@@ -564,6 +564,7 @@ module Aws::CloudFront
     OriginGroupMembers = Shapes::StructureShape.new(name: 'OriginGroupMembers')
     OriginGroupSelectionCriteria = Shapes::StringShape.new(name: 'OriginGroupSelectionCriteria')
     OriginGroups = Shapes::StructureShape.new(name: 'OriginGroups')
+    OriginHttpVersion = Shapes::StringShape.new(name: 'OriginHttpVersion')
     OriginList = Shapes::ListShape.new(name: 'OriginList')
     OriginMtlsConfig = Shapes::StructureShape.new(name: 'OriginMtlsConfig')
     OriginProtocolPolicy = Shapes::StringShape.new(name: 'OriginProtocolPolicy')
@@ -1565,6 +1566,7 @@ module Aws::CloudFront
     CustomOriginConfig.add_member(:origin_keepalive_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "OriginKeepaliveTimeout"))
     CustomOriginConfig.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     CustomOriginConfig.add_member(:origin_mtls_config, Shapes::ShapeRef.new(shape: OriginMtlsConfig, location_name: "OriginMtlsConfig"))
+    CustomOriginConfig.add_member(:origin_http_version, Shapes::ShapeRef.new(shape: OriginHttpVersion, location_name: "OriginHttpVersion"))
     CustomOriginConfig.struct_class = Types::CustomOriginConfig
 
     Customizations.add_member(:web_acl, Shapes::ShapeRef.new(shape: WebAclCustomization, location_name: "WebAcl"))
@@ -4217,6 +4219,7 @@ module Aws::CloudFront
     VpcOriginConfig.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: string, location_name: "OwnerAccountId"))
     VpcOriginConfig.add_member(:origin_read_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "OriginReadTimeout"))
     VpcOriginConfig.add_member(:origin_keepalive_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "OriginKeepaliveTimeout"))
+    VpcOriginConfig.add_member(:origin_http_version, Shapes::ShapeRef.new(shape: OriginHttpVersion, location_name: "OriginHttpVersion"))
     VpcOriginConfig.struct_class = Types::VpcOriginConfig
 
     VpcOriginEndpointConfig.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Name"))

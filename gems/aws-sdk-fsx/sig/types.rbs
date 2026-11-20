@@ -358,7 +358,7 @@ module Aws::FSx
     class CreateFileSystemOntapConfiguration
       attr_accessor automatic_backup_retention_days: ::Integer
       attr_accessor daily_automatic_backup_start_time: ::String
-      attr_accessor deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2" | "MULTI_AZ_2")
+      attr_accessor deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2" | "MULTI_AZ_2" | "SINGLE_AZ_3" | "MULTI_AZ_3")
       attr_accessor endpoint_ip_address_range: ::String
       attr_accessor fsx_admin_password: ::String
       attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration
@@ -1275,7 +1275,7 @@ module Aws::FSx
     class OntapFileSystemConfiguration
       attr_accessor automatic_backup_retention_days: ::Integer
       attr_accessor daily_automatic_backup_start_time: ::String
-      attr_accessor deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2" | "MULTI_AZ_2")
+      attr_accessor deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2" | "MULTI_AZ_2" | "SINGLE_AZ_3" | "MULTI_AZ_3")
       attr_accessor endpoint_ip_address_range: ::String
       attr_accessor endpoints: Types::FileSystemEndpoints
       attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration

@@ -657,6 +657,87 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # A filter used to limit results to a specific blueprint, and optionally
+    # a specific version.
+    #
+    # @!attribute [rw] blueprint_arn
+    #   The Amazon Resource Name (ARN) of the blueprint to filter by.
+    #   @return [String]
+    #
+    # @!attribute [rw] blueprint_version
+    #   The version of the blueprint to filter by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/BlueprintFilter AWS API Documentation
+    #
+    class BlueprintFilter < Struct.new(
+      :blueprint_arn,
+      :blueprint_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Associates a blueprint, and optionally a specific blueprint version,
+    # with a project for custom output extraction.
+    #
+    # @!attribute [rw] blueprint_arn
+    #   The Amazon Resource Name (ARN) of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] blueprint_version
+    #   The version of the blueprint. If omitted, the latest version is
+    #   used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/BlueprintItem AWS API Documentation
+    #
+    class BlueprintItem < Struct.new(
+      :blueprint_arn,
+      :blueprint_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a blueprint, returned in the results of `ListBlueprints`.
+    #
+    # @!attribute [rw] blueprint_arn
+    #   The Amazon Resource Name (ARN) of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] blueprint_name
+    #   The name of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] blueprint_version
+    #   The version of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   Whether the blueprint is owned by your account or provided by Amazon
+    #   Textract.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the blueprint was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the blueprint was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/BlueprintSummary AWS API Documentation
+    #
+    class BlueprintSummary < Struct.new(
+      :blueprint_arn,
+      :blueprint_name,
+      :blueprint_version,
+      :resource_owner,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The bounding box around the detected page, text, key-value pair,
     # table, table cell, or selection element on a document page. The `left`
     # (x-coordinate) and `top` (y-coordinate) are coordinates that represent
@@ -701,6 +782,22 @@ module Aws::Textract
       :height,
       :left,
       :top)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Controls whether bounding box geometry is returned in the extraction
+    # output.
+    #
+    # @!attribute [rw] state
+    #   Set to `ENABLED` to return bounding box geometry, or `DISABLED` to
+    #   omit it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/BoundingBoxConfiguration AWS API Documentation
+    #
+    class BoundingBoxConfiguration < Struct.new(
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -860,6 +957,210 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you use the same
+    #   token for a request that matches a previous request, the service
+    #   ignores the request, but does not return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] blueprint_name
+    #   A unique name for the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   The schema of the blueprint, which defines the fields to extract and
+    #   their expected structure.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The AWS KMS encryption configuration used to encrypt the blueprint
+    #   at rest.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   A set of tags (key-value pairs) to assign to the blueprint.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/CreateBlueprintRequest AWS API Documentation
+    #
+    class CreateBlueprintRequest < Struct.new(
+      :client_request_token,
+      :blueprint_name,
+      :schema,
+      :encryption_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] blueprint_arn
+    #   The Amazon Resource Name (ARN) of the blueprint that was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/CreateBlueprintResponse AWS API Documentation
+    #
+    class CreateBlueprintResponse < Struct.new(
+      :blueprint_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] blueprint_arn
+    #   The Amazon Resource Name (ARN) of the blueprint to create a new
+    #   version of.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you use the same
+    #   token for a request that matches a previous request, the service
+    #   ignores the request, but does not return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/CreateBlueprintVersionRequest AWS API Documentation
+    #
+    class CreateBlueprintVersionRequest < Struct.new(
+      :blueprint_arn,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] blueprint_arn
+    #   The Amazon Resource Name (ARN) of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] blueprint_version
+    #   The version of the blueprint that was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/CreateBlueprintVersionResponse AWS API Documentation
+    #
+    class CreateBlueprintVersionResponse < Struct.new(
+      :blueprint_arn,
+      :blueprint_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you use the same
+    #   token for a request that matches a previous request, the service
+    #   ignores the request, but does not return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   A unique name for the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_description
+    #   A description of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] extraction_configuration
+    #   The configuration that controls how Amazon Textract extracts content
+    #   from the document, including bounding boxes, granularity, and output
+    #   format.
+    #   @return [Types::ExtractionConfiguration]
+    #
+    # @!attribute [rw] generative_configuration
+    #   The configuration that controls generative capabilities such as
+    #   summarization and figure captioning.
+    #   @return [Types::GenerativeConfiguration]
+    #
+    # @!attribute [rw] custom_configuration
+    #   The configuration that associates blueprints with the project for
+    #   custom output extraction.
+    #   @return [Types::CustomConfiguration]
+    #
+    # @!attribute [rw] splitter_configuration
+    #   The configuration that controls whether multi-document packets are
+    #   split into individual documents.
+    #   @return [Types::SplitterConfiguration]
+    #
+    # @!attribute [rw] sensitive_data_configuration
+    #   The configuration that controls detection and redaction of sensitive
+    #   data, such as personally identifiable information (PII).
+    #   @return [Types::SensitiveDataConfiguration]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The AWS KMS encryption configuration used to encrypt the project at
+    #   rest. If you don't specify a value, Amazon Textract encrypts the
+    #   project using an AWS owned key.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   A set of tags (key-value pairs) to assign to the project.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/CreateProjectRequest AWS API Documentation
+    #
+    class CreateProjectRequest < Struct.new(
+      :client_request_token,
+      :project_name,
+      :project_description,
+      :extraction_configuration,
+      :generative_configuration,
+      :custom_configuration,
+      :splitter_configuration,
+      :sensitive_data_configuration,
+      :encryption_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project that was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the project, indicating whether creation completed
+    #   successfully or failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/CreateProjectResponse AWS API Documentation
+    #
+    class CreateProjectResponse < Struct.new(
+      :project_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Associates blueprints with a project to produce custom structured
+    # output. A fallback blueprint can be supplied for documents that do not
+    # match a primary blueprint.
+    #
+    # @!attribute [rw] blueprints
+    #   The blueprints used to extract custom structured output.
+    #   @return [Array<Types::BlueprintItem>]
+    #
+    # @!attribute [rw] fallback_blueprints
+    #   The blueprint used when a document does not match any of the primary
+    #   blueprints. Requires at least one blueprint in `Blueprints`.
+    #   @return [Array<Types::BlueprintItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/CustomConfiguration AWS API Documentation
+    #
+    class CustomConfiguration < Struct.new(
+      :blueprints,
+      :fallback_blueprints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] adapter_id
     #   A string containing a unique ID for the adapter to be deleted.
     #   @return [String]
@@ -897,6 +1198,44 @@ module Aws::Textract
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DeleteAdapterVersionResponse AWS API Documentation
     #
     class DeleteAdapterVersionResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] blueprint_arn
+    #   The Amazon Resource Name (ARN) of the blueprint to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] blueprint_version
+    #   The version of the blueprint to delete. If omitted, the entire
+    #   blueprint and all of its versions are deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DeleteBlueprintRequest AWS API Documentation
+    #
+    class DeleteBlueprintRequest < Struct.new(
+      :blueprint_arn,
+      :blueprint_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DeleteBlueprintResponse AWS API Documentation
+    #
+    class DeleteBlueprintResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DeleteProjectRequest AWS API Documentation
+    #
+    class DeleteProjectRequest < Struct.new(
+      :project_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DeleteProjectResponse AWS API Documentation
+    #
+    class DeleteProjectResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] document
     #   The input document as base64-encoded bytes or an Amazon S3 object.
@@ -1078,6 +1417,34 @@ module Aws::Textract
     #
     class DocumentTooLargeException < Aws::EmptyStructure; end
 
+    # Specifies the AWS Key Management Service (AWS KMS) key and encryption
+    # context used to encrypt a resource at rest. When omitted, Amazon
+    # Textract encrypts the resource using an AWS owned key.
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier of the AWS KMS key to use for encryption. This can be
+    #   a key ID, key ARN, alias name, or alias ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_encryption_context
+    #   A set of key-value pairs that Amazon Textract includes as the AWS
+    #   KMS encryption context when encrypting and decrypting the resource.
+    #
+    #   On `UpdateProject` and `UpdateBlueprint`, this member is the one
+    #   exception to replacing a supplied configuration whole. If you omit
+    #   it, the stored encryption context is kept. To clear a custom
+    #   encryption context, specify an empty map (`{}`).
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/EncryptionConfiguration AWS API Documentation
+    #
+    class EncryptionConfiguration < Struct.new(
+      :kms_key_id,
+      :kms_encryption_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The evaluation metrics (F1 score, Precision, and Recall) for an
     # adapter version.
     #
@@ -1099,6 +1466,21 @@ module Aws::Textract
       :f1_score,
       :precision,
       :recall)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Event bus settings for a job.
+    #
+    # @!attribute [rw] state
+    #   Set to `ENABLED` to send events to an event bus, or `DISABLED` to
+    #   not send them.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/EventBridgeConfiguration AWS API Documentation
+    #
+    class EventBridgeConfiguration < Struct.new(
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1320,6 +1702,89 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # Controls how Amazon Textract extracts content from a document,
+    # including whether bounding boxes are returned, the granularity of
+    # extraction, and the output format.
+    #
+    # @!attribute [rw] bounding_box
+    #   Controls whether bounding box geometry is included in the extraction
+    #   output.
+    #   @return [Types::BoundingBoxConfiguration]
+    #
+    # @!attribute [rw] granularity
+    #   Controls the granularity levels at which content is extracted.
+    #   @return [Types::ExtractionGranularity]
+    #
+    # @!attribute [rw] output_format
+    #   Controls the format of the extraction output.
+    #   @return [Types::OutputFormat]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ExtractionConfiguration AWS API Documentation
+    #
+    class ExtractionConfiguration < Struct.new(
+      :bounding_box,
+      :granularity,
+      :output_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the granularity levels at which Amazon Textract extracts
+    # content from a document.
+    #
+    # @!attribute [rw] types
+    #   The granularity levels at which Amazon Textract extracts content,
+    #   from the whole document down to individual lines of text. Each type
+    #   can appear only once.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ExtractionGranularity AWS API Documentation
+    #
+    class ExtractionGranularity < Struct.new(
+      :types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Controls whether generative captions are produced for figures detected
+    # in the document.
+    #
+    # @!attribute [rw] state
+    #   Set to `ENABLED` to produce figure captions, or `DISABLED` to omit
+    #   them.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/FigureCaptionConfiguration AWS API Documentation
+    #
+    class FigureCaptionConfiguration < Struct.new(
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Controls the generative capabilities applied during a document
+    # insights job, such as summarization and figure captioning.
+    #
+    # @!attribute [rw] summarization
+    #   Controls whether a generative summary of the document is produced.
+    #   If you omit it, no summary is produced.
+    #   @return [Types::SummarizationConfiguration]
+    #
+    # @!attribute [rw] figure_caption
+    #   Controls whether generative captions are produced for figures
+    #   detected in the document. If you omit it, no figure captions are
+    #   produced.
+    #   @return [Types::FigureCaptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GenerativeConfiguration AWS API Documentation
+    #
+    class GenerativeConfiguration < Struct.new(
+      :summarization,
+      :figure_caption)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about where the following items are located on a document
     # page: detected page, text, key-value pairs, tables, table cells, and
     # selection elements.
@@ -1521,6 +1986,72 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # @!attribute [rw] blueprint_arn
+    #   The Amazon Resource Name (ARN) of the blueprint to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] blueprint_version
+    #   The version of the blueprint to retrieve. If omitted, the latest
+    #   version is returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetBlueprintRequest AWS API Documentation
+    #
+    class GetBlueprintRequest < Struct.new(
+      :blueprint_arn,
+      :blueprint_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] blueprint_arn
+    #   The Amazon Resource Name (ARN) of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] blueprint_name
+    #   The name of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] blueprint_version
+    #   The version of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   The schema of the blueprint, which defines the fields to extract and
+    #   their expected structure.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier of the AWS KMS key used to encrypt the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_encryption_context
+    #   The AWS KMS encryption context used when encrypting the blueprint.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the blueprint was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the blueprint was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetBlueprintResponse AWS API Documentation
+    #
+    class GetBlueprintResponse < Struct.new(
+      :blueprint_arn,
+      :blueprint_name,
+      :blueprint_version,
+      :schema,
+      :kms_key_id,
+      :kms_encryption_context,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] job_id
     #   A unique identifier for the text-detection job. The `JobId` is
     #   returned from `StartDocumentAnalysis`. A `JobId` value is only valid
@@ -1594,6 +2125,50 @@ module Aws::Textract
       :warnings,
       :status_message,
       :analyze_document_model_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the document insights job to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetDocumentInsightsRequest AWS API Documentation
+    #
+    class GetDocumentInsightsRequest < Struct.new(
+      :job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current status of the document insights job, indicating whether
+    #   it is still running, has completed, or has failed. When the job has
+    #   failed, inspect `ErrorType` and `ErrorMessage` for details.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_configuration
+    #   The Amazon S3 location where the analysis results are written.
+    #   @return [Types::OutputConfiguration]
+    #
+    # @!attribute [rw] error_type
+    #   The type of error that caused the job to fail. Present only when the
+    #   job status is a failure state.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A human-readable description of the error that caused the job to
+    #   fail. Present only when the job status is a failure state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetDocumentInsightsResponse AWS API Documentation
+    #
+    class GetDocumentInsightsResponse < Struct.new(
+      :status,
+      :output_configuration,
+      :error_type,
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1882,6 +2457,93 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetProjectRequest AWS API Documentation
+    #
+    class GetProjectRequest < Struct.new(
+      :project_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_description
+    #   The description of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the project, indicating whether it was created
+    #   successfully or failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] extraction_configuration
+    #   The configuration that controls how Amazon Textract extracts content
+    #   from the document, including bounding boxes, granularity, and output
+    #   format.
+    #   @return [Types::ExtractionConfiguration]
+    #
+    # @!attribute [rw] generative_configuration
+    #   The configuration that controls generative capabilities such as
+    #   summarization and figure captioning.
+    #   @return [Types::GenerativeConfiguration]
+    #
+    # @!attribute [rw] custom_configuration
+    #   The configuration that associates blueprints with the project for
+    #   custom output extraction.
+    #   @return [Types::CustomConfiguration]
+    #
+    # @!attribute [rw] splitter_configuration
+    #   The configuration that controls whether multi-document packets are
+    #   split into individual documents.
+    #   @return [Types::SplitterConfiguration]
+    #
+    # @!attribute [rw] sensitive_data_configuration
+    #   The configuration that controls detection and redaction of sensitive
+    #   data, such as personally identifiable information (PII).
+    #   @return [Types::SensitiveDataConfiguration]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The AWS KMS encryption configuration used to encrypt the project at
+    #   rest.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the project was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the project was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetProjectResponse AWS API Documentation
+    #
+    class GetProjectResponse < Struct.new(
+      :project_arn,
+      :project_name,
+      :project_description,
+      :status,
+      :extraction_configuration,
+      :generative_configuration,
+      :custom_configuration,
+      :splitter_configuration,
+      :sensitive_data_configuration,
+      :encryption_configuration,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Shows the results of the human in the loop evaluation. If there is no
     # HumanLoopArn, the input did not trigger human review.
     #
@@ -2044,6 +2706,21 @@ module Aws::Textract
     class IdentityDocumentField < Struct.new(
       :type,
       :value_detection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 location of the input document for a document insights
+    # job.
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 URI of the input document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/InputConfiguration AWS API Documentation
+    #
+    class InputConfiguration < Struct.new(
+      :s3_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2371,6 +3048,110 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   The maximum number of blueprints to return in each page of results.
+    #   If you don't specify a value, the service selects a default page
+    #   size. Use the `NextToken` value in the response to retrieve any
+    #   remaining results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token returned from a previous call to
+    #   `ListBlueprints`. Use it to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] blueprint_arn
+    #   The Amazon Resource Name (ARN) of a blueprint to filter the results
+    #   by.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_filter
+    #   A filter that limits the results to blueprints associated with the
+    #   specified project.
+    #   @return [Types::ProjectFilter]
+    #
+    # @!attribute [rw] resource_owner
+    #   A filter that limits the results to blueprints owned by your account
+    #   or to blueprints provided by Amazon Textract.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ListBlueprintsRequest AWS API Documentation
+    #
+    class ListBlueprintsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :blueprint_arn,
+      :project_filter,
+      :resource_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] blueprints
+    #   A list of blueprint summaries that match the request.
+    #   @return [Array<Types::BlueprintSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to use in a subsequent call to `ListBlueprints`
+    #   to retrieve the next page of results. This value is `null` when
+    #   there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ListBlueprintsResponse AWS API Documentation
+    #
+    class ListBlueprintsResponse < Struct.new(
+      :blueprints,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of projects to return in each page of results. If
+    #   you don't specify a value, the service selects a default page size.
+    #   Use the `NextToken` value in the response to retrieve any remaining
+    #   results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token returned from a previous call to `ListProjects`.
+    #   Use it to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] blueprint_filter
+    #   A filter that limits the results to projects associated with the
+    #   specified blueprint.
+    #   @return [Types::BlueprintFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ListProjectsRequest AWS API Documentation
+    #
+    class ListProjectsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :blueprint_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] projects
+    #   A list of project summaries that match the request.
+    #   @return [Array<Types::ProjectSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to use in a subsequent call to `ListProjects` to
+    #   retrieve the next page of results. This value is `null` when there
+    #   are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ListProjectsResponse AWS API Documentation
+    #
+    class ListProjectsResponse < Struct.new(
+      :projects,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that specifies the resource to list
     #   tags for.
@@ -2440,6 +3221,36 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # Notification settings for a job.
+    #
+    # @!attribute [rw] event_bridge_configuration
+    #   Event bus settings.
+    #   @return [Types::EventBridgeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/NotificationConfiguration AWS API Documentation
+    #
+    class NotificationConfiguration < Struct.new(
+      :event_bridge_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Controls whether an additional file format is produced alongside the
+    # primary extraction output.
+    #
+    # @!attribute [rw] state
+    #   Set to `ENABLED` to produce an additional file format, or `DISABLED`
+    #   to omit it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/OutputAdditionalFileFormat AWS API Documentation
+    #
+    class OutputAdditionalFileFormat < Struct.new(
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Sets whether or not your output will go to a user created bucket. Used
     # to set the name of the bucket, and the prefix on the output file.
     #
@@ -2482,6 +3293,78 @@ module Aws::Textract
     class OutputConfig < Struct.new(
       :s3_bucket,
       :s3_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 location where the results of a document insights job
+    # are written.
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 URI where the analysis results are written.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/OutputConfiguration AWS API Documentation
+    #
+    class OutputConfiguration < Struct.new(
+      :s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Controls the format of the extraction output, including the text
+    # format and any additional file formats.
+    #
+    # @!attribute [rw] additional_file_format
+    #   Controls whether an additional file format is produced alongside the
+    #   primary output.
+    #   @return [Types::OutputAdditionalFileFormat]
+    #
+    # @!attribute [rw] text_format
+    #   Controls the text formats produced in the extraction output.
+    #   @return [Types::OutputTextFormat]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/OutputFormat AWS API Documentation
+    #
+    class OutputFormat < Struct.new(
+      :additional_file_format,
+      :text_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the text formats produced in the extraction output.
+    #
+    # @!attribute [rw] types
+    #   The text formats produced in the extraction output. Each type can
+    #   appear only once, and `CSV` can't be the only type.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/OutputTextFormat AWS API Documentation
+    #
+    class OutputTextFormat < Struct.new(
+      :types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies which personally identifiable information (PII) entity types
+    # to detect and how to mask them.
+    #
+    # @!attribute [rw] pii_entity_types
+    #   The list of PII entity types to detect. Each type can appear only
+    #   once.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] redaction_mask_mode
+    #   How detected PII is masked in the redacted output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/PIIEntitiesConfiguration AWS API Documentation
+    #
+    class PIIEntitiesConfiguration < Struct.new(
+      :pii_entity_types,
+      :redaction_mask_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2555,6 +3438,49 @@ module Aws::Textract
     class Prediction < Struct.new(
       :value,
       :confidence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter used to limit results to a specific project.
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project to filter by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ProjectFilter AWS API Documentation
+    #
+    class ProjectFilter < Struct.new(
+      :project_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a project, returned in the results of `ListProjects`.
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the project was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the project was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ProjectSummary AWS API Documentation
+    #
+    class ProjectSummary < Struct.new(
+      :project_arn,
+      :project_name,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2707,6 +3633,35 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # Controls detection and redaction of sensitive data, such as personally
+    # identifiable information (PII), in the output.
+    #
+    # @!attribute [rw] detection_mode
+    #   The detection mode. Valid values:
+    #
+    #   * `DETECTION` - Only detects sensitive data.
+    #
+    #   * `DETECTION_AND_REDACTION` - Detects and redacts sensitive data in
+    #     the output.
+    #
+    #   * `DISABLED` - Does not detect sensitive data.
+    #   @return [String]
+    #
+    # @!attribute [rw] pii_entities_configuration
+    #   The configuration that specifies which PII entity types to detect
+    #   and how to mask them. If you omit it, Amazon Textract detects all
+    #   PII entity types (`ALL`) and masks them with `ENTITY_TYPE`.
+    #   @return [Types::PIIEntitiesConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/SensitiveDataConfiguration AWS API Documentation
+    #
+    class SensitiveDataConfiguration < Struct.new(
+      :detection_mode,
+      :pii_entities_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Returned when a request cannot be completed as it would exceed a
     # maximum service quota.
     #
@@ -2754,6 +3709,22 @@ module Aws::Textract
     class SplitDocument < Struct.new(
       :index,
       :pages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Controls whether a multi-document packet is split into individual
+    # documents before analysis.
+    #
+    # @!attribute [rw] state
+    #   Set to `ENABLED` to split multi-document packets, or `DISABLED` to
+    #   treat the input as a single document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/SplitterConfiguration AWS API Documentation
+    #
+    class SplitterConfiguration < Struct.new(
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2844,6 +3815,66 @@ module Aws::Textract
     #
     class StartDocumentAnalysisResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] input_configuration
+    #   The Amazon S3 location of the input document to analyze.
+    #   @return [Types::InputConfiguration]
+    #
+    # @!attribute [rw] output_configuration
+    #   The Amazon S3 location where the analysis results are written.
+    #   @return [Types::OutputConfiguration]
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project whose configuration is
+    #   used to analyze the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] blueprints
+    #   The blueprints used to extract custom structured output from the
+    #   document.
+    #   @return [Array<Types::BlueprintItem>]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The AWS KMS encryption configuration used to encrypt the analysis
+    #   output. If you don't specify a value, Amazon Textract encrypts the
+    #   output using an AWS owned key.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @!attribute [rw] notification_configuration
+    #   Notification settings for the job.
+    #   @return [Types::NotificationConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   A set of tags (key-value pairs) to assign to the document insights
+    #   job.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/StartDocumentInsightsRequest AWS API Documentation
+    #
+    class StartDocumentInsightsRequest < Struct.new(
+      :input_configuration,
+      :output_configuration,
+      :project_arn,
+      :blueprints,
+      :encryption_configuration,
+      :notification_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the document insights job that was
+    #   started. Use it with GetDocumentInsights to retrieve the results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/StartDocumentInsightsResponse AWS API Documentation
+    #
+    class StartDocumentInsightsResponse < Struct.new(
+      :job_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3089,6 +4120,20 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # Controls whether a generative summary of the document is produced.
+    #
+    # @!attribute [rw] state
+    #   Set to `ENABLED` to produce a summary, or `DISABLED` to omit it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/SummarizationConfiguration AWS API Documentation
+    #
+    class SummarizationConfiguration < Struct.new(
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that specifies the resource to be
     #   tagged.
@@ -3228,6 +4273,118 @@ module Aws::Textract
       :description,
       :feature_types,
       :auto_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] blueprint_arn
+    #   The Amazon Resource Name (ARN) of the blueprint to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   The updated schema of the blueprint, which defines the fields to
+    #   extract and their expected structure.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The AWS KMS encryption configuration used to encrypt the blueprint
+    #   at rest.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/UpdateBlueprintRequest AWS API Documentation
+    #
+    class UpdateBlueprintRequest < Struct.new(
+      :blueprint_arn,
+      :schema,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] blueprint_arn
+    #   The Amazon Resource Name (ARN) of the blueprint that was updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/UpdateBlueprintResponse AWS API Documentation
+    #
+    class UpdateBlueprintResponse < Struct.new(
+      :blueprint_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_description
+    #   The updated description of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] extraction_configuration
+    #   The configuration that controls how Amazon Textract extracts content
+    #   from the document, including bounding boxes, granularity, and output
+    #   format. Replaces the stored extraction configuration.
+    #   @return [Types::ExtractionConfiguration]
+    #
+    # @!attribute [rw] generative_configuration
+    #   The configuration that controls generative capabilities such as
+    #   summarization and figure captioning. Replaces the stored generative
+    #   configuration, so a capability that you omit is turned off.
+    #   @return [Types::GenerativeConfiguration]
+    #
+    # @!attribute [rw] custom_configuration
+    #   The configuration that associates blueprints with the project for
+    #   custom output extraction. Replaces the stored custom configuration.
+    #   To disable custom configuration, specify an empty `Blueprints` list.
+    #   @return [Types::CustomConfiguration]
+    #
+    # @!attribute [rw] splitter_configuration
+    #   The configuration that controls whether multi-document packets are
+    #   split into individual documents. Replaces the stored splitter
+    #   configuration.
+    #   @return [Types::SplitterConfiguration]
+    #
+    # @!attribute [rw] sensitive_data_configuration
+    #   The configuration that controls detection and redaction of sensitive
+    #   data, such as personally identifiable information (PII). Replaces
+    #   the stored sensitive data configuration. To turn off detection, set
+    #   `DetectionMode` to `DISABLED`.
+    #   @return [Types::SensitiveDataConfiguration]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The AWS KMS encryption configuration used to encrypt the project at
+    #   rest.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/UpdateProjectRequest AWS API Documentation
+    #
+    class UpdateProjectRequest < Struct.new(
+      :project_arn,
+      :project_description,
+      :extraction_configuration,
+      :generative_configuration,
+      :custom_configuration,
+      :splitter_configuration,
+      :sensitive_data_configuration,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the project after the update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/UpdateProjectResponse AWS API Documentation
+    #
+    class UpdateProjectResponse < Struct.new(
+      :project_arn,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

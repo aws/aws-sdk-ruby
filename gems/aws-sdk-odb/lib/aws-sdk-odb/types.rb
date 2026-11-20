@@ -1181,6 +1181,38 @@ module Aws::Odb
       include Aws::Structure
     end
 
+    # A summary of a refreshable clone of an Autonomous Database.
+    #
+    # @!attribute [rw] autonomous_database_id
+    #   The unique identifier of the refreshable clone Autonomous Database.
+    #   @return [String]
+    #
+    # @!attribute [rw] autonomous_database_arn
+    #   The Amazon Resource Name (ARN) of the refreshable clone Autonomous
+    #   Database.
+    #   @return [String]
+    #
+    # @!attribute [rw] ocid
+    #   The Oracle Cloud Identifier (OCID) of the refreshable clone
+    #   Autonomous Database.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region where the refreshable clone
+    #   Autonomous Database is located.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/AutonomousDatabaseRefreshableCloneSummary AWS API Documentation
+    #
+    class AutonomousDatabaseRefreshableCloneSummary < Struct.new(
+      :autonomous_database_id,
+      :autonomous_database_arn,
+      :ocid,
+      :region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A summary of an Autonomous Database.
     #
     # @!attribute [rw] autonomous_database_id
@@ -8501,6 +8533,51 @@ module Aws::Odb
     #   request.
     #   @return [String]
     #
+    # @!attribute [rw] autonomous_database_id
+    #   The unique identifier of the source Autonomous Database whose
+    #   refreshable clones you want to list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListAutonomousDatabaseRefreshableClonesInput AWS API Documentation
+    #
+    class ListAutonomousDatabaseRefreshableClonesInput < Struct.new(
+      :max_results,
+      :next_token,
+      :autonomous_database_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] autonomous_database_refreshable_clones
+    #   The list of refreshable clones for the Autonomous Database.
+    #   @return [Array<Types::AutonomousDatabaseRefreshableCloneSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListAutonomousDatabaseRefreshableClonesOutput AWS API Documentation
+    #
+    class ListAutonomousDatabaseRefreshableClonesOutput < Struct.new(
+      :next_token,
+      :autonomous_database_refreshable_clones)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
     # @!attribute [rw] db_workload
     #   The intended use of the Autonomous Database to return versions for,
     #   such as transaction processing, data warehouse, JSON database, or
@@ -10572,6 +10649,62 @@ module Aws::Odb
       :display_name,
       :status,
       :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] autonomous_database_id
+    #   The unique identifier of the refreshable clone Autonomous Database
+    #   to refresh.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_of_refresh_cutoff
+    #   The date and time up to which the refreshable clone Autonomous
+    #   Database is refreshed from its source database. Data committed on
+    #   the source database after this time isn't applied to the
+    #   refreshable clone. The time must be at least 1 minute and at most 7
+    #   days in the past, and later than the clone's last refresh point.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/StartAutonomousDatabaseRefreshInput AWS API Documentation
+    #
+    class StartAutonomousDatabaseRefreshInput < Struct.new(
+      :autonomous_database_id,
+      :time_of_refresh_cutoff)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] autonomous_database_id
+    #   The unique identifier of the refreshable clone Autonomous Database
+    #   that is being refreshed.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The user-friendly name of the Autonomous Database.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Autonomous Database.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the current status of the Autonomous
+    #   Database.
+    #   @return [String]
+    #
+    # @!attribute [rw] refreshable_status
+    #   The refresh status of the refreshable clone Autonomous Database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/StartAutonomousDatabaseRefreshOutput AWS API Documentation
+    #
+    class StartAutonomousDatabaseRefreshOutput < Struct.new(
+      :autonomous_database_id,
+      :display_name,
+      :status,
+      :status_reason,
+      :refreshable_status)
       SENSITIVE = []
       include Aws::Structure
     end

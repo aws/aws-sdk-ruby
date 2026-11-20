@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2026-11-20)
+------------------
+
+* Feature - Adds Arabic (ara) as a supported language for subtitling transcription and custom vocabulary dictionaries.
+
 1.27.0 (2026-11-18)
 ------------------
 

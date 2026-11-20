@@ -2606,7 +2606,7 @@ module Aws::ObservabilityAdmin
     #
     # @!attribute [rw] label_name
     #   The label name to match, supporting alphanumeric characters,
-    #   underscores, hyphens, and colons.
+    #   underscores, hyphens, colons, and periods.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/LabelNameCondition AWS API Documentation
@@ -3213,8 +3213,8 @@ module Aws::ObservabilityAdmin
     # The configuration parameters for log delivery, including `logType`
     # settings. Applies to resource types that support configurable log
     # delivery, such as Amazon Bedrock Knowledge Bases, Amazon Bedrock
-    # AgentCore payment managers, and Elastic Load Balancing Application
-    # Load Balancers.
+    # AgentCore payment managers, Amazon Web Services Network Firewall
+    # firewalls, and Elastic Load Balancing Application Load Balancers.
     #
     # @!attribute [rw] log_types
     #   The types of logs to collect from the resource.
@@ -3729,12 +3729,32 @@ module Aws::ObservabilityAdmin
     #   SKIP will skip CMK encrypted source log groups from centralization.
     #   @return [String]
     #
+    # @!attribute [rw] centralize_with_data_protection
+    #   Specifies whether this centralization rule centralizes log events
+    #   with data protection applied. If you don't specify this setting, or
+    #   you set it to `DISABLED`, the rule centralizes the original log
+    #   events, including any sensitive data that a data protection policy
+    #   on the source log group masks.
+    #
+    #   When you set this to `ENABLED`, the rule centralizes the same masked
+    #   data that anyone in the source account without the `logs:Unmask`
+    #   permission sees. The rule doesn't copy the original values to the
+    #   destination, so you can't unmask them in the destination account.
+    #   The rule centralizes log events from source log groups that don't
+    #   have a data protection policy without changes.
+    #
+    #   The setting applies only to log events that the rule centralizes
+    #   after you enable it. It doesn't change log events that the rule
+    #   already centralized.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/SourceLogsConfiguration AWS API Documentation
     #
     class SourceLogsConfiguration < Struct.new(
       :log_group_selection_criteria,
       :data_source_selection_criteria,
-      :encrypted_log_group_strategy)
+      :encrypted_log_group_strategy,
+      :centralize_with_data_protection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4200,8 +4220,9 @@ module Aws::ObservabilityAdmin
     # @!attribute [rw] log_delivery_parameters
     #   The configuration parameters for log delivery when the resource type
     #   supports configurable log types, such as Amazon Bedrock Knowledge
-    #   Bases, Amazon Bedrock AgentCore payment managers, or Elastic Load
-    #   Balancing Application Load Balancers.
+    #   Bases, Amazon Bedrock AgentCore payment managers, Amazon Web
+    #   Services Network Firewall firewalls, or Elastic Load Balancing
+    #   Application Load Balancers.
     #   @return [Types::LogDeliveryParameters]
     #
     # @!attribute [rw] msk_monitoring_parameters
@@ -4493,8 +4514,9 @@ module Aws::ObservabilityAdmin
     #   (for example, `AWS::EC2::VPC`, `AWS::EKS::Cluster`,
     #   `AWS::ElasticLoadBalancingV2::LoadBalancer`,
     #   `AWS::Bedrock::KnowledgeBase`,
-    #   `AWS::BedrockAgentCore::PaymentManager`, or
-    #   `AWS::XRay::TransactionSearchConfig`).
+    #   `AWS::BedrockAgentCore::PaymentManager`,
+    #   `AWS::XRay::TransactionSearchConfig`, `AWS::CloudWatchOmni`, or
+    #   `AWS::NetworkFirewall::Firewall`).
     #   @return [String]
     #
     # @!attribute [rw] telemetry_type

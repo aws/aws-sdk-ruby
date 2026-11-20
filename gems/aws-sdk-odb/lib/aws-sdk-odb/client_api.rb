@@ -45,6 +45,8 @@ module Aws::Odb
     AutonomousDatabaseList = Shapes::ListShape.new(name: 'AutonomousDatabaseList')
     AutonomousDatabasePeerList = Shapes::ListShape.new(name: 'AutonomousDatabasePeerList')
     AutonomousDatabasePeerSummary = Shapes::StructureShape.new(name: 'AutonomousDatabasePeerSummary')
+    AutonomousDatabaseRefreshableCloneList = Shapes::ListShape.new(name: 'AutonomousDatabaseRefreshableCloneList')
+    AutonomousDatabaseRefreshableCloneSummary = Shapes::StructureShape.new(name: 'AutonomousDatabaseRefreshableCloneSummary')
     AutonomousDatabaseResourceStatus = Shapes::StringShape.new(name: 'AutonomousDatabaseResourceStatus')
     AutonomousDatabaseSummary = Shapes::StructureShape.new(name: 'AutonomousDatabaseSummary')
     AutonomousDatabaseVersionList = Shapes::ListShape.new(name: 'AutonomousDatabaseVersionList')
@@ -317,6 +319,10 @@ module Aws::Odb
     ListAutonomousDatabasePeersInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAutonomousDatabasePeersInputMaxResultsInteger')
     ListAutonomousDatabasePeersInputNextTokenString = Shapes::StringShape.new(name: 'ListAutonomousDatabasePeersInputNextTokenString')
     ListAutonomousDatabasePeersOutput = Shapes::StructureShape.new(name: 'ListAutonomousDatabasePeersOutput')
+    ListAutonomousDatabaseRefreshableClonesInput = Shapes::StructureShape.new(name: 'ListAutonomousDatabaseRefreshableClonesInput')
+    ListAutonomousDatabaseRefreshableClonesInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAutonomousDatabaseRefreshableClonesInputMaxResultsInteger')
+    ListAutonomousDatabaseRefreshableClonesInputNextTokenString = Shapes::StringShape.new(name: 'ListAutonomousDatabaseRefreshableClonesInputNextTokenString')
+    ListAutonomousDatabaseRefreshableClonesOutput = Shapes::StructureShape.new(name: 'ListAutonomousDatabaseRefreshableClonesOutput')
     ListAutonomousDatabaseVersionsInput = Shapes::StructureShape.new(name: 'ListAutonomousDatabaseVersionsInput')
     ListAutonomousDatabaseVersionsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAutonomousDatabaseVersionsInputMaxResultsInteger')
     ListAutonomousDatabaseVersionsInputNextTokenString = Shapes::StringShape.new(name: 'ListAutonomousDatabaseVersionsInputNextTokenString')
@@ -497,6 +503,8 @@ module Aws::Odb
     StandbyAllowlistedIpsSource = Shapes::StringShape.new(name: 'StandbyAllowlistedIpsSource')
     StartAutonomousDatabaseInput = Shapes::StructureShape.new(name: 'StartAutonomousDatabaseInput')
     StartAutonomousDatabaseOutput = Shapes::StructureShape.new(name: 'StartAutonomousDatabaseOutput')
+    StartAutonomousDatabaseRefreshInput = Shapes::StructureShape.new(name: 'StartAutonomousDatabaseRefreshInput')
+    StartAutonomousDatabaseRefreshOutput = Shapes::StructureShape.new(name: 'StartAutonomousDatabaseRefreshOutput')
     StartDbNodeInput = Shapes::StructureShape.new(name: 'StartDbNodeInput')
     StartDbNodeOutput = Shapes::StructureShape.new(name: 'StartDbNodeOutput')
     StopAutonomousDatabaseInput = Shapes::StructureShape.new(name: 'StopAutonomousDatabaseInput')
@@ -823,6 +831,14 @@ module Aws::Odb
     AutonomousDatabasePeerSummary.add_member(:ocid, Shapes::ShapeRef.new(shape: String, location_name: "ocid"))
     AutonomousDatabasePeerSummary.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "region"))
     AutonomousDatabasePeerSummary.struct_class = Types::AutonomousDatabasePeerSummary
+
+    AutonomousDatabaseRefreshableCloneList.member = Shapes::ShapeRef.new(shape: AutonomousDatabaseRefreshableCloneSummary)
+
+    AutonomousDatabaseRefreshableCloneSummary.add_member(:autonomous_database_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "autonomousDatabaseId"))
+    AutonomousDatabaseRefreshableCloneSummary.add_member(:autonomous_database_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "autonomousDatabaseArn"))
+    AutonomousDatabaseRefreshableCloneSummary.add_member(:ocid, Shapes::ShapeRef.new(shape: String, location_name: "ocid"))
+    AutonomousDatabaseRefreshableCloneSummary.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "region"))
+    AutonomousDatabaseRefreshableCloneSummary.struct_class = Types::AutonomousDatabaseRefreshableCloneSummary
 
     AutonomousDatabaseSummary.add_member(:autonomous_database_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, location_name: "autonomousDatabaseId"))
     AutonomousDatabaseSummary.add_member(:autonomous_database_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "autonomousDatabaseArn"))
@@ -2235,6 +2251,15 @@ module Aws::Odb
     ListAutonomousDatabasePeersOutput.add_member(:autonomous_database_peers, Shapes::ShapeRef.new(shape: AutonomousDatabasePeerList, required: true, location_name: "autonomousDatabasePeers"))
     ListAutonomousDatabasePeersOutput.struct_class = Types::ListAutonomousDatabasePeersOutput
 
+    ListAutonomousDatabaseRefreshableClonesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAutonomousDatabaseRefreshableClonesInputMaxResultsInteger, location_name: "maxResults"))
+    ListAutonomousDatabaseRefreshableClonesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListAutonomousDatabaseRefreshableClonesInputNextTokenString, location_name: "nextToken"))
+    ListAutonomousDatabaseRefreshableClonesInput.add_member(:autonomous_database_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "autonomousDatabaseId"))
+    ListAutonomousDatabaseRefreshableClonesInput.struct_class = Types::ListAutonomousDatabaseRefreshableClonesInput
+
+    ListAutonomousDatabaseRefreshableClonesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListAutonomousDatabaseRefreshableClonesOutput.add_member(:autonomous_database_refreshable_clones, Shapes::ShapeRef.new(shape: AutonomousDatabaseRefreshableCloneList, required: true, location_name: "autonomousDatabaseRefreshableClones"))
+    ListAutonomousDatabaseRefreshableClonesOutput.struct_class = Types::ListAutonomousDatabaseRefreshableClonesOutput
+
     ListAutonomousDatabaseVersionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAutonomousDatabaseVersionsInputMaxResultsInteger, location_name: "maxResults"))
     ListAutonomousDatabaseVersionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListAutonomousDatabaseVersionsInputNextTokenString, location_name: "nextToken"))
     ListAutonomousDatabaseVersionsInput.add_member(:db_workload, Shapes::ShapeRef.new(shape: DbWorkload, location_name: "dbWorkload"))
@@ -2678,6 +2703,17 @@ module Aws::Odb
     StartAutonomousDatabaseOutput.add_member(:status, Shapes::ShapeRef.new(shape: AutonomousDatabaseResourceStatus, location_name: "status"))
     StartAutonomousDatabaseOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     StartAutonomousDatabaseOutput.struct_class = Types::StartAutonomousDatabaseOutput
+
+    StartAutonomousDatabaseRefreshInput.add_member(:autonomous_database_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "autonomousDatabaseId"))
+    StartAutonomousDatabaseRefreshInput.add_member(:time_of_refresh_cutoff, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "timeOfRefreshCutoff"))
+    StartAutonomousDatabaseRefreshInput.struct_class = Types::StartAutonomousDatabaseRefreshInput
+
+    StartAutonomousDatabaseRefreshOutput.add_member(:autonomous_database_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "autonomousDatabaseId"))
+    StartAutonomousDatabaseRefreshOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    StartAutonomousDatabaseRefreshOutput.add_member(:status, Shapes::ShapeRef.new(shape: AutonomousDatabaseResourceStatus, location_name: "status"))
+    StartAutonomousDatabaseRefreshOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    StartAutonomousDatabaseRefreshOutput.add_member(:refreshable_status, Shapes::ShapeRef.new(shape: RefreshableStatus, location_name: "refreshableStatus"))
+    StartAutonomousDatabaseRefreshOutput.struct_class = Types::StartAutonomousDatabaseRefreshOutput
 
     StartDbNodeInput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "cloudVmClusterId"))
     StartDbNodeInput.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "exadbVmClusterId"))
@@ -3657,6 +3693,25 @@ module Aws::Odb
         )
       end)
 
+      api.add_operation(:list_autonomous_database_refreshable_clones, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAutonomousDatabaseRefreshableClones"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAutonomousDatabaseRefreshableClonesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListAutonomousDatabaseRefreshableClonesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_autonomous_database_versions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAutonomousDatabaseVersions"
         o.http_method = "POST"
@@ -4042,6 +4097,20 @@ module Aws::Odb
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartAutonomousDatabaseInput)
         o.output = Shapes::ShapeRef.new(shape: StartAutonomousDatabaseOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:start_autonomous_database_refresh, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartAutonomousDatabaseRefresh"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartAutonomousDatabaseRefreshInput)
+        o.output = Shapes::ShapeRef.new(shape: StartAutonomousDatabaseRefreshOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

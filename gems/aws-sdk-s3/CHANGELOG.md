@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.245.1 (2026-11-20)
+------------------
+
 * Issue - Fix `upload_file` raising `NoMethodError` instead of `MultipartUploadError` on JRuby when several parts fail at the same time.
 
 1.245.0 (2026-11-18)

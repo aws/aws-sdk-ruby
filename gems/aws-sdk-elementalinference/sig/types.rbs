@@ -85,7 +85,7 @@ module Aws::ElementalInference
 
     class CreateDictionaryRequest
       attr_accessor name: ::String
-      attr_accessor language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por")
+      attr_accessor language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por" | "ara")
       attr_accessor entries: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -95,7 +95,7 @@ module Aws::ElementalInference
       attr_accessor name: ::String
       attr_accessor arn: ::String
       attr_accessor id: ::String
-      attr_accessor language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por")
+      attr_accessor language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por" | "ara")
       attr_accessor status: ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
       attr_accessor references: ::Array[::String]
       attr_accessor tags: ::Hash[::String, ::String]
@@ -315,7 +315,7 @@ module Aws::ElementalInference
       attr_accessor arn: ::String
       attr_accessor id: ::String
       attr_accessor name: ::String
-      attr_accessor language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por")
+      attr_accessor language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por" | "ara")
       attr_accessor status: ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
       SENSITIVE: []
     end
@@ -444,7 +444,7 @@ module Aws::ElementalInference
       attr_accessor name: ::String
       attr_accessor arn: ::String
       attr_accessor id: ::String
-      attr_accessor language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por")
+      attr_accessor language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por" | "ara")
       attr_accessor status: ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
       attr_accessor references: ::Array[::String]
       attr_accessor tags: ::Hash[::String, ::String]
@@ -790,7 +790,7 @@ module Aws::ElementalInference
     end
 
     class SubtitlingConfig
-      attr_accessor language: ("eng" | "eng-au" | "eng-gb" | "eng-us" | "fra" | "ita" | "deu" | "spa" | "por")
+      attr_accessor language: ("eng" | "eng-au" | "eng-gb" | "eng-us" | "fra" | "ita" | "deu" | "spa" | "por" | "ara")
       attr_accessor aspect_ratio: Types::AspectRatio
       attr_accessor dictionary: ::String
       attr_accessor profanity_filter: ("DISABLED" | "CENSOR" | "DROP")
@@ -854,7 +854,7 @@ module Aws::ElementalInference
     class UpdateDictionaryRequest
       attr_accessor id: ::String
       attr_accessor name: ::String
-      attr_accessor language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por")
+      attr_accessor language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por" | "ara")
       attr_accessor entries: ::String
       SENSITIVE: []
     end
@@ -863,7 +863,7 @@ module Aws::ElementalInference
       attr_accessor name: ::String
       attr_accessor arn: ::String
       attr_accessor id: ::String
-      attr_accessor language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por")
+      attr_accessor language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por" | "ara")
       attr_accessor status: ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
       attr_accessor references: ::Array[::String]
       attr_accessor tags: ::Hash[::String, ::String]

@@ -8873,12 +8873,36 @@ module Aws::BedrockAgentCoreControl
     #   specifies how the input to the interceptor is constructed
     #   @return [Types::InterceptorInputConfiguration]
     #
+    # @!attribute [rw] response_interception_mode
+    #   Specifies how the interceptor processes streamed target responses.
+    #   You can set this field only on an interceptor that includes the
+    #   `RESPONSE` interception point. Valid values include:
+    #
+    #   * `BUFFERED` - The gateway collects the complete target response and
+    #     then invokes the interceptor once. This is the default.
+    #
+    #   * `STREAM` - The gateway sends a streamed target response to the
+    #     interceptor in batches of events and returns each processed batch
+    #     to the client as soon as it's ready. Non-streamed responses still
+    #     use `BUFFERED` processing. If you specify `STREAM`, you must also
+    #     specify `responseStreamingConfiguration`, and the input
+    #     configuration can't exclude the response body.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_streaming_configuration
+    #   Specifies the batching settings for a streamed response. Specify
+    #   this field only when `responseInterceptionMode` is `STREAM`. You
+    #   must specify it for `STREAM`.
+    #   @return [Types::ResponseStreamingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GatewayInterceptorConfiguration AWS API Documentation
     #
     class GatewayInterceptorConfiguration < Struct.new(
       :interceptor,
       :interception_points,
-      :input_configuration)
+      :input_configuration,
+      :response_interception_mode,
+      :response_streaming_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19993,6 +20017,25 @@ module Aws::BedrockAgentCoreControl
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the settings that the gateway uses to send a streamed target
+    # response to the interceptor in batches.
+    #
+    # @!attribute [rw] max_events_per_invocation
+    #   Specifies the maximum number of response events that the gateway
+    #   sends to the interceptor in one invocation. The interceptor's
+    #   output for the first batch determines the status code and headers of
+    #   the response. The gateway ignores the status code and headers that
+    #   the interceptor returns for later batches.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ResponseStreamingConfiguration AWS API Documentation
+    #
+    class ResponseStreamingConfiguration < Struct.new(
+      :max_events_per_invocation)
       SENSITIVE = []
       include Aws::Structure
     end

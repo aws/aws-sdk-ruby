@@ -117,14 +117,31 @@ module Aws::Glue
       SENSITIVE: []
     end
 
-    class AssetTypeFormReference
+    class AssetFormInput
       attr_accessor form_type_identifier: ::String
+      attr_accessor content: ::String
+      SENSITIVE: []
+    end
+
+    class AssetTypeFormOutput
+      attr_accessor form_type_id: ::String
       SENSITIVE: []
     end
 
     class AssetTypeItem
       attr_accessor id: ::String
       attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AssetsExport
+      attr_accessor s3_tables_export: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class AssetsExportResult
+      attr_accessor s3_tables_export: ("ENABLED" | "DISABLED")
+      attr_accessor s3_tables_export_state: Types::S3TablesExportState
       SENSITIVE: []
     end
 
@@ -138,9 +155,9 @@ module Aws::Glue
     end
 
     class AssociateGlossaryTermsResponse
-      attr_accessor asset_identifier: ::String
+      attr_accessor asset_id: ::String
       attr_accessor iterable_form_name: ::String
-      attr_accessor item_identifier: ::String
+      attr_accessor item_id: ::String
       attr_accessor glossary_terms: ::Array[::String]
       SENSITIVE: []
     end
@@ -2435,14 +2452,6 @@ module Aws::Glue
     class DeleteAssetResponse < Aws::EmptyStructure
     end
 
-    class DeleteAssetTypeRequest
-      attr_accessor identifier: ::String
-      SENSITIVE: []
-    end
-
-    class DeleteAssetTypeResponse < Aws::EmptyStructure
-    end
-
     class DeleteAttachmentRequest
       attr_accessor asset_identifier: ::String
       attr_accessor iterable_form_name: ::String
@@ -2452,9 +2461,9 @@ module Aws::Glue
     end
 
     class DeleteAttachmentResponse
-      attr_accessor asset_identifier: ::String
+      attr_accessor asset_id: ::String
       attr_accessor iterable_form_name: ::String
-      attr_accessor item_identifier: ::String
+      attr_accessor item_id: ::String
       SENSITIVE: []
     end
 
@@ -2983,9 +2992,9 @@ module Aws::Glue
     end
 
     class DisassociateGlossaryTermsResponse
-      attr_accessor asset_identifier: ::String
+      attr_accessor asset_id: ::String
       attr_accessor iterable_form_name: ::String
-      attr_accessor item_identifier: ::String
+      attr_accessor item_id: ::String
       attr_accessor glossary_terms: ::Array[::String]
       SENSITIVE: []
     end
@@ -3373,7 +3382,7 @@ module Aws::Glue
     class GetAssetTypeResponse
       attr_accessor id: ::String
       attr_accessor name: ::String
-      attr_accessor forms: ::Hash[::String, Types::AssetTypeFormReference]
+      attr_accessor forms: ::Hash[::String, Types::AssetTypeFormOutput]
       SENSITIVE: []
     end
 
@@ -3645,12 +3654,10 @@ module Aws::Glue
     end
 
     class GetDataCatalogExportConfigurationOutput
-      attr_accessor export_setting: ("ENABLED" | "DISABLED")
-      attr_accessor status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "FAILED")
-      attr_accessor encryption_configuration: Types::ExportEncryptionConfiguration
-      attr_accessor s3_table_bucket_arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor s3_tables_configuration: Types::S3TablesConfigurationResult
+      attr_accessor assets: Types::AssetsExportResult
       SENSITIVE: []
     end
 
@@ -6400,11 +6407,11 @@ module Aws::Glue
     end
 
     class PutAssetRequest
-      attr_accessor asset_type_id: ::String
+      attr_accessor asset_type_identifier: ::String
       attr_accessor identifier: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor forms: ::Hash[::String, Types::AssetFormEntry]
+      attr_accessor forms: ::Hash[::String, Types::AssetFormInput]
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -6413,22 +6420,9 @@ module Aws::Glue
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
+      attr_accessor asset_type_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor forms: ::Hash[::String, Types::AssetFormEntry]
-      SENSITIVE: []
-    end
-
-    class PutAssetTypeRequest
-      attr_accessor name: ::String
-      attr_accessor forms: ::Hash[::String, Types::AssetTypeFormReference]
-      attr_accessor client_token: ::String
-      SENSITIVE: []
-    end
-
-    class PutAssetTypeResponse
-      attr_accessor id: ::String
-      attr_accessor name: ::String
-      attr_accessor forms: ::Hash[::String, Types::AssetTypeFormReference]
       SENSITIVE: []
     end
 
@@ -6438,15 +6432,15 @@ module Aws::Glue
       attr_accessor item_identifier: ::String
       attr_accessor attachment_name: ::String
       attr_accessor content: ::String
-      attr_accessor form_type_id: ::String
+      attr_accessor form_type_identifier: ::String
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
     class PutAttachmentResponse
-      attr_accessor asset_identifier: ::String
+      attr_accessor asset_id: ::String
       attr_accessor iterable_form_name: ::String
-      attr_accessor item_identifier: ::String
+      attr_accessor item_id: ::String
       attr_accessor attachment_name: ::String
       attr_accessor form_type_id: ::String
       SENSITIVE: []
@@ -6462,15 +6456,15 @@ module Aws::Glue
     end
 
     class PutDataCatalogExportConfigurationInput
-      attr_accessor export_setting: ("ENABLED" | "DISABLED")
-      attr_accessor encryption_configuration: Types::ExportEncryptionConfiguration
       attr_accessor client_token: ::String
+      attr_accessor s3_tables_configuration: Types::S3TablesConfiguration
+      attr_accessor assets: Types::AssetsExport
       SENSITIVE: []
     end
 
     class PutDataCatalogExportConfigurationOutput
-      attr_accessor export_setting: ("ENABLED" | "DISABLED")
-      attr_accessor encryption_configuration: Types::ExportEncryptionConfiguration
+      attr_accessor s3_tables_configuration: Types::S3TablesConfiguration
+      attr_accessor assets: Types::AssetsExport
       SENSITIVE: []
     end
 
@@ -7095,6 +7089,22 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class S3TablesConfiguration
+      attr_accessor encryption_configuration: Types::ExportEncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class S3TablesConfigurationResult
+      attr_accessor table_bucket_arn: ::String
+      attr_accessor encryption_configuration: Types::ExportEncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class S3TablesExportState
+      attr_accessor status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "FAILED")
+      SENSITIVE: []
+    end
+
     class S3Target
       attr_accessor path: ::String
       attr_accessor exclusions: ::Array[::String]
@@ -7201,7 +7211,7 @@ module Aws::Glue
 
     class SearchAttributeFilter
       attr_accessor attribute: ::String
-      attr_accessor operator: ("equals" | "greaterThan" | "greaterThanOrEquals" | "lessThan" | "lessThanOrEquals" | "notExists")
+      attr_accessor comparator: ("EQUALS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "NOT_EXISTS")
       attr_accessor value: Types::SearchFilterValue
       SENSITIVE: []
     end
@@ -7260,8 +7270,9 @@ module Aws::Glue
 
     class SearchResultItem
       attr_accessor id: ::String
-      attr_accessor asset_name: ::String
-      attr_accessor asset_description: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor asset_type_id: ::String
       SENSITIVE: []

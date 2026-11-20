@@ -17,6 +17,9 @@ module Aws
       class ConflictException < ServiceError
         def message: () -> ::String
       end
+      class DependencyException < ServiceError
+        def message: () -> ::String
+      end
       class InternalServerException < ServiceError
         def message: () -> ::String
       end

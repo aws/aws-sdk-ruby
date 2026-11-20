@@ -1,10 +1,15 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "ListTagsForResourceFailure",
-    "operationName" : "ListTagsForResource",
+    "id" : "CreateRelationshipFailure",
+    "operationName" : "CreateRelationship",
     "input" : {
-      "resourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/program-management-account/pma-1234567890123"
+      "catalog" : "AWS",
+      "associationType" : "END_CUSTOMER",
+      "programManagementAccountIdentifier" : "pma-1234567890123",
+      "associatedAccountId" : "000000000000",
+      "displayName" : "TestRelationship",
+      "sector" : "COMMERCIAL"
     },
     "expectation" : {
       "failure" : { }
@@ -18,6 +23,22 @@
   }, {
     "id" : "ListRelationshipsSuccess",
     "operationName" : "ListRelationships",
+    "input" : {
+      "catalog" : "AWS",
+      "maxResults" : 1
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListProgramManagementAccountsSuccess",
+    "operationName" : "ListProgramManagementAccounts",
     "input" : {
       "catalog" : "AWS",
       "maxResults" : 1
@@ -48,24 +69,6 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "CreateProgramManagementAccountFailure",
-    "operationName" : "CreateProgramManagementAccount",
-    "input" : {
-      "catalog" : "AWS",
-      "displayName" : "TestAccount",
-      "program" : "SOLUTION_PROVIDER",
-      "accountId" : "000000000000"
-    },
-    "expectation" : {
-      "failure" : { }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
     "id" : "TagResourceFailure",
     "operationName" : "TagResource",
     "input" : {
@@ -85,11 +88,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListProgramManagementAccountsSuccess",
-    "operationName" : "ListProgramManagementAccounts",
+    "id" : "ListTagsForResourceFailure",
+    "operationName" : "ListTagsForResource",
     "input" : {
-      "catalog" : "AWS",
-      "maxResults" : 1
+      "resourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/program-management-account/pma-1234567890123"
     },
     "expectation" : {
       "failure" : { }
@@ -101,15 +103,13 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "CreateRelationshipFailure",
-    "operationName" : "CreateRelationship",
+    "id" : "CreateProgramManagementAccountFailure",
+    "operationName" : "CreateProgramManagementAccount",
     "input" : {
       "catalog" : "AWS",
-      "associationType" : "END_CUSTOMER",
-      "programManagementAccountIdentifier" : "pma-1234567890123",
-      "associatedAccountId" : "000000000000",
-      "displayName" : "TestRelationship",
-      "sector" : "COMMERCIAL"
+      "displayName" : "TestAccount",
+      "program" : "SOLUTION_PROVIDER",
+      "accountId" : "000000000000"
     },
     "expectation" : {
       "failure" : { }

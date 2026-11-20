@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2026-11-20)
+------------------
+
+* Feature - Add support for the use of virtual devices on Device Farm.
+
 1.124.0 (2026-11-18)
 ------------------
 

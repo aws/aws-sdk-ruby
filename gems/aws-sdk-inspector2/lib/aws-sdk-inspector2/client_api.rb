@@ -633,6 +633,7 @@ module Aws::Inspector2
     PackageRelease = Shapes::StringShape.new(name: 'PackageRelease')
     PackageSortBy = Shapes::StringShape.new(name: 'PackageSortBy')
     PackageType = Shapes::StringShape.new(name: 'PackageType')
+    PackageUrl = Shapes::StringShape.new(name: 'PackageUrl')
     PackageVersion = Shapes::StringShape.new(name: 'PackageVersion')
     PackageVulnerabilityDetails = Shapes::StructureShape.new(name: 'PackageVulnerabilityDetails')
     Path = Shapes::StringShape.new(name: 'Path')
@@ -667,6 +668,8 @@ module Aws::Inspector2
     ProviderOrgId = Shapes::StringShape.new(name: 'ProviderOrgId')
     ProviderPartition = Shapes::StringShape.new(name: 'ProviderPartition')
     ProviderRegion = Shapes::StringShape.new(name: 'ProviderRegion')
+    PurlQualifierFilter = Shapes::StructureShape.new(name: 'PurlQualifierFilter')
+    PurlQualifierKey = Shapes::StringShape.new(name: 'PurlQualifierKey')
     Reason = Shapes::StringShape.new(name: 'Reason')
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
     ReferenceUrls = Shapes::ListShape.new(name: 'ReferenceUrls')
@@ -708,6 +711,11 @@ module Aws::Inspector2
     RuleSetCategories = Shapes::ListShape.new(name: 'RuleSetCategories')
     RuleSetCategory = Shapes::StringShape.new(name: 'RuleSetCategory')
     Runtime = Shapes::StringShape.new(name: 'Runtime')
+    RuntimeReachability = Shapes::StringShape.new(name: 'RuntimeReachability')
+    RuntimeReachabilityComparison = Shapes::StringShape.new(name: 'RuntimeReachabilityComparison')
+    RuntimeReachabilityFilter = Shapes::StructureShape.new(name: 'RuntimeReachabilityFilter')
+    RuntimeReachabilityReason = Shapes::StringShape.new(name: 'RuntimeReachabilityReason')
+    RuntimeReachabilityReasonFilter = Shapes::StructureShape.new(name: 'RuntimeReachabilityReasonFilter')
     SbomReportFormat = Shapes::StringShape.new(name: 'SbomReportFormat')
     ScanConfigurationArn = Shapes::StringShape.new(name: 'ScanConfigurationArn')
     ScanConfigurationName = Shapes::StringShape.new(name: 'ScanConfigurationName')
@@ -2878,6 +2886,9 @@ module Aws::Inspector2
     PackageFilter.add_member(:source_layer_hash, Shapes::ShapeRef.new(shape: StringFilter, location_name: "sourceLayerHash"))
     PackageFilter.add_member(:source_lambda_layer_arn, Shapes::ShapeRef.new(shape: StringFilter, location_name: "sourceLambdaLayerArn"))
     PackageFilter.add_member(:file_path, Shapes::ShapeRef.new(shape: StringFilter, location_name: "filePath"))
+    PackageFilter.add_member(:runtime_reachability, Shapes::ShapeRef.new(shape: RuntimeReachabilityFilter, location_name: "runtimeReachability"))
+    PackageFilter.add_member(:runtime_reachability_reason, Shapes::ShapeRef.new(shape: RuntimeReachabilityReasonFilter, location_name: "runtimeReachabilityReason"))
+    PackageFilter.add_member(:purl_qualifier, Shapes::ShapeRef.new(shape: PurlQualifierFilter, location_name: "purlQualifier"))
     PackageFilter.struct_class = Types::PackageFilter
 
     PackageFilterList.member = Shapes::ShapeRef.new(shape: PackageFilter)
@@ -2955,6 +2966,11 @@ module Aws::Inspector2
     ProviderFilter.struct_class = Types::ProviderFilter
 
     ProviderFilterList.member = Shapes::ShapeRef.new(shape: ProviderFilter)
+
+    PurlQualifierFilter.add_member(:comparison, Shapes::ShapeRef.new(shape: MapComparison, required: true, location_name: "comparison"))
+    PurlQualifierFilter.add_member(:key, Shapes::ShapeRef.new(shape: PurlQualifierKey, required: true, location_name: "key"))
+    PurlQualifierFilter.add_member(:value, Shapes::ShapeRef.new(shape: MapValue, location_name: "value"))
+    PurlQualifierFilter.struct_class = Types::PurlQualifierFilter
 
     Recommendation.add_member(:text, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "text"))
     Recommendation.add_member(:url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Url"))
@@ -3085,6 +3101,14 @@ module Aws::Inspector2
     ResourceTagFilterList.member = Shapes::ShapeRef.new(shape: TagFilter)
 
     RuleSetCategories.member = Shapes::ShapeRef.new(shape: RuleSetCategory)
+
+    RuntimeReachabilityFilter.add_member(:comparison, Shapes::ShapeRef.new(shape: RuntimeReachabilityComparison, required: true, location_name: "comparison"))
+    RuntimeReachabilityFilter.add_member(:value, Shapes::ShapeRef.new(shape: RuntimeReachability, required: true, location_name: "value"))
+    RuntimeReachabilityFilter.struct_class = Types::RuntimeReachabilityFilter
+
+    RuntimeReachabilityReasonFilter.add_member(:comparison, Shapes::ShapeRef.new(shape: RuntimeReachabilityComparison, required: true, location_name: "comparison"))
+    RuntimeReachabilityReasonFilter.add_member(:value, Shapes::ShapeRef.new(shape: RuntimeReachabilityReason, required: true, location_name: "value"))
+    RuntimeReachabilityReasonFilter.struct_class = Types::RuntimeReachabilityReasonFilter
 
     ScanSourceList.member = Shapes::ShapeRef.new(shape: ScanSource)
 
@@ -3615,6 +3639,9 @@ module Aws::Inspector2
     VulnerablePackage.add_member(:fixed_in_version, Shapes::ShapeRef.new(shape: PackageVersion, location_name: "fixedInVersion"))
     VulnerablePackage.add_member(:remediation, Shapes::ShapeRef.new(shape: VulnerablePackageRemediation, location_name: "remediation"))
     VulnerablePackage.add_member(:source_lambda_layer_arn, Shapes::ShapeRef.new(shape: LambdaLayerArn, location_name: "sourceLambdaLayerArn"))
+    VulnerablePackage.add_member(:runtime_reachability, Shapes::ShapeRef.new(shape: RuntimeReachability, location_name: "runtimeReachability"))
+    VulnerablePackage.add_member(:runtime_reachability_reason, Shapes::ShapeRef.new(shape: RuntimeReachabilityReason, location_name: "runtimeReachabilityReason"))
+    VulnerablePackage.add_member(:purl, Shapes::ShapeRef.new(shape: PackageUrl, location_name: "purl"))
     VulnerablePackage.struct_class = Types::VulnerablePackage
 
     VulnerablePackageList.member = Shapes::ShapeRef.new(shape: VulnerablePackage)

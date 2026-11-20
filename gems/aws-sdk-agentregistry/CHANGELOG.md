@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2026-11-20)
+------------------
+
+* Feature - Adds support for the WEBBOT registry record type
+
 1.19.0 (2026-11-19)
 ------------------
 

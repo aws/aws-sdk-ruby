@@ -24,6 +24,7 @@ module Aws::NetworkFirewall
     ActionScope = Shapes::StringShape.new(name: 'ActionScope')
     Address = Shapes::StructureShape.new(name: 'Address')
     AddressDefinition = Shapes::StringShape.new(name: 'AddressDefinition')
+    AddressTranslations = Shapes::StructureShape.new(name: 'AddressTranslations')
     Addresses = Shapes::ListShape.new(name: 'Addresses')
     Age = Shapes::IntegerShape.new(name: 'Age')
     AlertEnabled = Shapes::BooleanShape.new(name: 'AlertEnabled')
@@ -178,6 +179,7 @@ module Aws::NetworkFirewall
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EndTime = Shapes::TimestampShape.new(name: 'EndTime')
     EndpointId = Shapes::StringShape.new(name: 'EndpointId')
+    EnforcementMode = Shapes::StringShape.new(name: 'EnforcementMode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FailureCode = Shapes::StringShape.new(name: 'FailureCode')
     FailureMessage = Shapes::StringShape.new(name: 'FailureMessage')
@@ -205,6 +207,7 @@ module Aws::NetworkFirewall
     FirewallRulesSource = Shapes::StructureShape.new(name: 'FirewallRulesSource')
     FirewallStatus = Shapes::StructureShape.new(name: 'FirewallStatus')
     FirewallStatusValue = Shapes::StringShape.new(name: 'FirewallStatusValue')
+    FirewallType = Shapes::StringShape.new(name: 'FirewallType')
     Firewalls = Shapes::ListShape.new(name: 'Firewalls')
     FirstAccessed = Shapes::TimestampShape.new(name: 'FirstAccessed')
     Flags = Shapes::ListShape.new(name: 'Flags')
@@ -237,7 +240,10 @@ module Aws::NetworkFirewall
     IPSetReferenceMap = Shapes::MapShape.new(name: 'IPSetReferenceMap')
     IPSetReferenceName = Shapes::StringShape.new(name: 'IPSetReferenceName')
     IPSets = Shapes::MapShape.new(name: 'IPSets')
+    IPv4AddressDefinition = Shapes::StringShape.new(name: 'IPv4AddressDefinition')
+    IPv6AddressDefinition = Shapes::StringShape.new(name: 'IPv6AddressDefinition')
     IdentifiedType = Shapes::StringShape.new(name: 'IdentifiedType')
+    IgwFirewallConfiguration = Shapes::StructureShape.new(name: 'IgwFirewallConfiguration')
     InsufficientCapacityException = Shapes::StructureShape.new(name: 'InsufficientCapacityException')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
@@ -329,6 +335,8 @@ module Aws::NetworkFirewall
     ProxyModifyState = Shapes::StringShape.new(name: 'ProxyModifyState')
     ProxySettings = Shapes::StructureShape.new(name: 'ProxySettings')
     ProxyState = Shapes::StringShape.new(name: 'ProxyState')
+    PublicIPv4Addresses = Shapes::ListShape.new(name: 'PublicIPv4Addresses')
+    PublicIPv6Addresses = Shapes::ListShape.new(name: 'PublicIPv6Addresses')
     PublicId = Shapes::StringShape.new(name: 'PublicId')
     PublishMetricAction = Shapes::StructureShape.new(name: 'PublishMetricAction')
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
@@ -522,6 +530,10 @@ module Aws::NetworkFirewall
     Address.add_member(:address_definition, Shapes::ShapeRef.new(shape: AddressDefinition, required: true, location_name: "AddressDefinition"))
     Address.struct_class = Types::Address
 
+    AddressTranslations.add_member(:public_i_pv_6_addresses, Shapes::ShapeRef.new(shape: PublicIPv6Addresses, location_name: "PublicIPv6Addresses"))
+    AddressTranslations.add_member(:public_i_pv_4_addresses, Shapes::ShapeRef.new(shape: PublicIPv4Addresses, location_name: "PublicIPv4Addresses"))
+    AddressTranslations.struct_class = Types::AddressTranslations
+
     Addresses.member = Shapes::ShapeRef.new(shape: Address)
 
     AnalysisReport.add_member(:analysis_report_id, Shapes::ShapeRef.new(shape: AnalysisReportId, location_name: "AnalysisReportId"))
@@ -553,6 +565,7 @@ module Aws::NetworkFirewall
     AssociateAvailabilityZonesRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     AssociateAvailabilityZonesRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
     AssociateAvailabilityZonesRequest.add_member(:availability_zone_mappings, Shapes::ShapeRef.new(shape: AvailabilityZoneMappings, required: true, location_name: "AvailabilityZoneMappings"))
+    AssociateAvailabilityZonesRequest.add_member(:firewall_type, Shapes::ShapeRef.new(shape: FirewallType, location_name: "FirewallType"))
     AssociateAvailabilityZonesRequest.struct_class = Types::AssociateAvailabilityZonesRequest
 
     AssociateAvailabilityZonesResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
@@ -565,6 +578,7 @@ module Aws::NetworkFirewall
     AssociateFirewallPolicyRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     AssociateFirewallPolicyRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
     AssociateFirewallPolicyRequest.add_member(:firewall_policy_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "FirewallPolicyArn"))
+    AssociateFirewallPolicyRequest.add_member(:firewall_type, Shapes::ShapeRef.new(shape: FirewallType, location_name: "FirewallType"))
     AssociateFirewallPolicyRequest.struct_class = Types::AssociateFirewallPolicyRequest
 
     AssociateFirewallPolicyResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
@@ -715,6 +729,7 @@ module Aws::NetworkFirewall
     CreateFirewallRequest.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: TransitGatewayId, location_name: "TransitGatewayId"))
     CreateFirewallRequest.add_member(:availability_zone_mappings, Shapes::ShapeRef.new(shape: AvailabilityZoneMappings, location_name: "AvailabilityZoneMappings"))
     CreateFirewallRequest.add_member(:availability_zone_change_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "AvailabilityZoneChangeProtection"))
+    CreateFirewallRequest.add_member(:igw_firewall_configuration, Shapes::ShapeRef.new(shape: IgwFirewallConfiguration, location_name: "IgwFirewallConfiguration"))
     CreateFirewallRequest.add_member(:nat_gateway_create_mappings, Shapes::ShapeRef.new(shape: NatGatewayCreateMappingsList, location_name: "NatGatewayCreateMappings"))
     CreateFirewallRequest.add_member(:proxy_settings, Shapes::ShapeRef.new(shape: ProxySettings, location_name: "ProxySettings"))
     CreateFirewallRequest.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: VpcEndpoint, location_name: "VpcEndpoint"))
@@ -798,6 +813,7 @@ module Aws::NetworkFirewall
 
     DeleteFirewallRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
     DeleteFirewallRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
+    DeleteFirewallRequest.add_member(:firewall_type, Shapes::ShapeRef.new(shape: FirewallType, location_name: "FirewallType"))
     DeleteFirewallRequest.add_member(:delete_associated_nat_gateways, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteAssociatedNatGateways"))
     DeleteFirewallRequest.struct_class = Types::DeleteFirewallRequest
 
@@ -897,6 +913,7 @@ module Aws::NetworkFirewall
 
     DescribeFirewallRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
     DescribeFirewallRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
+    DescribeFirewallRequest.add_member(:firewall_type, Shapes::ShapeRef.new(shape: FirewallType, location_name: "FirewallType"))
     DescribeFirewallRequest.struct_class = Types::DescribeFirewallRequest
 
     DescribeFirewallResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
@@ -927,6 +944,7 @@ module Aws::NetworkFirewall
 
     DescribeLoggingConfigurationRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     DescribeLoggingConfigurationRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
+    DescribeLoggingConfigurationRequest.add_member(:firewall_type, Shapes::ShapeRef.new(shape: FirewallType, location_name: "FirewallType"))
     DescribeLoggingConfigurationRequest.struct_class = Types::DescribeLoggingConfigurationRequest
 
     DescribeLoggingConfigurationResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
@@ -1033,6 +1051,7 @@ module Aws::NetworkFirewall
     DisassociateAvailabilityZonesRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     DisassociateAvailabilityZonesRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
     DisassociateAvailabilityZonesRequest.add_member(:availability_zone_mappings, Shapes::ShapeRef.new(shape: AvailabilityZoneMappings, required: true, location_name: "AvailabilityZoneMappings"))
+    DisassociateAvailabilityZonesRequest.add_member(:firewall_type, Shapes::ShapeRef.new(shape: FirewallType, location_name: "FirewallType"))
     DisassociateAvailabilityZonesRequest.struct_class = Types::DisassociateAvailabilityZonesRequest
 
     DisassociateAvailabilityZonesResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
@@ -1080,6 +1099,7 @@ module Aws::NetworkFirewall
     Firewall.add_member(:transit_gateway_owner_account_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "TransitGatewayOwnerAccountId"))
     Firewall.add_member(:availability_zone_mappings, Shapes::ShapeRef.new(shape: AvailabilityZoneMappings, location_name: "AvailabilityZoneMappings"))
     Firewall.add_member(:availability_zone_change_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "AvailabilityZoneChangeProtection"))
+    Firewall.add_member(:igw_firewall_configuration, Shapes::ShapeRef.new(shape: IgwFirewallConfiguration, location_name: "IgwFirewallConfiguration"))
     Firewall.add_member(:nat_gateway_create_mappings, Shapes::ShapeRef.new(shape: NatGatewayCreateMappingsList, location_name: "NatGatewayCreateMappings"))
     Firewall.add_member(:proxy_settings, Shapes::ShapeRef.new(shape: ProxySettings, location_name: "ProxySettings"))
     Firewall.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: VpcEndpoint, location_name: "VpcEndpoint"))
@@ -1294,6 +1314,9 @@ module Aws::NetworkFirewall
     IPSets.key = Shapes::ShapeRef.new(shape: RuleVariableName)
     IPSets.value = Shapes::ShapeRef.new(shape: IPSet)
 
+    IgwFirewallConfiguration.add_member(:enforcement_mode, Shapes::ShapeRef.new(shape: EnforcementMode, required: true, location_name: "EnforcementMode"))
+    IgwFirewallConfiguration.struct_class = Types::IgwFirewallConfiguration
+
     InsufficientCapacityException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InsufficientCapacityException.struct_class = Types::InsufficientCapacityException
 
@@ -1378,6 +1401,7 @@ module Aws::NetworkFirewall
     ListFirewallsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListFirewallsRequest.add_member(:vpc_ids, Shapes::ShapeRef.new(shape: VpcIds, location_name: "VpcIds"))
     ListFirewallsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
+    ListFirewallsRequest.add_member(:firewall_type, Shapes::ShapeRef.new(shape: FirewallType, location_name: "FirewallType"))
     ListFirewallsRequest.struct_class = Types::ListFirewallsRequest
 
     ListFirewallsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -1545,6 +1569,10 @@ module Aws::NetworkFirewall
     ProxySettings.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "CertificateArn"))
     ProxySettings.add_member(:domain_name, Shapes::ShapeRef.new(shape: ProxyDomainName, location_name: "DomainName"))
     ProxySettings.struct_class = Types::ProxySettings
+
+    PublicIPv4Addresses.member = Shapes::ShapeRef.new(shape: IPv4AddressDefinition)
+
+    PublicIPv6Addresses.member = Shapes::ShapeRef.new(shape: IPv6AddressDefinition)
 
     PublishMetricAction.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, required: true, location_name: "Dimensions"))
     PublishMetricAction.struct_class = Types::PublishMetricAction
@@ -1798,6 +1826,7 @@ module Aws::NetworkFirewall
 
     SyncState.add_member(:attachment, Shapes::ShapeRef.new(shape: Attachment, location_name: "Attachment"))
     SyncState.add_member(:config, Shapes::ShapeRef.new(shape: SyncStateConfig, location_name: "Config"))
+    SyncState.add_member(:address_translations, Shapes::ShapeRef.new(shape: AddressTranslations, location_name: "AddressTranslations"))
     SyncState.add_member(:nat_gateway_attachments, Shapes::ShapeRef.new(shape: NatGatewayAttachmentsList, location_name: "NatGatewayAttachments"))
     SyncState.struct_class = Types::SyncState
 
@@ -1918,6 +1947,7 @@ module Aws::NetworkFirewall
     UpdateFirewallAnalysisSettingsRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     UpdateFirewallAnalysisSettingsRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
     UpdateFirewallAnalysisSettingsRequest.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    UpdateFirewallAnalysisSettingsRequest.add_member(:firewall_type, Shapes::ShapeRef.new(shape: FirewallType, location_name: "FirewallType"))
     UpdateFirewallAnalysisSettingsRequest.struct_class = Types::UpdateFirewallAnalysisSettingsRequest
 
     UpdateFirewallAnalysisSettingsResponse.add_member(:enabled_analysis_types, Shapes::ShapeRef.new(shape: EnabledAnalysisTypes, location_name: "EnabledAnalysisTypes"))
@@ -1930,6 +1960,7 @@ module Aws::NetworkFirewall
     UpdateFirewallDeleteProtectionRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     UpdateFirewallDeleteProtectionRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
     UpdateFirewallDeleteProtectionRequest.add_member(:delete_protection, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "DeleteProtection"))
+    UpdateFirewallDeleteProtectionRequest.add_member(:firewall_type, Shapes::ShapeRef.new(shape: FirewallType, location_name: "FirewallType"))
     UpdateFirewallDeleteProtectionRequest.struct_class = Types::UpdateFirewallDeleteProtectionRequest
 
     UpdateFirewallDeleteProtectionResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
@@ -1942,6 +1973,7 @@ module Aws::NetworkFirewall
     UpdateFirewallDescriptionRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     UpdateFirewallDescriptionRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
     UpdateFirewallDescriptionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateFirewallDescriptionRequest.add_member(:firewall_type, Shapes::ShapeRef.new(shape: FirewallType, location_name: "FirewallType"))
     UpdateFirewallDescriptionRequest.struct_class = Types::UpdateFirewallDescriptionRequest
 
     UpdateFirewallDescriptionResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
@@ -1954,6 +1986,7 @@ module Aws::NetworkFirewall
     UpdateFirewallEncryptionConfigurationRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     UpdateFirewallEncryptionConfigurationRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
     UpdateFirewallEncryptionConfigurationRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    UpdateFirewallEncryptionConfigurationRequest.add_member(:firewall_type, Shapes::ShapeRef.new(shape: FirewallType, location_name: "FirewallType"))
     UpdateFirewallEncryptionConfigurationRequest.struct_class = Types::UpdateFirewallEncryptionConfigurationRequest
 
     UpdateFirewallEncryptionConfigurationResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
@@ -1966,6 +1999,7 @@ module Aws::NetworkFirewall
     UpdateFirewallPolicyChangeProtectionRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     UpdateFirewallPolicyChangeProtectionRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
     UpdateFirewallPolicyChangeProtectionRequest.add_member(:firewall_policy_change_protection, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "FirewallPolicyChangeProtection"))
+    UpdateFirewallPolicyChangeProtectionRequest.add_member(:firewall_type, Shapes::ShapeRef.new(shape: FirewallType, location_name: "FirewallType"))
     UpdateFirewallPolicyChangeProtectionRequest.struct_class = Types::UpdateFirewallPolicyChangeProtectionRequest
 
     UpdateFirewallPolicyChangeProtectionResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
@@ -2002,6 +2036,7 @@ module Aws::NetworkFirewall
 
     UpdateLoggingConfigurationRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     UpdateLoggingConfigurationRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
+    UpdateLoggingConfigurationRequest.add_member(:firewall_type, Shapes::ShapeRef.new(shape: FirewallType, location_name: "FirewallType"))
     UpdateLoggingConfigurationRequest.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
     UpdateLoggingConfigurationRequest.add_member(:enable_monitoring_dashboard, Shapes::ShapeRef.new(shape: EnableMonitoringDashboard, location_name: "EnableMonitoringDashboard"))
     UpdateLoggingConfigurationRequest.struct_class = Types::UpdateLoggingConfigurationRequest

@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.271.1 (2026-11-20)
+------------------
+
 * Issue - Fix response stubbing conflicts with other testing libraries.
 
 3.271.0 (2026-11-19)

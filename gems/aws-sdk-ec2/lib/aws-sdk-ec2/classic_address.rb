@@ -118,10 +118,6 @@ module Aws::EC2
     end
 
     # The service that manages the elastic IP address.
-    #
-    # <note markdown="1"> The only option supported today is `alb`.
-    #
-    #  </note>
     # @return [String]
     def service_managed
       data[:service_managed]

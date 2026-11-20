@@ -14,7 +14,8 @@ module Aws
       source_logs_configuration: {
         log_group_selection_criteria: ::String?,
         data_source_selection_criteria: ::String?,
-        encrypted_log_group_strategy: ("ALLOW" | "SKIP")
+        encrypted_log_group_strategy: ("ALLOW" | "SKIP"),
+        centralize_with_data_protection: ("ENABLED" | "DISABLED")?
       }?,
       source_metrics_configuration: {
         metrics_selection_criteria: ::String?
@@ -105,7 +106,7 @@ module Aws
       }?,
       waf_logging_parameters: Params::waf_logging_parameters?,
       log_delivery_parameters: {
-        log_types: Array[("APPLICATION_LOGS" | "USAGE_LOGS" | "SECURITY_FINDING_LOGS" | "ACCESS_LOGS" | "CONNECTION_LOGS" | "S3_SERVER_ACCESS_LOGS" | "ALB_ACCESS_LOGS" | "ALB_CONNECTION_LOGS" | "ALB_HEALTH_CHECK_LOGS")]?
+        log_types: Array[("APPLICATION_LOGS" | "USAGE_LOGS" | "SECURITY_FINDING_LOGS" | "ACCESS_LOGS" | "CONNECTION_LOGS" | "S3_SERVER_ACCESS_LOGS" | "ALB_ACCESS_LOGS" | "ALB_CONNECTION_LOGS" | "ALB_HEALTH_CHECK_LOGS" | "FLOW_LOGS" | "ALERT_LOGS" | "TLS_LOGS")]?
       }?,
       msk_monitoring_parameters: {
         enhanced_monitoring: ("DEFAULT" | "PER_BROKER" | "PER_TOPIC_PER_BROKER" | "PER_TOPIC_PER_PARTITION")?
@@ -114,7 +115,7 @@ module Aws
     }
 
       type telemetry_rule = {
-      resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig")?,
+      resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig" | "AWS::CloudWatchOmni" | "AWS::NetworkFirewall::Firewall")?,
       telemetry_type: ("Logs" | "Metrics" | "Traces" | "Insights"),
       telemetry_source_types: Array[("VPC_FLOW_LOGS" | "ROUTE53_RESOLVER_QUERY_LOGS" | "EKS_AUDIT_LOGS" | "EKS_AUTHENTICATOR_LOGS" | "EKS_CONTROLLER_MANAGER_LOGS" | "EKS_SCHEDULER_LOGS" | "EKS_API_LOGS")]?,
       destination_configuration: Params::telemetry_destination_configuration?,

@@ -724,6 +724,30 @@ module Aws::TaxSettings
     #
     # ^
     #
+    # **New Zealand**
+    #
+    # * You can optionally specify the `sector`. Valid values are
+    #   `Government` and `Business`. Non-government customers use
+    #   `Business`.
+    #
+    # * If your `sector` is `Government`, you can optionally specify the
+    #   `peppolId` in the `newZealandAdditionalInfo` field of the
+    #   `additionalTaxInformation` object.
+    #
+    # **Norway**
+    #
+    # * You can optionally specify the `taxRegistrationNumberType` in the
+    #   `norwayAdditionalInfo` field of the `additionalTaxInformation`
+    #   object. Valid values are `TaxRegistrationNumber` and
+    #   `LocalRegistrationNumber`. Use `LocalRegistrationNumber` to register
+    #   a Norwegian Organisation Number for a business that isn't VAT
+    #   registered. In that case, the `registrationId` must be the 9-digit
+    #   Organisation Number.
+    #
+    # * You can optionally specify the `peppolId` in the
+    #   `norwayAdditionalInfo` field of the `additionalTaxInformation`
+    #   object.
+    #
     # **Saudi Arabia**
     #
     # * For `address`, you must specify `addressLine3`.
@@ -782,6 +806,17 @@ module Aws::TaxSettings
     #
     # ^
     #
+    # **United Arab Emirates**
+    #
+    # * You must specify the `taxRegistrationNumberType` in the
+    #   `unitedArabEmiratesAdditionalInfo` field of the
+    #   `additionalTaxInformation` object. Valid values are
+    #   `VATTaxRegistrationNumber` and `LocalTaxRegistrationNumber`
+    #   (Corporate Tax).
+    #
+    # * You can optionally specify the `peppolId`, `tradeLicenseNumber`, and
+    #   `emiratesId` in the `unitedArabEmiratesAdditionalInfo` field.
+    #
     # **Uruguay**
     #
     # * `RegistrationType` valid values are `RUT` (Registro Único
@@ -789,6 +824,21 @@ module Aws::TaxSettings
     #   `CI` (Cedula Identidad).
     #
     # ^
+    #
+    # **Vietnam**
+    #
+    # * You must specify the `vatCreditMethod` in the
+    #   `vietnamAdditionalInfo` field of the `additionalTaxInformation`
+    #   object.
+    #
+    # * If `vatCreditMethod` is `true`, the sector must be `Business`, and
+    #   you must specify the `enterpriseIdentificationNumber`,
+    #   `electronicTransactionCodeNumber`, `paymentVoucherNumber`, and
+    #   `paymentVoucherNumberDate`.
+    #
+    # * If `vatCreditMethod` is `false`, the sector must be `Individual`,
+    #   and you must not specify those four fields. The tax registration
+    #   number can also be 12 digits.
     #
     # **Philippines**
     #
@@ -958,6 +1008,7 @@ module Aws::TaxSettings
     #           electronic_transaction_code_number: "ElectronicTransactionCodeNumber",
     #           payment_voucher_number: "PaymentVoucherNumber",
     #           payment_voucher_number_date: "DateString",
+    #           vat_credit_method: false,
     #         },
     #         egypt_additional_info: {
     #           unique_identification_number: "UniqueIdentificationNumber",
@@ -996,6 +1047,19 @@ module Aws::TaxSettings
     #           tax_regime: "MexicoTaxRegimeCode",
     #           tax_regime_full_name: "MexicoTaxRegimeFullName",
     #           cfdi_usage_code: "MexicoCfdiUsageCode",
+    #         },
+    #         united_arab_emirates_additional_info: {
+    #           tax_registration_number_type: "VATTaxRegistrationNumber", # accepts VATTaxRegistrationNumber, LocalTaxRegistrationNumber
+    #           peppol_id: "UaePeppolId",
+    #           trade_license_number: "UaeTradeLicenseNumber",
+    #           emirates_id: "UaeEmiratesId",
+    #         },
+    #         norway_additional_info: {
+    #           tax_registration_number_type: "TaxRegistrationNumber", # accepts TaxRegistrationNumber, LocalRegistrationNumber
+    #           peppol_id: "NorwayPeppolId",
+    #         },
+    #         new_zealand_additional_info: {
+    #           peppol_id: "NewZealandPeppolId",
     #         },
     #       },
     #       verification_details: {
@@ -1203,6 +1267,7 @@ module Aws::TaxSettings
     #   resp.tax_registration.additional_tax_information.vietnam_additional_info.electronic_transaction_code_number #=> String
     #   resp.tax_registration.additional_tax_information.vietnam_additional_info.payment_voucher_number #=> String
     #   resp.tax_registration.additional_tax_information.vietnam_additional_info.payment_voucher_number_date #=> String
+    #   resp.tax_registration.additional_tax_information.vietnam_additional_info.vat_credit_method #=> Boolean
     #   resp.tax_registration.additional_tax_information.egypt_additional_info.unique_identification_number #=> String
     #   resp.tax_registration.additional_tax_information.egypt_additional_info.unique_identification_number_expiration_date #=> String
     #   resp.tax_registration.additional_tax_information.greece_additional_info.contracting_authority_code #=> String
@@ -1225,6 +1290,13 @@ module Aws::TaxSettings
     #   resp.tax_registration.additional_tax_information.colombia_additional_info.responsibility_codes[0] #=> String
     #   resp.tax_registration.additional_tax_information.colombia_additional_info.taxpayer_type_code #=> String
     #   resp.tax_registration.additional_tax_information.colombia_additional_info.issue_date #=> String
+    #   resp.tax_registration.additional_tax_information.united_arab_emirates_additional_info.tax_registration_number_type #=> String, one of "VATTaxRegistrationNumber", "LocalTaxRegistrationNumber"
+    #   resp.tax_registration.additional_tax_information.united_arab_emirates_additional_info.peppol_id #=> String
+    #   resp.tax_registration.additional_tax_information.united_arab_emirates_additional_info.trade_license_number #=> String
+    #   resp.tax_registration.additional_tax_information.united_arab_emirates_additional_info.emirates_id #=> String
+    #   resp.tax_registration.additional_tax_information.norway_additional_info.tax_registration_number_type #=> String, one of "TaxRegistrationNumber", "LocalRegistrationNumber"
+    #   resp.tax_registration.additional_tax_information.norway_additional_info.peppol_id #=> String
+    #   resp.tax_registration.additional_tax_information.new_zealand_additional_info.peppol_id #=> String
     #   resp.tax_registration.status_reason.code #=> String
     #   resp.tax_registration.status_reason.message #=> String
     #   resp.tax_registration.legal_address.address_line_1 #=> String
@@ -1467,6 +1539,7 @@ module Aws::TaxSettings
     #   resp.account_details[0].tax_registration.additional_tax_information.vietnam_additional_info.electronic_transaction_code_number #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.vietnam_additional_info.payment_voucher_number #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.vietnam_additional_info.payment_voucher_number_date #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.vietnam_additional_info.vat_credit_method #=> Boolean
     #   resp.account_details[0].tax_registration.additional_tax_information.egypt_additional_info.unique_identification_number #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.egypt_additional_info.unique_identification_number_expiration_date #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.greece_additional_info.contracting_authority_code #=> String
@@ -1489,6 +1562,13 @@ module Aws::TaxSettings
     #   resp.account_details[0].tax_registration.additional_tax_information.colombia_additional_info.responsibility_codes[0] #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.colombia_additional_info.taxpayer_type_code #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.colombia_additional_info.issue_date #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.united_arab_emirates_additional_info.tax_registration_number_type #=> String, one of "VATTaxRegistrationNumber", "LocalTaxRegistrationNumber"
+    #   resp.account_details[0].tax_registration.additional_tax_information.united_arab_emirates_additional_info.peppol_id #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.united_arab_emirates_additional_info.trade_license_number #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.united_arab_emirates_additional_info.emirates_id #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.norway_additional_info.tax_registration_number_type #=> String, one of "TaxRegistrationNumber", "LocalRegistrationNumber"
+    #   resp.account_details[0].tax_registration.additional_tax_information.norway_additional_info.peppol_id #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.new_zealand_additional_info.peppol_id #=> String
     #   resp.account_details[0].tax_registration.status_reason.code #=> String
     #   resp.account_details[0].tax_registration.status_reason.message #=> String
     #   resp.account_details[0].tax_registration.jurisdiction.state_or_region #=> String
@@ -1787,6 +1867,30 @@ module Aws::TaxSettings
     #
     # ^
     #
+    # **New Zealand**
+    #
+    # * You can optionally specify the `sector`. Valid values are
+    #   `Government` and `Business`. Non-government customers use
+    #   `Business`.
+    #
+    # * If your `sector` is `Government`, you can optionally specify the
+    #   `peppolId` in the `newZealandAdditionalInfo` field of the
+    #   `additionalTaxInformation` object.
+    #
+    # **Norway**
+    #
+    # * You can optionally specify the `taxRegistrationNumberType` in the
+    #   `norwayAdditionalInfo` field of the `additionalTaxInformation`
+    #   object. Valid values are `TaxRegistrationNumber` and
+    #   `LocalRegistrationNumber`. Use `LocalRegistrationNumber` to register
+    #   a Norwegian Organisation Number for a business that isn't VAT
+    #   registered. In that case, the `registrationId` must be the 9-digit
+    #   Organisation Number.
+    #
+    # * You can optionally specify the `peppolId` in the
+    #   `norwayAdditionalInfo` field of the `additionalTaxInformation`
+    #   object.
+    #
     # **Saudi Arabia**
     #
     # * For `address`, you must specify `addressLine3`.
@@ -1845,6 +1949,17 @@ module Aws::TaxSettings
     #
     # ^
     #
+    # **United Arab Emirates**
+    #
+    # * You must specify the `taxRegistrationNumberType` in the
+    #   `unitedArabEmiratesAdditionalInfo` field of the
+    #   `additionalTaxInformation` object. Valid values are
+    #   `VATTaxRegistrationNumber` and `LocalTaxRegistrationNumber`
+    #   (Corporate Tax).
+    #
+    # * You can optionally specify the `peppolId`, `tradeLicenseNumber`, and
+    #   `emiratesId` in the `unitedArabEmiratesAdditionalInfo` field.
+    #
     # **Uruguay**
     #
     # * `RegistrationType` valid values are `RUT` (Registro Único
@@ -1852,6 +1967,21 @@ module Aws::TaxSettings
     #   `CI` (Cedula Identidad).
     #
     # ^
+    #
+    # **Vietnam**
+    #
+    # * You must specify the `vatCreditMethod` in the
+    #   `vietnamAdditionalInfo` field of the `additionalTaxInformation`
+    #   object.
+    #
+    # * If `vatCreditMethod` is `true`, the sector must be `Business`, and
+    #   you must specify the `enterpriseIdentificationNumber`,
+    #   `electronicTransactionCodeNumber`, `paymentVoucherNumber`, and
+    #   `paymentVoucherNumberDate`.
+    #
+    # * If `vatCreditMethod` is `false`, the sector must be `Individual`,
+    #   and you must not specify those four fields. The tax registration
+    #   number can also be 12 digits.
     #
     # **Philippines**
     #
@@ -2020,6 +2150,7 @@ module Aws::TaxSettings
     #           electronic_transaction_code_number: "ElectronicTransactionCodeNumber",
     #           payment_voucher_number: "PaymentVoucherNumber",
     #           payment_voucher_number_date: "DateString",
+    #           vat_credit_method: false,
     #         },
     #         egypt_additional_info: {
     #           unique_identification_number: "UniqueIdentificationNumber",
@@ -2058,6 +2189,19 @@ module Aws::TaxSettings
     #           tax_regime: "MexicoTaxRegimeCode",
     #           tax_regime_full_name: "MexicoTaxRegimeFullName",
     #           cfdi_usage_code: "MexicoCfdiUsageCode",
+    #         },
+    #         united_arab_emirates_additional_info: {
+    #           tax_registration_number_type: "VATTaxRegistrationNumber", # accepts VATTaxRegistrationNumber, LocalTaxRegistrationNumber
+    #           peppol_id: "UaePeppolId",
+    #           trade_license_number: "UaeTradeLicenseNumber",
+    #           emirates_id: "UaeEmiratesId",
+    #         },
+    #         norway_additional_info: {
+    #           tax_registration_number_type: "TaxRegistrationNumber", # accepts TaxRegistrationNumber, LocalRegistrationNumber
+    #           peppol_id: "NorwayPeppolId",
+    #         },
+    #         new_zealand_additional_info: {
+    #           peppol_id: "NewZealandPeppolId",
     #         },
     #       },
     #       verification_details: {
@@ -2110,7 +2254,7 @@ module Aws::TaxSettings
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-taxsettings'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

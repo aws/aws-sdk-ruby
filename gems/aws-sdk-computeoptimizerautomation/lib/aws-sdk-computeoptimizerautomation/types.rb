@@ -40,6 +40,11 @@ module Aws::ComputeOptimizerAutomation
     #   that implement optimization actions for this account.
     #   @return [String]
     #
+    # @!attribute [rw] organization_rule_mode_source
+    #   Information about the source of the account's effective
+    #   organization rule mode.
+    #   @return [Types::OrganizationRuleModeSource]
+    #
     # @!attribute [rw] status_reason
     #   The reason for the current Automation enrollment status.
     #   @return [String]
@@ -55,6 +60,7 @@ module Aws::ComputeOptimizerAutomation
       :account_id,
       :status,
       :organization_rule_mode,
+      :organization_rule_mode_source,
       :status_reason,
       :last_updated_timestamp)
       SENSITIVE = []
@@ -68,7 +74,7 @@ module Aws::ComputeOptimizerAutomation
     #
     # @!attribute [rw] client_token
     #   A unique identifier to ensure idempotency of the request. Valid for
-    #   24 hours after creation.
+    #   30 minutes after creation.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -195,7 +201,16 @@ module Aws::ComputeOptimizerAutomation
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The values to use for the specified filter.
+    #   The values to use for the specified filter. For the `ResourceType`,
+    #   `EventType`, and `EventStatus` filters, the value that you specify
+    #   must exactly match the corresponding field of the automation event,
+    #   including case. For example, specify `Complete`, not `complete`.
+    #   Wildcards aren't supported. An asterisk (`*`) or a question mark
+    #   (`?`) in a value matches only that literal character.
+    #
+    #   Valid values for the `EventStatus` filter are `Ready`, `InProgress`,
+    #   `Complete`, `Failed`, `Cancelled`, `RollbackReady`,
+    #   `RollbackInProgress`, `RollbackComplete`, and `RollbackFailed`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/AutomationEventFilter AWS API Documentation
@@ -370,6 +385,20 @@ module Aws::ComputeOptimizerAutomation
       :status,
       :created_timestamp,
       :last_updated_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request conflicts with a concurrent change to the same resource.
+    # Retry the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -586,7 +615,10 @@ module Aws::ComputeOptimizerAutomation
     #
     # @!attribute [rw] restart_needed
     #   Filter criteria indicating whether the recommended action requires a
-    #   resource restart.
+    #   resource restart. Valid values are `true` and `false`. Values are
+    #   case-sensitive unless you use an `IgnoreCase` comparison operator.
+    #   For example, `StringEquals` with the value `False` matches no
+    #   recommended actions.
     #   @return [Array<Types::StringCriteriaCondition>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/Criteria AWS API Documentation
@@ -633,6 +665,37 @@ module Aws::ComputeOptimizerAutomation
     #
     class DeleteAutomationRuleResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] target
+    #   The account, organizational unit (OU), or organization root whose
+    #   organization enrollment configuration you want to delete.
+    #   @return [Types::OrganizationTarget]
+    #
+    # @!attribute [rw] configuration_types
+    #   The organization enrollment configuration types to delete from the
+    #   target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique identifier to ensure idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/DeleteOrganizationEnrollmentConfigurationRequest AWS API Documentation
+    #
+    class DeleteOrganizationEnrollmentConfigurationRequest < Struct.new(
+      :target,
+      :configuration_types,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/DeleteOrganizationEnrollmentConfigurationResponse AWS API Documentation
+    #
+    class DeleteOrganizationEnrollmentConfigurationResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] account_ids
     #   The IDs of the member accounts to disassociate.
     #   @return [Array<String>]
@@ -675,7 +738,9 @@ module Aws::ComputeOptimizerAutomation
     #
     # @!attribute [rw] comparison
     #   The comparison operator used to evaluate the attribute against the
-    #   specified values.
+    #   specified values. Only operators that begin with `Numeric` are
+    #   valid. Any other operator returns an
+    #   `InvalidParameterValueException`.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -940,7 +1005,15 @@ module Aws::ComputeOptimizerAutomation
     #   @return [String]
     #
     # @!attribute [rw] organization_configuration
-    #   Configuration settings for organization-wide automation rules.
+    #   Configuration settings that define the scope of an organization-wide
+    #   automation rule. Each organizational unit (OU) list can contain up
+    #   to 150 OUs or organization roots, and each account list can contain
+    #   up to 50 accounts. Each included OU or organization root must have
+    #   an effective organization rule mode of `AnyAllowed`. Exclusions take
+    #   precedence over inclusions. An account that is in an included OU and
+    #   is also excluded is excluded. The rule doesn't apply to the
+    #   management account when the account is reached through an OU or the
+    #   organization root.
     #   @return [Types::OrganizationConfiguration]
     #
     # @!attribute [rw] priority
@@ -1028,13 +1101,24 @@ module Aws::ComputeOptimizerAutomation
     #   The timestamp of the last update to the enrollment configuration.
     #   @return [Time]
     #
+    # @!attribute [rw] organization_enrollment_configuration_status
+    #   Specifies whether an organization enrollment configuration on your
+    #   account, or inherited from a parent OU or the organization root,
+    #   enables Automation for your member account. Associations made using
+    #   `AssociateAccounts` don't affect this status. This field is
+    #   returned for organization member accounts, including delegated
+    #   administrators. It's omitted for management accounts and accounts
+    #   that aren't in an organization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/GetEnrollmentConfigurationResponse AWS API Documentation
     #
     class GetEnrollmentConfigurationResponse < Struct.new(
       :status,
       :status_reason,
       :organization_rule_mode,
-      :last_updated_timestamp)
+      :last_updated_timestamp,
+      :organization_enrollment_configuration_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1071,7 +1155,9 @@ module Aws::ComputeOptimizerAutomation
     #
     # @!attribute [rw] comparison
     #   The comparison operator used to evaluate the attribute against the
-    #   specified values.
+    #   specified values. Only operators that begin with `Numeric` are
+    #   valid. Any other operator returns an
+    #   `InvalidParameterValueException`.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -1155,7 +1241,7 @@ module Aws::ComputeOptimizerAutomation
     #
     # @!attribute [rw] max_results
     #   The maximum number of automation event steps to return in a single
-    #   response. Valid range is 1-1000.
+    #   response. If you don't specify a value, the default is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1195,6 +1281,14 @@ module Aws::ComputeOptimizerAutomation
     #   The filters to apply to the list of automation event summaries.
     #   @return [Array<Types::AutomationEventFilter>]
     #
+    # @!attribute [rw] organizational_unit_ids
+    #   The organizational unit (OU) or organization root IDs to use to
+    #   filter the results. The response includes event summaries for
+    #   accounts in the specified OUs and their child OUs. Only the
+    #   management account or a delegated administrator can specify this
+    #   parameter.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] start_date_inclusive
     #   The start date for filtering automation event summaries, inclusive.
     #   Events created on or after this date will be included.
@@ -1207,7 +1301,7 @@ module Aws::ComputeOptimizerAutomation
     #
     # @!attribute [rw] max_results
     #   The maximum number of automation event summaries to return in a
-    #   single response. Valid range is 1-1000.
+    #   single response. If you don't specify a value, the default is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1219,6 +1313,7 @@ module Aws::ComputeOptimizerAutomation
     #
     class ListAutomationEventSummariesRequest < Struct.new(
       :filters,
+      :organizational_unit_ids,
       :start_date_inclusive,
       :end_date_exclusive,
       :max_results,
@@ -1250,6 +1345,13 @@ module Aws::ComputeOptimizerAutomation
     #   The filters to apply to the list of automation events.
     #   @return [Array<Types::AutomationEventFilter>]
     #
+    # @!attribute [rw] organizational_unit_ids
+    #   The organizational unit (OU) or organization root IDs to use to
+    #   filter the results. The response includes events for accounts in the
+    #   specified OUs and their child OUs. Only the management account or a
+    #   delegated administrator can specify this parameter.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] start_time_inclusive
     #   The start of the time range to query for events.
     #   @return [Time]
@@ -1259,7 +1361,8 @@ module Aws::ComputeOptimizerAutomation
     #   @return [Time]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call.
+    #   The maximum number of automation events to return in a single
+    #   response. If you don't specify a value, the default is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1270,6 +1373,7 @@ module Aws::ComputeOptimizerAutomation
     #
     class ListAutomationEventsRequest < Struct.new(
       :filters,
+      :organizational_unit_ids,
       :start_time_inclusive,
       :end_time_exclusive,
       :max_results,
@@ -1305,7 +1409,9 @@ module Aws::ComputeOptimizerAutomation
     #   @return [String]
     #
     # @!attribute [rw] organization_scope
-    #   The organizational scope for the rule preview.
+    #   The organizational scope for the rule preview. This parameter is
+    #   required when `ruleType` is `OrganizationRule`. Don't specify it
+    #   when `ruleType` is `AccountRule`.
     #   @return [Types::OrganizationScope]
     #
     # @!attribute [rw] recommended_action_types
@@ -1321,7 +1427,7 @@ module Aws::ComputeOptimizerAutomation
     #
     # @!attribute [rw] max_results
     #   The maximum number of automation rule preview results to return in a
-    #   single response. Valid range is 1-1000.
+    #   single response. If you don't specify a value, the default is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1366,7 +1472,9 @@ module Aws::ComputeOptimizerAutomation
     #   @return [String]
     #
     # @!attribute [rw] organization_scope
-    #   The organizational scope for the rule preview.
+    #   The organizational scope for the rule preview. This parameter is
+    #   required when `ruleType` is `OrganizationRule`. Don't specify it
+    #   when `ruleType` is `AccountRule`.
     #   @return [Types::OrganizationScope]
     #
     # @!attribute [rw] recommended_action_types
@@ -1383,7 +1491,8 @@ module Aws::ComputeOptimizerAutomation
     #
     # @!attribute [rw] max_results
     #   The maximum number of automation rule preview summaries to return in
-    #   a single response. Valid range is 1-1000.
+    #   a single response. If you don't specify a value, the default is
+    #   100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1429,7 +1538,7 @@ module Aws::ComputeOptimizerAutomation
     #
     # @!attribute [rw] max_results
     #   The maximum number of automation rules to return in a single
-    #   response. Valid range is 1-1000.
+    #   response. If you don't specify a value, the default is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1465,15 +1574,112 @@ module Aws::ComputeOptimizerAutomation
       include Aws::Structure
     end
 
+    # @!attribute [rw] target_type
+    #   The target type to use to filter the results. If you specify
+    #   `OrganizationalUnit`, the results also include configurations stored
+    #   on the organization root. If you don't specify a target type, the
+    #   operation returns configurations for every target type.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of organization enrollment configurations to
+    #   return in a single response. If you don't specify a value, the
+    #   default is 1,000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/ListOrganizationEnrollmentConfigurationsRequest AWS API Documentation
+    #
+    class ListOrganizationEnrollmentConfigurationsRequest < Struct.new(
+      :target_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_enrollment_configurations
+    #   The organization enrollment configurations stored on each target in
+    #   this page of results.
+    #   @return [Array<Types::OrganizationEnrollmentConfiguration>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/ListOrganizationEnrollmentConfigurationsResponse AWS API Documentation
+    #
+    class ListOrganizationEnrollmentConfigurationsResponse < Struct.new(
+      :organization_enrollment_configurations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organizational_unit_ids
+    #   The organizational unit (OU) or organization root IDs to return. If
+    #   you don't specify this parameter, the operation returns the
+    #   organization root and every OU.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of organizational units to return in a single
+    #   response. If you don't specify a value, the default is 1,000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/ListOrganizationalUnitsRequest AWS API Documentation
+    #
+    class ListOrganizationalUnitsRequest < Struct.new(
+      :organizational_unit_ids,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organizational_units
+    #   The organizational units and organization root returned in this page
+    #   of results, including the organization rule mode that applies to
+    #   each.
+    #   @return [Array<Types::OrganizationalUnitInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/ListOrganizationalUnitsResponse AWS API Documentation
+    #
+    class ListOrganizationalUnitsResponse < Struct.new(
+      :organizational_units,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] filters
     #   A list of filters to apply when retrieving recommended action
     #   summaries. Filters can be based on resource type, action type,
     #   account ID, and other criteria.
     #   @return [Array<Types::RecommendedActionFilter>]
     #
+    # @!attribute [rw] organizational_unit_ids
+    #   The organizational unit (OU) or organization root IDs to use to
+    #   filter the results. The response includes recommended action
+    #   summaries for accounts in the specified OUs and their child OUs.
+    #   Only the management account or a delegated administrator can specify
+    #   this parameter.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of recommended action summaries to return in a
-    #   single response. Valid range is 1-1000.
+    #   single response. If you don't specify a value, the default is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1485,6 +1691,7 @@ module Aws::ComputeOptimizerAutomation
     #
     class ListRecommendedActionSummariesRequest < Struct.new(
       :filters,
+      :organizational_unit_ids,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -1514,9 +1721,17 @@ module Aws::ComputeOptimizerAutomation
     #   The filters to apply to the list of recommended actions.
     #   @return [Array<Types::RecommendedActionFilter>]
     #
+    # @!attribute [rw] organizational_unit_ids
+    #   The organizational unit (OU) or organization root IDs to use to
+    #   filter the results. The response includes recommended actions for
+    #   accounts in the specified OUs and their child OUs. Only the
+    #   management account or a delegated administrator can specify this
+    #   parameter.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of recommended actions to return in a single
-    #   response. Valid range is 1-1000.
+    #   response. If you don't specify a value, the default is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1528,6 +1743,7 @@ module Aws::ComputeOptimizerAutomation
     #
     class ListRecommendedActionsRequest < Struct.new(
       :filters,
+      :organizational_unit_ids,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -1576,7 +1792,8 @@ module Aws::ComputeOptimizerAutomation
       include Aws::Structure
     end
 
-    # The operation can only be performed by a management account.
+    # The operation can only be performed by an organization's management
+    # account or a delegated administrator.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1603,7 +1820,15 @@ module Aws::ComputeOptimizerAutomation
       include Aws::Structure
     end
 
-    # Configuration settings for organization-wide automation rules.
+    # Configuration settings that define the scope of an organization-wide
+    # automation rule. Each organizational unit (OU) list can contain up to
+    # 150 OUs or organization roots, and each account list can contain up to
+    # 50 accounts. Each included OU or organization root must have an
+    # effective organization rule mode of `AnyAllowed`. Exclusions take
+    # precedence over inclusions. An account that is in an included OU and
+    # is also excluded is excluded. The rule doesn't apply to the
+    # management account when the account is reached through an OU or the
+    # organization root.
     #
     # @!attribute [rw] rule_apply_order
     #   Specifies when organization rules should be applied relative to
@@ -1611,15 +1836,99 @@ module Aws::ComputeOptimizerAutomation
     #   @return [String]
     #
     # @!attribute [rw] account_ids
-    #   List of specific Amazon Web Services account IDs where the
-    #   organization rule should be applied.
+    #   The specific Amazon Web Services account IDs where the organization
+    #   rule should be applied. You can specify up to 50 account IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] organizational_unit_ids
+    #   The organizational unit (OU) or organization root IDs to include in
+    #   the organization rule scope. The rule applies to accounts in the
+    #   specified OUs and their child OUs. You can specify up to 150 IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_organizational_unit_ids
+    #   The organizational unit (OU) or organization root IDs to exclude
+    #   from the organization rule scope. The rule doesn't apply to
+    #   accounts in the specified OUs or their child OUs. You can specify up
+    #   to 150 IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_account_ids
+    #   The Amazon Web Services account IDs to exclude from the organization
+    #   rule scope. You can specify up to 50 account IDs. An excluded
+    #   account remains excluded even if it is in an included OU.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/OrganizationConfiguration AWS API Documentation
     #
     class OrganizationConfiguration < Struct.new(
       :rule_apply_order,
-      :account_ids)
+      :account_ids,
+      :organizational_unit_ids,
+      :excluded_organizational_unit_ids,
+      :excluded_account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An organization enrollment configuration sets the organization rule
+    # mode on an account, organizational unit (OU), or the organization root
+    # and enables Automation for affected member accounts that have opted in
+    # to Compute Optimizer.
+    #
+    # @!attribute [rw] target_id
+    #   The ID of the account, organizational unit (OU), or organization
+    #   root on which the configuration is stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   The type of target on which the configuration is stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_rule_mode
+    #   The organization rule mode set on the target by the organization
+    #   enrollment configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/OrganizationEnrollmentConfiguration AWS API Documentation
+    #
+    class OrganizationEnrollmentConfiguration < Struct.new(
+      :target_id,
+      :target_type,
+      :organization_rule_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the source of an effective organization rule mode.
+    #
+    # @!attribute [rw] source_type
+    #   How the effective organization rule mode is supplied.
+    #
+    #   * `Applied` - An organization enrollment configuration is on this
+    #     organizational unit or account.
+    #
+    #   * `Inherited` - The organization enrollment configuration is on the
+    #     parent organizational unit or root.
+    #
+    #   * `Direct` - The organization rule mode is set on the account
+    #     itself, with no organization enrollment configuration applied.
+    #
+    #   * `Default` - No organization enrollment configuration applies, so
+    #     the organization rule mode is None allowed.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_target_id
+    #   The ID of the account, organizational unit (OU), or organization
+    #   root that has the organization enrollment configuration. This field
+    #   is omitted when `sourceType` is `Direct` or `Default`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/OrganizationRuleModeSource AWS API Documentation
+    #
+    class OrganizationRuleModeSource < Struct.new(
+      :source_type,
+      :source_target_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1632,10 +1941,106 @@ module Aws::ComputeOptimizerAutomation
     #   organization scope.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] organizational_unit_ids
+    #   The organizational unit (OU) or organization root IDs to include in
+    #   the preview scope. The preview includes accounts in the specified
+    #   OUs and their child OUs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_organizational_unit_ids
+    #   The organizational unit (OU) or organization root IDs to exclude
+    #   from the preview scope. The preview doesn't include accounts in the
+    #   specified OUs or their child OUs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_account_ids
+    #   The Amazon Web Services account IDs to exclude from the preview
+    #   scope.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/OrganizationScope AWS API Documentation
     #
     class OrganizationScope < Struct.new(
-      :account_ids)
+      :account_ids,
+      :organizational_unit_ids,
+      :excluded_organizational_unit_ids,
+      :excluded_account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An account, organizational unit (OU), or organization root to which an
+    # organization enrollment configuration applies. The management account
+    # can't be specified as an account target.
+    #
+    # @note OrganizationTarget is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] account_id
+    #   The ID of the member account to target. You can't specify the
+    #   management account.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_id
+    #   The ID of the organizational unit (OU) or organization root to
+    #   target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/OrganizationTarget AWS API Documentation
+    #
+    class OrganizationTarget < Struct.new(
+      :account_id,
+      :organizational_unit_id,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AccountId < OrganizationTarget; end
+      class OrganizationalUnitId < OrganizationTarget; end
+      class Unknown < OrganizationTarget; end
+    end
+
+    # Information about an organizational unit (OU) or the organization
+    # root, including whether an applicable organization enrollment
+    # configuration enables Automation for member accounts and the effective
+    # organization rule mode.
+    #
+    # @!attribute [rw] organizational_unit_id
+    #   The ID of the organizational unit (OU) or organization root.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_enroll_member_accounts
+    #   Whether an applicable organization enrollment configuration enables
+    #   Automation for eligible member accounts beneath the organizational
+    #   unit (OU) or organization root.
+    #
+    #   * `All` - An organization enrollment configuration applies and
+    #     enables Automation for affected member accounts, including
+    #     accounts that join later. This value applies to configurations
+    #     with either `AnyAllowed` or `NoneAllowed`.
+    #
+    #   * `None` - No organization enrollment configuration applies, so
+    #     Automation isn't enabled by an organization enrollment
+    #     configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_rule_mode
+    #   The effective organization rule mode for the organizational unit or
+    #   organization root.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_rule_mode_source
+    #   Information about the source of the effective organization rule
+    #   mode.
+    #   @return [Types::OrganizationRuleModeSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/OrganizationalUnitInfo AWS API Documentation
+    #
+    class OrganizationalUnitInfo < Struct.new(
+      :organizational_unit_id,
+      :auto_enroll_member_accounts,
+      :organization_rule_mode,
+      :organization_rule_mode_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1749,6 +2154,41 @@ module Aws::ComputeOptimizerAutomation
       include Aws::Structure
     end
 
+    # @!attribute [rw] target
+    #   The account, organizational unit (OU), or organization root on which
+    #   to create or update the organization enrollment configuration. You
+    #   can't specify the management account.
+    #   @return [Types::OrganizationTarget]
+    #
+    # @!attribute [rw] organization_rule_mode
+    #   The organization rule mode to set on the target. An organization
+    #   enrollment configuration with either `AnyAllowed` or `NoneAllowed`
+    #   enables Automation for affected member accounts. `AnyAllowed`
+    #   permits organization rules to apply to those accounts, while
+    #   `NoneAllowed` doesn't.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique identifier to ensure idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/PutOrganizationEnrollmentConfigurationRequest AWS API Documentation
+    #
+    class PutOrganizationEnrollmentConfigurationRequest < Struct.new(
+      :target,
+      :organization_rule_mode,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/PutOrganizationEnrollmentConfigurationResponse AWS API Documentation
+    #
+    class PutOrganizationEnrollmentConfigurationResponse < Aws::EmptyStructure; end
+
     # Contains information about a recommended action that can be applied to
     # optimize an Amazon Web Services resource.
     #
@@ -1840,15 +2280,54 @@ module Aws::ComputeOptimizerAutomation
     end
 
     # A filter used to narrow down recommended action results based on
-    # specific criteria.
+    # specific criteria. If a filter has more than one value, a recommended
+    # action matches the filter when it matches any of the values. If you
+    # specify more than one filter, a recommended action must match all of
+    # the filters.
     #
     # @!attribute [rw] name
     #   The name of the filter field to apply.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   List of filter values to match against the specified filter name.
-    #   Used to narrow down recommended actions based on specific criteria.
+    #   The list of values to filter by for the specified filter name.
+    #   Wildcards aren't supported. An asterisk (`*`) or a question mark
+    #   (`?`) in a value matches only that literal character. How a value is
+    #   matched depends on the filter name:
+    #
+    #   ResourceType, RecommendedActionType, ResourceId, and AccountId
+    #
+    #   : The value that you specify must exactly match the corresponding
+    #     field of the recommended action, including case. For example,
+    #     specify `EbsVolume`, not `ebsvolume`.
+    #
+    #   CurrentResourceDetailsEbsVolumeType
+    #
+    #   : Matches when the value appears anywhere in the current resource
+    #     details of the recommended action, which include the volume type,
+    #     size, IOPS, and throughput. Matching is case sensitive, and a
+    #     partial value also matches. For example, `gp` matches both `gp2`
+    #     and `gp3` volumes, and `100` matches any volume whose size, IOPS,
+    #     or throughput contains 100. To filter by volume type, specify the
+    #     complete volume type, such as `gp3` or `io2`.
+    #
+    #   ResourceTagsKey and ResourceTagsValue
+    #
+    #   : Matches when the value appears anywhere in the tags of the
+    #     resource. Both filter names search every tag key and tag value.
+    #     Matching is case sensitive, and a partial value also matches. For
+    #     example, a `ResourceTagsKey` value of `test` matches a resource
+    #     that has a tag value of `test`.
+    #
+    #   LookBackPeriodInDays
+    #
+    #   : Matches when the lookback period of the recommended action equals
+    #     the value. Specify a number of days, such as `14`.
+    #
+    #   RestartNeeded
+    #
+    #   : Matches recommended actions based on whether implementing them
+    #     requires a resource restart. Specify `true` or `false`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/RecommendedActionFilter AWS API Documentation
@@ -1943,7 +2422,8 @@ module Aws::ComputeOptimizerAutomation
     #
     # @!attribute [rw] comparison
     #   The comparison operator used to evaluate the attribute against the
-    #   specified values.
+    #   specified values. Only operators that begin with `String` are valid.
+    #   Any other operator returns an `InvalidParameterValueException`.
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -2135,7 +2615,8 @@ module Aws::ComputeOptimizerAutomation
     #
     # @!attribute [rw] comparison
     #   The comparison operator used to evaluate the attribute against the
-    #   specified values.
+    #   specified values. Only operators that begin with `String` are valid.
+    #   Any other operator returns an `InvalidParameterValueException`.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -2498,13 +2979,16 @@ module Aws::ComputeOptimizerAutomation
     #     run. You must wait at least 24 hours after opting out to opt in
     #     again.
     #
-    #   <note markdown="1"> The `Pending` and `Failed` options cannot be used to update the
+    #   <note markdown="1"> The `Pending` and `Failed` options can't be used to update the
     #   enrollment status of an account. They are returned in the response
     #   of a request to update the enrollment status of an account.
     #
-    #    If you are a member account, your account must be disassociated from
-    #   your organization’s management account before you can disable
-    #   Automation. Contact your administrator to make this change.
+    #    If you are a member account, you can't disable Automation while an
+    #   organization enrollment configuration applies. If no organization
+    #   enrollment configuration applies, you also can't disable Automation
+    #   while your organization rule mode is `AnyAllowed`. Ask your
+    #   administrator to delete the organization enrollment configuration or
+    #   disassociate your account, as applicable.
     #
     #    </note>
     #   @return [String]

@@ -9221,6 +9221,33 @@ module Aws::Inspector2
     #   on.
     #   @return [Types::StringFilter]
     #
+    # @!attribute [rw] runtime_reachability
+    #   An object that contains details on the runtime reachability status
+    #   of the package to filter on. For more information, see
+    #   [Understanding runtime reachability][1] in the Amazon Inspector user
+    #   guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html
+    #   @return [Types::RuntimeReachabilityFilter]
+    #
+    # @!attribute [rw] runtime_reachability_reason
+    #   An object that contains details on the runtime reachability reason
+    #   of the package to filter on. For more information, see
+    #   [Understanding runtime reachability][1] in the Amazon Inspector user
+    #   guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html
+    #   @return [Types::RuntimeReachabilityReasonFilter]
+    #
+    # @!attribute [rw] purl_qualifier
+    #   An object that contains details on the package URL (purl) qualifier
+    #   to filter on.
+    #   @return [Types::PurlQualifierFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/PackageFilter AWS API Documentation
     #
     class PackageFilter < Struct.new(
@@ -9231,7 +9258,10 @@ module Aws::Inspector2
       :architecture,
       :source_layer_hash,
       :source_lambda_layer_arn,
-      :file_path)
+      :file_path,
+      :runtime_reachability,
+      :runtime_reachability_reason,
+      :purl_qualifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9518,6 +9548,31 @@ module Aws::Inspector2
     #
     class ProviderFilter < Struct.new(
       :comparison,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that describes the details of a package URL (purl) qualifier
+    # filter.
+    #
+    # @!attribute [rw] comparison
+    #   The operator to use when comparing values in the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The package URL (purl) qualifier key to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The package URL (purl) qualifier value to filter on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/PurlQualifierFilter AWS API Documentation
+    #
+    class PurlQualifierFilter < Struct.new(
+      :comparison,
+      :key,
       :value)
       SENSITIVE = []
       include Aws::Structure
@@ -10174,6 +10229,45 @@ module Aws::Inspector2
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceStringFilter AWS API Documentation
     #
     class ResourceStringFilter < Struct.new(
+      :comparison,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that describes the details of a runtime reachability filter.
+    #
+    # @!attribute [rw] comparison
+    #   The operator to use when comparing values in the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The runtime reachability status to filter on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/RuntimeReachabilityFilter AWS API Documentation
+    #
+    class RuntimeReachabilityFilter < Struct.new(
+      :comparison,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that describes the details of a runtime reachability reason
+    # filter.
+    #
+    # @!attribute [rw] comparison
+    #   The operator to use when comparing values in the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The runtime reachability reason to filter on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/RuntimeReachabilityReasonFilter AWS API Documentation
+    #
+    class RuntimeReachabilityReasonFilter < Struct.new(
       :comparison,
       :value)
       SENSITIVE = []
@@ -12641,6 +12735,30 @@ module Aws::Inspector2
     #   function affected by a finding.
     #   @return [String]
     #
+    # @!attribute [rw] runtime_reachability
+    #   The runtime reachability status of the vulnerable package. For more
+    #   information, see [Understanding runtime reachability][1] in the
+    #   Amazon Inspector user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime_reachability_reason
+    #   The reason for the runtime reachability status of the vulnerable
+    #   package. For more information, see [Understanding runtime
+    #   reachability][1] in the Amazon Inspector user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html
+    #   @return [String]
+    #
+    # @!attribute [rw] purl
+    #   The package URL (purl) of the vulnerable package.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/VulnerablePackage AWS API Documentation
     #
     class VulnerablePackage < Struct.new(
@@ -12654,7 +12772,10 @@ module Aws::Inspector2
       :file_path,
       :fixed_in_version,
       :remediation,
-      :source_lambda_layer_arn)
+      :source_lambda_layer_arn,
+      :runtime_reachability,
+      :runtime_reachability_reason,
+      :purl)
       SENSITIVE = []
       include Aws::Structure
     end

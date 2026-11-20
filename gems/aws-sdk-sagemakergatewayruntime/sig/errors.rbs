@@ -1,0 +1,49 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SageMakerGatewayRuntime
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDeniedException < ServiceError
+        def message: () -> ::String
+      end
+      class BadGatewayException < ServiceError
+        def message: () -> ::String
+      end
+      class GatewayTimeoutException < ServiceError
+        def message: () -> ::String
+      end
+      class InternalServerException < ServiceError
+        def message: () -> ::String
+      end
+      class InternalStreamFailure < ServiceError
+        def message: () -> ::String
+      end
+      class ModelStreamError < ServiceError
+        def message: () -> ::String
+        def error_code: () -> ::String
+      end
+      class PayloadTooLargeException < ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ServiceError
+        def message: () -> ::String
+        def resource_id: () -> ::String
+        def resource_type: () -> ::String
+      end
+      class ServiceUnavailableException < ServiceError
+        def message: () -> ::String
+      end
+      class ThrottlingException < ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

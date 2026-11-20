@@ -10,6 +10,75 @@
 module Aws::Route53
   module Types
 
+    # Specifies the location that an AZ-affinity resource record set answers
+    # DNS queries from. For the location types, from most to least specific,
+    # see `LocationType`. A query matches a location when Route 53 VPC
+    # Resolver reports that the query came from an Availability Zone (AZ) in
+    # that location. If Route 53 doesn't know which AZ a query came from,
+    # the query matches only the record for the `Global` location type.
+    # AZ-affinity routing chooses which record to return. It doesn't
+    # restrict which clients can get a record. You must specify both
+    # `LocationType` and `LocationId`.
+    #
+    # To have Route 53 fall back to a less specific location when a resource
+    # is unhealthy, associate a health check with each record, or set
+    # `EvaluateTargetHealth` to `true` for alias records. If every record
+    # that matches a query is unhealthy, Route 53 responds with the most
+    # specific one.
+    #
+    # @!attribute [rw] location_type
+    #   The level of the location that `LocationId` identifies. Valid
+    #   values, from most to least specific:
+    #
+    #   * `AvailabilityZone`: A single Availability Zone.
+    #
+    #   * `AvailabilityZoneGroup`: A Zone Group, which is a group of
+    #     Availability Zones in an Amazon Web Services Region.
+    #
+    #   * `Region`: An entire Amazon Web Services Region.
+    #
+    #   * `Partition`: An entire Amazon Web Services partition.
+    #
+    #   * `Global`: All locations.
+    #
+    #   We recommend that you create a record for the `Global` location type
+    #   so that every query gets an answer. Route 53 responds with it when a
+    #   query matches no more specific record, or when it's the only
+    #   healthy record that matches. Without a `Global` record, Route 53
+    #   returns a "no answer" response to queries that don't match any
+    #   other record.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_id
+    #   The ID of the location. You can specify only generally available
+    #   Availability Zones and Zone Groups. Zone Group, Region, and
+    #   partition IDs must belong to a partition that you can use. Specify
+    #   the ID in lowercase, in the format that corresponds to
+    #   `LocationType`:
+    #
+    #   * For `AvailabilityZone`, the Availability Zone ID (not the
+    #     Availability Zone name or a Local Zone ID), such as `use1-az1`.
+    #
+    #   * For `AvailabilityZoneGroup`, the Zone Group that an Availability
+    #     Zone belongs to (not a Local Zone group), such as
+    #     `us-east-1-zg-1`.
+    #
+    #   * For `Region`, the Region code, such as `us-east-1`.
+    #
+    #   * For `Partition`, the partition name, such as `aws`.
+    #
+    #   * For `Global`, the value `global`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AZAffinity AWS API Documentation
+    #
+    class AZAffinity < Struct.new(
+      :location_type,
+      :location_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A complex type that contains the type of limit that you specified in
     # the request and the current value for that limit.
     #
@@ -19,7 +88,7 @@ module Aws::Route53
     #   * **MAX\_HEALTH\_CHECKS\_BY\_OWNER**: The maximum number of health
     #     checks that you can create using the current account.
     #
-    #   * **MAX\_HEALTH\_CHECK\_SOURCES\_BY\_OWNER** The maximum number of
+    #   * **MAX\_HEALTH\_CHECK\_SOURCES\_BY\_OWNER**: The maximum number of
     #     health check sources that you can create using the current
     #     account.
     #
@@ -431,12 +500,12 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] evaluate_target_health
-    #   *Applies only to alias, failover alias, geolocation alias, latency
-    #   alias, and weighted alias resource record sets:* When
-    #   `EvaluateTargetHealth` is `true`, an alias resource record set
-    #   inherits the health of the referenced Amazon Web Services resource,
-    #   such as an ELB load balancer or another resource record set in the
-    #   hosted zone.
+    #   *Applies only to alias, az-affinity alias, failover alias,
+    #   geolocation alias, latency alias, and weighted alias resource record
+    #   sets:* When `EvaluateTargetHealth` is `true`, an alias resource
+    #   record set inherits the health of the referenced Amazon Web Services
+    #   resource, such as an ELB load balancer or another resource record
+    #   set in the hosted zone.
     #
     #   Note the following:
     #
@@ -667,6 +736,62 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # A summary of one change batch in the change history of a hosted zone.
+    #
+    # @!attribute [rw] change_id
+    #   The ID of the change batch. This is the same ID that
+    #   `ChangeResourceRecordSets` returns in `ChangeInfo/Id` and that you
+    #   pass to `GetChange`.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   The Route 53 API operation that submitted the change batch:
+    #   `ChangeResourceRecordSets` or `CreateHostedZone`. New values might
+    #   be added, so ignore values that your code doesn't recognize.
+    #   @return [String]
+    #
+    # @!attribute [rw] submitted_at
+    #   The date and time, in UTC, when the change batch was submitted.
+    #   @return [Time]
+    #
+    # @!attribute [rw] submitted_by
+    #   The Amazon Resource Name of the principal that submitted the
+    #   request, for example,
+    #   `arn:aws:sts::111122223333:assumed-role/Admin/my-session`. This
+    #   element is absent when Route 53 has no principal to record for the
+    #   change.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID of the call that submitted the change batch.
+    #   CloudTrail records the same value in `requestID`, so you can use it
+    #   to find the CloudTrail event for the change. This element is absent
+    #   when there was no request.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   The comment that was submitted with the change batch, if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_count
+    #   The number of changes in the change batch. For `CreateHostedZone`,
+    #   the value is 0.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeBatchSummary AWS API Documentation
+    #
+    class ChangeBatchSummary < Struct.new(
+      :change_id,
+      :operation,
+      :submitted_at,
+      :submitted_by,
+      :request_id,
+      :comment,
+      :change_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] id
     #   The UUID of the CIDR collection to update.
     #   @return [String]
@@ -716,6 +841,111 @@ module Aws::Route53
     #
     class ChangeCidrCollectionResponse < Struct.new(
       :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A Change Guardrail and its status. A Change Guardrail checks each
+    # change to the records in a hosted zone, and rejects the change if the
+    # check fails.
+    #
+    # When you submit a `ChangeResourceRecordSets` request, Route 53 checks
+    # each change against every guardrail that is turned on. If a check
+    # fails, Route 53 rejects the whole request and returns an error that
+    # identifies the guardrail. If every check passes, Route 53 applies the
+    # changes.
+    #
+    # For example, suppose that `ALIAS_TARGET_CHECK` is turned on, and an
+    # alias record points to `www.example.com`. If you try to delete
+    # `www.example.com`, Route 53 rejects the request. To delete the record,
+    # first delete or change the alias record.
+    #
+    # @!attribute [rw] name
+    #   The name of the guardrail. Valid values are the following:
+    #
+    #   NS\_FORMAT\_CHECK
+    #
+    #   : This guardrail rejects an NS record whose value looks like a Route
+    #     53 name server but isn't one.
+    #
+    #   NS\_DELEGATION\_AUTHORITY\_CHECK
+    #
+    #   : This guardrail rejects an NS record that delegates a subdomain to
+    #     Route 53 name servers that don't host it.
+    #
+    #     This guardrail applies only to public hosted zones.
+    #
+    #   NS\_OCCLUSION\_CHECK
+    #
+    #   : This guardrail rejects a change that leaves records under a
+    #     delegated subdomain, where resolvers never use them.
+    #
+    #   ALIAS\_TARGET\_CHECK
+    #
+    #   : This guardrail rejects deleting a record that an alias record in
+    #     the same hosted zone points to.
+    #
+    #   ACTIVE\_RECORD\_CHECK
+    #
+    #   : This guardrail rejects deleting a record that still receives DNS
+    #     queries, if no other record with the same name and type remains to
+    #     answer them.
+    #
+    #   ACTIVE\_DELEGATION\_CHECK
+    #
+    #   : This guardrail rejects deleting the NS record for a subdomain
+    #     while resolvers are still referred to it.
+    #
+    #   The tier of the hosted zone determines which guardrails it includes
+    #   and which ones you can turn on.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the guardrail. Valid values are the following:
+    #
+    #   ENABLED
+    #
+    #   : `ENABLED` means that the guardrail is turned on.
+    #
+    #   DISABLED
+    #
+    #   : `DISABLED` means that the guardrail is turned off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeGuardrail AWS API Documentation
+    #
+    class ChangeGuardrail < Struct.new(
+      :name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of Change History for the hosted zone.
+    #
+    # @!attribute [rw] status
+    #   Indicates whether Change History is turned on for the hosted zone.
+    #   Valid values are the following:
+    #
+    #   * `ENABLED`: Change History is turned on for the hosted zone.
+    #
+    #   * `DISABLED`: Change History is turned off for the hosted zone.
+    #
+    #   Route 53 turns Change History on or off when the hosted zone moves
+    #   to or from a tier that includes it.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_starts_at
+    #   The earliest date and time from which you can read the change
+    #   history of the hosted zone. Route 53 returns this value only when
+    #   `Status` is `ENABLED`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeHistoryFeature AWS API Documentation
+    #
+    class ChangeHistoryFeature < Struct.new(
+      :status,
+      :retention_starts_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -827,8 +1057,8 @@ module Aws::Route53
     #
     # @!attribute [rw] add_tags
     #   A complex type that contains a list of the tags that you want to add
-    #   to the specified health check or hosted zone and/or the tags that
-    #   you want to edit `Value` for.
+    #   to the specified health check, health check source, or hosted zone
+    #   and/or the tags that you want to edit `Value` for.
     #
     #   You can add a maximum of 10 tags to a health check, a health check
     #   source, or a hosted zone.
@@ -1444,6 +1674,33 @@ module Aws::Route53
     #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html
     #   @return [String]
     #
+    # @!attribute [rw] enable_public_dns_fallback
+    #   Specifies whether to enable public DNS fallback for the hosted zone.
+    #   When public DNS fallback is enabled and a query for a domain name in
+    #   the private hosted zone matches no existing name (`NXDOMAIN`), Route
+    #   53 retries the query against public DNS instead of returning a
+    #   negative response. Fallback does not occur when the name exists but
+    #   has no record of the requested type.
+    #
+    #   Set to `true` to enable public DNS fallback, or `false` to disable
+    #   it. The default is `false`.
+    #
+    #   Public DNS fallback is supported only for private hosted zones. If
+    #   you specify `true` for a public hosted zone, the request fails with
+    #   an `InvalidInput` error.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] change_guardrails
+    #   Specify the optional Change Guardrails to turn on for the hosted
+    #   zone. Each entry specifies the name and status of a guardrail. For
+    #   the guardrail names and statuses, see `ChangeGuardrail`.
+    #
+    #   Route 53 turns on the guardrails that the tier of the hosted zone
+    #   includes, so you don't need to specify them. If you turn on a
+    #   guardrail that the tier doesn't offer, Route 53 returns an
+    #   `InvalidInput` error.
+    #   @return [Array<Types::ChangeGuardrail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHostedZoneRequest AWS API Documentation
     #
     class CreateHostedZoneRequest < Struct.new(
@@ -1451,7 +1708,9 @@ module Aws::Route53
       :vpc,
       :caller_reference,
       :hosted_zone_config,
-      :delegation_set_id)
+      :delegation_set_id,
+      :enable_public_dns_fallback,
+      :change_guardrails)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2510,6 +2769,23 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # This error occurs when a feature that the operation requires isn't
+    # turned on for the hosted zone. For example, the tier of the hosted
+    # zone doesn't include Change History. To resolve this error, turn on
+    # the feature, or move the hosted zone to a tier that includes it.
+    #
+    # @!attribute [rw] message
+    #   A message that explains which feature isn't turned on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/FeatureNotEnabled AWS API Documentation
+    #
+    class FeatureNotEnabled < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A complex type that contains information about a geographic location.
     #
     # @!attribute [rw] continent_code
@@ -2700,7 +2976,7 @@ module Aws::Route53
     #   * **MAX\_HEALTH\_CHECKS\_BY\_OWNER**: The maximum number of health
     #     checks that you can create using the current account.
     #
-    #   * **MAX\_HEALTH\_CHECK\_SOURCES\_BY\_OWNER** The maximum number of
+    #   * **MAX\_HEALTH\_CHECK\_SOURCES\_BY\_OWNER**: The maximum number of
     #     health check sources that you can create using the current
     #     account.
     #
@@ -3075,6 +3351,44 @@ module Aws::Route53
     #
     class GetHealthCheckStatusResponse < Struct.new(
       :health_check_observations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hosted_zone_id
+    #   The ID of the hosted zone that contains the change batch.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_id
+    #   The ID of the change batch that you want to get. This is the ID that
+    #   `ChangeResourceRecordSets` returns in `ChangeInfo/Id`. You can
+    #   specify the ID with or without the `/change/` prefix.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneChangeBatchRequest AWS API Documentation
+    #
+    class GetHostedZoneChangeBatchRequest < Struct.new(
+      :hosted_zone_id,
+      :change_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] change_batch_summary
+    #   A summary of the change batch, including who submitted it and when.
+    #   @return [Types::ChangeBatchSummary]
+    #
+    # @!attribute [rw] change_batch
+    #   The changes in the change batch. Each resource record set is in the
+    #   same form that `ListResourceRecordSets` returns. For example, the
+    #   name is in lowercase and ends with a dot.
+    #   @return [Types::ChangeBatch]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneChangeBatchResponse AWS API Documentation
+    #
+    class GetHostedZoneChangeBatchResponse < Struct.new(
+      :change_batch_summary,
+      :change_batch)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4225,11 +4539,35 @@ module Aws::Route53
     #   A value that indicates whether this is a private hosted zone.
     #   @return [Boolean]
     #
+    # @!attribute [rw] hosted_zone_tier
+    #   The tier of the hosted zone. The tier controls which features you
+    #   get and which optional features you can turn on. Valid values are
+    #   the following:
+    #
+    #   STANDARD
+    #
+    #   : `STANDARD` is the default tier for new hosted zones.
+    #
+    #   ADVANCED
+    #
+    #   : `ADVANCED` is a tier that includes Change History and offers more
+    #     optional features.
+    #
+    #   If you don't specify a tier when you create a hosted zone, Route 53
+    #   uses `STANDARD`. Route 53 always returns this value. For pricing
+    #   information, see Amazon Route 53 pricing on the [AWS website][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/route53/pricing/
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneConfig AWS API Documentation
     #
     class HostedZoneConfig < Struct.new(
       :comment,
-      :private_zone)
+      :private_zone,
+      :hosted_zone_tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4257,16 +4595,44 @@ module Aws::Route53
     #   The current status of accelerated recovery for the hosted zone.
     #   @return [String]
     #
+    # @!attribute [rw] public_dns_fallback_status
+    #   The current status of public DNS fallback for the hosted zone. Valid
+    #   values:
+    #
+    #   * `ENABLED`: Public DNS fallback is enabled.
+    #
+    #   * `DISABLED`: Public DNS fallback is disabled.
+    #
+    #   * `ENABLING`: A request to enable public DNS fallback is still
+    #     propagating.
+    #
+    #   * `DISABLING`: A request to disable public DNS fallback is still
+    #     propagating.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_history
+    #   The status of Change History for the hosted zone, and the earliest
+    #   time from which you can read its change history.
+    #   @return [Types::ChangeHistoryFeature]
+    #
     # @!attribute [rw] failure_reasons
     #   Information about any failures that occurred when attempting to
     #   enable or configure features for the hosted zone.
     #   @return [Types::HostedZoneFailureReasons]
     #
+    # @!attribute [rw] change_guardrails
+    #   The name and status of each Change Guardrail for the hosted zone.
+    #   For the guardrail names and statuses, see `ChangeGuardrail`.
+    #   @return [Array<Types::ChangeGuardrail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneFeatures AWS API Documentation
     #
     class HostedZoneFeatures < Struct.new(
       :accelerated_recovery_status,
-      :failure_reasons)
+      :public_dns_fallback_status,
+      :change_history,
+      :failure_reasons,
+      :change_guardrails)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5419,6 +5785,117 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # @!attribute [rw] hosted_zone_id
+    #   The ID of the hosted zone that you want to list change batches for.
+    #   @return [String]
+    #
+    # @!attribute [rw] submitted_after
+    #   The start of the time range, in ISO 8601 format with a UTC offset,
+    #   for example `2026-12-01T00:00:00Z` or
+    #   `2026-12-01T05:30:00.123+05:30`. You can specify up to nine
+    #   fractional digits. Route 53 rounds a value with more than
+    #   millisecond precision up to the next millisecond. The range includes
+    #   `SubmittedAfter`.
+    #
+    #   If you don't specify a value, the range starts at
+    #   `RetentionStartsAt`. If you specify a value that's earlier than
+    #   `RetentionStartsAt`, Route 53 returns an `InvalidInput` error that
+    #   includes the earliest time that you can specify.
+    #
+    #   Because submit times can be slightly out of order, a returned
+    #   `SubmittedAt` can fall just outside the range that you requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] submitted_before
+    #   The end of the time range, in ISO 8601 format with a UTC offset, for
+    #   example `2026-12-02T00:00:00Z` or `2026-12-02T05:30:00.123+05:30`.
+    #   You can specify up to nine fractional digits. Route 53 rounds a
+    #   value with more than millisecond precision up to the next
+    #   millisecond. The range excludes `SubmittedBefore`. The value must be
+    #   at least one millisecond later than `SubmittedAfter`, or later than
+    #   `RetentionStartsAt` if you omit `SubmittedAfter`.
+    #
+    #   If the range ends within a few seconds of the current time, a later
+    #   request for the same range might return more change batches.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_after_change_id
+    #   Returns the change batches after the specified change batch, not
+    #   including it. Use this to read new change batches since the last
+    #   change batch that you processed.
+    #
+    #   If you specify `StartAfterChangeId`, you must also specify
+    #   `SortOrder` `ASCENDING`, and you can't specify `SubmittedAfter` or
+    #   `SubmittedBefore`. If the change batch has expired, is from before
+    #   `RetentionStartsAt`, or isn't in the hosted zone, Route 53 returns
+    #   an `InvalidInput` error.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The order in which you want Route 53 to return change batches. Valid
+    #   values:
+    #
+    #   * `DESCENDING` – Newest first. This is the default.
+    #
+    #   * `ASCENDING` – Oldest first.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of change batches that you want Route 53 to
+    #   return in this response. Specify a value from 1 to 1,000. If you
+    #   don't specify a value, Route 53 returns up to 100 change batches.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the response to a previous `ListHostedZoneChangeBatches` request
+    #   included a `NextToken` element, specify that value here to get the
+    #   next page of results. If the previous request included any of the
+    #   following parameters, include them with exactly the same values:
+    #   `SubmittedAfter`, `SubmittedBefore`, `SortOrder`, and
+    #   `StartAfterChangeId`. If you don't, Route 53 returns an
+    #   `InvalidInput` error. If you don't specify `NextToken`, Route 53
+    #   returns the first page of results.
+    #
+    #   A `NextToken` expires 24 hours after Route 53 returns it, and you
+    #   can use it only with the hosted zone that it was returned for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZoneChangeBatchesRequest AWS API Documentation
+    #
+    class ListHostedZoneChangeBatchesRequest < Struct.new(
+      :hosted_zone_id,
+      :submitted_after,
+      :submitted_before,
+      :start_after_change_id,
+      :sort_order,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] change_batch_summaries
+    #   A summary of each change batch on this page of results. The list is
+    #   empty if there are no change batches in the range that you
+    #   specified.
+    #   @return [Array<Types::ChangeBatchSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there might be more change batches to list, a token that you can
+    #   specify in the `NextToken` parameter of another request to get the
+    #   next page of results. If there are no more change batches to list,
+    #   the response doesn't include `NextToken`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZoneChangeBatchesResponse AWS API Documentation
+    #
+    class ListHostedZoneChangeBatchesResponse < Struct.new(
+      :change_batch_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Retrieves a list of the public and private hosted zones that are
     # associated with the current Amazon Web Services account in ASCII order
     # by domain name.
@@ -5768,6 +6245,119 @@ module Aws::Route53
     #
     class ListQueryLoggingConfigsResponse < Struct.new(
       :query_logging_configs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hosted_zone_id
+    #   The ID of the hosted zone that you want to list changes for.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_name
+    #   The name of the resource record sets that you want to list changes
+    #   for, for example, `www.example.com`. The name must be the name of
+    #   the hosted zone or a subdomain of it. If you specify `RecordName`,
+    #   you must also specify `RecordType`. If you specify neither, the
+    #   results include every change in the hosted zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_type
+    #   The DNS record type of the resource record sets that you want to
+    #   list changes for. If you specify `RecordType`, you must also specify
+    #   `RecordName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] submitted_after
+    #   The start of the time range, in ISO 8601 format with a UTC offset,
+    #   for example `2026-12-01T00:00:00Z` or
+    #   `2026-12-01T05:30:00.123+05:30`. You can specify up to nine
+    #   fractional digits. Route 53 rounds a value with more than
+    #   millisecond precision up to the next millisecond. The range includes
+    #   `SubmittedAfter`.
+    #
+    #   If you don't specify a value, the range starts at
+    #   `RetentionStartsAt`. If you specify a value that's earlier than
+    #   `RetentionStartsAt`, Route 53 returns an `InvalidInput` error that
+    #   includes the earliest time that you can specify.
+    #
+    #   Because submit times can be slightly out of order, a returned
+    #   `SubmittedAt` can fall just outside the range that you requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] submitted_before
+    #   The end of the time range, in ISO 8601 format with a UTC offset, for
+    #   example `2026-12-02T00:00:00Z` or `2026-12-02T05:30:00.123+05:30`.
+    #   You can specify up to nine fractional digits. Route 53 rounds a
+    #   value with more than millisecond precision up to the next
+    #   millisecond. The range excludes `SubmittedBefore`. The value must be
+    #   at least one millisecond later than `SubmittedAfter`, or later than
+    #   `RetentionStartsAt` if you omit `SubmittedAfter`.
+    #
+    #   If the range ends within a few seconds of the current time, a later
+    #   request for the same range might return more changes.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The order in which you want Route 53 to return changes. Valid
+    #   values:
+    #
+    #   * `DESCENDING` – Newest first. This is the default.
+    #
+    #   * `ASCENDING` – Oldest first.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of changes that you want Route 53 to return in
+    #   this response. Specify a value from 1 to 100. If you don't specify
+    #   a value, Route 53 returns up to 100 changes.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the response to a previous `ListResourceRecordSetChanges` request
+    #   included a `NextToken` element, specify that value here to get the
+    #   next page of results. If the previous request included any of the
+    #   following parameters, include them with exactly the same values:
+    #   `SubmittedAfter`, `SubmittedBefore`, `SortOrder`, `RecordName`, and
+    #   `RecordType`. If you don't, Route 53 returns an `InvalidInput`
+    #   error. If you don't specify `NextToken`, Route 53 returns the first
+    #   page of results.
+    #
+    #   A `NextToken` expires 24 hours after Route 53 returns it, and you
+    #   can use it only with the hosted zone that it was returned for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListResourceRecordSetChangesRequest AWS API Documentation
+    #
+    class ListResourceRecordSetChangesRequest < Struct.new(
+      :hosted_zone_id,
+      :record_name,
+      :record_type,
+      :submitted_after,
+      :submitted_before,
+      :sort_order,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_record_set_changes
+    #   The changes on this page of results. The list is empty if there are
+    #   no changes that match the request.
+    #   @return [Array<Types::ResourceRecordSetChange>]
+    #
+    # @!attribute [rw] next_token
+    #   If there might be more changes to list, a token that you can specify
+    #   in the `NextToken` parameter of another request to get the next page
+    #   of results. If there are no more changes to list, the response
+    #   doesn't include `NextToken`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListResourceRecordSetChangesResponse AWS API Documentation
+    #
+    class ListResourceRecordSetChangesResponse < Struct.new(
+      :resource_record_set_changes,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -7634,6 +8224,27 @@ module Aws::Route53
     #   based on the geographic origin of the query and your resources.
     #   @return [Types::GeoProximityLocation]
     #
+    # @!attribute [rw] az_affinity
+    #   *AZ-affinity resource record sets only:* The location that this
+    #   resource record set answers DNS queries from, such as an
+    #   Availability Zone (AZ) or an Amazon Web Services Region. For each
+    #   query, Route 53 starts with the most specific location that the
+    #   query matches and falls back to a less specific location when
+    #   there's no record for that location or the record is unhealthy (its
+    #   health check fails or, for an alias record that has
+    #   `EvaluateTargetHealth` set to `true`, its target is unhealthy). You
+    #   must also specify `SetIdentifier`, and you can't specify another
+    #   routing policy element, such as `Weight`, in the same resource
+    #   record set.
+    #
+    #   For more information, see [AZ-affinity routing][1] in the *Amazon
+    #   Route 53 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-azaffinity.html
+    #   @return [Types::AZAffinity]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ResourceRecordSet AWS API Documentation
     #
     class ResourceRecordSet < Struct.new(
@@ -7651,7 +8262,65 @@ module Aws::Route53
       :health_check_id,
       :traffic_policy_instance_id,
       :cidr_routing_config,
-      :geo_proximity_location)
+      :geo_proximity_location,
+      :az_affinity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One change to a resource record set in the change history of a hosted
+    # zone, with the resource record set that the change wrote or deleted.
+    #
+    # @!attribute [rw] change_id
+    #   The ID of the change batch that contains the change. To get every
+    #   change in the change batch, specify this ID in
+    #   `GetHostedZoneChangeBatch`.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   The Route 53 API operation that submitted the change. New values
+    #   might be added, so ignore values that your code doesn't recognize.
+    #   @return [String]
+    #
+    # @!attribute [rw] submitted_at
+    #   The date and time, in UTC, when the change batch that contains the
+    #   change was submitted.
+    #   @return [Time]
+    #
+    # @!attribute [rw] submitted_by
+    #   The Amazon Resource Name of the principal that submitted the
+    #   request. This element is absent when Route 53 has no principal to
+    #   record for the change.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID of the call that submitted the change. CloudTrail
+    #   records the same value in `requestID`. This element is absent when
+    #   there was no request.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action in the change: `CREATE`, `DELETE`, or `UPSERT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_record_set
+    #   The resource record set that the change wrote or deleted, in the
+    #   same form that `ListResourceRecordSets` returns. For example, the
+    #   name is in lowercase and ends with a dot. For an `UPSERT` or a
+    #   `DELETE`, the response doesn't contain the values that the resource
+    #   record set had before the change.
+    #   @return [Types::ResourceRecordSet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ResourceRecordSetChange AWS API Documentation
+    #
+    class ResourceRecordSetChange < Struct.new(
+      :change_id,
+      :operation,
+      :submitted_at,
+      :submitted_by,
+      :request_id,
+      :action,
+      :resource_record_set)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8064,10 +8733,6 @@ module Aws::Route53
     # For information about how to get the current limit for an account, see
     # [GetAccountLimit][2]. To request a higher limit, [create a case][3]
     # with the Amazon Web Services Support Center.
-    #
-    # You have reached the maximum number of active health checks for an
-    # Amazon Web Services account. To request a higher limit, [create a
-    # case][3] with the Amazon Web Services Support Center.
     #
     #
     #
@@ -8907,11 +9572,50 @@ module Aws::Route53
     #   disable it.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_public_dns_fallback
+    #   Specifies whether to enable public DNS fallback for the hosted zone.
+    #   Set to `true` to enable public DNS fallback, or `false` to disable
+    #   it.
+    #
+    #   Public DNS fallback applies to the entire hosted zone and to all
+    #   VPCs that are associated with it. To check whether a change has
+    #   propagated, call `GetHostedZone` and review
+    #   `PublicDNSFallbackStatus` in the response.
+    #
+    #   Public DNS fallback is supported only for private hosted zones.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] change_guardrails
+    #   Specify the Change Guardrails to turn on or off for the hosted zone.
+    #   Each entry specifies the name of a guardrail and one of the
+    #   following statuses:
+    #
+    #   * `ENABLED`: Turns on the guardrail.
+    #
+    #   * `DISABLED`: Turns off the guardrail.
+    #
+    #   Guardrails that aren't in the request keep their current status.
+    #
+    #   You can turn on an optional guardrail only if the tier of the hosted
+    #   zone offers it. You can't turn off a guardrail that the tier
+    #   includes, such as `NS_FORMAT_CHECK`. In either case, Route 53
+    #   returns an `InvalidInput` error.
+    #   @return [Array<Types::ChangeGuardrail>]
+    #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to validate the request without changing any
+    #   features. Route 53 returns the same errors as for a real request,
+    #   but doesn't change the hosted zone. The default is `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneFeaturesRequest AWS API Documentation
     #
     class UpdateHostedZoneFeaturesRequest < Struct.new(
       :hosted_zone_id,
-      :enable_accelerated_recovery)
+      :enable_accelerated_recovery,
+      :enable_public_dns_fallback,
+      :change_guardrails,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8919,6 +9623,40 @@ module Aws::Route53
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneFeaturesResponse AWS API Documentation
     #
     class UpdateHostedZoneFeaturesResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] hosted_zone_id
+    #   Specify the ID of the hosted zone whose tier you want to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] hosted_zone_tier
+    #   Specify the tier to move the hosted zone to. Valid values are the
+    #   following:
+    #
+    #   * `STANDARD`: The default tier for new hosted zones.
+    #
+    #   * `ADVANCED`: A tier that includes Change History and offers more
+    #     optional features.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to validate the request without changing the tier.
+    #   Route 53 returns the same errors as for a real request, but doesn't
+    #   change the hosted zone. The default is `false`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneTierRequest AWS API Documentation
+    #
+    class UpdateHostedZoneTierRequest < Struct.new(
+      :hosted_zone_id,
+      :hosted_zone_tier,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneTierResponse AWS API Documentation
+    #
+    class UpdateHostedZoneTierResponse < Aws::EmptyStructure; end
 
     # A complex type that contains information about the traffic policy that
     # you want to update the comment for.

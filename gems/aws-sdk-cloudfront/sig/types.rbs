@@ -848,6 +848,7 @@ module Aws::CloudFront
       attr_accessor origin_keepalive_timeout: ::Integer
       attr_accessor ip_address_type: ("ipv4" | "ipv6" | "dualstack")
       attr_accessor origin_mtls_config: Types::OriginMtlsConfig
+      attr_accessor origin_http_version: ("http1.1" | "http2")
       SENSITIVE: []
     end
 
@@ -4251,6 +4252,7 @@ module Aws::CloudFront
       attr_accessor owner_account_id: ::String
       attr_accessor origin_read_timeout: ::Integer
       attr_accessor origin_keepalive_timeout: ::Integer
+      attr_accessor origin_http_version: ("http1.1" | "http2")
       SENSITIVE: []
     end
 

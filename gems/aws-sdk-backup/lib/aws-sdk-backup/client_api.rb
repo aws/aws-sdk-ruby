@@ -352,6 +352,7 @@ module Aws::Backup
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResourceTypeList = Shapes::ListShape.new(name: 'ResourceTypeList')
     ResourceTypeManagementPreference = Shapes::MapShape.new(name: 'ResourceTypeManagementPreference')
+    ResourceTypeOptInIncremental = Shapes::MapShape.new(name: 'ResourceTypeOptInIncremental')
     ResourceTypeOptInPreference = Shapes::MapShape.new(name: 'ResourceTypeOptInPreference')
     ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
     RestoreAccessBackupVaultList = Shapes::ListShape.new(name: 'RestoreAccessBackupVaultList')
@@ -1109,6 +1110,7 @@ module Aws::Backup
 
     DescribeRegionSettingsOutput.add_member(:resource_type_opt_in_preference, Shapes::ShapeRef.new(shape: ResourceTypeOptInPreference, location_name: "ResourceTypeOptInPreference"))
     DescribeRegionSettingsOutput.add_member(:resource_type_management_preference, Shapes::ShapeRef.new(shape: ResourceTypeManagementPreference, location_name: "ResourceTypeManagementPreference"))
+    DescribeRegionSettingsOutput.add_member(:resource_type_opt_in_incremental, Shapes::ShapeRef.new(shape: ResourceTypeOptInIncremental, location_name: "ResourceTypeOptInIncremental"))
     DescribeRegionSettingsOutput.struct_class = Types::DescribeRegionSettingsOutput
 
     DescribeReportJobInput.add_member(:report_job_id, Shapes::ShapeRef.new(shape: ReportJobId, required: true, location: "uri", location_name: "reportJobId"))
@@ -1999,6 +2001,9 @@ module Aws::Backup
     ResourceTypeManagementPreference.key = Shapes::ShapeRef.new(shape: ResourceType)
     ResourceTypeManagementPreference.value = Shapes::ShapeRef.new(shape: IsEnabled)
 
+    ResourceTypeOptInIncremental.key = Shapes::ShapeRef.new(shape: ResourceType)
+    ResourceTypeOptInIncremental.value = Shapes::ShapeRef.new(shape: IsEnabled)
+
     ResourceTypeOptInPreference.key = Shapes::ShapeRef.new(shape: ResourceType)
     ResourceTypeOptInPreference.value = Shapes::ShapeRef.new(shape: IsEnabled)
 
@@ -2392,6 +2397,7 @@ module Aws::Backup
 
     UpdateRegionSettingsInput.add_member(:resource_type_opt_in_preference, Shapes::ShapeRef.new(shape: ResourceTypeOptInPreference, location_name: "ResourceTypeOptInPreference"))
     UpdateRegionSettingsInput.add_member(:resource_type_management_preference, Shapes::ShapeRef.new(shape: ResourceTypeManagementPreference, location_name: "ResourceTypeManagementPreference"))
+    UpdateRegionSettingsInput.add_member(:resource_type_opt_in_incremental, Shapes::ShapeRef.new(shape: ResourceTypeOptInIncremental, location_name: "ResourceTypeOptInIncremental"))
     UpdateRegionSettingsInput.struct_class = Types::UpdateRegionSettingsInput
 
     UpdateReportPlanInput.add_member(:report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, required: true, location: "uri", location_name: "reportPlanName"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2026-11-20)
+------------------
+
+* Feature - Enablement for Network Firewall and Omni Events via Observability Admin Telemetry Rule for account and organization level
+
 1.55.0 (2026-11-18)
 ------------------
 

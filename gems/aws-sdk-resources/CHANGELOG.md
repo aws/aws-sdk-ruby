@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+3.283.0 (2026-11-20)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-sagemakergatewayruntime` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-payments` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-agentdiscovery` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-apiportal` gem.
+
 3.282.0 (2026-11-19)
 ------------------
 

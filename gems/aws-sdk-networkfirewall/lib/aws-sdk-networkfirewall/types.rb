@@ -154,6 +154,32 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # The public IP addresses that an internet gateway firewall uses for
+    # network address translation in one Availability Zone. Resources that
+    # don't have a public IP address reach the internet through these
+    # addresses. Network Firewall manages the addresses for you: it
+    # allocates them in your account and adds or removes addresses
+    # automatically based on traffic.
+    #
+    # @!attribute [rw] public_i_pv_6_addresses
+    #   The public IPv6 addresses that the internet gateway firewall uses
+    #   for network address translation in this Availability Zone.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] public_i_pv_4_addresses
+    #   The public IPv4 addresses that the internet gateway firewall uses
+    #   for network address translation in this Availability Zone.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/AddressTranslations AWS API Documentation
+    #
+    class AddressTranslations < Struct.new(
+      :public_i_pv_6_addresses,
+      :public_i_pv_4_addresses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A report that captures key activity from the last 30 days of network
     # traffic monitored by your firewall.
     #
@@ -344,13 +370,29 @@ module Aws::NetworkFirewall
     #   endpoints. You must specify at least one Availability Zone.
     #   @return [Array<Types::AvailabilityZoneMapping>]
     #
+    # @!attribute [rw] firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource
+    #   type in the ARN. If you specify only the firewall name, Network
+    #   Firewall uses this value to identify the firewall. If you don't
+    #   specify a type, the default is `FIREWALL`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/AssociateAvailabilityZonesRequest AWS API Documentation
     #
     class AssociateAvailabilityZonesRequest < Struct.new(
       :update_token,
       :firewall_arn,
       :firewall_name,
-      :availability_zone_mappings)
+      :availability_zone_mappings,
+      :firewall_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -438,13 +480,29 @@ module Aws::NetworkFirewall
     #   The Amazon Resource Name (ARN) of the firewall policy.
     #   @return [String]
     #
+    # @!attribute [rw] firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource
+    #   type in the ARN. If you specify only the firewall name, Network
+    #   Firewall uses this value to identify the firewall. If you don't
+    #   specify a type, the default is `FIREWALL`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/AssociateFirewallPolicyRequest AWS API Documentation
     #
     class AssociateFirewallPolicyRequest < Struct.new(
       :update_token,
       :firewall_arn,
       :firewall_name,
-      :firewall_policy_arn)
+      :firewall_policy_arn,
+      :firewall_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -631,6 +689,11 @@ module Aws::NetworkFirewall
     #   When this value is `READY`, the endpoint is available to handle
     #   network traffic. Otherwise, this value reflects its state, for
     #   example `CREATING` or `DELETING`.
+    #
+    #   For an internet gateway firewall, `STANDBY` indicates an
+    #   Availability Zone that has no resources yet. Network Firewall
+    #   provisions the endpoint there when the first resource is launched in
+    #   that Availability Zone.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -1409,6 +1472,20 @@ module Aws::NetworkFirewall
     #   Default value: `FALSE`
     #   @return [Boolean]
     #
+    # @!attribute [rw] igw_firewall_configuration
+    #   Settings that make this firewall an internet gateway firewall. An
+    #   internet gateway firewall inspects all traffic between a VPC and its
+    #   internet gateway, without changes to your subnets or route tables.
+    #   Amazon Web Services Network Security Manager creates and manages
+    #   internet gateway firewalls on your behalf, so you don't include
+    #   this setting when you create a standard Network Firewall firewall.
+    #
+    #   When this setting is present, `FirewallName` must equal the `VpcId`,
+    #   `AvailabilityZoneMappings` is required and must use Availability
+    #   Zone IDs, and you can't specify `SubnetMappings` or a transit
+    #   gateway.
+    #   @return [Types::IgwFirewallConfiguration]
+    #
     # @!attribute [rw] nat_gateway_create_mappings
     #   The NAT gateways that Network Firewall creates for a proxy mode
     #   firewall, one for each Availability Zone. When you specify this, you
@@ -1487,6 +1564,7 @@ module Aws::NetworkFirewall
       :transit_gateway_id,
       :availability_zone_mappings,
       :availability_zone_change_protection,
+      :igw_firewall_configuration,
       :nat_gateway_create_mappings,
       :proxy_settings,
       :vpc_endpoint,
@@ -2057,6 +2135,21 @@ module Aws::NetworkFirewall
     #   You must specify the ARN or the name, and you can specify both.
     #   @return [String]
     #
+    # @!attribute [rw] firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource
+    #   type in the ARN. If you specify only the firewall name, Network
+    #   Firewall uses this value to identify the firewall. If you don't
+    #   specify a type, the default is `FIREWALL`.
+    #   @return [String]
+    #
     # @!attribute [rw] delete_associated_nat_gateways
     #   Specifies whether to delete the NAT gateways that Network Firewall
     #   created for a proxy mode firewall when you delete the firewall. You
@@ -2078,6 +2171,7 @@ module Aws::NetworkFirewall
     class DeleteFirewallRequest < Struct.new(
       :firewall_name,
       :firewall_arn,
+      :firewall_type,
       :delete_associated_nat_gateways)
       SENSITIVE = []
       include Aws::Structure
@@ -2497,6 +2591,11 @@ module Aws::NetworkFirewall
     #   `ConfigurationSyncStateSummary` value is `IN_SYNC` and the
     #   `Attachment` `Status` values for all of the configured subnets are
     #   `READY`.
+    #
+    #   For an internet gateway firewall, this setting is `STANDBY` while no
+    #   Availability Zone in the VPC has resources that need the firewall.
+    #   Network Firewall provisions the firewall in an Availability Zone
+    #   when the first resource is launched there.
     #   @return [String]
     #
     # @!attribute [rw] supported_availability_zones
@@ -2659,11 +2758,27 @@ module Aws::NetworkFirewall
     #   You must specify the ARN or the name, and you can specify both.
     #   @return [String]
     #
+    # @!attribute [rw] firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource
+    #   type in the ARN. If you specify only the firewall name, Network
+    #   Firewall uses this value to identify the firewall. If you don't
+    #   specify a type, the default is `FIREWALL`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewallRequest AWS API Documentation
     #
     class DescribeFirewallRequest < Struct.new(
       :firewall_name,
-      :firewall_arn)
+      :firewall_arn,
+      :firewall_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2858,11 +2973,27 @@ module Aws::NetworkFirewall
     #   You must specify the ARN or the name, and you can specify both.
     #   @return [String]
     #
+    # @!attribute [rw] firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource
+    #   type in the ARN. If you specify only the firewall name, Network
+    #   Firewall uses this value to identify the firewall. If you don't
+    #   specify a type, the default is `FIREWALL`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeLoggingConfigurationRequest AWS API Documentation
     #
     class DescribeLoggingConfigurationRequest < Struct.new(
       :firewall_arn,
-      :firewall_name)
+      :firewall_name,
+      :firewall_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3573,13 +3704,29 @@ module Aws::NetworkFirewall
     #   configuration.
     #   @return [Array<Types::AvailabilityZoneMapping>]
     #
+    # @!attribute [rw] firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource
+    #   type in the ARN. If you specify only the firewall name, Network
+    #   Firewall uses this value to identify the firewall. If you don't
+    #   specify a type, the default is `FIREWALL`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DisassociateAvailabilityZonesRequest AWS API Documentation
     #
     class DisassociateAvailabilityZonesRequest < Struct.new(
       :update_token,
       :firewall_arn,
       :firewall_name,
-      :availability_zone_mappings)
+      :availability_zone_mappings,
+      :firewall_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3913,6 +4060,14 @@ module Aws::NetworkFirewall
     #   Availability Zones.
     #   @return [Boolean]
     #
+    # @!attribute [rw] igw_firewall_configuration
+    #   Contains the settings that configure an internet gateway firewall,
+    #   which Amazon Web Services Network Security Manager creates and
+    #   manages for a VPC. Network Firewall returns this setting only for an
+    #   internet gateway firewall. For a standard firewall, this setting
+    #   isn't present.
+    #   @return [Types::IgwFirewallConfiguration]
+    #
     # @!attribute [rw] nat_gateway_create_mappings
     #   The NAT gateways that you specified for Network Firewall to create
     #   for a proxy mode firewall. To get the IDs and status of the NAT
@@ -3970,6 +4125,7 @@ module Aws::NetworkFirewall
       :transit_gateway_owner_account_id,
       :availability_zone_mappings,
       :availability_zone_change_protection,
+      :igw_firewall_configuration,
       :nat_gateway_create_mappings,
       :proxy_settings,
       :vpc_endpoint,
@@ -4867,6 +5023,11 @@ module Aws::NetworkFirewall
     #   `ConfigurationSyncStateSummary` value is `IN_SYNC` and the
     #   `Attachment` `Status` values for all of the configured subnets are
     #   `READY`.
+    #
+    #   For an internet gateway firewall, this setting is `STANDBY` while no
+    #   Availability Zone in the VPC has resources that need the firewall.
+    #   Network Firewall provisions the firewall in an Availability Zone
+    #   when the first resource is launched there.
     #   @return [String]
     #
     # @!attribute [rw] configuration_sync_state_summary
@@ -5414,6 +5575,29 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # Contains the settings that configure an internet gateway firewall. An
+    # internet gateway firewall inspects all traffic between your VPC and
+    # its internet gateway, without changes to your subnets or route tables.
+    # You can describe and list internet gateway firewalls in Network
+    # Firewall, but you can't create, modify, or delete them directly,
+    # because Amazon Web Services Network Security Manager creates and
+    # manages them on your behalf.
+    #
+    # @!attribute [rw] enforcement_mode
+    #   How the internet gateway firewall enforces its rules. The only
+    #   supported value is `POLICY_CONTROLLED`, which means that the
+    #   enforcement mode is set by the firewall policy that Amazon Web
+    #   Services Network Security Manager associates with the firewall.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/IgwFirewallConfiguration AWS API Documentation
+    #
+    class IgwFirewallConfiguration < Struct.new(
+      :enforcement_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Amazon Web Services doesn't currently have enough available capacity
     # to fulfill your request. Try your request later.
     #
@@ -5889,12 +6073,27 @@ module Aws::NetworkFirewall
     #   use in a subsequent call to get the next batch of objects.
     #   @return [Integer]
     #
+    # @!attribute [rw] firewall_type
+    #   Specifies the firewall type to filter the results by. You can
+    #   specify one of the following values:
+    #
+    #   * `IGW_FIREWALL` - Returns only internet gateway firewalls, which
+    #     Amazon Web Services Network Security Manager creates and manages
+    #     for your VPCs.
+    #
+    #   * `FIREWALL` - Returns only standard Network Firewall firewalls.
+    #
+    #   If you don't specify a type, the default is to return firewalls of
+    #   both types.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListFirewallsRequest AWS API Documentation
     #
     class ListFirewallsRequest < Struct.new(
       :next_token,
       :vpc_ids,
-      :max_results)
+      :max_results,
+      :firewall_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8661,6 +8860,14 @@ module Aws::NetworkFirewall
     #   traffic.
     #   @return [Hash<String,Types::PerObjectStatus>]
     #
+    # @!attribute [rw] address_translations
+    #   The public IP addresses that an internet gateway firewall uses for
+    #   network address translation in this Availability Zone. Network
+    #   Firewall allocates these addresses in your account and adds or
+    #   removes addresses automatically based on traffic. This setting is
+    #   only present for an internet gateway firewall.
+    #   @return [Types::AddressTranslations]
+    #
     # @!attribute [rw] nat_gateway_attachments
     #   The NAT gateway that's attached to a proxy mode firewall in the
     #   Availability Zone, and the status of the attachment. To get NAT
@@ -8676,6 +8883,7 @@ module Aws::NetworkFirewall
     class SyncState < Struct.new(
       :attachment,
       :config,
+      :address_translations,
       :nat_gateway_attachments)
       SENSITIVE = []
       include Aws::Structure
@@ -9360,13 +9568,29 @@ module Aws::NetworkFirewall
     #   operation again using the new token.
     #   @return [String]
     #
+    # @!attribute [rw] firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource
+    #   type in the ARN. If you specify only the firewall name, Network
+    #   Firewall uses this value to identify the firewall. If you don't
+    #   specify a type, the default is `FIREWALL`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateFirewallAnalysisSettingsRequest AWS API Documentation
     #
     class UpdateFirewallAnalysisSettingsRequest < Struct.new(
       :enabled_analysis_types,
       :firewall_arn,
       :firewall_name,
-      :update_token)
+      :update_token,
+      :firewall_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9461,13 +9685,29 @@ module Aws::NetworkFirewall
     #   initializes this flag to `TRUE`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource
+    #   type in the ARN. If you specify only the firewall name, Network
+    #   Firewall uses this value to identify the firewall. If you don't
+    #   specify a type, the default is `FIREWALL`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateFirewallDeleteProtectionRequest AWS API Documentation
     #
     class UpdateFirewallDeleteProtectionRequest < Struct.new(
       :update_token,
       :firewall_arn,
       :firewall_name,
-      :delete_protection)
+      :delete_protection,
+      :firewall_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9558,13 +9798,29 @@ module Aws::NetworkFirewall
     #   Network Firewall removes the description for the firewall.
     #   @return [String]
     #
+    # @!attribute [rw] firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource
+    #   type in the ARN. If you specify only the firewall name, Network
+    #   Firewall uses this value to identify the firewall. If you don't
+    #   specify a type, the default is `FIREWALL`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateFirewallDescriptionRequest AWS API Documentation
     #
     class UpdateFirewallDescriptionRequest < Struct.new(
       :update_token,
       :firewall_arn,
       :firewall_name,
-      :description)
+      :description,
+      :firewall_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9658,13 +9914,29 @@ module Aws::NetworkFirewall
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html
     #   @return [Types::EncryptionConfiguration]
     #
+    # @!attribute [rw] firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource
+    #   type in the ARN. If you specify only the firewall name, Network
+    #   Firewall uses this value to identify the firewall. If you don't
+    #   specify a type, the default is `FIREWALL`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateFirewallEncryptionConfigurationRequest AWS API Documentation
     #
     class UpdateFirewallEncryptionConfigurationRequest < Struct.new(
       :update_token,
       :firewall_arn,
       :firewall_name,
-      :encryption_configuration)
+      :encryption_configuration,
+      :firewall_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9766,13 +10038,29 @@ module Aws::NetworkFirewall
     #   initializes this setting to `TRUE`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource
+    #   type in the ARN. If you specify only the firewall name, Network
+    #   Firewall uses this value to identify the firewall. If you don't
+    #   specify a type, the default is `FIREWALL`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateFirewallPolicyChangeProtectionRequest AWS API Documentation
     #
     class UpdateFirewallPolicyChangeProtectionRequest < Struct.new(
       :update_token,
       :firewall_arn,
       :firewall_name,
-      :firewall_policy_change_protection)
+      :firewall_policy_change_protection,
+      :firewall_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10041,6 +10329,21 @@ module Aws::NetworkFirewall
     #   You must specify the ARN or the name, and you can specify both.
     #   @return [String]
     #
+    # @!attribute [rw] firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource
+    #   type in the ARN. If you specify only the firewall name, Network
+    #   Firewall uses this value to identify the firewall. If you don't
+    #   specify a type, the default is `FIREWALL`.
+    #   @return [String]
+    #
     # @!attribute [rw] logging_configuration
     #   Defines how Network Firewall performs logging for a firewall. If you
     #   omit this setting, Network Firewall disables logging for the
@@ -10066,6 +10369,7 @@ module Aws::NetworkFirewall
     class UpdateLoggingConfigurationRequest < Struct.new(
       :firewall_arn,
       :firewall_name,
+      :firewall_type,
       :logging_configuration,
       :enable_monitoring_dashboard)
       SENSITIVE = []

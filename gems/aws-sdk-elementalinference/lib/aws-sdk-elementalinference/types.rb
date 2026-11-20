@@ -368,8 +368,21 @@ module Aws::ElementalInference
     #
     # @!attribute [rw] language
     #   The language of the dictionary entries. Specify the language using
-    #   an ISO 639-2/T three-letter code. Supported values: eng, fra, ita,
-    #   deu, spa, por.
+    #   an ISO 639-2/T three-letter code. Supported values:
+    #
+    #   * eng – English
+    #
+    #   * fra – French
+    #
+    #   * ita – Italian
+    #
+    #   * deu – German
+    #
+    #   * spa – Spanish
+    #
+    #   * por – Portuguese
+    #
+    #   * ara – Arabic
     #   @return [String]
     #
     # @!attribute [rw] entries
@@ -3067,8 +3080,27 @@ module Aws::ElementalInference
     #   The language of the audio in the source media. Elemental Inference
     #   uses this setting to optimize transcription accuracy. Specify the
     #   language using an ISO 639-2/T three-letter code, optionally with a
-    #   region subtag. Supported values: eng, eng-au, eng-gb, eng-us, fra,
-    #   ita, deu, spa, por.
+    #   region subtag. Supported values:
+    #
+    #   * eng – English
+    #
+    #   * eng-au – English (Australia)
+    #
+    #   * eng-gb – English (United Kingdom)
+    #
+    #   * eng-us – English (United States)
+    #
+    #   * fra – French
+    #
+    #   * ita – Italian
+    #
+    #   * deu – German
+    #
+    #   * spa – Spanish
+    #
+    #   * por – Portuguese
+    #
+    #   * ara – Arabic
     #   @return [String]
     #
     # @!attribute [rw] aspect_ratio

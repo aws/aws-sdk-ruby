@@ -29,6 +29,7 @@ module Aws::AgentRegistryControl
   # ## Error Classes
   # * {AccessDeniedException}
   # * {ConflictException}
+  # * {DependencyException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
@@ -68,6 +69,25 @@ module Aws::AgentRegistryControl
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class DependencyException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AgentRegistryControl::Types::DependencyException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      def retryable?
+        true
       end
     end
 

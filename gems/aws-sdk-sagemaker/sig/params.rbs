@@ -852,6 +852,15 @@ module Aws
       }?
     }
 
+      type global_inference_gateway_routing = {
+      weights: {
+        kv_headroom: ::Float?,
+        queue_depth: ::Float?,
+        region_proximity: ::Float?,
+        error_rate: ::Float?
+      }
+    }
+
       type parameter_ranges = {
       integer_parameter_ranges: Array[
         {

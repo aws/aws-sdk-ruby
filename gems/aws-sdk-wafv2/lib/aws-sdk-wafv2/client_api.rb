@@ -21,6 +21,7 @@ module Aws::WAFV2
     APIKeyVersion = Shapes::IntegerShape.new(name: 'APIKeyVersion')
     ASN = Shapes::IntegerShape.new(name: 'ASN')
     AWSManagedRulesACFPRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesACFPRuleSet')
+    AWSManagedRulesAISecurityRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesAISecurityRuleSet')
     AWSManagedRulesATPRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesATPRuleSet')
     AWSManagedRulesAntiDDoSRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesAntiDDoSRuleSet')
     AWSManagedRulesBotControlRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesBotControlRuleSet')
@@ -35,11 +36,19 @@ module Aws::WAFV2
     AnalyticsConfig = Shapes::StructureShape.new(name: 'AnalyticsConfig')
     AnalyticsMode = Shapes::StringShape.new(name: 'AnalyticsMode')
     AndStatement = Shapes::StructureShape.new(name: 'AndStatement')
+    ApiPattern = Shapes::StructureShape.new(name: 'ApiPattern')
+    ApiPatternDomainList = Shapes::ListShape.new(name: 'ApiPatternDomainList')
+    ApiPatternFilter = Shapes::StructureShape.new(name: 'ApiPatternFilter')
+    ApiPatternFilterList = Shapes::ListShape.new(name: 'ApiPatternFilterList')
+    ApiPatternList = Shapes::ListShape.new(name: 'ApiPatternList')
+    ApiSecurityEventDetail = Shapes::StructureShape.new(name: 'ApiSecurityEventDetail')
     ApplicationAttribute = Shapes::StructureShape.new(name: 'ApplicationAttribute')
     ApplicationAttributes = Shapes::ListShape.new(name: 'ApplicationAttributes')
     ApplicationConfig = Shapes::StructureShape.new(name: 'ApplicationConfig')
     AsnList = Shapes::ListShape.new(name: 'AsnList')
     AsnMatchStatement = Shapes::StructureShape.new(name: 'AsnMatchStatement')
+    AsnOrganizationString = Shapes::StringShape.new(name: 'AsnOrganizationString')
+    AsnString = Shapes::StringShape.new(name: 'AsnString')
     AssociateWebACLRequest = Shapes::StructureShape.new(name: 'AssociateWebACLRequest')
     AssociateWebACLResponse = Shapes::StructureShape.new(name: 'AssociateWebACLResponse')
     AssociatedResourceType = Shapes::StringShape.new(name: 'AssociatedResourceType')
@@ -47,6 +56,10 @@ module Aws::WAFV2
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
     AttributeValues = Shapes::ListShape.new(name: 'AttributeValues')
+    AuthFingerprintString = Shapes::StringShape.new(name: 'AuthFingerprintString')
+    BedrockGuardrails = Shapes::StructureShape.new(name: 'BedrockGuardrails')
+    BedrockGuardrailsRequestAndResponse = Shapes::StructureShape.new(name: 'BedrockGuardrailsRequestAndResponse')
+    BedrockGuardrailsRequestOnly = Shapes::StructureShape.new(name: 'BedrockGuardrailsRequestOnly')
     BlockAction = Shapes::StructureShape.new(name: 'BlockAction')
     BlockchainChain = Shapes::StringShape.new(name: 'BlockchainChain')
     Body = Shapes::StructureShape.new(name: 'Body')
@@ -59,6 +72,7 @@ module Aws::WAFV2
     CaptchaAction = Shapes::StructureShape.new(name: 'CaptchaAction')
     CaptchaConfig = Shapes::StructureShape.new(name: 'CaptchaConfig')
     CaptchaResponse = Shapes::StructureShape.new(name: 'CaptchaResponse')
+    CategoryString = Shapes::StringShape.new(name: 'CategoryString')
     ChallengeAction = Shapes::StructureShape.new(name: 'ChallengeAction')
     ChallengeConfig = Shapes::StructureShape.new(name: 'ChallengeConfig')
     ChallengeJavascriptSdkInjection = Shapes::MapShape.new(name: 'ChallengeJavascriptSdkInjection')
@@ -71,6 +85,7 @@ module Aws::WAFV2
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     Condition = Shapes::StructureShape.new(name: 'Condition')
     Conditions = Shapes::ListShape.new(name: 'Conditions')
+    Confidence = Shapes::StringShape.new(name: 'Confidence')
     ConnectedAccountArn = Shapes::StringShape.new(name: 'ConnectedAccountArn')
     ConnectedAccountChain = Shapes::StringShape.new(name: 'ConnectedAccountChain')
     ConnectedAccountChainConfig = Shapes::StructureShape.new(name: 'ConnectedAccountChainConfig')
@@ -85,9 +100,11 @@ module Aws::WAFV2
     CookieNames = Shapes::ListShape.new(name: 'CookieNames')
     Cookies = Shapes::StructureShape.new(name: 'Cookies')
     CountAction = Shapes::StructureShape.new(name: 'CountAction')
+    CountedValue = Shapes::IntegerShape.new(name: 'CountedValue')
     Country = Shapes::StringShape.new(name: 'Country')
     CountryCode = Shapes::StringShape.new(name: 'CountryCode')
     CountryCodes = Shapes::ListShape.new(name: 'CountryCodes')
+    CountryString = Shapes::StringShape.new(name: 'CountryString')
     CreateAPIKeyRequest = Shapes::StructureShape.new(name: 'CreateAPIKeyRequest')
     CreateAPIKeyResponse = Shapes::StructureShape.new(name: 'CreateAPIKeyResponse')
     CreateIPSetRequest = Shapes::StructureShape.new(name: 'CreateIPSetRequest')
@@ -140,10 +157,13 @@ module Aws::WAFV2
     DescribeManagedProductsByVendorResponse = Shapes::StructureShape.new(name: 'DescribeManagedProductsByVendorResponse')
     DescribeManagedRuleGroupRequest = Shapes::StructureShape.new(name: 'DescribeManagedRuleGroupRequest')
     DescribeManagedRuleGroupResponse = Shapes::StructureShape.new(name: 'DescribeManagedRuleGroupResponse')
+    DisableBedrockGuardrails = Shapes::StructureShape.new(name: 'DisableBedrockGuardrails')
     DisallowedFeature = Shapes::StructureShape.new(name: 'DisallowedFeature')
     DisallowedFeatures = Shapes::ListShape.new(name: 'DisallowedFeatures')
     DisassociateWebACLRequest = Shapes::StructureShape.new(name: 'DisassociateWebACLRequest')
     DisassociateWebACLResponse = Shapes::StructureShape.new(name: 'DisassociateWebACLResponse')
+    DomainList = Shapes::ListShape.new(name: 'DomainList')
+    DomainString = Shapes::StringShape.new(name: 'DomainString')
     DownloadUrl = Shapes::StringShape.new(name: 'DownloadUrl')
     EmailField = Shapes::StructureShape.new(name: 'EmailField')
     EnableMachineLearning = Shapes::BooleanShape.new(name: 'EnableMachineLearning')
@@ -153,6 +173,30 @@ module Aws::WAFV2
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorReason = Shapes::StringShape.new(name: 'ErrorReason')
     EvaluationWindowSec = Shapes::IntegerShape.new(name: 'EvaluationWindowSec')
+    EventActorChange = Shapes::StructureShape.new(name: 'EventActorChange')
+    EventActorChangeList = Shapes::ListShape.new(name: 'EventActorChangeList')
+    EventActorDetail = Shapes::StructureShape.new(name: 'EventActorDetail')
+    EventActorDetailSummary = Shapes::StructureShape.new(name: 'EventActorDetailSummary')
+    EventActorReference = Shapes::StructureShape.new(name: 'EventActorReference')
+    EventActorReferenceList = Shapes::ListShape.new(name: 'EventActorReferenceList')
+    EventActorSortBy = Shapes::StringShape.new(name: 'EventActorSortBy')
+    EventActorSummary = Shapes::StructureShape.new(name: 'EventActorSummary')
+    EventActorSummaryList = Shapes::ListShape.new(name: 'EventActorSummaryList')
+    EventActorValueString = Shapes::StringShape.new(name: 'EventActorValueString')
+    EventCategory = Shapes::StringShape.new(name: 'EventCategory')
+    EventDetailSummary = Shapes::StructureShape.new(name: 'EventDetailSummary')
+    EventDetailSummaryList = Shapes::ListShape.new(name: 'EventDetailSummaryList')
+    EventFilter = Shapes::StructureShape.new(name: 'EventFilter')
+    EventFilterKey = Shapes::StringShape.new(name: 'EventFilterKey')
+    EventFilterList = Shapes::ListShape.new(name: 'EventFilterList')
+    EventIncludeField = Shapes::StringShape.new(name: 'EventIncludeField')
+    EventIncludeFieldList = Shapes::ListShape.new(name: 'EventIncludeFieldList')
+    EventNextMarker = Shapes::StringShape.new(name: 'EventNextMarker')
+    EventPaginationLimit = Shapes::IntegerShape.new(name: 'EventPaginationLimit')
+    EventSortBy = Shapes::StringShape.new(name: 'EventSortBy')
+    EventStatus = Shapes::StringShape.new(name: 'EventStatus')
+    EventTimelineEntry = Shapes::StructureShape.new(name: 'EventTimelineEntry')
+    EventTimelineEntryList = Shapes::ListShape.new(name: 'EventTimelineEntryList')
     ExcludedRule = Shapes::StructureShape.new(name: 'ExcludedRule')
     ExcludedRules = Shapes::ListShape.new(name: 'ExcludedRules')
     FailureCode = Shapes::IntegerShape.new(name: 'FailureCode')
@@ -171,6 +215,8 @@ module Aws::WAFV2
     FilterRequirement = Shapes::StringShape.new(name: 'FilterRequirement')
     FilterSource = Shapes::StructureShape.new(name: 'FilterSource')
     FilterString = Shapes::StringShape.new(name: 'FilterString')
+    FilterValue = Shapes::StringShape.new(name: 'FilterValue')
+    FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
     Filters = Shapes::ListShape.new(name: 'Filters')
     FirewallManagerRuleGroup = Shapes::StructureShape.new(name: 'FirewallManagerRuleGroup')
     FirewallManagerRuleGroups = Shapes::ListShape.new(name: 'FirewallManagerRuleGroups')
@@ -183,6 +229,10 @@ module Aws::WAFV2
     GeoMatchStatement = Shapes::StructureShape.new(name: 'GeoMatchStatement')
     GetDecryptedAPIKeyRequest = Shapes::StructureShape.new(name: 'GetDecryptedAPIKeyRequest')
     GetDecryptedAPIKeyResponse = Shapes::StructureShape.new(name: 'GetDecryptedAPIKeyResponse')
+    GetEventActorRequest = Shapes::StructureShape.new(name: 'GetEventActorRequest')
+    GetEventActorResponse = Shapes::StructureShape.new(name: 'GetEventActorResponse')
+    GetEventRequest = Shapes::StructureShape.new(name: 'GetEventRequest')
+    GetEventResponse = Shapes::StructureShape.new(name: 'GetEventResponse')
     GetIPSetRequest = Shapes::StructureShape.new(name: 'GetIPSetRequest')
     GetIPSetResponse = Shapes::StructureShape.new(name: 'GetIPSetResponse')
     GetLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'GetLoggingConfigurationRequest')
@@ -225,6 +275,8 @@ module Aws::WAFV2
     HeaderOrder = Shapes::StructureShape.new(name: 'HeaderOrder')
     HeaderValue = Shapes::StringShape.new(name: 'HeaderValue')
     Headers = Shapes::StructureShape.new(name: 'Headers')
+    HttpMethodString = Shapes::StringShape.new(name: 'HttpMethodString')
+    IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
     IPAddress = Shapes::StringShape.new(name: 'IPAddress')
     IPAddressVersion = Shapes::StringShape.new(name: 'IPAddressVersion')
     IPAddresses = Shapes::ListShape.new(name: 'IPAddresses')
@@ -237,6 +289,7 @@ module Aws::WAFV2
     ImmunityTimeProperty = Shapes::StructureShape.new(name: 'ImmunityTimeProperty')
     InspectionLevel = Shapes::StringShape.new(name: 'InspectionLevel')
     IntervalType = Shapes::StringShape.new(name: 'IntervalType')
+    IpAddressString = Shapes::StringShape.new(name: 'IpAddressString')
     JA3Fingerprint = Shapes::StructureShape.new(name: 'JA3Fingerprint')
     JA4Fingerprint = Shapes::StructureShape.new(name: 'JA4Fingerprint')
     JsonBody = Shapes::StructureShape.new(name: 'JsonBody')
@@ -260,6 +313,12 @@ module Aws::WAFV2
     ListAvailableManagedRuleGroupVersionsResponse = Shapes::StructureShape.new(name: 'ListAvailableManagedRuleGroupVersionsResponse')
     ListAvailableManagedRuleGroupsRequest = Shapes::StructureShape.new(name: 'ListAvailableManagedRuleGroupsRequest')
     ListAvailableManagedRuleGroupsResponse = Shapes::StructureShape.new(name: 'ListAvailableManagedRuleGroupsResponse')
+    ListEventActorsRequest = Shapes::StructureShape.new(name: 'ListEventActorsRequest')
+    ListEventActorsResponse = Shapes::StructureShape.new(name: 'ListEventActorsResponse')
+    ListEventsByWebACLRequest = Shapes::StructureShape.new(name: 'ListEventsByWebACLRequest')
+    ListEventsByWebACLResponse = Shapes::StructureShape.new(name: 'ListEventsByWebACLResponse')
+    ListEventsRequest = Shapes::StructureShape.new(name: 'ListEventsRequest')
+    ListEventsResponse = Shapes::StructureShape.new(name: 'ListEventsResponse')
     ListIPSetsRequest = Shapes::StructureShape.new(name: 'ListIPSetsRequest')
     ListIPSetsResponse = Shapes::StructureShape.new(name: 'ListIPSetsResponse')
     ListLoggingConfigurationsRequest = Shapes::StructureShape.new(name: 'ListLoggingConfigurationsRequest')
@@ -329,6 +388,7 @@ module Aws::WAFV2
     ParameterExceptionField = Shapes::StringShape.new(name: 'ParameterExceptionField')
     ParameterExceptionParameter = Shapes::StringShape.new(name: 'ParameterExceptionParameter')
     PasswordField = Shapes::StructureShape.new(name: 'PasswordField')
+    PathPatternString = Shapes::StringShape.new(name: 'PathPatternString')
     PathStatistics = Shapes::StructureShape.new(name: 'PathStatistics')
     PathStatisticsLimit = Shapes::IntegerShape.new(name: 'PathStatisticsLimit')
     PathStatisticsList = Shapes::ListShape.new(name: 'PathStatisticsList')
@@ -342,6 +402,7 @@ module Aws::WAFV2
     Platform = Shapes::StringShape.new(name: 'Platform')
     PolicyString = Shapes::StringShape.new(name: 'PolicyString')
     PopulationSize = Shapes::IntegerShape.new(name: 'PopulationSize')
+    PortNumber = Shapes::IntegerShape.new(name: 'PortNumber')
     PositionalConstraint = Shapes::StringShape.new(name: 'PositionalConstraint')
     PreParseTextTransformation = Shapes::StructureShape.new(name: 'PreParseTextTransformation')
     PreParseTextTransformationPriority = Shapes::IntegerShape.new(name: 'PreParseTextTransformationPriority')
@@ -394,6 +455,8 @@ module Aws::WAFV2
     RegexPatternString = Shapes::StringShape.new(name: 'RegexPatternString')
     RegistrationPagePathString = Shapes::StringShape.new(name: 'RegistrationPagePathString')
     RegularExpressionList = Shapes::ListShape.new(name: 'RegularExpressionList')
+    RelatedEvent = Shapes::StructureShape.new(name: 'RelatedEvent')
+    RelatedEventList = Shapes::ListShape.new(name: 'RelatedEventList')
     ReleaseNotes = Shapes::StringShape.new(name: 'ReleaseNotes')
     ReleaseSummaries = Shapes::ListShape.new(name: 'ReleaseSummaries')
     ReleaseSummary = Shapes::StructureShape.new(name: 'ReleaseSummary')
@@ -487,6 +550,7 @@ module Aws::WAFV2
     TimeWindowDay = Shapes::IntegerShape.new(name: 'TimeWindowDay')
     TimeWindowSecond = Shapes::IntegerShape.new(name: 'TimeWindowSecond')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TlsFingerprintString = Shapes::StringShape.new(name: 'TlsFingerprintString')
     TokenDomain = Shapes::StringShape.new(name: 'TokenDomain')
     TokenDomains = Shapes::ListShape.new(name: 'TokenDomains')
     URIString = Shapes::StringShape.new(name: 'URIString')
@@ -556,6 +620,9 @@ module Aws::WAFV2
     AWSManagedRulesACFPRuleSet.add_member(:enable_regex_in_path, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableRegexInPath"))
     AWSManagedRulesACFPRuleSet.struct_class = Types::AWSManagedRulesACFPRuleSet
 
+    AWSManagedRulesAISecurityRuleSet.add_member(:bedrock_guardrails, Shapes::ShapeRef.new(shape: BedrockGuardrails, required: true, location_name: "BedrockGuardrails"))
+    AWSManagedRulesAISecurityRuleSet.struct_class = Types::AWSManagedRulesAISecurityRuleSet
+
     AWSManagedRulesATPRuleSet.add_member(:login_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "LoginPath"))
     AWSManagedRulesATPRuleSet.add_member(:request_inspection, Shapes::ShapeRef.new(shape: RequestInspection, location_name: "RequestInspection"))
     AWSManagedRulesATPRuleSet.add_member(:response_inspection, Shapes::ShapeRef.new(shape: ResponseInspection, location_name: "ResponseInspection"))
@@ -591,6 +658,32 @@ module Aws::WAFV2
     AndStatement.add_member(:statements, Shapes::ShapeRef.new(shape: Statements, required: true, location_name: "Statements"))
     AndStatement.struct_class = Types::AndStatement
 
+    ApiPattern.add_member(:method, Shapes::ShapeRef.new(shape: HttpMethodString, location_name: "Method"))
+    ApiPattern.add_member(:path_pattern, Shapes::ShapeRef.new(shape: PathPatternString, location_name: "PathPattern"))
+    ApiPattern.add_member(:port, Shapes::ShapeRef.new(shape: PortNumber, location_name: "Port"))
+    ApiPattern.add_member(:domains, Shapes::ShapeRef.new(shape: DomainList, location_name: "Domains"))
+    ApiPattern.struct_class = Types::ApiPattern
+
+    ApiPatternDomainList.member = Shapes::ShapeRef.new(shape: DomainString)
+
+    ApiPatternFilter.add_member(:method, Shapes::ShapeRef.new(shape: HttpMethodString, location_name: "Method"))
+    ApiPatternFilter.add_member(:path_pattern, Shapes::ShapeRef.new(shape: PathPatternString, location_name: "PathPattern"))
+    ApiPatternFilter.add_member(:port, Shapes::ShapeRef.new(shape: PortNumber, location_name: "Port"))
+    ApiPatternFilter.add_member(:domains, Shapes::ShapeRef.new(shape: ApiPatternDomainList, location_name: "Domains"))
+    ApiPatternFilter.struct_class = Types::ApiPatternFilter
+
+    ApiPatternFilterList.member = Shapes::ShapeRef.new(shape: ApiPatternFilter)
+
+    ApiPatternList.member = Shapes::ShapeRef.new(shape: ApiPattern)
+
+    ApiSecurityEventDetail.add_member(:label, Shapes::ShapeRef.new(shape: LabelName, location_name: "Label"))
+    ApiSecurityEventDetail.add_member(:category, Shapes::ShapeRef.new(shape: CategoryString, location_name: "Category"))
+    ApiSecurityEventDetail.add_member(:confidence, Shapes::ShapeRef.new(shape: Confidence, location_name: "Confidence"))
+    ApiSecurityEventDetail.add_member(:api_patterns, Shapes::ShapeRef.new(shape: ApiPatternList, location_name: "ApiPatterns"))
+    ApiSecurityEventDetail.add_member(:event_actors, Shapes::ShapeRef.new(shape: EventActorReferenceList, location_name: "EventActors"))
+    ApiSecurityEventDetail.add_member(:timeline, Shapes::ShapeRef.new(shape: EventTimelineEntryList, location_name: "Timeline"))
+    ApiSecurityEventDetail.struct_class = Types::ApiSecurityEventDetail
+
     ApplicationAttribute.add_member(:name, Shapes::ShapeRef.new(shape: AttributeName, location_name: "Name"))
     ApplicationAttribute.add_member(:values, Shapes::ShapeRef.new(shape: AttributeValues, location_name: "Values"))
     ApplicationAttribute.struct_class = Types::ApplicationAttribute
@@ -617,6 +710,17 @@ module Aws::WAFV2
     AssociationConfig.struct_class = Types::AssociationConfig
 
     AttributeValues.member = Shapes::ShapeRef.new(shape: AttributeValue)
+
+    BedrockGuardrails.add_member(:disable, Shapes::ShapeRef.new(shape: DisableBedrockGuardrails, location_name: "Disable"))
+    BedrockGuardrails.add_member(:protect_request_only, Shapes::ShapeRef.new(shape: BedrockGuardrailsRequestOnly, location_name: "ProtectRequestOnly"))
+    BedrockGuardrails.add_member(:protect_request_and_response, Shapes::ShapeRef.new(shape: BedrockGuardrailsRequestAndResponse, location_name: "ProtectRequestAndResponse"))
+    BedrockGuardrails.struct_class = Types::BedrockGuardrails
+
+    BedrockGuardrailsRequestAndResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "RoleArn"))
+    BedrockGuardrailsRequestAndResponse.struct_class = Types::BedrockGuardrailsRequestAndResponse
+
+    BedrockGuardrailsRequestOnly.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "RoleArn"))
+    BedrockGuardrailsRequestOnly.struct_class = Types::BedrockGuardrailsRequestOnly
 
     BlockAction.add_member(:custom_response, Shapes::ShapeRef.new(shape: CustomResponse, location_name: "CustomResponse"))
     BlockAction.struct_class = Types::BlockAction
@@ -920,6 +1024,8 @@ module Aws::WAFV2
     DescribeManagedRuleGroupResponse.add_member(:consumed_labels, Shapes::ShapeRef.new(shape: LabelSummaries, location_name: "ConsumedLabels"))
     DescribeManagedRuleGroupResponse.struct_class = Types::DescribeManagedRuleGroupResponse
 
+    DisableBedrockGuardrails.struct_class = Types::DisableBedrockGuardrails
+
     DisallowedFeature.add_member(:feature, Shapes::ShapeRef.new(shape: PricingPlanFeatureName, location_name: "Feature"))
     DisallowedFeature.add_member(:required_pricing_plan, Shapes::ShapeRef.new(shape: RequiredPricingPlanName, location_name: "RequiredPricingPlan"))
     DisallowedFeature.struct_class = Types::DisallowedFeature
@@ -931,8 +1037,83 @@ module Aws::WAFV2
 
     DisassociateWebACLResponse.struct_class = Types::DisassociateWebACLResponse
 
+    DomainList.member = Shapes::ShapeRef.new(shape: DomainString)
+
     EmailField.add_member(:identifier, Shapes::ShapeRef.new(shape: FieldIdentifier, required: true, location_name: "Identifier"))
     EmailField.struct_class = Types::EmailField
+
+    EventActorChange.add_member(:change_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ChangeTime"))
+    EventActorChange.add_member(:client_ip, Shapes::ShapeRef.new(shape: IpAddressString, location_name: "ClientIp"))
+    EventActorChange.add_member(:tls_fingerprint, Shapes::ShapeRef.new(shape: TlsFingerprintString, location_name: "TlsFingerprint"))
+    EventActorChange.add_member(:asn, Shapes::ShapeRef.new(shape: AsnString, location_name: "Asn"))
+    EventActorChange.add_member(:asn_organization, Shapes::ShapeRef.new(shape: AsnOrganizationString, location_name: "AsnOrganization"))
+    EventActorChange.add_member(:country, Shapes::ShapeRef.new(shape: CountryString, location_name: "Country"))
+    EventActorChange.struct_class = Types::EventActorChange
+
+    EventActorChangeList.member = Shapes::ShapeRef.new(shape: EventActorChange)
+
+    EventActorDetail.add_member(:summary, Shapes::ShapeRef.new(shape: EventActorDetailSummary, required: true, location_name: "Summary"))
+    EventActorDetail.add_member(:events, Shapes::ShapeRef.new(shape: RelatedEventList, location_name: "Events"))
+    EventActorDetail.add_member(:changes, Shapes::ShapeRef.new(shape: EventActorChangeList, location_name: "Changes"))
+    EventActorDetail.struct_class = Types::EventActorDetail
+
+    EventActorDetailSummary.add_member(:event_actor_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "EventActorId"))
+    EventActorDetailSummary.add_member(:client_ip, Shapes::ShapeRef.new(shape: IpAddressString, location_name: "ClientIp"))
+    EventActorDetailSummary.add_member(:tls_fingerprint, Shapes::ShapeRef.new(shape: TlsFingerprintString, location_name: "TlsFingerprint"))
+    EventActorDetailSummary.add_member(:asn, Shapes::ShapeRef.new(shape: AsnString, location_name: "Asn"))
+    EventActorDetailSummary.add_member(:asn_organization, Shapes::ShapeRef.new(shape: AsnOrganizationString, location_name: "AsnOrganization"))
+    EventActorDetailSummary.add_member(:country, Shapes::ShapeRef.new(shape: CountryString, location_name: "Country"))
+    EventActorDetailSummary.add_member(:auth_fingerprint, Shapes::ShapeRef.new(shape: AuthFingerprintString, location_name: "AuthFingerprint"))
+    EventActorDetailSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    EventActorDetailSummary.struct_class = Types::EventActorDetailSummary
+
+    EventActorReference.add_member(:event_actor_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "EventActorId"))
+    EventActorReference.add_member(:event_actor_value, Shapes::ShapeRef.new(shape: EventActorValueString, location_name: "EventActorValue"))
+    EventActorReference.struct_class = Types::EventActorReference
+
+    EventActorReferenceList.member = Shapes::ShapeRef.new(shape: EventActorReference)
+
+    EventActorSummary.add_member(:event_actor_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "EventActorId"))
+    EventActorSummary.add_member(:client_ip, Shapes::ShapeRef.new(shape: IpAddressString, location_name: "ClientIp"))
+    EventActorSummary.add_member(:tls_fingerprint, Shapes::ShapeRef.new(shape: TlsFingerprintString, location_name: "TlsFingerprint"))
+    EventActorSummary.add_member(:asn, Shapes::ShapeRef.new(shape: AsnString, location_name: "Asn"))
+    EventActorSummary.add_member(:asn_organization, Shapes::ShapeRef.new(shape: AsnOrganizationString, location_name: "AsnOrganization"))
+    EventActorSummary.add_member(:country, Shapes::ShapeRef.new(shape: CountryString, location_name: "Country"))
+    EventActorSummary.add_member(:auth_fingerprint, Shapes::ShapeRef.new(shape: AuthFingerprintString, location_name: "AuthFingerprint"))
+    EventActorSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    EventActorSummary.add_member(:event_count, Shapes::ShapeRef.new(shape: CountedValue, location_name: "EventCount"))
+    EventActorSummary.struct_class = Types::EventActorSummary
+
+    EventActorSummaryList.member = Shapes::ShapeRef.new(shape: EventActorSummary)
+
+    EventDetailSummary.add_member(:event_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "EventId"))
+    EventDetailSummary.add_member(:event_status, Shapes::ShapeRef.new(shape: EventStatus, location_name: "EventStatus"))
+    EventDetailSummary.add_member(:event_category, Shapes::ShapeRef.new(shape: EventCategory, location_name: "EventCategory"))
+    EventDetailSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    EventDetailSummary.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    EventDetailSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    EventDetailSummary.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
+    EventDetailSummary.add_member(:web_acl_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "WebAclArn"))
+    EventDetailSummary.add_member(:api_security_event_detail, Shapes::ShapeRef.new(shape: ApiSecurityEventDetail, location_name: "ApiSecurityEventDetail"))
+    EventDetailSummary.struct_class = Types::EventDetailSummary
+
+    EventDetailSummaryList.member = Shapes::ShapeRef.new(shape: EventDetailSummary)
+
+    EventFilter.add_member(:name, Shapes::ShapeRef.new(shape: EventFilterKey, required: true, location_name: "Name"))
+    EventFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValueList, required: true, location_name: "Values"))
+    EventFilter.struct_class = Types::EventFilter
+
+    EventFilterList.member = Shapes::ShapeRef.new(shape: EventFilter)
+
+    EventIncludeFieldList.member = Shapes::ShapeRef.new(shape: EventIncludeField)
+
+    EventTimelineEntry.add_member(:change_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ChangeTime"))
+    EventTimelineEntry.add_member(:label, Shapes::ShapeRef.new(shape: LabelName, location_name: "Label"))
+    EventTimelineEntry.add_member(:confidence, Shapes::ShapeRef.new(shape: Confidence, location_name: "Confidence"))
+    EventTimelineEntry.add_member(:api_patterns, Shapes::ShapeRef.new(shape: ApiPatternList, location_name: "ApiPatterns"))
+    EventTimelineEntry.struct_class = Types::EventTimelineEntry
+
+    EventTimelineEntryList.member = Shapes::ShapeRef.new(shape: EventTimelineEntry)
 
     ExcludedRule.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
     ExcludedRule.struct_class = Types::ExcludedRule
@@ -971,6 +1152,8 @@ module Aws::WAFV2
     FilterSource.add_member(:bot_name, Shapes::ShapeRef.new(shape: FilterString, location_name: "BotName"))
     FilterSource.struct_class = Types::FilterSource
 
+    FilterValueList.member = Shapes::ShapeRef.new(shape: FilterValue)
+
     Filters.member = Shapes::ShapeRef.new(shape: Filter)
 
     FirewallManagerRuleGroup.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
@@ -1008,6 +1191,21 @@ module Aws::WAFV2
     GetDecryptedAPIKeyResponse.add_member(:token_domains, Shapes::ShapeRef.new(shape: TokenDomains, location_name: "TokenDomains"))
     GetDecryptedAPIKeyResponse.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimestamp"))
     GetDecryptedAPIKeyResponse.struct_class = Types::GetDecryptedAPIKeyResponse
+
+    GetEventActorRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
+    GetEventActorRequest.add_member(:event_actor_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "EventActorId"))
+    GetEventActorRequest.struct_class = Types::GetEventActorRequest
+
+    GetEventActorResponse.add_member(:event_actor, Shapes::ShapeRef.new(shape: EventActorDetail, location_name: "EventActor"))
+    GetEventActorResponse.struct_class = Types::GetEventActorResponse
+
+    GetEventRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
+    GetEventRequest.add_member(:event_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "EventId"))
+    GetEventRequest.add_member(:web_acl_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "WebAclArn"))
+    GetEventRequest.struct_class = Types::GetEventRequest
+
+    GetEventResponse.add_member(:event, Shapes::ShapeRef.new(shape: EventDetailSummary, location_name: "Event"))
+    GetEventResponse.struct_class = Types::GetEventResponse
 
     GetIPSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
     GetIPSetRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
@@ -1292,6 +1490,48 @@ module Aws::WAFV2
     ListAvailableManagedRuleGroupsResponse.add_member(:managed_rule_groups, Shapes::ShapeRef.new(shape: ManagedRuleGroupSummaries, location_name: "ManagedRuleGroups"))
     ListAvailableManagedRuleGroupsResponse.struct_class = Types::ListAvailableManagedRuleGroupsResponse
 
+    ListEventActorsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
+    ListEventActorsRequest.add_member(:time_window, Shapes::ShapeRef.new(shape: TimeWindow, required: true, location_name: "TimeWindow"))
+    ListEventActorsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: EventActorSortBy, location_name: "SortBy"))
+    ListEventActorsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
+    ListEventActorsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: EventNextMarker, location_name: "NextMarker"))
+    ListEventActorsRequest.struct_class = Types::ListEventActorsRequest
+
+    ListEventActorsResponse.add_member(:event_actors, Shapes::ShapeRef.new(shape: EventActorSummaryList, required: true, location_name: "EventActors"))
+    ListEventActorsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: EventNextMarker, location_name: "NextMarker"))
+    ListEventActorsResponse.struct_class = Types::ListEventActorsResponse
+
+    ListEventsByWebACLRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
+    ListEventsByWebACLRequest.add_member(:web_acl_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "WebAclArn"))
+    ListEventsByWebACLRequest.add_member(:time_window, Shapes::ShapeRef.new(shape: TimeWindow, location_name: "TimeWindow"))
+    ListEventsByWebACLRequest.add_member(:filters, Shapes::ShapeRef.new(shape: EventFilterList, location_name: "Filters"))
+    ListEventsByWebACLRequest.add_member(:api_pattern_filters, Shapes::ShapeRef.new(shape: ApiPatternFilterList, location_name: "ApiPatternFilters"))
+    ListEventsByWebACLRequest.add_member(:limit, Shapes::ShapeRef.new(shape: EventPaginationLimit, location_name: "Limit"))
+    ListEventsByWebACLRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: EventNextMarker, location_name: "NextMarker"))
+    ListEventsByWebACLRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    ListEventsByWebACLRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: EventSortBy, location_name: "SortBy"))
+    ListEventsByWebACLRequest.add_member(:include, Shapes::ShapeRef.new(shape: EventIncludeFieldList, location_name: "Include"))
+    ListEventsByWebACLRequest.struct_class = Types::ListEventsByWebACLRequest
+
+    ListEventsByWebACLResponse.add_member(:events, Shapes::ShapeRef.new(shape: EventDetailSummaryList, required: true, location_name: "Events"))
+    ListEventsByWebACLResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: EventNextMarker, location_name: "NextMarker"))
+    ListEventsByWebACLResponse.struct_class = Types::ListEventsByWebACLResponse
+
+    ListEventsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
+    ListEventsRequest.add_member(:time_window, Shapes::ShapeRef.new(shape: TimeWindow, location_name: "TimeWindow"))
+    ListEventsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: EventFilterList, location_name: "Filters"))
+    ListEventsRequest.add_member(:api_pattern_filters, Shapes::ShapeRef.new(shape: ApiPatternFilterList, location_name: "ApiPatternFilters"))
+    ListEventsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: EventPaginationLimit, location_name: "Limit"))
+    ListEventsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: EventNextMarker, location_name: "NextMarker"))
+    ListEventsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    ListEventsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: EventSortBy, location_name: "SortBy"))
+    ListEventsRequest.add_member(:include, Shapes::ShapeRef.new(shape: EventIncludeFieldList, location_name: "Include"))
+    ListEventsRequest.struct_class = Types::ListEventsRequest
+
+    ListEventsResponse.add_member(:events, Shapes::ShapeRef.new(shape: EventDetailSummaryList, required: true, location_name: "Events"))
+    ListEventsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: EventNextMarker, location_name: "NextMarker"))
+    ListEventsResponse.struct_class = Types::ListEventsResponse
+
     ListIPSetsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
     ListIPSetsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
     ListIPSetsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
@@ -1424,6 +1664,7 @@ module Aws::WAFV2
     ManagedRuleGroupConfig.add_member(:aws_managed_rules_atp_rule_set, Shapes::ShapeRef.new(shape: AWSManagedRulesATPRuleSet, location_name: "AWSManagedRulesATPRuleSet"))
     ManagedRuleGroupConfig.add_member(:aws_managed_rules_acfp_rule_set, Shapes::ShapeRef.new(shape: AWSManagedRulesACFPRuleSet, location_name: "AWSManagedRulesACFPRuleSet"))
     ManagedRuleGroupConfig.add_member(:aws_managed_rules_anti_d_do_s_rule_set, Shapes::ShapeRef.new(shape: AWSManagedRulesAntiDDoSRuleSet, location_name: "AWSManagedRulesAntiDDoSRuleSet"))
+    ManagedRuleGroupConfig.add_member(:aws_managed_rules_ai_security_rule_set, Shapes::ShapeRef.new(shape: AWSManagedRulesAISecurityRuleSet, location_name: "AWSManagedRulesAISecurityRuleSet"))
     ManagedRuleGroupConfig.struct_class = Types::ManagedRuleGroupConfig
 
     ManagedRuleGroupConfigs.member = Shapes::ShapeRef.new(shape: ManagedRuleGroupConfig)
@@ -1678,6 +1919,16 @@ module Aws::WAFV2
     RegexPatternSetSummary.struct_class = Types::RegexPatternSetSummary
 
     RegularExpressionList.member = Shapes::ShapeRef.new(shape: Regex)
+
+    RelatedEvent.add_member(:event_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "EventId"))
+    RelatedEvent.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    RelatedEvent.add_member(:label, Shapes::ShapeRef.new(shape: LabelName, location_name: "Label"))
+    RelatedEvent.add_member(:category, Shapes::ShapeRef.new(shape: CategoryString, location_name: "Category"))
+    RelatedEvent.add_member(:confidence, Shapes::ShapeRef.new(shape: Confidence, location_name: "Confidence"))
+    RelatedEvent.add_member(:api_patterns, Shapes::ShapeRef.new(shape: ApiPatternList, location_name: "ApiPatterns"))
+    RelatedEvent.struct_class = Types::RelatedEvent
+
+    RelatedEventList.member = Shapes::ShapeRef.new(shape: RelatedEvent)
 
     ReleaseSummaries.member = Shapes::ShapeRef.new(shape: ReleaseSummary)
 
@@ -2468,6 +2719,30 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidResourceException)
       end)
 
+      api.add_operation(:get_event, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEvent"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetEventRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEventResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+      end)
+
+      api.add_operation(:get_event_actor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEventActor"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetEventActorRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEventActorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+      end)
+
       api.add_operation(:get_ip_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetIPSet"
         o.http_method = "POST"
@@ -2681,6 +2956,40 @@ module Aws::WAFV2
         o.output = Shapes::ShapeRef.new(shape: ListAvailableManagedRuleGroupsResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+      end)
+
+      api.add_operation(:list_event_actors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEventActors"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListEventActorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEventActorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+      end)
+
+      api.add_operation(:list_events, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEvents"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListEventsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEventsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+      end)
+
+      api.add_operation(:list_events_by_web_acl, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEventsByWebACL"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListEventsByWebACLRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEventsByWebACLResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 

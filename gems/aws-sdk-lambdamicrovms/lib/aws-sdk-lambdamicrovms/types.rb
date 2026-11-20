@@ -198,6 +198,20 @@ module Aws::LambdaMicrovms
     #   Environment variables set in the MicroVM runtime environment.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_identifier
+    #   The customer managed Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) key that encrypts the contents and
+    #   metadata of your MicroVM image version. You must have permission to
+    #   use the key. Specify the key in one of the following formats:
+    #
+    #   * Key ARN
+    #
+    #   * Alias ARN
+    #
+    #   If you don't specify a key, your MicroVM image version uses an
+    #   Amazon Web Services owned key.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the MicroVM image. Must be unique within the AWS
     #   account.
@@ -234,6 +248,7 @@ module Aws::LambdaMicrovms
       :additional_os_capabilities,
       :hooks,
       :environment_variables,
+      :kms_key_identifier,
       :name,
       :tags,
       :client_token)
@@ -319,6 +334,13 @@ module Aws::LambdaMicrovms
     #   Environment variables set in the MicroVM runtime environment.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_identifier
+    #   The customer managed Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) key that encrypts the contents and
+    #   metadata of your MicroVM image version. If you don't specify a key,
+    #   your MicroVM image version uses an Amazon Web Services owned key.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A set of key-value pairs that you can attach to the resource. Use
     #   tags to categorize resources for cost allocation, access control
@@ -354,6 +376,7 @@ module Aws::LambdaMicrovms
       :additional_os_capabilities,
       :hooks,
       :environment_variables,
+      :kms_key_identifier,
       :tags,
       :updated_at,
       :image_version)
@@ -668,6 +691,13 @@ module Aws::LambdaMicrovms
     #   Environment variables set in the MicroVM runtime environment.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_identifier
+    #   The customer managed Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) key that encrypts the contents and
+    #   metadata of your MicroVM image version. If you don't specify a key,
+    #   your MicroVM image version uses an Amazon Web Services owned key.
+    #   @return [String]
+    #
     # @!attribute [rw] image_arn
     #   The ARN of the MicroVM image.
     #   @return [String]
@@ -717,6 +747,7 @@ module Aws::LambdaMicrovms
       :additional_os_capabilities,
       :hooks,
       :environment_variables,
+      :kms_key_identifier,
       :image_arn,
       :image_version,
       :state,
@@ -789,6 +820,13 @@ module Aws::LambdaMicrovms
     #   The reason for why the MicroVM is in the current state.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_identifier
+    #   The customer managed Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) key that encrypts your MicroVM
+    #   configuration at rest. If you don't specify a key, your MicroVM
+    #   uses an Amazon Web Services owned key.
+    #   @return [String]
+    #
     # @!attribute [rw] ingress_network_connectors
     #   The list of ingress network connectors configured for the MicroVM.
     #   @return [Array<String>]
@@ -812,6 +850,7 @@ module Aws::LambdaMicrovms
       :started_at,
       :terminated_at,
       :state_reason,
+      :kms_key_identifier,
       :ingress_network_connectors,
       :egress_network_connectors)
       SENSITIVE = []
@@ -1551,6 +1590,13 @@ module Aws::LambdaMicrovms
     #   Environment variables set in the MicroVM runtime environment.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_identifier
+    #   The customer managed Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) key that encrypts the contents and
+    #   metadata of your MicroVM image version. If you don't specify a key,
+    #   your MicroVM image version uses an Amazon Web Services owned key.
+    #   @return [String]
+    #
     # @!attribute [rw] image_arn
     #   The ARN of the MicroVM image.
     #   @return [String]
@@ -1600,6 +1646,7 @@ module Aws::LambdaMicrovms
       :additional_os_capabilities,
       :hooks,
       :environment_variables,
+      :kms_key_identifier,
       :image_arn,
       :image_version,
       :state,
@@ -1803,6 +1850,16 @@ module Aws::LambdaMicrovms
     #   turn off logging.
     #   @return [Types::Logging]
     #
+    # @!attribute [rw] kms_key_identifier
+    #   The customer managed Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) key that encrypts your MicroVM
+    #   configuration at rest. To use this operation, you must have
+    #   permission to use the key. Specify the key ARN or the alias ARN.
+    #
+    #   If you don't specify a key, your MicroVM uses an Amazon Web
+    #   Services owned key.
+    #   @return [String]
+    #
     # @!attribute [rw] run_hook_payload
     #   Per-MicroVM initialization data delivered as the request body of the
     #   /run lifecycle hook. Use to pass tenant-specific configuration such
@@ -1832,6 +1889,7 @@ module Aws::LambdaMicrovms
       :execution_role_arn,
       :idle_policy,
       :logging,
+      :kms_key_identifier,
       :run_hook_payload,
       :maximum_duration_in_seconds,
       :client_token)
@@ -1885,6 +1943,13 @@ module Aws::LambdaMicrovms
     #   The reason for why the MicroVM is in the current state.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_identifier
+    #   The customer managed Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) key that encrypts your MicroVM
+    #   configuration at rest. If you don't specify a key, your MicroVM
+    #   uses an Amazon Web Services owned key.
+    #   @return [String]
+    #
     # @!attribute [rw] ingress_network_connectors
     #   The list of ingress network connectors configured for the MicroVM.
     #   @return [Array<String>]
@@ -1908,6 +1973,7 @@ module Aws::LambdaMicrovms
       :started_at,
       :terminated_at,
       :state_reason,
+      :kms_key_identifier,
       :ingress_network_connectors,
       :egress_network_connectors)
       SENSITIVE = []
@@ -2162,6 +2228,20 @@ module Aws::LambdaMicrovms
     #   Environment variables set in the MicroVM runtime environment.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_identifier
+    #   The customer managed Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) key that encrypts the contents and
+    #   metadata of your MicroVM image version. You must have permission to
+    #   use the key. Specify the key in one of the following formats:
+    #
+    #   * Key ARN
+    #
+    #   * Alias ARN
+    #
+    #   If you don't specify a key, your MicroVM image version uses an
+    #   Amazon Web Services owned key.
+    #   @return [String]
+    #
     # @!attribute [rw] image_identifier
     #   The unique identifier (ARN or ID) of the MicroVM image to update.
     #   @return [String]
@@ -2189,6 +2269,7 @@ module Aws::LambdaMicrovms
       :additional_os_capabilities,
       :hooks,
       :environment_variables,
+      :kms_key_identifier,
       :image_identifier,
       :client_token)
       SENSITIVE = [:environment_variables]
@@ -2273,6 +2354,13 @@ module Aws::LambdaMicrovms
     #   Environment variables set in the MicroVM runtime environment.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_identifier
+    #   The customer managed Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) key that encrypts the contents and
+    #   metadata of your MicroVM image version. If you don't specify a key,
+    #   your MicroVM image version uses an Amazon Web Services owned key.
+    #   @return [String]
+    #
     # @!attribute [rw] updated_at
     #   The timestamp when the MicroVM image was last updated.
     #   @return [Time]
@@ -2302,6 +2390,7 @@ module Aws::LambdaMicrovms
       :additional_os_capabilities,
       :hooks,
       :environment_variables,
+      :kms_key_identifier,
       :updated_at,
       :image_version)
       SENSITIVE = [:environment_variables]
@@ -2380,6 +2469,13 @@ module Aws::LambdaMicrovms
     #   Environment variables set in the MicroVM runtime environment.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_identifier
+    #   The customer managed Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) key that encrypts the contents and
+    #   metadata of your MicroVM image version. If you don't specify a key,
+    #   your MicroVM image version uses an Amazon Web Services owned key.
+    #   @return [String]
+    #
     # @!attribute [rw] image_arn
     #   The ARN of the MicroVM image.
     #   @return [String]
@@ -2429,6 +2525,7 @@ module Aws::LambdaMicrovms
       :additional_os_capabilities,
       :hooks,
       :environment_variables,
+      :kms_key_identifier,
       :image_arn,
       :image_version,
       :state,

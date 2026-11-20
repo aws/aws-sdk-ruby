@@ -482,6 +482,155 @@ module Aws::AgentRegistryControl
 
     # @!group API Operations
 
+    # Associate a registry record with a publisher and assign the record a
+    # public identifier under the publisher's domain. The registry record
+    # must be APPROVED and the publisher must be ACTIVE. A registry record
+    # can have only one publisher association. The new association starts in
+    # PENDING\_APPROVAL until a curator approves or rejects it. A
+    # ConflictException (HTTP 409) means the publisher is not ACTIVE yet,
+    # the registry record already has an association, or another registry
+    # record already holds the public identifier. To retry safely, repeat
+    # the request with the same clientToken; a retry returns the original
+    # association. If the publisher has reached its association quota, the
+    # request fails with ServiceQuotaExceededException (HTTP 402). Remove an
+    # unused association or request a quota increase.
+    #
+    # @option params [required, String] :record_arn
+    #   The Record being associated.
+    #
+    # @option params [required, String] :publisher_arn
+    #   The Publisher to associate the Record with.
+    #
+    # @option params [String] :subdomain
+    #   Optional single DNS label placed in front of the publisher domain
+    #   (e.g. "agents" -&gt; agents.acme.com). Absent means the Record sits
+    #   directly on the publisher domain.
+    #
+    # @option params [Array<String>] :categories
+    #   Optional categorization/hierarchy applied to the public identifier.
+    #
+    # @option params [String] :client_token
+    #   Optional client-provided idempotency token. Retries carrying the same
+    #   token return the originally-created association instead of creating a
+    #   duplicate.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::AssociatePublisherResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociatePublisherResponse#record_arn #record_arn} => String
+    #   * {Types::AssociatePublisherResponse#public_identifier #public_identifier} => String
+    #   * {Types::AssociatePublisherResponse#publisher #publisher} => String
+    #   * {Types::AssociatePublisherResponse#status #status} => String
+    #   * {Types::AssociatePublisherResponse#status_reason #status_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_publisher({
+    #     record_arn: "RegistryRecordArn", # required
+    #     publisher_arn: "PublisherIdentifierArn", # required
+    #     subdomain: "Subdomain",
+    #     categories: ["Category"],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.record_arn #=> String
+    #   resp.public_identifier #=> String
+    #   resp.publisher #=> String
+    #   resp.status #=> String, one of "PENDING_APPROVAL", "APPROVED", "REJECTED", "SUSPENDED"
+    #   resp.status_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/AssociatePublisher AWS API Documentation
+    #
+    # @overload associate_publisher(params = {})
+    # @param [Hash] params ({})
+    def associate_publisher(params = {}, options = {})
+      req = build_request(:associate_publisher, params)
+      req.send_request(options)
+    end
+
+    # Create a publisher for a domain you control. The publisher starts in
+    # ACTION\_REQUIRED, and the response includes a domainChallenge. To
+    # verify the domain, create a DNS TXT record with the challenge's
+    # recordName and recordValue. When the registry finds the record, the
+    # publisher becomes ACTIVE and you can associate registry records with
+    # it. Your account can have one publisher per domain. Creating a second
+    # publisher for the same domain fails with ConflictException unless the
+    # request repeats the original clientToken, which returns the existing
+    # publisher. The request also fails with ConflictException when another
+    # account has already verified the domain. If your account has reached
+    # its Publisher quota, the request fails with
+    # ServiceQuotaExceededException (HTTP 402). Delete an unused Publisher
+    # or request a quota increase.
+    #
+    # @option params [required, Types::Identifier] :value
+    #   The identifier value. Discriminated union — exactly one member is set.
+    #   GA supports `domain` only; other identifier types are added as new
+    #   members (backward-compatible) in a later task.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to attach to the publisher. Each tag is a key-value pair. You
+    #   can attach up to 50 tags.
+    #
+    # @option params [String] :client_token
+    #   Optional client-provided idempotency token. Retries of the same Create
+    #   request carrying the same token return the originally-created resource
+    #   instead of creating a duplicate. Forwarded to BelfryGlobalCP. Optional
+    #   and backward-compatible.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreatePublisherResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePublisherResponse#value #value} => Types::Identifier
+    #   * {Types::CreatePublisherResponse#identifier_type #identifier_type} => String
+    #   * {Types::CreatePublisherResponse#status #status} => String
+    #   * {Types::CreatePublisherResponse#status_reason #status_reason} => String
+    #   * {Types::CreatePublisherResponse#domain_challenge #domain_challenge} => Types::DomainChallenge
+    #   * {Types::CreatePublisherResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreatePublisherResponse#created_at #created_at} => Time
+    #   * {Types::CreatePublisherResponse#updated_at #updated_at} => Time
+    #   * {Types::CreatePublisherResponse#publisher_arn #publisher_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_publisher({
+    #     value: { # required
+    #       domain: "DomainName",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.value.domain #=> String
+    #   resp.identifier_type #=> String, one of "DOMAIN"
+    #   resp.status #=> String, one of "ACTION_REQUIRED", "ACTIVE", "FAILED", "SUSPENDED", "DELETING"
+    #   resp.status_reason #=> String
+    #   resp.domain_challenge.record_name #=> String
+    #   resp.domain_challenge.record_value #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.publisher_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/CreatePublisher AWS API Documentation
+    #
+    # @overload create_publisher(params = {})
+    # @param [Hash] params ({})
+    def create_publisher(params = {}, options = {})
+      req = build_request(:create_publisher, params)
+      req.send_request(options)
+    end
+
     # Creates a new registry, a catalog that organizes registry records and
     # defines their discovery authorization and record approval behavior.
     # Creation is asynchronous: the registry begins in the CREATING status
@@ -612,7 +761,7 @@ module Aws::AgentRegistryControl
     #       default_schema: "CustomMetadataSchemaDefinition",
     #       record_type_schema_overrides: [
     #         {
-    #           record_type: "MCP", # required, accepts MCP, AGENT, CUSTOM, SKILL, GATEWAY
+    #           record_type: "MCP", # required, accepts MCP, AGENT, CUSTOM, SKILL, GATEWAY, WEB_BOT
     #           schema: "CustomMetadataSchemaDefinition", # required
     #         },
     #       ],
@@ -713,7 +862,7 @@ module Aws::AgentRegistryControl
     #     name: "RegistryRecordName", # required
     #     display_name: "RegistryRecordDisplayName",
     #     description: "Description",
-    #     record_type: "MCP", # required, accepts MCP, AGENT, CUSTOM, SKILL, GATEWAY
+    #     record_type: "MCP", # required, accepts MCP, AGENT, CUSTOM, SKILL, GATEWAY, WEB_BOT
     #     descriptors: { # required
     #       mcp_server: {
     #         data: "DescriptorData",
@@ -910,6 +1059,39 @@ module Aws::AgentRegistryControl
     #           },
     #         },
     #       },
+    #       signature_agent_card: {
+    #         data: "DescriptorData",
+    #         data_schema_version: "DataSchemaVersion",
+    #         source: {
+    #           from_url: {
+    #             url: "DescriptorSourceUrl", # required
+    #             credential_provider_configurations: [
+    #               {
+    #                 credential_provider_type: "OAUTH", # required, accepts OAUTH, IAM
+    #                 credential_provider: { # required
+    #                   oauth_credential_provider: {
+    #                     provider_arn: "CredentialProviderArn", # required
+    #                     grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #                     scopes: ["String"],
+    #                     custom_parameters: {
+    #                       "String" => "String",
+    #                     },
+    #                     return_url: "OAuthReturnUrl",
+    #                   },
+    #                   iam_credential_provider: {
+    #                     role_arn: "IamRoleArn",
+    #                     service: "IamSigningServiceName",
+    #                     region: "IamSigningRegion",
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         additional_data: {
+    #           category: "advertising", # accepts advertising, archiver, content_fetcher, email_client, http_library, link_checker, miscellaneous, monitoring, page_preview, scraping_framework, search_engine, security, seo, social_media, ai_training, ai_search, ai_assistant, ai_content_optimization
+    #         },
+    #       },
     #     },
     #     artifact: {
     #       content: "data", # required
@@ -1078,6 +1260,45 @@ module Aws::AgentRegistryControl
       req.send_request(options)
     end
 
+    # Delete a publisher. A successful call returns an empty response. You
+    # can't delete a publisher that has registry record associations;
+    # disassociate every registry record from it first. The request fails
+    # with ConflictException while the publisher has associations or another
+    # delete is in progress. Association removals can take a few seconds to
+    # be reflected, so a delete that follows a disassociation can briefly
+    # fail with ConflictException; retry after a short wait. If the
+    # publisher ARN names your account and the publisher doesn't exist, the
+    # request fails with ResourceNotFoundException.
+    #
+    # @option params [required, String] :publisher_arn
+    #   ARN for an Identifier resource. Global (region-less) resource, so the
+    #   region field is empty; the resource segment carries the identifier
+    #   value, which may contain dots.
+    #
+    #   Named `PublisherIdentifierArn` (RegionalCP's local name) so
+    #   RegionalCP consumes it without a rename — which keeps its c2j/SDK
+    #   model (generated from the un-projected source, where the top-level c2j
+    #   plugin runs to preserve @idempotencyToken) showing the correct shape
+    #   name. GlobalCP renames this to `identifierArn` in its own coral-export
+    #   projection.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_publisher({
+    #     publisher_arn: "PublisherIdentifierArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/DeletePublisher AWS API Documentation
+    #
+    # @overload delete_publisher(params = {})
+    # @param [Hash] params ({})
+    def delete_publisher(params = {}, options = {})
+      req = build_request(:delete_publisher, params)
+      req.send_request(options)
+    end
+
     # Deletes a registry. Deletion is asynchronous: the registry transitions
     # to the DELETING status and is removed along with its registry records.
     #
@@ -1130,6 +1351,90 @@ module Aws::AgentRegistryControl
     # @param [Hash] params ({})
     def delete_registry_record(params = {}, options = {})
       req = build_request(:delete_registry_record, params)
+      req.send_request(options)
+    end
+
+    # Remove a registry record's publisher association and release its
+    # public identifier. A successful call returns an empty response.
+    # Disassociating a registry record that has no association succeeds. If
+    # another account created the association, the request fails with
+    # AccessDeniedException.
+    #
+    # @option params [required, String] :record_arn
+    #   Registry Record Amazon Resource Name
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_publisher({
+    #     record_arn: "RegistryRecordArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/DisassociatePublisher AWS API Documentation
+    #
+    # @overload disassociate_publisher(params = {})
+    # @param [Hash] params ({})
+    def disassociate_publisher(params = {}, options = {})
+      req = build_request(:disassociate_publisher, params)
+      req.send_request(options)
+    end
+
+    # Get a publisher, including its verification status and the DNS
+    # challenge for its domain. If the publisher ARN names your account and
+    # the publisher doesn't exist, the request fails with
+    # ResourceNotFoundException.
+    #
+    # @option params [required, String] :publisher_arn
+    #   ARN for an Identifier resource. Global (region-less) resource, so the
+    #   region field is empty; the resource segment carries the identifier
+    #   value, which may contain dots.
+    #
+    #   Named `PublisherIdentifierArn` (RegionalCP's local name) so
+    #   RegionalCP consumes it without a rename — which keeps its c2j/SDK
+    #   model (generated from the un-projected source, where the top-level c2j
+    #   plugin runs to preserve @idempotencyToken) showing the correct shape
+    #   name. GlobalCP renames this to `identifierArn` in its own coral-export
+    #   projection.
+    #
+    # @return [Types::Publisher] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Publisher#value #value} => Types::Identifier
+    #   * {Types::Publisher#identifier_type #identifier_type} => String
+    #   * {Types::Publisher#status #status} => String
+    #   * {Types::Publisher#status_reason #status_reason} => String
+    #   * {Types::Publisher#domain_challenge #domain_challenge} => Types::DomainChallenge
+    #   * {Types::Publisher#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::Publisher#created_at #created_at} => Time
+    #   * {Types::Publisher#updated_at #updated_at} => Time
+    #   * {Types::Publisher#publisher_arn #publisher_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_publisher({
+    #     publisher_arn: "PublisherIdentifierArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.value.domain #=> String
+    #   resp.identifier_type #=> String, one of "DOMAIN"
+    #   resp.status #=> String, one of "ACTION_REQUIRED", "ACTIVE", "FAILED", "SUSPENDED", "DELETING"
+    #   resp.status_reason #=> String
+    #   resp.domain_challenge.record_name #=> String
+    #   resp.domain_challenge.record_value #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.publisher_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/GetPublisher AWS API Documentation
+    #
+    # @overload get_publisher(params = {})
+    # @param [Hash] params ({})
+    def get_publisher(params = {}, options = {})
+      req = build_request(:get_publisher, params)
       req.send_request(options)
     end
 
@@ -1208,7 +1513,7 @@ module Aws::AgentRegistryControl
     #   resp.approval_configuration.auto_approval_rules[0] #=> String, one of "APPROVE_ALL"
     #   resp.custom_metadata_schema_configuration.default_schema #=> String
     #   resp.custom_metadata_schema_configuration.record_type_schema_overrides #=> Array
-    #   resp.custom_metadata_schema_configuration.record_type_schema_overrides[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
+    #   resp.custom_metadata_schema_configuration.record_type_schema_overrides[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY", "WEB_BOT"
     #   resp.custom_metadata_schema_configuration.record_type_schema_overrides[0].schema #=> String
     #   resp.status #=> String, one of "CREATING", "READY", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
     #   resp.status_reason #=> String
@@ -1283,7 +1588,7 @@ module Aws::AgentRegistryControl
     #   resp.name #=> String
     #   resp.display_name #=> String
     #   resp.description #=> String
-    #   resp.record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
+    #   resp.record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY", "WEB_BOT"
     #   resp.descriptors.mcp_server.data #=> String
     #   resp.descriptors.mcp_server.data_schema_version #=> String
     #   resp.descriptors.mcp_server.additional_data.tools.data #=> String
@@ -1375,6 +1680,22 @@ module Aws::AgentRegistryControl
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
+    #   resp.descriptors.signature_agent_card.data #=> String
+    #   resp.descriptors.signature_agent_card.data_schema_version #=> String
+    #   resp.descriptors.signature_agent_card.source.from_url.url #=> String
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations #=> Array
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.return_url #=> String
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
+    #   resp.descriptors.signature_agent_card.additional_data.category #=> String, one of "advertising", "archiver", "content_fetcher", "email_client", "http_library", "link_checker", "miscellaneous", "monitoring", "page_preview", "scraping_framework", "search_engine", "security", "seo", "social_media", "ai_training", "ai_search", "ai_assistant", "ai_content_optimization"
     #   resp.record_version #=> String
     #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH"
     #   resp.created_at #=> Time
@@ -1485,6 +1806,108 @@ module Aws::AgentRegistryControl
     # @param [Hash] params ({})
     def get_registry_record(params = {}, options = {})
       req = build_request(:get_registry_record, params)
+      req.send_request(options)
+    end
+
+    # List the registry record associations your account created. Pass
+    # publisherArn to list only the associations for that publisher; omit it
+    # to list associations across all publishers. Results are eventually
+    # consistent, so an association you just created or removed can take a
+    # few seconds to appear in or disappear from the list.
+    #
+    # @option params [String] :publisher_arn
+    #   ARN for an Identifier resource. Global (region-less) resource, so the
+    #   region field is empty; the resource segment carries the identifier
+    #   value, which may contain dots.
+    #
+    #   Named `PublisherIdentifierArn` (RegionalCP's local name) so
+    #   RegionalCP consumes it without a rename — which keeps its c2j/SDK
+    #   model (generated from the un-projected source, where the top-level c2j
+    #   plugin runs to preserve @idempotencyToken) showing the correct shape
+    #   name. GlobalCP renames this to `identifierArn` in its own coral-export
+    #   projection.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of items to be listed
+    #
+    # @option params [String] :next_token
+    #   Opaque continuation token of previous paginated response
+    #
+    # @return [Types::ListPublisherAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPublisherAssociationsResponse#items #items} => Array&lt;Types::PublisherAssociation&gt;
+    #   * {Types::ListPublisherAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_publisher_associations({
+    #     publisher_arn: "PublisherIdentifierArn",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].record_arn #=> String
+    #   resp.items[0].public_identifier #=> String
+    #   resp.items[0].publisher #=> String
+    #   resp.items[0].status #=> String, one of "PENDING_APPROVAL", "APPROVED", "REJECTED", "SUSPENDED"
+    #   resp.items[0].status_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/ListPublisherAssociations AWS API Documentation
+    #
+    # @overload list_publisher_associations(params = {})
+    # @param [Hash] params ({})
+    def list_publisher_associations(params = {}, options = {})
+      req = build_request(:list_publisher_associations, params)
+      req.send_request(options)
+    end
+
+    # List the publishers your account owns, followed by the ACTIVE
+    # publishers shared with your account.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of items to be listed
+    #
+    # @option params [String] :next_token
+    #   Opaque continuation token of previous paginated response
+    #
+    # @return [Types::ListPublishersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPublishersResponse#items #items} => Array&lt;Types::PublisherSummary&gt;
+    #   * {Types::ListPublishersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_publishers({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].value.domain #=> String
+    #   resp.items[0].identifier_type #=> String, one of "DOMAIN"
+    #   resp.items[0].status #=> String, one of "ACTION_REQUIRED", "ACTIVE", "FAILED", "SUSPENDED", "DELETING"
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].publisher_arn #=> String
+    #   resp.items[0].association_count #=> Integer
+    #   resp.items[0].pending_association_approval_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/ListPublishers AWS API Documentation
+    #
+    # @overload list_publishers(params = {})
+    # @param [Hash] params ({})
+    def list_publishers(params = {}, options = {})
+      req = build_request(:list_publishers, params)
       req.send_request(options)
     end
 
@@ -1628,7 +2051,7 @@ module Aws::AgentRegistryControl
     #   resp.registry_records[0].name #=> String
     #   resp.registry_records[0].display_name #=> String
     #   resp.registry_records[0].description #=> String
-    #   resp.registry_records[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
+    #   resp.registry_records[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY", "WEB_BOT"
     #   resp.registry_records[0].record_version #=> String
     #   resp.registry_records[0].status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH"
     #   resp.registry_records[0].created_at #=> Time
@@ -1791,6 +2214,45 @@ module Aws::AgentRegistryControl
       req.send_request(options)
     end
 
+    # Record the curator's decision (APPROVED or REJECTED) on a registry
+    # record's publisher association. A successful call returns an empty
+    # response. Repeating the decision the association already holds changes
+    # nothing; the same approvalStatus with a different approvalStatusReason
+    # updates the reason. If the caller has no publisher association for the
+    # registry record, the request fails with AccessDeniedException. A
+    # ConflictException (HTTP 409) means the association is not in a state
+    # that accepts the decision (e.g. not
+    # PENDING\_APPROVAL/APPROVED/REJECTED) or it changed while the request
+    # was being applied; read it again before deciding whether to resubmit.
+    #
+    # @option params [required, String] :record_arn
+    #   Registry Record Amazon Resource Name
+    #
+    # @option params [required, String] :approval_status
+    #   The curator's decision on a Record's Publisher association.
+    #
+    # @option params [required, String] :approval_status_reason
+    #   The curator's reason for the decision; may be empty.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_publisher_association_approval_status({
+    #     record_arn: "RegistryRecordArn", # required
+    #     approval_status: "APPROVED", # required, accepts APPROVED, REJECTED
+    #     approval_status_reason: "StatusReason", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdatePublisherAssociationApprovalStatus AWS API Documentation
+    #
+    # @overload update_publisher_association_approval_status(params = {})
+    # @param [Hash] params ({})
+    def update_publisher_association_approval_status(params = {}, options = {})
+      req = build_request(:update_publisher_association_approval_status, params)
+      req.send_request(options)
+    end
+
     # Updates an existing registry. This operation uses PATCH semantics:
     # specify only the fields you want to change, and omit the rest to leave
     # them unchanged. Updates are applied asynchronously and the registry
@@ -1920,7 +2382,7 @@ module Aws::AgentRegistryControl
     #         default_schema: "CustomMetadataSchemaDefinition",
     #         record_type_schema_overrides: [
     #           {
-    #             record_type: "MCP", # required, accepts MCP, AGENT, CUSTOM, SKILL, GATEWAY
+    #             record_type: "MCP", # required, accepts MCP, AGENT, CUSTOM, SKILL, GATEWAY, WEB_BOT
     #             schema: "CustomMetadataSchemaDefinition", # required
     #           },
     #         ],
@@ -1982,7 +2444,7 @@ module Aws::AgentRegistryControl
     #   resp.approval_configuration.auto_approval_rules[0] #=> String, one of "APPROVE_ALL"
     #   resp.custom_metadata_schema_configuration.default_schema #=> String
     #   resp.custom_metadata_schema_configuration.record_type_schema_overrides #=> Array
-    #   resp.custom_metadata_schema_configuration.record_type_schema_overrides[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
+    #   resp.custom_metadata_schema_configuration.record_type_schema_overrides[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY", "WEB_BOT"
     #   resp.custom_metadata_schema_configuration.record_type_schema_overrides[0].schema #=> String
     #   resp.status #=> String, one of "CREATING", "READY", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
     #   resp.status_reason #=> String
@@ -2116,7 +2578,7 @@ module Aws::AgentRegistryControl
     #     description: {
     #       optional_value: "Description",
     #     },
-    #     record_type: "MCP", # accepts MCP, AGENT, CUSTOM, SKILL, GATEWAY
+    #     record_type: "MCP", # accepts MCP, AGENT, CUSTOM, SKILL, GATEWAY, WEB_BOT
     #     descriptors: {
     #       optional_value: {
     #         mcp_server: {
@@ -2372,6 +2834,51 @@ module Aws::AgentRegistryControl
     #             },
     #           },
     #         },
+    #         signature_agent_card: {
+    #           optional_value: {
+    #             data: {
+    #               optional_value: "DescriptorData",
+    #             },
+    #             data_schema_version: {
+    #               optional_value: "DataSchemaVersion",
+    #             },
+    #             source: {
+    #               optional_value: {
+    #                 from_url: {
+    #                   url: "DescriptorSourceUrl", # required
+    #                   credential_provider_configurations: [
+    #                     {
+    #                       credential_provider_type: "OAUTH", # required, accepts OAUTH, IAM
+    #                       credential_provider: { # required
+    #                         oauth_credential_provider: {
+    #                           provider_arn: "CredentialProviderArn", # required
+    #                           grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #                           scopes: ["String"],
+    #                           custom_parameters: {
+    #                             "String" => "String",
+    #                           },
+    #                           return_url: "OAuthReturnUrl",
+    #                         },
+    #                         iam_credential_provider: {
+    #                           role_arn: "IamRoleArn",
+    #                           service: "IamSigningServiceName",
+    #                           region: "IamSigningRegion",
+    #                         },
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             additional_data: {
+    #               optional_value: {
+    #                 category: {
+    #                   optional_value: "advertising", # accepts advertising, archiver, content_fetcher, email_client, http_library, link_checker, miscellaneous, monitoring, page_preview, scraping_framework, search_engine, security, seo, social_media, ai_training, ai_search, ai_assistant, ai_content_optimization
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
     #       },
     #     },
     #     artifact: {
@@ -2533,7 +3040,7 @@ module Aws::AgentRegistryControl
     #   resp.name #=> String
     #   resp.display_name #=> String
     #   resp.description #=> String
-    #   resp.record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
+    #   resp.record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY", "WEB_BOT"
     #   resp.descriptors.mcp_server.data #=> String
     #   resp.descriptors.mcp_server.data_schema_version #=> String
     #   resp.descriptors.mcp_server.additional_data.tools.data #=> String
@@ -2625,6 +3132,22 @@ module Aws::AgentRegistryControl
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
+    #   resp.descriptors.signature_agent_card.data #=> String
+    #   resp.descriptors.signature_agent_card.data_schema_version #=> String
+    #   resp.descriptors.signature_agent_card.source.from_url.url #=> String
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations #=> Array
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.return_url #=> String
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
+    #   resp.descriptors.signature_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
+    #   resp.descriptors.signature_agent_card.additional_data.category #=> String, one of "advertising", "archiver", "content_fetcher", "email_client", "http_library", "link_checker", "miscellaneous", "monitoring", "page_preview", "scraping_framework", "search_engine", "security", "seo", "social_media", "ai_training", "ai_search", "ai_assistant", "ai_content_optimization"
     #   resp.record_version #=> String
     #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH"
     #   resp.created_at #=> Time
@@ -2783,6 +3306,67 @@ module Aws::AgentRegistryControl
       req.send_request(options)
     end
 
+    # Restart domain verification for a publisher in FAILED or SUSPENDED.
+    # The publisher returns to ACTION\_REQUIRED with a new domainChallenge,
+    # which the response includes. Update the DNS TXT record with the new
+    # recordValue; the previous value no longer verifies the domain. The
+    # request fails with ConflictException when the publisher is ACTIVE,
+    # verification is already in progress (ACTION\_REQUIRED), or the
+    # publisher is being deleted.
+    #
+    # @option params [required, String] :publisher_arn
+    #   ARN for an Identifier resource. Global (region-less) resource, so the
+    #   region field is empty; the resource segment carries the identifier
+    #   value, which may contain dots.
+    #
+    #   Named `PublisherIdentifierArn` (RegionalCP's local name) so
+    #   RegionalCP consumes it without a rename — which keeps its c2j/SDK
+    #   model (generated from the un-projected source, where the top-level c2j
+    #   plugin runs to preserve @idempotencyToken) showing the correct shape
+    #   name. GlobalCP renames this to `identifierArn` in its own coral-export
+    #   projection.
+    #
+    # @return [Types::ValidatePublisherResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ValidatePublisherResponse#value #value} => Types::Identifier
+    #   * {Types::ValidatePublisherResponse#identifier_type #identifier_type} => String
+    #   * {Types::ValidatePublisherResponse#status #status} => String
+    #   * {Types::ValidatePublisherResponse#status_reason #status_reason} => String
+    #   * {Types::ValidatePublisherResponse#domain_challenge #domain_challenge} => Types::DomainChallenge
+    #   * {Types::ValidatePublisherResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::ValidatePublisherResponse#created_at #created_at} => Time
+    #   * {Types::ValidatePublisherResponse#updated_at #updated_at} => Time
+    #   * {Types::ValidatePublisherResponse#publisher_arn #publisher_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.validate_publisher({
+    #     publisher_arn: "PublisherIdentifierArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.value.domain #=> String
+    #   resp.identifier_type #=> String, one of "DOMAIN"
+    #   resp.status #=> String, one of "ACTION_REQUIRED", "ACTIVE", "FAILED", "SUSPENDED", "DELETING"
+    #   resp.status_reason #=> String
+    #   resp.domain_challenge.record_name #=> String
+    #   resp.domain_challenge.record_value #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.publisher_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/ValidatePublisher AWS API Documentation
+    #
+    # @overload validate_publisher(params = {})
+    # @param [Hash] params ({})
+    def validate_publisher(params = {}, options = {})
+      req = build_request(:validate_publisher, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2801,7 +3385,7 @@ module Aws::AgentRegistryControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-agentregistrycontrol'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

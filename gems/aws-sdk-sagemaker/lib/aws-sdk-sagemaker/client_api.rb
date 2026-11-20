@@ -115,6 +115,8 @@ module Aws::SageMaker
     AddClusterNodeSpecification = Shapes::StructureShape.new(name: 'AddClusterNodeSpecification')
     AddClusterNodeSpecificationIncrementTargetCountByInteger = Shapes::IntegerShape.new(name: 'AddClusterNodeSpecificationIncrementTargetCountByInteger')
     AddClusterNodeSpecificationList = Shapes::ListShape.new(name: 'AddClusterNodeSpecificationList')
+    AddInferenceGatewayRequest = Shapes::StructureShape.new(name: 'AddInferenceGatewayRequest')
+    AddInferenceGatewayResponse = Shapes::StructureShape.new(name: 'AddInferenceGatewayResponse')
     AddTagsInput = Shapes::StructureShape.new(name: 'AddTagsInput')
     AddTagsOutput = Shapes::StructureShape.new(name: 'AddTagsOutput')
     AdditionalCodeRepositoryNamesOrUrls = Shapes::ListShape.new(name: 'AdditionalCodeRepositoryNamesOrUrls')
@@ -701,6 +703,8 @@ module Aws::SageMaker
     CreateFeatureGroupResponse = Shapes::StructureShape.new(name: 'CreateFeatureGroupResponse')
     CreateFlowDefinitionRequest = Shapes::StructureShape.new(name: 'CreateFlowDefinitionRequest')
     CreateFlowDefinitionResponse = Shapes::StructureShape.new(name: 'CreateFlowDefinitionResponse')
+    CreateGlobalInferenceGatewayRequest = Shapes::StructureShape.new(name: 'CreateGlobalInferenceGatewayRequest')
+    CreateGlobalInferenceGatewayResponse = Shapes::StructureShape.new(name: 'CreateGlobalInferenceGatewayResponse')
     CreateHubContentPresignedUrlsRequest = Shapes::StructureShape.new(name: 'CreateHubContentPresignedUrlsRequest')
     CreateHubContentPresignedUrlsResponse = Shapes::StructureShape.new(name: 'CreateHubContentPresignedUrlsResponse')
     CreateHubContentReferenceRequest = Shapes::StructureShape.new(name: 'CreateHubContentReferenceRequest')
@@ -893,6 +897,8 @@ module Aws::SageMaker
     DeleteFeatureGroupRequest = Shapes::StructureShape.new(name: 'DeleteFeatureGroupRequest')
     DeleteFlowDefinitionRequest = Shapes::StructureShape.new(name: 'DeleteFlowDefinitionRequest')
     DeleteFlowDefinitionResponse = Shapes::StructureShape.new(name: 'DeleteFlowDefinitionResponse')
+    DeleteGlobalInferenceGatewayRequest = Shapes::StructureShape.new(name: 'DeleteGlobalInferenceGatewayRequest')
+    DeleteGlobalInferenceGatewayResponse = Shapes::StructureShape.new(name: 'DeleteGlobalInferenceGatewayResponse')
     DeleteHubContentReferenceRequest = Shapes::StructureShape.new(name: 'DeleteHubContentReferenceRequest')
     DeleteHubContentRequest = Shapes::StructureShape.new(name: 'DeleteHubContentRequest')
     DeleteHubRequest = Shapes::StructureShape.new(name: 'DeleteHubRequest')
@@ -1025,6 +1031,8 @@ module Aws::SageMaker
     DescribeFeatureMetadataResponse = Shapes::StructureShape.new(name: 'DescribeFeatureMetadataResponse')
     DescribeFlowDefinitionRequest = Shapes::StructureShape.new(name: 'DescribeFlowDefinitionRequest')
     DescribeFlowDefinitionResponse = Shapes::StructureShape.new(name: 'DescribeFlowDefinitionResponse')
+    DescribeGlobalInferenceGatewayRequest = Shapes::StructureShape.new(name: 'DescribeGlobalInferenceGatewayRequest')
+    DescribeGlobalInferenceGatewayResponse = Shapes::StructureShape.new(name: 'DescribeGlobalInferenceGatewayResponse')
     DescribeHubContentRequest = Shapes::StructureShape.new(name: 'DescribeHubContentRequest')
     DescribeHubContentResponse = Shapes::StructureShape.new(name: 'DescribeHubContentResponse')
     DescribeHubRequest = Shapes::StructureShape.new(name: 'DescribeHubRequest')
@@ -1417,6 +1425,39 @@ module Aws::SageMaker
     GitConfig = Shapes::StructureShape.new(name: 'GitConfig')
     GitConfigForUpdate = Shapes::StructureShape.new(name: 'GitConfigForUpdate')
     GitConfigUrl = Shapes::StringShape.new(name: 'GitConfigUrl')
+    GlobalInferenceGatewayArn = Shapes::StringShape.new(name: 'GlobalInferenceGatewayArn')
+    GlobalInferenceGatewayClientToken = Shapes::StringShape.new(name: 'GlobalInferenceGatewayClientToken')
+    GlobalInferenceGatewayClusterArn = Shapes::StringShape.new(name: 'GlobalInferenceGatewayClusterArn')
+    GlobalInferenceGatewayEndpointUrl = Shapes::StringShape.new(name: 'GlobalInferenceGatewayEndpointUrl')
+    GlobalInferenceGatewayExecutionRoleArn = Shapes::StringShape.new(name: 'GlobalInferenceGatewayExecutionRoleArn')
+    GlobalInferenceGatewayFailureReason = Shapes::StringShape.new(name: 'GlobalInferenceGatewayFailureReason')
+    GlobalInferenceGatewayFilter = Shapes::StructureShape.new(name: 'GlobalInferenceGatewayFilter')
+    GlobalInferenceGatewayFilterName = Shapes::StringShape.new(name: 'GlobalInferenceGatewayFilterName')
+    GlobalInferenceGatewayFilterValue = Shapes::StringShape.new(name: 'GlobalInferenceGatewayFilterValue')
+    GlobalInferenceGatewayFilters = Shapes::ListShape.new(name: 'GlobalInferenceGatewayFilters')
+    GlobalInferenceGatewayId = Shapes::StringShape.new(name: 'GlobalInferenceGatewayId')
+    GlobalInferenceGatewayIdentifier = Shapes::StringShape.new(name: 'GlobalInferenceGatewayIdentifier')
+    GlobalInferenceGatewayKubernetesNamespace = Shapes::StringShape.new(name: 'GlobalInferenceGatewayKubernetesNamespace')
+    GlobalInferenceGatewayKubernetesResourceName = Shapes::StringShape.new(name: 'GlobalInferenceGatewayKubernetesResourceName')
+    GlobalInferenceGatewayMaxResults = Shapes::IntegerShape.new(name: 'GlobalInferenceGatewayMaxResults')
+    GlobalInferenceGatewayMember = Shapes::StructureShape.new(name: 'GlobalInferenceGatewayMember')
+    GlobalInferenceGatewayMemberFilter = Shapes::StructureShape.new(name: 'GlobalInferenceGatewayMemberFilter')
+    GlobalInferenceGatewayMemberFilterName = Shapes::StringShape.new(name: 'GlobalInferenceGatewayMemberFilterName')
+    GlobalInferenceGatewayMemberFilterValue = Shapes::StringShape.new(name: 'GlobalInferenceGatewayMemberFilterValue')
+    GlobalInferenceGatewayMemberFilters = Shapes::ListShape.new(name: 'GlobalInferenceGatewayMemberFilters')
+    GlobalInferenceGatewayMemberStatus = Shapes::StringShape.new(name: 'GlobalInferenceGatewayMemberStatus')
+    GlobalInferenceGatewayMemberSummaries = Shapes::ListShape.new(name: 'GlobalInferenceGatewayMemberSummaries')
+    GlobalInferenceGatewayMemberSummary = Shapes::StructureShape.new(name: 'GlobalInferenceGatewayMemberSummary')
+    GlobalInferenceGatewayMembers = Shapes::ListShape.new(name: 'GlobalInferenceGatewayMembers')
+    GlobalInferenceGatewayName = Shapes::StringShape.new(name: 'GlobalInferenceGatewayName')
+    GlobalInferenceGatewayNextToken = Shapes::StringShape.new(name: 'GlobalInferenceGatewayNextToken')
+    GlobalInferenceGatewayRouting = Shapes::StructureShape.new(name: 'GlobalInferenceGatewayRouting')
+    GlobalInferenceGatewayRoutingWeight = Shapes::FloatShape.new(name: 'GlobalInferenceGatewayRoutingWeight')
+    GlobalInferenceGatewayRoutingWeights = Shapes::StructureShape.new(name: 'GlobalInferenceGatewayRoutingWeights')
+    GlobalInferenceGatewayStatus = Shapes::StringShape.new(name: 'GlobalInferenceGatewayStatus')
+    GlobalInferenceGatewaySummaries = Shapes::ListShape.new(name: 'GlobalInferenceGatewaySummaries')
+    GlobalInferenceGatewaySummary = Shapes::StructureShape.new(name: 'GlobalInferenceGatewaySummary')
+    GlobalInferenceGatewayVpcEndpointServiceName = Shapes::StringShape.new(name: 'GlobalInferenceGatewayVpcEndpointServiceName')
     Group = Shapes::StringShape.new(name: 'Group')
     GroupNamePattern = Shapes::StringShape.new(name: 'GroupNamePattern')
     GroupPatternsList = Shapes::ListShape.new(name: 'GroupPatternsList')
@@ -1824,6 +1865,8 @@ module Aws::SageMaker
     ListFeatureGroupsResponse = Shapes::StructureShape.new(name: 'ListFeatureGroupsResponse')
     ListFlowDefinitionsRequest = Shapes::StructureShape.new(name: 'ListFlowDefinitionsRequest')
     ListFlowDefinitionsResponse = Shapes::StructureShape.new(name: 'ListFlowDefinitionsResponse')
+    ListGlobalInferenceGatewaysRequest = Shapes::StructureShape.new(name: 'ListGlobalInferenceGatewaysRequest')
+    ListGlobalInferenceGatewaysResponse = Shapes::StructureShape.new(name: 'ListGlobalInferenceGatewaysResponse')
     ListHubContentVersionsRequest = Shapes::StructureShape.new(name: 'ListHubContentVersionsRequest')
     ListHubContentVersionsResponse = Shapes::StructureShape.new(name: 'ListHubContentVersionsResponse')
     ListHubContentsRequest = Shapes::StructureShape.new(name: 'ListHubContentsRequest')
@@ -1842,6 +1885,8 @@ module Aws::SageMaker
     ListInferenceComponentsOutput = Shapes::StructureShape.new(name: 'ListInferenceComponentsOutput')
     ListInferenceExperimentsRequest = Shapes::StructureShape.new(name: 'ListInferenceExperimentsRequest')
     ListInferenceExperimentsResponse = Shapes::StructureShape.new(name: 'ListInferenceExperimentsResponse')
+    ListInferenceGatewaysRequest = Shapes::StructureShape.new(name: 'ListInferenceGatewaysRequest')
+    ListInferenceGatewaysResponse = Shapes::StructureShape.new(name: 'ListInferenceGatewaysResponse')
     ListInferenceRecommendationsJobStepsRequest = Shapes::StructureShape.new(name: 'ListInferenceRecommendationsJobStepsRequest')
     ListInferenceRecommendationsJobStepsResponse = Shapes::StructureShape.new(name: 'ListInferenceRecommendationsJobStepsResponse')
     ListInferenceRecommendationsJobsRequest = Shapes::StructureShape.new(name: 'ListInferenceRecommendationsJobsRequest')
@@ -2212,6 +2257,17 @@ module Aws::SageMaker
     MonitoringTimeOffsetString = Shapes::StringShape.new(name: 'MonitoringTimeOffsetString')
     MonitoringType = Shapes::StringShape.new(name: 'MonitoringType')
     MountPath = Shapes::StringShape.new(name: 'MountPath')
+    MoveClusterNodeIds = Shapes::ListShape.new(name: 'MoveClusterNodeIds')
+    MoveClusterNodeLogicalIds = Shapes::ListShape.new(name: 'MoveClusterNodeLogicalIds')
+    MoveClusterNodeLogicalIdsError = Shapes::StructureShape.new(name: 'MoveClusterNodeLogicalIdsError')
+    MoveClusterNodeLogicalIdsErrorList = Shapes::ListShape.new(name: 'MoveClusterNodeLogicalIdsErrorList')
+    MoveClusterNodesError = Shapes::StructureShape.new(name: 'MoveClusterNodesError')
+    MoveClusterNodesErrorCode = Shapes::StringShape.new(name: 'MoveClusterNodesErrorCode')
+    MoveClusterNodesErrorList = Shapes::ListShape.new(name: 'MoveClusterNodesErrorList')
+    MoveClusterNodesInstanceCount = Shapes::IntegerShape.new(name: 'MoveClusterNodesInstanceCount')
+    MoveClusterNodesRequest = Shapes::StructureShape.new(name: 'MoveClusterNodesRequest')
+    MoveClusterNodesRequestClientTokenString = Shapes::StringShape.new(name: 'MoveClusterNodesRequestClientTokenString')
+    MoveClusterNodesResponse = Shapes::StructureShape.new(name: 'MoveClusterNodesResponse')
     MultiModelConfig = Shapes::StructureShape.new(name: 'MultiModelConfig')
     NameContains = Shapes::StringShape.new(name: 'NameContains')
     NeoVpcConfig = Shapes::StructureShape.new(name: 'NeoVpcConfig')
@@ -2556,6 +2612,8 @@ module Aws::SageMaker
     ReleaseNotesList = Shapes::ListShape.new(name: 'ReleaseNotesList')
     RemoteDebugConfig = Shapes::StructureShape.new(name: 'RemoteDebugConfig')
     RemoteDebugConfigForUpdate = Shapes::StructureShape.new(name: 'RemoteDebugConfigForUpdate')
+    RemoveInferenceGatewayRequest = Shapes::StructureShape.new(name: 'RemoveInferenceGatewayRequest')
+    RemoveInferenceGatewayResponse = Shapes::StructureShape.new(name: 'RemoveInferenceGatewayResponse')
     RenderUiTemplateRequest = Shapes::StructureShape.new(name: 'RenderUiTemplateRequest')
     RenderUiTemplateResponse = Shapes::StructureShape.new(name: 'RenderUiTemplateResponse')
     RenderableTask = Shapes::StructureShape.new(name: 'RenderableTask')
@@ -3085,6 +3143,8 @@ module Aws::SageMaker
     UpdateFeatureGroupRequest = Shapes::StructureShape.new(name: 'UpdateFeatureGroupRequest')
     UpdateFeatureGroupResponse = Shapes::StructureShape.new(name: 'UpdateFeatureGroupResponse')
     UpdateFeatureMetadataRequest = Shapes::StructureShape.new(name: 'UpdateFeatureMetadataRequest')
+    UpdateGlobalInferenceGatewayRequest = Shapes::StructureShape.new(name: 'UpdateGlobalInferenceGatewayRequest')
+    UpdateGlobalInferenceGatewayResponse = Shapes::StructureShape.new(name: 'UpdateGlobalInferenceGatewayResponse')
     UpdateHubContentReferenceRequest = Shapes::StructureShape.new(name: 'UpdateHubContentReferenceRequest')
     UpdateHubContentReferenceResponse = Shapes::StructureShape.new(name: 'UpdateHubContentReferenceResponse')
     UpdateHubContentRequest = Shapes::StructureShape.new(name: 'UpdateHubContentRequest')
@@ -3468,6 +3528,19 @@ module Aws::SageMaker
     AddClusterNodeSpecification.struct_class = Types::AddClusterNodeSpecification
 
     AddClusterNodeSpecificationList.member = Shapes::ShapeRef.new(shape: AddClusterNodeSpecification)
+
+    AddInferenceGatewayRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayIdentifier, required: true, location_name: "Identifier"))
+    AddInferenceGatewayRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayClusterArn, required: true, location_name: "ClusterArn"))
+    AddInferenceGatewayRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayKubernetesNamespace, required: true, location_name: "Namespace"))
+    AddInferenceGatewayRequest.add_member(:name, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayKubernetesResourceName, required: true, location_name: "Name"))
+    AddInferenceGatewayRequest.struct_class = Types::AddInferenceGatewayRequest
+
+    AddInferenceGatewayResponse.add_member(:arn, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayArn, required: true, location_name: "Arn"))
+    AddInferenceGatewayResponse.add_member(:id, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayId, required: true, location_name: "Id"))
+    AddInferenceGatewayResponse.add_member(:name, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayName, required: true, location_name: "Name"))
+    AddInferenceGatewayResponse.add_member(:gateway, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayMember, required: true, location_name: "Gateway"))
+    AddInferenceGatewayResponse.add_member(:status, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayMemberStatus, location_name: "Status"))
+    AddInferenceGatewayResponse.struct_class = Types::AddInferenceGatewayResponse
 
     AddTagsInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     AddTagsInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
@@ -5179,6 +5252,23 @@ module Aws::SageMaker
     CreateFlowDefinitionResponse.add_member(:flow_definition_arn, Shapes::ShapeRef.new(shape: FlowDefinitionArn, required: true, location_name: "FlowDefinitionArn"))
     CreateFlowDefinitionResponse.struct_class = Types::CreateFlowDefinitionResponse
 
+    CreateGlobalInferenceGatewayRequest.add_member(:name, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayName, required: true, location_name: "Name"))
+    CreateGlobalInferenceGatewayRequest.add_member(:routing, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayRouting, location_name: "Routing"))
+    CreateGlobalInferenceGatewayRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayExecutionRoleArn, required: true, location_name: "ExecutionRoleArn"))
+    CreateGlobalInferenceGatewayRequest.add_member(:gateways, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayMembers, required: true, location_name: "Gateways"))
+    CreateGlobalInferenceGatewayRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateGlobalInferenceGatewayRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateGlobalInferenceGatewayRequest.struct_class = Types::CreateGlobalInferenceGatewayRequest
+
+    CreateGlobalInferenceGatewayResponse.add_member(:arn, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayArn, required: true, location_name: "Arn"))
+    CreateGlobalInferenceGatewayResponse.add_member(:id, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayId, required: true, location_name: "Id"))
+    CreateGlobalInferenceGatewayResponse.add_member(:name, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayName, required: true, location_name: "Name"))
+    CreateGlobalInferenceGatewayResponse.add_member(:status, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayStatus, required: true, location_name: "Status"))
+    CreateGlobalInferenceGatewayResponse.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayExecutionRoleArn, location_name: "ExecutionRoleArn"))
+    CreateGlobalInferenceGatewayResponse.add_member(:routing, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayRouting, location_name: "Routing"))
+    CreateGlobalInferenceGatewayResponse.add_member(:gateways, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayMembers, location_name: "Gateways"))
+    CreateGlobalInferenceGatewayResponse.struct_class = Types::CreateGlobalInferenceGatewayResponse
+
     CreateHubContentPresignedUrlsRequest.add_member(:hub_name, Shapes::ShapeRef.new(shape: HubNameOrArn, required: true, location_name: "HubName"))
     CreateHubContentPresignedUrlsRequest.add_member(:hub_content_type, Shapes::ShapeRef.new(shape: HubContentType, required: true, location_name: "HubContentType"))
     CreateHubContentPresignedUrlsRequest.add_member(:hub_content_name, Shapes::ShapeRef.new(shape: HubContentName, required: true, location_name: "HubContentName"))
@@ -6093,6 +6183,14 @@ module Aws::SageMaker
 
     DeleteFlowDefinitionResponse.struct_class = Types::DeleteFlowDefinitionResponse
 
+    DeleteGlobalInferenceGatewayRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayIdentifier, required: true, location_name: "Identifier"))
+    DeleteGlobalInferenceGatewayRequest.struct_class = Types::DeleteGlobalInferenceGatewayRequest
+
+    DeleteGlobalInferenceGatewayResponse.add_member(:arn, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayArn, location_name: "Arn"))
+    DeleteGlobalInferenceGatewayResponse.add_member(:id, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayId, location_name: "Id"))
+    DeleteGlobalInferenceGatewayResponse.add_member(:name, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayName, location_name: "Name"))
+    DeleteGlobalInferenceGatewayResponse.struct_class = Types::DeleteGlobalInferenceGatewayResponse
+
     DeleteHubContentReferenceRequest.add_member(:hub_name, Shapes::ShapeRef.new(shape: HubNameOrArn, required: true, location_name: "HubName"))
     DeleteHubContentReferenceRequest.add_member(:hub_content_type, Shapes::ShapeRef.new(shape: HubContentType, required: true, location_name: "HubContentType"))
     DeleteHubContentReferenceRequest.add_member(:hub_content_name, Shapes::ShapeRef.new(shape: HubContentName, required: true, location_name: "HubContentName"))
@@ -6863,6 +6961,21 @@ module Aws::SageMaker
     DescribeFlowDefinitionResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     DescribeFlowDefinitionResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     DescribeFlowDefinitionResponse.struct_class = Types::DescribeFlowDefinitionResponse
+
+    DescribeGlobalInferenceGatewayRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayIdentifier, required: true, location_name: "Identifier"))
+    DescribeGlobalInferenceGatewayRequest.struct_class = Types::DescribeGlobalInferenceGatewayRequest
+
+    DescribeGlobalInferenceGatewayResponse.add_member(:arn, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayArn, required: true, location_name: "Arn"))
+    DescribeGlobalInferenceGatewayResponse.add_member(:id, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayId, required: true, location_name: "Id"))
+    DescribeGlobalInferenceGatewayResponse.add_member(:name, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayName, required: true, location_name: "Name"))
+    DescribeGlobalInferenceGatewayResponse.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayExecutionRoleArn, required: true, location_name: "ExecutionRoleArn"))
+    DescribeGlobalInferenceGatewayResponse.add_member(:status, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayStatus, required: true, location_name: "Status"))
+    DescribeGlobalInferenceGatewayResponse.add_member(:endpoint_url, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayEndpointUrl, location_name: "EndpointUrl"))
+    DescribeGlobalInferenceGatewayResponse.add_member(:vpc_endpoint_service_name, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayVpcEndpointServiceName, location_name: "VpcEndpointServiceName"))
+    DescribeGlobalInferenceGatewayResponse.add_member(:routing, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayRouting, location_name: "Routing"))
+    DescribeGlobalInferenceGatewayResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    DescribeGlobalInferenceGatewayResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayFailureReason, location_name: "FailureReason"))
+    DescribeGlobalInferenceGatewayResponse.struct_class = Types::DescribeGlobalInferenceGatewayResponse
 
     DescribeHubContentRequest.add_member(:hub_name, Shapes::ShapeRef.new(shape: HubNameOrArn, required: true, location_name: "HubName"))
     DescribeHubContentRequest.add_member(:hub_content_type, Shapes::ShapeRef.new(shape: HubContentType, required: true, location_name: "HubContentType"))
@@ -8469,6 +8582,52 @@ module Aws::SageMaker
     GitConfigForUpdate.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
     GitConfigForUpdate.struct_class = Types::GitConfigForUpdate
 
+    GlobalInferenceGatewayFilter.add_member(:name, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayFilterName, required: true, location_name: "Name"))
+    GlobalInferenceGatewayFilter.add_member(:value, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayFilterValue, required: true, location_name: "Value"))
+    GlobalInferenceGatewayFilter.struct_class = Types::GlobalInferenceGatewayFilter
+
+    GlobalInferenceGatewayFilters.member = Shapes::ShapeRef.new(shape: GlobalInferenceGatewayFilter)
+
+    GlobalInferenceGatewayMember.add_member(:name, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayKubernetesResourceName, required: true, location_name: "Name"))
+    GlobalInferenceGatewayMember.add_member(:namespace, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayKubernetesNamespace, required: true, location_name: "Namespace"))
+    GlobalInferenceGatewayMember.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayClusterArn, required: true, location_name: "ClusterArn"))
+    GlobalInferenceGatewayMember.struct_class = Types::GlobalInferenceGatewayMember
+
+    GlobalInferenceGatewayMemberFilter.add_member(:name, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayMemberFilterName, required: true, location_name: "Name"))
+    GlobalInferenceGatewayMemberFilter.add_member(:value, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayMemberFilterValue, required: true, location_name: "Value"))
+    GlobalInferenceGatewayMemberFilter.struct_class = Types::GlobalInferenceGatewayMemberFilter
+
+    GlobalInferenceGatewayMemberFilters.member = Shapes::ShapeRef.new(shape: GlobalInferenceGatewayMemberFilter)
+
+    GlobalInferenceGatewayMemberSummaries.member = Shapes::ShapeRef.new(shape: GlobalInferenceGatewayMemberSummary)
+
+    GlobalInferenceGatewayMemberSummary.add_member(:name, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayKubernetesResourceName, required: true, location_name: "Name"))
+    GlobalInferenceGatewayMemberSummary.add_member(:namespace, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayKubernetesNamespace, required: true, location_name: "Namespace"))
+    GlobalInferenceGatewayMemberSummary.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayClusterArn, required: true, location_name: "ClusterArn"))
+    GlobalInferenceGatewayMemberSummary.add_member(:status, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayMemberStatus, location_name: "Status"))
+    GlobalInferenceGatewayMemberSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayFailureReason, location_name: "FailureReason"))
+    GlobalInferenceGatewayMemberSummary.struct_class = Types::GlobalInferenceGatewayMemberSummary
+
+    GlobalInferenceGatewayMembers.member = Shapes::ShapeRef.new(shape: GlobalInferenceGatewayMember)
+
+    GlobalInferenceGatewayRouting.add_member(:weights, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayRoutingWeights, required: true, location_name: "Weights"))
+    GlobalInferenceGatewayRouting.struct_class = Types::GlobalInferenceGatewayRouting
+
+    GlobalInferenceGatewayRoutingWeights.add_member(:kv_headroom, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayRoutingWeight, location_name: "KVHeadroom"))
+    GlobalInferenceGatewayRoutingWeights.add_member(:queue_depth, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayRoutingWeight, location_name: "QueueDepth"))
+    GlobalInferenceGatewayRoutingWeights.add_member(:region_proximity, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayRoutingWeight, location_name: "RegionProximity"))
+    GlobalInferenceGatewayRoutingWeights.add_member(:error_rate, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayRoutingWeight, location_name: "ErrorRate"))
+    GlobalInferenceGatewayRoutingWeights.struct_class = Types::GlobalInferenceGatewayRoutingWeights
+
+    GlobalInferenceGatewaySummaries.member = Shapes::ShapeRef.new(shape: GlobalInferenceGatewaySummary)
+
+    GlobalInferenceGatewaySummary.add_member(:arn, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayArn, required: true, location_name: "Arn"))
+    GlobalInferenceGatewaySummary.add_member(:id, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayId, required: true, location_name: "Id"))
+    GlobalInferenceGatewaySummary.add_member(:name, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayName, required: true, location_name: "Name"))
+    GlobalInferenceGatewaySummary.add_member(:status, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayStatus, required: true, location_name: "Status"))
+    GlobalInferenceGatewaySummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    GlobalInferenceGatewaySummary.struct_class = Types::GlobalInferenceGatewaySummary
+
     GroupPatternsList.member = Shapes::ShapeRef.new(shape: GroupNamePattern)
 
     GroupingAttributeNames.member = Shapes::ShapeRef.new(shape: GroupingAttributeName)
@@ -9780,6 +9939,15 @@ module Aws::SageMaker
     ListFlowDefinitionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListFlowDefinitionsResponse.struct_class = Types::ListFlowDefinitionsResponse
 
+    ListGlobalInferenceGatewaysRequest.add_member(:filters, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayFilters, location_name: "Filters"))
+    ListGlobalInferenceGatewaysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayNextToken, location_name: "NextToken"))
+    ListGlobalInferenceGatewaysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayMaxResults, location_name: "MaxResults"))
+    ListGlobalInferenceGatewaysRequest.struct_class = Types::ListGlobalInferenceGatewaysRequest
+
+    ListGlobalInferenceGatewaysResponse.add_member(:global_inference_gateway_summaries, Shapes::ShapeRef.new(shape: GlobalInferenceGatewaySummaries, required: true, location_name: "GlobalInferenceGatewaySummaries"))
+    ListGlobalInferenceGatewaysResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayNextToken, location_name: "NextToken"))
+    ListGlobalInferenceGatewaysResponse.struct_class = Types::ListGlobalInferenceGatewaysResponse
+
     ListHubContentVersionsRequest.add_member(:hub_name, Shapes::ShapeRef.new(shape: HubNameOrArn, required: true, location_name: "HubName"))
     ListHubContentVersionsRequest.add_member(:hub_content_type, Shapes::ShapeRef.new(shape: HubContentType, required: true, location_name: "HubContentType"))
     ListHubContentVersionsRequest.add_member(:hub_content_name, Shapes::ShapeRef.new(shape: HubContentName, required: true, location_name: "HubContentName"))
@@ -9919,6 +10087,16 @@ module Aws::SageMaker
     ListInferenceExperimentsResponse.add_member(:inference_experiments, Shapes::ShapeRef.new(shape: InferenceExperimentList, location_name: "InferenceExperiments"))
     ListInferenceExperimentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListInferenceExperimentsResponse.struct_class = Types::ListInferenceExperimentsResponse
+
+    ListInferenceGatewaysRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayIdentifier, required: true, location_name: "Identifier"))
+    ListInferenceGatewaysRequest.add_member(:filters, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayMemberFilters, location_name: "Filters"))
+    ListInferenceGatewaysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayNextToken, location_name: "NextToken"))
+    ListInferenceGatewaysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayMaxResults, location_name: "MaxResults"))
+    ListInferenceGatewaysRequest.struct_class = Types::ListInferenceGatewaysRequest
+
+    ListInferenceGatewaysResponse.add_member(:inference_gateway_summaries, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayMemberSummaries, required: true, location_name: "InferenceGatewaySummaries"))
+    ListInferenceGatewaysResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayNextToken, location_name: "NextToken"))
+    ListInferenceGatewaysResponse.struct_class = Types::ListInferenceGatewaysResponse
 
     ListInferenceRecommendationsJobStepsRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: RecommendationJobName, required: true, location_name: "JobName"))
     ListInferenceRecommendationsJobStepsRequest.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationJobStatus, location_name: "Status"))
@@ -11289,6 +11467,40 @@ module Aws::SageMaker
     MonitoringStoppingCondition.add_member(:max_runtime_in_seconds, Shapes::ShapeRef.new(shape: MonitoringMaxRuntimeInSeconds, required: true, location_name: "MaxRuntimeInSeconds", metadata: {"box" => true}))
     MonitoringStoppingCondition.struct_class = Types::MonitoringStoppingCondition
 
+    MoveClusterNodeIds.member = Shapes::ShapeRef.new(shape: ClusterNodeId)
+
+    MoveClusterNodeLogicalIds.member = Shapes::ShapeRef.new(shape: ClusterNodeLogicalId)
+
+    MoveClusterNodeLogicalIdsError.add_member(:code, Shapes::ShapeRef.new(shape: MoveClusterNodesErrorCode, required: true, location_name: "Code"))
+    MoveClusterNodeLogicalIdsError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
+    MoveClusterNodeLogicalIdsError.add_member(:node_logical_id, Shapes::ShapeRef.new(shape: ClusterNodeLogicalId, required: true, location_name: "NodeLogicalId"))
+    MoveClusterNodeLogicalIdsError.struct_class = Types::MoveClusterNodeLogicalIdsError
+
+    MoveClusterNodeLogicalIdsErrorList.member = Shapes::ShapeRef.new(shape: MoveClusterNodeLogicalIdsError)
+
+    MoveClusterNodesError.add_member(:code, Shapes::ShapeRef.new(shape: MoveClusterNodesErrorCode, required: true, location_name: "Code"))
+    MoveClusterNodesError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
+    MoveClusterNodesError.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, required: true, location_name: "NodeId"))
+    MoveClusterNodesError.struct_class = Types::MoveClusterNodesError
+
+    MoveClusterNodesErrorList.member = Shapes::ShapeRef.new(shape: MoveClusterNodesError)
+
+    MoveClusterNodesRequest.add_member(:source_cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "SourceClusterArn"))
+    MoveClusterNodesRequest.add_member(:source_instance_group_name, Shapes::ShapeRef.new(shape: ClusterInstanceGroupName, required: true, location_name: "SourceInstanceGroupName"))
+    MoveClusterNodesRequest.add_member(:target_cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "TargetClusterArn"))
+    MoveClusterNodesRequest.add_member(:target_instance_group_name, Shapes::ShapeRef.new(shape: ClusterInstanceGroupName, required: true, location_name: "TargetInstanceGroupName"))
+    MoveClusterNodesRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: MoveClusterNodesInstanceCount, location_name: "InstanceCount"))
+    MoveClusterNodesRequest.add_member(:node_ids, Shapes::ShapeRef.new(shape: MoveClusterNodeIds, location_name: "NodeIds"))
+    MoveClusterNodesRequest.add_member(:node_logical_ids, Shapes::ShapeRef.new(shape: MoveClusterNodeLogicalIds, location_name: "NodeLogicalIds"))
+    MoveClusterNodesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: MoveClusterNodesRequestClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    MoveClusterNodesRequest.struct_class = Types::MoveClusterNodesRequest
+
+    MoveClusterNodesResponse.add_member(:successful, Shapes::ShapeRef.new(shape: MoveClusterNodeIds, location_name: "Successful"))
+    MoveClusterNodesResponse.add_member(:failed, Shapes::ShapeRef.new(shape: MoveClusterNodesErrorList, location_name: "Failed"))
+    MoveClusterNodesResponse.add_member(:successful_node_logical_ids, Shapes::ShapeRef.new(shape: MoveClusterNodeLogicalIds, location_name: "SuccessfulNodeLogicalIds"))
+    MoveClusterNodesResponse.add_member(:failed_node_logical_ids, Shapes::ShapeRef.new(shape: MoveClusterNodeLogicalIdsErrorList, location_name: "FailedNodeLogicalIds"))
+    MoveClusterNodesResponse.struct_class = Types::MoveClusterNodesResponse
+
     MultiModelConfig.add_member(:model_cache_setting, Shapes::ShapeRef.new(shape: ModelCacheSetting, location_name: "ModelCacheSetting"))
     MultiModelConfig.struct_class = Types::MultiModelConfig
 
@@ -12207,6 +12419,19 @@ module Aws::SageMaker
 
     RemoteDebugConfigForUpdate.add_member(:enable_remote_debug, Shapes::ShapeRef.new(shape: EnableRemoteDebug, location_name: "EnableRemoteDebug"))
     RemoteDebugConfigForUpdate.struct_class = Types::RemoteDebugConfigForUpdate
+
+    RemoveInferenceGatewayRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayIdentifier, required: true, location_name: "Identifier"))
+    RemoveInferenceGatewayRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayClusterArn, required: true, location_name: "ClusterArn"))
+    RemoveInferenceGatewayRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayKubernetesNamespace, required: true, location_name: "Namespace"))
+    RemoveInferenceGatewayRequest.add_member(:name, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayKubernetesResourceName, required: true, location_name: "Name"))
+    RemoveInferenceGatewayRequest.struct_class = Types::RemoveInferenceGatewayRequest
+
+    RemoveInferenceGatewayResponse.add_member(:arn, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayArn, required: true, location_name: "Arn"))
+    RemoveInferenceGatewayResponse.add_member(:id, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayId, required: true, location_name: "Id"))
+    RemoveInferenceGatewayResponse.add_member(:name, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayName, required: true, location_name: "Name"))
+    RemoveInferenceGatewayResponse.add_member(:gateway, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayMember, required: true, location_name: "Gateway"))
+    RemoveInferenceGatewayResponse.add_member(:status, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayMemberStatus, location_name: "Status"))
+    RemoveInferenceGatewayResponse.struct_class = Types::RemoveInferenceGatewayResponse
 
     RenderUiTemplateRequest.add_member(:ui_template, Shapes::ShapeRef.new(shape: UiTemplate, location_name: "UiTemplate"))
     RenderUiTemplateRequest.add_member(:task, Shapes::ShapeRef.new(shape: RenderableTask, required: true, location_name: "Task"))
@@ -13624,6 +13849,17 @@ module Aws::SageMaker
     UpdateFeatureMetadataRequest.add_member(:parameter_removals, Shapes::ShapeRef.new(shape: FeatureParameterRemovals, location_name: "ParameterRemovals"))
     UpdateFeatureMetadataRequest.struct_class = Types::UpdateFeatureMetadataRequest
 
+    UpdateGlobalInferenceGatewayRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayIdentifier, required: true, location_name: "Identifier"))
+    UpdateGlobalInferenceGatewayRequest.add_member(:routing, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayRouting, required: true, location_name: "Routing"))
+    UpdateGlobalInferenceGatewayRequest.struct_class = Types::UpdateGlobalInferenceGatewayRequest
+
+    UpdateGlobalInferenceGatewayResponse.add_member(:arn, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayArn, required: true, location_name: "Arn"))
+    UpdateGlobalInferenceGatewayResponse.add_member(:id, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayId, required: true, location_name: "Id"))
+    UpdateGlobalInferenceGatewayResponse.add_member(:name, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayName, required: true, location_name: "Name"))
+    UpdateGlobalInferenceGatewayResponse.add_member(:status, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayStatus, required: true, location_name: "Status"))
+    UpdateGlobalInferenceGatewayResponse.add_member(:routing, Shapes::ShapeRef.new(shape: GlobalInferenceGatewayRouting, location_name: "Routing"))
+    UpdateGlobalInferenceGatewayResponse.struct_class = Types::UpdateGlobalInferenceGatewayResponse
+
     UpdateHubContentReferenceRequest.add_member(:hub_name, Shapes::ShapeRef.new(shape: HubNameOrArn, required: true, location_name: "HubName"))
     UpdateHubContentReferenceRequest.add_member(:hub_content_name, Shapes::ShapeRef.new(shape: HubContentName, required: true, location_name: "HubContentName"))
     UpdateHubContentReferenceRequest.add_member(:hub_content_type, Shapes::ShapeRef.new(shape: HubContentType, required: true, location_name: "HubContentType"))
@@ -14110,6 +14346,18 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
       end)
 
+      api.add_operation(:add_inference_gateway, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AddInferenceGateway"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AddInferenceGatewayRequest)
+        o.output = Shapes::ShapeRef.new(shape: AddInferenceGatewayResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+      end)
+
       api.add_operation(:add_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AddTags"
         o.http_method = "POST"
@@ -14457,6 +14705,16 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateFlowDefinitionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateFlowDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+      end)
+
+      api.add_operation(:create_global_inference_gateway, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateGlobalInferenceGateway"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateGlobalInferenceGatewayRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateGlobalInferenceGatewayResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
       end)
@@ -15175,6 +15433,15 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
       end)
 
+      api.add_operation(:delete_global_inference_gateway, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteGlobalInferenceGateway"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteGlobalInferenceGatewayRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteGlobalInferenceGatewayResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:delete_hub, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteHub"
         o.http_method = "POST"
@@ -15822,6 +16089,15 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeFlowDefinitionRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeFlowDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:describe_global_inference_gateway, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeGlobalInferenceGateway"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeGlobalInferenceGatewayRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeGlobalInferenceGatewayResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
@@ -16853,6 +17129,20 @@ module Aws::SageMaker
         )
       end)
 
+      api.add_operation(:list_global_inference_gateways, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListGlobalInferenceGateways"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListGlobalInferenceGatewaysRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListGlobalInferenceGatewaysResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_hub_content_versions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListHubContentVersions"
         o.http_method = "POST"
@@ -16956,6 +17246,21 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListInferenceExperimentsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListInferenceExperimentsResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_inference_gateways, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListInferenceGateways"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListInferenceGatewaysRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListInferenceGatewaysResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -17707,6 +18012,15 @@ module Aws::SageMaker
         )
       end)
 
+      api.add_operation(:move_cluster_nodes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "MoveClusterNodes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: MoveClusterNodesRequest)
+        o.output = Shapes::ShapeRef.new(shape: MoveClusterNodesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
       api.add_operation(:put_endpoint_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutEndpointPolicy"
         o.http_method = "POST"
@@ -17747,6 +18061,16 @@ module Aws::SageMaker
         o.input = Shapes::ShapeRef.new(shape: RegisterDevicesRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+      end)
+
+      api.add_operation(:remove_inference_gateway, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveInferenceGateway"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RemoveInferenceGatewayRequest)
+        o.output = Shapes::ShapeRef.new(shape: RemoveInferenceGatewayResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
       api.add_operation(:render_ui_template, Seahorse::Model::Operation.new.tap do |o|
@@ -18243,6 +18567,16 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateFeatureMetadataRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:update_global_inference_gateway, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateGlobalInferenceGateway"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateGlobalInferenceGatewayRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateGlobalInferenceGatewayResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 

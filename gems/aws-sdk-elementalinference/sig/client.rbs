@@ -100,7 +100,7 @@ module Aws
         def name: () -> ::String
         def arn: () -> ::String
         def id: () -> ::String
-        def language: () -> ("eng" | "fra" | "ita" | "deu" | "spa" | "por")
+        def language: () -> ("eng" | "fra" | "ita" | "deu" | "spa" | "por" | "ara")
         def status: () -> ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
         def references: () -> ::Array[::String]
         def tags: () -> ::Hash[::String, ::String]
@@ -108,7 +108,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#create_dictionary-instance_method
       def create_dictionary: (
                                name: ::String,
-                               language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por"),
+                               language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por" | "ara"),
                                ?entries: ::String,
                                ?tags: Hash[::String, ::String]
                              ) -> _CreateDictionaryResponseSuccess
@@ -359,7 +359,7 @@ module Aws
         def name: () -> ::String
         def arn: () -> ::String
         def id: () -> ::String
-        def language: () -> ("eng" | "fra" | "ita" | "deu" | "spa" | "por")
+        def language: () -> ("eng" | "fra" | "ita" | "deu" | "spa" | "por" | "ara")
         def status: () -> ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
         def references: () -> ::Array[::String]
         def tags: () -> ::Hash[::String, ::String]
@@ -590,7 +590,7 @@ module Aws
         def name: () -> ::String
         def arn: () -> ::String
         def id: () -> ::String
-        def language: () -> ("eng" | "fra" | "ita" | "deu" | "spa" | "por")
+        def language: () -> ("eng" | "fra" | "ita" | "deu" | "spa" | "por" | "ara")
         def status: () -> ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
         def references: () -> ::Array[::String]
         def tags: () -> ::Hash[::String, ::String]
@@ -599,7 +599,7 @@ module Aws
       def update_dictionary: (
                                id: ::String,
                                ?name: ::String,
-                               ?language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por"),
+                               ?language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por" | "ara"),
                                ?entries: ::String
                              ) -> _UpdateDictionaryResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDictionaryResponseSuccess

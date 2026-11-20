@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.214.0 (2026-11-20)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports converting captions from non-embedded sources, such as Teletext and Smart Subtitles, into CEA-608 and CEA-708 embedded captions, and supports WebVTT subtitle renditions from HLS inputs as a caption source.
+
 1.213.0 (2026-11-19)
 ------------------
 

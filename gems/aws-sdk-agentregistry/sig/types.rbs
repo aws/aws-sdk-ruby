@@ -85,6 +85,7 @@ module Aws::AgentRegistry
       attr_accessor custom: Types::CustomDescriptor
       attr_accessor http: Types::HttpDescriptor
       attr_accessor agui: Types::AgUiDescriptor
+      attr_accessor signature_agent_card: Types::SignatureAgentCardDescriptor
       SENSITIVE: []
     end
 
@@ -95,7 +96,7 @@ module Aws::AgentRegistry
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor display_name: ::String
-      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY" | "WEB_BOT")
       attr_accessor record_version: ::String
       attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "CREATE_PENDING_AUTH" | "UPDATE_PENDING_AUTH")
       attr_accessor created_at: ::Time
@@ -166,7 +167,7 @@ module Aws::AgentRegistry
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor display_name: ::String
-      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY" | "WEB_BOT")
       attr_accessor descriptors: Types::Descriptors
       attr_accessor record_version: ::String
       attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "CREATE_PENDING_AUTH" | "UPDATE_PENDING_AUTH")
@@ -203,6 +204,19 @@ module Aws::AgentRegistry
       attr_accessor search_type: ("HYBRID" | "SEMANTIC" | "KEYWORD")
       attr_accessor next_token: ::String
       SENSITIVE: []
+    end
+
+    class SignatureAgentCardAdditionalData
+      attr_accessor category: ("advertising" | "archiver" | "content_fetcher" | "email_client" | "http_library" | "link_checker" | "miscellaneous" | "monitoring" | "page_preview" | "scraping_framework" | "search_engine" | "security" | "seo" | "social_media" | "ai_training" | "ai_search" | "ai_assistant" | "ai_content_optimization")
+      SENSITIVE: []
+    end
+
+    class SignatureAgentCardDescriptor
+      attr_accessor data: ::String
+      attr_accessor data_schema_version: ::String
+      attr_accessor source: Types::DescriptorSource
+      attr_accessor additional_data: Types::SignatureAgentCardAdditionalData
+      SENSITIVE: [:data]
     end
 
     class ThrottlingException

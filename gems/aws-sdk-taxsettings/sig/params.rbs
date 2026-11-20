@@ -88,7 +88,8 @@ module Aws
         enterprise_identification_number: ::String?,
         electronic_transaction_code_number: ::String?,
         payment_voucher_number: ::String?,
-        payment_voucher_number_date: ::String?
+        payment_voucher_number_date: ::String?,
+        vat_credit_method: bool?
       }?,
       egypt_additional_info: {
         unique_identification_number: ::String?,
@@ -127,6 +128,19 @@ module Aws
         tax_regime: ::String?,
         tax_regime_full_name: ::String?,
         cfdi_usage_code: ::String?
+      }?,
+      united_arab_emirates_additional_info: {
+        tax_registration_number_type: ("VATTaxRegistrationNumber" | "LocalTaxRegistrationNumber")?,
+        peppol_id: ::String?,
+        trade_license_number: ::String?,
+        emirates_id: ::String?
+      }?,
+      norway_additional_info: {
+        tax_registration_number_type: ("TaxRegistrationNumber" | "LocalRegistrationNumber")?,
+        peppol_id: ::String?
+      }?,
+      new_zealand_additional_info: {
+        peppol_id: ::String?
       }?
     }
 

@@ -1108,6 +1108,50 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The details of an asset ownership transfer.
+    #
+    # @!attribute [rw] status
+    #   The status of the ownership transfer. Valid values:
+    #
+    #   * `IN_PROGRESS` — The transfer is in progress. Requests that change
+    #     the asset or its listing fail until the transfer completes.
+    #
+    #   * `SUCCEEDED` — The transfer completed. The target project owns the
+    #     asset, its listing, and the subscriptions to the asset.
+    #
+    #   * `FAILED` — The transfer didn't complete, and the service rolled
+    #     back its changes. The source project owns the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_project_id
+    #   The ID of the project that owned the asset when the transfer
+    #   started.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_project_id
+    #   The ID of the project that the asset is transferred to.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The timestamp of when the transfer started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp of when the status of the transfer was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssetOwnershipTransfer AWS API Documentation
+    #
+    class AssetOwnershipTransfer < Struct.new(
+      :status,
+      :source_project_id,
+      :target_project_id,
+      :started_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The asset permissions.
     #
     # @!attribute [rw] asset_id
@@ -8664,6 +8708,10 @@ module Aws::DataZone
     #   The ID of the environment.
     #   @return [String]
     #
+    # @!attribute [rw] environment_blueprint_id
+    #   The ID of the environment blueprint.
+    #   @return [String]
+    #
     # @!attribute [rw] environment_resolved_account
     #   Specifies the account/Region that is to be used during project
     #   creation for a particular blueprint.
@@ -8681,6 +8729,7 @@ module Aws::DataZone
     #
     class EnvironmentConfigurationUserParameter < Struct.new(
       :environment_id,
+      :environment_blueprint_id,
       :environment_resolved_account,
       :environment_configuration_name,
       :environment_parameters)
@@ -9536,6 +9585,11 @@ module Aws::DataZone
     #   for the asset.
     #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
     #
+    # @!attribute [rw] ownership_transfer
+    #   The most recent ownership transfer of the asset. The response omits
+    #   this member if the asset has never had an ownership transfer.
+    #   @return [Types::AssetOwnershipTransfer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetAssetOutput AWS API Documentation
     #
     class GetAssetOutput < Struct.new(
@@ -9557,7 +9611,8 @@ module Aws::DataZone
       :listing,
       :forms_output,
       :read_only_forms_output,
-      :latest_time_series_data_point_forms_output)
+      :latest_time_series_data_point_forms_output,
+      :ownership_transfer)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -24080,6 +24135,69 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain that contains the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the asset whose ownership is transferred.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_project_identifier
+    #   The ID of the project that the asset is transferred to. The project
+    #   must be in the same domain and must be different from the project
+    #   that currently owns the asset.
+    #
+    #   If the domain's administration project owns the asset, the target
+    #   can be any project. Otherwise, the target must be the administration
+    #   project.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request while its transfer is in progress, the service returns that
+    #   transfer and doesn't start a new one. This field is automatically
+    #   populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateAssetOwnerInput AWS API Documentation
+    #
+    class UpdateAssetOwnerInput < Struct.new(
+      :domain_identifier,
+      :identifier,
+      :target_project_identifier,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The revision of the asset that was created when the transfer
+    #   started.
+    #   @return [String]
+    #
+    # @!attribute [rw] ownership_transfer
+    #   The state of the ownership transfer that the request started.
+    #   @return [Types::AssetOwnershipTransfer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateAssetOwnerOutput AWS API Documentation
+    #
+    class UpdateAssetOwnerOutput < Struct.new(
+      :id,
+      :revision,
+      :ownership_transfer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] configurations
     #   The configurations of the connection.
     #   @return [Array<Types::Configuration>]
@@ -25653,6 +25771,11 @@ module Aws::DataZone
     #   `latest`.
     #   @return [String]
     #
+    # @!attribute [rw] project_profile_action
+    #   The action to perform on the project profile of the project. Specify
+    #   `DISASSOCIATE` to disassociate the project from its project profile.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateProjectInput AWS API Documentation
     #
     class UpdateProjectInput < Struct.new(
@@ -25665,7 +25788,8 @@ module Aws::DataZone
       :domain_unit_id,
       :environment_deployment_details,
       :user_parameters,
-      :project_profile_version)
+      :project_profile_version,
+      :project_profile_action)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end

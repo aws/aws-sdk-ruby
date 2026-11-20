@@ -310,6 +310,15 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class AssetOwnershipTransfer
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor source_project_id: ::String
+      attr_accessor target_project_id: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class AssetPermission
       attr_accessor asset_id: ::String
       attr_accessor permissions: Types::Permissions
@@ -2366,6 +2375,7 @@ module Aws::DataZone
 
     class EnvironmentConfigurationUserParameter
       attr_accessor environment_id: ::String
+      attr_accessor environment_blueprint_id: ::String
       attr_accessor environment_resolved_account: Types::EnvironmentResolvedAccount
       attr_accessor environment_configuration_name: ::String
       attr_accessor environment_parameters: ::Array[Types::EnvironmentParameter]
@@ -2606,6 +2616,7 @@ module Aws::DataZone
       attr_accessor forms_output: ::Array[Types::FormOutput]
       attr_accessor read_only_forms_output: ::Array[Types::FormOutput]
       attr_accessor latest_time_series_data_point_forms_output: ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
+      attr_accessor ownership_transfer: Types::AssetOwnershipTransfer
       SENSITIVE: [:name, :description]
     end
 
@@ -6550,6 +6561,21 @@ module Aws::DataZone
       SENSITIVE: [:name, :description]
     end
 
+    class UpdateAssetOwnerInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor target_project_identifier: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAssetOwnerOutput
+      attr_accessor id: ::String
+      attr_accessor revision: ::String
+      attr_accessor ownership_transfer: Types::AssetOwnershipTransfer
+      SENSITIVE: []
+    end
+
     class UpdateConnectionInput
       attr_accessor configurations: ::Array[Types::Configuration]
       attr_accessor domain_identifier: ::String
@@ -6912,6 +6938,7 @@ module Aws::DataZone
       attr_accessor environment_deployment_details: Types::EnvironmentDeploymentDetails
       attr_accessor user_parameters: ::Array[Types::EnvironmentConfigurationUserParameter]
       attr_accessor project_profile_version: ::String
+      attr_accessor project_profile_action: ("DISASSOCIATE")
       SENSITIVE: [:name, :description]
     end
 

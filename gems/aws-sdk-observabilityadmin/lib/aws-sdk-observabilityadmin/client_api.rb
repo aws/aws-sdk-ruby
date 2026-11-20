@@ -93,6 +93,7 @@ module Aws::ObservabilityAdmin
     CentralizationRuleSource = Shapes::StructureShape.new(name: 'CentralizationRuleSource')
     CentralizationRuleSummaries = Shapes::ListShape.new(name: 'CentralizationRuleSummaries')
     CentralizationRuleSummary = Shapes::StructureShape.new(name: 'CentralizationRuleSummary')
+    CentralizeWithDataProtection = Shapes::StringShape.new(name: 'CentralizeWithDataProtection')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudtrailParameters = Shapes::StructureShape.new(name: 'CloudtrailParameters')
     Condition = Shapes::StructureShape.new(name: 'Condition')
@@ -1184,6 +1185,7 @@ module Aws::ObservabilityAdmin
     SourceLogsConfiguration.add_member(:log_group_selection_criteria, Shapes::ShapeRef.new(shape: LogsFilterString, location_name: "LogGroupSelectionCriteria"))
     SourceLogsConfiguration.add_member(:data_source_selection_criteria, Shapes::ShapeRef.new(shape: DataSourceFilterString, location_name: "DataSourceSelectionCriteria"))
     SourceLogsConfiguration.add_member(:encrypted_log_group_strategy, Shapes::ShapeRef.new(shape: EncryptedLogGroupStrategy, required: true, location_name: "EncryptedLogGroupStrategy"))
+    SourceLogsConfiguration.add_member(:centralize_with_data_protection, Shapes::ShapeRef.new(shape: CentralizeWithDataProtection, location_name: "CentralizeWithDataProtection"))
     SourceLogsConfiguration.struct_class = Types::SourceLogsConfiguration
 
     SourceMetricsConfiguration.add_member(:metrics_selection_criteria, Shapes::ShapeRef.new(shape: MetricsFilterString, location_name: "MetricsSelectionCriteria"))

@@ -1089,6 +1089,241 @@ module Aws::Textract
       req.send_request(options)
     end
 
+    # Creates a blueprint that defines the schema Amazon Textract uses to
+    # extract structured data from a document during a document insights
+    # job. A blueprint describes the fields to extract and how to normalize
+    # them.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you use the same
+    #   token for a request that matches a previous request, the service
+    #   ignores the request, but does not return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :blueprint_name
+    #   A unique name for the blueprint.
+    #
+    # @option params [required, String] :schema
+    #   The schema of the blueprint, which defines the fields to extract and
+    #   their expected structure.
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   The AWS KMS encryption configuration used to encrypt the blueprint at
+    #   rest.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A set of tags (key-value pairs) to assign to the blueprint.
+    #
+    # @return [Types::CreateBlueprintResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBlueprintResponse#blueprint_arn #blueprint_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_blueprint({
+    #     client_request_token: "ClientRequestToken",
+    #     blueprint_name: "BlueprintName", # required
+    #     schema: "BlueprintSchema", # required
+    #     encryption_configuration: {
+    #       kms_key_id: "EncryptionKmsKeyId", # required
+    #       kms_encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue",
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.blueprint_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/CreateBlueprint AWS API Documentation
+    #
+    # @overload create_blueprint(params = {})
+    # @param [Hash] params ({})
+    def create_blueprint(params = {}, options = {})
+      req = build_request(:create_blueprint, params)
+      req.send_request(options)
+    end
+
+    # Creates a new, immutable version of an existing blueprint so that
+    # projects can pin to a specific version.
+    #
+    # @option params [required, String] :blueprint_arn
+    #   The Amazon Resource Name (ARN) of the blueprint to create a new
+    #   version of.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you use the same
+    #   token for a request that matches a previous request, the service
+    #   ignores the request, but does not return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateBlueprintVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBlueprintVersionResponse#blueprint_arn #blueprint_arn} => String
+    #   * {Types::CreateBlueprintVersionResponse#blueprint_version #blueprint_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_blueprint_version({
+    #     blueprint_arn: "BlueprintArn", # required
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.blueprint_arn #=> String
+    #   resp.blueprint_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/CreateBlueprintVersion AWS API Documentation
+    #
+    # @overload create_blueprint_version(params = {})
+    # @param [Hash] params ({})
+    def create_blueprint_version(params = {}, options = {})
+      req = build_request(:create_blueprint_version, params)
+      req.send_request(options)
+    end
+
+    # Creates a project that groups the configuration used to run document
+    # insights jobs.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you use the same
+    #   token for a request that matches a previous request, the service
+    #   ignores the request, but does not return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :project_name
+    #   A unique name for the project.
+    #
+    # @option params [String] :project_description
+    #   A description of the project.
+    #
+    # @option params [required, Types::ExtractionConfiguration] :extraction_configuration
+    #   The configuration that controls how Amazon Textract extracts content
+    #   from the document, including bounding boxes, granularity, and output
+    #   format.
+    #
+    # @option params [Types::GenerativeConfiguration] :generative_configuration
+    #   The configuration that controls generative capabilities such as
+    #   summarization and figure captioning.
+    #
+    # @option params [Types::CustomConfiguration] :custom_configuration
+    #   The configuration that associates blueprints with the project for
+    #   custom output extraction.
+    #
+    # @option params [Types::SplitterConfiguration] :splitter_configuration
+    #   The configuration that controls whether multi-document packets are
+    #   split into individual documents.
+    #
+    # @option params [Types::SensitiveDataConfiguration] :sensitive_data_configuration
+    #   The configuration that controls detection and redaction of sensitive
+    #   data, such as personally identifiable information (PII).
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   The AWS KMS encryption configuration used to encrypt the project at
+    #   rest. If you don't specify a value, Amazon Textract encrypts the
+    #   project using an AWS owned key.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A set of tags (key-value pairs) to assign to the project.
+    #
+    # @return [Types::CreateProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProjectResponse#project_arn #project_arn} => String
+    #   * {Types::CreateProjectResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_project({
+    #     client_request_token: "ClientRequestToken",
+    #     project_name: "ProjectName", # required
+    #     project_description: "ProjectDescription",
+    #     extraction_configuration: { # required
+    #       bounding_box: { # required
+    #         state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
+    #       granularity: { # required
+    #         types: ["DOCUMENT"], # accepts DOCUMENT, PAGE, ELEMENT, WORD, LINE
+    #       },
+    #       output_format: { # required
+    #         additional_file_format: { # required
+    #           state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         },
+    #         text_format: { # required
+    #           types: ["PLAIN_TEXT"], # accepts PLAIN_TEXT, MARKDOWN, HTML, CSV
+    #         },
+    #       },
+    #     },
+    #     generative_configuration: {
+    #       summarization: {
+    #         state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
+    #       figure_caption: {
+    #         state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
+    #     },
+    #     custom_configuration: {
+    #       blueprints: [ # required
+    #         {
+    #           blueprint_arn: "BlueprintArn", # required
+    #           blueprint_version: "BlueprintVersion",
+    #         },
+    #       ],
+    #       fallback_blueprints: [
+    #         {
+    #           blueprint_arn: "BlueprintArn", # required
+    #           blueprint_version: "BlueprintVersion",
+    #         },
+    #       ],
+    #     },
+    #     splitter_configuration: {
+    #       state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
+    #     sensitive_data_configuration: {
+    #       detection_mode: "DETECTION", # required, accepts DETECTION, DETECTION_AND_REDACTION, DISABLED
+    #       pii_entities_configuration: {
+    #         pii_entity_types: ["ALL"], # required, accepts ALL, ADDRESS, AGE, NAME, EMAIL, PHONE, USERNAME, PASSWORD, DRIVER_ID, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, PIN, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, IP_ADDRESS, MAC_ADDRESS, URL, AWS_ACCESS_KEY, AWS_SECRET_KEY, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+    #         redaction_mask_mode: "PII", # required, accepts PII, ENTITY_TYPE
+    #       },
+    #     },
+    #     encryption_configuration: {
+    #       kms_key_id: "EncryptionKmsKeyId", # required
+    #       kms_encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue",
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.project_arn #=> String
+    #   resp.status #=> String, one of "COMPLETED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/CreateProject AWS API Documentation
+    #
+    # @overload create_project(params = {})
+    # @param [Hash] params ({})
+    def create_project(params = {}, options = {})
+      req = build_request(:create_project, params)
+      req.send_request(options)
+    end
+
     # Deletes an Amazon Textract adapter. Takes an AdapterId and deletes the
     # adapter specified by the ID.
     #
@@ -1138,6 +1373,55 @@ module Aws::Textract
     # @param [Hash] params ({})
     def delete_adapter_version(params = {}, options = {})
       req = build_request(:delete_adapter_version, params)
+      req.send_request(options)
+    end
+
+    # Deletes a blueprint, or a specific version of a blueprint.
+    #
+    # @option params [required, String] :blueprint_arn
+    #   The Amazon Resource Name (ARN) of the blueprint to delete.
+    #
+    # @option params [String] :blueprint_version
+    #   The version of the blueprint to delete. If omitted, the entire
+    #   blueprint and all of its versions are deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_blueprint({
+    #     blueprint_arn: "BlueprintArn", # required
+    #     blueprint_version: "BlueprintVersion",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DeleteBlueprint AWS API Documentation
+    #
+    # @overload delete_blueprint(params = {})
+    # @param [Hash] params ({})
+    def delete_blueprint(params = {}, options = {})
+      req = build_request(:delete_blueprint, params)
+      req.send_request(options)
+    end
+
+    # Deletes a project.
+    #
+    # @option params [required, String] :project_arn
+    #   The Amazon Resource Name (ARN) of the project to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_project({
+    #     project_arn: "ProjectArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DeleteProject AWS API Documentation
+    #
+    # @overload delete_project(params = {})
+    # @param [Hash] params ({})
+    def delete_project(params = {}, options = {})
+      req = build_request(:delete_project, params)
       req.send_request(options)
     end
 
@@ -1347,6 +1631,55 @@ module Aws::Textract
       req.send_request(options)
     end
 
+    # Gets the details of a blueprint, including its schema, encryption
+    # settings, and timestamps.
+    #
+    # @option params [required, String] :blueprint_arn
+    #   The Amazon Resource Name (ARN) of the blueprint to retrieve.
+    #
+    # @option params [String] :blueprint_version
+    #   The version of the blueprint to retrieve. If omitted, the latest
+    #   version is returned.
+    #
+    # @return [Types::GetBlueprintResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBlueprintResponse#blueprint_arn #blueprint_arn} => String
+    #   * {Types::GetBlueprintResponse#blueprint_name #blueprint_name} => String
+    #   * {Types::GetBlueprintResponse#blueprint_version #blueprint_version} => String
+    #   * {Types::GetBlueprintResponse#schema #schema} => String
+    #   * {Types::GetBlueprintResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::GetBlueprintResponse#kms_encryption_context #kms_encryption_context} => Hash&lt;String,String&gt;
+    #   * {Types::GetBlueprintResponse#creation_time #creation_time} => Time
+    #   * {Types::GetBlueprintResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_blueprint({
+    #     blueprint_arn: "BlueprintArn", # required
+    #     blueprint_version: "BlueprintVersion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.blueprint_arn #=> String
+    #   resp.blueprint_name #=> String
+    #   resp.blueprint_version #=> String
+    #   resp.schema #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.kms_encryption_context #=> Hash
+    #   resp.kms_encryption_context["EncryptionContextKey"] #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetBlueprint AWS API Documentation
+    #
+    # @overload get_blueprint(params = {})
+    # @param [Hash] params ({})
+    def get_blueprint(params = {}, options = {})
+      req = build_request(:get_blueprint, params)
+      req.send_request(options)
+    end
+
     # Gets the results for an Amazon Textract asynchronous operation that
     # analyzes text in a document.
     #
@@ -1495,6 +1828,42 @@ module Aws::Textract
     # @param [Hash] params ({})
     def get_document_analysis(params = {}, options = {})
       req = build_request(:get_document_analysis, params)
+      req.send_request(options)
+    end
+
+    # Gets the status and results of a document insights job that was
+    # started by StartDocumentInsights.
+    #
+    # @option params [required, String] :job_arn
+    #   The Amazon Resource Name (ARN) of the document insights job to
+    #   retrieve.
+    #
+    # @return [Types::GetDocumentInsightsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDocumentInsightsResponse#status #status} => String
+    #   * {Types::GetDocumentInsightsResponse#output_configuration #output_configuration} => Types::OutputConfiguration
+    #   * {Types::GetDocumentInsightsResponse#error_type #error_type} => String
+    #   * {Types::GetDocumentInsightsResponse#error_message #error_message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_document_insights({
+    #     job_arn: "JobArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED", "PARTIAL_SUCCESS"
+    #   resp.output_configuration.s3_uri #=> String
+    #   resp.error_type #=> String
+    #   resp.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetDocumentInsights AWS API Documentation
+    #
+    # @overload get_document_insights(params = {})
+    # @param [Hash] params ({})
+    def get_document_insights(params = {}, options = {})
+      req = build_request(:get_document_insights, params)
       req.send_request(options)
     end
 
@@ -2120,6 +2489,73 @@ module Aws::Textract
       req.send_request(options)
     end
 
+    # Gets the details of a project, including its configuration, status,
+    # and timestamps.
+    #
+    # @option params [required, String] :project_arn
+    #   The Amazon Resource Name (ARN) of the project to retrieve.
+    #
+    # @return [Types::GetProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProjectResponse#project_arn #project_arn} => String
+    #   * {Types::GetProjectResponse#project_name #project_name} => String
+    #   * {Types::GetProjectResponse#project_description #project_description} => String
+    #   * {Types::GetProjectResponse#status #status} => String
+    #   * {Types::GetProjectResponse#extraction_configuration #extraction_configuration} => Types::ExtractionConfiguration
+    #   * {Types::GetProjectResponse#generative_configuration #generative_configuration} => Types::GenerativeConfiguration
+    #   * {Types::GetProjectResponse#custom_configuration #custom_configuration} => Types::CustomConfiguration
+    #   * {Types::GetProjectResponse#splitter_configuration #splitter_configuration} => Types::SplitterConfiguration
+    #   * {Types::GetProjectResponse#sensitive_data_configuration #sensitive_data_configuration} => Types::SensitiveDataConfiguration
+    #   * {Types::GetProjectResponse#encryption_configuration #encryption_configuration} => Types::EncryptionConfiguration
+    #   * {Types::GetProjectResponse#creation_time #creation_time} => Time
+    #   * {Types::GetProjectResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_project({
+    #     project_arn: "ProjectArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.project_arn #=> String
+    #   resp.project_name #=> String
+    #   resp.project_description #=> String
+    #   resp.status #=> String, one of "COMPLETED", "FAILED"
+    #   resp.extraction_configuration.bounding_box.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.extraction_configuration.granularity.types #=> Array
+    #   resp.extraction_configuration.granularity.types[0] #=> String, one of "DOCUMENT", "PAGE", "ELEMENT", "WORD", "LINE"
+    #   resp.extraction_configuration.output_format.additional_file_format.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.extraction_configuration.output_format.text_format.types #=> Array
+    #   resp.extraction_configuration.output_format.text_format.types[0] #=> String, one of "PLAIN_TEXT", "MARKDOWN", "HTML", "CSV"
+    #   resp.generative_configuration.summarization.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.generative_configuration.figure_caption.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.custom_configuration.blueprints #=> Array
+    #   resp.custom_configuration.blueprints[0].blueprint_arn #=> String
+    #   resp.custom_configuration.blueprints[0].blueprint_version #=> String
+    #   resp.custom_configuration.fallback_blueprints #=> Array
+    #   resp.custom_configuration.fallback_blueprints[0].blueprint_arn #=> String
+    #   resp.custom_configuration.fallback_blueprints[0].blueprint_version #=> String
+    #   resp.splitter_configuration.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.sensitive_data_configuration.detection_mode #=> String, one of "DETECTION", "DETECTION_AND_REDACTION", "DISABLED"
+    #   resp.sensitive_data_configuration.pii_entities_configuration.pii_entity_types #=> Array
+    #   resp.sensitive_data_configuration.pii_entities_configuration.pii_entity_types[0] #=> String, one of "ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+    #   resp.sensitive_data_configuration.pii_entities_configuration.redaction_mask_mode #=> String, one of "PII", "ENTITY_TYPE"
+    #   resp.encryption_configuration.kms_key_id #=> String
+    #   resp.encryption_configuration.kms_encryption_context #=> Hash
+    #   resp.encryption_configuration.kms_encryption_context["EncryptionContextKey"] #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetProject AWS API Documentation
+    #
+    # @overload get_project(params = {})
+    # @param [Hash] params ({})
+    def get_project(params = {}, options = {})
+      req = build_request(:get_project, params)
+      req.send_request(options)
+    end
+
     # List all version of an adapter that meet the specified filtration
     # criteria.
     #
@@ -2232,6 +2668,127 @@ module Aws::Textract
     # @param [Hash] params ({})
     def list_adapters(params = {}, options = {})
       req = build_request(:list_adapters, params)
+      req.send_request(options)
+    end
+
+    # Lists the blueprints that are available to the caller, with optional
+    # filtering by project and resource owner. The results are paginated. If
+    # the response includes a `NextToken` value, pass it in a subsequent
+    # call to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of blueprints to return in each page of results. If
+    #   you don't specify a value, the service selects a default page size.
+    #   Use the `NextToken` value in the response to retrieve any remaining
+    #   results.
+    #
+    # @option params [String] :next_token
+    #   A pagination token returned from a previous call to `ListBlueprints`.
+    #   Use it to retrieve the next page of results.
+    #
+    # @option params [String] :blueprint_arn
+    #   The Amazon Resource Name (ARN) of a blueprint to filter the results
+    #   by.
+    #
+    # @option params [Types::ProjectFilter] :project_filter
+    #   A filter that limits the results to blueprints associated with the
+    #   specified project.
+    #
+    # @option params [String] :resource_owner
+    #   A filter that limits the results to blueprints owned by your account
+    #   or to blueprints provided by Amazon Textract.
+    #
+    # @return [Types::ListBlueprintsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBlueprintsResponse#blueprints #blueprints} => Array&lt;Types::BlueprintSummary&gt;
+    #   * {Types::ListBlueprintsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_blueprints({
+    #     max_results: 1,
+    #     next_token: "IntelligencePaginationToken",
+    #     blueprint_arn: "BlueprintArn",
+    #     project_filter: {
+    #       project_arn: "ProjectArn", # required
+    #     },
+    #     resource_owner: "ACCOUNT", # accepts ACCOUNT, SERVICE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.blueprints #=> Array
+    #   resp.blueprints[0].blueprint_arn #=> String
+    #   resp.blueprints[0].blueprint_name #=> String
+    #   resp.blueprints[0].blueprint_version #=> String
+    #   resp.blueprints[0].resource_owner #=> String, one of "ACCOUNT", "SERVICE"
+    #   resp.blueprints[0].creation_time #=> Time
+    #   resp.blueprints[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ListBlueprints AWS API Documentation
+    #
+    # @overload list_blueprints(params = {})
+    # @param [Hash] params ({})
+    def list_blueprints(params = {}, options = {})
+      req = build_request(:list_blueprints, params)
+      req.send_request(options)
+    end
+
+    # Lists the projects that are available to the caller, with optional
+    # filtering by blueprint. The results are paginated. If the response
+    # includes a `NextToken` value, pass it in a subsequent call to retrieve
+    # the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of projects to return in each page of results. If
+    #   you don't specify a value, the service selects a default page size.
+    #   Use the `NextToken` value in the response to retrieve any remaining
+    #   results.
+    #
+    # @option params [String] :next_token
+    #   A pagination token returned from a previous call to `ListProjects`.
+    #   Use it to retrieve the next page of results.
+    #
+    # @option params [Types::BlueprintFilter] :blueprint_filter
+    #   A filter that limits the results to projects associated with the
+    #   specified blueprint.
+    #
+    # @return [Types::ListProjectsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProjectsResponse#projects #projects} => Array&lt;Types::ProjectSummary&gt;
+    #   * {Types::ListProjectsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_projects({
+    #     max_results: 1,
+    #     next_token: "IntelligencePaginationToken",
+    #     blueprint_filter: {
+    #       blueprint_arn: "BlueprintArn", # required
+    #       blueprint_version: "BlueprintVersion",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.projects #=> Array
+    #   resp.projects[0].project_arn #=> String
+    #   resp.projects[0].project_name #=> String
+    #   resp.projects[0].creation_time #=> Time
+    #   resp.projects[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ListProjects AWS API Documentation
+    #
+    # @overload list_projects(params = {})
+    # @param [Hash] params ({})
+    def list_projects(params = {}, options = {})
+      req = build_request(:list_projects, params)
       req.send_request(options)
     end
 
@@ -2395,6 +2952,85 @@ module Aws::Textract
     # @param [Hash] params ({})
     def start_document_analysis(params = {}, options = {})
       req = build_request(:start_document_analysis, params)
+      req.send_request(options)
+    end
+
+    # Starts an asynchronous job that analyzes a document using the
+    # configuration defined by a project or a set of blueprints. Use
+    # GetDocumentInsights to retrieve the results of the job.
+    #
+    # @option params [required, Types::InputConfiguration] :input_configuration
+    #   The Amazon S3 location of the input document to analyze.
+    #
+    # @option params [required, Types::OutputConfiguration] :output_configuration
+    #   The Amazon S3 location where the analysis results are written.
+    #
+    # @option params [String] :project_arn
+    #   The Amazon Resource Name (ARN) of the project whose configuration is
+    #   used to analyze the document.
+    #
+    # @option params [Array<Types::BlueprintItem>] :blueprints
+    #   The blueprints used to extract custom structured output from the
+    #   document.
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   The AWS KMS encryption configuration used to encrypt the analysis
+    #   output. If you don't specify a value, Amazon Textract encrypts the
+    #   output using an AWS owned key.
+    #
+    # @option params [Types::NotificationConfiguration] :notification_configuration
+    #   Notification settings for the job.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A set of tags (key-value pairs) to assign to the document insights
+    #   job.
+    #
+    # @return [Types::StartDocumentInsightsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDocumentInsightsResponse#job_arn #job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_document_insights({
+    #     input_configuration: { # required
+    #       s3_uri: "S3Uri", # required
+    #     },
+    #     output_configuration: { # required
+    #       s3_uri: "S3Uri", # required
+    #     },
+    #     project_arn: "ProjectArn",
+    #     blueprints: [
+    #       {
+    #         blueprint_arn: "BlueprintArn", # required
+    #         blueprint_version: "BlueprintVersion",
+    #       },
+    #     ],
+    #     encryption_configuration: {
+    #       kms_key_id: "EncryptionKmsKeyId", # required
+    #       kms_encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue",
+    #       },
+    #     },
+    #     notification_configuration: {
+    #       event_bridge_configuration: { # required
+    #         state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/StartDocumentInsights AWS API Documentation
+    #
+    # @overload start_document_insights(params = {})
+    # @param [Hash] params ({})
+    def start_document_insights(params = {}, options = {})
+      req = build_request(:start_document_insights, params)
       req.send_request(options)
     end
 
@@ -2847,6 +3483,171 @@ module Aws::Textract
       req.send_request(options)
     end
 
+    # Updates an existing blueprint, replacing its schema and, optionally,
+    # its encryption configuration.
+    #
+    # @option params [required, String] :blueprint_arn
+    #   The Amazon Resource Name (ARN) of the blueprint to update.
+    #
+    # @option params [String] :schema
+    #   The updated schema of the blueprint, which defines the fields to
+    #   extract and their expected structure.
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   The AWS KMS encryption configuration used to encrypt the blueprint at
+    #   rest.
+    #
+    # @return [Types::UpdateBlueprintResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateBlueprintResponse#blueprint_arn #blueprint_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_blueprint({
+    #     blueprint_arn: "BlueprintArn", # required
+    #     schema: "BlueprintSchema",
+    #     encryption_configuration: {
+    #       kms_key_id: "EncryptionKmsKeyId", # required
+    #       kms_encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.blueprint_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/UpdateBlueprint AWS API Documentation
+    #
+    # @overload update_blueprint(params = {})
+    # @param [Hash] params ({})
+    def update_blueprint(params = {}, options = {})
+      req = build_request(:update_blueprint, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration of an existing project. If you omit a
+    # configuration, UpdateProject leaves it unchanged. A configuration that
+    # you supply replaces the stored one, so include every setting that you
+    # want to keep.
+    #
+    # @option params [required, String] :project_arn
+    #   The Amazon Resource Name (ARN) of the project to update.
+    #
+    # @option params [String] :project_description
+    #   The updated description of the project.
+    #
+    # @option params [Types::ExtractionConfiguration] :extraction_configuration
+    #   The configuration that controls how Amazon Textract extracts content
+    #   from the document, including bounding boxes, granularity, and output
+    #   format. Replaces the stored extraction configuration.
+    #
+    # @option params [Types::GenerativeConfiguration] :generative_configuration
+    #   The configuration that controls generative capabilities such as
+    #   summarization and figure captioning. Replaces the stored generative
+    #   configuration, so a capability that you omit is turned off.
+    #
+    # @option params [Types::CustomConfiguration] :custom_configuration
+    #   The configuration that associates blueprints with the project for
+    #   custom output extraction. Replaces the stored custom configuration. To
+    #   disable custom configuration, specify an empty `Blueprints` list.
+    #
+    # @option params [Types::SplitterConfiguration] :splitter_configuration
+    #   The configuration that controls whether multi-document packets are
+    #   split into individual documents. Replaces the stored splitter
+    #   configuration.
+    #
+    # @option params [Types::SensitiveDataConfiguration] :sensitive_data_configuration
+    #   The configuration that controls detection and redaction of sensitive
+    #   data, such as personally identifiable information (PII). Replaces the
+    #   stored sensitive data configuration. To turn off detection, set
+    #   `DetectionMode` to `DISABLED`.
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   The AWS KMS encryption configuration used to encrypt the project at
+    #   rest.
+    #
+    # @return [Types::UpdateProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProjectResponse#project_arn #project_arn} => String
+    #   * {Types::UpdateProjectResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_project({
+    #     project_arn: "ProjectArn", # required
+    #     project_description: "ProjectDescription",
+    #     extraction_configuration: {
+    #       bounding_box: { # required
+    #         state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
+    #       granularity: { # required
+    #         types: ["DOCUMENT"], # accepts DOCUMENT, PAGE, ELEMENT, WORD, LINE
+    #       },
+    #       output_format: { # required
+    #         additional_file_format: { # required
+    #           state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         },
+    #         text_format: { # required
+    #           types: ["PLAIN_TEXT"], # accepts PLAIN_TEXT, MARKDOWN, HTML, CSV
+    #         },
+    #       },
+    #     },
+    #     generative_configuration: {
+    #       summarization: {
+    #         state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
+    #       figure_caption: {
+    #         state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
+    #     },
+    #     custom_configuration: {
+    #       blueprints: [ # required
+    #         {
+    #           blueprint_arn: "BlueprintArn", # required
+    #           blueprint_version: "BlueprintVersion",
+    #         },
+    #       ],
+    #       fallback_blueprints: [
+    #         {
+    #           blueprint_arn: "BlueprintArn", # required
+    #           blueprint_version: "BlueprintVersion",
+    #         },
+    #       ],
+    #     },
+    #     splitter_configuration: {
+    #       state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
+    #     sensitive_data_configuration: {
+    #       detection_mode: "DETECTION", # required, accepts DETECTION, DETECTION_AND_REDACTION, DISABLED
+    #       pii_entities_configuration: {
+    #         pii_entity_types: ["ALL"], # required, accepts ALL, ADDRESS, AGE, NAME, EMAIL, PHONE, USERNAME, PASSWORD, DRIVER_ID, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, PIN, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, IP_ADDRESS, MAC_ADDRESS, URL, AWS_ACCESS_KEY, AWS_SECRET_KEY, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+    #         redaction_mask_mode: "PII", # required, accepts PII, ENTITY_TYPE
+    #       },
+    #     },
+    #     encryption_configuration: {
+    #       kms_key_id: "EncryptionKmsKeyId", # required
+    #       kms_encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.project_arn #=> String
+    #   resp.status #=> String, one of "COMPLETED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/UpdateProject AWS API Documentation
+    #
+    # @overload update_project(params = {})
+    # @param [Hash] params ({})
+    def update_project(params = {}, options = {})
+      req = build_request(:update_project, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2865,7 +3666,7 @@ module Aws::Textract
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-textract'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

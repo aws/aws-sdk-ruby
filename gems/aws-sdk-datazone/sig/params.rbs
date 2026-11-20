@@ -236,6 +236,7 @@ module Aws
 
       type environment_configuration_user_parameter = {
       environment_id: ::String?,
+      environment_blueprint_id: ::String?,
       environment_resolved_account: {
         aws_account_id: ::String,
         region_name: ::String,

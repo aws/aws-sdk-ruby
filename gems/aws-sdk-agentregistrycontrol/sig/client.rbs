@@ -79,6 +79,46 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _AssociatePublisherResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociatePublisherResponse]
+        def record_arn: () -> ::String
+        def public_identifier: () -> ::String
+        def publisher: () -> ::String
+        def status: () -> ("PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "SUSPENDED")
+        def status_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#associate_publisher-instance_method
+      def associate_publisher: (
+                                 record_arn: ::String,
+                                 publisher_arn: ::String,
+                                 ?subdomain: ::String,
+                                 ?categories: Array[::String],
+                                 ?client_token: ::String
+                               ) -> _AssociatePublisherResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociatePublisherResponseSuccess
+
+      interface _CreatePublisherResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePublisherResponse]
+        def value: () -> Types::Identifier
+        def identifier_type: () -> ("DOMAIN")
+        def status: () -> ("ACTION_REQUIRED" | "ACTIVE" | "FAILED" | "SUSPENDED" | "DELETING")
+        def status_reason: () -> ::String
+        def domain_challenge: () -> Types::DomainChallenge
+        def tags: () -> ::Hash[::String, ::String]
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def publisher_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#create_publisher-instance_method
+      def create_publisher: (
+                              value: {
+                                domain: ::String?
+                              },
+                              ?tags: Hash[::String, ::String],
+                              ?client_token: ::String
+                            ) -> _CreatePublisherResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePublisherResponseSuccess
+
       interface _CreateRegistryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateRegistryResponse]
         def registry_arn: () -> ::String
@@ -103,7 +143,7 @@ module Aws
                                default_schema: ::String?,
                                record_type_schema_overrides: Array[
                                  {
-                                   record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY"),
+                                   record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY" | "WEB_BOT"),
                                    schema: ::String
                                  }
                                ]?
@@ -127,7 +167,7 @@ module Aws
                                     name: ::String,
                                     ?display_name: ::String,
                                     ?description: ::String,
-                                    record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY"),
+                                    record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY" | "WEB_BOT"),
                                     descriptors: {
                                       mcp_server: {
                                         data: ::String?,
@@ -171,6 +211,14 @@ module Aws
                                       }?,
                                       agui: {
                                         source: Params::descriptor_source?
+                                      }?,
+                                      signature_agent_card: {
+                                        data: ::String?,
+                                        data_schema_version: ::String?,
+                                        source: Params::descriptor_source?,
+                                        additional_data: {
+                                          category: ("advertising" | "archiver" | "content_fetcher" | "email_client" | "http_library" | "link_checker" | "miscellaneous" | "monitoring" | "page_preview" | "scraping_framework" | "search_engine" | "security" | "seo" | "social_media" | "ai_training" | "ai_search" | "ai_assistant" | "ai_content_optimization")?
+                                        }?
                                       }?
                                     },
                                     ?artifact: {
@@ -187,6 +235,12 @@ module Aws
                                     ?tags: Hash[::String, ::String]
                                   ) -> _CreateRegistryRecordResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRegistryRecordResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#delete_publisher-instance_method
+      def delete_publisher: (
+                              publisher_arn: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _DeleteRegistryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRegistryResponse]
@@ -207,6 +261,30 @@ module Aws
                                     record_id: ::String
                                   ) -> _DeleteRegistryRecordResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRegistryRecordResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#disassociate_publisher-instance_method
+      def disassociate_publisher: (
+                                    record_arn: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetPublisherResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Publisher]
+        def value: () -> Types::Identifier
+        def identifier_type: () -> ("DOMAIN")
+        def status: () -> ("ACTION_REQUIRED" | "ACTIVE" | "FAILED" | "SUSPENDED" | "DELETING")
+        def status_reason: () -> ::String
+        def domain_challenge: () -> Types::DomainChallenge
+        def tags: () -> ::Hash[::String, ::String]
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def publisher_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#get_publisher-instance_method
+      def get_publisher: (
+                           publisher_arn: ::String
+                         ) -> _GetPublisherResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPublisherResponseSuccess
 
       interface _GetRegistryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRegistryResponse]
@@ -238,7 +316,7 @@ module Aws
         def name: () -> ::String
         def display_name: () -> ::String
         def description: () -> ::String
-        def record_type: () -> ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
+        def record_type: () -> ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY" | "WEB_BOT")
         def descriptors: () -> Types::Descriptors
         def record_version: () -> ::String
         def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "CREATE_PENDING_AUTH" | "UPDATE_PENDING_AUTH")
@@ -259,6 +337,31 @@ module Aws
                                  record_id: ::String
                                ) -> _GetRegistryRecordResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRegistryRecordResponseSuccess
+
+      interface _ListPublisherAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPublisherAssociationsResponse]
+        def items: () -> ::Array[Types::PublisherAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#list_publisher_associations-instance_method
+      def list_publisher_associations: (
+                                         ?publisher_arn: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListPublisherAssociationsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPublisherAssociationsResponseSuccess
+
+      interface _ListPublishersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPublishersResponse]
+        def items: () -> ::Array[Types::PublisherSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#list_publishers-instance_method
+      def list_publishers: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListPublishersResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPublishersResponseSuccess
 
       interface _ListRegistriesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRegistriesResponse]
@@ -342,6 +445,17 @@ module Aws
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
 
+      interface _UpdatePublisherAssociationApprovalStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePublisherAssociationApprovalStatusResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#update_publisher_association_approval_status-instance_method
+      def update_publisher_association_approval_status: (
+                                                          record_arn: ::String,
+                                                          approval_status: ("APPROVED" | "REJECTED"),
+                                                          approval_status_reason: ::String
+                                                        ) -> _UpdatePublisherAssociationApprovalStatusResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePublisherAssociationApprovalStatusResponseSuccess
+
       interface _UpdateRegistryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRegistryResponse]
         def name: () -> ::String
@@ -380,7 +494,7 @@ module Aws
                                  default_schema: ::String?,
                                  record_type_schema_overrides: Array[
                                    {
-                                     record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY"),
+                                     record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY" | "WEB_BOT"),
                                      schema: ::String
                                    }
                                  ]?
@@ -403,7 +517,7 @@ module Aws
         def name: () -> ::String
         def display_name: () -> ::String
         def description: () -> ::String
-        def record_type: () -> ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
+        def record_type: () -> ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY" | "WEB_BOT")
         def descriptors: () -> Types::Descriptors
         def record_version: () -> ::String
         def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "CREATE_PENDING_AUTH" | "UPDATE_PENDING_AUTH")
@@ -428,7 +542,7 @@ module Aws
                                     ?description: {
                                       optional_value: ::String?
                                     },
-                                    ?record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY"),
+                                    ?record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY" | "WEB_BOT"),
                                     ?descriptors: {
                                       optional_value: {
                                         mcp_server: {
@@ -521,6 +635,24 @@ module Aws
                                           optional_value: {
                                             source: Params::updated_descriptor_source?
                                           }?
+                                        }?,
+                                        signature_agent_card: {
+                                          optional_value: {
+                                            data: {
+                                              optional_value: ::String?
+                                            }?,
+                                            data_schema_version: {
+                                              optional_value: ::String?
+                                            }?,
+                                            source: Params::updated_descriptor_source?,
+                                            additional_data: {
+                                              optional_value: {
+                                                category: {
+                                                  optional_value: ("advertising" | "archiver" | "content_fetcher" | "email_client" | "http_library" | "link_checker" | "miscellaneous" | "monitoring" | "page_preview" | "scraping_framework" | "search_engine" | "security" | "seo" | "social_media" | "ai_training" | "ai_search" | "ai_assistant" | "ai_content_optimization")?
+                                                }?
+                                              }?
+                                            }?
+                                          }?
                                         }?
                                       }?
                                     },
@@ -560,6 +692,24 @@ module Aws
                                            status_reason: ::String
                                          ) -> _UpdateRegistryRecordStatusResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRegistryRecordStatusResponseSuccess
+
+      interface _ValidatePublisherResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ValidatePublisherResponse]
+        def value: () -> Types::Identifier
+        def identifier_type: () -> ("DOMAIN")
+        def status: () -> ("ACTION_REQUIRED" | "ACTIVE" | "FAILED" | "SUSPENDED" | "DELETING")
+        def status_reason: () -> ::String
+        def domain_challenge: () -> Types::DomainChallenge
+        def tags: () -> ::Hash[::String, ::String]
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def publisher_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#validate_publisher-instance_method
+      def validate_publisher: (
+                                publisher_arn: ::String
+                              ) -> _ValidatePublisherResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidatePublisherResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#wait_until-instance_method
       def wait_until: (:registry_ready waiter_name, 

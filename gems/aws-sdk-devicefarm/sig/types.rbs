@@ -283,6 +283,7 @@ module Aws::DeviceFarm
       attr_accessor model_id: ::String
       attr_accessor form_factor: ("PHONE" | "TABLET")
       attr_accessor platform: ("ANDROID" | "IOS")
+      attr_accessor type: ("PHYSICAL" | "VIRTUAL")
       attr_accessor os: ::String
       attr_accessor cpu: Types::CPU
       attr_accessor resolution: Types::Resolution
@@ -301,7 +302,7 @@ module Aws::DeviceFarm
     end
 
     class DeviceFilter
-      attr_accessor attribute: ("ARN" | "PLATFORM" | "OS_VERSION" | "MODEL" | "AVAILABILITY" | "FORM_FACTOR" | "MANUFACTURER" | "REMOTE_ACCESS_ENABLED" | "REMOTE_DEBUG_ENABLED" | "INSTANCE_ARN" | "INSTANCE_LABELS" | "FLEET_TYPE")
+      attr_accessor attribute: ("ARN" | "PLATFORM" | "OS_VERSION" | "MODEL" | "AVAILABILITY" | "FORM_FACTOR" | "DEVICE_TYPE" | "MANUFACTURER" | "REMOTE_ACCESS_ENABLED" | "REMOTE_DEBUG_ENABLED" | "INSTANCE_ARN" | "INSTANCE_LABELS" | "FLEET_TYPE")
       attr_accessor operator: ("EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "IN" | "NOT_IN" | "CONTAINS")
       attr_accessor values: ::Array[::String]
       SENSITIVE: []
@@ -570,7 +571,7 @@ module Aws::DeviceFarm
 
     class IncompatibilityMessage
       attr_accessor message: ::String
-      attr_accessor type: ("ARN" | "PLATFORM" | "FORM_FACTOR" | "MANUFACTURER" | "REMOTE_ACCESS_ENABLED" | "REMOTE_DEBUG_ENABLED" | "APPIUM_VERSION" | "INSTANCE_ARN" | "INSTANCE_LABELS" | "FLEET_TYPE" | "OS_VERSION" | "MODEL" | "AVAILABILITY")
+      attr_accessor type: ("ARN" | "PLATFORM" | "FORM_FACTOR" | "DEVICE_TYPE" | "MANUFACTURER" | "REMOTE_ACCESS_ENABLED" | "REMOTE_DEBUG_ENABLED" | "APPIUM_VERSION" | "INSTANCE_ARN" | "INSTANCE_LABELS" | "FLEET_TYPE" | "OS_VERSION" | "MODEL" | "AVAILABILITY")
       SENSITIVE: []
     end
 
@@ -1126,7 +1127,7 @@ module Aws::DeviceFarm
     end
 
     class Rule
-      attr_accessor attribute: ("ARN" | "PLATFORM" | "FORM_FACTOR" | "MANUFACTURER" | "REMOTE_ACCESS_ENABLED" | "REMOTE_DEBUG_ENABLED" | "APPIUM_VERSION" | "INSTANCE_ARN" | "INSTANCE_LABELS" | "FLEET_TYPE" | "OS_VERSION" | "MODEL" | "AVAILABILITY")
+      attr_accessor attribute: ("ARN" | "PLATFORM" | "FORM_FACTOR" | "DEVICE_TYPE" | "MANUFACTURER" | "REMOTE_ACCESS_ENABLED" | "REMOTE_DEBUG_ENABLED" | "APPIUM_VERSION" | "INSTANCE_ARN" | "INSTANCE_LABELS" | "FLEET_TYPE" | "OS_VERSION" | "MODEL" | "AVAILABILITY")
       attr_accessor operator: ("EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "IN" | "NOT_IN" | "CONTAINS")
       attr_accessor value: ::String
       SENSITIVE: []

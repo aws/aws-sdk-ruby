@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.159.0 (2026-11-20)
+------------------
+
+* Feature - This release adds the TranscribeAudio API for synchronous transcription. Send a media file inline or from Amazon S3 and receive the transcript in the same response, with support for speaker, channel identification, language identification, custom vocabularies, vocabulary filters, and PII redaction.
+
 1.158.0 (2026-11-18)
 ------------------
 

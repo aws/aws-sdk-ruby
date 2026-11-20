@@ -137,6 +137,30 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # Configures the use of the AI security managed rule group,
+    # `AWSManagedRulesAISecurityRuleSet`. This configuration is used in
+    # `ManagedRuleGroupConfig`.
+    #
+    # The rule group always runs its own inspections. The configuration that
+    # you provide here determines whether the rule group also uses Amazon
+    # Bedrock Guardrails to inspect web requests, or web requests and
+    # responses.
+    #
+    # Use of this rule group is not supported in Firewall Manager.
+    #
+    # @!attribute [rw] bedrock_guardrails
+    #   Specifies whether and how the rule group uses Amazon Bedrock
+    #   Guardrails.
+    #   @return [Types::BedrockGuardrails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AWSManagedRulesAISecurityRuleSet AWS API Documentation
+    #
+    class AWSManagedRulesAISecurityRuleSet < Struct.new(
+      :bedrock_guardrails)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details for your use of the account takeover prevention managed rule
     # group, `AWSManagedRulesATPRuleSet`. This configuration is used in
     # `ManagedRuleGroupConfig`.
@@ -483,6 +507,121 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # An API endpoint pattern that an API security event involves.
+    #
+    # @!attribute [rw] method
+    #   The HTTP method of the API pattern. For example, `GET` or `POST`.
+    #   @return [String]
+    #
+    # @!attribute [rw] path_pattern
+    #   The normalized URI path of the API pattern. Templated path segments
+    #   are shown in braces. For example, `/api/v1/accounts/{id}`.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port of the API pattern. For example, `443`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] domains
+    #   The domains that the API pattern was observed on. For example,
+    #   `api.example.com`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ApiPattern AWS API Documentation
+    #
+    class ApiPattern < Struct.new(
+      :method,
+      :path_pattern,
+      :port,
+      :domains)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An API pattern to filter events by, used in ListEvents and
+    # ListEventsByWebACL.
+    #
+    # @!attribute [rw] method
+    #   The HTTP method that you want the filter to match. For example,
+    #   `GET` or `POST`.
+    #   @return [String]
+    #
+    # @!attribute [rw] path_pattern
+    #   The normalized URI path that you want the filter to match. For
+    #   example, `/api/v1/accounts/{id}`.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port that you want the filter to match. For example, `443`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] domains
+    #   The domains that you want the filter to match. You can specify up to
+    #   10 domains.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ApiPatternFilter AWS API Documentation
+    #
+    class ApiPatternFilter < Struct.new(
+      :method,
+      :path_pattern,
+      :port,
+      :domains)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The API security details of an event.
+    #
+    # @!attribute [rw] label
+    #   The fully qualified name of the label that WAF assigned to the
+    #   event. For example,
+    #   `awswaf:managed:aws:api-security:credential-stuffing-high`.
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   The API security threat category of the event. For example,
+    #   `API2:2023`.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence level of the event detection: `LOW`, `MEDIUM`, or
+    #   `HIGH`.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_patterns
+    #   The API patterns that the event involves. The list contains up to 20
+    #   API patterns.
+    #   @return [Array<Types::ApiPattern>]
+    #
+    # @!attribute [rw] event_actors
+    #   The event actors that are associated with the event. The list
+    #   contains up to 20 event actors. To retrieve the details of an event
+    #   actor, provide its `EventActorId` to GetEventActor.
+    #   @return [Array<Types::EventActorReference>]
+    #
+    # @!attribute [rw] timeline
+    #   The changes to the event's label, confidence, and API patterns over
+    #   time, ordered from oldest to newest. The list contains up to 32
+    #   entries.
+    #
+    #   For ListEvents and ListEventsByWebACL, this is returned only if you
+    #   specify `TIMELINE` in the request `Include` setting.
+    #   @return [Array<Types::EventTimelineEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ApiSecurityEventDetail AWS API Documentation
+    #
+    class ApiSecurityEventDetail < Struct.new(
+      :label,
+      :category,
+      :confidence,
+      :api_patterns,
+      :event_actors,
+      :timeline)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Application details defined during the web ACL creation process.
     # Application attributes help WAF give recommendations for protection
     # packs.
@@ -614,9 +753,10 @@ module Aws::WAFV2
     #
     # Use this to customize the maximum size of the request body that your
     # protected resources forward to WAF for inspection. You can customize
-    # this setting for CloudFront, API Gateway, Amazon Cognito, App Runner,
-    # or Verified Access resources. The default setting is 16 KB (16,384
-    # bytes).
+    # this setting for Application Load Balancer, CloudFront, API Gateway,
+    # Amazon Cognito, App Runner, or Verified Access resources. The default
+    # setting is 8 KB (8,192 bytes) for Application Load Balancer and 16 KB
+    # (16,384 bytes) for the other resource types.
     #
     # <note markdown="1"> You are charged additional fees when your protected resources forward
     # body sizes that are larger than the default. For more information, see
@@ -624,8 +764,7 @@ module Aws::WAFV2
     #
     #  </note>
     #
-    # For Application Load Balancer and AppSync, the limit is fixed at 8 KB
-    # (8,192 bytes).
+    # For AppSync, the limit is fixed at 8 KB (8,192 bytes).
     #
     # You can also use this to have your CloudFront distributions insert the
     # WAF challenge JavaScript SDK into the HTML responses that they return.
@@ -638,10 +777,11 @@ module Aws::WAFV2
     #
     # @!attribute [rw] request_body
     #   Customizes the maximum size of the request body that your protected
-    #   CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified
-    #   Access resources forward to WAF for inspection. The default size is
-    #   16 KB (16,384 bytes). You can change the setting for any of the
-    #   available resource types.
+    #   Application Load Balancer, CloudFront, API Gateway, Amazon Cognito,
+    #   App Runner, and Verified Access resources forward to WAF for
+    #   inspection. The default size is 8 KB (8,192 bytes) for Application
+    #   Load Balancer and 16 KB (16,384 bytes) for the other resource types.
+    #   You can change the setting for any of the available resource types.
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more
@@ -650,10 +790,9 @@ module Aws::WAFV2
     #    </note>
     #
     #   Example JSON: ` { "API_GATEWAY": "KB_48", "APP_RUNNER_SERVICE":
-    #   "KB_32" }`
+    #   "KB_32", "APPLICATION_LOAD_BALANCER": "KB_16" }`
     #
-    #   For Application Load Balancer and AppSync, the limit is fixed at 8
-    #   KB (8,192 bytes).
+    #   For AppSync, the limit is fixed at 8 KB (8,192 bytes).
     #
     #
     #
@@ -713,6 +852,87 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # Specifies whether the AI security managed rule group,
+    # `AWSManagedRulesAISecurityRuleSet`, uses Amazon Bedrock Guardrails to
+    # inspect web requests, or web requests and responses.
+    #
+    # Specify exactly one of the following settings: `Disable`,
+    # `ProtectRequestOnly`, or `ProtectRequestAndResponse`.
+    #
+    # @!attribute [rw] disable
+    #   Turns off the use of Amazon Bedrock Guardrails. The rule group
+    #   continues to run its own inspections.
+    #
+    #   JSON specification: `"Disable": {}`
+    #   @return [Types::DisableBedrockGuardrails]
+    #
+    # @!attribute [rw] protect_request_only
+    #   Uses Amazon Bedrock Guardrails to inspect web requests.
+    #   @return [Types::BedrockGuardrailsRequestOnly]
+    #
+    # @!attribute [rw] protect_request_and_response
+    #   Uses Amazon Bedrock Guardrails to inspect web requests and the
+    #   responses to them.
+    #   @return [Types::BedrockGuardrailsRequestAndResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/BedrockGuardrails AWS API Documentation
+    #
+    class BedrockGuardrails < Struct.new(
+      :disable,
+      :protect_request_only,
+      :protect_request_and_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures the AI security managed rule group to use Amazon Bedrock
+    # Guardrails to inspect web requests and the responses to them.
+    #
+    # This is used in the `BedrockGuardrails` setting of
+    # `AWSManagedRulesAISecurityRuleSet`.
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that WAF uses to call
+    #   Amazon Bedrock Guardrails for the rule group. The role must be in
+    #   the same Amazon Web Services account as the web ACL.
+    #
+    #   To specify the role, you must have permission to call `iam:PassRole`
+    #   on it, to pass it to the WAF service principal
+    #   `wafv2.amazonaws.com`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/BedrockGuardrailsRequestAndResponse AWS API Documentation
+    #
+    class BedrockGuardrailsRequestAndResponse < Struct.new(
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures the AI security managed rule group to use Amazon Bedrock
+    # Guardrails to inspect web requests.
+    #
+    # This is used in the `BedrockGuardrails` setting of
+    # `AWSManagedRulesAISecurityRuleSet`.
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that WAF uses to call
+    #   Amazon Bedrock Guardrails for the rule group. The role must be in
+    #   the same Amazon Web Services account as the web ACL.
+    #
+    #   To specify the role, you must have permission to call `iam:PassRole`
+    #   on it, to pass it to the WAF service principal
+    #   `wafv2.amazonaws.com`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/BedrockGuardrailsRequestOnly AWS API Documentation
+    #
+    class BedrockGuardrailsRequestOnly < Struct.new(
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies that WAF should block the request and optionally defines
     # additional custom handling for the response to the web request.
     #
@@ -754,8 +974,11 @@ module Aws::WAFV2
     #   host service only forwards the contents that are within the limit to
     #   WAF for inspection.
     #
-    #   * For Application Load Balancer and AppSync, the limit is fixed at 8
-    #     KB (8,192 bytes).
+    #   * For AppSync, the limit is fixed at 8 KB (8,192 bytes).
+    #
+    #   * For Application Load Balancer, the default limit is 8 KB (8,192
+    #     bytes), and you can change the limit in the web ACL
+    #     `AssociationConfig`.
     #
     #   * For CloudFront, API Gateway, Amazon Cognito, App Runner, and
     #     Verified Access, the default limit is 16 KB (16,384 bytes), and
@@ -2041,9 +2264,10 @@ module Aws::WAFV2
     #
     #   Use this to customize the maximum size of the request body that your
     #   protected resources forward to WAF for inspection. You can customize
-    #   this setting for CloudFront, API Gateway, Amazon Cognito, App
-    #   Runner, or Verified Access resources. The default setting is 16 KB
-    #   (16,384 bytes).
+    #   this setting for Application Load Balancer, CloudFront, API Gateway,
+    #   Amazon Cognito, App Runner, or Verified Access resources. The
+    #   default setting is 8 KB (8,192 bytes) for Application Load Balancer
+    #   and 16 KB (16,384 bytes) for the other resource types.
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more
@@ -2051,8 +2275,7 @@ module Aws::WAFV2
     #
     #    </note>
     #
-    #   For Application Load Balancer and AppSync, the limit is fixed at 8
-    #   KB (8,192 bytes).
+    #   For AppSync, the limit is fixed at 8 KB (8,192 bytes).
     #
     #   You can also use this to have your CloudFront distributions insert
     #   the WAF challenge JavaScript SDK into the HTML responses that they
@@ -3006,6 +3229,21 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # Turns off the use of Amazon Bedrock Guardrails in the AI security
+    # managed rule group. The rule group continues to run its own
+    # inspections.
+    #
+    # This is used in the `BedrockGuardrails` setting of
+    # `AWSManagedRulesAISecurityRuleSet`.
+    #
+    # JSON specification: `"Disable": {}`
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DisableBedrockGuardrails AWS API Documentation
+    #
+    class DisableBedrockGuardrails < Aws::EmptyStructure; end
+
     # A WAF feature that is not supported by the CloudFront pricing plan
     # associated with the web ACL.
     #
@@ -3108,6 +3346,336 @@ module Aws::WAFV2
     #
     class EmailField < Struct.new(
       :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A change to the network attributes of an event actor.
+    #
+    # @!attribute [rw] change_time
+    #   The time of the change.
+    #   @return [Time]
+    #
+    # @!attribute [rw] client_ip
+    #   The client IP address of the event actor after the change.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_fingerprint
+    #   The TLS fingerprint of the event actor after the change, such as a
+    #   JA3 or JA4 fingerprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] asn
+    #   The autonomous system number (ASN) that is associated with the
+    #   client IP address after the change.
+    #   @return [String]
+    #
+    # @!attribute [rw] asn_organization
+    #   The name of the organization that owns the ASN after the change.
+    #   @return [String]
+    #
+    # @!attribute [rw] country
+    #   The country of the client IP address after the change.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/EventActorChange AWS API Documentation
+    #
+    class EventActorChange < Struct.new(
+      :change_time,
+      :client_ip,
+      :tls_fingerprint,
+      :asn,
+      :asn_organization,
+      :country)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of an event actor, returned by GetEventActor.
+    #
+    # @!attribute [rw] summary
+    #   The latest observed attributes of the event actor.
+    #   @return [Types::EventActorDetailSummary]
+    #
+    # @!attribute [rw] events
+    #   The API security events that the event actor is associated with. The
+    #   list contains up to 20 events.
+    #   @return [Array<Types::RelatedEvent>]
+    #
+    # @!attribute [rw] changes
+    #   The history of changes to the network attributes of the event actor,
+    #   ordered from oldest to newest. The list contains up to 20 entries.
+    #   @return [Array<Types::EventActorChange>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/EventActorDetail AWS API Documentation
+    #
+    class EventActorDetail < Struct.new(
+      :summary,
+      :events,
+      :changes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The latest observed attributes of an event actor.
+    #
+    # @!attribute [rw] event_actor_id
+    #   The unique identifier of the event actor.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_ip
+    #   The client IP address of the event actor.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_fingerprint
+    #   The TLS fingerprint of the event actor, such as a JA3 or JA4
+    #   fingerprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] asn
+    #   The autonomous system number (ASN) that is associated with the
+    #   client IP address of the event actor.
+    #   @return [String]
+    #
+    # @!attribute [rw] asn_organization
+    #   The name of the organization that owns the ASN. For example,
+    #   `AMAZON-02`.
+    #   @return [String]
+    #
+    # @!attribute [rw] country
+    #   The country of the client IP address of the event actor.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_fingerprint
+    #   A hash of the authentication credentials that the client of the
+    #   event actor provides in the request. These can include a JSON Web
+    #   Token (JWT), a JSON Web Encryption (JWE) token, an Amazon Web
+    #   Services Signature Version 4 (SigV4) signature, or basic
+    #   authentication credentials. You can use the fingerprint to match the
+    #   same client across events and in your WAF logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when WAF first observed the event actor.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/EventActorDetailSummary AWS API Documentation
+    #
+    class EventActorDetailSummary < Struct.new(
+      :event_actor_id,
+      :client_ip,
+      :tls_fingerprint,
+      :asn,
+      :asn_organization,
+      :country,
+      :auth_fingerprint,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A reference to an event actor that is associated with an API security
+    # event.
+    #
+    # @!attribute [rw] event_actor_id
+    #   The unique identifier of the event actor. You provide this to
+    #   GetEventActor to retrieve the details of the event actor.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_actor_value
+    #   The observed identifier of the event actor. For example, a client IP
+    #   address or an authentication fingerprint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/EventActorReference AWS API Documentation
+    #
+    class EventActorReference < Struct.new(
+      :event_actor_id,
+      :event_actor_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # High-level information about an event actor, returned by
+    # ListEventActors.
+    #
+    # @!attribute [rw] event_actor_id
+    #   The unique identifier of the event actor. You provide this to
+    #   GetEventActor to retrieve the details of the event actor.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_ip
+    #   The client IP address of the event actor.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_fingerprint
+    #   The TLS fingerprint of the event actor, such as a JA3 or JA4
+    #   fingerprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] asn
+    #   The autonomous system number (ASN) that is associated with the
+    #   client IP address of the event actor.
+    #   @return [String]
+    #
+    # @!attribute [rw] asn_organization
+    #   The name of the organization that owns the ASN. For example,
+    #   `AMAZON-02`.
+    #   @return [String]
+    #
+    # @!attribute [rw] country
+    #   The country of the client IP address of the event actor.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_fingerprint
+    #   A hash of the authentication credentials that the client of the
+    #   event actor provides in the request. These can include a JSON Web
+    #   Token (JWT), a JSON Web Encryption (JWE) token, an Amazon Web
+    #   Services Signature Version 4 (SigV4) signature, or basic
+    #   authentication credentials. You can use the fingerprint to match the
+    #   same client across events and in your WAF logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when WAF first observed the event actor.
+    #   @return [Time]
+    #
+    # @!attribute [rw] event_count
+    #   The number of API security events that the event actor is associated
+    #   with in the requested time window.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/EventActorSummary AWS API Documentation
+    #
+    class EventActorSummary < Struct.new(
+      :event_actor_id,
+      :client_ip,
+      :tls_fingerprint,
+      :asn,
+      :asn_organization,
+      :country,
+      :auth_fingerprint,
+      :created_at,
+      :event_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an API security event, returned by ListEvents,
+    # ListEventsByWebACL, and GetEvent.
+    #
+    # @!attribute [rw] event_id
+    #   The unique identifier of the event. You provide this to GetEvent to
+    #   retrieve the details of the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_status
+    #   The current status of the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_category
+    #   The category of the event. The only supported value is
+    #   `API_SECURITY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time when the event started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time when the event was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time when the event ended. This is not populated while the event
+    #   is ongoing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the protected resource that the
+    #   event is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] web_acl_arn
+    #   The Amazon Resource Name (ARN) of the web ACL that the event is
+    #   associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_security_event_detail
+    #   The API security details of the event, such as the label, category,
+    #   confidence, API patterns, and event actors.
+    #   @return [Types::ApiSecurityEventDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/EventDetailSummary AWS API Documentation
+    #
+    class EventDetailSummary < Struct.new(
+      :event_id,
+      :event_status,
+      :event_category,
+      :start_time,
+      :last_updated_time,
+      :end_time,
+      :resource_arn,
+      :web_acl_arn,
+      :api_security_event_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter to narrow the events that are returned by ListEvents and
+    # ListEventsByWebACL.
+    #
+    # @!attribute [rw] name
+    #   The name of the field to filter on. Valid values:
+    #
+    #   * `EVENT_CATEGORY` - Filter by event category. The only supported
+    #     filter value is `API_SECURITY`.
+    #
+    #   * `RESOURCE_ARN` - Filter by protected resource. The filter values
+    #     are the Amazon Resource Name (ARN)s of the protected resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values to filter on. You can specify up to 10 values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/EventFilter AWS API Documentation
+    #
+    class EventFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A change to the label, confidence, or API patterns of an API security
+    # event.
+    #
+    # @!attribute [rw] change_time
+    #   The time of the change.
+    #   @return [Time]
+    #
+    # @!attribute [rw] label
+    #   The fully qualified name of the label that was assigned to the event
+    #   at the time of the change.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence level of the event detection at the time of the
+    #   change: `LOW`, `MEDIUM`, or `HIGH`.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_patterns
+    #   The API patterns that the event involved at the time of the change.
+    #   @return [Array<Types::ApiPattern>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/EventTimelineEntry AWS API Documentation
+    #
+    class EventTimelineEntry < Struct.new(
+      :change_time,
+      :label,
+      :confidence,
+      :api_patterns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3215,8 +3783,11 @@ module Aws::WAFV2
     #   host service only forwards the contents that are within the limit to
     #   WAF for inspection.
     #
-    #   * For Application Load Balancer and AppSync, the limit is fixed at 8
-    #     KB (8,192 bytes).
+    #   * For AppSync, the limit is fixed at 8 KB (8,192 bytes).
+    #
+    #   * For Application Load Balancer, the default limit is 8 KB (8,192
+    #     bytes), and you can change the limit in the web ACL
+    #     `AssociationConfig`.
     #
     #   * For CloudFront, API Gateway, Amazon Cognito, App Runner, and
     #     Verified Access, the default limit is 16 KB (16,384 bytes), and
@@ -3246,8 +3817,11 @@ module Aws::WAFV2
     #   host service only forwards the contents that are within the limit to
     #   WAF for inspection.
     #
-    #   * For Application Load Balancer and AppSync, the limit is fixed at 8
-    #     KB (8,192 bytes).
+    #   * For AppSync, the limit is fixed at 8 KB (8,192 bytes).
+    #
+    #   * For Application Load Balancer, the default limit is 8 KB (8,192
+    #     bytes), and you can change the limit in the web ACL
+    #     `AssociationConfig`.
     #
     #   * For CloudFront, API Gateway, Amazon Cognito, App Runner, and
     #     Verified Access, the default limit is 16 KB (16,384 bytes), and
@@ -3757,6 +4331,93 @@ module Aws::WAFV2
     class GetDecryptedAPIKeyResponse < Struct.new(
       :token_domains,
       :creation_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scope
+    #   Specifies whether this is for a global resource type, such as a
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
+    #
+    #   To work with CloudFront, you must also specify the Region US East
+    #   (N. Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_actor_id
+    #   The unique identifier of the event actor. WAF returns the event
+    #   actor ID in the event details of ListEvents, ListEventsByWebACL, and
+    #   GetEvent, and in the response to ListEventActors.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetEventActorRequest AWS API Documentation
+    #
+    class GetEventActorRequest < Struct.new(
+      :scope,
+      :event_actor_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_actor
+    #   The details of the event actor.
+    #   @return [Types::EventActorDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetEventActorResponse AWS API Documentation
+    #
+    class GetEventActorResponse < Struct.new(
+      :event_actor)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scope
+    #   Specifies whether this is for a global resource type, such as a
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
+    #
+    #   To work with CloudFront, you must also specify the Region US East
+    #   (N. Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_id
+    #   The unique identifier of the event. WAF returns the event ID in the
+    #   responses to ListEvents and ListEventsByWebACL.
+    #   @return [String]
+    #
+    # @!attribute [rw] web_acl_arn
+    #   The Amazon Resource Name (ARN) of the web ACL that the event is
+    #   associated with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetEventRequest AWS API Documentation
+    #
+    class GetEventRequest < Struct.new(
+      :scope,
+      :event_id,
+      :web_acl_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event
+    #   The details of the event.
+    #   @return [Types::EventDetailSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetEventResponse AWS API Documentation
+    #
+    class GetEventResponse < Struct.new(
+      :event)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5412,8 +6073,11 @@ module Aws::WAFV2
     #   host service only forwards the contents that are within the limit to
     #   WAF for inspection.
     #
-    #   * For Application Load Balancer and AppSync, the limit is fixed at 8
-    #     KB (8,192 bytes).
+    #   * For AppSync, the limit is fixed at 8 KB (8,192 bytes).
+    #
+    #   * For Application Load Balancer, the default limit is 8 KB (8,192
+    #     bytes), and you can change the limit in the web ACL
+    #     `AssociationConfig`.
     #
     #   * For CloudFront, API Gateway, Amazon Cognito, App Runner, and
     #     Verified Access, the default limit is 16 KB (16,384 bytes), and
@@ -5796,6 +6460,316 @@ module Aws::WAFV2
     class ListAvailableManagedRuleGroupsResponse < Struct.new(
       :next_marker,
       :managed_rule_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scope
+    #   Specifies whether this is for a global resource type, such as a
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
+    #
+    #   To work with CloudFront, you must also specify the Region US East
+    #   (N. Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_window
+    #   The time range for the event actors to return. The time window
+    #   can't be longer than one year.
+    #   @return [Types::TimeWindow]
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort event actors by. The only supported value is
+    #   `EVENT_COUNT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of event actors that you want WAF to return for
+    #   this request. Valid values are 1 to 100. If more event actors are
+    #   available, WAF returns a `NextMarker` value in the response that you
+    #   can use in a subsequent call to get the next batch of event actors.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListEventActorsRequest AWS API Documentation
+    #
+    class ListEventActorsRequest < Struct.new(
+      :scope,
+      :time_window,
+      :sort_by,
+      :limit,
+      :next_marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_actors
+    #   The list of event actor summaries.
+    #   @return [Array<Types::EventActorSummary>]
+    #
+    # @!attribute [rw] next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListEventActorsResponse AWS API Documentation
+    #
+    class ListEventActorsResponse < Struct.new(
+      :event_actors,
+      :next_marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scope
+    #   Specifies whether this is for a global resource type, such as a
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
+    #
+    #   To work with CloudFront, you must also specify the Region US East
+    #   (N. Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #   @return [String]
+    #
+    # @!attribute [rw] web_acl_arn
+    #   The Amazon Resource Name (ARN) of the web ACL whose events you want
+    #   to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_window
+    #   The time range for the events to return. If you don't specify a
+    #   time window, WAF returns events from the past year. The time window
+    #   can't be longer than one year.
+    #   @return [Types::TimeWindow]
+    #
+    # @!attribute [rw] filters
+    #   Filters that narrow the results by event category or by the Amazon
+    #   Resource Name (ARN) of the protected resource. You can specify up to
+    #   8 filters.
+    #   @return [Array<Types::EventFilter>]
+    #
+    # @!attribute [rw] api_pattern_filters
+    #   Filters that narrow the results to events that involve the specified
+    #   API patterns. If you specify more than one API pattern filter, WAF
+    #   returns the events that match any of the filters. You can specify up
+    #   to 20 API pattern filters.
+    #   @return [Array<Types::ApiPatternFilter>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of events that you want WAF to return for this
+    #   request. Valid values are 1 to 20. If more events are available, WAF
+    #   returns a `NextMarker` value in the response that you can use in a
+    #   subsequent call to get the next batch of events.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #
+    #   The marker is valid only for a request with the same `WebAclArn`,
+    #   `TimeWindow`, `Filters`, `SortBy`, and `SortOrder` settings as the
+    #   request that returned it.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The order in which WAF sorts the events. Valid values:
+    #
+    #   * `ASC` - Sort in ascending order.
+    #
+    #   * `DESC` - Sort in descending order. This is the default.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The field that WAF sorts the events by. Valid values:
+    #
+    #   * `CONFIDENCE` - Sort by the confidence level of the event
+    #     detection.
+    #
+    #   * `END_TIME` - Sort by the time that the event ended.
+    #
+    #   * `START_TIME` - Sort by the time that the event started.
+    #   @return [String]
+    #
+    # @!attribute [rw] include
+    #   Additional fields to return with each event summary. By default, the
+    #   response includes only the default summary fields.
+    #
+    #   Specify `TIMELINE` to return the timeline of each event in
+    #   `ApiSecurityEventDetail$Timeline`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListEventsByWebACLRequest AWS API Documentation
+    #
+    class ListEventsByWebACLRequest < Struct.new(
+      :scope,
+      :web_acl_arn,
+      :time_window,
+      :filters,
+      :api_pattern_filters,
+      :limit,
+      :next_marker,
+      :sort_order,
+      :sort_by,
+      :include)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] events
+    #   The list of event summaries.
+    #   @return [Array<Types::EventDetailSummary>]
+    #
+    # @!attribute [rw] next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListEventsByWebACLResponse AWS API Documentation
+    #
+    class ListEventsByWebACLResponse < Struct.new(
+      :events,
+      :next_marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scope
+    #   Specifies whether this is for a global resource type, such as a
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
+    #
+    #   To work with CloudFront, you must also specify the Region US East
+    #   (N. Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_window
+    #   The time range for the events to return. If you don't specify a
+    #   time window, WAF returns events from the past year. The time window
+    #   can't be longer than one year.
+    #   @return [Types::TimeWindow]
+    #
+    # @!attribute [rw] filters
+    #   Filters that narrow the results by event category or by the Amazon
+    #   Resource Name (ARN) of the protected resource. You can specify up to
+    #   8 filters.
+    #   @return [Array<Types::EventFilter>]
+    #
+    # @!attribute [rw] api_pattern_filters
+    #   Filters that narrow the results to events that involve the specified
+    #   API patterns. If you specify more than one API pattern filter, WAF
+    #   returns the events that match any of the filters. You can specify up
+    #   to 20 API pattern filters.
+    #   @return [Array<Types::ApiPatternFilter>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of events that you want WAF to return for this
+    #   request. Valid values are 1 to 20. If more events are available, WAF
+    #   returns a `NextMarker` value in the response that you can use in a
+    #   subsequent call to get the next batch of events.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #
+    #   The marker is valid only for a request with the same `TimeWindow`,
+    #   `Filters`, `SortBy`, and `SortOrder` settings as the request that
+    #   returned it.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The order in which WAF sorts the events. Valid values:
+    #
+    #   * `ASC` - Sort in ascending order.
+    #
+    #   * `DESC` - Sort in descending order. This is the default.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The field that WAF sorts the events by. Valid values:
+    #
+    #   * `CONFIDENCE` - Sort by the confidence level of the event
+    #     detection.
+    #
+    #   * `END_TIME` - Sort by the time that the event ended.
+    #
+    #   * `START_TIME` - Sort by the time that the event started.
+    #   @return [String]
+    #
+    # @!attribute [rw] include
+    #   Additional fields to return with each event summary. By default, the
+    #   response includes only the default summary fields.
+    #
+    #   Specify `TIMELINE` to return the timeline of each event in
+    #   `ApiSecurityEventDetail$Timeline`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListEventsRequest AWS API Documentation
+    #
+    class ListEventsRequest < Struct.new(
+      :scope,
+      :time_window,
+      :filters,
+      :api_pattern_filters,
+      :limit,
+      :next_marker,
+      :sort_order,
+      :sort_by,
+      :include)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] events
+    #   The list of event summaries.
+    #   @return [Array<Types::EventDetailSummary>]
+    #
+    # @!attribute [rw] next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListEventsResponse AWS API Documentation
+    #
+    class ListEventsResponse < Struct.new(
+      :events,
+      :next_marker)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6677,6 +7651,12 @@ module Aws::WAFV2
     #   your application and the locations in the account creation request
     #   payload of data, such as the user email and phone number fields.
     #
+    # * Use the `AWSManagedRulesAISecurityRuleSet` configuration object to
+    #   configure the AI security managed rule group. The configuration
+    #   specifies whether the rule group uses Amazon Bedrock Guardrails to
+    #   inspect web requests, or web requests and responses, and the IAM
+    #   role that WAF uses to call Amazon Bedrock Guardrails.
+    #
     # * Use the `AWSManagedRulesAntiDDoSRuleSet` configuration object to
     #   configure the anti-DDoS managed rule group. The configuration
     #   includes the sensitivity levels to use in the rules that typically
@@ -6796,6 +7776,21 @@ module Aws::WAFV2
     #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-anti-ddos.html
     #   @return [Types::AWSManagedRulesAntiDDoSRuleSet]
     #
+    # @!attribute [rw] aws_managed_rules_ai_security_rule_set
+    #   Additional configuration for using the AI security managed rule
+    #   group, `AWSManagedRulesAISecurityRuleSet`. Use this to specify
+    #   whether the rule group uses Amazon Bedrock Guardrails to inspect web
+    #   requests, or web requests and responses.
+    #
+    #   For information about the Amazon Web Services Managed Rules rule
+    #   groups, see [Amazon Web Services Managed Rules rule groups list][1]
+    #   in the *WAF Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-list
+    #   @return [Types::AWSManagedRulesAISecurityRuleSet]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedRuleGroupConfig AWS API Documentation
     #
     class ManagedRuleGroupConfig < Struct.new(
@@ -6806,7 +7801,8 @@ module Aws::WAFV2
       :aws_managed_rules_bot_control_rule_set,
       :aws_managed_rules_atp_rule_set,
       :aws_managed_rules_acfp_rule_set,
-      :aws_managed_rules_anti_d_do_s_rule_set)
+      :aws_managed_rules_anti_d_do_s_rule_set,
+      :aws_managed_rules_ai_security_rule_set)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6885,6 +7881,12 @@ module Aws::WAFV2
     #     pages of your application and the locations in the account
     #     creation request payload of data, such as the user email and phone
     #     number fields.
+    #
+    #   * Use the `AWSManagedRulesAISecurityRuleSet` configuration object to
+    #     configure the AI security managed rule group. The configuration
+    #     specifies whether the rule group uses Amazon Bedrock Guardrails to
+    #     inspect web requests, or web requests and responses, and the IAM
+    #     role that WAF uses to call Amazon Bedrock Guardrails.
     #
     #   * Use the `AWSManagedRulesAntiDDoSRuleSet` configuration object to
     #     configure the anti-DDoS managed rule group. The configuration
@@ -8817,6 +9819,49 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # An API security event that an event actor is associated with.
+    #
+    # @!attribute [rw] event_id
+    #   The unique identifier of the event. You provide this to GetEvent to
+    #   retrieve the details of the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time when the event started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] label
+    #   The fully qualified name of the label that WAF assigned to the
+    #   event.
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   The API security threat category of the event. For example,
+    #   `API2:2023`.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence level of the event detection: `LOW`, `MEDIUM`, or
+    #   `HIGH`.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_patterns
+    #   The API patterns that the event involves.
+    #   @return [Array<Types::ApiPattern>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RelatedEvent AWS API Documentation
+    #
+    class RelatedEvent < Struct.new(
+      :event_id,
+      :start_time,
+      :label,
+      :category,
+      :confidence,
+      :api_patterns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # High level information for an SDK release.
     #
     # @!attribute [rw] release_version
@@ -8837,10 +9882,11 @@ module Aws::WAFV2
     end
 
     # Customizes the maximum size of the request body that your protected
-    # CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified
-    # Access resources forward to WAF for inspection. The default size is 16
-    # KB (16,384 bytes). You can change the setting for any of the available
-    # resource types.
+    # Application Load Balancer, CloudFront, API Gateway, Amazon Cognito,
+    # App Runner, and Verified Access resources forward to WAF for
+    # inspection. The default size is 8 KB (8,192 bytes) for Application
+    # Load Balancer and 16 KB (16,384 bytes) for the other resource types.
+    # You can change the setting for any of the available resource types.
     #
     # <note markdown="1"> You are charged additional fees when your protected resources forward
     # body sizes that are larger than the default. For more information, see
@@ -8849,10 +9895,9 @@ module Aws::WAFV2
     #  </note>
     #
     # Example JSON: ` { "API_GATEWAY": "KB_48", "APP_RUNNER_SERVICE":
-    # "KB_32" }`
+    # "KB_32", "APPLICATION_LOAD_BALANCER": "KB_16" }`
     #
-    # For Application Load Balancer and AppSync, the limit is fixed at 8 KB
-    # (8,192 bytes).
+    # For AppSync, the limit is fixed at 8 KB (8,192 bytes).
     #
     # This is used in the `AssociationConfig` of the web ACL.
     #
@@ -8862,12 +9907,16 @@ module Aws::WAFV2
     #
     # @!attribute [rw] default_size_inspection_limit
     #   Specifies the maximum size of the web request body component that an
-    #   associated CloudFront, API Gateway, Amazon Cognito, App Runner, or
-    #   Verified Access resource should send to WAF for inspection. This
-    #   applies to statements in the web ACL that inspect the body or JSON
-    #   body.
+    #   associated Application Load Balancer, CloudFront, API Gateway,
+    #   Amazon Cognito, App Runner, or Verified Access resource should send
+    #   to WAF for inspection. This applies to statements in the web ACL
+    #   that inspect the body or JSON body.
     #
-    #   Default: `16 KB (16,384 bytes)`
+    #   You can specify `KB_8` only for Application Load Balancer, with the
+    #   `APPLICATION_LOAD_BALANCER` resource type.
+    #
+    #   Default: `8 KB (8,192 bytes)` for Application Load Balancer and `16
+    #   KB (16,384 bytes)` for the other resource types
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RequestBodyAssociatedResourceTypeConfig AWS API Documentation
@@ -11385,9 +12434,10 @@ module Aws::WAFV2
     #
     #   Use this to customize the maximum size of the request body that your
     #   protected resources forward to WAF for inspection. You can customize
-    #   this setting for CloudFront, API Gateway, Amazon Cognito, App
-    #   Runner, or Verified Access resources. The default setting is 16 KB
-    #   (16,384 bytes).
+    #   this setting for Application Load Balancer, CloudFront, API Gateway,
+    #   Amazon Cognito, App Runner, or Verified Access resources. The
+    #   default setting is 8 KB (8,192 bytes) for Application Load Balancer
+    #   and 16 KB (16,384 bytes) for the other resource types.
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more
@@ -11395,8 +12445,7 @@ module Aws::WAFV2
     #
     #    </note>
     #
-    #   For Application Load Balancer and AppSync, the limit is fixed at 8
-    #   KB (8,192 bytes).
+    #   For AppSync, the limit is fixed at 8 KB (8,192 bytes).
     #
     #   You can also use this to have your CloudFront distributions insert
     #   the WAF challenge JavaScript SDK into the HTML responses that they
@@ -12232,9 +13281,10 @@ module Aws::WAFV2
     #
     #   Use this to customize the maximum size of the request body that your
     #   protected resources forward to WAF for inspection. You can customize
-    #   this setting for CloudFront, API Gateway, Amazon Cognito, App
-    #   Runner, or Verified Access resources. The default setting is 16 KB
-    #   (16,384 bytes).
+    #   this setting for Application Load Balancer, CloudFront, API Gateway,
+    #   Amazon Cognito, App Runner, or Verified Access resources. The
+    #   default setting is 8 KB (8,192 bytes) for Application Load Balancer
+    #   and 16 KB (16,384 bytes) for the other resource types.
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more
@@ -12242,8 +13292,7 @@ module Aws::WAFV2
     #
     #    </note>
     #
-    #   For Application Load Balancer and AppSync, the limit is fixed at 8
-    #   KB (8,192 bytes).
+    #   For AppSync, the limit is fixed at 8 KB (8,192 bytes).
     #
     #   You can also use this to have your CloudFront distributions insert
     #   the WAF challenge JavaScript SDK into the HTML responses that they

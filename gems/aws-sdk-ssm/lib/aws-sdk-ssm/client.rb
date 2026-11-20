@@ -1734,6 +1734,18 @@ module Aws::SSM
     #
     #    </note>
     #
+    # @option params [Array<String>] :cloud_providers
+    #   The cloud providers that the document can run against. Valid values
+    #   include the following:
+    #
+    #   * `AWS` - The document runs against Amazon Web Services resources.
+    #
+    #   * `Azure` - The document runs against Microsoft Azure resources.
+    #
+    #   * `GCP` - The document runs against Google Cloud resources.
+    #
+    #   If you don't specify a value, the default is `AWS`.
+    #
     # @return [Types::CreateDocumentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDocumentResult#document_description #document_description} => Types::DocumentDescription
@@ -1769,6 +1781,7 @@ module Aws::SSM
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     cloud_providers: ["AWS"], # accepts AWS, Azure, GCP
     #   })
     #
     # @example Response structure
@@ -1820,6 +1833,8 @@ module Aws::SSM
     #   resp.document_description.category[0] #=> String
     #   resp.document_description.category_enum #=> Array
     #   resp.document_description.category_enum[0] #=> String
+    #   resp.document_description.cloud_providers #=> Array
+    #   resp.document_description.cloud_providers[0] #=> String, one of "AWS", "Azure", "GCP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateDocument AWS API Documentation
     #
@@ -4090,6 +4105,8 @@ module Aws::SSM
     #   resp.document.category[0] #=> String
     #   resp.document.category_enum #=> Array
     #   resp.document.category_enum[0] #=> String
+    #   resp.document.cloud_providers #=> Array
+    #   resp.document.cloud_providers[0] #=> String, one of "AWS", "Azure", "GCP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocument AWS API Documentation
     #
@@ -8939,6 +8956,8 @@ module Aws::SSM
     #   resp.document_versions[0].status #=> String, one of "Creating", "Active", "Updating", "Deleting", "Failed"
     #   resp.document_versions[0].status_information #=> String
     #   resp.document_versions[0].review_status #=> String, one of "APPROVED", "NOT_REVIEWED", "PENDING", "REJECTED"
+    #   resp.document_versions[0].cloud_providers #=> Array
+    #   resp.document_versions[0].cloud_providers[0] #=> String, one of "AWS", "Azure", "GCP"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocumentVersions AWS API Documentation
@@ -8961,10 +8980,10 @@ module Aws::SSM
     #   One or more `DocumentKeyValuesFilter` objects. Use a filter to return
     #   a more specific list of results. For keys, you can specify one or more
     #   key-value pair tags that have been applied to a document. Other valid
-    #   keys include `Owner`, `Name`, `PlatformTypes`, `DocumentType`, and
-    #   `TargetType`. For example, to return documents you own use
-    #   `Key=Owner,Values=Self`. To specify a custom key-value pair, use the
-    #   format `Key=tag:tagName,Values=valueName`.
+    #   keys include `Owner`, `Name`, `PlatformTypes`, `DocumentType`,
+    #   `TargetType`, and `CloudProviders`. For example, to return documents
+    #   you own use `Key=Owner,Values=Self`. To specify a custom key-value
+    #   pair, use the format `Key=tag:tagName,Values=valueName`.
     #
     #   <note markdown="1"> This API operation only supports filtering documents by using a single
     #   tag key and one or more tag values. For example:
@@ -9032,6 +9051,8 @@ module Aws::SSM
     #   resp.document_identifiers[0].requires[0].version_name #=> String
     #   resp.document_identifiers[0].review_status #=> String, one of "APPROVED", "NOT_REVIEWED", "PENDING", "REJECTED"
     #   resp.document_identifiers[0].author #=> String
+    #   resp.document_identifiers[0].cloud_providers #=> Array
+    #   resp.document_identifiers[0].cloud_providers[0] #=> String, one of "AWS", "Azure", "GCP"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocuments AWS API Documentation
@@ -12869,6 +12890,19 @@ module Aws::SSM
     # @option params [String] :target_type
     #   Specify a new target type for the document.
     #
+    # @option params [Array<String>] :cloud_providers
+    #   The cloud providers that the new document version can run against.
+    #   Valid values include the following:
+    #
+    #   * `AWS` - The document runs against Amazon Web Services resources.
+    #
+    #   * `Azure` - The document runs against Microsoft Azure resources.
+    #
+    #   * `GCP` - The document runs against Google Cloud resources.
+    #
+    #   If you don't specify a value, the new version uses the cloud
+    #   providers of the latest version.
+    #
     # @return [Types::UpdateDocumentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDocumentResult#document_description #document_description} => Types::DocumentDescription
@@ -12890,6 +12924,7 @@ module Aws::SSM
     #     document_version: "DocumentVersion",
     #     document_format: "YAML", # accepts YAML, JSON, TEXT
     #     target_type: "TargetType",
+    #     cloud_providers: ["AWS"], # accepts AWS, Azure, GCP
     #   })
     #
     # @example Response structure
@@ -12941,6 +12976,8 @@ module Aws::SSM
     #   resp.document_description.category[0] #=> String
     #   resp.document_description.category_enum #=> Array
     #   resp.document_description.category_enum[0] #=> String
+    #   resp.document_description.cloud_providers #=> Array
+    #   resp.document_description.cloud_providers[0] #=> String, one of "AWS", "Azure", "GCP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocument AWS API Documentation
     #
@@ -14343,7 +14380,7 @@ module Aws::SSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.236.0'
+      context[:gem_version] = '1.237.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

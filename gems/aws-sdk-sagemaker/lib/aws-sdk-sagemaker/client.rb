@@ -550,6 +550,73 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Adds an in-cluster inference gateway to a global inference gateway.
+    # This operation is asynchronous: the in-cluster inference gateway
+    # starts in the `ADDING` status. To check its status, call
+    # `ListInferenceGateways`. If the in-cluster inference gateway is
+    # already in the global inference gateway, the operation succeeds and
+    # returns its current status.
+    #
+    # An in-cluster inference gateway can belong to only one global
+    # inference gateway. If it already belongs to another global inference
+    # gateway, the operation fails with `ResourceInUse`. The operation fails
+    # with `ConflictException` while another operation is in progress on the
+    # global inference gateway, or if the global inference gateway failed to
+    # create.
+    #
+    # @option params [required, String] :identifier
+    #   The name, Amazon Resource Name (ARN), or ID of the global inference
+    #   gateway.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster that
+    #   runs the in-cluster inference gateway. The cluster must be in the same
+    #   account and partition as the global inference gateway. It can be in a
+    #   different Region, but not in an opt-in Region.
+    #
+    # @option params [required, String] :namespace
+    #   The Kubernetes namespace of the in-cluster inference gateway.
+    #
+    # @option params [required, String] :name
+    #   The name of the `InferenceGatewayConfig` resource that defines the
+    #   in-cluster inference gateway.
+    #
+    # @return [Types::AddInferenceGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddInferenceGatewayResponse#arn #arn} => String
+    #   * {Types::AddInferenceGatewayResponse#id #id} => String
+    #   * {Types::AddInferenceGatewayResponse#name #name} => String
+    #   * {Types::AddInferenceGatewayResponse#gateway #gateway} => Types::GlobalInferenceGatewayMember
+    #   * {Types::AddInferenceGatewayResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_inference_gateway({
+    #     identifier: "GlobalInferenceGatewayIdentifier", # required
+    #     cluster_arn: "GlobalInferenceGatewayClusterArn", # required
+    #     namespace: "GlobalInferenceGatewayKubernetesNamespace", # required
+    #     name: "GlobalInferenceGatewayKubernetesResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.gateway.name #=> String
+    #   resp.gateway.namespace #=> String
+    #   resp.gateway.cluster_arn #=> String
+    #   resp.status #=> String, one of "ADDING", "ACTIVE", "REMOVING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AddInferenceGateway AWS API Documentation
+    #
+    # @overload add_inference_gateway(params = {})
+    # @param [Hash] params ({})
+    def add_inference_gateway(params = {}, options = {})
+      req = build_request(:add_inference_gateway, params)
+      req.send_request(options)
+    end
+
     # Adds or overwrites one or more tags for the specified SageMaker
     # resource. You can add tags to notebook instances, training jobs,
     # hyperparameter tuning jobs, batch transform jobs, models, labeling
@@ -834,7 +901,7 @@ module Aws::SageMaker
     #   resp.successful #=> Array
     #   resp.successful[0].node_logical_id #=> String
     #   resp.successful[0].instance_group_name #=> String
-    #   resp.successful[0].status #=> String, one of "Running", "Failure", "Pending", "ShuttingDown", "SystemUpdating", "DeepHealthCheckInProgress", "NotFound"
+    #   resp.successful[0].status #=> String, one of "Running", "Failure", "Pending", "ShuttingDown", "SystemUpdating", "DeepHealthCheckInProgress", "NotFound", "DetachInProgress", "AttachInProgress"
     #   resp.successful[0].availability_zones #=> Array
     #   resp.successful[0].availability_zones[0] #=> String
     #   resp.successful[0].instance_types #=> Array
@@ -5588,6 +5655,125 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def create_flow_definition(params = {}, options = {})
       req = build_request(:create_flow_definition, params)
+      req.send_request(options)
+    end
+
+    # Creates a global inference gateway. This operation is asynchronous:
+    # the global inference gateway starts in the `CREATING` status. To check
+    # its status, call `DescribeGlobalInferenceGateway` until the status is
+    # `ACTIVE` or `FAILED`. The operation fails with `ResourceInUse` if the
+    # name is already in use, or if one of the in-cluster inference gateways
+    # in `Gateways` already belongs to another global inference gateway.
+    #
+    # @option params [required, String] :name
+    #   The name of the global inference gateway. The name must be unique in
+    #   your account in the current Region, and is case-sensitive. The name
+    #   can't be exactly 12 lowercase letters or digits, because the global
+    #   inference gateway ID uses that format.
+    #
+    # @option params [Types::GlobalInferenceGatewayRouting] :routing
+    #   The routing configuration of the global inference gateway. If you omit
+    #   it, the global inference gateway uses default routing weights.
+    #
+    # @option params [required, String] :execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the global
+    #   inference gateway assumes to access your SageMaker HyperPod clusters.
+    #   The role must be in your account and partition, and you must have
+    #   `iam:PassRole` permission for it. You can't change the role after you
+    #   create the global inference gateway.
+    #
+    # @option params [required, Array<Types::GlobalInferenceGatewayMember>] :gateways
+    #   The 1 to 10 in-cluster inference gateways to add to the global
+    #   inference gateway. A global inference gateway must always have at
+    #   least one in-cluster inference gateway, so `RemoveInferenceGateway`
+    #   can't remove the last one.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. An idempotent operation completes no more
+    #   than one time. If you don't specify a client token, the Amazon Web
+    #   Services SDKs and the Amazon Web Services CLI generate one for you.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Custom tags for managing the global inference gateway as an Amazon Web
+    #   Services resource. You can add tags to your global inference gateway
+    #   in the same way you add them in other Amazon Web Services services
+    #   that support tagging. For more information about tagging Amazon Web
+    #   Services resources, see [Tagging your Amazon Web Services
+    #   resources][1] in the *Tagging Amazon Web Services Resources User
+    #   Guide*.
+    #
+    #   The global inference gateway doesn't return tags in its responses. To
+    #   read the tags, use `ListTags`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
+    #
+    # @return [Types::CreateGlobalInferenceGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGlobalInferenceGatewayResponse#arn #arn} => String
+    #   * {Types::CreateGlobalInferenceGatewayResponse#id #id} => String
+    #   * {Types::CreateGlobalInferenceGatewayResponse#name #name} => String
+    #   * {Types::CreateGlobalInferenceGatewayResponse#status #status} => String
+    #   * {Types::CreateGlobalInferenceGatewayResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::CreateGlobalInferenceGatewayResponse#routing #routing} => Types::GlobalInferenceGatewayRouting
+    #   * {Types::CreateGlobalInferenceGatewayResponse#gateways #gateways} => Array&lt;Types::GlobalInferenceGatewayMember&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_global_inference_gateway({
+    #     name: "GlobalInferenceGatewayName", # required
+    #     routing: {
+    #       weights: { # required
+    #         kv_headroom: 1.0,
+    #         queue_depth: 1.0,
+    #         region_proximity: 1.0,
+    #         error_rate: 1.0,
+    #       },
+    #     },
+    #     execution_role_arn: "GlobalInferenceGatewayExecutionRoleArn", # required
+    #     gateways: [ # required
+    #       {
+    #         name: "GlobalInferenceGatewayKubernetesResourceName", # required
+    #         namespace: "GlobalInferenceGatewayKubernetesNamespace", # required
+    #         cluster_arn: "GlobalInferenceGatewayClusterArn", # required
+    #       },
+    #     ],
+    #     client_token: "GlobalInferenceGatewayClientToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.execution_role_arn #=> String
+    #   resp.routing.weights.kv_headroom #=> Float
+    #   resp.routing.weights.queue_depth #=> Float
+    #   resp.routing.weights.region_proximity #=> Float
+    #   resp.routing.weights.error_rate #=> Float
+    #   resp.gateways #=> Array
+    #   resp.gateways[0].name #=> String
+    #   resp.gateways[0].namespace #=> String
+    #   resp.gateways[0].cluster_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateGlobalInferenceGateway AWS API Documentation
+    #
+    # @overload create_global_inference_gateway(params = {})
+    # @param [Hash] params ({})
+    def create_global_inference_gateway(params = {}, options = {})
+      req = build_request(:create_global_inference_gateway, params)
       req.send_request(options)
     end
 
@@ -13457,6 +13643,47 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Delete a global inference gateway and its member inference gateways,
+    # which are then free to join another global inference gateway.
+    # Asynchronous: the global inference gateway is DELETING while its
+    # managed endpoint resources are torn down; poll
+    # DescribeGlobalInferenceGateway until it returns ResourceNotFound. Does
+    # not touch the customer's clusters. Idempotent: a Delete whose
+    # Identifier matches no global inference gateway succeeds and echoes
+    # what the Identifier says (Arn and Id for an ARN or Id, Name for a
+    # name).
+    #
+    # @option params [required, String] :identifier
+    #   The name, Amazon Resource Name (ARN), or ID of the global inference
+    #   gateway to delete.
+    #
+    # @return [Types::DeleteGlobalInferenceGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteGlobalInferenceGatewayResponse#arn #arn} => String
+    #   * {Types::DeleteGlobalInferenceGatewayResponse#id #id} => String
+    #   * {Types::DeleteGlobalInferenceGatewayResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_global_inference_gateway({
+    #     identifier: "GlobalInferenceGatewayIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteGlobalInferenceGateway AWS API Documentation
+    #
+    # @overload delete_global_inference_gateway(params = {})
+    # @param [Hash] params ({})
+    def delete_global_inference_gateway(params = {}, options = {})
+      req = build_request(:delete_global_inference_gateway, params)
+      req.send_request(options)
+    end
+
     # Delete a hub.
     #
     # @option params [required, String] :hub_name
@@ -15981,7 +16208,7 @@ module Aws::SageMaker
     #   resp.node_details.instance_group_name #=> String
     #   resp.node_details.instance_id #=> String
     #   resp.node_details.node_logical_id #=> String
-    #   resp.node_details.instance_status.status #=> String, one of "Running", "Failure", "Pending", "ShuttingDown", "SystemUpdating", "DeepHealthCheckInProgress", "NotFound"
+    #   resp.node_details.instance_status.status #=> String, one of "Running", "Failure", "Pending", "ShuttingDown", "SystemUpdating", "DeepHealthCheckInProgress", "NotFound", "DetachInProgress", "AttachInProgress"
     #   resp.node_details.instance_status.message #=> String
     #   resp.node_details.instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.p5.4xlarge", "ml.p6e-gb200.36xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.12xlarge", "ml.g5.16xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.c5n.large", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.g6.xlarge", "ml.g6.2xlarge", "ml.g6.4xlarge", "ml.g6.8xlarge", "ml.g6.16xlarge", "ml.g6.12xlarge", "ml.g6.24xlarge", "ml.g6.48xlarge", "ml.gr6.4xlarge", "ml.gr6.8xlarge", "ml.g6e.xlarge", "ml.g6e.2xlarge", "ml.g6e.4xlarge", "ml.g6e.8xlarge", "ml.g6e.16xlarge", "ml.g6e.12xlarge", "ml.g6e.24xlarge", "ml.g6e.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.p6-b200.48xlarge", "ml.trn2.3xlarge", "ml.trn2.48xlarge", "ml.c6i.large", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.4xlarge", "ml.c6i.8xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.r6i.large", "ml.r6i.xlarge", "ml.r6i.2xlarge", "ml.r6i.4xlarge", "ml.r6i.8xlarge", "ml.r6i.12xlarge", "ml.r6i.16xlarge", "ml.r6i.24xlarge", "ml.r6i.32xlarge", "ml.i3en.large", "ml.i3en.xlarge", "ml.i3en.2xlarge", "ml.i3en.3xlarge", "ml.i3en.6xlarge", "ml.i3en.12xlarge", "ml.i3en.24xlarge", "ml.m7i.large", "ml.m7i.xlarge", "ml.m7i.2xlarge", "ml.m7i.4xlarge", "ml.m7i.8xlarge", "ml.m7i.12xlarge", "ml.m7i.16xlarge", "ml.m7i.24xlarge", "ml.m7i.48xlarge", "ml.r7i.large", "ml.r7i.xlarge", "ml.r7i.2xlarge", "ml.r7i.4xlarge", "ml.r7i.8xlarge", "ml.r7i.12xlarge", "ml.r7i.16xlarge", "ml.r7i.24xlarge", "ml.r7i.48xlarge", "ml.r5d.16xlarge", "ml.g7e.2xlarge", "ml.g7e.4xlarge", "ml.g7e.8xlarge", "ml.g7e.12xlarge", "ml.g7e.24xlarge", "ml.g7e.48xlarge", "ml.p6-b300.48xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.c6g.medium", "ml.c6g.large", "ml.c6g.xlarge", "ml.c6g.2xlarge", "ml.c6g.4xlarge", "ml.c6g.8xlarge", "ml.c6g.12xlarge", "ml.c6g.16xlarge", "ml.c7g.medium", "ml.c7g.large", "ml.c7g.xlarge", "ml.c7g.2xlarge", "ml.c7g.4xlarge", "ml.c7g.8xlarge", "ml.c7g.12xlarge", "ml.c7g.16xlarge", "ml.c8g.medium", "ml.c8g.large", "ml.c8g.xlarge", "ml.c8g.2xlarge", "ml.c8g.4xlarge", "ml.c8g.8xlarge", "ml.c8g.12xlarge", "ml.c8g.16xlarge", "ml.c8g.24xlarge", "ml.c8g.48xlarge", "ml.c6a.large", "ml.c6a.xlarge", "ml.c6a.2xlarge", "ml.c6a.4xlarge", "ml.c6a.8xlarge", "ml.c6a.12xlarge", "ml.c6a.16xlarge", "ml.c6a.24xlarge", "ml.c6a.32xlarge", "ml.c6a.48xlarge", "ml.m6a.large", "ml.m6a.xlarge", "ml.m6a.2xlarge", "ml.m6a.4xlarge", "ml.m6a.8xlarge", "ml.m6a.12xlarge", "ml.m6a.16xlarge", "ml.m6a.24xlarge", "ml.m6a.32xlarge", "ml.m6a.48xlarge", "ml.m6g.medium", "ml.m6g.large", "ml.m6g.xlarge", "ml.m6g.2xlarge", "ml.m6g.4xlarge", "ml.m6g.8xlarge", "ml.m6g.12xlarge", "ml.m6g.16xlarge", "ml.m7g.medium", "ml.m7g.large", "ml.m7g.xlarge", "ml.m7g.2xlarge", "ml.m7g.4xlarge", "ml.m7g.8xlarge", "ml.m7g.12xlarge", "ml.m7g.16xlarge", "ml.m8g.medium", "ml.m8g.large", "ml.m8g.xlarge", "ml.m8g.2xlarge", "ml.m8g.4xlarge", "ml.m8g.8xlarge", "ml.m8g.12xlarge", "ml.m8g.16xlarge", "ml.m8g.24xlarge", "ml.m8g.48xlarge", "ml.g7.2xlarge", "ml.g7.4xlarge", "ml.g7.8xlarge", "ml.g7.12xlarge", "ml.g7.24xlarge", "ml.g7.48xlarge", "ml.c8a.16xlarge", "ml.m8a.16xlarge"
     #   resp.node_details.launch_time #=> Time
@@ -17761,6 +17988,60 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def describe_flow_definition(params = {}, options = {})
       req = build_request(:describe_flow_definition, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a global inference gateway, including its
+    # status, endpoints, and routing configuration. To list the in-cluster
+    # inference gateways of the global inference gateway, use
+    # `ListInferenceGateways`. To read the tags of the global inference
+    # gateway, use `ListTags`.
+    #
+    # @option params [required, String] :identifier
+    #   The name, Amazon Resource Name (ARN), or ID of the global inference
+    #   gateway.
+    #
+    # @return [Types::DescribeGlobalInferenceGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#arn #arn} => String
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#id #id} => String
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#name #name} => String
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#status #status} => String
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#endpoint_url #endpoint_url} => String
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#vpc_endpoint_service_name #vpc_endpoint_service_name} => String
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#routing #routing} => Types::GlobalInferenceGatewayRouting
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#failure_reason #failure_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_global_inference_gateway({
+    #     identifier: "GlobalInferenceGatewayIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.execution_role_arn #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.endpoint_url #=> String
+    #   resp.vpc_endpoint_service_name #=> String
+    #   resp.routing.weights.kv_headroom #=> Float
+    #   resp.routing.weights.queue_depth #=> Float
+    #   resp.routing.weights.region_proximity #=> Float
+    #   resp.routing.weights.error_rate #=> Float
+    #   resp.creation_time #=> Time
+    #   resp.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeGlobalInferenceGateway AWS API Documentation
+    #
+    # @overload describe_global_inference_gateway(params = {})
+    # @param [Hash] params ({})
+    def describe_global_inference_gateway(params = {}, options = {})
+      req = build_request(:describe_global_inference_gateway, params)
       req.send_request(options)
     end
 
@@ -23943,7 +24224,7 @@ module Aws::SageMaker
     #   resp.cluster_node_summaries[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.p5.4xlarge", "ml.p6e-gb200.36xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.12xlarge", "ml.g5.16xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.c5n.large", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.g6.xlarge", "ml.g6.2xlarge", "ml.g6.4xlarge", "ml.g6.8xlarge", "ml.g6.16xlarge", "ml.g6.12xlarge", "ml.g6.24xlarge", "ml.g6.48xlarge", "ml.gr6.4xlarge", "ml.gr6.8xlarge", "ml.g6e.xlarge", "ml.g6e.2xlarge", "ml.g6e.4xlarge", "ml.g6e.8xlarge", "ml.g6e.16xlarge", "ml.g6e.12xlarge", "ml.g6e.24xlarge", "ml.g6e.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.p6-b200.48xlarge", "ml.trn2.3xlarge", "ml.trn2.48xlarge", "ml.c6i.large", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.4xlarge", "ml.c6i.8xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.r6i.large", "ml.r6i.xlarge", "ml.r6i.2xlarge", "ml.r6i.4xlarge", "ml.r6i.8xlarge", "ml.r6i.12xlarge", "ml.r6i.16xlarge", "ml.r6i.24xlarge", "ml.r6i.32xlarge", "ml.i3en.large", "ml.i3en.xlarge", "ml.i3en.2xlarge", "ml.i3en.3xlarge", "ml.i3en.6xlarge", "ml.i3en.12xlarge", "ml.i3en.24xlarge", "ml.m7i.large", "ml.m7i.xlarge", "ml.m7i.2xlarge", "ml.m7i.4xlarge", "ml.m7i.8xlarge", "ml.m7i.12xlarge", "ml.m7i.16xlarge", "ml.m7i.24xlarge", "ml.m7i.48xlarge", "ml.r7i.large", "ml.r7i.xlarge", "ml.r7i.2xlarge", "ml.r7i.4xlarge", "ml.r7i.8xlarge", "ml.r7i.12xlarge", "ml.r7i.16xlarge", "ml.r7i.24xlarge", "ml.r7i.48xlarge", "ml.r5d.16xlarge", "ml.g7e.2xlarge", "ml.g7e.4xlarge", "ml.g7e.8xlarge", "ml.g7e.12xlarge", "ml.g7e.24xlarge", "ml.g7e.48xlarge", "ml.p6-b300.48xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.c6g.medium", "ml.c6g.large", "ml.c6g.xlarge", "ml.c6g.2xlarge", "ml.c6g.4xlarge", "ml.c6g.8xlarge", "ml.c6g.12xlarge", "ml.c6g.16xlarge", "ml.c7g.medium", "ml.c7g.large", "ml.c7g.xlarge", "ml.c7g.2xlarge", "ml.c7g.4xlarge", "ml.c7g.8xlarge", "ml.c7g.12xlarge", "ml.c7g.16xlarge", "ml.c8g.medium", "ml.c8g.large", "ml.c8g.xlarge", "ml.c8g.2xlarge", "ml.c8g.4xlarge", "ml.c8g.8xlarge", "ml.c8g.12xlarge", "ml.c8g.16xlarge", "ml.c8g.24xlarge", "ml.c8g.48xlarge", "ml.c6a.large", "ml.c6a.xlarge", "ml.c6a.2xlarge", "ml.c6a.4xlarge", "ml.c6a.8xlarge", "ml.c6a.12xlarge", "ml.c6a.16xlarge", "ml.c6a.24xlarge", "ml.c6a.32xlarge", "ml.c6a.48xlarge", "ml.m6a.large", "ml.m6a.xlarge", "ml.m6a.2xlarge", "ml.m6a.4xlarge", "ml.m6a.8xlarge", "ml.m6a.12xlarge", "ml.m6a.16xlarge", "ml.m6a.24xlarge", "ml.m6a.32xlarge", "ml.m6a.48xlarge", "ml.m6g.medium", "ml.m6g.large", "ml.m6g.xlarge", "ml.m6g.2xlarge", "ml.m6g.4xlarge", "ml.m6g.8xlarge", "ml.m6g.12xlarge", "ml.m6g.16xlarge", "ml.m7g.medium", "ml.m7g.large", "ml.m7g.xlarge", "ml.m7g.2xlarge", "ml.m7g.4xlarge", "ml.m7g.8xlarge", "ml.m7g.12xlarge", "ml.m7g.16xlarge", "ml.m8g.medium", "ml.m8g.large", "ml.m8g.xlarge", "ml.m8g.2xlarge", "ml.m8g.4xlarge", "ml.m8g.8xlarge", "ml.m8g.12xlarge", "ml.m8g.16xlarge", "ml.m8g.24xlarge", "ml.m8g.48xlarge", "ml.g7.2xlarge", "ml.g7.4xlarge", "ml.g7.8xlarge", "ml.g7.12xlarge", "ml.g7.24xlarge", "ml.g7.48xlarge", "ml.c8a.16xlarge", "ml.m8a.16xlarge"
     #   resp.cluster_node_summaries[0].launch_time #=> Time
     #   resp.cluster_node_summaries[0].last_software_update_time #=> Time
-    #   resp.cluster_node_summaries[0].instance_status.status #=> String, one of "Running", "Failure", "Pending", "ShuttingDown", "SystemUpdating", "DeepHealthCheckInProgress", "NotFound"
+    #   resp.cluster_node_summaries[0].instance_status.status #=> String, one of "Running", "Failure", "Pending", "ShuttingDown", "SystemUpdating", "DeepHealthCheckInProgress", "NotFound", "DetachInProgress", "AttachInProgress"
     #   resp.cluster_node_summaries[0].instance_status.message #=> String
     #   resp.cluster_node_summaries[0].ultra_server_info.id #=> String
     #   resp.cluster_node_summaries[0].ultra_server_info.type #=> String
@@ -25356,6 +25637,62 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Lists summaries of the global inference gateways in your account. You
+    # can filter the results by status.
+    #
+    # @option params [Array<Types::GlobalInferenceGatewayFilter>] :filters
+    #   The filters to apply to the results. You can filter by `Status`.
+    #   Multiple filters are combined with a logical AND.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous `ListGlobalInferenceGateways` request
+    #   was truncated, the response includes a `NextToken`. To retrieve the
+    #   next set of global inference gateways, use the token in the next
+    #   request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of global inference gateways to return in the
+    #   response.
+    #
+    # @return [Types::ListGlobalInferenceGatewaysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGlobalInferenceGatewaysResponse#global_inference_gateway_summaries #global_inference_gateway_summaries} => Array&lt;Types::GlobalInferenceGatewaySummary&gt;
+    #   * {Types::ListGlobalInferenceGatewaysResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_global_inference_gateways({
+    #     filters: [
+    #       {
+    #         name: "Status", # required, accepts Status
+    #         value: "GlobalInferenceGatewayFilterValue", # required
+    #       },
+    #     ],
+    #     next_token: "GlobalInferenceGatewayNextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_inference_gateway_summaries #=> Array
+    #   resp.global_inference_gateway_summaries[0].arn #=> String
+    #   resp.global_inference_gateway_summaries[0].id #=> String
+    #   resp.global_inference_gateway_summaries[0].name #=> String
+    #   resp.global_inference_gateway_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.global_inference_gateway_summaries[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListGlobalInferenceGateways AWS API Documentation
+    #
+    # @overload list_global_inference_gateways(params = {})
+    # @param [Hash] params ({})
+    def list_global_inference_gateways(params = {}, options = {})
+      req = build_request(:list_global_inference_gateways, params)
+      req.send_request(options)
+    end
+
     # List hub content versions.
     #
     # @option params [required, String] :hub_name
@@ -26109,6 +26446,71 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def list_inference_experiments(params = {}, options = {})
       req = build_request(:list_inference_experiments, params)
+      req.send_request(options)
+    end
+
+    # Lists the in-cluster inference gateways in a global inference gateway,
+    # in the order that they were added. Each summary includes the status of
+    # the in-cluster inference gateway and, if the status is `FAILED`, the
+    # reason for the failure. `DescribeGlobalInferenceGateway` doesn't
+    # return the in-cluster inference gateways; use this operation to list
+    # them.
+    #
+    # @option params [required, String] :identifier
+    #   The name, Amazon Resource Name (ARN), or ID of the global inference
+    #   gateway.
+    #
+    # @option params [Array<Types::GlobalInferenceGatewayMemberFilter>] :filters
+    #   The filters to apply to the results. You can filter by `Status` and
+    #   `ClusterArn`. Multiple filters are combined with a logical AND.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous `ListInferenceGateways` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of in-cluster inference gateways, use the token in the next
+    #   request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of in-cluster inference gateways to return in the
+    #   response.
+    #
+    # @return [Types::ListInferenceGatewaysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInferenceGatewaysResponse#inference_gateway_summaries #inference_gateway_summaries} => Array&lt;Types::GlobalInferenceGatewayMemberSummary&gt;
+    #   * {Types::ListInferenceGatewaysResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_inference_gateways({
+    #     identifier: "GlobalInferenceGatewayIdentifier", # required
+    #     filters: [
+    #       {
+    #         name: "Status", # required, accepts Status, ClusterArn
+    #         value: "GlobalInferenceGatewayMemberFilterValue", # required
+    #       },
+    #     ],
+    #     next_token: "GlobalInferenceGatewayNextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_gateway_summaries #=> Array
+    #   resp.inference_gateway_summaries[0].name #=> String
+    #   resp.inference_gateway_summaries[0].namespace #=> String
+    #   resp.inference_gateway_summaries[0].cluster_arn #=> String
+    #   resp.inference_gateway_summaries[0].status #=> String, one of "ADDING", "ACTIVE", "REMOVING", "FAILED"
+    #   resp.inference_gateway_summaries[0].failure_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceGateways AWS API Documentation
+    #
+    # @overload list_inference_gateways(params = {})
+    # @param [Hash] params ({})
+    def list_inference_gateways(params = {}, options = {})
+      req = build_request(:list_inference_gateways, params)
       req.send_request(options)
     end
 
@@ -28645,7 +29047,7 @@ module Aws::SageMaker
     #   Filters the pipelines by who manages them. Specify `AWS` to return
     #   pipelines that Amazon Web Services manages, or `CUSTOMER` to return
     #   pipelines that you created. If you don't specify a value, the
-    #   response includes both.
+    #   response includes only pipelines that you created.
     #
     # @return [Types::ListPipelinesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -30117,6 +30519,135 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Moves running nodes from one instance group to another instance group.
+    # The target instance group can be in the same HyperPod cluster or in a
+    # different HyperPod cluster in the same account and Region. The
+    # underlying instances aren't terminated.
+    #
+    # Each node keeps its instance ID, its `NodeLogicalId`, its network
+    # interfaces and IP addresses, and its capacity. The node then joins the
+    # target instance group with the target's configuration and lifecycle
+    # scripts.
+    #
+    # The move replaces the node's root Amazon Elastic Block Store (Amazon
+    # EBS) volume and secondary EBS volume, which deletes any data stored on
+    # them. Back up any data that you need before you move the node.
+    #
+    # Specify the nodes to move with exactly one of `NodeIds`,
+    # `NodeLogicalIds`, or `InstanceCount`. The operation is asynchronous
+    # and returns after it accepts the nodes for the move. While a node
+    # moves, its status is `DetachInProgress` and then `AttachInProgress`.
+    # The node appears in the source cluster while it detaches. After
+    # HyperPod hands the node off to the target instance group, the node
+    # appears in the target cluster. To track the node, call
+    # `DescribeClusterNode` or `ListClusterNodes` on the source or target
+    # cluster.
+    #
+    # <note markdown="1"> Both clusters must be `InService`, use Amazon EKS orchestration, and
+    # use `Continuous` as the `NodeProvisioningMode`.
+    #
+    #  The source and target instance groups must also use compatible
+    # configurations.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :source_cluster_arn
+    #   The Amazon Resource Name (ARN) of the HyperPod cluster that the nodes
+    #   are moved from.
+    #
+    # @option params [required, String] :source_instance_group_name
+    #   The name of the instance group in the source cluster that the nodes
+    #   are moved from.
+    #
+    # @option params [required, String] :target_cluster_arn
+    #   The Amazon Resource Name (ARN) of the HyperPod cluster that the nodes
+    #   are moved to. The target cluster must be in the same account and
+    #   Region as the source cluster, and can be the same cluster as the
+    #   source.
+    #
+    # @option params [required, String] :target_instance_group_name
+    #   The name of the instance group in the target cluster that the nodes
+    #   are moved to. If the target cluster is the same as the source cluster,
+    #   the target instance group must be different from the source instance
+    #   group.
+    #
+    # @option params [Integer] :instance_count
+    #   The number of nodes to move, from 1 to 50. HyperPod selects the nodes
+    #   from the source instance group. If fewer than this number of nodes are
+    #   eligible to move, the request fails and no nodes are moved. Specify
+    #   exactly one of `NodeIds`, `NodeLogicalIds`, or `InstanceCount`.
+    #
+    # @option params [Array<String>] :node_ids
+    #   A list of instance IDs of the nodes to move. You can specify up to 50
+    #   instance IDs. Each node is evaluated separately, so some nodes can be
+    #   moved while others fail. The request fails if moving the eligible
+    #   nodes would reduce the source instance group below its minimum
+    #   instance count. Specify exactly one of `NodeIds`, `NodeLogicalIds`, or
+    #   `InstanceCount`.
+    #
+    # @option params [Array<String>] :node_logical_ids
+    #   A list of `NodeLogicalIds` of the nodes to move. You can specify up to
+    #   50 `NodeLogicalIds`. Each node is evaluated separately, so some nodes
+    #   can be moved while others fail. The request fails if moving the
+    #   eligible nodes would reduce the source instance group below its
+    #   minimum instance count. Specify exactly one of `NodeIds`,
+    #   `NodeLogicalIds`, or `InstanceCount`.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you retry the
+    #   request with the same client token and the same parameters within 8
+    #   hours, the service returns the original response. It doesn't start a
+    #   new move. If you reuse a client token with different parameters, the
+    #   request fails.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::MoveClusterNodesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::MoveClusterNodesResponse#successful #successful} => Array&lt;String&gt;
+    #   * {Types::MoveClusterNodesResponse#failed #failed} => Array&lt;Types::MoveClusterNodesError&gt;
+    #   * {Types::MoveClusterNodesResponse#successful_node_logical_ids #successful_node_logical_ids} => Array&lt;String&gt;
+    #   * {Types::MoveClusterNodesResponse#failed_node_logical_ids #failed_node_logical_ids} => Array&lt;Types::MoveClusterNodeLogicalIdsError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.move_cluster_nodes({
+    #     source_cluster_arn: "ClusterArn", # required
+    #     source_instance_group_name: "ClusterInstanceGroupName", # required
+    #     target_cluster_arn: "ClusterArn", # required
+    #     target_instance_group_name: "ClusterInstanceGroupName", # required
+    #     instance_count: 1,
+    #     node_ids: ["ClusterNodeId"],
+    #     node_logical_ids: ["ClusterNodeLogicalId"],
+    #     client_token: "MoveClusterNodesRequestClientTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0] #=> String
+    #   resp.failed #=> Array
+    #   resp.failed[0].code #=> String, one of "NodeIdNotFound", "InvalidNodeStatus", "NodeIdInUse", "NodeInstanceTypeMismatch"
+    #   resp.failed[0].message #=> String
+    #   resp.failed[0].node_id #=> String
+    #   resp.successful_node_logical_ids #=> Array
+    #   resp.successful_node_logical_ids[0] #=> String
+    #   resp.failed_node_logical_ids #=> Array
+    #   resp.failed_node_logical_ids[0].code #=> String, one of "NodeIdNotFound", "InvalidNodeStatus", "NodeIdInUse", "NodeInstanceTypeMismatch"
+    #   resp.failed_node_logical_ids[0].message #=> String
+    #   resp.failed_node_logical_ids[0].node_logical_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MoveClusterNodes AWS API Documentation
+    #
+    # @overload move_cluster_nodes(params = {})
+    # @param [Hash] params ({})
+    def move_cluster_nodes(params = {}, options = {})
+      req = build_request(:move_cluster_nodes, params)
+      req.send_request(options)
+    end
+
     # Attaches a resource-based policy to an endpoint. With an endpoint
     # policy, you can allow other Amazon Web Services accounts to send
     # requests to your endpoint, or to inference components on it, through
@@ -30357,6 +30888,70 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def register_devices(params = {}, options = {})
       req = build_request(:register_devices, params)
+      req.send_request(options)
+    end
+
+    # Removes an in-cluster inference gateway from a global inference
+    # gateway. This operation is asynchronous: the in-cluster inference
+    # gateway moves to the `REMOVING` status, and then no longer appears in
+    # `ListInferenceGateways`. If the in-cluster inference gateway isn't in
+    # the global inference gateway, the operation succeeds and returns no
+    # status. The operation returns `ResourceNotFound` only if the global
+    # inference gateway doesn't exist.
+    #
+    # The operation fails with `ConflictException` while another operation
+    # is in progress on the global inference gateway. It fails with
+    # `ValidationException` if the in-cluster inference gateway is the last
+    # one, because a global inference gateway must have at least one.
+    #
+    # @option params [required, String] :identifier
+    #   The name, Amazon Resource Name (ARN), or ID of the global inference
+    #   gateway.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster that
+    #   runs the in-cluster inference gateway.
+    #
+    # @option params [required, String] :namespace
+    #   The Kubernetes namespace of the in-cluster inference gateway.
+    #
+    # @option params [required, String] :name
+    #   The name of the `InferenceGatewayConfig` resource that defines the
+    #   in-cluster inference gateway.
+    #
+    # @return [Types::RemoveInferenceGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RemoveInferenceGatewayResponse#arn #arn} => String
+    #   * {Types::RemoveInferenceGatewayResponse#id #id} => String
+    #   * {Types::RemoveInferenceGatewayResponse#name #name} => String
+    #   * {Types::RemoveInferenceGatewayResponse#gateway #gateway} => Types::GlobalInferenceGatewayMember
+    #   * {Types::RemoveInferenceGatewayResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_inference_gateway({
+    #     identifier: "GlobalInferenceGatewayIdentifier", # required
+    #     cluster_arn: "GlobalInferenceGatewayClusterArn", # required
+    #     namespace: "GlobalInferenceGatewayKubernetesNamespace", # required
+    #     name: "GlobalInferenceGatewayKubernetesResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.gateway.name #=> String
+    #   resp.gateway.namespace #=> String
+    #   resp.gateway.cluster_arn #=> String
+    #   resp.status #=> String, one of "ADDING", "ACTIVE", "REMOVING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RemoveInferenceGateway AWS API Documentation
+    #
+    # @overload remove_inference_gateway(params = {})
+    # @param [Hash] params ({})
+    def remove_inference_gateway(params = {}, options = {})
+      req = build_request(:remove_inference_gateway, params)
       req.send_request(options)
     end
 
@@ -33480,6 +34075,62 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Updates the routing configuration of a global inference gateway. To
+    # add or remove in-cluster inference gateways, use `AddInferenceGateway`
+    # and `RemoveInferenceGateway`. This operation is asynchronous: the
+    # global inference gateway moves to the `UPDATING` status. The operation
+    # fails with `ConflictException` while another operation is in progress
+    # on the global inference gateway.
+    #
+    # @option params [required, String] :identifier
+    #   The name, Amazon Resource Name (ARN), or ID of the global inference
+    #   gateway to update.
+    #
+    # @option params [required, Types::GlobalInferenceGatewayRouting] :routing
+    #   The new routing configuration of the global inference gateway.
+    #
+    # @return [Types::UpdateGlobalInferenceGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateGlobalInferenceGatewayResponse#arn #arn} => String
+    #   * {Types::UpdateGlobalInferenceGatewayResponse#id #id} => String
+    #   * {Types::UpdateGlobalInferenceGatewayResponse#name #name} => String
+    #   * {Types::UpdateGlobalInferenceGatewayResponse#status #status} => String
+    #   * {Types::UpdateGlobalInferenceGatewayResponse#routing #routing} => Types::GlobalInferenceGatewayRouting
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_global_inference_gateway({
+    #     identifier: "GlobalInferenceGatewayIdentifier", # required
+    #     routing: { # required
+    #       weights: { # required
+    #         kv_headroom: 1.0,
+    #         queue_depth: 1.0,
+    #         region_proximity: 1.0,
+    #         error_rate: 1.0,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.routing.weights.kv_headroom #=> Float
+    #   resp.routing.weights.queue_depth #=> Float
+    #   resp.routing.weights.region_proximity #=> Float
+    #   resp.routing.weights.error_rate #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateGlobalInferenceGateway AWS API Documentation
+    #
+    # @overload update_global_inference_gateway(params = {})
+    # @param [Hash] params ({})
+    def update_global_inference_gateway(params = {}, options = {})
+      req = build_request(:update_global_inference_gateway, params)
+      req.send_request(options)
+    end
+
     # Update a hub.
     #
     # @option params [required, String] :hub_name
@@ -36293,7 +36944,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.417.0'
+      context[:gem_version] = '1.418.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

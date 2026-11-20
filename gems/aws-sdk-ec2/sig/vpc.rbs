@@ -42,6 +42,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#block_public_access_states-instance_method
       def block_public_access_states: () -> Types::BlockPublicAccessStates
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#network_firewall_associations-instance_method
+      def network_firewall_associations: () -> ::Array[Types::NetworkFirewallAssociation]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#state-instance_method
       def state: () -> ("pending" | "available" | "deleting")
 

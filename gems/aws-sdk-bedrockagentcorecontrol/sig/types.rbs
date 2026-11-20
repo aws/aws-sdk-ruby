@@ -2354,6 +2354,8 @@ module Aws::BedrockAgentCoreControl
       attr_accessor interceptor: Types::InterceptorConfiguration
       attr_accessor interception_points: ::Array[("REQUEST" | "RESPONSE")]
       attr_accessor input_configuration: Types::InterceptorInputConfiguration
+      attr_accessor response_interception_mode: ("BUFFERED" | "STREAM")
+      attr_accessor response_streaming_configuration: Types::ResponseStreamingConfiguration
       SENSITIVE: []
     end
 
@@ -5477,6 +5479,11 @@ module Aws::BedrockAgentCoreControl
 
     class ResourceNotFoundException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResponseStreamingConfiguration
+      attr_accessor max_events_per_invocation: ::Integer
       SENSITIVE: []
     end
 

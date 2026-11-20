@@ -540,6 +540,76 @@ module Aws::PartnerCentralChannel
       req.send_request(options)
     end
 
+    # Cancels a pending channel contract created within the last 30 days. A
+    # request for a channel contract that isn't PENDING, including one that
+    # is already CANCELED, fails with a ValidationException.
+    #
+    # @option params [required, String] :catalog
+    #   The catalog identifier for the channel contract.
+    #
+    # @option params [required, String] :identifier
+    #   The unique identifier of the channel contract to cancel.
+    #
+    # @option params [String] :reason
+    #   The reason for canceling the channel contract. Later requests don't
+    #   change or remove it.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CancelChannelContractResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelChannelContractResponse#channel_contract_detail #channel_contract_detail} => Types::CancelChannelContractDetail
+    #
+    #
+    # @example Example: Example for CancelChannelContract
+    #
+    #   resp = client.cancel_channel_contract({
+    #     catalog: "AWS", 
+    #     client_token: "clientToken", 
+    #     identifier: "cc-4fj3bd2o3vb91", 
+    #     reason: "No longer providing managed services for this customer", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     channel_contract_detail: {
+    #       arn: "arn:aws:partnercentral:us-east-1:111122223333:catalog/AWS/channel-contract/cc-4fj3bd2o3vb91", 
+    #       cancellation_reason: "No longer providing managed services for this customer", 
+    #       id: "cc-4fj3bd2o3vb91", 
+    #       status: "CANCELED", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_channel_contract({
+    #     catalog: "Catalog", # required
+    #     identifier: "ChannelContractIdentifier", # required
+    #     reason: "CancellationReason",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_contract_detail.id #=> String
+    #   resp.channel_contract_detail.arn #=> String
+    #   resp.channel_contract_detail.status #=> String, one of "PENDING", "ACCEPTED", "EXPIRED", "CANCELED", "INACTIVE"
+    #   resp.channel_contract_detail.cancellation_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/CancelChannelContract AWS API Documentation
+    #
+    # @overload cancel_channel_contract(params = {})
+    # @param [Hash] params ({})
+    def cancel_channel_contract(params = {}, options = {})
+      req = build_request(:cancel_channel_contract, params)
+      req.send_request(options)
+    end
+
     # Cancels a pending channel handshake request.
     #
     # @option params [required, String] :catalog
@@ -588,6 +658,124 @@ module Aws::PartnerCentralChannel
     # @param [Hash] params ({})
     def cancel_channel_handshake(params = {}, options = {})
       req = build_request(:cancel_channel_handshake, params)
+      req.send_request(options)
+    end
+
+    # Creates a new channel contract and sends it to the signatory for
+    # signature. In the Sandbox catalog, the channel contract is accepted
+    # automatically.
+    #
+    # @option params [required, String] :contract_type
+    #   The type of channel contract to create (for example, managed services
+    #   attestation).
+    #
+    # @option params [required, String] :catalog
+    #   The catalog identifier for the channel contract.
+    #
+    # @option params [required, Types::ChannelContractPayload] :payload
+    #   The payload containing specific details for the contract type.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Key-value pairs to associate with the channel contract.
+    #
+    # @return [Types::CreateChannelContractResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateChannelContractResponse#channel_contract_detail #channel_contract_detail} => Types::CreateChannelContractDetail
+    #
+    #
+    # @example Example: Example for CreateChannelContract - MANAGED_SERVICES_ATTESTATION
+    #
+    #   resp = client.create_channel_contract({
+    #     catalog: "AWS", 
+    #     client_token: "clientToken", 
+    #     contract_type: "MANAGED_SERVICES_ATTESTATION", 
+    #     payload: {
+    #       managed_services_attestation_payload: {
+    #         end_date: Time.parse("2027-03-31T00:00:00Z"), 
+    #         legal_entity_address: {
+    #           address_line: "123 Any Street", 
+    #           address_line_2: "Suite 100", 
+    #           city: "Anytown", 
+    #           country_code: "US", 
+    #           postal_code: "98101", 
+    #           state_or_region: "WA", 
+    #         }, 
+    #         legal_entity_name: "Example Partner Corp", 
+    #         member_account_ids: [
+    #           "111122224444", 
+    #         ], 
+    #         program_management_account_identifier: "pma-abcdef123456g", 
+    #         relationship_identifier: "rs-abc123def456g", 
+    #         signatory_email: "mary.major@example.com", 
+    #         signatory_name: "Mary Major", 
+    #         supported_services: [
+    #           "MONITORING", 
+    #           "SECURITY", 
+    #         ], 
+    #       }, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     channel_contract_detail: {
+    #       arn: "arn:aws:partnercentral:us-east-1:111122223333:catalog/AWS/channel-contract/cc-4fj3bd2o3vb91", 
+    #       id: "cc-4fj3bd2o3vb91", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_channel_contract({
+    #     contract_type: "MANAGED_SERVICES_ATTESTATION", # required, accepts MANAGED_SERVICES_ATTESTATION
+    #     catalog: "Catalog", # required
+    #     payload: { # required
+    #       managed_services_attestation_payload: {
+    #         legal_entity_name: "ChannelContractLegalEntityName", # required
+    #         relationship_identifier: "RelationshipIdentifier", # required
+    #         program_management_account_identifier: "ProgramManagementAccountIdentifier", # required
+    #         member_account_ids: ["AccountId"],
+    #         end_date: Time.now, # required
+    #         supported_services: ["MONITORING"], # required, accepts MONITORING, PATCHING, SECURITY, BACKUP_AND_DISASTER_RECOVERY, FINANCIAL_OPERATIONS, INFRASTRUCTURE_AS_CODE_AND_AUTOMATION, WELL_ARCHITECTED, ARTIFICIAL_INTELLIGENCE_AND_MACHINE_LEARNING_OPERATIONS
+    #         legal_entity_address: { # required
+    #           city: "City", # required
+    #           state_or_region: "StateOrRegion", # required
+    #           postal_code: "PostalCode", # required
+    #           country_code: "CountryCode", # required
+    #           address_line: "AddressLine", # required
+    #           address_line_2: "AddressLine",
+    #         },
+    #         signatory_name: "ChannelContractSignatoryName", # required
+    #         signatory_email: "ChannelContractSignatoryEmail", # required
+    #       },
+    #     },
+    #     client_token: "ClientToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_contract_detail.id #=> String
+    #   resp.channel_contract_detail.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/CreateChannelContract AWS API Documentation
+    #
+    # @overload create_channel_contract(params = {})
+    # @param [Hash] params ({})
+    def create_channel_contract(params = {}, options = {})
+      req = build_request(:create_channel_contract, params)
       req.send_request(options)
     end
 
@@ -779,6 +967,11 @@ module Aws::PartnerCentralChannel
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs to associate with the program management account.
     #
+    # @option params [String] :type
+    #   The type of the program management account (for example, resale
+    #   billing transfer, managed services), required for the managed services
+    #   provider program.
+    #
     # @return [Types::CreateProgramManagementAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProgramManagementAccountResponse#program_management_account_detail #program_management_account_detail} => Types::CreateProgramManagementAccountDetail
@@ -802,11 +995,30 @@ module Aws::PartnerCentralChannel
     #     }, 
     #   }
     #
+    # @example Example: Example for CreateProgramManagementAccount - MANAGED_SERVICES
+    #
+    #   resp = client.create_program_management_account({
+    #     type: "MANAGED_SERVICES", 
+    #     account_id: "111122223333", 
+    #     catalog: "AWS", 
+    #     client_token: "clientToken", 
+    #     display_name: "TestManagedServices", 
+    #     program: "MANAGED_SERVICES_PROVIDER", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     program_management_account_detail: {
+    #       arn: "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/program-management-account/pma-abcdef123456g", 
+    #       id: "pma-abcdef123456g", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_program_management_account({
     #     catalog: "Catalog", # required
-    #     program: "SOLUTION_PROVIDER", # required, accepts SOLUTION_PROVIDER, DISTRIBUTION, DISTRIBUTION_SELLER
+    #     program: "SOLUTION_PROVIDER", # required, accepts SOLUTION_PROVIDER, DISTRIBUTION, DISTRIBUTION_SELLER, MANAGED_SERVICES_PROVIDER
     #     display_name: "ProgramManagementAccountDisplayName", # required
     #     account_id: "AccountId", # required
     #     client_token: "ClientToken",
@@ -816,6 +1028,7 @@ module Aws::PartnerCentralChannel
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     type: "RESALE_BILLING_TRANSFER", # accepts RESALE_BILLING_TRANSFER, MANAGED_SERVICES
     #   })
     #
     # @example Response structure
@@ -845,14 +1058,15 @@ module Aws::PartnerCentralChannel
     #   The identifier of the program management account for this
     #   relationship.
     #
-    # @option params [required, String] :associated_account_id
+    # @option params [String] :associated_account_id
     #   The AWS account ID to associate in this relationship.
     #
     # @option params [required, String] :display_name
     #   A human-readable name for the relationship.
     #
     # @option params [String] :resale_account_model
-    #   The resale account model for the relationship.
+    #   The resale account model for the relationship. Applies only to billing
+    #   transfer relationships.
     #
     # @option params [required, String] :sector
     #   The business sector for the relationship.
@@ -868,7 +1082,17 @@ module Aws::PartnerCentralChannel
     #   Key-value pairs to associate with the relationship.
     #
     # @option params [Types::SupportPlan] :requested_support_plan
-    #   The support plan requested for this relationship.
+    #   The support plan requested for this relationship. Applies only to
+    #   billing transfer relationships.
+    #
+    # @option params [String] :account_scope
+    #   The account scope for a managed services relationship (for example,
+    #   entire organization, specific member accounts). Applies only to
+    #   managed services relationships.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_date
+    #   The start date of the managed services relationship. Applies only to
+    #   managed services relationships.
     #
     # @return [Types::CreateRelationshipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -896,13 +1120,35 @@ module Aws::PartnerCentralChannel
     #     }, 
     #   }
     #
+    # @example Example: Example for CreateRelationship - MANAGED_SERVICES_END_CUSTOMER
+    #
+    #   resp = client.create_relationship({
+    #     account_scope: "ENTIRE_ORGANIZATION", 
+    #     associated_account_id: "987654321012", 
+    #     association_type: "MANAGED_SERVICES_END_CUSTOMER", 
+    #     catalog: "AWS", 
+    #     client_token: "clientToken", 
+    #     display_name: "TestManagedCustomer", 
+    #     program_management_account_identifier: "pma-abcdef123456g", 
+    #     sector: "COMMERCIAL", 
+    #     start_date: Time.parse("2026-10-01T00:00:00Z"), 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     relationship_detail: {
+    #       arn: "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/program-management-account/pma-abcdef123456g/relationship/rs-abc123def456g", 
+    #       id: "rs-abc123def456g", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_relationship({
     #     catalog: "Catalog", # required
-    #     association_type: "DOWNSTREAM_SELLER", # required, accepts DOWNSTREAM_SELLER, END_CUSTOMER, INTERNAL
+    #     association_type: "DOWNSTREAM_SELLER", # required, accepts DOWNSTREAM_SELLER, END_CUSTOMER, INTERNAL, MANAGED_SERVICES_END_CUSTOMER
     #     program_management_account_identifier: "ProgramManagementAccountIdentifier", # required
-    #     associated_account_id: "AccountId", # required
+    #     associated_account_id: "AccountId",
     #     display_name: "RelationshipDisplayName", # required
     #     resale_account_model: "DISTRIBUTOR", # accepts DISTRIBUTOR, END_CUSTOMER, SOLUTION_PROVIDER
     #     sector: "COMMERCIAL", # required, accepts COMMERCIAL, GOVERNMENT, GOVERNMENT_EXCEPTION
@@ -930,6 +1176,8 @@ module Aws::PartnerCentralChannel
     #         charge_account_id: "AccountId",
     #       },
     #     },
+    #     account_scope: "ENTIRE_ORGANIZATION", # accepts ENTIRE_ORGANIZATION, SPECIFIC_MEMBER_ACCOUNTS
+    #     start_date: Time.now,
     #   })
     #
     # @example Response structure
@@ -1046,6 +1294,154 @@ module Aws::PartnerCentralChannel
       req.send_request(options)
     end
 
+    # Retrieves details of a specific channel contract.
+    #
+    # @option params [required, String] :catalog
+    #   The catalog identifier for the channel contract.
+    #
+    # @option params [required, String] :identifier
+    #   The unique identifier of the channel contract to retrieve.
+    #
+    # @return [Types::GetChannelContractResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetChannelContractResponse#channel_contract_detail #channel_contract_detail} => Types::ChannelContractDetail
+    #
+    #
+    # @example Example: Example for GetChannelContract - MANAGED_SERVICES_ATTESTATION
+    #
+    #   resp = client.get_channel_contract({
+    #     catalog: "AWS", 
+    #     identifier: "cc-4fj3bd2o3vb91", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     channel_contract_detail: {
+    #       arn: "arn:aws:partnercentral:us-east-1:111122223333:catalog/AWS/channel-contract/cc-4fj3bd2o3vb91", 
+    #       catalog: "AWS", 
+    #       contract_type: "MANAGED_SERVICES_ATTESTATION", 
+    #       created_at: Time.parse("2026-09-08T16:18:16.000Z"), 
+    #       details: {
+    #         managed_services_attestation_details: {
+    #           end_date: Time.parse("2027-03-31T00:00:00Z"), 
+    #           legal_entity_address: {
+    #             address_line: "123 Any Street", 
+    #             address_line_2: "Suite 100", 
+    #             city: "Anytown", 
+    #             country_code: "US", 
+    #             postal_code: "98101", 
+    #             state_or_region: "WA", 
+    #           }, 
+    #           legal_entity_name: "Example Partner Corp", 
+    #           member_account_ids: [
+    #             "111122224444", 
+    #           ], 
+    #           program_management_account_identifier: "pma-abcdef123456g", 
+    #           relationship_identifier: "rs-abc123def456g", 
+    #           signatory_email: "mary.major@example.com", 
+    #           signatory_name: "Mary Major", 
+    #           supported_services: [
+    #             "MONITORING", 
+    #             "SECURITY", 
+    #           ], 
+    #         }, 
+    #       }, 
+    #       id: "cc-4fj3bd2o3vb91", 
+    #       status: "PENDING", 
+    #       updated_at: Time.parse("2026-09-08T16:18:16.000Z"), 
+    #     }, 
+    #   }
+    #
+    # @example Example: Example for GetChannelContract - CANCELED
+    #
+    #   resp = client.get_channel_contract({
+    #     catalog: "AWS", 
+    #     identifier: "cc-9xq4rt6w2zp81", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     channel_contract_detail: {
+    #       arn: "arn:aws:partnercentral:us-east-1:111122223333:catalog/AWS/channel-contract/cc-9xq4rt6w2zp81", 
+    #       cancellation_reason: "No longer providing managed services for this customer", 
+    #       catalog: "AWS", 
+    #       contract_type: "MANAGED_SERVICES_ATTESTATION", 
+    #       created_at: Time.parse("2026-09-08T16:18:16.000Z"), 
+    #       details: {
+    #         managed_services_attestation_details: {
+    #           end_date: Time.parse("2027-03-31T00:00:00Z"), 
+    #           legal_entity_address: {
+    #             address_line: "123 Any Street", 
+    #             address_line_2: "Suite 100", 
+    #             city: "Anytown", 
+    #             country_code: "US", 
+    #             postal_code: "98101", 
+    #             state_or_region: "WA", 
+    #           }, 
+    #           legal_entity_name: "Example Partner Corp", 
+    #           member_account_ids: [
+    #             "111122224444", 
+    #           ], 
+    #           program_management_account_identifier: "pma-abcdef123456g", 
+    #           relationship_identifier: "rs-abc123def456g", 
+    #           signatory_email: "mary.major@example.com", 
+    #           signatory_name: "Mary Major", 
+    #           supported_services: [
+    #             "MONITORING", 
+    #             "SECURITY", 
+    #           ], 
+    #         }, 
+    #       }, 
+    #       id: "cc-9xq4rt6w2zp81", 
+    #       status: "CANCELED", 
+    #       updated_at: Time.parse("2026-09-10T09:30:00.000Z"), 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_channel_contract({
+    #     catalog: "Catalog", # required
+    #     identifier: "ChannelContractIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_contract_detail.id #=> String
+    #   resp.channel_contract_detail.arn #=> String
+    #   resp.channel_contract_detail.catalog #=> String
+    #   resp.channel_contract_detail.contract_type #=> String, one of "MANAGED_SERVICES_ATTESTATION"
+    #   resp.channel_contract_detail.status #=> String, one of "PENDING", "ACCEPTED", "EXPIRED", "CANCELED", "INACTIVE"
+    #   resp.channel_contract_detail.created_at #=> Time
+    #   resp.channel_contract_detail.updated_at #=> Time
+    #   resp.channel_contract_detail.responded_at #=> Time
+    #   resp.channel_contract_detail.cancellation_reason #=> String
+    #   resp.channel_contract_detail.details.managed_services_attestation_details.legal_entity_name #=> String
+    #   resp.channel_contract_detail.details.managed_services_attestation_details.relationship_identifier #=> String
+    #   resp.channel_contract_detail.details.managed_services_attestation_details.program_management_account_identifier #=> String
+    #   resp.channel_contract_detail.details.managed_services_attestation_details.member_account_ids #=> Array
+    #   resp.channel_contract_detail.details.managed_services_attestation_details.member_account_ids[0] #=> String
+    #   resp.channel_contract_detail.details.managed_services_attestation_details.end_date #=> Time
+    #   resp.channel_contract_detail.details.managed_services_attestation_details.supported_services #=> Array
+    #   resp.channel_contract_detail.details.managed_services_attestation_details.supported_services[0] #=> String, one of "MONITORING", "PATCHING", "SECURITY", "BACKUP_AND_DISASTER_RECOVERY", "FINANCIAL_OPERATIONS", "INFRASTRUCTURE_AS_CODE_AND_AUTOMATION", "WELL_ARCHITECTED", "ARTIFICIAL_INTELLIGENCE_AND_MACHINE_LEARNING_OPERATIONS"
+    #   resp.channel_contract_detail.details.managed_services_attestation_details.signatory_name #=> String
+    #   resp.channel_contract_detail.details.managed_services_attestation_details.signatory_email #=> String
+    #   resp.channel_contract_detail.details.managed_services_attestation_details.legal_entity_address.city #=> String
+    #   resp.channel_contract_detail.details.managed_services_attestation_details.legal_entity_address.state_or_region #=> String
+    #   resp.channel_contract_detail.details.managed_services_attestation_details.legal_entity_address.postal_code #=> String
+    #   resp.channel_contract_detail.details.managed_services_attestation_details.legal_entity_address.country_code #=> String
+    #   resp.channel_contract_detail.details.managed_services_attestation_details.legal_entity_address.address_line #=> String
+    #   resp.channel_contract_detail.details.managed_services_attestation_details.legal_entity_address.address_line_2 #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/GetChannelContract AWS API Documentation
+    #
+    # @overload get_channel_contract(params = {})
+    # @param [Hash] params ({})
+    def get_channel_contract(params = {}, options = {})
+      req = build_request(:get_channel_contract, params)
+      req.send_request(options)
+    end
+
     # Retrieves details of a specific partner relationship.
     #
     # @option params [required, String] :catalog
@@ -1088,6 +1484,34 @@ module Aws::PartnerCentralChannel
     #     }, 
     #   }
     #
+    # @example Example: Example for GetRelationship - MANAGED_SERVICES_END_CUSTOMER
+    #
+    #   resp = client.get_relationship({
+    #     catalog: "AWS", 
+    #     identifier: "rs-abc123def456g", 
+    #     program_management_account_identifier: "pma-abcdef123456g", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     relationship_detail: {
+    #       account_scope: "ENTIRE_ORGANIZATION", 
+    #       arn: "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/program-management-account/pma-abcdef123456g/relationship/rs-abc123def456g", 
+    #       associated_account_id: "987654321012", 
+    #       association_type: "MANAGED_SERVICES_END_CUSTOMER", 
+    #       channel_contract_id: "cc-4fj3bd2o3vb91", 
+    #       created_at: Time.parse("2026-09-08T16:18:16Z"), 
+    #       display_name: "TestManagedCustomer", 
+    #       end_date: Time.parse("2027-03-31T00:00:00Z"), 
+    #       id: "rs-abc123def456g", 
+    #       program_management_account_id: "pma-abcdef123456g", 
+    #       revision: "2", 
+    #       sector: "COMMERCIAL", 
+    #       start_date: Time.parse("2026-10-01T00:00:00Z"), 
+    #       updated_at: Time.parse("2026-09-10T09:30:00Z"), 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_relationship({
@@ -1102,15 +1526,18 @@ module Aws::PartnerCentralChannel
     #   resp.relationship_detail.id #=> String
     #   resp.relationship_detail.revision #=> String
     #   resp.relationship_detail.catalog #=> String
-    #   resp.relationship_detail.association_type #=> String, one of "DOWNSTREAM_SELLER", "END_CUSTOMER", "INTERNAL"
+    #   resp.relationship_detail.association_type #=> String, one of "DOWNSTREAM_SELLER", "END_CUSTOMER", "INTERNAL", "MANAGED_SERVICES_END_CUSTOMER"
     #   resp.relationship_detail.program_management_account_id #=> String
     #   resp.relationship_detail.associated_account_id #=> String
     #   resp.relationship_detail.display_name #=> String
     #   resp.relationship_detail.resale_account_model #=> String, one of "DISTRIBUTOR", "END_CUSTOMER", "SOLUTION_PROVIDER"
     #   resp.relationship_detail.sector #=> String, one of "COMMERCIAL", "GOVERNMENT", "GOVERNMENT_EXCEPTION"
+    #   resp.relationship_detail.account_scope #=> String, one of "ENTIRE_ORGANIZATION", "SPECIFIC_MEMBER_ACCOUNTS"
+    #   resp.relationship_detail.channel_contract_id #=> String
     #   resp.relationship_detail.created_at #=> Time
     #   resp.relationship_detail.updated_at #=> Time
     #   resp.relationship_detail.start_date #=> Time
+    #   resp.relationship_detail.end_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/GetRelationship AWS API Documentation
     #
@@ -1118,6 +1545,147 @@ module Aws::PartnerCentralChannel
     # @param [Hash] params ({})
     def get_relationship(params = {}, options = {})
       req = build_request(:get_relationship, params)
+      req.send_request(options)
+    end
+
+    # Lists channel contracts based on specified criteria.
+    #
+    # @option params [required, String] :catalog
+    #   The catalog identifier to filter channel contracts.
+    #
+    # @option params [required, String] :contract_type
+    #   Filter results by contract type.
+    #
+    # @option params [Array<String>] :statuses
+    #   Filter results by channel contract status.
+    #
+    # @option params [Types::ListChannelContractsTypeFilters] :contract_type_filters
+    #   Type-specific filters for channel contracts.
+    #
+    # @option params [Types::ListChannelContractsTypeSort] :contract_type_sort
+    #   Type-specific sorting options for channel contracts.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   Token for retrieving the next page of results.
+    #
+    # @return [Types::ListChannelContractsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListChannelContractsResponse#items #items} => Array&lt;Types::ChannelContractSummary&gt;
+    #   * {Types::ListChannelContractsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Example for ListChannelContracts - MANAGED_SERVICES_ATTESTATION
+    #
+    #   resp = client.list_channel_contracts({
+    #     catalog: "AWS", 
+    #     contract_type: "MANAGED_SERVICES_ATTESTATION", 
+    #     contract_type_filters: {
+    #       managed_services_attestation_type_filters: {
+    #         legal_entity_names: [
+    #           "Example Partner Corp", 
+    #         ], 
+    #         relationship_identifiers: [
+    #           "rs-abc123def456g", 
+    #         ], 
+    #       }, 
+    #     }, 
+    #     contract_type_sort: {
+    #       managed_services_attestation_type_sort: {
+    #         sort_by: "UpdatedAt", 
+    #         sort_order: "Descending", 
+    #       }, 
+    #     }, 
+    #     max_results: 20, 
+    #     statuses: [
+    #       "PENDING", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         arn: "arn:aws:partnercentral:us-east-1:111122223333:catalog/AWS/channel-contract/cc-4fj3bd2o3vb91", 
+    #         catalog: "AWS", 
+    #         contract_type: "MANAGED_SERVICES_ATTESTATION", 
+    #         created_at: Time.parse("2026-09-08T16:18:16.000Z"), 
+    #         details: {
+    #           managed_services_attestation_details: {
+    #             end_date: Time.parse("2027-03-31T00:00:00Z"), 
+    #             legal_entity_name: "Example Partner Corp", 
+    #             member_account_ids: [
+    #               "111122224444", 
+    #             ], 
+    #             program_management_account_identifier: "pma-abcdef123456g", 
+    #             relationship_identifier: "rs-abc123def456g", 
+    #             supported_services: [
+    #               "MONITORING", 
+    #               "SECURITY", 
+    #             ], 
+    #           }, 
+    #         }, 
+    #         id: "cc-4fj3bd2o3vb91", 
+    #         status: "PENDING", 
+    #         updated_at: Time.parse("2026-09-08T16:18:16.000Z"), 
+    #       }, 
+    #     ], 
+    #     next_token: "nextToken", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_channel_contracts({
+    #     catalog: "Catalog", # required
+    #     contract_type: "MANAGED_SERVICES_ATTESTATION", # required, accepts MANAGED_SERVICES_ATTESTATION
+    #     statuses: ["PENDING"], # accepts PENDING, ACCEPTED, EXPIRED, CANCELED, INACTIVE
+    #     contract_type_filters: {
+    #       managed_services_attestation_type_filters: {
+    #         relationship_identifiers: ["RelationshipIdentifier"],
+    #         legal_entity_names: ["ChannelContractLegalEntityName"],
+    #       },
+    #     },
+    #     contract_type_sort: {
+    #       managed_services_attestation_type_sort: {
+    #         sort_order: "Ascending", # required, accepts Ascending, Descending
+    #         sort_by: "UpdatedAt", # required, accepts UpdatedAt
+    #       },
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].catalog #=> String
+    #   resp.items[0].contract_type #=> String, one of "MANAGED_SERVICES_ATTESTATION"
+    #   resp.items[0].status #=> String, one of "PENDING", "ACCEPTED", "EXPIRED", "CANCELED", "INACTIVE"
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].updated_at #=> Time
+    #   resp.items[0].responded_at #=> Time
+    #   resp.items[0].details.managed_services_attestation_details.legal_entity_name #=> String
+    #   resp.items[0].details.managed_services_attestation_details.relationship_identifier #=> String
+    #   resp.items[0].details.managed_services_attestation_details.program_management_account_identifier #=> String
+    #   resp.items[0].details.managed_services_attestation_details.member_account_ids #=> Array
+    #   resp.items[0].details.managed_services_attestation_details.member_account_ids[0] #=> String
+    #   resp.items[0].details.managed_services_attestation_details.end_date #=> Time
+    #   resp.items[0].details.managed_services_attestation_details.supported_services #=> Array
+    #   resp.items[0].details.managed_services_attestation_details.supported_services[0] #=> String, one of "MONITORING", "PATCHING", "SECURITY", "BACKUP_AND_DISASTER_RECOVERY", "FINANCIAL_OPERATIONS", "INFRASTRUCTURE_AS_CODE_AND_AUTOMATION", "WELL_ARCHITECTED", "ARTIFICIAL_INTELLIGENCE_AND_MACHINE_LEARNING_OPERATIONS"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ListChannelContracts AWS API Documentation
+    #
+    # @overload list_channel_contracts(params = {})
+    # @param [Hash] params ({})
+    def list_channel_contracts(params = {}, options = {})
+      req = build_request(:list_channel_contracts, params)
       req.send_request(options)
     end
 
@@ -1358,7 +1926,7 @@ module Aws::PartnerCentralChannel
     #         service_period_types: ["MINIMUM_NOTICE_PERIOD"], # accepts MINIMUM_NOTICE_PERIOD, FIXED_COMMITMENT_PERIOD
     #       },
     #       program_management_account_type_filters: {
-    #         programs: ["SOLUTION_PROVIDER"], # accepts SOLUTION_PROVIDER, DISTRIBUTION, DISTRIBUTION_SELLER
+    #         programs: ["SOLUTION_PROVIDER"], # accepts SOLUTION_PROVIDER, DISTRIBUTION, DISTRIBUTION_SELLER, MANAGED_SERVICES_PROVIDER
     #       },
     #     },
     #     handshake_type_sort: {
@@ -1400,7 +1968,7 @@ module Aws::PartnerCentralChannel
     #   resp.items[0].detail.revoke_service_period_handshake_detail.minimum_notice_days #=> String
     #   resp.items[0].detail.revoke_service_period_handshake_detail.start_date #=> Time
     #   resp.items[0].detail.revoke_service_period_handshake_detail.end_date #=> Time
-    #   resp.items[0].detail.program_management_account_handshake_detail.program #=> String, one of "SOLUTION_PROVIDER", "DISTRIBUTION", "DISTRIBUTION_SELLER"
+    #   resp.items[0].detail.program_management_account_handshake_detail.program #=> String, one of "SOLUTION_PROVIDER", "DISTRIBUTION", "DISTRIBUTION_SELLER", "MANAGED_SERVICES_PROVIDER"
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].updated_at #=> Time
     #   resp.items[0].status #=> String, one of "PENDING", "ACCEPTED", "REJECTED", "CANCELED", "EXPIRED"
@@ -1440,6 +2008,9 @@ module Aws::PartnerCentralChannel
     #
     # @option params [String] :next_token
     #   Token for retrieving the next page of results.
+    #
+    # @option params [String] :type
+    #   Filter by program management account type.
     #
     # @return [Types::ListProgramManagementAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1497,7 +2068,7 @@ module Aws::PartnerCentralChannel
     #     catalog: "Catalog", # required
     #     max_results: 1,
     #     display_names: ["ProgramManagementAccountDisplayName"],
-    #     programs: ["SOLUTION_PROVIDER"], # accepts SOLUTION_PROVIDER, DISTRIBUTION, DISTRIBUTION_SELLER
+    #     programs: ["SOLUTION_PROVIDER"], # accepts SOLUTION_PROVIDER, DISTRIBUTION, DISTRIBUTION_SELLER, MANAGED_SERVICES_PROVIDER
     #     account_ids: ["AccountId"],
     #     statuses: ["PENDING"], # accepts PENDING, ACTIVE, INACTIVE
     #     sort: {
@@ -1505,6 +2076,7 @@ module Aws::PartnerCentralChannel
     #       sort_by: "UpdatedAt", # required, accepts UpdatedAt
     #     },
     #     next_token: "NextToken",
+    #     type: "RESALE_BILLING_TRANSFER", # accepts RESALE_BILLING_TRANSFER, MANAGED_SERVICES
     #   })
     #
     # @example Response structure
@@ -1513,7 +2085,7 @@ module Aws::PartnerCentralChannel
     #   resp.items[0].id #=> String
     #   resp.items[0].revision #=> String
     #   resp.items[0].catalog #=> String
-    #   resp.items[0].program #=> String, one of "SOLUTION_PROVIDER", "DISTRIBUTION", "DISTRIBUTION_SELLER"
+    #   resp.items[0].program #=> String, one of "SOLUTION_PROVIDER", "DISTRIBUTION", "DISTRIBUTION_SELLER", "MANAGED_SERVICES_PROVIDER"
     #   resp.items[0].display_name #=> String
     #   resp.items[0].account_id #=> String
     #   resp.items[0].arn #=> String
@@ -1521,6 +2093,7 @@ module Aws::PartnerCentralChannel
     #   resp.items[0].updated_at #=> Time
     #   resp.items[0].start_date #=> Time
     #   resp.items[0].status #=> String, one of "PENDING", "ACTIVE", "INACTIVE"
+    #   resp.items[0].type #=> String, one of "RESALE_BILLING_TRANSFER", "MANAGED_SERVICES"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ListProgramManagementAccounts AWS API Documentation
@@ -1614,7 +2187,7 @@ module Aws::PartnerCentralChannel
     #     catalog: "Catalog", # required
     #     max_results: 1,
     #     associated_account_ids: ["AccountId"],
-    #     association_types: ["DOWNSTREAM_SELLER"], # accepts DOWNSTREAM_SELLER, END_CUSTOMER, INTERNAL
+    #     association_types: ["DOWNSTREAM_SELLER"], # accepts DOWNSTREAM_SELLER, END_CUSTOMER, INTERNAL, MANAGED_SERVICES_END_CUSTOMER
     #     display_names: ["RelationshipDisplayName"],
     #     program_management_account_identifiers: ["ProgramManagementAccountIdentifier"],
     #     sort: {
@@ -1631,7 +2204,7 @@ module Aws::PartnerCentralChannel
     #   resp.items[0].id #=> String
     #   resp.items[0].revision #=> String
     #   resp.items[0].catalog #=> String
-    #   resp.items[0].association_type #=> String, one of "DOWNSTREAM_SELLER", "END_CUSTOMER", "INTERNAL"
+    #   resp.items[0].association_type #=> String, one of "DOWNSTREAM_SELLER", "END_CUSTOMER", "INTERNAL", "MANAGED_SERVICES_END_CUSTOMER"
     #   resp.items[0].program_management_account_id #=> String
     #   resp.items[0].associated_account_id #=> String
     #   resp.items[0].display_name #=> String
@@ -1763,6 +2336,22 @@ module Aws::PartnerCentralChannel
     #
     #   resp = client.tag_resource({
     #     resource_arn: "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/program-management-account/pma-u8ic702rtzng8/relationship/rs-l9o4fj3b5zb91", 
+    #     tags: [
+    #       {
+    #         key: "ExampleKey", 
+    #         value: "ExampleValue", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Example: Example for TagResource - ChannelContract
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/channel-contract/cc-4fj3bd2o3vb91", 
     #     tags: [
     #       {
     #         key: "ExampleKey", 
@@ -1918,7 +2507,8 @@ module Aws::PartnerCentralChannel
     #   The new display name for the relationship.
     #
     # @option params [Types::SupportPlan] :requested_support_plan
-    #   The updated support plan for the relationship.
+    #   The updated support plan for the relationship. Applies only to billing
+    #   transfer relationships.
     #
     # @return [Types::UpdateRelationshipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2006,7 +2596,7 @@ module Aws::PartnerCentralChannel
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-partnercentralchannel'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

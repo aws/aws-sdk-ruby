@@ -48,6 +48,7 @@ module Aws::NetworkSecurityManager
     ConfigurationIssue = Shapes::StructureShape.new(name: 'ConfigurationIssue')
     ConfigurationIssueList = Shapes::ListShape.new(name: 'ConfigurationIssueList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CoverageStatus = Shapes::StringShape.new(name: 'CoverageStatus')
     CreateDeploymentInput = Shapes::StructureShape.new(name: 'CreateDeploymentInput')
     CreateDeploymentOutput = Shapes::StructureShape.new(name: 'CreateDeploymentOutput')
     CreateDeploymentSnapshotInput = Shapes::StructureShape.new(name: 'CreateDeploymentSnapshotInput')
@@ -69,6 +70,7 @@ module Aws::NetworkSecurityManager
     CreateTemplateSnapshotInput = Shapes::StructureShape.new(name: 'CreateTemplateSnapshotInput')
     CreateTemplateSnapshotOutput = Shapes::StructureShape.new(name: 'CreateTemplateSnapshotOutput')
     DateTimestamp = Shapes::TimestampShape.new(name: 'DateTimestamp', timestampFormat: "iso8601")
+    DefaultSubnetConnectivity = Shapes::StringShape.new(name: 'DefaultSubnetConnectivity')
     DeleteAdminAccountRequest = Shapes::StructureShape.new(name: 'DeleteAdminAccountRequest')
     DeleteDeploymentInput = Shapes::StructureShape.new(name: 'DeleteDeploymentInput')
     DeletePolicyInput = Shapes::StructureShape.new(name: 'DeletePolicyInput')
@@ -76,6 +78,7 @@ module Aws::NetworkSecurityManager
     DeleteScopeInput = Shapes::StructureShape.new(name: 'DeleteScopeInput')
     DeleteTemplateInput = Shapes::StructureShape.new(name: 'DeleteTemplateInput')
     DeploymentArn = Shapes::StringShape.new(name: 'DeploymentArn')
+    DeploymentArnSet = Shapes::ListShape.new(name: 'DeploymentArnSet')
     DeploymentConfiguration = Shapes::StructureShape.new(name: 'DeploymentConfiguration')
     DeploymentCoverageEntry = Shapes::StructureShape.new(name: 'DeploymentCoverageEntry')
     DeploymentCoverageList = Shapes::ListShape.new(name: 'DeploymentCoverageList')
@@ -115,9 +118,13 @@ module Aws::NetworkSecurityManager
     GetTemplateOutput = Shapes::StructureShape.new(name: 'GetTemplateOutput')
     HasPublishedVersion = Shapes::BooleanShape.new(name: 'HasPublishedVersion')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
+    IgwFirewallConfig = Shapes::StructureShape.new(name: 'IgwFirewallConfig')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidFirewallReasons = Shapes::StructureShape.new(name: 'InvalidFirewallReasons')
+    InvalidResourceIssue = Shapes::StructureShape.new(name: 'InvalidResourceIssue')
+    InvalidResourceIssueList = Shapes::ListShape.new(name: 'InvalidResourceIssueList')
+    InvalidResourcesByType = Shapes::MapShape.new(name: 'InvalidResourcesByType')
     IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
     IsPublished = Shapes::BooleanShape.new(name: 'IsPublished')
     IsSnapshot = Shapes::BooleanShape.new(name: 'IsSnapshot')
@@ -130,10 +137,14 @@ module Aws::NetworkSecurityManager
     ListDeploymentSnapshotsOutput = Shapes::StructureShape.new(name: 'ListDeploymentSnapshotsOutput')
     ListDeploymentsInput = Shapes::StructureShape.new(name: 'ListDeploymentsInput')
     ListDeploymentsOutput = Shapes::StructureShape.new(name: 'ListDeploymentsOutput')
+    ListEntityCoveragesInput = Shapes::StructureShape.new(name: 'ListEntityCoveragesInput')
+    ListEntityCoveragesOutput = Shapes::StructureShape.new(name: 'ListEntityCoveragesOutput')
     ListPoliciesInput = Shapes::StructureShape.new(name: 'ListPoliciesInput')
     ListPoliciesOutput = Shapes::StructureShape.new(name: 'ListPoliciesOutput')
     ListPolicySnapshotsInput = Shapes::StructureShape.new(name: 'ListPolicySnapshotsInput')
     ListPolicySnapshotsOutput = Shapes::StructureShape.new(name: 'ListPolicySnapshotsOutput')
+    ListProtectedResourceCoveragesInput = Shapes::StructureShape.new(name: 'ListProtectedResourceCoveragesInput')
+    ListProtectedResourceCoveragesOutput = Shapes::StructureShape.new(name: 'ListProtectedResourceCoveragesOutput')
     ListResourceAssociationsInput = Shapes::StructureShape.new(name: 'ListResourceAssociationsInput')
     ListResourceAssociationsOutput = Shapes::StructureShape.new(name: 'ListResourceAssociationsOutput')
     ListResourceSynchronizationStatusesInput = Shapes::StructureShape.new(name: 'ListResourceSynchronizationStatusesInput')
@@ -183,6 +194,8 @@ module Aws::NetworkSecurityManager
     ResourceArnList = Shapes::ListShape.new(name: 'ResourceArnList')
     ResourceAssociation = Shapes::StructureShape.new(name: 'ResourceAssociation')
     ResourceAssociationList = Shapes::ListShape.new(name: 'ResourceAssociationList')
+    ResourceCoverageSummary = Shapes::StructureShape.new(name: 'ResourceCoverageSummary')
+    ResourceCoverageSummaryList = Shapes::ListShape.new(name: 'ResourceCoverageSummaryList')
     ResourceCriteria = Shapes::UnionShape.new(name: 'ResourceCriteria')
     ResourceIdentifier = Shapes::StringShape.new(name: 'ResourceIdentifier')
     ResourceLogicalExpression = Shapes::UnionShape.new(name: 'ResourceLogicalExpression')
@@ -223,8 +236,13 @@ module Aws::NetworkSecurityManager
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceResourceType = Shapes::StringShape.new(name: 'ServiceResourceType')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    SpecializedScopeType = Shapes::StringShape.new(name: 'SpecializedScopeType')
     String = Shapes::StringShape.new(name: 'String')
     StringMap = Shapes::MapShape.new(name: 'StringMap')
+    SubnetConnectivity = Shapes::StringShape.new(name: 'SubnetConnectivity')
+    SubnetConnectivityOverride = Shapes::StructureShape.new(name: 'SubnetConnectivityOverride')
+    SubnetConnectivityOverrideList = Shapes::ListShape.new(name: 'SubnetConnectivityOverrideList')
+    SubnetConnectivityScopeArnList = Shapes::ListShape.new(name: 'SubnetConnectivityScopeArnList')
     SynchronizationStatus = Shapes::StringShape.new(name: 'SynchronizationStatus')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -240,6 +258,7 @@ module Aws::NetworkSecurityManager
     TemplateIdentifier = Shapes::StringShape.new(name: 'TemplateIdentifier')
     TemplateName = Shapes::StringShape.new(name: 'TemplateName')
     TemplateOrRuleReference = Shapes::UnionShape.new(name: 'TemplateOrRuleReference')
+    TemplateOwner = Shapes::StringShape.new(name: 'TemplateOwner')
     TemplateSummary = Shapes::StructureShape.new(name: 'TemplateSummary')
     TemplateSummaryList = Shapes::ListShape.new(name: 'TemplateSummaryList')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
@@ -532,6 +551,7 @@ module Aws::NetworkSecurityManager
     CreateScopeInput.add_member(:scope_name, Shapes::ShapeRef.new(shape: ScopeName, required: true, location_name: "scopeName"))
     CreateScopeInput.add_member(:scope_description, Shapes::ShapeRef.new(shape: Description, location_name: "scopeDescription"))
     CreateScopeInput.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: ScopeConfiguration, required: true, location_name: "scopeConfiguration"))
+    CreateScopeInput.add_member(:specialized_scope_type, Shapes::ShapeRef.new(shape: SpecializedScopeType, location_name: "specializedScopeType"))
     CreateScopeInput.add_member(:is_published, Shapes::ShapeRef.new(shape: IsPublished, location_name: "isPublished"))
     CreateScopeInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateScopeInput.struct_class = Types::CreateScopeInput
@@ -541,6 +561,7 @@ module Aws::NetworkSecurityManager
     CreateScopeOutput.add_member(:scope_name, Shapes::ShapeRef.new(shape: ScopeName, required: true, location_name: "scopeName"))
     CreateScopeOutput.add_member(:scope_description, Shapes::ShapeRef.new(shape: Description, location_name: "scopeDescription"))
     CreateScopeOutput.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: ScopeConfiguration, location_name: "scopeConfiguration"))
+    CreateScopeOutput.add_member(:specialized_scope_type, Shapes::ShapeRef.new(shape: SpecializedScopeType, location_name: "specializedScopeType"))
     CreateScopeOutput.add_member(:status, Shapes::ShapeRef.new(shape: EntityStatus, required: true, location_name: "status"))
     CreateScopeOutput.add_member(:version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "version"))
     CreateScopeOutput.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "updateToken"))
@@ -559,6 +580,7 @@ module Aws::NetworkSecurityManager
     CreateScopeSnapshotOutput.add_member(:scope_name, Shapes::ShapeRef.new(shape: ScopeName, required: true, location_name: "scopeName"))
     CreateScopeSnapshotOutput.add_member(:scope_description, Shapes::ShapeRef.new(shape: Description, location_name: "scopeDescription"))
     CreateScopeSnapshotOutput.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: ScopeConfiguration, location_name: "scopeConfiguration"))
+    CreateScopeSnapshotOutput.add_member(:specialized_scope_type, Shapes::ShapeRef.new(shape: SpecializedScopeType, location_name: "specializedScopeType"))
     CreateScopeSnapshotOutput.add_member(:status, Shapes::ShapeRef.new(shape: EntityStatus, required: true, location_name: "status"))
     CreateScopeSnapshotOutput.add_member(:version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "version"))
     CreateScopeSnapshotOutput.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "updateToken"))
@@ -627,6 +649,8 @@ module Aws::NetworkSecurityManager
     DeleteTemplateInput.add_member(:template_identifier, Shapes::ShapeRef.new(shape: TemplateIdentifier, required: true, location: "uri", location_name: "templateIdentifier"))
     DeleteTemplateInput.struct_class = Types::DeleteTemplateInput
 
+    DeploymentArnSet.member = Shapes::ShapeRef.new(shape: Arn)
+
     DeploymentConfiguration.add_member(:enable_cross_account_visibility, Shapes::ShapeRef.new(shape: EnableCrossAccountVisibility, required: true, location_name: "enableCrossAccountVisibility"))
     DeploymentConfiguration.struct_class = Types::DeploymentConfiguration
 
@@ -661,9 +685,11 @@ module Aws::NetworkSecurityManager
 
     FirewallSyncReason.add_member(:missing_firewall, Shapes::ShapeRef.new(shape: String, location_name: "missingFirewall"))
     FirewallSyncReason.add_member(:invalid_firewall, Shapes::ShapeRef.new(shape: InvalidFirewallReasons, location_name: "invalidFirewall"))
+    FirewallSyncReason.add_member(:invalid_resource, Shapes::ShapeRef.new(shape: InvalidResourcesByType, location_name: "invalidResource"))
     FirewallSyncReason.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     FirewallSyncReason.add_member_subclass(:missing_firewall, Types::FirewallSyncReason::MissingFirewall)
     FirewallSyncReason.add_member_subclass(:invalid_firewall, Types::FirewallSyncReason::InvalidFirewall)
+    FirewallSyncReason.add_member_subclass(:invalid_resource, Types::FirewallSyncReason::InvalidResource)
     FirewallSyncReason.add_member_subclass(:unknown, Types::FirewallSyncReason::Unknown)
     FirewallSyncReason.struct_class = Types::FirewallSyncReason
 
@@ -752,6 +778,7 @@ module Aws::NetworkSecurityManager
     GetScopeOutput.add_member(:scope_name, Shapes::ShapeRef.new(shape: ScopeName, required: true, location_name: "scopeName"))
     GetScopeOutput.add_member(:scope_description, Shapes::ShapeRef.new(shape: Description, location_name: "scopeDescription"))
     GetScopeOutput.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: ScopeConfiguration, location_name: "scopeConfiguration"))
+    GetScopeOutput.add_member(:specialized_scope_type, Shapes::ShapeRef.new(shape: SpecializedScopeType, location_name: "specializedScopeType"))
     GetScopeOutput.add_member(:status, Shapes::ShapeRef.new(shape: EntityStatus, required: true, location_name: "status"))
     GetScopeOutput.add_member(:version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "version"))
     GetScopeOutput.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "updateToken"))
@@ -777,6 +804,10 @@ module Aws::NetworkSecurityManager
     GetTemplateOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "updatedAt"))
     GetTemplateOutput.struct_class = Types::GetTemplateOutput
 
+    IgwFirewallConfig.add_member(:default_subnet_connectivity, Shapes::ShapeRef.new(shape: DefaultSubnetConnectivity, location_name: "defaultSubnetConnectivity"))
+    IgwFirewallConfig.add_member(:subnet_connectivity_overrides, Shapes::ShapeRef.new(shape: SubnetConnectivityOverrideList, location_name: "subnetConnectivityOverrides"))
+    IgwFirewallConfig.struct_class = Types::IgwFirewallConfig
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
@@ -787,6 +818,16 @@ module Aws::NetworkSecurityManager
     InvalidFirewallReasons.add_member(:missing_mergeable_configuration_values, Shapes::ShapeRef.new(shape: ConfigurationIssueList, location_name: "missingMergeableConfigurationValues"))
     InvalidFirewallReasons.add_member(:unexpected_mergeable_configuration_values, Shapes::ShapeRef.new(shape: ConfigurationIssueList, location_name: "unexpectedMergeableConfigurationValues"))
     InvalidFirewallReasons.struct_class = Types::InvalidFirewallReasons
+
+    InvalidResourceIssue.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
+    InvalidResourceIssue.add_member(:expected_value, Shapes::ShapeRef.new(shape: String, location_name: "expectedValue"))
+    InvalidResourceIssue.add_member(:actual_value, Shapes::ShapeRef.new(shape: String, location_name: "actualValue"))
+    InvalidResourceIssue.struct_class = Types::InvalidResourceIssue
+
+    InvalidResourceIssueList.member = Shapes::ShapeRef.new(shape: InvalidResourceIssue)
+
+    InvalidResourcesByType.key = Shapes::ShapeRef.new(shape: ScopeResourceType)
+    InvalidResourcesByType.value = Shapes::ShapeRef.new(shape: InvalidResourceIssueList)
 
     ListAdminAccountsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListAdminAccountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -823,6 +864,16 @@ module Aws::NetworkSecurityManager
     ListDeploymentsOutput.add_member(:deployments, Shapes::ShapeRef.new(shape: DeploymentSummaryList, required: true, location_name: "deployments"))
     ListDeploymentsOutput.struct_class = Types::ListDeploymentsOutput
 
+    ListEntityCoveragesInput.add_member(:entity_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "entityArn"))
+    ListEntityCoveragesInput.add_member(:resource_owner_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "resourceOwnerAccountId"))
+    ListEntityCoveragesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListEntityCoveragesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListEntityCoveragesInput.struct_class = Types::ListEntityCoveragesInput
+
+    ListEntityCoveragesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListEntityCoveragesOutput.add_member(:resource_coverages, Shapes::ShapeRef.new(shape: ResourceCoverageSummaryList, required: true, location_name: "resourceCoverages"))
+    ListEntityCoveragesOutput.struct_class = Types::ListEntityCoveragesOutput
+
     ListPoliciesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListPoliciesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListPoliciesInput.add_member(:status, Shapes::ShapeRef.new(shape: EntityStatusFilter, location: "querystring", location_name: "status"))
@@ -840,6 +891,16 @@ module Aws::NetworkSecurityManager
     ListPolicySnapshotsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListPolicySnapshotsOutput.add_member(:snapshots, Shapes::ShapeRef.new(shape: PolicySummaryList, required: true, location_name: "snapshots"))
     ListPolicySnapshotsOutput.struct_class = Types::ListPolicySnapshotsOutput
+
+    ListProtectedResourceCoveragesInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "resourceArn"))
+    ListProtectedResourceCoveragesInput.add_member(:entity_type, Shapes::ShapeRef.new(shape: ServiceResourceType, location: "querystring", location_name: "entityType"))
+    ListProtectedResourceCoveragesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListProtectedResourceCoveragesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListProtectedResourceCoveragesInput.struct_class = Types::ListProtectedResourceCoveragesInput
+
+    ListProtectedResourceCoveragesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListProtectedResourceCoveragesOutput.add_member(:resource_coverages, Shapes::ShapeRef.new(shape: ResourceCoverageSummaryList, required: true, location_name: "resourceCoverages"))
+    ListProtectedResourceCoveragesOutput.struct_class = Types::ListProtectedResourceCoveragesOutput
 
     ListResourceAssociationsInput.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location: "querystring", location_name: "resourceIdentifier"))
     ListResourceAssociationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -914,6 +975,7 @@ module Aws::NetworkSecurityManager
     ListTemplatesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListTemplatesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListTemplatesInput.add_member(:status, Shapes::ShapeRef.new(shape: EntityStatusFilter, location: "querystring", location_name: "status"))
+    ListTemplatesInput.add_member(:template_owner, Shapes::ShapeRef.new(shape: TemplateOwner, location: "querystring", location_name: "templateOwner"))
     ListTemplatesInput.struct_class = Types::ListTemplatesInput
 
     ListTemplatesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -947,6 +1009,7 @@ module Aws::NetworkSecurityManager
     PolicyConfiguration.add_member(:remediation_enabled, Shapes::ShapeRef.new(shape: RemediationEnabled, required: true, location_name: "remediationEnabled"))
     PolicyConfiguration.add_member(:resources_clean_up, Shapes::ShapeRef.new(shape: ResourcesCleanUp, required: true, location_name: "resourcesCleanUp"))
     PolicyConfiguration.add_member(:waf_config, Shapes::ShapeRef.new(shape: WafConfig, location_name: "wafConfig"))
+    PolicyConfiguration.add_member(:igw_firewall_config, Shapes::ShapeRef.new(shape: IgwFirewallConfig, location_name: "igwFirewallConfig"))
     PolicyConfiguration.struct_class = Types::PolicyConfiguration
 
     PolicyReference.add_member(:policy_identifier, Shapes::ShapeRef.new(shape: PolicyIdentifier, required: true, location_name: "policyIdentifier"))
@@ -998,6 +1061,19 @@ module Aws::NetworkSecurityManager
     ResourceAssociation.struct_class = Types::ResourceAssociation
 
     ResourceAssociationList.member = Shapes::ShapeRef.new(shape: ResourceAssociation)
+
+    ResourceCoverageSummary.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn"))
+    ResourceCoverageSummary.add_member(:entity_type, Shapes::ShapeRef.new(shape: ServiceResourceType, location_name: "entityType"))
+    ResourceCoverageSummary.add_member(:entity_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "entityArn"))
+    ResourceCoverageSummary.add_member(:resource_owner_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "resourceOwnerAccountId"))
+    ResourceCoverageSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: ScopeResourceType, location_name: "resourceType"))
+    ResourceCoverageSummary.add_member(:firewall_type, Shapes::ShapeRef.new(shape: PolicyFirewallType, location_name: "firewallType"))
+    ResourceCoverageSummary.add_member(:coverage_status, Shapes::ShapeRef.new(shape: CoverageStatus, location_name: "coverageStatus"))
+    ResourceCoverageSummary.add_member(:deployment_arns, Shapes::ShapeRef.new(shape: DeploymentArnSet, location_name: "deploymentArns"))
+    ResourceCoverageSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "updatedAt"))
+    ResourceCoverageSummary.struct_class = Types::ResourceCoverageSummary
+
+    ResourceCoverageSummaryList.member = Shapes::ShapeRef.new(shape: ResourceCoverageSummary)
 
     ResourceCriteria.add_member(:tags, Shapes::ShapeRef.new(shape: StringMap, location_name: "tags"))
     ResourceCriteria.add_member(:alb_config, Shapes::ShapeRef.new(shape: AlbConfiguration, location_name: "albConfig"))
@@ -1081,6 +1157,7 @@ module Aws::NetworkSecurityManager
     ScopeSummary.add_member(:scope_id, Shapes::ShapeRef.new(shape: ScopeId, required: true, location_name: "scopeId"))
     ScopeSummary.add_member(:scope_arn, Shapes::ShapeRef.new(shape: ScopeArn, required: true, location_name: "scopeArn"))
     ScopeSummary.add_member(:scope_name, Shapes::ShapeRef.new(shape: ScopeName, location_name: "scopeName"))
+    ScopeSummary.add_member(:specialized_scope_type, Shapes::ShapeRef.new(shape: SpecializedScopeType, location_name: "specializedScopeType"))
     ScopeSummary.add_member(:status, Shapes::ShapeRef.new(shape: EntityStatus, location_name: "status"))
     ScopeSummary.add_member(:version, Shapes::ShapeRef.new(shape: EntityVersion, location_name: "version"))
     ScopeSummary.add_member(:has_published_version, Shapes::ShapeRef.new(shape: HasPublishedVersion, location_name: "hasPublishedVersion"))
@@ -1102,6 +1179,14 @@ module Aws::NetworkSecurityManager
 
     StringMap.key = Shapes::ShapeRef.new(shape: String)
     StringMap.value = Shapes::ShapeRef.new(shape: String)
+
+    SubnetConnectivityOverride.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: SubnetConnectivity, required: true, location_name: "connectivityType"))
+    SubnetConnectivityOverride.add_member(:scopes, Shapes::ShapeRef.new(shape: SubnetConnectivityScopeArnList, required: true, location_name: "scopes"))
+    SubnetConnectivityOverride.struct_class = Types::SubnetConnectivityOverride
+
+    SubnetConnectivityOverrideList.member = Shapes::ShapeRef.new(shape: SubnetConnectivityOverride)
+
+    SubnetConnectivityScopeArnList.member = Shapes::ShapeRef.new(shape: Arn)
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -1130,6 +1215,7 @@ module Aws::NetworkSecurityManager
     TemplateSummary.add_member(:template_id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location_name: "templateId"))
     TemplateSummary.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location_name: "templateArn"))
     TemplateSummary.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "templateName"))
+    TemplateSummary.add_member(:template_owner, Shapes::ShapeRef.new(shape: TemplateOwner, location_name: "templateOwner"))
     TemplateSummary.add_member(:status, Shapes::ShapeRef.new(shape: EntityStatus, location_name: "status"))
     TemplateSummary.add_member(:version, Shapes::ShapeRef.new(shape: EntityVersion, location_name: "version"))
     TemplateSummary.add_member(:has_published_version, Shapes::ShapeRef.new(shape: HasPublishedVersion, location_name: "hasPublishedVersion"))
@@ -1241,6 +1327,7 @@ module Aws::NetworkSecurityManager
     UpdateScopeOutput.add_member(:scope_name, Shapes::ShapeRef.new(shape: ScopeName, required: true, location_name: "scopeName"))
     UpdateScopeOutput.add_member(:scope_description, Shapes::ShapeRef.new(shape: Description, location_name: "scopeDescription"))
     UpdateScopeOutput.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: ScopeConfiguration, location_name: "scopeConfiguration"))
+    UpdateScopeOutput.add_member(:specialized_scope_type, Shapes::ShapeRef.new(shape: SpecializedScopeType, location_name: "specializedScopeType"))
     UpdateScopeOutput.add_member(:status, Shapes::ShapeRef.new(shape: EntityStatus, required: true, location_name: "status"))
     UpdateScopeOutput.add_member(:version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "version"))
     UpdateScopeOutput.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "updateToken"))
@@ -1330,6 +1417,7 @@ module Aws::NetworkSecurityManager
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyViolationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1361,6 +1449,7 @@ module Aws::NetworkSecurityManager
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyViolationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1392,6 +1481,7 @@ module Aws::NetworkSecurityManager
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyViolationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1423,6 +1513,7 @@ module Aws::NetworkSecurityManager
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyViolationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1454,6 +1545,7 @@ module Aws::NetworkSecurityManager
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyViolationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1700,6 +1792,24 @@ module Aws::NetworkSecurityManager
         )
       end)
 
+      api.add_operation(:list_entity_coverages, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEntityCoverages"
+        o.http_method = "GET"
+        o.http_request_uri = "/resource-coverage/entities"
+        o.input = Shapes::ShapeRef.new(shape: ListEntityCoveragesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListEntityCoveragesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_policies, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPolicies"
         o.http_method = "GET"
@@ -1728,6 +1838,24 @@ module Aws::NetworkSecurityManager
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_protected_resource_coverages, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListProtectedResourceCoverages"
+        o.http_method = "GET"
+        o.http_request_uri = "/resource-coverage/protected-resources"
+        o.input = Shapes::ShapeRef.new(shape: ListProtectedResourceCoveragesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListProtectedResourceCoveragesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

@@ -102,6 +102,7 @@ module Aws::PCS
       attr_accessor spot_options: Types::SpotOptions
       attr_accessor slurm_configuration: Types::ComputeNodeGroupSlurmConfiguration
       attr_accessor node_lifecycle_actions: Types::NodeLifecycleActions
+      attr_accessor instance_health_checks: Types::InstanceHealthChecks
       attr_accessor error_info: ::Array[Types::ErrorInfo]
       SENSITIVE: []
     end
@@ -175,6 +176,7 @@ module Aws::PCS
       attr_accessor spot_options: Types::SpotOptions
       attr_accessor slurm_configuration: Types::ComputeNodeGroupSlurmConfigurationRequest
       attr_accessor node_lifecycle_actions: Types::NodeLifecycleActionsRequest
+      attr_accessor instance_health_checks: Types::InstanceHealthChecksRequest
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -203,6 +205,17 @@ module Aws::PCS
     class CustomLaunchTemplate
       attr_accessor id: ::String
       attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class DeepHealthCheckOnStart
+      attr_accessor profile: ("NONE" | "QUICK" | "MEDIUM" | "LONG")
+      attr_accessor repair_action: ("AUTO" | "REPLACE" | "ISOLATE" | "NONE")
+      SENSITIVE: []
+    end
+
+    class DeepHealthChecks
+      attr_accessor on_start: Types::DeepHealthCheckOnStart
       SENSITIVE: []
     end
 
@@ -282,8 +295,26 @@ module Aws::PCS
       SENSITIVE: []
     end
 
+    class HealthMonitoring
+      attr_accessor mode: ("NONE" | "STANDARD")
+      attr_accessor repair_action: ("AUTO" | "REPLACE" | "ISOLATE" | "NONE")
+      SENSITIVE: []
+    end
+
     class InstanceConfig
       attr_accessor instance_type: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceHealthChecks
+      attr_accessor health_monitoring: Types::HealthMonitoring
+      attr_accessor deep_health_checks: Types::DeepHealthChecks
+      SENSITIVE: []
+    end
+
+    class InstanceHealthChecksRequest
+      attr_accessor health_monitoring: Types::HealthMonitoring
+      attr_accessor deep_health_checks: Types::DeepHealthChecks
       SENSITIVE: []
     end
 
@@ -456,6 +487,7 @@ module Aws::PCS
       attr_accessor compute_node_group_name: ::String
       attr_accessor node_lifecycle_actions: Types::NodeLifecycleActions
       attr_accessor scheduler_version: ::String
+      attr_accessor instance_health_checks: Types::InstanceHealthChecks
       SENSITIVE: [:shared_secret]
     end
 
@@ -608,6 +640,7 @@ module Aws::PCS
       attr_accessor iam_instance_profile_arn: ::String
       attr_accessor slurm_configuration: Types::UpdateComputeNodeGroupSlurmConfigurationRequest
       attr_accessor node_lifecycle_actions: Types::UpdateNodeLifecycleActionsRequest
+      attr_accessor instance_health_checks: Types::UpdateInstanceHealthChecksRequest
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -621,6 +654,12 @@ module Aws::PCS
       attr_accessor scale_down_idle_time_in_seconds: ::Integer
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
       attr_accessor gres_custom_settings: ::Array[::Hash[::String, ::String]]
+      SENSITIVE: []
+    end
+
+    class UpdateInstanceHealthChecksRequest
+      attr_accessor health_monitoring: Types::HealthMonitoring
+      attr_accessor deep_health_checks: Types::DeepHealthChecks
       SENSITIVE: []
     end
 

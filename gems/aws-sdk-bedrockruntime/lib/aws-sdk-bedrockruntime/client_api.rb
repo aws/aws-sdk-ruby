@@ -325,6 +325,7 @@ module Aws::BedrockRuntime
     PayloadPart = Shapes::StructureShape.new(name: 'PayloadPart')
     PerformanceConfigLatency = Shapes::StringShape.new(name: 'PerformanceConfigLatency')
     PerformanceConfiguration = Shapes::StructureShape.new(name: 'PerformanceConfiguration')
+    ProjectIdentifier = Shapes::StringShape.new(name: 'ProjectIdentifier')
     PromptRouterTrace = Shapes::StructureShape.new(name: 'PromptRouterTrace')
     PromptVariableMap = Shapes::MapShape.new(name: 'PromptVariableMap')
     PromptVariableValues = Shapes::UnionShape.new(name: 'PromptVariableValues')
@@ -635,6 +636,7 @@ module Aws::BedrockRuntime
     ConverseRequest.add_member(:inference_config, Shapes::ShapeRef.new(shape: InferenceConfiguration, location_name: "inferenceConfig"))
     ConverseRequest.add_member(:tool_config, Shapes::ShapeRef.new(shape: ToolConfiguration, location_name: "toolConfig"))
     ConverseRequest.add_member(:guardrail_config, Shapes::ShapeRef.new(shape: GuardrailConfiguration, location_name: "guardrailConfig"))
+    ConverseRequest.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectIdentifier, location_name: "projectIdentifier"))
     ConverseRequest.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: Document, location_name: "additionalModelRequestFields"))
     ConverseRequest.add_member(:prompt_variables, Shapes::ShapeRef.new(shape: PromptVariableMap, location_name: "promptVariables"))
     ConverseRequest.add_member(:additional_model_response_field_paths, Shapes::ShapeRef.new(shape: ConverseRequestAdditionalModelResponseFieldPathsList, location_name: "additionalModelResponseFieldPaths"))
@@ -685,6 +687,7 @@ module Aws::BedrockRuntime
     ConverseStreamRequest.add_member(:inference_config, Shapes::ShapeRef.new(shape: InferenceConfiguration, location_name: "inferenceConfig"))
     ConverseStreamRequest.add_member(:tool_config, Shapes::ShapeRef.new(shape: ToolConfiguration, location_name: "toolConfig"))
     ConverseStreamRequest.add_member(:guardrail_config, Shapes::ShapeRef.new(shape: GuardrailStreamConfiguration, location_name: "guardrailConfig"))
+    ConverseStreamRequest.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectIdentifier, location_name: "projectIdentifier"))
     ConverseStreamRequest.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: Document, location_name: "additionalModelRequestFields"))
     ConverseStreamRequest.add_member(:prompt_variables, Shapes::ShapeRef.new(shape: PromptVariableMap, location_name: "promptVariables"))
     ConverseStreamRequest.add_member(:additional_model_response_field_paths, Shapes::ShapeRef.new(shape: ConverseStreamRequestAdditionalModelResponseFieldPathsList, location_name: "additionalModelResponseFieldPaths"))
@@ -1221,6 +1224,7 @@ module Aws::BedrockRuntime
     InvokeModelRequest.add_member(:performance_config_latency, Shapes::ShapeRef.new(shape: PerformanceConfigLatency, location: "header", location_name: "X-Amzn-Bedrock-PerformanceConfig-Latency"))
     InvokeModelRequest.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTierType, location: "header", location_name: "X-Amzn-Bedrock-Service-Tier"))
     InvokeModelRequest.add_member(:request_metadata, Shapes::ShapeRef.new(shape: RequestMetadataJson, location: "header", location_name: "X-Amzn-Bedrock-Request-Metadata"))
+    InvokeModelRequest.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectIdentifier, location: "header", location_name: "X-Amzn-Bedrock-ProjectIdentifier"))
     InvokeModelRequest.struct_class = Types::InvokeModelRequest
     InvokeModelRequest[:payload] = :body
     InvokeModelRequest[:payload_member] = InvokeModelRequest.member(:body)
@@ -1269,6 +1273,7 @@ module Aws::BedrockRuntime
     InvokeModelWithResponseStreamRequest.add_member(:performance_config_latency, Shapes::ShapeRef.new(shape: PerformanceConfigLatency, location: "header", location_name: "X-Amzn-Bedrock-PerformanceConfig-Latency"))
     InvokeModelWithResponseStreamRequest.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTierType, location: "header", location_name: "X-Amzn-Bedrock-Service-Tier"))
     InvokeModelWithResponseStreamRequest.add_member(:request_metadata, Shapes::ShapeRef.new(shape: RequestMetadataJson, location: "header", location_name: "X-Amzn-Bedrock-Request-Metadata"))
+    InvokeModelWithResponseStreamRequest.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectIdentifier, location: "header", location_name: "X-Amzn-Bedrock-ProjectIdentifier"))
     InvokeModelWithResponseStreamRequest.struct_class = Types::InvokeModelWithResponseStreamRequest
     InvokeModelWithResponseStreamRequest[:payload] = :body
     InvokeModelWithResponseStreamRequest[:payload_member] = InvokeModelWithResponseStreamRequest.member(:body)

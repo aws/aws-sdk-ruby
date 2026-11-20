@@ -729,6 +729,7 @@ module Aws::SSM
       attr_accessor document_format: ("YAML" | "JSON" | "TEXT")
       attr_accessor target_type: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor cloud_providers: ::Array[("AWS" | "Azure" | "GCP")]
       SENSITIVE: []
     end
 
@@ -1544,6 +1545,7 @@ module Aws::SSM
       attr_accessor review_status: ("APPROVED" | "NOT_REVIEWED" | "PENDING" | "REJECTED")
       attr_accessor category: ::Array[::String]
       attr_accessor category_enum: ::Array[::String]
+      attr_accessor cloud_providers: ::Array[("AWS" | "Azure" | "GCP")]
       SENSITIVE: []
     end
 
@@ -1569,6 +1571,7 @@ module Aws::SSM
       attr_accessor requires: ::Array[Types::DocumentRequires]
       attr_accessor review_status: ("APPROVED" | "NOT_REVIEWED" | "PENDING" | "REJECTED")
       attr_accessor author: ::String
+      attr_accessor cloud_providers: ::Array[("AWS" | "Azure" | "GCP")]
       SENSITIVE: []
     end
 
@@ -1641,6 +1644,7 @@ module Aws::SSM
       attr_accessor status: ("Creating" | "Active" | "Updating" | "Deleting" | "Failed")
       attr_accessor status_information: ::String
       attr_accessor review_status: ("APPROVED" | "NOT_REVIEWED" | "PENDING" | "REJECTED")
+      attr_accessor cloud_providers: ::Array[("AWS" | "Azure" | "GCP")]
       SENSITIVE: []
     end
 
@@ -4547,6 +4551,7 @@ module Aws::SSM
       attr_accessor document_version: ::String
       attr_accessor document_format: ("YAML" | "JSON" | "TEXT")
       attr_accessor target_type: ::String
+      attr_accessor cloud_providers: ::Array[("AWS" | "Azure" | "GCP")]
       SENSITIVE: []
     end
 

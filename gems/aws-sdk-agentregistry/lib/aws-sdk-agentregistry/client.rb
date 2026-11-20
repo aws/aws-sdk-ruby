@@ -520,7 +520,7 @@ module Aws::AgentRegistry
     #   resp.registry_records[0].name #=> String
     #   resp.registry_records[0].description #=> String
     #   resp.registry_records[0].display_name #=> String
-    #   resp.registry_records[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
+    #   resp.registry_records[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY", "WEB_BOT"
     #   resp.registry_records[0].descriptors.mcp_server.data #=> String
     #   resp.registry_records[0].descriptors.mcp_server.data_schema_version #=> String
     #   resp.registry_records[0].descriptors.mcp_server.additional_data.tools.data #=> String
@@ -537,6 +537,10 @@ module Aws::AgentRegistry
     #   resp.registry_records[0].descriptors.custom.data #=> String
     #   resp.registry_records[0].descriptors.http.source.from_url.url #=> String
     #   resp.registry_records[0].descriptors.agui.source.from_url.url #=> String
+    #   resp.registry_records[0].descriptors.signature_agent_card.data #=> String
+    #   resp.registry_records[0].descriptors.signature_agent_card.data_schema_version #=> String
+    #   resp.registry_records[0].descriptors.signature_agent_card.source.from_url.url #=> String
+    #   resp.registry_records[0].descriptors.signature_agent_card.additional_data.category #=> String, one of "advertising", "archiver", "content_fetcher", "email_client", "http_library", "link_checker", "miscellaneous", "monitoring", "page_preview", "scraping_framework", "search_engine", "security", "seo", "social_media", "ai_training", "ai_search", "ai_assistant", "ai_content_optimization"
     #   resp.registry_records[0].record_version #=> String
     #   resp.registry_records[0].status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH"
     #   resp.registry_records[0].created_at #=> Time
@@ -607,7 +611,7 @@ module Aws::AgentRegistry
     #   resp.registry_records[0].name #=> String
     #   resp.registry_records[0].description #=> String
     #   resp.registry_records[0].display_name #=> String
-    #   resp.registry_records[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
+    #   resp.registry_records[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY", "WEB_BOT"
     #   resp.registry_records[0].record_version #=> String
     #   resp.registry_records[0].status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH"
     #   resp.registry_records[0].created_at #=> Time
@@ -726,7 +730,7 @@ module Aws::AgentRegistry
     #   resp.registry_records[0].name #=> String
     #   resp.registry_records[0].description #=> String
     #   resp.registry_records[0].display_name #=> String
-    #   resp.registry_records[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
+    #   resp.registry_records[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY", "WEB_BOT"
     #   resp.registry_records[0].descriptors.mcp_server.data #=> String
     #   resp.registry_records[0].descriptors.mcp_server.data_schema_version #=> String
     #   resp.registry_records[0].descriptors.mcp_server.additional_data.tools.data #=> String
@@ -743,6 +747,10 @@ module Aws::AgentRegistry
     #   resp.registry_records[0].descriptors.custom.data #=> String
     #   resp.registry_records[0].descriptors.http.source.from_url.url #=> String
     #   resp.registry_records[0].descriptors.agui.source.from_url.url #=> String
+    #   resp.registry_records[0].descriptors.signature_agent_card.data #=> String
+    #   resp.registry_records[0].descriptors.signature_agent_card.data_schema_version #=> String
+    #   resp.registry_records[0].descriptors.signature_agent_card.source.from_url.url #=> String
+    #   resp.registry_records[0].descriptors.signature_agent_card.additional_data.category #=> String, one of "advertising", "archiver", "content_fetcher", "email_client", "http_library", "link_checker", "miscellaneous", "monitoring", "page_preview", "scraping_framework", "search_engine", "security", "seo", "social_media", "ai_training", "ai_search", "ai_assistant", "ai_content_optimization"
     #   resp.registry_records[0].record_version #=> String
     #   resp.registry_records[0].status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH"
     #   resp.registry_records[0].created_at #=> Time
@@ -779,7 +787,7 @@ module Aws::AgentRegistry
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-agentregistry'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

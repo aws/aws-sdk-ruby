@@ -279,6 +279,12 @@ module Aws::AgentRegistry
     #   protocol endpoint.
     #   @return [Types::AgUiDescriptor]
     #
+    # @!attribute [rw] signature_agent_card
+    #   The signature agent card descriptor, populated when the record
+    #   represents a web bot. It identifies the JSON Web Key Set (JWKS) used
+    #   to verify the bot's HTTP message signatures.
+    #   @return [Types::SignatureAgentCardDescriptor]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-2025-12-01/Descriptors AWS API Documentation
     #
     class Descriptors < Struct.new(
@@ -287,7 +293,8 @@ module Aws::AgentRegistry
       :agent_skills_definition,
       :custom,
       :http,
-      :agui)
+      :agui,
+      :signature_agent_card)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -810,6 +817,56 @@ module Aws::AgentRegistry
       :search_type,
       :next_token)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The additional data for a signature agent card descriptor, such as the
+    # bot category of the web bot.
+    #
+    # @!attribute [rw] category
+    #   The bot category that describes the purpose of the web bot
+    #   identified by the signature agent card descriptor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-2025-12-01/SignatureAgentCardAdditionalData AWS API Documentation
+    #
+    class SignatureAgentCardAdditionalData < Struct.new(
+      :category)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Descriptor that defines the content of a signature agent card, which
+    # identifies a web bot and references the JSON Web Key Set (JWKS) used
+    # to verify its HTTP message signatures.
+    #
+    # @!attribute [rw] data
+    #   The signature agent card descriptor content, serialized as
+    #   descriptor payload data.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_schema_version
+    #   The schema version of the descriptor payload.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source location from which the signature agent card descriptor
+    #   content was retrieved.
+    #   @return [Types::DescriptorSource]
+    #
+    # @!attribute [rw] additional_data
+    #   Additional data for the signature agent card, such as its AWS WAF
+    #   bot category.
+    #   @return [Types::SignatureAgentCardAdditionalData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-2025-12-01/SignatureAgentCardDescriptor AWS API Documentation
+    #
+    class SignatureAgentCardDescriptor < Struct.new(
+      :data,
+      :data_schema_version,
+      :source,
+      :additional_data)
+      SENSITIVE = [:data]
       include Aws::Structure
     end
 

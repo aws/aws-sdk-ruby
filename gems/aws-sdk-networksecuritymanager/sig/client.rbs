@@ -157,7 +157,7 @@ module Aws
         def update_token: () -> ::String
         def is_snapshot: () -> bool
         def has_published_version: () -> bool
-        def firewall_type: () -> ("WAF" | "SHIELD_ADVANCED")
+        def firewall_type: () -> ("WAF" | "SHIELD_ADVANCED" | "IGW_FIREWALL")
         def policy_configuration: () -> Types::PolicyConfiguration
         def updated_at: () -> ::Time
       end
@@ -173,7 +173,7 @@ module Aws
                                rule_identifier: ::String?
                              }
                            ],
-                           firewall_type: ("WAF" | "SHIELD_ADVANCED"),
+                           firewall_type: ("WAF" | "SHIELD_ADVANCED" | "IGW_FIREWALL"),
                            policy_configuration: Params::policy_configuration,
                            ?is_published: bool,
                            ?tags: Hash[::String, ::String]
@@ -193,7 +193,7 @@ module Aws
         def update_token: () -> ::String
         def is_snapshot: () -> bool
         def has_published_version: () -> bool
-        def firewall_type: () -> ("WAF" | "SHIELD_ADVANCED")
+        def firewall_type: () -> ("WAF" | "SHIELD_ADVANCED" | "IGW_FIREWALL")
         def policy_configuration: () -> Types::PolicyConfiguration
         def updated_at: () -> ::Time
       end
@@ -210,7 +210,7 @@ module Aws
         def rule_id: () -> ::String
         def rule_arn: () -> ::String
         def rule_name: () -> ::String
-        def firewall_type: () -> ("WAF")
+        def firewall_type: () -> ("WAF" | "IGW_FIREWALL")
         def rule_type: () -> ("CONFIGURATION" | "INSPECTION")
         def rule_description: () -> ::String
         def configuration: () -> untyped
@@ -225,7 +225,7 @@ module Aws
       def create_rule: (
                          ?client_token: ::String,
                          rule_name: ::String,
-                         firewall_type: ("WAF"),
+                         firewall_type: ("WAF" | "IGW_FIREWALL"),
                          rule_type: ("CONFIGURATION" | "INSPECTION"),
                          ?rule_description: ::String,
                          configuration: {
@@ -240,7 +240,7 @@ module Aws
         def rule_id: () -> ::String
         def rule_arn: () -> ::String
         def rule_name: () -> ::String
-        def firewall_type: () -> ("WAF")
+        def firewall_type: () -> ("WAF" | "IGW_FIREWALL")
         def rule_type: () -> ("CONFIGURATION" | "INSPECTION")
         def rule_description: () -> ::String
         def configuration: () -> untyped
@@ -266,6 +266,7 @@ module Aws
         def scope_name: () -> ::String
         def scope_description: () -> ::String
         def scope_configuration: () -> Types::ScopeConfiguration
+        def specialized_scope_type: () -> ("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE")
         def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
         def version: () -> ::String
         def update_token: () -> ::String
@@ -279,6 +280,7 @@ module Aws
                           scope_name: ::String,
                           ?scope_description: ::String,
                           scope_configuration: Params::scope_configuration,
+                          ?specialized_scope_type: ("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
                           ?is_published: bool,
                           ?tags: Hash[::String, ::String]
                         ) -> _CreateScopeResponseSuccess
@@ -291,6 +293,7 @@ module Aws
         def scope_name: () -> ::String
         def scope_description: () -> ::String
         def scope_configuration: () -> Types::ScopeConfiguration
+        def specialized_scope_type: () -> ("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE")
         def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
         def version: () -> ::String
         def update_token: () -> ::String
@@ -318,7 +321,7 @@ module Aws
         def update_token: () -> ::String
         def is_snapshot: () -> bool
         def has_published_version: () -> bool
-        def firewall_type: () -> ("WAF")
+        def firewall_type: () -> ("WAF" | "IGW_FIREWALL")
         def updated_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#create_template-instance_method
@@ -331,7 +334,7 @@ module Aws
                                  rule_identifier: ::String
                                }
                              ],
-                             firewall_type: ("WAF"),
+                             firewall_type: ("WAF" | "IGW_FIREWALL"),
                              ?is_published: bool,
                              ?tags: Hash[::String, ::String]
                            ) -> _CreateTemplateResponseSuccess
@@ -349,7 +352,7 @@ module Aws
         def update_token: () -> ::String
         def is_snapshot: () -> bool
         def has_published_version: () -> bool
-        def firewall_type: () -> ("WAF")
+        def firewall_type: () -> ("WAF" | "IGW_FIREWALL")
         def updated_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#create_template_snapshot-instance_method
@@ -404,7 +407,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#generate_rule_configuration-instance_method
       def generate_rule_configuration: (
                                          prompt: ::String,
-                                         rule_firewall_type: ("WAF"),
+                                         rule_firewall_type: ("WAF" | "IGW_FIREWALL"),
                                          rule_type: ("CONFIGURATION" | "INSPECTION"),
                                          ?waf_config_data_type: ("DefaultAction" | "VisibilityConfig" | "CaptchaConfig" | "ChallengeConfig" | "CustomResponseBodies" | "LoggingConfiguration" | "DataProtectionConfig" | "AssociationConfig" | "OnSourceDDoSProtectionConfig" | "TokenDomains"),
                                          ?current_configuration: ::String,
@@ -459,7 +462,7 @@ module Aws
         def update_token: () -> ::String
         def is_snapshot: () -> bool
         def has_published_version: () -> bool
-        def firewall_type: () -> ("WAF" | "SHIELD_ADVANCED")
+        def firewall_type: () -> ("WAF" | "SHIELD_ADVANCED" | "IGW_FIREWALL")
         def policy_configuration: () -> Types::PolicyConfiguration
         def updated_at: () -> ::Time
       end
@@ -474,7 +477,7 @@ module Aws
         def rule_id: () -> ::String
         def rule_arn: () -> ::String
         def rule_name: () -> ::String
-        def firewall_type: () -> ("WAF")
+        def firewall_type: () -> ("WAF" | "IGW_FIREWALL")
         def rule_type: () -> ("CONFIGURATION" | "INSPECTION")
         def rule_description: () -> ::String
         def configuration: () -> untyped
@@ -498,6 +501,7 @@ module Aws
         def scope_name: () -> ::String
         def scope_description: () -> ::String
         def scope_configuration: () -> Types::ScopeConfiguration
+        def specialized_scope_type: () -> ("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE")
         def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
         def version: () -> ::String
         def update_token: () -> ::String
@@ -523,7 +527,7 @@ module Aws
         def update_token: () -> ::String
         def is_snapshot: () -> bool
         def has_published_version: () -> bool
-        def firewall_type: () -> ("WAF")
+        def firewall_type: () -> ("WAF" | "IGW_FIREWALL")
         def updated_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#get_template-instance_method
@@ -583,6 +587,20 @@ module Aws
                             ) -> _ListDeploymentsResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeploymentsResponseSuccess
 
+      interface _ListEntityCoveragesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEntityCoveragesOutput]
+        def next_token: () -> ::String
+        def resource_coverages: () -> ::Array[Types::ResourceCoverageSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#list_entity_coverages-instance_method
+      def list_entity_coverages: (
+                                   entity_arn: ::String,
+                                   ?resource_owner_account_id: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListEntityCoveragesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEntityCoveragesResponseSuccess
+
       interface _ListPoliciesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPoliciesOutput]
         def next_token: () -> ::String
@@ -608,6 +626,20 @@ module Aws
                                    ?next_token: ::String
                                  ) -> _ListPolicySnapshotsResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPolicySnapshotsResponseSuccess
+
+      interface _ListProtectedResourceCoveragesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProtectedResourceCoveragesOutput]
+        def next_token: () -> ::String
+        def resource_coverages: () -> ::Array[Types::ResourceCoverageSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#list_protected_resource_coverages-instance_method
+      def list_protected_resource_coverages: (
+                                               resource_arn: ::String,
+                                               ?entity_type: ("Rule" | "Template" | "Policy" | "Deployment" | "Scope"),
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _ListProtectedResourceCoveragesResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProtectedResourceCoveragesResponseSuccess
 
       interface _ListResourceAssociationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceAssociationsOutput]
@@ -720,7 +752,8 @@ module Aws
       def list_templates: (
                             ?max_results: ::Integer,
                             ?next_token: ::String,
-                            ?status: ("ACTIVE" | "DRAFT" | "DISABLED")
+                            ?status: ("ACTIVE" | "DRAFT" | "DISABLED"),
+                            ?template_owner: ("CUSTOMER" | "AWS")
                           ) -> _ListTemplatesResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTemplatesResponseSuccess
 
@@ -747,7 +780,7 @@ module Aws
                                  }?,
                                  firewall_type_scope: {
                                    all_firewall_types_enabled: bool?,
-                                   firewall_types: Array[("WAF" | "SHIELD_ADVANCED")]?
+                                   firewall_types: Array[("WAF" | "SHIELD_ADVANCED" | "IGW_FIREWALL")]?
                                  }?
                                }
                              ) -> _PutAdminAccountResponseSuccess
@@ -827,7 +860,7 @@ module Aws
         def update_token: () -> ::String
         def is_snapshot: () -> bool
         def has_published_version: () -> bool
-        def firewall_type: () -> ("WAF" | "SHIELD_ADVANCED")
+        def firewall_type: () -> ("WAF" | "SHIELD_ADVANCED" | "IGW_FIREWALL")
         def policy_configuration: () -> Types::PolicyConfiguration
         def updated_at: () -> ::Time
       end
@@ -854,7 +887,7 @@ module Aws
         def rule_id: () -> ::String
         def rule_arn: () -> ::String
         def rule_name: () -> ::String
-        def firewall_type: () -> ("WAF")
+        def firewall_type: () -> ("WAF" | "IGW_FIREWALL")
         def rule_type: () -> ("CONFIGURATION" | "INSPECTION")
         def rule_description: () -> ::String
         def configuration: () -> untyped
@@ -885,6 +918,7 @@ module Aws
         def scope_name: () -> ::String
         def scope_description: () -> ::String
         def scope_configuration: () -> Types::ScopeConfiguration
+        def specialized_scope_type: () -> ("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE")
         def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
         def version: () -> ::String
         def update_token: () -> ::String
@@ -915,7 +949,7 @@ module Aws
         def update_token: () -> ::String
         def is_snapshot: () -> bool
         def has_published_version: () -> bool
-        def firewall_type: () -> ("WAF")
+        def firewall_type: () -> ("WAF" | "IGW_FIREWALL")
         def updated_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#update_template-instance_method

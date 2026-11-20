@@ -26,6 +26,7 @@ module Aws::AgentRegistry
     BatchGetDiscoverableRegistryRecordRequest = Shapes::StructureShape.new(name: 'BatchGetDiscoverableRegistryRecordRequest')
     BatchGetDiscoverableRegistryRecordRequestEntriesList = Shapes::ListShape.new(name: 'BatchGetDiscoverableRegistryRecordRequestEntriesList')
     BatchGetDiscoverableRegistryRecordResponse = Shapes::StructureShape.new(name: 'BatchGetDiscoverableRegistryRecordResponse')
+    BotCategory = Shapes::StringShape.new(name: 'BotCategory')
     CustomDescriptor = Shapes::StructureShape.new(name: 'CustomDescriptor')
     CustomMetadataDocument = Shapes::DocumentShape.new(name: 'CustomMetadataDocument', document: true)
     DataSchemaVersion = Shapes::StringShape.new(name: 'DataSchemaVersion')
@@ -80,6 +81,8 @@ module Aws::AgentRegistry
     SearchQuery = Shapes::StringShape.new(name: 'SearchQuery')
     SearchType = Shapes::StringShape.new(name: 'SearchType')
     Sha256Hash = Shapes::StringShape.new(name: 'Sha256Hash')
+    SignatureAgentCardAdditionalData = Shapes::StructureShape.new(name: 'SignatureAgentCardAdditionalData')
+    SignatureAgentCardDescriptor = Shapes::StructureShape.new(name: 'SignatureAgentCardDescriptor')
     String = Shapes::StringShape.new(name: 'String')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
@@ -146,6 +149,7 @@ module Aws::AgentRegistry
     Descriptors.add_member(:custom, Shapes::ShapeRef.new(shape: CustomDescriptor, location_name: "custom"))
     Descriptors.add_member(:http, Shapes::ShapeRef.new(shape: HttpDescriptor, location_name: "http"))
     Descriptors.add_member(:agui, Shapes::ShapeRef.new(shape: AgUiDescriptor, location_name: "agui"))
+    Descriptors.add_member(:signature_agent_card, Shapes::ShapeRef.new(shape: SignatureAgentCardDescriptor, location_name: "signatureAgentCard"))
     Descriptors.struct_class = Types::Descriptors
 
     DiscoverableFilterValues.member = Shapes::ShapeRef.new(shape: FilterValue)
@@ -246,6 +250,15 @@ module Aws::AgentRegistry
     SearchDiscoverableRegistryRecordsResponse.add_member(:search_type, Shapes::ShapeRef.new(shape: SearchType, location_name: "searchType"))
     SearchDiscoverableRegistryRecordsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     SearchDiscoverableRegistryRecordsResponse.struct_class = Types::SearchDiscoverableRegistryRecordsResponse
+
+    SignatureAgentCardAdditionalData.add_member(:category, Shapes::ShapeRef.new(shape: BotCategory, location_name: "category"))
+    SignatureAgentCardAdditionalData.struct_class = Types::SignatureAgentCardAdditionalData
+
+    SignatureAgentCardDescriptor.add_member(:data, Shapes::ShapeRef.new(shape: DescriptorData, location_name: "data"))
+    SignatureAgentCardDescriptor.add_member(:data_schema_version, Shapes::ShapeRef.new(shape: DataSchemaVersion, location_name: "dataSchemaVersion"))
+    SignatureAgentCardDescriptor.add_member(:source, Shapes::ShapeRef.new(shape: DescriptorSource, location_name: "source"))
+    SignatureAgentCardDescriptor.add_member(:additional_data, Shapes::ShapeRef.new(shape: SignatureAgentCardAdditionalData, location_name: "additionalData"))
+    SignatureAgentCardDescriptor.struct_class = Types::SignatureAgentCardDescriptor
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException

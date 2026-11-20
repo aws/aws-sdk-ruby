@@ -93,6 +93,23 @@ module Aws
                            ) -> _AddAssociationResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddAssociationResponseSuccess
 
+      interface _AddInferenceGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddInferenceGatewayResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def gateway: () -> Types::GlobalInferenceGatewayMember
+        def status: () -> ("ADDING" | "ACTIVE" | "REMOVING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#add_inference_gateway-instance_method
+      def add_inference_gateway: (
+                                   identifier: ::String,
+                                   cluster_arn: ::String,
+                                   namespace: ::String,
+                                   name: ::String
+                                 ) -> _AddInferenceGatewayResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddInferenceGatewayResponseSuccess
+
       interface _AddTagsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AddTagsOutput]
         def tags: () -> ::Array[Types::Tag]
@@ -1378,6 +1395,38 @@ module Aws
                                     ]
                                   ) -> _CreateFlowDefinitionResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFlowDefinitionResponseSuccess
+
+      interface _CreateGlobalInferenceGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGlobalInferenceGatewayResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "FAILED")
+        def execution_role_arn: () -> ::String
+        def routing: () -> Types::GlobalInferenceGatewayRouting
+        def gateways: () -> ::Array[Types::GlobalInferenceGatewayMember]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#create_global_inference_gateway-instance_method
+      def create_global_inference_gateway: (
+                                             name: ::String,
+                                             ?routing: Params::global_inference_gateway_routing,
+                                             execution_role_arn: ::String,
+                                             gateways: Array[
+                                               {
+                                                 name: ::String,
+                                                 namespace: ::String,
+                                                 cluster_arn: ::String
+                                               }
+                                             ],
+                                             ?client_token: ::String,
+                                             ?tags: Array[
+                                               {
+                                                 key: ::String,
+                                                 value: ::String
+                                               }
+                                             ]
+                                           ) -> _CreateGlobalInferenceGatewayResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGlobalInferenceGatewayResponseSuccess
 
       interface _CreateHubResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateHubResponse]
@@ -3349,6 +3398,18 @@ module Aws
                                   ) -> _DeleteFlowDefinitionResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFlowDefinitionResponseSuccess
 
+      interface _DeleteGlobalInferenceGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGlobalInferenceGatewayResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_global_inference_gateway-instance_method
+      def delete_global_inference_gateway: (
+                                             identifier: ::String
+                                           ) -> _DeleteGlobalInferenceGatewayResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGlobalInferenceGatewayResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_hub-instance_method
       def delete_hub: (
                         hub_name: ::String
@@ -4343,6 +4404,25 @@ module Aws
                                       flow_definition_name: ::String
                                     ) -> _DescribeFlowDefinitionResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFlowDefinitionResponseSuccess
+
+      interface _DescribeGlobalInferenceGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGlobalInferenceGatewayResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def execution_role_arn: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "FAILED")
+        def endpoint_url: () -> ::String
+        def vpc_endpoint_service_name: () -> ::String
+        def routing: () -> Types::GlobalInferenceGatewayRouting
+        def creation_time: () -> ::Time
+        def failure_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_global_inference_gateway-instance_method
+      def describe_global_inference_gateway: (
+                                               identifier: ::String
+                                             ) -> _DescribeGlobalInferenceGatewayResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGlobalInferenceGatewayResponseSuccess
 
       interface _DescribeHubResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeHubResponse]
@@ -6202,6 +6282,24 @@ module Aws
                                  ) -> _ListFlowDefinitionsResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlowDefinitionsResponseSuccess
 
+      interface _ListGlobalInferenceGatewaysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGlobalInferenceGatewaysResponse]
+        def global_inference_gateway_summaries: () -> ::Array[Types::GlobalInferenceGatewaySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_global_inference_gateways-instance_method
+      def list_global_inference_gateways: (
+                                            ?filters: Array[
+                                              {
+                                                name: ("Status"),
+                                                value: ::String
+                                              }
+                                            ],
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer
+                                          ) -> _ListGlobalInferenceGatewaysResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGlobalInferenceGatewaysResponseSuccess
+
       interface _ListHubContentVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListHubContentVersionsResponse]
         def hub_content_summaries: () -> ::Array[Types::HubContentInfo]
@@ -6377,6 +6475,25 @@ module Aws
                                         ?max_results: ::Integer
                                       ) -> _ListInferenceExperimentsResponseSuccess
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInferenceExperimentsResponseSuccess
+
+      interface _ListInferenceGatewaysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInferenceGatewaysResponse]
+        def inference_gateway_summaries: () -> ::Array[Types::GlobalInferenceGatewayMemberSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_inference_gateways-instance_method
+      def list_inference_gateways: (
+                                     identifier: ::String,
+                                     ?filters: Array[
+                                       {
+                                         name: ("Status" | "ClusterArn"),
+                                         value: ::String
+                                       }
+                                     ],
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListInferenceGatewaysResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInferenceGatewaysResponseSuccess
 
       interface _ListInferenceRecommendationsJobStepsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListInferenceRecommendationsJobStepsResponse]
@@ -7295,6 +7412,26 @@ module Aws
                           ) -> _ListWorkteamsResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkteamsResponseSuccess
 
+      interface _MoveClusterNodesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MoveClusterNodesResponse]
+        def successful: () -> ::Array[::String]
+        def failed: () -> ::Array[Types::MoveClusterNodesError]
+        def successful_node_logical_ids: () -> ::Array[::String]
+        def failed_node_logical_ids: () -> ::Array[Types::MoveClusterNodeLogicalIdsError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#move_cluster_nodes-instance_method
+      def move_cluster_nodes: (
+                                source_cluster_arn: ::String,
+                                source_instance_group_name: ::String,
+                                target_cluster_arn: ::String,
+                                target_instance_group_name: ::String,
+                                ?instance_count: ::Integer,
+                                ?node_ids: Array[::String],
+                                ?node_logical_ids: Array[::String],
+                                ?client_token: ::String
+                              ) -> _MoveClusterNodesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MoveClusterNodesResponseSuccess
+
       interface _PutEndpointPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutEndpointPolicyResponse]
         def endpoint_arn: () -> ::String
@@ -7361,6 +7498,23 @@ module Aws
                               ]
                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _RemoveInferenceGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveInferenceGatewayResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def gateway: () -> Types::GlobalInferenceGatewayMember
+        def status: () -> ("ADDING" | "ACTIVE" | "REMOVING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#remove_inference_gateway-instance_method
+      def remove_inference_gateway: (
+                                      identifier: ::String,
+                                      cluster_arn: ::String,
+                                      namespace: ::String,
+                                      name: ::String
+                                    ) -> _RemoveInferenceGatewayResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveInferenceGatewayResponseSuccess
 
       interface _RenderUiTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RenderUiTemplateResponse]
@@ -8045,6 +8199,21 @@ module Aws
                                      ?parameter_removals: Array[::String]
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateGlobalInferenceGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGlobalInferenceGatewayResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "FAILED")
+        def routing: () -> Types::GlobalInferenceGatewayRouting
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#update_global_inference_gateway-instance_method
+      def update_global_inference_gateway: (
+                                             identifier: ::String,
+                                             routing: Params::global_inference_gateway_routing
+                                           ) -> _UpdateGlobalInferenceGatewayResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGlobalInferenceGatewayResponseSuccess
 
       interface _UpdateHubResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateHubResponse]

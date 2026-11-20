@@ -647,6 +647,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRegionSettingsOutput]
         def resource_type_opt_in_preference: () -> ::Hash[::String, bool]
         def resource_type_management_preference: () -> ::Hash[::String, bool]
+        def resource_type_opt_in_incremental: () -> ::Hash[::String, bool]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#describe_region_settings-instance_method
       def describe_region_settings: (
@@ -1699,7 +1700,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#update_region_settings-instance_method
       def update_region_settings: (
                                     ?resource_type_opt_in_preference: Hash[::String, bool],
-                                    ?resource_type_management_preference: Hash[::String, bool]
+                                    ?resource_type_management_preference: Hash[::String, bool],
+                                    ?resource_type_opt_in_incremental: Hash[::String, bool]
                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

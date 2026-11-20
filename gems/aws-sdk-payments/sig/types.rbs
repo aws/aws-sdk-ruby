@@ -1,0 +1,334 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Payments
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor reason: ("NOT_AUTHORIZED" | "INVALID_ACCOUNT_STATE" | "OTHER")
+      SENSITIVE: []
+    end
+
+    class AccountBalance
+      attr_accessor amount: Types::CurrencyAmount
+      attr_accessor merchant_of_record: ::String
+      SENSITIVE: []
+    end
+
+    class Balances
+      attr_accessor outstanding: Types::CurrencyAmount
+      attr_accessor processing: Types::CurrencyAmount
+      attr_accessor settled: Types::CurrencyAmount
+      attr_accessor canceled: Types::CurrencyAmount
+      SENSITIVE: []
+    end
+
+    class BatchGetFinancialRecordRequest
+      attr_accessor keys: ::Array[Types::FinancialRecordKey]
+      SENSITIVE: []
+    end
+
+    class BatchGetFinancialRecordResponse
+      attr_accessor financial_records: ::Array[Types::FinancialRecord]
+      attr_accessor errors: ::Array[Types::FinancialRecordError]
+      SENSITIVE: []
+    end
+
+    class BillingPeriod
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      SENSITIVE: []
+    end
+
+    class BusinessUnit
+      attr_accessor merchant_of_record: ::String
+      attr_accessor line_of_business: ("AWS_CLOUD_SERVICES" | "PROSERVE_MARKETING_AND_TRAINING" | "AWS_MARKETPLACE")
+      SENSITIVE: []
+    end
+
+    class Card
+      attr_accessor brand: ("VISA" | "MASTERCARD" | "AMEX" | "DISCOVER" | "JCB" | "RUPAY" | "CHINA_UNIONPAY")
+      attr_accessor last4: ::String
+      attr_accessor expiration_month: ::Integer
+      attr_accessor expiration_year: ::Integer
+      attr_accessor card_type: ("CREDIT" | "DEBIT")
+      attr_accessor issuing_bank: ::String
+      attr_accessor issuer_country: ::String
+      SENSITIVE: [:last4, :expiration_month, :expiration_year]
+    end
+
+    class CnBankRedirect
+      attr_accessor bank_code: ::String
+      SENSITIVE: []
+    end
+
+    class CreditMemoDetails
+      attr_accessor invoice_id: ::String
+      attr_accessor billing_period: Types::BillingPeriod
+      SENSITIVE: []
+    end
+
+    class CurrencyAmount
+      attr_accessor value: ::String
+      attr_accessor currency: ::String
+      SENSITIVE: []
+    end
+
+    class FinancialRecord
+      attr_accessor id: ::String
+      attr_accessor type: ("INVOICE" | "CREDIT_MEMO")
+      attr_accessor business_unit: Types::BusinessUnit
+      attr_accessor amount: Types::CurrencyAmount
+      attr_accessor balances: Types::Balances
+      attr_accessor settlement_status: ("OPEN" | "CLOSED")
+      attr_accessor status: ("OUTSTANDING" | "PROCESSING" | "SETTLED" | "CANCELED")
+      attr_accessor issued_at: ::Time
+      attr_accessor closed_at: ::Time
+      attr_accessor details: Types::FinancialRecordDetails
+      SENSITIVE: []
+    end
+
+    class FinancialRecordDetails
+      attr_accessor invoice_details: Types::InvoiceDetails
+      attr_accessor credit_memo_details: Types::CreditMemoDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class InvoiceDetails < FinancialRecordDetails
+      end
+      class CreditMemoDetails < FinancialRecordDetails
+      end
+      class Unknown < FinancialRecordDetails
+      end
+    end
+
+    class FinancialRecordError
+      attr_accessor key: Types::FinancialRecordKey
+      attr_accessor code: ("NOT_FOUND" | "INTERNAL_ERROR")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FinancialRecordKey
+      attr_accessor identifier: ::String
+      attr_accessor invoice_identifier: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Identifier < FinancialRecordKey
+      end
+      class InvoiceIdentifier < FinancialRecordKey
+      end
+      class Unknown < FinancialRecordKey
+      end
+    end
+
+    class FinancialRecordSummary
+      attr_accessor id: ::String
+      attr_accessor type: ("INVOICE" | "CREDIT_MEMO")
+      attr_accessor business_unit: Types::BusinessUnit
+      attr_accessor amount: Types::CurrencyAmount
+      attr_accessor balances: Types::Balances
+      attr_accessor settlement_status: ("OPEN" | "CLOSED")
+      attr_accessor status: ("OUTSTANDING" | "PROCESSING" | "SETTLED" | "CANCELED")
+      attr_accessor issued_at: ::Time
+      attr_accessor closed_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetAccountBalanceRequest
+      attr_accessor balance_type: ("INVOICES_DUE" | "INVOICES_PAST_DUE" | "OUTSTANDING_CREDIT_MEMOS")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetAccountBalanceResponse
+      attr_accessor account_balances: ::Array[Types::AccountBalance]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetFinancialRecordRequest
+      attr_accessor identifier: ::String
+      attr_accessor invoice_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetFinancialRecordResponse
+      attr_accessor financial_record: Types::FinancialRecord
+      SENSITIVE: []
+    end
+
+    class GetPaymentInstrumentRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetPaymentInstrumentResponse
+      attr_accessor payment_instrument: Types::PaymentInstrument
+      SENSITIVE: []
+    end
+
+    class InNetBanking
+      attr_accessor bank_code: ::String
+      attr_accessor bank_name: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class InvoiceDetails
+      attr_accessor invoice_id: ::String
+      attr_accessor due_status: ("DUE" | "PAST_DUE")
+      attr_accessor billing_period: Types::BillingPeriod
+      attr_accessor due_date: ::Time
+      attr_accessor payment_terms: ::String
+      attr_accessor invoice_frequency: ("ONE_TIME" | "RECURRING")
+      SENSITIVE: []
+    end
+
+    class ListFinancialRecordsRequest
+      attr_accessor types: ::Array[("INVOICE" | "CREDIT_MEMO")]
+      attr_accessor settlement_statuses: ::Array[("OPEN" | "CLOSED")]
+      attr_accessor issued_after: ::Time
+      attr_accessor issued_before: ::Time
+      attr_accessor sort_by: ("ISSUED_AT")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFinancialRecordsResponse
+      attr_accessor financial_record_summaries: ::Array[Types::FinancialRecordSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPaymentInstrumentsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPaymentInstrumentsResponse
+      attr_accessor payment_instrument_summaries: ::Array[Types::PaymentInstrumentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class PaymentInstrument
+      attr_accessor arn: ::String
+      attr_accessor payment_method: ("CARD" | "US_ACH_BANK_ACCOUNT" | "SEPA_BANK_ACCOUNT" | "UK_BACS_BANK_ACCOUNT" | "IN_NET_BANKING" | "CN_BANK_REDIRECT" | "UPI" | "PIX" | "PAY_BY_INVOICE")
+      attr_accessor status: ("ACTIVE" | "PENDING_SETUP" | "SETUP_IN_PROGRESS" | "INVALID")
+      attr_accessor details: Types::PaymentInstrumentDetails
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PaymentInstrumentDetails
+      attr_accessor card: Types::Card
+      attr_accessor us_ach_bank_account: Types::UsAchBankAccount
+      attr_accessor sepa_bank_account: Types::SepaBankAccount
+      attr_accessor uk_bacs_bank_account: Types::UkBacsBankAccount
+      attr_accessor in_net_banking: Types::InNetBanking
+      attr_accessor cn_bank_redirect: Types::CnBankRedirect
+      attr_accessor upi: Types::Upi
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Card < PaymentInstrumentDetails
+      end
+      class UsAchBankAccount < PaymentInstrumentDetails
+      end
+      class SepaBankAccount < PaymentInstrumentDetails
+      end
+      class UkBacsBankAccount < PaymentInstrumentDetails
+      end
+      class InNetBanking < PaymentInstrumentDetails
+      end
+      class CnBankRedirect < PaymentInstrumentDetails
+      end
+      class Upi < PaymentInstrumentDetails
+      end
+      class Unknown < PaymentInstrumentDetails
+      end
+    end
+
+    class PaymentInstrumentSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor payment_method: ("CARD" | "US_ACH_BANK_ACCOUNT" | "SEPA_BANK_ACCOUNT" | "UK_BACS_BANK_ACCOUNT" | "IN_NET_BANKING" | "CN_BANK_REDIRECT" | "UPI" | "PIX" | "PAY_BY_INVOICE")
+      attr_accessor status: ("ACTIVE" | "PENDING_SETUP" | "SETUP_IN_PROGRESS" | "INVALID")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class SepaBankAccount
+      attr_accessor account_number_tail: ::String
+      attr_accessor account_holder_name: ::String
+      attr_accessor bank_name: ::String
+      attr_accessor account_type: ("CHECKING" | "SAVINGS")
+      SENSITIVE: [:account_number_tail, :account_holder_name]
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UkBacsBankAccount
+      attr_accessor account_number_tail: ::String
+      attr_accessor account_holder_name: ::String
+      attr_accessor bank_name: ::String
+      attr_accessor account_type: ("CHECKING" | "SAVINGS")
+      SENSITIVE: [:account_number_tail, :account_holder_name]
+    end
+
+    class Upi
+      attr_accessor app_name: ::String
+      SENSITIVE: []
+    end
+
+    class UsAchBankAccount
+      attr_accessor account_number_tail: ::String
+      attr_accessor account_holder_name: ::String
+      attr_accessor bank_name: ::String
+      attr_accessor account_type: ("CHECKING" | "SAVINGS")
+      SENSITIVE: [:account_number_tail, :account_holder_name]
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("CANNOT_PARSE" | "FIELD_VALIDATION_FAILED" | "INVALID_PAGINATION_TOKEN" | "UNSUPPORTED_ACTION" | "OTHER")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

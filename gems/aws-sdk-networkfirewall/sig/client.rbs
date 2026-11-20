@@ -107,7 +107,8 @@ module Aws
                                             {
                                               availability_zone: ::String
                                             }
-                                          ]
+                                          ],
+                                          ?firewall_type: ("FIREWALL" | "IGW_FIREWALL")
                                         ) -> _AssociateAvailabilityZonesResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateAvailabilityZonesResponseSuccess
 
@@ -123,7 +124,8 @@ module Aws
                                        ?update_token: ::String,
                                        ?firewall_arn: ::String,
                                        ?firewall_name: ::String,
-                                       firewall_policy_arn: ::String
+                                       firewall_policy_arn: ::String,
+                                       ?firewall_type: ("FIREWALL" | "IGW_FIREWALL")
                                      ) -> _AssociateFirewallPolicyResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateFirewallPolicyResponseSuccess
 
@@ -229,6 +231,9 @@ module Aws
                                }
                              ],
                              ?availability_zone_change_protection: bool,
+                             ?igw_firewall_configuration: {
+                               enforcement_mode: ("POLICY_CONTROLLED")
+                             },
                              ?nat_gateway_create_mappings: Array[
                                {
                                  subnet_id: ::String,
@@ -403,6 +408,7 @@ module Aws
       def delete_firewall: (
                              ?firewall_name: ::String,
                              ?firewall_arn: ::String,
+                             ?firewall_type: ("FIREWALL" | "IGW_FIREWALL"),
                              ?delete_associated_nat_gateways: bool
                            ) -> _DeleteFirewallResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFirewallResponseSuccess
@@ -526,7 +532,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_firewall-instance_method
       def describe_firewall: (
                                ?firewall_name: ::String,
-                               ?firewall_arn: ::String
+                               ?firewall_arn: ::String,
+                               ?firewall_type: ("FIREWALL" | "IGW_FIREWALL")
                              ) -> _DescribeFirewallResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFirewallResponseSuccess
 
@@ -535,7 +542,7 @@ module Aws
         def firewall_arn: () -> ::String
         def firewall_policy_arn: () -> ::String
         def description: () -> ::String
-        def status: () -> ("PROVISIONING" | "DELETING" | "READY" | "FAILED")
+        def status: () -> ("PROVISIONING" | "DELETING" | "READY" | "FAILED" | "STANDBY")
         def supported_availability_zones: () -> ::Hash[::String, Types::AvailabilityZoneMetadata]
         def transit_gateway_attachment_id: () -> ::String
       end
@@ -606,7 +613,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_logging_configuration-instance_method
       def describe_logging_configuration: (
                                             ?firewall_arn: ::String,
-                                            ?firewall_name: ::String
+                                            ?firewall_name: ::String,
+                                            ?firewall_type: ("FIREWALL" | "IGW_FIREWALL")
                                           ) -> _DescribeLoggingConfigurationResponseSuccess
                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLoggingConfigurationResponseSuccess
 
@@ -725,7 +733,8 @@ module Aws
                                                {
                                                  availability_zone: ::String
                                                }
-                                             ]
+                                             ],
+                                             ?firewall_type: ("FIREWALL" | "IGW_FIREWALL")
                                            ) -> _DisassociateAvailabilityZonesResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateAvailabilityZonesResponseSuccess
 
@@ -836,7 +845,8 @@ module Aws
       def list_firewalls: (
                             ?next_token: ::String,
                             ?vpc_ids: Array[::String],
-                            ?max_results: ::Integer
+                            ?max_results: ::Integer,
+                            ?firewall_type: ("FIREWALL" | "IGW_FIREWALL")
                           ) -> _ListFirewallsResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFirewallsResponseSuccess
 
@@ -1120,7 +1130,8 @@ module Aws
                                                ?enabled_analysis_types: Array[("TLS_SNI" | "HTTP_HOST")],
                                                ?firewall_arn: ::String,
                                                ?firewall_name: ::String,
-                                               ?update_token: ::String
+                                               ?update_token: ::String,
+                                               ?firewall_type: ("FIREWALL" | "IGW_FIREWALL")
                                              ) -> _UpdateFirewallAnalysisSettingsResponseSuccess
                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallAnalysisSettingsResponseSuccess
 
@@ -1136,7 +1147,8 @@ module Aws
                                                ?update_token: ::String,
                                                ?firewall_arn: ::String,
                                                ?firewall_name: ::String,
-                                               delete_protection: bool
+                                               delete_protection: bool,
+                                               ?firewall_type: ("FIREWALL" | "IGW_FIREWALL")
                                              ) -> _UpdateFirewallDeleteProtectionResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallDeleteProtectionResponseSuccess
 
@@ -1152,7 +1164,8 @@ module Aws
                                          ?update_token: ::String,
                                          ?firewall_arn: ::String,
                                          ?firewall_name: ::String,
-                                         ?description: ::String
+                                         ?description: ::String,
+                                         ?firewall_type: ("FIREWALL" | "IGW_FIREWALL")
                                        ) -> _UpdateFirewallDescriptionResponseSuccess
                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallDescriptionResponseSuccess
 
@@ -1171,7 +1184,8 @@ module Aws
                                                       ?encryption_configuration: {
                                                         key_id: ::String?,
                                                         type: ("CUSTOMER_KMS" | "AWS_OWNED_KMS_KEY")
-                                                      }
+                                                      },
+                                                      ?firewall_type: ("FIREWALL" | "IGW_FIREWALL")
                                                     ) -> _UpdateFirewallEncryptionConfigurationResponseSuccess
                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallEncryptionConfigurationResponseSuccess
 
@@ -1207,7 +1221,8 @@ module Aws
                                                       ?update_token: ::String,
                                                       ?firewall_arn: ::String,
                                                       ?firewall_name: ::String,
-                                                      firewall_policy_change_protection: bool
+                                                      firewall_policy_change_protection: bool,
+                                                      ?firewall_type: ("FIREWALL" | "IGW_FIREWALL")
                                                     ) -> _UpdateFirewallPolicyChangeProtectionResponseSuccess
                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallPolicyChangeProtectionResponseSuccess
 
@@ -1242,6 +1257,7 @@ module Aws
       def update_logging_configuration: (
                                           ?firewall_arn: ::String,
                                           ?firewall_name: ::String,
+                                          ?firewall_type: ("FIREWALL" | "IGW_FIREWALL"),
                                           ?logging_configuration: {
                                             log_destination_configs: Array[
                                               {

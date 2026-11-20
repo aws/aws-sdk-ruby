@@ -2146,7 +2146,8 @@ module Aws::Omics
     # @!attribute [rw] engine_settings
     #   Engine-specific settings for the workflow run. Use this field to
     #   specify configuration options that are specific to the workflow
-    #   engine (for example, Nextflow profiles).
+    #   engine (for example, Nextflow profiles, Nextflow runtime
+    #   configuration).
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] scratch_storage_mode
@@ -2155,6 +2156,13 @@ module Aws::Omics
     #   configuration is applicable only for CPU tasks. For tasks using
     #   GPUs, scratch storage is always LOCAL.
     #   @return [String]
+    #
+    # @!attribute [rw] requester_pays_enabled
+    #   Specifies whether each workflow run in the batch can read inputs
+    #   from Amazon Simple Storage Service (Amazon S3) buckets that use
+    #   Requester Pays. Your account pays the request and data transfer
+    #   charges for those reads. The default is `false`.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/DefaultRunSetting AWS API Documentation
     #
@@ -2181,7 +2189,8 @@ module Aws::Omics
       :configuration_name,
       :session_policy,
       :engine_settings,
-      :scratch_storage_mode)
+      :scratch_storage_mode,
+      :requester_pays_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4114,6 +4123,29 @@ module Aws::Omics
     #   the request did not specify a value.
     #   @return [String]
     #
+    # @!attribute [rw] requester_pays_enabled
+    #   Specifies whether this workflow run can read inputs from Amazon S3
+    #   buckets that use Requester Pays, as set in the `StartRun` or
+    #   `StartRunBatch` request.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parameters_uri
+    #   For a run that you started with `parametersUri`, the service returns
+    #   the location of the run parameters in this field instead of
+    #   `parameters`. The value is one of the following values:
+    #
+    #   * A presigned HTTPS URL for the copy of the parameters file that
+    #     Amazon Web Services HealthOmics stores for the run
+    #
+    #   * The S3 URI that you submitted, if Amazon Web Services HealthOmics
+    #     has not stored a copy of the file yet or the run failed validation
+    #
+    #   A presigned URL expires after a limited time. Call `GetRun` again to
+    #   get a new URL. Treat the URL as a credential and do not share it. If
+    #   the run failed because the parameters were not valid, check
+    #   `failureReason` and `statusMessage`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetRunResponse AWS API Documentation
     #
     class GetRunResponse < Struct.new(
@@ -4160,7 +4192,9 @@ module Aws::Omics
       :vpc_config,
       :engine_settings,
       :session_policy,
-      :output_uri_prefix_mode)
+      :output_uri_prefix_mode,
+      :requester_pays_enabled,
+      :parameters_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5268,8 +5302,8 @@ module Aws::Omics
     # @!attribute [rw] engine_settings
     #   Per-run engine-specific settings. Use this field to specify
     #   configuration options that are specific to the workflow engine (for
-    #   example, Nextflow profiles). Overrides
-    #   `defaultRunSetting.engineSettings` for this run.
+    #   example, Nextflow profiles, Nextflow runtime configuration).
+    #   Overrides `defaultRunSetting.engineSettings` for this run.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/InlineSetting AWS API Documentation
@@ -8421,7 +8455,9 @@ module Aws::Omics
     #   Parameters for the run. The run needs all required parameters and
     #   can include optional parameters. The run cannot include any
     #   parameters that are not defined in the parameter template. To
-    #   retrieve parameters from the run, use the GetRun API operation.
+    #   retrieve parameters from the run, use the GetRun API operation. To
+    #   supply the parameters in a file in S3 instead, use `parametersUri`.
+    #   Specify either `parameters` or `parametersUri`, not both.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] storage_capacity
@@ -8540,13 +8576,41 @@ module Aws::Omics
     # @!attribute [rw] engine_settings
     #   Engine-specific settings for the workflow run. Use this field to
     #   specify configuration options that are specific to the workflow
-    #   engine (for example, Nextflow profiles).
+    #   engine (for example, Nextflow profiles, Nextflow runtime
+    #   configuration).
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] output_uri_prefix_mode
     #   You can control the path prefixes that the service adds beneath
     #   `outputUri`. If you don't specify a value, the service uses
     #   `SERVICE_DEFINED`, which adds a run-specific prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] requester_pays_enabled
+    #   Specifies whether the workflow run that this request starts can read
+    #   inputs from Amazon S3 buckets that use Requester Pays. Your account
+    #   pays the request and data transfer charges for those reads. The
+    #   default is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parameters_uri
+    #   The S3 URI of a JSON file that contains the run parameters. Use this
+    #   field instead of `parameters` when your parameters are too large for
+    #   the request. Specify either `parameters` or `parametersUri`, not
+    #   both.
+    #
+    #   Amazon Web Services HealthOmics validates the file after `StartRun`
+    #   returns. If the file isn't valid, Amazon Web Services HealthOmics
+    #   fails the run with the failure reason `INVALID_RUN_PARAMETERS`. For
+    #   more information about permissions, limits, and other requirements,
+    #   see [Amazon Web Services HealthOmics run inputs][1] and [Amazon Web
+    #   Services HealthOmics service quotas][2] in the *Amazon Web Services
+    #   HealthOmics User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/workflows-run-inputs.html
+    #   [2]: https://docs.aws.amazon.com/omics/latest/dev/fixed-quotas.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartRunRequest AWS API Documentation
@@ -8576,7 +8640,9 @@ module Aws::Omics
       :configuration_name,
       :session_policy,
       :engine_settings,
-      :output_uri_prefix_mode)
+      :output_uri_prefix_mode,
+      :requester_pays_enabled,
+      :parameters_uri)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2026-11-20)
+------------------
+
+* Feature - Adds APIs to create publishers, verify that a publisher owns a domain, and associate registry records with a publisher. Publishers can approve or reject each association.
+
 1.19.0 (2026-11-19)
 ------------------
 

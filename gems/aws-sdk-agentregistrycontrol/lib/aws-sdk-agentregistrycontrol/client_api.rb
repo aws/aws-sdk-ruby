@@ -36,6 +36,10 @@ module Aws::AgentRegistryControl
     AllowedScopesType = Shapes::ListShape.new(name: 'AllowedScopesType')
     ApprovalConfiguration = Shapes::StructureShape.new(name: 'ApprovalConfiguration')
     ArtifactContent = Shapes::BlobShape.new(name: 'ArtifactContent')
+    AssociatePublisherRequest = Shapes::StructureShape.new(name: 'AssociatePublisherRequest')
+    AssociatePublisherResponse = Shapes::StructureShape.new(name: 'AssociatePublisherResponse')
+    AssociationApprovalStatus = Shapes::StringShape.new(name: 'AssociationApprovalStatus')
+    AssociationStatus = Shapes::StringShape.new(name: 'AssociationStatus')
     AuthorizationAttemptId = Shapes::StringShape.new(name: 'AuthorizationAttemptId')
     AuthorizationData = Shapes::UnionShape.new(name: 'AuthorizationData')
     AuthorizerConfiguration = Shapes::UnionShape.new(name: 'AuthorizerConfiguration')
@@ -47,10 +51,17 @@ module Aws::AgentRegistryControl
     AutoDetectionScope = Shapes::StringShape.new(name: 'AutoDetectionScope')
     AutoDetectionStatus = Shapes::StringShape.new(name: 'AutoDetectionStatus')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BotCategory = Shapes::StringShape.new(name: 'BotCategory')
+    Category = Shapes::StringShape.new(name: 'Category')
+    CategoryList = Shapes::ListShape.new(name: 'CategoryList')
+    ChallengeRecordName = Shapes::StringShape.new(name: 'ChallengeRecordName')
+    ChallengeRecordValue = Shapes::StringShape.new(name: 'ChallengeRecordValue')
     ClaimMatchOperatorType = Shapes::StringShape.new(name: 'ClaimMatchOperatorType')
     ClaimMatchValueType = Shapes::UnionShape.new(name: 'ClaimMatchValueType')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CreatePublisherRequest = Shapes::StructureShape.new(name: 'CreatePublisherRequest')
+    CreatePublisherResponse = Shapes::StructureShape.new(name: 'CreatePublisherResponse')
     CreateRegistryRecordRequest = Shapes::StructureShape.new(name: 'CreateRegistryRecordRequest')
     CreateRegistryRecordResponse = Shapes::StructureShape.new(name: 'CreateRegistryRecordResponse')
     CreateRegistryRequest = Shapes::StructureShape.new(name: 'CreateRegistryRequest')
@@ -68,22 +79,28 @@ module Aws::AgentRegistryControl
     CustomParameterMap = Shapes::MapShape.new(name: 'CustomParameterMap')
     DataSchemaVersion = Shapes::StringShape.new(name: 'DataSchemaVersion')
     DateTimestamp = Shapes::TimestampShape.new(name: 'DateTimestamp', timestampFormat: "iso8601")
+    DeletePublisherRequest = Shapes::StructureShape.new(name: 'DeletePublisherRequest')
     DeleteRegistryRecordRequest = Shapes::StructureShape.new(name: 'DeleteRegistryRecordRequest')
     DeleteRegistryRecordResponse = Shapes::StructureShape.new(name: 'DeleteRegistryRecordResponse')
     DeleteRegistryRequest = Shapes::StructureShape.new(name: 'DeleteRegistryRequest')
     DeleteRegistryResponse = Shapes::StructureShape.new(name: 'DeleteRegistryResponse')
+    DependencyException = Shapes::StructureShape.new(name: 'DependencyException')
     Description = Shapes::StringShape.new(name: 'Description')
     DescriptorData = Shapes::StringShape.new(name: 'DescriptorData')
     DescriptorSource = Shapes::StructureShape.new(name: 'DescriptorSource')
     DescriptorSourceFromUrl = Shapes::StructureShape.new(name: 'DescriptorSourceFromUrl')
     DescriptorSourceUrl = Shapes::StringShape.new(name: 'DescriptorSourceUrl')
     Descriptors = Shapes::StructureShape.new(name: 'Descriptors')
+    DisassociatePublisherRequest = Shapes::StructureShape.new(name: 'DisassociatePublisherRequest')
     DiscoveryConfiguration = Shapes::StructureShape.new(name: 'DiscoveryConfiguration')
     DiscoveryUrl = Shapes::StringShape.new(name: 'DiscoveryUrl')
+    DomainChallenge = Shapes::StructureShape.new(name: 'DomainChallenge')
+    DomainName = Shapes::StringShape.new(name: 'DomainName')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     EndpointIpAddressType = Shapes::StringShape.new(name: 'EndpointIpAddressType')
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
     FilterValues = Shapes::ListShape.new(name: 'FilterValues')
+    GetPublisherRequest = Shapes::StructureShape.new(name: 'GetPublisherRequest')
     GetRegistryRecordRequest = Shapes::StructureShape.new(name: 'GetRegistryRecordRequest')
     GetRegistryRecordResponse = Shapes::StructureShape.new(name: 'GetRegistryRecordResponse')
     GetRegistryRequest = Shapes::StructureShape.new(name: 'GetRegistryRequest')
@@ -94,10 +111,16 @@ module Aws::AgentRegistryControl
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     IamSigningRegion = Shapes::StringShape.new(name: 'IamSigningRegion')
     IamSigningServiceName = Shapes::StringShape.new(name: 'IamSigningServiceName')
+    Identifier = Shapes::UnionShape.new(name: 'Identifier')
+    IdentifierType = Shapes::StringShape.new(name: 'IdentifierType')
     InboundTokenClaimNameType = Shapes::StringShape.new(name: 'InboundTokenClaimNameType')
     InboundTokenClaimValueType = Shapes::StringShape.new(name: 'InboundTokenClaimValueType')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
+    ListPublisherAssociationsRequest = Shapes::StructureShape.new(name: 'ListPublisherAssociationsRequest')
+    ListPublisherAssociationsResponse = Shapes::StructureShape.new(name: 'ListPublisherAssociationsResponse')
+    ListPublishersRequest = Shapes::StructureShape.new(name: 'ListPublishersRequest')
+    ListPublishersResponse = Shapes::StructureShape.new(name: 'ListPublishersResponse')
     ListRegistriesRequest = Shapes::StructureShape.new(name: 'ListRegistriesRequest')
     ListRegistriesResponse = Shapes::StructureShape.new(name: 'ListRegistriesResponse')
     ListRegistryRecordsRequest = Shapes::StructureShape.new(name: 'ListRegistryRecordsRequest')
@@ -127,6 +150,15 @@ module Aws::AgentRegistryControl
     ProvenanceRelation = Shapes::StringShape.new(name: 'ProvenanceRelation')
     ProvenanceSummary = Shapes::StructureShape.new(name: 'ProvenanceSummary')
     ProvenanceSummaryList = Shapes::ListShape.new(name: 'ProvenanceSummaryList')
+    PublicIdentifier = Shapes::StringShape.new(name: 'PublicIdentifier')
+    Publisher = Shapes::StructureShape.new(name: 'Publisher')
+    PublisherAssociation = Shapes::StructureShape.new(name: 'PublisherAssociation')
+    PublisherAssociationList = Shapes::ListShape.new(name: 'PublisherAssociationList')
+    PublisherIdentifierArn = Shapes::StringShape.new(name: 'PublisherIdentifierArn')
+    PublisherSummary = Shapes::StructureShape.new(name: 'PublisherSummary')
+    PublisherSummaryAssociationCountInteger = Shapes::IntegerShape.new(name: 'PublisherSummaryAssociationCountInteger')
+    PublisherSummaryList = Shapes::ListShape.new(name: 'PublisherSummaryList')
+    PublisherSummaryPendingAssociationApprovalCountInteger = Shapes::IntegerShape.new(name: 'PublisherSummaryPendingAssociationApprovalCountInteger')
     RecordIdentifier = Shapes::StringShape.new(name: 'RecordIdentifier')
     RecordType = Shapes::StringShape.new(name: 'RecordType')
     RecordTypeSchemaOverride = Shapes::StructureShape.new(name: 'RecordTypeSchemaOverride')
@@ -179,10 +211,14 @@ module Aws::AgentRegistryControl
     SelfManagedLatticeResource = Shapes::UnionShape.new(name: 'SelfManagedLatticeResource')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Sha256Hash = Shapes::StringShape.new(name: 'Sha256Hash')
+    SignatureAgentCardAdditionalData = Shapes::StructureShape.new(name: 'SignatureAgentCardAdditionalData')
+    SignatureAgentCardDescriptor = Shapes::StructureShape.new(name: 'SignatureAgentCardDescriptor')
     SourceDetails = Shapes::UnionShape.new(name: 'SourceDetails')
     SourceId = Shapes::StringShape.new(name: 'SourceId')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
+    StatusReason = Shapes::StringShape.new(name: 'StatusReason')
     String = Shapes::StringShape.new(name: 'String')
+    Subdomain = Shapes::StringShape.new(name: 'Subdomain')
     SubmitRegistryRecordForApprovalRequest = Shapes::StructureShape.new(name: 'SubmitRegistryRecordForApprovalRequest')
     SubmitRegistryRecordForApprovalResponse = Shapes::StructureShape.new(name: 'SubmitRegistryRecordForApprovalResponse')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
@@ -190,13 +226,17 @@ module Aws::AgentRegistryControl
     SynchronizedSourceUrl = Shapes::StringShape.new(name: 'SynchronizedSourceUrl')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagMap = Shapes::MapShape.new(name: 'TagMap')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TagsMap = Shapes::MapShape.new(name: 'TagsMap')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdatePublisherAssociationApprovalStatusRequest = Shapes::StructureShape.new(name: 'UpdatePublisherAssociationApprovalStatusRequest')
+    UpdatePublisherAssociationApprovalStatusResponse = Shapes::StructureShape.new(name: 'UpdatePublisherAssociationApprovalStatusResponse')
     UpdateRegistryRecordRequest = Shapes::StructureShape.new(name: 'UpdateRegistryRecordRequest')
     UpdateRegistryRecordResponse = Shapes::StructureShape.new(name: 'UpdateRegistryRecordResponse')
     UpdateRegistryRecordStatusRequest = Shapes::StructureShape.new(name: 'UpdateRegistryRecordStatusRequest')
@@ -220,6 +260,7 @@ module Aws::AgentRegistryControl
     UpdatedApprovalConfiguration = Shapes::StructureShape.new(name: 'UpdatedApprovalConfiguration')
     UpdatedAuthorizerConfiguration = Shapes::StructureShape.new(name: 'UpdatedAuthorizerConfiguration')
     UpdatedAutoDetectionConfiguration = Shapes::StructureShape.new(name: 'UpdatedAutoDetectionConfiguration')
+    UpdatedBotCategory = Shapes::StructureShape.new(name: 'UpdatedBotCategory')
     UpdatedCustomDescriptor = Shapes::StructureShape.new(name: 'UpdatedCustomDescriptor')
     UpdatedCustomDescriptorFields = Shapes::StructureShape.new(name: 'UpdatedCustomDescriptorFields')
     UpdatedCustomMetadataMap = Shapes::StructureShape.new(name: 'UpdatedCustomMetadataMap')
@@ -241,13 +282,21 @@ module Aws::AgentRegistryControl
     UpdatedMcpToolsDescriptor = Shapes::StructureShape.new(name: 'UpdatedMcpToolsDescriptor')
     UpdatedMcpToolsDescriptorFields = Shapes::StructureShape.new(name: 'UpdatedMcpToolsDescriptorFields')
     UpdatedRegistryRecordArtifact = Shapes::StructureShape.new(name: 'UpdatedRegistryRecordArtifact')
+    UpdatedSignatureAgentCardAdditionalData = Shapes::StructureShape.new(name: 'UpdatedSignatureAgentCardAdditionalData')
+    UpdatedSignatureAgentCardAdditionalDataFields = Shapes::StructureShape.new(name: 'UpdatedSignatureAgentCardAdditionalDataFields')
+    UpdatedSignatureAgentCardDescriptor = Shapes::StructureShape.new(name: 'UpdatedSignatureAgentCardDescriptor')
+    UpdatedSignatureAgentCardDescriptorFields = Shapes::StructureShape.new(name: 'UpdatedSignatureAgentCardDescriptorFields')
+    ValidatePublisherRequest = Shapes::StructureShape.new(name: 'ValidatePublisherRequest')
+    ValidatePublisherResponse = Shapes::StructureShape.new(name: 'ValidatePublisherResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VerificationStatus = Shapes::StringShape.new(name: 'VerificationStatus')
     VpcIdentifier = Shapes::StringShape.new(name: 'VpcIdentifier')
     WorkloadIdentityDetails = Shapes::StructureShape.new(name: 'WorkloadIdentityDetails')
     WorkloadIdentityDetailsWorkloadIdentityArnString = Shapes::StringShape.new(name: 'WorkloadIdentityDetailsWorkloadIdentityArnString')
+    errorMessage = Shapes::StringShape.new(name: 'errorMessage')
 
     A2aAgentCardDescriptor.add_member(:data, Shapes::ShapeRef.new(shape: DescriptorData, location_name: "data"))
     A2aAgentCardDescriptor.add_member(:data_schema_version, Shapes::ShapeRef.new(shape: DataSchemaVersion, location_name: "dataSchemaVersion"))
@@ -308,6 +357,20 @@ module Aws::AgentRegistryControl
     ApprovalConfiguration.add_member(:auto_approval_rules, Shapes::ShapeRef.new(shape: AutoApprovalRuleList, location_name: "autoApprovalRules"))
     ApprovalConfiguration.struct_class = Types::ApprovalConfiguration
 
+    AssociatePublisherRequest.add_member(:record_arn, Shapes::ShapeRef.new(shape: RegistryRecordArn, required: true, location_name: "recordArn"))
+    AssociatePublisherRequest.add_member(:publisher_arn, Shapes::ShapeRef.new(shape: PublisherIdentifierArn, required: true, location_name: "publisherArn"))
+    AssociatePublisherRequest.add_member(:subdomain, Shapes::ShapeRef.new(shape: Subdomain, location_name: "subdomain"))
+    AssociatePublisherRequest.add_member(:categories, Shapes::ShapeRef.new(shape: CategoryList, location_name: "categories"))
+    AssociatePublisherRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    AssociatePublisherRequest.struct_class = Types::AssociatePublisherRequest
+
+    AssociatePublisherResponse.add_member(:record_arn, Shapes::ShapeRef.new(shape: RegistryRecordArn, required: true, location_name: "recordArn"))
+    AssociatePublisherResponse.add_member(:public_identifier, Shapes::ShapeRef.new(shape: PublicIdentifier, required: true, location_name: "publicIdentifier"))
+    AssociatePublisherResponse.add_member(:publisher, Shapes::ShapeRef.new(shape: PublisherIdentifierArn, required: true, location_name: "publisher"))
+    AssociatePublisherResponse.add_member(:status, Shapes::ShapeRef.new(shape: AssociationStatus, required: true, location_name: "status"))
+    AssociatePublisherResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, location_name: "statusReason"))
+    AssociatePublisherResponse.struct_class = Types::AssociatePublisherResponse
+
     AuthorizationData.add_member(:oauth2, Shapes::ShapeRef.new(shape: OAuth2AuthorizationData, location_name: "oauth2"))
     AuthorizationData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     AuthorizationData.add_member_subclass(:oauth2, Types::AuthorizationData::Oauth2)
@@ -335,6 +398,8 @@ module Aws::AgentRegistryControl
     AutoDetectionConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
     AutoDetectionConfiguration.struct_class = Types::AutoDetectionConfiguration
 
+    CategoryList.member = Shapes::ShapeRef.new(shape: Category)
+
     ClaimMatchValueType.add_member(:match_value_string, Shapes::ShapeRef.new(shape: MatchValueString, location_name: "matchValueString"))
     ClaimMatchValueType.add_member(:match_value_string_list, Shapes::ShapeRef.new(shape: MatchValueStringList, location_name: "matchValueStringList"))
     ClaimMatchValueType.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -345,6 +410,22 @@ module Aws::AgentRegistryControl
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
+
+    CreatePublisherRequest.add_member(:value, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "value"))
+    CreatePublisherRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreatePublisherRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreatePublisherRequest.struct_class = Types::CreatePublisherRequest
+
+    CreatePublisherResponse.add_member(:value, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "value"))
+    CreatePublisherResponse.add_member(:identifier_type, Shapes::ShapeRef.new(shape: IdentifierType, location_name: "identifierType"))
+    CreatePublisherResponse.add_member(:status, Shapes::ShapeRef.new(shape: VerificationStatus, required: true, location_name: "status"))
+    CreatePublisherResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, location_name: "statusReason"))
+    CreatePublisherResponse.add_member(:domain_challenge, Shapes::ShapeRef.new(shape: DomainChallenge, location_name: "domainChallenge"))
+    CreatePublisherResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreatePublisherResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    CreatePublisherResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    CreatePublisherResponse.add_member(:publisher_arn, Shapes::ShapeRef.new(shape: PublisherIdentifierArn, required: true, location_name: "publisherArn"))
+    CreatePublisherResponse.struct_class = Types::CreatePublisherResponse
 
     CreateRegistryRecordRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryIdentifier, required: true, location: "uri", location_name: "registryId"))
     CreateRegistryRecordRequest.add_member(:name, Shapes::ShapeRef.new(shape: RegistryRecordName, required: true, location_name: "name"))
@@ -405,6 +486,9 @@ module Aws::AgentRegistryControl
     CustomParameterMap.key = Shapes::ShapeRef.new(shape: String)
     CustomParameterMap.value = Shapes::ShapeRef.new(shape: String)
 
+    DeletePublisherRequest.add_member(:publisher_arn, Shapes::ShapeRef.new(shape: PublisherIdentifierArn, required: true, location: "uri", location_name: "publisherArn"))
+    DeletePublisherRequest.struct_class = Types::DeletePublisherRequest
+
     DeleteRegistryRecordRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryIdentifier, required: true, location: "uri", location_name: "registryId"))
     DeleteRegistryRecordRequest.add_member(:record_id, Shapes::ShapeRef.new(shape: RecordIdentifier, required: true, location: "uri", location_name: "recordId"))
     DeleteRegistryRecordRequest.struct_class = Types::DeleteRegistryRecordRequest
@@ -416,6 +500,9 @@ module Aws::AgentRegistryControl
 
     DeleteRegistryResponse.add_member(:status, Shapes::ShapeRef.new(shape: RegistryStatus, required: true, location_name: "status"))
     DeleteRegistryResponse.struct_class = Types::DeleteRegistryResponse
+
+    DependencyException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    DependencyException.struct_class = Types::DependencyException
 
     DescriptorSource.add_member(:from_url, Shapes::ShapeRef.new(shape: DescriptorSourceFromUrl, location_name: "fromUrl"))
     DescriptorSource.struct_class = Types::DescriptorSource
@@ -430,16 +517,27 @@ module Aws::AgentRegistryControl
     Descriptors.add_member(:custom, Shapes::ShapeRef.new(shape: CustomDescriptor, location_name: "custom"))
     Descriptors.add_member(:http, Shapes::ShapeRef.new(shape: HttpDescriptor, location_name: "http"))
     Descriptors.add_member(:agui, Shapes::ShapeRef.new(shape: AgUiDescriptor, location_name: "agui"))
+    Descriptors.add_member(:signature_agent_card, Shapes::ShapeRef.new(shape: SignatureAgentCardDescriptor, location_name: "signatureAgentCard"))
     Descriptors.struct_class = Types::Descriptors
+
+    DisassociatePublisherRequest.add_member(:record_arn, Shapes::ShapeRef.new(shape: RegistryRecordArn, required: true, location: "uri", location_name: "recordArn"))
+    DisassociatePublisherRequest.struct_class = Types::DisassociatePublisherRequest
 
     DiscoveryConfiguration.add_member(:authorizer_configuration, Shapes::ShapeRef.new(shape: AuthorizerConfiguration, location_name: "authorizerConfiguration"))
     DiscoveryConfiguration.add_member(:authorizer_type, Shapes::ShapeRef.new(shape: RegistryAuthorizerType, location_name: "authorizerType"))
     DiscoveryConfiguration.struct_class = Types::DiscoveryConfiguration
 
+    DomainChallenge.add_member(:record_name, Shapes::ShapeRef.new(shape: ChallengeRecordName, required: true, location_name: "recordName"))
+    DomainChallenge.add_member(:record_value, Shapes::ShapeRef.new(shape: ChallengeRecordValue, required: true, location_name: "recordValue"))
+    DomainChallenge.struct_class = Types::DomainChallenge
+
     EncryptionConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, required: true, location_name: "kmsKeyArn"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
 
     FilterValues.member = Shapes::ShapeRef.new(shape: FilterValue)
+
+    GetPublisherRequest.add_member(:publisher_arn, Shapes::ShapeRef.new(shape: PublisherIdentifierArn, required: true, location: "uri", location_name: "publisherArn"))
+    GetPublisherRequest.struct_class = Types::GetPublisherRequest
 
     GetRegistryRecordRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryIdentifier, required: true, location: "uri", location_name: "registryId"))
     GetRegistryRecordRequest.add_member(:record_id, Shapes::ShapeRef.new(shape: RecordIdentifier, required: true, location: "uri", location_name: "recordId"))
@@ -493,8 +591,31 @@ module Aws::AgentRegistryControl
     HttpDescriptor.add_member(:source, Shapes::ShapeRef.new(shape: DescriptorSource, location_name: "source"))
     HttpDescriptor.struct_class = Types::HttpDescriptor
 
+    Identifier.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, location_name: "domain"))
+    Identifier.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    Identifier.add_member_subclass(:domain, Types::Identifier::Domain)
+    Identifier.add_member_subclass(:unknown, Types::Identifier::Unknown)
+    Identifier.struct_class = Types::Identifier
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    ListPublisherAssociationsRequest.add_member(:publisher_arn, Shapes::ShapeRef.new(shape: PublisherIdentifierArn, location: "querystring", location_name: "publisherArn"))
+    ListPublisherAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListPublisherAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListPublisherAssociationsRequest.struct_class = Types::ListPublisherAssociationsRequest
+
+    ListPublisherAssociationsResponse.add_member(:items, Shapes::ShapeRef.new(shape: PublisherAssociationList, required: true, location_name: "items"))
+    ListPublisherAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListPublisherAssociationsResponse.struct_class = Types::ListPublisherAssociationsResponse
+
+    ListPublishersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListPublishersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListPublishersRequest.struct_class = Types::ListPublishersRequest
+
+    ListPublishersResponse.add_member(:items, Shapes::ShapeRef.new(shape: PublisherSummaryList, required: true, location_name: "items"))
+    ListPublishersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListPublishersResponse.struct_class = Types::ListPublishersResponse
 
     ListRegistriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListRegistriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -578,6 +699,37 @@ module Aws::AgentRegistryControl
     ProvenanceSummary.struct_class = Types::ProvenanceSummary
 
     ProvenanceSummaryList.member = Shapes::ShapeRef.new(shape: ProvenanceSummary)
+
+    Publisher.add_member(:value, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "value"))
+    Publisher.add_member(:identifier_type, Shapes::ShapeRef.new(shape: IdentifierType, location_name: "identifierType"))
+    Publisher.add_member(:status, Shapes::ShapeRef.new(shape: VerificationStatus, required: true, location_name: "status"))
+    Publisher.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, location_name: "statusReason"))
+    Publisher.add_member(:domain_challenge, Shapes::ShapeRef.new(shape: DomainChallenge, location_name: "domainChallenge"))
+    Publisher.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    Publisher.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    Publisher.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    Publisher.add_member(:publisher_arn, Shapes::ShapeRef.new(shape: PublisherIdentifierArn, required: true, location_name: "publisherArn"))
+    Publisher.struct_class = Types::Publisher
+
+    PublisherAssociation.add_member(:record_arn, Shapes::ShapeRef.new(shape: RegistryRecordArn, required: true, location_name: "recordArn"))
+    PublisherAssociation.add_member(:public_identifier, Shapes::ShapeRef.new(shape: PublicIdentifier, required: true, location_name: "publicIdentifier"))
+    PublisherAssociation.add_member(:publisher, Shapes::ShapeRef.new(shape: PublisherIdentifierArn, required: true, location_name: "publisher"))
+    PublisherAssociation.add_member(:status, Shapes::ShapeRef.new(shape: AssociationStatus, required: true, location_name: "status"))
+    PublisherAssociation.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, location_name: "statusReason"))
+    PublisherAssociation.struct_class = Types::PublisherAssociation
+
+    PublisherAssociationList.member = Shapes::ShapeRef.new(shape: PublisherAssociation)
+
+    PublisherSummary.add_member(:value, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "value"))
+    PublisherSummary.add_member(:identifier_type, Shapes::ShapeRef.new(shape: IdentifierType, location_name: "identifierType"))
+    PublisherSummary.add_member(:status, Shapes::ShapeRef.new(shape: VerificationStatus, required: true, location_name: "status"))
+    PublisherSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    PublisherSummary.add_member(:publisher_arn, Shapes::ShapeRef.new(shape: PublisherIdentifierArn, required: true, location_name: "publisherArn"))
+    PublisherSummary.add_member(:association_count, Shapes::ShapeRef.new(shape: PublisherSummaryAssociationCountInteger, location_name: "associationCount"))
+    PublisherSummary.add_member(:pending_association_approval_count, Shapes::ShapeRef.new(shape: PublisherSummaryPendingAssociationApprovalCountInteger, location_name: "pendingAssociationApprovalCount"))
+    PublisherSummary.struct_class = Types::PublisherSummary
+
+    PublisherSummaryList.member = Shapes::ShapeRef.new(shape: PublisherSummary)
 
     RecordTypeSchemaOverride.add_member(:record_type, Shapes::ShapeRef.new(shape: RecordType, required: true, location_name: "recordType"))
     RecordTypeSchemaOverride.add_member(:schema, Shapes::ShapeRef.new(shape: CustomMetadataSchemaDefinition, required: true, location_name: "schema"))
@@ -700,6 +852,15 @@ module Aws::AgentRegistryControl
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    SignatureAgentCardAdditionalData.add_member(:category, Shapes::ShapeRef.new(shape: BotCategory, location_name: "category"))
+    SignatureAgentCardAdditionalData.struct_class = Types::SignatureAgentCardAdditionalData
+
+    SignatureAgentCardDescriptor.add_member(:data, Shapes::ShapeRef.new(shape: DescriptorData, location_name: "data"))
+    SignatureAgentCardDescriptor.add_member(:data_schema_version, Shapes::ShapeRef.new(shape: DataSchemaVersion, location_name: "dataSchemaVersion"))
+    SignatureAgentCardDescriptor.add_member(:source, Shapes::ShapeRef.new(shape: DescriptorSource, location_name: "source"))
+    SignatureAgentCardDescriptor.add_member(:additional_data, Shapes::ShapeRef.new(shape: SignatureAgentCardAdditionalData, location_name: "additionalData"))
+    SignatureAgentCardDescriptor.struct_class = Types::SignatureAgentCardDescriptor
+
     SourceDetails.add_member(:agentcore_runtime, Shapes::ShapeRef.new(shape: AgentCoreRuntimeSourceDetails, location_name: "agentcoreRuntime"))
     SourceDetails.add_member(:agentcore_gateway, Shapes::ShapeRef.new(shape: AgentCoreGatewaySourceDetails, location_name: "agentcoreGateway"))
     SourceDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -723,6 +884,9 @@ module Aws::AgentRegistryControl
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
+    TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, required: true, location_name: "tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
@@ -740,6 +904,13 @@ module Aws::AgentRegistryControl
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdatePublisherAssociationApprovalStatusRequest.add_member(:record_arn, Shapes::ShapeRef.new(shape: RegistryRecordArn, required: true, location: "uri", location_name: "recordArn"))
+    UpdatePublisherAssociationApprovalStatusRequest.add_member(:approval_status, Shapes::ShapeRef.new(shape: AssociationApprovalStatus, required: true, location_name: "approvalStatus"))
+    UpdatePublisherAssociationApprovalStatusRequest.add_member(:approval_status_reason, Shapes::ShapeRef.new(shape: StatusReason, required: true, location_name: "approvalStatusReason"))
+    UpdatePublisherAssociationApprovalStatusRequest.struct_class = Types::UpdatePublisherAssociationApprovalStatusRequest
+
+    UpdatePublisherAssociationApprovalStatusResponse.struct_class = Types::UpdatePublisherAssociationApprovalStatusResponse
 
     UpdateRegistryRecordRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryIdentifier, required: true, location: "uri", location_name: "registryId"))
     UpdateRegistryRecordRequest.add_member(:record_id, Shapes::ShapeRef.new(shape: RecordIdentifier, required: true, location: "uri", location_name: "recordId"))
@@ -872,6 +1043,9 @@ module Aws::AgentRegistryControl
     UpdatedAutoDetectionConfiguration.add_member(:optional_value, Shapes::ShapeRef.new(shape: AutoDetectionConfiguration, location_name: "optionalValue"))
     UpdatedAutoDetectionConfiguration.struct_class = Types::UpdatedAutoDetectionConfiguration
 
+    UpdatedBotCategory.add_member(:optional_value, Shapes::ShapeRef.new(shape: BotCategory, location_name: "optionalValue"))
+    UpdatedBotCategory.struct_class = Types::UpdatedBotCategory
+
     UpdatedCustomDescriptor.add_member(:optional_value, Shapes::ShapeRef.new(shape: UpdatedCustomDescriptorFields, location_name: "optionalValue"))
     UpdatedCustomDescriptor.struct_class = Types::UpdatedCustomDescriptor
 
@@ -905,6 +1079,7 @@ module Aws::AgentRegistryControl
     UpdatedDescriptorsFields.add_member(:custom, Shapes::ShapeRef.new(shape: UpdatedCustomDescriptor, location_name: "custom"))
     UpdatedDescriptorsFields.add_member(:http, Shapes::ShapeRef.new(shape: UpdatedHttpDescriptor, location_name: "http"))
     UpdatedDescriptorsFields.add_member(:agui, Shapes::ShapeRef.new(shape: UpdatedAgUiDescriptor, location_name: "agui"))
+    UpdatedDescriptorsFields.add_member(:signature_agent_card, Shapes::ShapeRef.new(shape: UpdatedSignatureAgentCardDescriptor, location_name: "signatureAgentCard"))
     UpdatedDescriptorsFields.struct_class = Types::UpdatedDescriptorsFields
 
     UpdatedDiscoveryConfiguration.add_member(:authorizer_configuration, Shapes::ShapeRef.new(shape: UpdatedAuthorizerConfiguration, location_name: "authorizerConfiguration"))
@@ -944,6 +1119,35 @@ module Aws::AgentRegistryControl
     UpdatedRegistryRecordArtifact.add_member(:optional_value, Shapes::ShapeRef.new(shape: RegistryRecordArtifactUpload, location_name: "optionalValue"))
     UpdatedRegistryRecordArtifact.struct_class = Types::UpdatedRegistryRecordArtifact
 
+    UpdatedSignatureAgentCardAdditionalData.add_member(:optional_value, Shapes::ShapeRef.new(shape: UpdatedSignatureAgentCardAdditionalDataFields, location_name: "optionalValue"))
+    UpdatedSignatureAgentCardAdditionalData.struct_class = Types::UpdatedSignatureAgentCardAdditionalData
+
+    UpdatedSignatureAgentCardAdditionalDataFields.add_member(:category, Shapes::ShapeRef.new(shape: UpdatedBotCategory, location_name: "category"))
+    UpdatedSignatureAgentCardAdditionalDataFields.struct_class = Types::UpdatedSignatureAgentCardAdditionalDataFields
+
+    UpdatedSignatureAgentCardDescriptor.add_member(:optional_value, Shapes::ShapeRef.new(shape: UpdatedSignatureAgentCardDescriptorFields, location_name: "optionalValue"))
+    UpdatedSignatureAgentCardDescriptor.struct_class = Types::UpdatedSignatureAgentCardDescriptor
+
+    UpdatedSignatureAgentCardDescriptorFields.add_member(:data, Shapes::ShapeRef.new(shape: UpdatedDescriptorData, location_name: "data"))
+    UpdatedSignatureAgentCardDescriptorFields.add_member(:data_schema_version, Shapes::ShapeRef.new(shape: UpdatedDataSchemaVersion, location_name: "dataSchemaVersion"))
+    UpdatedSignatureAgentCardDescriptorFields.add_member(:source, Shapes::ShapeRef.new(shape: UpdatedDescriptorSource, location_name: "source"))
+    UpdatedSignatureAgentCardDescriptorFields.add_member(:additional_data, Shapes::ShapeRef.new(shape: UpdatedSignatureAgentCardAdditionalData, location_name: "additionalData"))
+    UpdatedSignatureAgentCardDescriptorFields.struct_class = Types::UpdatedSignatureAgentCardDescriptorFields
+
+    ValidatePublisherRequest.add_member(:publisher_arn, Shapes::ShapeRef.new(shape: PublisherIdentifierArn, required: true, location: "uri", location_name: "publisherArn"))
+    ValidatePublisherRequest.struct_class = Types::ValidatePublisherRequest
+
+    ValidatePublisherResponse.add_member(:value, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "value"))
+    ValidatePublisherResponse.add_member(:identifier_type, Shapes::ShapeRef.new(shape: IdentifierType, location_name: "identifierType"))
+    ValidatePublisherResponse.add_member(:status, Shapes::ShapeRef.new(shape: VerificationStatus, required: true, location_name: "status"))
+    ValidatePublisherResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, location_name: "statusReason"))
+    ValidatePublisherResponse.add_member(:domain_challenge, Shapes::ShapeRef.new(shape: DomainChallenge, location_name: "domainChallenge"))
+    ValidatePublisherResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ValidatePublisherResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    ValidatePublisherResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    ValidatePublisherResponse.add_member(:publisher_arn, Shapes::ShapeRef.new(shape: PublisherIdentifierArn, required: true, location_name: "publisherArn"))
+    ValidatePublisherResponse.struct_class = Types::ValidatePublisherResponse
+
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, required: true, location_name: "reason"))
     ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
@@ -977,6 +1181,35 @@ module Aws::AgentRegistryControl
         "uid" => "agent-registry-control-2025-12-01",
       }
 
+      api.add_operation(:associate_publisher, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociatePublisher"
+        o.http_method = "POST"
+        o.http_request_uri = "/associations"
+        o.input = Shapes::ShapeRef.new(shape: AssociatePublisherRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociatePublisherResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_publisher, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePublisher"
+        o.http_method = "POST"
+        o.http_request_uri = "/publishers"
+        o.input = Shapes::ShapeRef.new(shape: CreatePublisherRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePublisherResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:create_registry, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateRegistry"
         o.http_method = "POST"
@@ -1003,6 +1236,20 @@ module Aws::AgentRegistryControl
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_publisher, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePublisher"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/publishers/{publisherArn}"
+        o.input = Shapes::ShapeRef.new(shape: DeletePublisherRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -1034,6 +1281,31 @@ module Aws::AgentRegistryControl
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:disassociate_publisher, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociatePublisher"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/associations/{recordArn+}"
+        o.input = Shapes::ShapeRef.new(shape: DisassociatePublisherRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_publisher, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPublisher"
+        o.http_method = "GET"
+        o.http_request_uri = "/publishers/{publisherArn}"
+        o.input = Shapes::ShapeRef.new(shape: GetPublisherRequest)
+        o.output = Shapes::ShapeRef.new(shape: Publisher)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:get_registry, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetRegistry"
         o.http_method = "GET"
@@ -1059,6 +1331,42 @@ module Aws::AgentRegistryControl
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:list_publisher_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPublisherAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/associations"
+        o.input = Shapes::ShapeRef.new(shape: ListPublisherAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPublisherAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_publishers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPublishers"
+        o.http_method = "GET"
+        o.http_request_uri = "/publishers"
+        o.input = Shapes::ShapeRef.new(shape: ListPublishersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPublishersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_registries, Seahorse::Model::Operation.new.tap do |o|
@@ -1153,6 +1461,19 @@ module Aws::AgentRegistryControl
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:update_publisher_association_approval_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePublisherAssociationApprovalStatus"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/associations/{recordArn+}"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePublisherAssociationApprovalStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePublisherAssociationApprovalStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:update_registry, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateRegistry"
         o.http_method = "PATCH"
@@ -1191,6 +1512,19 @@ module Aws::AgentRegistryControl
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:validate_publisher, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ValidatePublisher"
+        o.http_method = "POST"
+        o.http_request_uri = "/publishers/{publisherArn}/verification"
+        o.input = Shapes::ShapeRef.new(shape: ValidatePublisherRequest)
+        o.output = Shapes::ShapeRef.new(shape: ValidatePublisherResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

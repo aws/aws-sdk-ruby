@@ -56,6 +56,10 @@ module Aws::PCS
     CreateQueueRequest = Shapes::StructureShape.new(name: 'CreateQueueRequest')
     CreateQueueResponse = Shapes::StructureShape.new(name: 'CreateQueueResponse')
     CustomLaunchTemplate = Shapes::StructureShape.new(name: 'CustomLaunchTemplate')
+    DeepHealthCheckOnStart = Shapes::StructureShape.new(name: 'DeepHealthCheckOnStart')
+    DeepHealthCheckOnStartProfile = Shapes::StringShape.new(name: 'DeepHealthCheckOnStartProfile')
+    DeepHealthCheckOnStartRepairAction = Shapes::StringShape.new(name: 'DeepHealthCheckOnStartRepairAction')
+    DeepHealthChecks = Shapes::StructureShape.new(name: 'DeepHealthChecks')
     DeleteClusterRequest = Shapes::StructureShape.new(name: 'DeleteClusterRequest')
     DeleteClusterResponse = Shapes::StructureShape.new(name: 'DeleteClusterResponse')
     DeleteComputeNodeGroupRequest = Shapes::StructureShape.new(name: 'DeleteComputeNodeGroupRequest')
@@ -76,7 +80,12 @@ module Aws::PCS
     GetQueueResponse = Shapes::StructureShape.new(name: 'GetQueueResponse')
     GresCustomSettingMap = Shapes::MapShape.new(name: 'GresCustomSettingMap')
     GresCustomSettings = Shapes::ListShape.new(name: 'GresCustomSettings')
+    HealthMonitoring = Shapes::StructureShape.new(name: 'HealthMonitoring')
+    HealthMonitoringMode = Shapes::StringShape.new(name: 'HealthMonitoringMode')
+    HealthMonitoringRepairAction = Shapes::StringShape.new(name: 'HealthMonitoringRepairAction')
     InstanceConfig = Shapes::StructureShape.new(name: 'InstanceConfig')
+    InstanceHealthChecks = Shapes::StructureShape.new(name: 'InstanceHealthChecks')
+    InstanceHealthChecksRequest = Shapes::StructureShape.new(name: 'InstanceHealthChecksRequest')
     InstanceList = Shapes::ListShape.new(name: 'InstanceList')
     InstanceProfileArn = Shapes::StringShape.new(name: 'InstanceProfileArn')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -183,6 +192,7 @@ module Aws::PCS
     UpdateComputeNodeGroupResponse = Shapes::StructureShape.new(name: 'UpdateComputeNodeGroupResponse')
     UpdateComputeNodeGroupSlurmConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateComputeNodeGroupSlurmConfigurationRequest')
     UpdateComputeNodeGroupSlurmConfigurationRequestScaleDownIdleTimeInSecondsInteger = Shapes::IntegerShape.new(name: 'UpdateComputeNodeGroupSlurmConfigurationRequestScaleDownIdleTimeInSecondsInteger')
+    UpdateInstanceHealthChecksRequest = Shapes::StructureShape.new(name: 'UpdateInstanceHealthChecksRequest')
     UpdateNodeLifecycleActionsRequest = Shapes::StructureShape.new(name: 'UpdateNodeLifecycleActionsRequest')
     UpdateQueueRequest = Shapes::StructureShape.new(name: 'UpdateQueueRequest')
     UpdateQueueResponse = Shapes::StructureShape.new(name: 'UpdateQueueResponse')
@@ -275,6 +285,7 @@ module Aws::PCS
     ComputeNodeGroup.add_member(:spot_options, Shapes::ShapeRef.new(shape: SpotOptions, location_name: "spotOptions"))
     ComputeNodeGroup.add_member(:slurm_configuration, Shapes::ShapeRef.new(shape: ComputeNodeGroupSlurmConfiguration, location_name: "slurmConfiguration"))
     ComputeNodeGroup.add_member(:node_lifecycle_actions, Shapes::ShapeRef.new(shape: NodeLifecycleActions, location_name: "nodeLifecycleActions"))
+    ComputeNodeGroup.add_member(:instance_health_checks, Shapes::ShapeRef.new(shape: InstanceHealthChecks, location_name: "instanceHealthChecks"))
     ComputeNodeGroup.add_member(:error_info, Shapes::ShapeRef.new(shape: ErrorInfoList, location_name: "errorInfo"))
     ComputeNodeGroup.struct_class = Types::ComputeNodeGroup
 
@@ -336,6 +347,7 @@ module Aws::PCS
     CreateComputeNodeGroupRequest.add_member(:spot_options, Shapes::ShapeRef.new(shape: SpotOptions, location_name: "spotOptions"))
     CreateComputeNodeGroupRequest.add_member(:slurm_configuration, Shapes::ShapeRef.new(shape: ComputeNodeGroupSlurmConfigurationRequest, location_name: "slurmConfiguration"))
     CreateComputeNodeGroupRequest.add_member(:node_lifecycle_actions, Shapes::ShapeRef.new(shape: NodeLifecycleActionsRequest, location_name: "nodeLifecycleActions"))
+    CreateComputeNodeGroupRequest.add_member(:instance_health_checks, Shapes::ShapeRef.new(shape: InstanceHealthChecksRequest, location_name: "instanceHealthChecks"))
     CreateComputeNodeGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateComputeNodeGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: RequestTagMap, location_name: "tags"))
     CreateComputeNodeGroupRequest.struct_class = Types::CreateComputeNodeGroupRequest
@@ -357,6 +369,13 @@ module Aws::PCS
     CustomLaunchTemplate.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
     CustomLaunchTemplate.add_member(:version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "version"))
     CustomLaunchTemplate.struct_class = Types::CustomLaunchTemplate
+
+    DeepHealthCheckOnStart.add_member(:profile, Shapes::ShapeRef.new(shape: DeepHealthCheckOnStartProfile, location_name: "profile"))
+    DeepHealthCheckOnStart.add_member(:repair_action, Shapes::ShapeRef.new(shape: DeepHealthCheckOnStartRepairAction, location_name: "repairAction"))
+    DeepHealthCheckOnStart.struct_class = Types::DeepHealthCheckOnStart
+
+    DeepHealthChecks.add_member(:on_start, Shapes::ShapeRef.new(shape: DeepHealthCheckOnStart, location_name: "onStart"))
+    DeepHealthChecks.struct_class = Types::DeepHealthChecks
 
     DeleteClusterRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterIdentifier, required: true, location_name: "clusterIdentifier"))
     DeleteClusterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -418,8 +437,20 @@ module Aws::PCS
 
     GresCustomSettings.member = Shapes::ShapeRef.new(shape: GresCustomSettingMap)
 
+    HealthMonitoring.add_member(:mode, Shapes::ShapeRef.new(shape: HealthMonitoringMode, location_name: "mode"))
+    HealthMonitoring.add_member(:repair_action, Shapes::ShapeRef.new(shape: HealthMonitoringRepairAction, location_name: "repairAction"))
+    HealthMonitoring.struct_class = Types::HealthMonitoring
+
     InstanceConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     InstanceConfig.struct_class = Types::InstanceConfig
+
+    InstanceHealthChecks.add_member(:health_monitoring, Shapes::ShapeRef.new(shape: HealthMonitoring, location_name: "healthMonitoring"))
+    InstanceHealthChecks.add_member(:deep_health_checks, Shapes::ShapeRef.new(shape: DeepHealthChecks, location_name: "deepHealthChecks"))
+    InstanceHealthChecks.struct_class = Types::InstanceHealthChecks
+
+    InstanceHealthChecksRequest.add_member(:health_monitoring, Shapes::ShapeRef.new(shape: HealthMonitoring, location_name: "healthMonitoring"))
+    InstanceHealthChecksRequest.add_member(:deep_health_checks, Shapes::ShapeRef.new(shape: DeepHealthChecks, location_name: "deepHealthChecks"))
+    InstanceHealthChecksRequest.struct_class = Types::InstanceHealthChecksRequest
 
     InstanceList.member = Shapes::ShapeRef.new(shape: InstanceConfig)
 
@@ -551,6 +582,7 @@ module Aws::PCS
     RegisterComputeNodeGroupInstanceResponse.add_member(:compute_node_group_name, Shapes::ShapeRef.new(shape: String, location_name: "computeNodeGroupName"))
     RegisterComputeNodeGroupInstanceResponse.add_member(:node_lifecycle_actions, Shapes::ShapeRef.new(shape: NodeLifecycleActions, location_name: "nodeLifecycleActions"))
     RegisterComputeNodeGroupInstanceResponse.add_member(:scheduler_version, Shapes::ShapeRef.new(shape: String, location_name: "schedulerVersion"))
+    RegisterComputeNodeGroupInstanceResponse.add_member(:instance_health_checks, Shapes::ShapeRef.new(shape: InstanceHealthChecks, location_name: "instanceHealthChecks"))
     RegisterComputeNodeGroupInstanceResponse.struct_class = Types::RegisterComputeNodeGroupInstanceResponse
 
     RequestTagMap.key = Shapes::ShapeRef.new(shape: TagKey)
@@ -679,6 +711,7 @@ module Aws::PCS
     UpdateComputeNodeGroupRequest.add_member(:iam_instance_profile_arn, Shapes::ShapeRef.new(shape: InstanceProfileArn, location_name: "iamInstanceProfileArn"))
     UpdateComputeNodeGroupRequest.add_member(:slurm_configuration, Shapes::ShapeRef.new(shape: UpdateComputeNodeGroupSlurmConfigurationRequest, location_name: "slurmConfiguration"))
     UpdateComputeNodeGroupRequest.add_member(:node_lifecycle_actions, Shapes::ShapeRef.new(shape: UpdateNodeLifecycleActionsRequest, location_name: "nodeLifecycleActions"))
+    UpdateComputeNodeGroupRequest.add_member(:instance_health_checks, Shapes::ShapeRef.new(shape: UpdateInstanceHealthChecksRequest, location_name: "instanceHealthChecks"))
     UpdateComputeNodeGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateComputeNodeGroupRequest.struct_class = Types::UpdateComputeNodeGroupRequest
 
@@ -689,6 +722,10 @@ module Aws::PCS
     UpdateComputeNodeGroupSlurmConfigurationRequest.add_member(:slurm_custom_settings, Shapes::ShapeRef.new(shape: SlurmCustomSettings, location_name: "slurmCustomSettings"))
     UpdateComputeNodeGroupSlurmConfigurationRequest.add_member(:gres_custom_settings, Shapes::ShapeRef.new(shape: GresCustomSettings, location_name: "gresCustomSettings"))
     UpdateComputeNodeGroupSlurmConfigurationRequest.struct_class = Types::UpdateComputeNodeGroupSlurmConfigurationRequest
+
+    UpdateInstanceHealthChecksRequest.add_member(:health_monitoring, Shapes::ShapeRef.new(shape: HealthMonitoring, location_name: "healthMonitoring"))
+    UpdateInstanceHealthChecksRequest.add_member(:deep_health_checks, Shapes::ShapeRef.new(shape: DeepHealthChecks, location_name: "deepHealthChecks"))
+    UpdateInstanceHealthChecksRequest.struct_class = Types::UpdateInstanceHealthChecksRequest
 
     UpdateNodeLifecycleActionsRequest.add_member(:stages, Shapes::ShapeRef.new(shape: NodeLifecycleStages, required: true, location_name: "stages"))
     UpdateNodeLifecycleActionsRequest.add_member(:script_caching_policy, Shapes::ShapeRef.new(shape: ScriptCachingPolicy, location_name: "scriptCachingPolicy"))

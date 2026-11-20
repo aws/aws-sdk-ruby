@@ -50,6 +50,9 @@ module Aws
       class DelegationSetNotReusable < ServiceError
         def message: () -> ::String
       end
+      class FeatureNotEnabled < ServiceError
+        def message: () -> ::String
+      end
       class HealthCheckAlreadyExists < ServiceError
         def message: () -> ::String
       end

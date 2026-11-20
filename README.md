@@ -306,6 +306,7 @@ RubyGems.org page under "LINKS" section.
 
 | Service Name                                          | Service Module                           | gem_name                                    | API Version |
 | ----------------------------------------------------- | ---------------------------------------- | ------------------------------------------- | ----------- |
+| APIPortal                                             | Aws::APIPortal                           | aws-sdk-apiportal                           | 2026-04-30  |
 | ARC - Region switch                                   | Aws::ARCRegionswitch                     | aws-sdk-arcregionswitch                     | 2022-07-26  |
 | AWS AI Ops                                            | Aws::AIOps                               | aws-sdk-aiops                               | 2018-05-10  |
 | AWS ARC - Zonal Shift                                 | Aws::ARCZonalShift                       | aws-sdk-arczonalshift                       | 2022-10-30  |
@@ -433,6 +434,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Organizations                                     | Aws::Organizations                       | aws-sdk-organizations                       | 2016-11-28  |
 | AWS Outposts                                          | Aws::Outposts                            | aws-sdk-outposts                            | 2019-12-03  |
 | AWS Parallel Computing Service                        | Aws::PCS                                 | aws-sdk-pcs                                 | 2023-02-10  |
+| AWS Payments                                          | Aws::Payments                            | aws-sdk-payments                            | 2026-09-23  |
 | AWS Performance Insights                              | Aws::PI                                  | aws-sdk-pi                                  | 2018-02-27  |
 | AWS Price List Service                                | Aws::Pricing                             | aws-sdk-pricing                             | 2017-10-15  |
 | AWS Proton                                            | Aws::Proton                              | aws-sdk-proton                              | 2020-07-20  |
@@ -493,6 +495,7 @@ RubyGems.org page under "LINKS" section.
 | Access Analyzer                                       | Aws::AccessAnalyzer                      | aws-sdk-accessanalyzer                      | 2019-11-01  |
 | Account Access                                        | Aws::AccountAccess                       | aws-sdk-accountaccess                       | 2018-05-10  |
 | Account Access Runtime                                | Aws::AccountAccessRuntime                | aws-sdk-accountaccessruntime                | 2018-05-10  |
+| Agent Discovery                                       | Aws::AgentDiscovery                      | aws-sdk-agentdiscovery                      | 2022-07-26  |
 | Agent Registry                                        | Aws::AgentRegistry                       | aws-sdk-agentregistry                       | 2025-12-01  |
 | Agent Registry Control                                | Aws::AgentRegistryControl                | aws-sdk-agentregistrycontrol                | 2025-12-01  |
 | Agents for Amazon Bedrock                             | Aws::BedrockAgent                        | aws-sdk-bedrockagent                        | 2023-06-05  |
@@ -643,6 +646,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon S3 Vectors                                     | Aws::S3Vectors                           | aws-sdk-s3vectors                           | 2025-07-15  |
 | Amazon S3 on Outposts                                 | Aws::S3Outposts                          | aws-sdk-s3outposts                          | 2017-07-25  |
 | Amazon SageMaker Feature Store Runtime                | Aws::SageMakerFeatureStoreRuntime        | aws-sdk-sagemakerfeaturestoreruntime        | 2020-07-01  |
+| Amazon SageMaker Gateway Runtime                      | Aws::SageMakerGatewayRuntime             | aws-sdk-sagemakergatewayruntime             | 2026-10-01  |
 | Amazon SageMaker Inference Router Runtime             | Aws::SageMakerInferenceRouterRuntime     | aws-sdk-sagemakerinferencerouterruntime     | 2026-01-01  |
 | Amazon SageMaker Metrics Service                      | Aws::SageMakerMetrics                    | aws-sdk-sagemakermetrics                    | 2022-09-30  |
 | Amazon SageMaker Runtime                              | Aws::SageMakerRuntime                    | aws-sdk-sagemakerruntime                    | 2017-05-13  |

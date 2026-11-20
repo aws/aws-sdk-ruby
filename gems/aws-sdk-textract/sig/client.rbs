@@ -184,6 +184,66 @@ module Aws
                                   ) -> _CreateAdapterVersionResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAdapterVersionResponseSuccess
 
+      interface _CreateBlueprintResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBlueprintResponse]
+        def blueprint_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#create_blueprint-instance_method
+      def create_blueprint: (
+                              ?client_request_token: ::String,
+                              blueprint_name: ::String,
+                              schema: ::String,
+                              ?encryption_configuration: {
+                                kms_key_id: ::String,
+                                kms_encryption_context: Hash[::String, ::String]?
+                              },
+                              ?tags: Hash[::String, ::String]
+                            ) -> _CreateBlueprintResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBlueprintResponseSuccess
+
+      interface _CreateBlueprintVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBlueprintVersionResponse]
+        def blueprint_arn: () -> ::String
+        def blueprint_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#create_blueprint_version-instance_method
+      def create_blueprint_version: (
+                                      blueprint_arn: ::String,
+                                      ?client_request_token: ::String
+                                    ) -> _CreateBlueprintVersionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBlueprintVersionResponseSuccess
+
+      interface _CreateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProjectResponse]
+        def project_arn: () -> ::String
+        def status: () -> ("COMPLETED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#create_project-instance_method
+      def create_project: (
+                            ?client_request_token: ::String,
+                            project_name: ::String,
+                            ?project_description: ::String,
+                            extraction_configuration: Params::extraction_configuration,
+                            ?generative_configuration: Params::generative_configuration,
+                            ?custom_configuration: Params::custom_configuration,
+                            ?splitter_configuration: {
+                              state: ("ENABLED" | "DISABLED")
+                            },
+                            ?sensitive_data_configuration: {
+                              detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION" | "DISABLED"),
+                              pii_entities_configuration: {
+                                pii_entity_types: Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")],
+                                redaction_mask_mode: ("PII" | "ENTITY_TYPE")
+                              }?
+                            },
+                            ?encryption_configuration: {
+                              kms_key_id: ::String,
+                              kms_encryption_context: Hash[::String, ::String]?
+                            },
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProjectResponseSuccess
+
       interface _DeleteAdapterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAdapterResponse]
       end
@@ -202,6 +262,25 @@ module Aws
                                     adapter_version: ::String
                                   ) -> _DeleteAdapterVersionResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAdapterVersionResponseSuccess
+
+      interface _DeleteBlueprintResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBlueprintResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#delete_blueprint-instance_method
+      def delete_blueprint: (
+                              blueprint_arn: ::String,
+                              ?blueprint_version: ::String
+                            ) -> _DeleteBlueprintResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBlueprintResponseSuccess
+
+      interface _DeleteProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProjectResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#delete_project-instance_method
+      def delete_project: (
+                            project_arn: ::String
+                          ) -> _DeleteProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProjectResponseSuccess
 
       interface _DetectDocumentTextResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DetectDocumentTextResponse]
@@ -252,6 +331,24 @@ module Aws
                                ) -> _GetAdapterVersionResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAdapterVersionResponseSuccess
 
+      interface _GetBlueprintResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBlueprintResponse]
+        def blueprint_arn: () -> ::String
+        def blueprint_name: () -> ::String
+        def blueprint_version: () -> ::String
+        def schema: () -> ::String
+        def kms_key_id: () -> ::String
+        def kms_encryption_context: () -> ::Hash[::String, ::String]
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#get_blueprint-instance_method
+      def get_blueprint: (
+                           blueprint_arn: ::String,
+                           ?blueprint_version: ::String
+                         ) -> _GetBlueprintResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBlueprintResponseSuccess
+
       interface _GetDocumentAnalysisResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDocumentAnalysisResponse]
         def document_metadata: () -> Types::DocumentMetadata
@@ -269,6 +366,19 @@ module Aws
                                    ?next_token: ::String
                                  ) -> _GetDocumentAnalysisResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDocumentAnalysisResponseSuccess
+
+      interface _GetDocumentInsightsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDocumentInsightsResponse]
+        def status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "PARTIAL_SUCCESS")
+        def output_configuration: () -> Types::OutputConfiguration
+        def error_type: () -> ::String
+        def error_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#get_document_insights-instance_method
+      def get_document_insights: (
+                                   job_arn: ::String
+                                 ) -> _GetDocumentInsightsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDocumentInsightsResponseSuccess
 
       interface _GetDocumentTextDetectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDocumentTextDetectionResponse]
@@ -339,6 +449,27 @@ module Aws
                                         ) -> _GetLendingAnalysisSummaryResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLendingAnalysisSummaryResponseSuccess
 
+      interface _GetProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProjectResponse]
+        def project_arn: () -> ::String
+        def project_name: () -> ::String
+        def project_description: () -> ::String
+        def status: () -> ("COMPLETED" | "FAILED")
+        def extraction_configuration: () -> Types::ExtractionConfiguration
+        def generative_configuration: () -> Types::GenerativeConfiguration
+        def custom_configuration: () -> Types::CustomConfiguration
+        def splitter_configuration: () -> Types::SplitterConfiguration
+        def sensitive_data_configuration: () -> Types::SensitiveDataConfiguration
+        def encryption_configuration: () -> Types::EncryptionConfiguration
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#get_project-instance_method
+      def get_project: (
+                         project_arn: ::String
+                       ) -> _GetProjectResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProjectResponseSuccess
+
       interface _ListAdapterVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAdapterVersionsResponse]
         def adapter_versions: () -> ::Array[Types::AdapterVersionOverview]
@@ -367,6 +498,39 @@ module Aws
                            ?next_token: ::String
                          ) -> _ListAdaptersResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAdaptersResponseSuccess
+
+      interface _ListBlueprintsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBlueprintsResponse]
+        def blueprints: () -> ::Array[Types::BlueprintSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#list_blueprints-instance_method
+      def list_blueprints: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?blueprint_arn: ::String,
+                             ?project_filter: {
+                               project_arn: ::String
+                             },
+                             ?resource_owner: ("ACCOUNT" | "SERVICE")
+                           ) -> _ListBlueprintsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBlueprintsResponseSuccess
+
+      interface _ListProjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProjectsResponse]
+        def projects: () -> ::Array[Types::ProjectSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#list_projects-instance_method
+      def list_projects: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           ?blueprint_filter: {
+                             blueprint_arn: ::String,
+                             blueprint_version: ::String?
+                           }
+                         ) -> _ListProjectsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProjectsResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
@@ -423,6 +587,38 @@ module Aws
                                      }
                                    ) -> _StartDocumentAnalysisResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDocumentAnalysisResponseSuccess
+
+      interface _StartDocumentInsightsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDocumentInsightsResponse]
+        def job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#start_document_insights-instance_method
+      def start_document_insights: (
+                                     input_configuration: {
+                                       s3_uri: ::String
+                                     },
+                                     output_configuration: {
+                                       s3_uri: ::String
+                                     },
+                                     ?project_arn: ::String,
+                                     ?blueprints: Array[
+                                       {
+                                         blueprint_arn: ::String,
+                                         blueprint_version: ::String?
+                                       }
+                                     ],
+                                     ?encryption_configuration: {
+                                       kms_key_id: ::String,
+                                       kms_encryption_context: Hash[::String, ::String]?
+                                     },
+                                     ?notification_configuration: {
+                                       event_bridge_configuration: {
+                                         state: ("ENABLED" | "DISABLED")
+                                       }
+                                     },
+                                     ?tags: Hash[::String, ::String]
+                                   ) -> _StartDocumentInsightsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDocumentInsightsResponseSuccess
 
       interface _StartDocumentTextDetectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartDocumentTextDetectionResponse]
@@ -542,6 +738,50 @@ module Aws
                             ?auto_update: ("ENABLED" | "DISABLED")
                           ) -> _UpdateAdapterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAdapterResponseSuccess
+
+      interface _UpdateBlueprintResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBlueprintResponse]
+        def blueprint_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#update_blueprint-instance_method
+      def update_blueprint: (
+                              blueprint_arn: ::String,
+                              ?schema: ::String,
+                              ?encryption_configuration: {
+                                kms_key_id: ::String,
+                                kms_encryption_context: Hash[::String, ::String]?
+                              }
+                            ) -> _UpdateBlueprintResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBlueprintResponseSuccess
+
+      interface _UpdateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProjectResponse]
+        def project_arn: () -> ::String
+        def status: () -> ("COMPLETED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#update_project-instance_method
+      def update_project: (
+                            project_arn: ::String,
+                            ?project_description: ::String,
+                            ?extraction_configuration: Params::extraction_configuration,
+                            ?generative_configuration: Params::generative_configuration,
+                            ?custom_configuration: Params::custom_configuration,
+                            ?splitter_configuration: {
+                              state: ("ENABLED" | "DISABLED")
+                            },
+                            ?sensitive_data_configuration: {
+                              detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION" | "DISABLED"),
+                              pii_entities_configuration: {
+                                pii_entity_types: Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")],
+                                redaction_mask_mode: ("PII" | "ENTITY_TYPE")
+                              }?
+                            },
+                            ?encryption_configuration: {
+                              kms_key_id: ::String,
+                              kms_encryption_context: Hash[::String, ::String]?
+                            }
+                          ) -> _UpdateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProjectResponseSuccess
     end
   end
 end

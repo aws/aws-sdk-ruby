@@ -180,6 +180,18 @@ module Aws
                                          stages: Params::node_lifecycle_stages,
                                          script_caching_policy: ("CACHE_ONCE" | "REFRESH_ON_REBOOT")?
                                        },
+                                       ?instance_health_checks: {
+                                         health_monitoring: {
+                                           mode: ("NONE" | "STANDARD")?,
+                                           repair_action: ("AUTO" | "REPLACE" | "ISOLATE" | "NONE")?
+                                         }?,
+                                         deep_health_checks: {
+                                           on_start: {
+                                             profile: ("NONE" | "QUICK" | "MEDIUM" | "LONG")?,
+                                             repair_action: ("AUTO" | "REPLACE" | "ISOLATE" | "NONE")?
+                                           }?
+                                         }?
+                                       },
                                        ?client_token: ::String,
                                        ?tags: Hash[::String, ::String]
                                      ) -> _CreateComputeNodeGroupResponseSuccess
@@ -333,6 +345,7 @@ module Aws
         def compute_node_group_name: () -> ::String
         def node_lifecycle_actions: () -> Types::NodeLifecycleActions
         def scheduler_version: () -> ::String
+        def instance_health_checks: () -> Types::InstanceHealthChecks
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#register_compute_node_group_instance-instance_method
       def register_compute_node_group_instance: (
@@ -447,6 +460,18 @@ module Aws
                                        ?node_lifecycle_actions: {
                                          stages: Params::node_lifecycle_stages,
                                          script_caching_policy: ("CACHE_ONCE" | "REFRESH_ON_REBOOT")?
+                                       },
+                                       ?instance_health_checks: {
+                                         health_monitoring: {
+                                           mode: ("NONE" | "STANDARD")?,
+                                           repair_action: ("AUTO" | "REPLACE" | "ISOLATE" | "NONE")?
+                                         }?,
+                                         deep_health_checks: {
+                                           on_start: {
+                                             profile: ("NONE" | "QUICK" | "MEDIUM" | "LONG")?,
+                                             repair_action: ("AUTO" | "REPLACE" | "ISOLATE" | "NONE")?
+                                           }?
+                                         }?
                                        },
                                        ?client_token: ::String
                                      ) -> _UpdateComputeNodeGroupResponseSuccess

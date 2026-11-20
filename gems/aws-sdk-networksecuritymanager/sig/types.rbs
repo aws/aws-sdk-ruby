@@ -61,7 +61,7 @@ module Aws::NetworkSecurityManager
 
     class AdminFirewallTypeScope
       attr_accessor all_firewall_types_enabled: bool
-      attr_accessor firewall_types: ::Array[("WAF" | "SHIELD_ADVANCED")]
+      attr_accessor firewall_types: ::Array[("WAF" | "SHIELD_ADVANCED" | "IGW_FIREWALL")]
       SENSITIVE: []
     end
 
@@ -233,7 +233,7 @@ module Aws::NetworkSecurityManager
       attr_accessor policy_description: ::String
       attr_accessor priority: ::Integer
       attr_accessor associated_template_and_rule_list: ::Array[Types::TemplateOrRuleReference]
-      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED")
+      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED" | "IGW_FIREWALL")
       attr_accessor policy_configuration: Types::PolicyConfiguration
       attr_accessor is_published: bool
       attr_accessor tags: ::Hash[::String, ::String]
@@ -252,7 +252,7 @@ module Aws::NetworkSecurityManager
       attr_accessor update_token: ::String
       attr_accessor is_snapshot: bool
       attr_accessor has_published_version: bool
-      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED")
+      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED" | "IGW_FIREWALL")
       attr_accessor policy_configuration: Types::PolicyConfiguration
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -277,7 +277,7 @@ module Aws::NetworkSecurityManager
       attr_accessor update_token: ::String
       attr_accessor is_snapshot: bool
       attr_accessor has_published_version: bool
-      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED")
+      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED" | "IGW_FIREWALL")
       attr_accessor policy_configuration: Types::PolicyConfiguration
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -286,7 +286,7 @@ module Aws::NetworkSecurityManager
     class CreateRuleInput
       attr_accessor client_token: ::String
       attr_accessor rule_name: ::String
-      attr_accessor firewall_type: ("WAF")
+      attr_accessor firewall_type: ("WAF" | "IGW_FIREWALL")
       attr_accessor rule_type: ("CONFIGURATION" | "INSPECTION")
       attr_accessor rule_description: ::String
       attr_accessor configuration: untyped
@@ -299,7 +299,7 @@ module Aws::NetworkSecurityManager
       attr_accessor rule_id: ::String
       attr_accessor rule_arn: ::String
       attr_accessor rule_name: ::String
-      attr_accessor firewall_type: ("WAF")
+      attr_accessor firewall_type: ("WAF" | "IGW_FIREWALL")
       attr_accessor rule_type: ("CONFIGURATION" | "INSPECTION")
       attr_accessor rule_description: ::String
       attr_accessor configuration: untyped
@@ -323,7 +323,7 @@ module Aws::NetworkSecurityManager
       attr_accessor rule_id: ::String
       attr_accessor rule_arn: ::String
       attr_accessor rule_name: ::String
-      attr_accessor firewall_type: ("WAF")
+      attr_accessor firewall_type: ("WAF" | "IGW_FIREWALL")
       attr_accessor rule_type: ("CONFIGURATION" | "INSPECTION")
       attr_accessor rule_description: ::String
       attr_accessor configuration: untyped
@@ -341,6 +341,7 @@ module Aws::NetworkSecurityManager
       attr_accessor scope_name: ::String
       attr_accessor scope_description: ::String
       attr_accessor scope_configuration: Types::ScopeConfiguration
+      attr_accessor specialized_scope_type: ("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE")
       attr_accessor is_published: bool
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -352,6 +353,7 @@ module Aws::NetworkSecurityManager
       attr_accessor scope_name: ::String
       attr_accessor scope_description: ::String
       attr_accessor scope_configuration: Types::ScopeConfiguration
+      attr_accessor specialized_scope_type: ("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE")
       attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
       attr_accessor version: ::String
       attr_accessor update_token: ::String
@@ -374,6 +376,7 @@ module Aws::NetworkSecurityManager
       attr_accessor scope_name: ::String
       attr_accessor scope_description: ::String
       attr_accessor scope_configuration: Types::ScopeConfiguration
+      attr_accessor specialized_scope_type: ("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE")
       attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
       attr_accessor version: ::String
       attr_accessor update_token: ::String
@@ -388,7 +391,7 @@ module Aws::NetworkSecurityManager
       attr_accessor template_name: ::String
       attr_accessor template_description: ::String
       attr_accessor associated_rule_list: ::Array[Types::RuleReference]
-      attr_accessor firewall_type: ("WAF")
+      attr_accessor firewall_type: ("WAF" | "IGW_FIREWALL")
       attr_accessor is_published: bool
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -405,7 +408,7 @@ module Aws::NetworkSecurityManager
       attr_accessor update_token: ::String
       attr_accessor is_snapshot: bool
       attr_accessor has_published_version: bool
-      attr_accessor firewall_type: ("WAF")
+      attr_accessor firewall_type: ("WAF" | "IGW_FIREWALL")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -428,7 +431,7 @@ module Aws::NetworkSecurityManager
       attr_accessor update_token: ::String
       attr_accessor is_snapshot: bool
       attr_accessor has_published_version: bool
-      attr_accessor firewall_type: ("WAF")
+      attr_accessor firewall_type: ("WAF" | "IGW_FIREWALL")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -469,9 +472,9 @@ module Aws::NetworkSecurityManager
     end
 
     class DeploymentCoverageEntry
-      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED")
+      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED" | "IGW_FIREWALL")
       attr_accessor policy_arns: ::Array[::String]
-      attr_accessor in_scope_resource_types: ::Array[("AWS::ApiGateway::Stage" | "AWS::CloudFront::Distribution" | "AWS::EC2::EIP" | "AWS::ElasticLoadBalancingV2::LoadBalancer::application" | "AWS::ElasticLoadBalancing::LoadBalancer")]
+      attr_accessor in_scope_resource_types: ::Array[("AWS::ApiGateway::Stage" | "AWS::CloudFront::Distribution" | "AWS::EC2::EIP" | "AWS::ElasticLoadBalancingV2::LoadBalancer::application" | "AWS::ElasticLoadBalancing::LoadBalancer" | "AWS::EC2::VPC" | "AWS::EC2::Subnet")]
       SENSITIVE: []
     end
 
@@ -496,6 +499,7 @@ module Aws::NetworkSecurityManager
     class FirewallSyncReason
       attr_accessor missing_firewall: ::String
       attr_accessor invalid_firewall: Types::InvalidFirewallReasons
+      attr_accessor invalid_resource: ::Hash[("AWS::ApiGateway::Stage" | "AWS::CloudFront::Distribution" | "AWS::EC2::EIP" | "AWS::ElasticLoadBalancingV2::LoadBalancer::application" | "AWS::ElasticLoadBalancing::LoadBalancer" | "AWS::EC2::VPC" | "AWS::EC2::Subnet"), ::Array[Types::InvalidResourceIssue]]
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -503,13 +507,15 @@ module Aws::NetworkSecurityManager
       end
       class InvalidFirewall < FirewallSyncReason
       end
+      class InvalidResource < FirewallSyncReason
+      end
       class Unknown < FirewallSyncReason
       end
     end
 
     class GenerateRuleConfigurationRequest
       attr_accessor prompt: ::String
-      attr_accessor rule_firewall_type: ("WAF")
+      attr_accessor rule_firewall_type: ("WAF" | "IGW_FIREWALL")
       attr_accessor rule_type: ("CONFIGURATION" | "INSPECTION")
       attr_accessor waf_config_data_type: ("DefaultAction" | "VisibilityConfig" | "CaptchaConfig" | "ChallengeConfig" | "CustomResponseBodies" | "LoggingConfiguration" | "DataProtectionConfig" | "AssociationConfig" | "OnSourceDDoSProtectionConfig" | "TokenDomains")
       attr_accessor current_configuration: ::String
@@ -574,7 +580,7 @@ module Aws::NetworkSecurityManager
       attr_accessor update_token: ::String
       attr_accessor is_snapshot: bool
       attr_accessor has_published_version: bool
-      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED")
+      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED" | "IGW_FIREWALL")
       attr_accessor policy_configuration: Types::PolicyConfiguration
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -589,7 +595,7 @@ module Aws::NetworkSecurityManager
       attr_accessor rule_id: ::String
       attr_accessor rule_arn: ::String
       attr_accessor rule_name: ::String
-      attr_accessor firewall_type: ("WAF")
+      attr_accessor firewall_type: ("WAF" | "IGW_FIREWALL")
       attr_accessor rule_type: ("CONFIGURATION" | "INSPECTION")
       attr_accessor rule_description: ::String
       attr_accessor configuration: untyped
@@ -613,6 +619,7 @@ module Aws::NetworkSecurityManager
       attr_accessor scope_name: ::String
       attr_accessor scope_description: ::String
       attr_accessor scope_configuration: Types::ScopeConfiguration
+      attr_accessor specialized_scope_type: ("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE")
       attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
       attr_accessor version: ::String
       attr_accessor update_token: ::String
@@ -638,8 +645,14 @@ module Aws::NetworkSecurityManager
       attr_accessor update_token: ::String
       attr_accessor is_snapshot: bool
       attr_accessor has_published_version: bool
-      attr_accessor firewall_type: ("WAF")
+      attr_accessor firewall_type: ("WAF" | "IGW_FIREWALL")
       attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class IgwFirewallConfig
+      attr_accessor default_subnet_connectivity: ("flexible" | "bidirectional" | "outbound-only")
+      attr_accessor subnet_connectivity_overrides: ::Array[Types::SubnetConnectivityOverride]
       SENSITIVE: []
     end
 
@@ -655,6 +668,13 @@ module Aws::NetworkSecurityManager
       attr_accessor incorrect_appendable_configuration_order: ::Array[Types::ConfigurationIssue]
       attr_accessor missing_mergeable_configuration_values: ::Array[Types::ConfigurationIssue]
       attr_accessor unexpected_mergeable_configuration_values: ::Array[Types::ConfigurationIssue]
+      SENSITIVE: []
+    end
+
+    class InvalidResourceIssue
+      attr_accessor resource_id: ::String
+      attr_accessor expected_value: ::String
+      attr_accessor actual_value: ::String
       SENSITIVE: []
     end
 
@@ -709,6 +729,20 @@ module Aws::NetworkSecurityManager
       SENSITIVE: []
     end
 
+    class ListEntityCoveragesInput
+      attr_accessor entity_arn: ::String
+      attr_accessor resource_owner_account_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEntityCoveragesOutput
+      attr_accessor next_token: ::String
+      attr_accessor resource_coverages: ::Array[Types::ResourceCoverageSummary]
+      SENSITIVE: []
+    end
+
     class ListPoliciesInput
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -732,6 +766,20 @@ module Aws::NetworkSecurityManager
     class ListPolicySnapshotsOutput
       attr_accessor next_token: ::String
       attr_accessor snapshots: ::Array[Types::PolicySummary]
+      SENSITIVE: []
+    end
+
+    class ListProtectedResourceCoveragesInput
+      attr_accessor resource_arn: ::String
+      attr_accessor entity_type: ("Rule" | "Template" | "Policy" | "Deployment" | "Scope")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProtectedResourceCoveragesOutput
+      attr_accessor next_token: ::String
+      attr_accessor resource_coverages: ::Array[Types::ResourceCoverageSummary]
       SENSITIVE: []
     end
 
@@ -841,6 +889,7 @@ module Aws::NetworkSecurityManager
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       attr_accessor status: ("ACTIVE" | "DRAFT" | "DISABLED")
+      attr_accessor template_owner: ("CUSTOMER" | "AWS")
       SENSITIVE: []
     end
 
@@ -862,7 +911,7 @@ module Aws::NetworkSecurityManager
     end
 
     class OutOfSyncReasonsView
-      attr_accessor reasons: ::Hash[("WAF" | "SHIELD_ADVANCED"), Types::FirewallSyncReason]
+      attr_accessor reasons: ::Hash[("WAF" | "SHIELD_ADVANCED" | "IGW_FIREWALL"), Types::FirewallSyncReason]
       attr_accessor not_visible: Types::NotVisibleMarker
       attr_accessor unknown: untyped
       SENSITIVE: []
@@ -879,6 +928,7 @@ module Aws::NetworkSecurityManager
       attr_accessor remediation_enabled: bool
       attr_accessor resources_clean_up: bool
       attr_accessor waf_config: Types::WafConfig
+      attr_accessor igw_firewall_config: Types::IgwFirewallConfig
       SENSITIVE: []
     end
 
@@ -894,7 +944,7 @@ module Aws::NetworkSecurityManager
       attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
       attr_accessor version: ::String
       attr_accessor has_published_version: bool
-      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED")
+      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED" | "IGW_FIREWALL")
       attr_accessor priority: ::Integer
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -920,7 +970,7 @@ module Aws::NetworkSecurityManager
     end
 
     class RemediationIssuesView
-      attr_accessor issues: ::Hash[("WAF" | "SHIELD_ADVANCED"), Types::RemediationIssueDetails]
+      attr_accessor issues: ::Hash[("WAF" | "SHIELD_ADVANCED" | "IGW_FIREWALL"), Types::RemediationIssueDetails]
       attr_accessor not_visible: Types::NotVisibleMarker
       attr_accessor unknown: untyped
       SENSITIVE: []
@@ -936,6 +986,19 @@ module Aws::NetworkSecurityManager
     class ResourceAssociation
       attr_accessor arn: ::String
       attr_accessor resource_type: ("Rule" | "Template" | "Policy" | "Deployment" | "Scope")
+      SENSITIVE: []
+    end
+
+    class ResourceCoverageSummary
+      attr_accessor resource_arn: ::String
+      attr_accessor entity_type: ("Rule" | "Template" | "Policy" | "Deployment" | "Scope")
+      attr_accessor entity_arn: ::String
+      attr_accessor resource_owner_account_id: ::String
+      attr_accessor resource_type: ("AWS::ApiGateway::Stage" | "AWS::CloudFront::Distribution" | "AWS::EC2::EIP" | "AWS::ElasticLoadBalancingV2::LoadBalancer::application" | "AWS::ElasticLoadBalancing::LoadBalancer" | "AWS::EC2::VPC" | "AWS::EC2::Subnet")
+      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED" | "IGW_FIREWALL")
+      attr_accessor coverage_status: ("IN_EFFECT" | "SUPERSEDED")
+      attr_accessor deployment_arns: ::Array[::String]
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -998,7 +1061,7 @@ module Aws::NetworkSecurityManager
       attr_accessor account_id: ::String
       attr_accessor resource_arn: ::String
       attr_accessor deployment_arn: ::String
-      attr_accessor resource_type: ("AWS::ApiGateway::Stage" | "AWS::CloudFront::Distribution" | "AWS::EC2::EIP" | "AWS::ElasticLoadBalancingV2::LoadBalancer::application" | "AWS::ElasticLoadBalancing::LoadBalancer" | "AWS::WAFv2::WebACL" | "AWS::Shield::Protection" | "AWS::ShieldRegional::Protection")
+      attr_accessor resource_type: ("AWS::ApiGateway::Stage" | "AWS::CloudFront::Distribution" | "AWS::EC2::EIP" | "AWS::ElasticLoadBalancingV2::LoadBalancer::application" | "AWS::ElasticLoadBalancing::LoadBalancer" | "AWS::WAFv2::WebACL" | "AWS::Shield::Protection" | "AWS::ShieldRegional::Protection" | "AWS::EC2::VPC")
       attr_accessor updated_at: ::Time
       attr_accessor out_of_sync_reasons: Types::OutOfSyncReasonsView
       attr_accessor remediation_issues: Types::RemediationIssuesView
@@ -1015,7 +1078,7 @@ module Aws::NetworkSecurityManager
       attr_accessor rule_id: ::String
       attr_accessor rule_arn: ::String
       attr_accessor rule_name: ::String
-      attr_accessor firewall_type: ("WAF")
+      attr_accessor firewall_type: ("WAF" | "IGW_FIREWALL")
       attr_accessor rule_type: ("CONFIGURATION" | "INSPECTION")
       attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
       attr_accessor version: ::String
@@ -1026,7 +1089,7 @@ module Aws::NetworkSecurityManager
 
     class ScopeConfiguration
       attr_accessor account_filter: Types::AccountFilter
-      attr_accessor resource_scopes: ::Hash[("AWS::ApiGateway::Stage" | "AWS::CloudFront::Distribution" | "AWS::EC2::EIP" | "AWS::ElasticLoadBalancingV2::LoadBalancer::application" | "AWS::ElasticLoadBalancing::LoadBalancer"), Types::ResourceScope]
+      attr_accessor resource_scopes: ::Hash[("AWS::ApiGateway::Stage" | "AWS::CloudFront::Distribution" | "AWS::EC2::EIP" | "AWS::ElasticLoadBalancingV2::LoadBalancer::application" | "AWS::ElasticLoadBalancing::LoadBalancer" | "AWS::EC2::VPC" | "AWS::EC2::Subnet"), Types::ResourceScope]
       SENSITIVE: []
     end
 
@@ -1039,6 +1102,7 @@ module Aws::NetworkSecurityManager
       attr_accessor scope_id: ::String
       attr_accessor scope_arn: ::String
       attr_accessor scope_name: ::String
+      attr_accessor specialized_scope_type: ("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE")
       attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
       attr_accessor version: ::String
       attr_accessor has_published_version: bool
@@ -1058,6 +1122,12 @@ module Aws::NetworkSecurityManager
     class ServiceUnavailableException
       attr_accessor message: ::String
       attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class SubnetConnectivityOverride
+      attr_accessor connectivity_type: ("flexible" | "bidirectional" | "outbound-only" | "exclude")
+      attr_accessor scopes: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1093,10 +1163,11 @@ module Aws::NetworkSecurityManager
       attr_accessor template_id: ::String
       attr_accessor template_arn: ::String
       attr_accessor template_name: ::String
+      attr_accessor template_owner: ("CUSTOMER" | "AWS")
       attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
       attr_accessor version: ::String
       attr_accessor has_published_version: bool
-      attr_accessor firewall_type: ("WAF")
+      attr_accessor firewall_type: ("WAF" | "IGW_FIREWALL")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -1174,7 +1245,7 @@ module Aws::NetworkSecurityManager
       attr_accessor update_token: ::String
       attr_accessor is_snapshot: bool
       attr_accessor has_published_version: bool
-      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED")
+      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED" | "IGW_FIREWALL")
       attr_accessor policy_configuration: Types::PolicyConfiguration
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1195,7 +1266,7 @@ module Aws::NetworkSecurityManager
       attr_accessor rule_id: ::String
       attr_accessor rule_arn: ::String
       attr_accessor rule_name: ::String
-      attr_accessor firewall_type: ("WAF")
+      attr_accessor firewall_type: ("WAF" | "IGW_FIREWALL")
       attr_accessor rule_type: ("CONFIGURATION" | "INSPECTION")
       attr_accessor rule_description: ::String
       attr_accessor configuration: untyped
@@ -1224,6 +1295,7 @@ module Aws::NetworkSecurityManager
       attr_accessor scope_name: ::String
       attr_accessor scope_description: ::String
       attr_accessor scope_configuration: Types::ScopeConfiguration
+      attr_accessor specialized_scope_type: ("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE")
       attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
       attr_accessor version: ::String
       attr_accessor update_token: ::String
@@ -1254,7 +1326,7 @@ module Aws::NetworkSecurityManager
       attr_accessor update_token: ::String
       attr_accessor is_snapshot: bool
       attr_accessor has_published_version: bool
-      attr_accessor firewall_type: ("WAF")
+      attr_accessor firewall_type: ("WAF" | "IGW_FIREWALL")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end

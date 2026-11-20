@@ -784,7 +784,7 @@ module Aws::TranscribeService
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
     #   Specifies the encryption configuration for your custom language model.
     #   Your model artifacts are encrypted with the specified KMS key or with
-    #   an AWS-owned key if a key is not supplied.
+    #   an Amazon Web Services owned key if a key is not supplied.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Adds one or more custom tags, each in the form of a key:value pair, to
@@ -1050,7 +1050,7 @@ module Aws::TranscribeService
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
     #   Specifies the encryption configuration for your custom vocabulary.
     #   Your vocabulary artifacts are encrypted with the specified KMS key or
-    #   with an AWS-owned key if a key is not supplied.
+    #   with an Amazon Web Services owned key if a key is not supplied.
     #
     # @return [Types::CreateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1206,7 +1206,8 @@ module Aws::TranscribeService
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
     #   Specifies the encryption configuration for your custom vocabulary
     #   filter. Your vocabulary filter artifacts are encrypted with the
-    #   specified KMS key or with an AWS-owned key if a key is not supplied.
+    #   specified KMS key or with an Amazon Web Services owned key if a key is
+    #   not supplied.
     #
     # @return [Types::CreateVocabularyFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3813,7 +3814,7 @@ module Aws::TranscribeService
     #   `DataAccessRoleArn`.
     #
     # @option params [Types::ContentRedaction] :content_redaction
-    #   Makes it possible to redact or flag specified personally identifiable
+    #   Makes it possible to redact specified personally identifiable
     #   information (PII) in your transcript. If you use `ContentRedaction`,
     #   you must also include the sub-parameters: `RedactionOutput` and
     #   `RedactionType`. You can optionally include `PiiEntityTypes` to choose
@@ -4134,6 +4135,244 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
+    # Transcribes a media file and returns the transcript in the same
+    # response. There is no job to start and no status to poll.
+    #
+    # Use `TranscribeAudio` when you already have a complete media file and
+    # want the transcript right away. For large files, long audio, or bulk
+    # processing, use .
+    #
+    # You must include the following parameters in your `TranscribeAudio`
+    # request:
+    #
+    # * `Media`: Your audio, either as inline bytes (`MediaBytes`) or as the
+    #   Amazon S3 location of a media file (`MediaFileUri`).
+    #
+    # * One of `Language` or `LanguageDetectionMode`: Specify the language
+    #   of your audio, or have Amazon Transcribe identify it.
+    #
+    # Your audio must be between 0.5 seconds and 1 hour long. Supported
+    # formats are WAV, MP3, FLAC, M4A, MP4, Ogg, WebM, and AMR.
+    #
+    # If you send your audio in the request (`MediaBytes`), the file can be
+    # up to 25 MB. If you provide an Amazon S3 location (`MediaFileUri`),
+    # the file can be up to 500 MB.
+    #
+    # Amazon Transcribe always turns on smart formatting, also known as
+    # inverse text normalization (ITN). It writes numbers, dates, currency,
+    # and similar items in their usual written form. For example, "one
+    # hundred" becomes "100". You can't turn smart formatting off.
+    #
+    # By default, Amazon Transcribe returns the transcript in
+    # `TranscriptResponse`. If you include `OutputConfiguration`, Amazon
+    # Transcribe writes the transcript to the Amazon S3 location you specify
+    # instead, and the response contains only that location.
+    #
+    # @option params [required, Types::SyncMedia] :media
+    #   The audio to transcribe. Specify exactly one of `MediaBytes` or
+    #   `MediaFileUri`.
+    #
+    #   Audio sent in the request (`MediaBytes`) can be up to 25 MB. Audio in
+    #   Amazon S3 (`MediaFileUri`) can be up to 500 MB.
+    #
+    # @option params [String] :language
+    #   The language spoken in your audio, as a base language code (for
+    #   example, `en` or `es`).
+    #
+    #   Include either `Language` or `LanguageDetectionMode` in your request,
+    #   but not both.
+    #
+    # @option params [String] :language_detection_mode
+    #   Enables automatic language identification. Use `IDENTIFY_LANGUAGE` if
+    #   your audio contains a single language that you don't know in advance.
+    #
+    #   You can optionally include `LanguageOptions` to limit identification
+    #   to languages you think may be present, which can improve accuracy.
+    #
+    #   Amazon Transcribe returns the identified language, as a locale (for
+    #   example, `en-US`), in the response metadata.
+    #
+    #   Include either `Language` or `LanguageDetectionMode` in your request,
+    #   but not both.
+    #
+    # @option params [Array<String>] :language_options
+    #   A list of two or more languages that you think may be present in your
+    #   audio, as base language codes (for example, `en` and `es`). Each
+    #   language can appear only once. A list with only one language returns a
+    #   `BadRequestException`.
+    #
+    #   You can use `LanguageOptions` only with `LanguageDetectionMode`.
+    #
+    # @option params [Boolean] :channel_identification
+    #   Enables channel identification in multi-channel audio. Each channel is
+    #   transcribed independently, and each item in the transcript is labeled
+    #   with its channel.
+    #
+    #   Channel identification supports up to two channels.
+    #
+    # @option params [Boolean] :show_speaker_labels
+    #   Enables speaker partitioning (diarization) in your transcript. Speaker
+    #   partitioning labels the speech from individual speakers in your media
+    #   file.
+    #
+    #   If you set `ShowSpeakerLabels` to `true`, you must also include
+    #   `MaxSpeakerLabels`.
+    #
+    #   For more information, see [Partitioning speakers (diarization)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html
+    #
+    # @option params [Integer] :max_speaker_labels
+    #   Specify the maximum number of speakers you want to partition in your
+    #   media.
+    #
+    #   Note that if your media contains more speakers than the specified
+    #   number, Amazon Transcribe treats multiple speakers as a single
+    #   speaker.
+    #
+    #   You can set `MaxSpeakerLabels` only if `ShowSpeakerLabels` is `true`.
+    #
+    # @option params [Array<Types::VocabularySettingsEntry>] :vocabulary_settings
+    #   Custom vocabularies to apply to your transcript, with one entry per
+    #   language. In each entry, you can reference a custom vocabulary you
+    #   created or provide phrases inline. All entries must use the same type,
+    #   either all by name or all inline.
+    #
+    #   If you specify `Language`, include exactly one entry, and its
+    #   `Language` must match. If you use `LanguageDetectionMode`, you can
+    #   include one entry for each language in `LanguageOptions`.
+    #
+    # @option params [Types::VocabularyFilterSettings] :vocabulary_filter_settings
+    #   Custom vocabulary filters to apply to your transcript, and how to
+    #   apply them.
+    #
+    # @option params [Types::ContentRedaction] :content_redaction
+    #   Redacts personally identifiable information (PII) from your
+    #   transcript. Amazon Transcribe returns the redacted transcript in
+    #   `RedactedResults`.
+    #
+    #   If you set `RedactionOutput` to `redacted_and_unredacted`, Amazon
+    #   Transcribe also returns the unredacted transcript in `Results`.
+    #
+    #   In Sync, content redaction has these limits:
+    #
+    #   * **Languages:** English (`en`), Spanish (`es`), French (`fr`),
+    #     Italian (`it`), German (`de`), and Portuguese (`pt`).
+    #
+    #   * **Language identification:** If you use `LanguageDetectionMode`, you
+    #     must also include `LanguageOptions`, and every language in it must
+    #     be one of the languages above. A request that has no
+    #     `LanguageOptions`, or that lists a language that isn't supported,
+    #     returns a `BadRequestException`.
+    #
+    #   * **Regions:** Content redaction isn't available in the South America
+    #     (São Paulo) Region (`sa-east-1`). It's available in the other
+    #     Amazon Web Services Regions where Sync is available.
+    #
+    # @option params [Types::SyncOutputConfiguration] :output_configuration
+    #   Writes the transcript to an Amazon S3 location instead of returning it
+    #   in the response. If you include `OutputConfiguration`, the response
+    #   contains only the output location.
+    #
+    #   You must have write permission for the location you specify.
+    #
+    # @return [Types::TranscribeAudioResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TranscribeAudioResponse#output_configuration #output_configuration} => Types::SyncOutputConfiguration
+    #   * {Types::TranscribeAudioResponse#transcript_response #transcript_response} => Types::TranscriptResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.transcribe_audio({
+    #     media: { # required
+    #       media_bytes: "data",
+    #       media_file_uri: "Uri",
+    #     },
+    #     language: "en", # accepts en, es, fr, it, de, ja, pt, ko, zh-CN, zh-TW, zh-HK
+    #     language_detection_mode: "IDENTIFY_LANGUAGE", # accepts IDENTIFY_LANGUAGE
+    #     language_options: ["en"], # accepts en, es, fr, it, de, ja, pt, ko, zh-CN, zh-TW, zh-HK
+    #     channel_identification: false,
+    #     show_speaker_labels: false,
+    #     max_speaker_labels: 1,
+    #     vocabulary_settings: [
+    #       {
+    #         language: "en", # required, accepts en, es, fr, it, de, ja, pt, ko, zh-CN, zh-TW, zh-HK
+    #         vocabulary_name: "VocabularyName",
+    #         phrases: [
+    #           {
+    #             text: "VocabularyText", # required
+    #             display_as: "VocabularyText",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     vocabulary_filter_settings: {
+    #       vocabulary_filter_method: "remove", # required, accepts remove, mask, tag
+    #       filters: [ # required
+    #         {
+    #           language: "en", # required, accepts en, es, fr, it, de, ja, pt, ko, zh-CN, zh-TW, zh-HK
+    #           vocabulary_filter_name: "VocabularyFilterName",
+    #           words: ["Word"],
+    #         },
+    #       ],
+    #     },
+    #     content_redaction: {
+    #       redaction_type: "PII", # required, accepts PII
+    #       redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
+    #       pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, DATE_TIME, PASSPORT_NUMBER, DRIVER_ID, URL, AGE, USERNAME, PASSWORD, AWS_ACCESS_KEY, AWS_SECRET_KEY, IP_ADDRESS, MAC_ADDRESS, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, ALL
+    #     },
+    #     output_configuration: {
+    #       output_media_file_uri: "Uri", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.output_configuration.output_media_file_uri #=> String
+    #   resp.transcript_response.metadata.language_code #=> String, one of "en-US", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-WL", "en-ZA", "en-NZ", "es-US", "es-ES", "es-MX", "fr-FR", "fr-CA", "it-IT", "de-DE", "de-CH", "ja-JP", "pt-BR", "pt-PT", "zh-CN", "zh-TW", "zh-HK", "ko-KR"
+    #   resp.transcript_response.metadata.language_codes #=> Array
+    #   resp.transcript_response.metadata.language_codes[0].language_code #=> String, one of "en-US", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-WL", "en-ZA", "en-NZ", "es-US", "es-ES", "es-MX", "fr-FR", "fr-CA", "it-IT", "de-DE", "de-CH", "ja-JP", "pt-BR", "pt-PT", "zh-CN", "zh-TW", "zh-HK", "ko-KR"
+    #   resp.transcript_response.metadata.language_codes[0].duration_in_seconds #=> Float
+    #   resp.transcript_response.metadata.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm", "m4a"
+    #   resp.transcript_response.metadata.media_sample_rate_hertz #=> Integer
+    #   resp.transcript_response.metadata.speakers_count #=> Integer
+    #   resp.transcript_response.metadata.number_of_channels #=> Integer
+    #   resp.transcript_response.results.transcript #=> String
+    #   resp.transcript_response.results.items #=> Array
+    #   resp.transcript_response.results.items[0].id #=> Integer
+    #   resp.transcript_response.results.items[0].content #=> String
+    #   resp.transcript_response.results.items[0].start_time #=> Float
+    #   resp.transcript_response.results.items[0].end_time #=> Float
+    #   resp.transcript_response.results.items[0].language_code #=> String, one of "en-US", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-WL", "en-ZA", "en-NZ", "es-US", "es-ES", "es-MX", "fr-FR", "fr-CA", "it-IT", "de-DE", "de-CH", "ja-JP", "pt-BR", "pt-PT", "zh-CN", "zh-TW", "zh-HK", "ko-KR"
+    #   resp.transcript_response.results.items[0].channel_label #=> String
+    #   resp.transcript_response.results.items[0].speaker_label #=> String
+    #   resp.transcript_response.results.items[0].vocabulary_filter_match #=> Boolean
+    #   resp.transcript_response.results.items[0].redactions #=> Array
+    #   resp.transcript_response.results.items[0].redactions[0].type #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "ALL"
+    #   resp.transcript_response.redacted_results.transcript #=> String
+    #   resp.transcript_response.redacted_results.items #=> Array
+    #   resp.transcript_response.redacted_results.items[0].id #=> Integer
+    #   resp.transcript_response.redacted_results.items[0].content #=> String
+    #   resp.transcript_response.redacted_results.items[0].start_time #=> Float
+    #   resp.transcript_response.redacted_results.items[0].end_time #=> Float
+    #   resp.transcript_response.redacted_results.items[0].language_code #=> String, one of "en-US", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-WL", "en-ZA", "en-NZ", "es-US", "es-ES", "es-MX", "fr-FR", "fr-CA", "it-IT", "de-DE", "de-CH", "ja-JP", "pt-BR", "pt-PT", "zh-CN", "zh-TW", "zh-HK", "ko-KR"
+    #   resp.transcript_response.redacted_results.items[0].channel_label #=> String
+    #   resp.transcript_response.redacted_results.items[0].speaker_label #=> String
+    #   resp.transcript_response.redacted_results.items[0].vocabulary_filter_match #=> Boolean
+    #   resp.transcript_response.redacted_results.items[0].redactions #=> Array
+    #   resp.transcript_response.redacted_results.items[0].redactions[0].type #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "ALL"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscribeAudio AWS API Documentation
+    #
+    # @overload transcribe_audio(params = {})
+    # @param [Hash] params ({})
+    def transcribe_audio(params = {}, options = {})
+      req = build_request(:transcribe_audio, params)
+      req.send_request(options)
+    end
+
     # Removes the specified tags from the specified Amazon Transcribe
     # resource.
     #
@@ -4382,7 +4621,8 @@ module Aws::TranscribeService
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
     #   Specifies the new encryption configuration for your custom language
     #   model. The model artifacts are re-encrypted in place using the
-    #   specified KMS key or with an AWS-owned key if a key is not supplied.
+    #   specified KMS key or with an Amazon Web Services owned key if a key is
+    #   not supplied.
     #
     # @return [Types::UpdateLanguageModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4549,9 +4789,9 @@ module Aws::TranscribeService
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
     #
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
-    #   Specifies the new encryption configuration for your custom vocabulary.
-    #   The vocabulary artifacts are re-encrypted in place using the specified
-    #   KMS key or with an AWS-owned key if a key is not supplied.
+    #   Specifies the encryption configuration for your custom vocabulary.
+    #   Your vocabulary artifacts are encrypted with the specified KMS key or
+    #   with an Amazon Web Services owned key if a key is not supplied.
     #
     # @return [Types::UpdateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4653,10 +4893,10 @@ module Aws::TranscribeService
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
     #
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
-    #   Specifies the new encryption configuration for your custom vocabulary
-    #   filter. The vocabulary filter artifacts are re-encrypted in place
-    #   using the specified KMS key or with an AWS-owned key if a key is not
-    #   supplied.
+    #   Specifies the encryption configuration for your custom vocabulary
+    #   filter. Your vocabulary filter artifacts are encrypted with the
+    #   specified KMS key or with an Amazon Web Services owned key if a key is
+    #   not supplied.
     #
     # @return [Types::UpdateVocabularyFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4712,7 +4952,7 @@ module Aws::TranscribeService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.158.0'
+      context[:gem_version] = '1.159.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

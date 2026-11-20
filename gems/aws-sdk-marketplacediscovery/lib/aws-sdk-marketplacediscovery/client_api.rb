@@ -37,6 +37,19 @@ module Aws::MarketplaceDiscovery
     BillingPeriodType = Shapes::StringShape.new(name: 'BillingPeriodType')
     BoundedString = Shapes::StringShape.new(name: 'BoundedString')
     ByolPricingTerm = Shapes::StructureShape.new(name: 'ByolPricingTerm')
+    CaseStudiesSummary = Shapes::StructureShape.new(name: 'CaseStudiesSummary')
+    CaseStudy = Shapes::StructureShape.new(name: 'CaseStudy')
+    CaseStudyChallengeString = Shapes::StringShape.new(name: 'CaseStudyChallengeString')
+    CaseStudyId = Shapes::StringShape.new(name: 'CaseStudyId')
+    CaseStudyIdList = Shapes::ListShape.new(name: 'CaseStudyIdList')
+    CaseStudyImplementationApproachString = Shapes::StringShape.new(name: 'CaseStudyImplementationApproachString')
+    CaseStudyOutcomeString = Shapes::StringShape.new(name: 'CaseStudyOutcomeString')
+    CaseStudyResolutionString = Shapes::StringShape.new(name: 'CaseStudyResolutionString')
+    CaseStudyResource = Shapes::StructureShape.new(name: 'CaseStudyResource')
+    CaseStudyResourceDisplayNameString = Shapes::StringShape.new(name: 'CaseStudyResourceDisplayNameString')
+    CaseStudyResourceList = Shapes::ListShape.new(name: 'CaseStudyResourceList')
+    CaseStudyResourceType = Shapes::StringShape.new(name: 'CaseStudyResourceType')
+    CaseStudyResourceValueString = Shapes::StringShape.new(name: 'CaseStudyResourceValueString')
     Catalog = Shapes::StringShape.new(name: 'Catalog')
     Category = Shapes::StructureShape.new(name: 'Category')
     CategoryList = Shapes::ListShape.new(name: 'CategoryList')
@@ -64,6 +77,7 @@ module Aws::MarketplaceDiscovery
     EksAddOnFulfillmentOption = Shapes::StructureShape.new(name: 'EksAddOnFulfillmentOption')
     EksAddOnOperatingSystem = Shapes::StructureShape.new(name: 'EksAddOnOperatingSystem')
     EksAddOnOperatingSystemList = Shapes::ListShape.new(name: 'EksAddOnOperatingSystemList')
+    EngagementDates = Shapes::StructureShape.new(name: 'EngagementDates')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     FacetTypeList = Shapes::ListShape.new(name: 'FacetTypeList')
     FixedPercentage = Shapes::StructureShape.new(name: 'FixedPercentage')
@@ -100,11 +114,17 @@ module Aws::MarketplaceDiscovery
     ListFulfillmentOptionsInput = Shapes::StructureShape.new(name: 'ListFulfillmentOptionsInput')
     ListFulfillmentOptionsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListFulfillmentOptionsInputMaxResultsInteger')
     ListFulfillmentOptionsOutput = Shapes::StructureShape.new(name: 'ListFulfillmentOptionsOutput')
+    ListListingAttributesInput = Shapes::StructureShape.new(name: 'ListListingAttributesInput')
+    ListListingAttributesOutput = Shapes::StructureShape.new(name: 'ListListingAttributesOutput')
     ListPurchaseOptionsInput = Shapes::StructureShape.new(name: 'ListPurchaseOptionsInput')
     ListPurchaseOptionsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListPurchaseOptionsInputMaxResultsInteger')
     ListPurchaseOptionsOutput = Shapes::StructureShape.new(name: 'ListPurchaseOptionsOutput')
     ListingAssociatedEntity = Shapes::StructureShape.new(name: 'ListingAssociatedEntity')
     ListingAssociatedEntityList = Shapes::ListShape.new(name: 'ListingAssociatedEntityList')
+    ListingAttributeResults = Shapes::UnionShape.new(name: 'ListingAttributeResults')
+    ListingAttributeResultsList = Shapes::ListShape.new(name: 'ListingAttributeResultsList')
+    ListingAttributeType = Shapes::StringShape.new(name: 'ListingAttributeType')
+    ListingAttributeTypeList = Shapes::ListShape.new(name: 'ListingAttributeTypeList')
     ListingBadge = Shapes::StructureShape.new(name: 'ListingBadge')
     ListingBadgeList = Shapes::ListShape.new(name: 'ListingBadgeList')
     ListingBadgeType = Shapes::StringShape.new(name: 'ListingBadgeType')
@@ -152,6 +172,9 @@ module Aws::MarketplaceDiscovery
     PromotionalEmbeddedVideo = Shapes::StructureShape.new(name: 'PromotionalEmbeddedVideo')
     PromotionalMedia = Shapes::UnionShape.new(name: 'PromotionalMedia')
     PromotionalMediaList = Shapes::ListShape.new(name: 'PromotionalMediaList')
+    PurchaseIndicator = Shapes::StructureShape.new(name: 'PurchaseIndicator')
+    PurchaseIndicatorList = Shapes::ListShape.new(name: 'PurchaseIndicatorList')
+    PurchaseIndicatorType = Shapes::StringShape.new(name: 'PurchaseIndicatorType')
     PurchaseOptionAssociatedEntity = Shapes::StructureShape.new(name: 'PurchaseOptionAssociatedEntity')
     PurchaseOptionAssociatedEntityList = Shapes::ListShape.new(name: 'PurchaseOptionAssociatedEntityList')
     PurchaseOptionBadge = Shapes::StructureShape.new(name: 'PurchaseOptionBadge')
@@ -169,6 +192,9 @@ module Aws::MarketplaceDiscovery
     RateCardItem = Shapes::StructureShape.new(name: 'RateCardItem')
     RateCardList = Shapes::ListShape.new(name: 'RateCardList')
     RecurringPaymentTerm = Shapes::StructureShape.new(name: 'RecurringPaymentTerm')
+    RegionalPrice = Shapes::StructureShape.new(name: 'RegionalPrice')
+    RegionalPriceList = Shapes::ListShape.new(name: 'RegionalPriceList')
+    RegionalPriceRegionString = Shapes::StringShape.new(name: 'RegionalPriceRegionString')
     RenewalTerm = Shapes::StructureShape.new(name: 'RenewalTerm')
     RenewalTermMaxRenewalsInteger = Shapes::IntegerShape.new(name: 'RenewalTermMaxRenewalsInteger')
     Resource = Shapes::StructureShape.new(name: 'Resource')
@@ -180,6 +206,11 @@ module Aws::MarketplaceDiscovery
     ReviewSourceSummary = Shapes::StructureShape.new(name: 'ReviewSourceSummary')
     ReviewSourceSummaryList = Shapes::ListShape.new(name: 'ReviewSourceSummaryList')
     ReviewSummary = Shapes::StructureShape.new(name: 'ReviewSummary')
+    SaasCloudFormationDeploymentTemplate = Shapes::StructureShape.new(name: 'SaasCloudFormationDeploymentTemplate')
+    SaasCloudFormationDeploymentTemplateDescriptionString = Shapes::StringShape.new(name: 'SaasCloudFormationDeploymentTemplateDescriptionString')
+    SaasCloudFormationDeploymentTemplateIamPolicyString = Shapes::StringShape.new(name: 'SaasCloudFormationDeploymentTemplateIamPolicyString')
+    SaasDeploymentTemplate = Shapes::UnionShape.new(name: 'SaasDeploymentTemplate')
+    SaasDeploymentTemplateList = Shapes::ListShape.new(name: 'SaasDeploymentTemplateList')
     SaasFulfillmentOption = Shapes::StructureShape.new(name: 'SaasFulfillmentOption')
     SaasQuickLaunchStatus = Shapes::StringShape.new(name: 'SaasQuickLaunchStatus')
     SageMakerAlgorithmFulfillmentOption = Shapes::StructureShape.new(name: 'SageMakerAlgorithmFulfillmentOption')
@@ -213,6 +244,13 @@ module Aws::MarketplaceDiscovery
     SellerEngagementType = Shapes::StringShape.new(name: 'SellerEngagementType')
     SellerInformation = Shapes::StructureShape.new(name: 'SellerInformation')
     SellerProfileId = Shapes::StringShape.new(name: 'SellerProfileId')
+    Specialization = Shapes::StructureShape.new(name: 'Specialization')
+    SpecializationCategory = Shapes::StructureShape.new(name: 'SpecializationCategory')
+    SpecializationDetail = Shapes::UnionShape.new(name: 'SpecializationDetail')
+    SpecializationId = Shapes::StringShape.new(name: 'SpecializationId')
+    SpecializationType = Shapes::StringShape.new(name: 'SpecializationType')
+    SpecializationTypeDetail = Shapes::StructureShape.new(name: 'SpecializationTypeDetail')
+    SpecializationTypeList = Shapes::ListShape.new(name: 'SpecializationTypeList')
     String = Shapes::StringShape.new(name: 'String')
     SupportTerm = Shapes::StructureShape.new(name: 'SupportTerm')
     TermId = Shapes::StringShape.new(name: 'TermId')
@@ -221,6 +259,30 @@ module Aws::MarketplaceDiscovery
     TermType = Shapes::StringShape.new(name: 'TermType')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TrustCenterCertificationAttribute = Shapes::StructureShape.new(name: 'TrustCenterCertificationAttribute')
+    TrustCenterCertificationSummary = Shapes::StructureShape.new(name: 'TrustCenterCertificationSummary')
+    TrustCenterCertificationSummaryList = Shapes::ListShape.new(name: 'TrustCenterCertificationSummaryList')
+    TrustCenterControl = Shapes::StructureShape.new(name: 'TrustCenterControl')
+    TrustCenterControlDescriptionString = Shapes::StringShape.new(name: 'TrustCenterControlDescriptionString')
+    TrustCenterControlDomain = Shapes::StringShape.new(name: 'TrustCenterControlDomain')
+    TrustCenterControlDomainList = Shapes::ListShape.new(name: 'TrustCenterControlDomainList')
+    TrustCenterDocumentAccessType = Shapes::StringShape.new(name: 'TrustCenterDocumentAccessType')
+    TrustCenterDocumentAttribute = Shapes::StructureShape.new(name: 'TrustCenterDocumentAttribute')
+    TrustCenterDocumentAttributeDisplayNameString = Shapes::StringShape.new(name: 'TrustCenterDocumentAttributeDisplayNameString')
+    TrustCenterDocumentAttributeValueString = Shapes::StringShape.new(name: 'TrustCenterDocumentAttributeValueString')
+    TrustCenterFaqAttribute = Shapes::StructureShape.new(name: 'TrustCenterFaqAttribute')
+    TrustCenterFaqAttributeAnswerString = Shapes::StringShape.new(name: 'TrustCenterFaqAttributeAnswerString')
+    TrustCenterProvider = Shapes::StringShape.new(name: 'TrustCenterProvider')
+    TrustCenterSource = Shapes::StructureShape.new(name: 'TrustCenterSource')
+    TrustCenterSourceDisplayNameString = Shapes::StringShape.new(name: 'TrustCenterSourceDisplayNameString')
+    TrustCenterSourceSummary = Shapes::StructureShape.new(name: 'TrustCenterSourceSummary')
+    TrustCenterSourceSummaryDisplayNameString = Shapes::StringShape.new(name: 'TrustCenterSourceSummaryDisplayNameString')
+    TrustCenterSourceSummaryList = Shapes::ListShape.new(name: 'TrustCenterSourceSummaryList')
+    TrustCenterSourceSummaryValueString = Shapes::StringShape.new(name: 'TrustCenterSourceSummaryValueString')
+    TrustCenterSourceValueString = Shapes::StringShape.new(name: 'TrustCenterSourceValueString')
+    TrustCenterSummary = Shapes::StructureShape.new(name: 'TrustCenterSummary')
+    TrustCenterUpdateAttribute = Shapes::StructureShape.new(name: 'TrustCenterUpdateAttribute')
+    TrustCenterUpdateAttributeDescriptionString = Shapes::StringShape.new(name: 'TrustCenterUpdateAttributeDescriptionString')
     TypeToFacetMap = Shapes::MapShape.new(name: 'TypeToFacetMap')
     URL = Shapes::StringShape.new(name: 'URL')
     UsageBasedPricingTerm = Shapes::StructureShape.new(name: 'UsageBasedPricingTerm')
@@ -228,7 +290,11 @@ module Aws::MarketplaceDiscovery
     UsageBasedRateCardList = Shapes::ListShape.new(name: 'UsageBasedRateCardList')
     UseCase = Shapes::StructureShape.new(name: 'UseCase')
     UseCaseEntry = Shapes::StructureShape.new(name: 'UseCaseEntry')
+    UseCaseInformation = Shapes::StructureShape.new(name: 'UseCaseInformation')
     UseCaseList = Shapes::ListShape.new(name: 'UseCaseList')
+    UseCaseSummary = Shapes::StructureShape.new(name: 'UseCaseSummary')
+    UseCaseSummaryEntry = Shapes::StructureShape.new(name: 'UseCaseSummaryEntry')
+    UseCaseSummaryList = Shapes::ListShape.new(name: 'UseCaseSummaryList')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
     ValidityTerm = Shapes::StructureShape.new(name: 'ValidityTerm')
@@ -299,6 +365,30 @@ module Aws::MarketplaceDiscovery
     ByolPricingTerm.add_member(:type, Shapes::ShapeRef.new(shape: TermType, required: true, location_name: "type"))
     ByolPricingTerm.struct_class = Types::ByolPricingTerm
 
+    CaseStudiesSummary.add_member(:case_study_count, Shapes::ShapeRef.new(shape: NonNegativeCount, required: true, location_name: "caseStudyCount"))
+    CaseStudiesSummary.struct_class = Types::CaseStudiesSummary
+
+    CaseStudy.add_member(:case_study_id, Shapes::ShapeRef.new(shape: CaseStudyId, required: true, location_name: "caseStudyId"))
+    CaseStudy.add_member(:case_study_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "caseStudyName"))
+    CaseStudy.add_member(:short_description, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "shortDescription"))
+    CaseStudy.add_member(:engagement_dates, Shapes::ShapeRef.new(shape: EngagementDates, location_name: "engagementDates"))
+    CaseStudy.add_member(:challenge, Shapes::ShapeRef.new(shape: CaseStudyChallengeString, location_name: "challenge"))
+    CaseStudy.add_member(:resolution, Shapes::ShapeRef.new(shape: CaseStudyResolutionString, location_name: "resolution"))
+    CaseStudy.add_member(:implementation_approach, Shapes::ShapeRef.new(shape: CaseStudyImplementationApproachString, location_name: "implementationApproach"))
+    CaseStudy.add_member(:outcome, Shapes::ShapeRef.new(shape: CaseStudyOutcomeString, location_name: "outcome"))
+    CaseStudy.add_member(:resources, Shapes::ShapeRef.new(shape: CaseStudyResourceList, location_name: "resources"))
+    CaseStudy.struct_class = Types::CaseStudy
+
+    CaseStudyIdList.member = Shapes::ShapeRef.new(shape: CaseStudyId)
+
+    CaseStudyResource.add_member(:content_type, Shapes::ShapeRef.new(shape: ResourceContentType, required: true, location_name: "contentType"))
+    CaseStudyResource.add_member(:value, Shapes::ShapeRef.new(shape: CaseStudyResourceValueString, required: true, location_name: "value"))
+    CaseStudyResource.add_member(:display_name, Shapes::ShapeRef.new(shape: CaseStudyResourceDisplayNameString, location_name: "displayName"))
+    CaseStudyResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: CaseStudyResourceType, required: true, location_name: "resourceType"))
+    CaseStudyResource.struct_class = Types::CaseStudyResource
+
+    CaseStudyResourceList.member = Shapes::ShapeRef.new(shape: CaseStudyResource)
+
     Category.add_member(:category_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "categoryId"))
     Category.add_member(:display_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "displayName"))
     Category.struct_class = Types::Category
@@ -313,6 +403,8 @@ module Aws::MarketplaceDiscovery
     CloudFormationFulfillmentOption.add_member(:release_notes, Shapes::ShapeRef.new(shape: String, location_name: "releaseNotes"))
     CloudFormationFulfillmentOption.add_member(:usage_instructions, Shapes::ShapeRef.new(shape: String, location_name: "usageInstructions"))
     CloudFormationFulfillmentOption.add_member(:available_from_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "availableFromTime"))
+    CloudFormationFulfillmentOption.add_member(:architecture_diagram_url, Shapes::ShapeRef.new(shape: String, location_name: "architectureDiagramUrl"))
+    CloudFormationFulfillmentOption.add_member(:deployment_template_url, Shapes::ShapeRef.new(shape: String, location_name: "deploymentTemplateUrl"))
     CloudFormationFulfillmentOption.add_member(:short_description, Shapes::ShapeRef.new(shape: CloudFormationFulfillmentOptionShortDescriptionString, location_name: "shortDescription"))
     CloudFormationFulfillmentOption.add_member(:long_description, Shapes::ShapeRef.new(shape: CloudFormationFulfillmentOptionLongDescriptionString, location_name: "longDescription"))
     CloudFormationFulfillmentOption.struct_class = Types::CloudFormationFulfillmentOption
@@ -407,6 +499,10 @@ module Aws::MarketplaceDiscovery
 
     EksAddOnOperatingSystemList.member = Shapes::ShapeRef.new(shape: EksAddOnOperatingSystem)
 
+    EngagementDates.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDate"))
+    EngagementDates.add_member(:completion_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "completionDate"))
+    EngagementDates.struct_class = Types::EngagementDates
+
     FacetTypeList.member = Shapes::ShapeRef.new(shape: SearchFacetType)
 
     FixedPercentage.add_member(:percentage_value, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "percentageValue"))
@@ -487,6 +583,7 @@ module Aws::MarketplaceDiscovery
     GetListingOutput.add_member(:seller_engagements, Shapes::ShapeRef.new(shape: SellerEngagementList, required: true, location_name: "sellerEngagements"))
     GetListingOutput.add_member(:short_description, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "shortDescription"))
     GetListingOutput.add_member(:use_cases, Shapes::ShapeRef.new(shape: UseCaseList, required: true, location_name: "useCases"))
+    GetListingOutput.add_member(:purchase_indicators, Shapes::ShapeRef.new(shape: PurchaseIndicatorList, required: true, location_name: "purchaseIndicators"))
     GetListingOutput.struct_class = Types::GetListingOutput
 
     GetOfferInput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
@@ -554,6 +651,7 @@ module Aws::MarketplaceDiscovery
     GetProductOutput.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceList, required: true, location_name: "resources"))
     GetProductOutput.add_member(:seller_engagements, Shapes::ShapeRef.new(shape: SellerEngagementList, required: true, location_name: "sellerEngagements"))
     GetProductOutput.add_member(:listing_id, Shapes::ShapeRef.new(shape: ListingId, required: true, location_name: "listingId"))
+    GetProductOutput.add_member(:purchase_indicators, Shapes::ShapeRef.new(shape: PurchaseIndicatorList, required: true, location_name: "purchaseIndicators"))
     GetProductOutput.struct_class = Types::GetProductOutput
 
     GrantItem.add_member(:dimension_key, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "dimensionKey"))
@@ -604,6 +702,18 @@ module Aws::MarketplaceDiscovery
     ListFulfillmentOptionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListFulfillmentOptionsOutput.struct_class = Types::ListFulfillmentOptionsOutput
 
+    ListListingAttributesInput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
+    ListListingAttributesInput.add_member(:listing_id, Shapes::ShapeRef.new(shape: ListingId, required: true, location_name: "listingId"))
+    ListListingAttributesInput.add_member(:attribute_types, Shapes::ShapeRef.new(shape: ListingAttributeTypeList, required: true, location_name: "attributeTypes"))
+    ListListingAttributesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListListingAttributesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListListingAttributesInput.struct_class = Types::ListListingAttributesInput
+
+    ListListingAttributesOutput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
+    ListListingAttributesOutput.add_member(:listing_attributes, Shapes::ShapeRef.new(shape: ListingAttributeResultsList, required: true, location_name: "listingAttributes"))
+    ListListingAttributesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListListingAttributesOutput.struct_class = Types::ListListingAttributesOutput
+
     ListPurchaseOptionsInput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     ListPurchaseOptionsInput.add_member(:filters, Shapes::ShapeRef.new(shape: PurchaseOptionFilterList, location_name: "filters"))
     ListPurchaseOptionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListPurchaseOptionsInputMaxResultsInteger, location_name: "maxResults"))
@@ -619,6 +729,30 @@ module Aws::MarketplaceDiscovery
     ListingAssociatedEntity.struct_class = Types::ListingAssociatedEntity
 
     ListingAssociatedEntityList.member = Shapes::ShapeRef.new(shape: ListingAssociatedEntity)
+
+    ListingAttributeResults.add_member(:case_study, Shapes::ShapeRef.new(shape: CaseStudy, location_name: "caseStudy"))
+    ListingAttributeResults.add_member(:specialization_detail, Shapes::ShapeRef.new(shape: SpecializationDetail, location_name: "specializationDetail"))
+    ListingAttributeResults.add_member(:trust_center_source, Shapes::ShapeRef.new(shape: TrustCenterSource, location_name: "trustCenterSource"))
+    ListingAttributeResults.add_member(:trust_center_certification, Shapes::ShapeRef.new(shape: TrustCenterCertificationAttribute, location_name: "trustCenterCertification"))
+    ListingAttributeResults.add_member(:trust_center_document, Shapes::ShapeRef.new(shape: TrustCenterDocumentAttribute, location_name: "trustCenterDocument"))
+    ListingAttributeResults.add_member(:trust_center_control, Shapes::ShapeRef.new(shape: TrustCenterControl, location_name: "trustCenterControl"))
+    ListingAttributeResults.add_member(:trust_center_faq, Shapes::ShapeRef.new(shape: TrustCenterFaqAttribute, location_name: "trustCenterFaq"))
+    ListingAttributeResults.add_member(:trust_center_update, Shapes::ShapeRef.new(shape: TrustCenterUpdateAttribute, location_name: "trustCenterUpdate"))
+    ListingAttributeResults.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ListingAttributeResults.add_member_subclass(:case_study, Types::ListingAttributeResults::CaseStudy)
+    ListingAttributeResults.add_member_subclass(:specialization_detail, Types::ListingAttributeResults::SpecializationDetail)
+    ListingAttributeResults.add_member_subclass(:trust_center_source, Types::ListingAttributeResults::TrustCenterSource)
+    ListingAttributeResults.add_member_subclass(:trust_center_certification, Types::ListingAttributeResults::TrustCenterCertification)
+    ListingAttributeResults.add_member_subclass(:trust_center_document, Types::ListingAttributeResults::TrustCenterDocument)
+    ListingAttributeResults.add_member_subclass(:trust_center_control, Types::ListingAttributeResults::TrustCenterControl)
+    ListingAttributeResults.add_member_subclass(:trust_center_faq, Types::ListingAttributeResults::TrustCenterFaq)
+    ListingAttributeResults.add_member_subclass(:trust_center_update, Types::ListingAttributeResults::TrustCenterUpdate)
+    ListingAttributeResults.add_member_subclass(:unknown, Types::ListingAttributeResults::Unknown)
+    ListingAttributeResults.struct_class = Types::ListingAttributeResults
+
+    ListingAttributeResultsList.member = Shapes::ShapeRef.new(shape: ListingAttributeResults)
+
+    ListingAttributeTypeList.member = Shapes::ShapeRef.new(shape: ListingAttributeType)
 
     ListingBadge.add_member(:display_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "displayName"))
     ListingBadge.add_member(:badge_type, Shapes::ShapeRef.new(shape: ListingBadgeType, required: true, location_name: "badgeType"))
@@ -647,6 +781,10 @@ module Aws::MarketplaceDiscovery
     ListingSummary.add_member(:pricing_models, Shapes::ShapeRef.new(shape: PricingModelList, required: true, location_name: "pricingModels"))
     ListingSummary.add_member(:pricing_units, Shapes::ShapeRef.new(shape: PricingUnitList, required: true, location_name: "pricingUnits"))
     ListingSummary.add_member(:associated_entities, Shapes::ShapeRef.new(shape: ListingSummaryAssociatedEntityList, required: true, location_name: "associatedEntities"))
+    ListingSummary.add_member(:trust_center_summary, Shapes::ShapeRef.new(shape: TrustCenterSummary, location_name: "trustCenterSummary"))
+    ListingSummary.add_member(:case_studies_summary, Shapes::ShapeRef.new(shape: CaseStudiesSummary, location_name: "caseStudiesSummary"))
+    ListingSummary.add_member(:use_case_summary, Shapes::ShapeRef.new(shape: UseCaseSummary, location_name: "useCaseSummary"))
+    ListingSummary.add_member(:seller_engagements, Shapes::ShapeRef.new(shape: SellerEngagementList, location_name: "sellerEngagements"))
     ListingSummary.struct_class = Types::ListingSummary
 
     ListingSummaryAssociatedEntity.add_member(:product, Shapes::ShapeRef.new(shape: ProductInformation, location_name: "product"))
@@ -787,6 +925,11 @@ module Aws::MarketplaceDiscovery
 
     PromotionalMediaList.member = Shapes::ShapeRef.new(shape: PromotionalMedia)
 
+    PurchaseIndicator.add_member(:indicator_type, Shapes::ShapeRef.new(shape: PurchaseIndicatorType, required: true, location_name: "indicatorType"))
+    PurchaseIndicator.struct_class = Types::PurchaseIndicator
+
+    PurchaseIndicatorList.member = Shapes::ShapeRef.new(shape: PurchaseIndicator)
+
     PurchaseOptionAssociatedEntity.add_member(:product, Shapes::ShapeRef.new(shape: ProductInformation, required: true, location_name: "product"))
     PurchaseOptionAssociatedEntity.add_member(:offer, Shapes::ShapeRef.new(shape: OfferInformation, required: true, location_name: "offer"))
     PurchaseOptionAssociatedEntity.add_member(:offer_set, Shapes::ShapeRef.new(shape: OfferSetInformation, location_name: "offerSet"))
@@ -827,6 +970,7 @@ module Aws::MarketplaceDiscovery
     RateCardItem.add_member(:dimension_labels, Shapes::ShapeRef.new(shape: DimensionLabelList, location_name: "dimensionLabels"))
     RateCardItem.add_member(:unit, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "unit"))
     RateCardItem.add_member(:price, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "price"))
+    RateCardItem.add_member(:regional_prices, Shapes::ShapeRef.new(shape: RegionalPriceList, required: true, location_name: "regionalPrices"))
     RateCardItem.struct_class = Types::RateCardItem
 
     RateCardList.member = Shapes::ShapeRef.new(shape: RateCardItem)
@@ -837,6 +981,13 @@ module Aws::MarketplaceDiscovery
     RecurringPaymentTerm.add_member(:billing_period, Shapes::ShapeRef.new(shape: BillingPeriodType, required: true, location_name: "billingPeriod"))
     RecurringPaymentTerm.add_member(:price, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "price"))
     RecurringPaymentTerm.struct_class = Types::RecurringPaymentTerm
+
+    RegionalPrice.add_member(:region, Shapes::ShapeRef.new(shape: RegionalPriceRegionString, required: true, location_name: "region"))
+    RegionalPrice.add_member(:display_name, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "displayName"))
+    RegionalPrice.add_member(:price, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "price"))
+    RegionalPrice.struct_class = Types::RegionalPrice
+
+    RegionalPriceList.member = Shapes::ShapeRef.new(shape: RegionalPrice)
 
     RenewalTerm.add_member(:id, Shapes::ShapeRef.new(shape: TermId, required: true, location_name: "id"))
     RenewalTerm.add_member(:type, Shapes::ShapeRef.new(shape: TermType, required: true, location_name: "type"))
@@ -870,6 +1021,21 @@ module Aws::MarketplaceDiscovery
     ReviewSummary.add_member(:review_source_summaries, Shapes::ShapeRef.new(shape: ReviewSourceSummaryList, required: true, location_name: "reviewSourceSummaries"))
     ReviewSummary.struct_class = Types::ReviewSummary
 
+    SaasCloudFormationDeploymentTemplate.add_member(:template_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "templateName"))
+    SaasCloudFormationDeploymentTemplate.add_member(:description, Shapes::ShapeRef.new(shape: SaasCloudFormationDeploymentTemplateDescriptionString, location_name: "description"))
+    SaasCloudFormationDeploymentTemplate.add_member(:default_stack_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "defaultStackName"))
+    SaasCloudFormationDeploymentTemplate.add_member(:template_url, Shapes::ShapeRef.new(shape: URL, required: true, location_name: "templateUrl"))
+    SaasCloudFormationDeploymentTemplate.add_member(:iam_policy, Shapes::ShapeRef.new(shape: SaasCloudFormationDeploymentTemplateIamPolicyString, required: true, location_name: "iamPolicy"))
+    SaasCloudFormationDeploymentTemplate.struct_class = Types::SaasCloudFormationDeploymentTemplate
+
+    SaasDeploymentTemplate.add_member(:cloud_formation_deployment_template, Shapes::ShapeRef.new(shape: SaasCloudFormationDeploymentTemplate, location_name: "cloudFormationDeploymentTemplate"))
+    SaasDeploymentTemplate.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    SaasDeploymentTemplate.add_member_subclass(:cloud_formation_deployment_template, Types::SaasDeploymentTemplate::CloudFormationDeploymentTemplate)
+    SaasDeploymentTemplate.add_member_subclass(:unknown, Types::SaasDeploymentTemplate::Unknown)
+    SaasDeploymentTemplate.struct_class = Types::SaasDeploymentTemplate
+
+    SaasDeploymentTemplateList.member = Shapes::ShapeRef.new(shape: SaasDeploymentTemplate)
+
     SaasFulfillmentOption.add_member(:fulfillment_option_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fulfillmentOptionId"))
     SaasFulfillmentOption.add_member(:fulfillment_option_type, Shapes::ShapeRef.new(shape: FulfillmentOptionType, required: true, location_name: "fulfillmentOptionType"))
     SaasFulfillmentOption.add_member(:fulfillment_option_display_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fulfillmentOptionDisplayName"))
@@ -878,6 +1044,7 @@ module Aws::MarketplaceDiscovery
     SaasFulfillmentOption.add_member(:available_from_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "availableFromTime"))
     SaasFulfillmentOption.add_member(:launch_url, Shapes::ShapeRef.new(shape: URL, location_name: "launchUrl"))
     SaasFulfillmentOption.add_member(:quick_launch, Shapes::ShapeRef.new(shape: SaasQuickLaunchStatus, required: true, location_name: "quickLaunch"))
+    SaasFulfillmentOption.add_member(:deployment_templates, Shapes::ShapeRef.new(shape: SaasDeploymentTemplateList, required: true, location_name: "deploymentTemplates"))
     SaasFulfillmentOption.struct_class = Types::SaasFulfillmentOption
 
     SageMakerAlgorithmFulfillmentOption.add_member(:fulfillment_option_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fulfillmentOptionId"))
@@ -968,6 +1135,32 @@ module Aws::MarketplaceDiscovery
     SellerInformation.add_member(:display_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "displayName"))
     SellerInformation.struct_class = Types::SellerInformation
 
+    Specialization.add_member(:specialization_id, Shapes::ShapeRef.new(shape: SpecializationId, required: true, location_name: "specializationId"))
+    Specialization.add_member(:specialization_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "specializationName"))
+    Specialization.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
+    Specialization.add_member(:specialization_types, Shapes::ShapeRef.new(shape: SpecializationTypeList, required: true, location_name: "specializationTypes"))
+    Specialization.add_member(:case_study_ids, Shapes::ShapeRef.new(shape: CaseStudyIdList, location_name: "caseStudyIds"))
+    Specialization.struct_class = Types::Specialization
+
+    SpecializationCategory.add_member(:specialization_category_id, Shapes::ShapeRef.new(shape: SpecializationId, required: true, location_name: "specializationCategoryId"))
+    SpecializationCategory.add_member(:specialization_category_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "specializationCategoryName"))
+    SpecializationCategory.add_member(:parent_specialization_id, Shapes::ShapeRef.new(shape: SpecializationId, required: true, location_name: "parentSpecializationId"))
+    SpecializationCategory.struct_class = Types::SpecializationCategory
+
+    SpecializationDetail.add_member(:specialization, Shapes::ShapeRef.new(shape: Specialization, location_name: "specialization"))
+    SpecializationDetail.add_member(:specialization_category, Shapes::ShapeRef.new(shape: SpecializationCategory, location_name: "specializationCategory"))
+    SpecializationDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    SpecializationDetail.add_member_subclass(:specialization, Types::SpecializationDetail::Specialization)
+    SpecializationDetail.add_member_subclass(:specialization_category, Types::SpecializationDetail::SpecializationCategory)
+    SpecializationDetail.add_member_subclass(:unknown, Types::SpecializationDetail::Unknown)
+    SpecializationDetail.struct_class = Types::SpecializationDetail
+
+    SpecializationTypeDetail.add_member(:specialization_type, Shapes::ShapeRef.new(shape: SpecializationType, required: true, location_name: "specializationType"))
+    SpecializationTypeDetail.add_member(:display_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "displayName"))
+    SpecializationTypeDetail.struct_class = Types::SpecializationTypeDetail
+
+    SpecializationTypeList.member = Shapes::ShapeRef.new(shape: SpecializationTypeDetail)
+
     SupportTerm.add_member(:id, Shapes::ShapeRef.new(shape: TermId, required: true, location_name: "id"))
     SupportTerm.add_member(:type, Shapes::ShapeRef.new(shape: TermType, required: true, location_name: "type"))
     SupportTerm.add_member(:refund_policy, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "refundPolicy"))
@@ -983,6 +1176,61 @@ module Aws::MarketplaceDiscovery
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TrustCenterCertificationAttribute.add_member(:certification_type, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "certificationType"))
+    TrustCenterCertificationAttribute.add_member(:display_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "displayName"))
+    TrustCenterCertificationAttribute.add_member(:logo_url, Shapes::ShapeRef.new(shape: URL, required: true, location_name: "logoUrl"))
+    TrustCenterCertificationAttribute.struct_class = Types::TrustCenterCertificationAttribute
+
+    TrustCenterCertificationSummary.add_member(:certification_type, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "certificationType"))
+    TrustCenterCertificationSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "displayName"))
+    TrustCenterCertificationSummary.add_member(:logo_url, Shapes::ShapeRef.new(shape: URL, required: true, location_name: "logoUrl"))
+    TrustCenterCertificationSummary.struct_class = Types::TrustCenterCertificationSummary
+
+    TrustCenterCertificationSummaryList.member = Shapes::ShapeRef.new(shape: TrustCenterCertificationSummary)
+
+    TrustCenterControl.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "name"))
+    TrustCenterControl.add_member(:description, Shapes::ShapeRef.new(shape: TrustCenterControlDescriptionString, location_name: "description"))
+    TrustCenterControl.add_member(:domains, Shapes::ShapeRef.new(shape: TrustCenterControlDomainList, required: true, location_name: "domains"))
+    TrustCenterControl.struct_class = Types::TrustCenterControl
+
+    TrustCenterControlDomainList.member = Shapes::ShapeRef.new(shape: TrustCenterControlDomain)
+
+    TrustCenterDocumentAttribute.add_member(:content_type, Shapes::ShapeRef.new(shape: ResourceContentType, required: true, location_name: "contentType"))
+    TrustCenterDocumentAttribute.add_member(:value, Shapes::ShapeRef.new(shape: TrustCenterDocumentAttributeValueString, required: true, location_name: "value"))
+    TrustCenterDocumentAttribute.add_member(:display_name, Shapes::ShapeRef.new(shape: TrustCenterDocumentAttributeDisplayNameString, location_name: "displayName"))
+    TrustCenterDocumentAttribute.add_member(:subject_area, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "subjectArea"))
+    TrustCenterDocumentAttribute.add_member(:access_type, Shapes::ShapeRef.new(shape: TrustCenterDocumentAccessType, required: true, location_name: "accessType"))
+    TrustCenterDocumentAttribute.struct_class = Types::TrustCenterDocumentAttribute
+
+    TrustCenterFaqAttribute.add_member(:question, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "question"))
+    TrustCenterFaqAttribute.add_member(:answer, Shapes::ShapeRef.new(shape: TrustCenterFaqAttributeAnswerString, required: true, location_name: "answer"))
+    TrustCenterFaqAttribute.add_member(:subject_area, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "subjectArea"))
+    TrustCenterFaqAttribute.struct_class = Types::TrustCenterFaqAttribute
+
+    TrustCenterSource.add_member(:content_type, Shapes::ShapeRef.new(shape: ResourceContentType, required: true, location_name: "contentType"))
+    TrustCenterSource.add_member(:value, Shapes::ShapeRef.new(shape: TrustCenterSourceValueString, required: true, location_name: "value"))
+    TrustCenterSource.add_member(:display_name, Shapes::ShapeRef.new(shape: TrustCenterSourceDisplayNameString, location_name: "displayName"))
+    TrustCenterSource.add_member(:provider, Shapes::ShapeRef.new(shape: TrustCenterProvider, required: true, location_name: "provider"))
+    TrustCenterSource.struct_class = Types::TrustCenterSource
+
+    TrustCenterSourceSummary.add_member(:content_type, Shapes::ShapeRef.new(shape: ResourceContentType, required: true, location_name: "contentType"))
+    TrustCenterSourceSummary.add_member(:value, Shapes::ShapeRef.new(shape: TrustCenterSourceSummaryValueString, required: true, location_name: "value"))
+    TrustCenterSourceSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: TrustCenterSourceSummaryDisplayNameString, location_name: "displayName"))
+    TrustCenterSourceSummary.add_member(:provider, Shapes::ShapeRef.new(shape: TrustCenterProvider, required: true, location_name: "provider"))
+    TrustCenterSourceSummary.struct_class = Types::TrustCenterSourceSummary
+
+    TrustCenterSourceSummaryList.member = Shapes::ShapeRef.new(shape: TrustCenterSourceSummary)
+
+    TrustCenterSummary.add_member(:source_summaries, Shapes::ShapeRef.new(shape: TrustCenterSourceSummaryList, required: true, location_name: "sourceSummaries"))
+    TrustCenterSummary.add_member(:certification_summaries, Shapes::ShapeRef.new(shape: TrustCenterCertificationSummaryList, required: true, location_name: "certificationSummaries"))
+    TrustCenterSummary.add_member(:total_certification_count, Shapes::ShapeRef.new(shape: NonNegativeCount, required: true, location_name: "totalCertificationCount"))
+    TrustCenterSummary.struct_class = Types::TrustCenterSummary
+
+    TrustCenterUpdateAttribute.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "title"))
+    TrustCenterUpdateAttribute.add_member(:description, Shapes::ShapeRef.new(shape: TrustCenterUpdateAttributeDescriptionString, required: true, location_name: "description"))
+    TrustCenterUpdateAttribute.add_member(:published_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "publishedTime"))
+    TrustCenterUpdateAttribute.struct_class = Types::TrustCenterUpdateAttribute
 
     TypeToFacetMap.key = Shapes::ShapeRef.new(shape: SearchFacetType)
     TypeToFacetMap.value = Shapes::ShapeRef.new(shape: ListingFacetList)
@@ -1006,7 +1254,19 @@ module Aws::MarketplaceDiscovery
     UseCaseEntry.add_member(:use_case, Shapes::ShapeRef.new(shape: UseCase, required: true, location_name: "useCase"))
     UseCaseEntry.struct_class = Types::UseCaseEntry
 
+    UseCaseInformation.add_member(:display_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "displayName"))
+    UseCaseInformation.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "value"))
+    UseCaseInformation.struct_class = Types::UseCaseInformation
+
     UseCaseList.member = Shapes::ShapeRef.new(shape: UseCaseEntry)
+
+    UseCaseSummary.add_member(:use_cases, Shapes::ShapeRef.new(shape: UseCaseSummaryList, required: true, location_name: "useCases"))
+    UseCaseSummary.struct_class = Types::UseCaseSummary
+
+    UseCaseSummaryEntry.add_member(:use_case, Shapes::ShapeRef.new(shape: UseCaseInformation, required: true, location_name: "useCase"))
+    UseCaseSummaryEntry.struct_class = Types::UseCaseSummaryEntry
+
+    UseCaseSummaryList.member = Shapes::ShapeRef.new(shape: UseCaseSummaryEntry)
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "reason"))
@@ -1122,6 +1382,25 @@ module Aws::MarketplaceDiscovery
         o.http_request_uri = "/2026-02-05/listFulfillmentOptions"
         o.input = Shapes::ShapeRef.new(shape: ListFulfillmentOptionsInput)
         o.output = Shapes::ShapeRef.new(shape: ListFulfillmentOptionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_listing_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListListingAttributes"
+        o.http_method = "POST"
+        o.http_request_uri = "/2026-02-05/listListingAttributes"
+        o.input = Shapes::ShapeRef.new(shape: ListListingAttributesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListListingAttributesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

@@ -1856,6 +1856,7 @@ module Aws
         def forms_output: () -> ::Array[Types::FormOutput]
         def read_only_forms_output: () -> ::Array[Types::FormOutput]
         def latest_time_series_data_point_forms_output: () -> ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
+        def ownership_transfer: () -> Types::AssetOwnershipTransfer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_asset-instance_method
       def get_asset: (
@@ -3928,6 +3929,21 @@ module Aws
                                ) -> _UpdateAssetFilterResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssetFilterResponseSuccess
 
+      interface _UpdateAssetOwnerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssetOwnerOutput]
+        def id: () -> ::String
+        def revision: () -> ::String
+        def ownership_transfer: () -> Types::AssetOwnershipTransfer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_asset_owner-instance_method
+      def update_asset_owner: (
+                                domain_identifier: ::String,
+                                identifier: ::String,
+                                target_project_identifier: ::String,
+                                ?client_token: ::String
+                              ) -> _UpdateAssetOwnerResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssetOwnerResponseSuccess
+
       interface _UpdateConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectionOutput]
         def configurations: () -> ::Array[Types::Configuration]
@@ -4460,7 +4476,8 @@ module Aws
                             ?user_parameters: Array[
                               Params::environment_configuration_user_parameter
                             ],
-                            ?project_profile_version: ::String
+                            ?project_profile_version: ::String,
+                            ?project_profile_action: ("DISASSOCIATE")
                           ) -> _UpdateProjectResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProjectResponseSuccess
 

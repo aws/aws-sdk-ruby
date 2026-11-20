@@ -28,6 +28,7 @@ module Aws::ComputeOptimizerAutomation
   #
   # ## Error Classes
   # * {AccessDeniedException}
+  # * {ConflictException}
   # * {ForbiddenException}
   # * {IdempotencyTokenInUseException}
   # * {IdempotentParameterMismatchException}
@@ -51,6 +52,21 @@ module Aws::ComputeOptimizerAutomation
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ComputeOptimizerAutomation::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ComputeOptimizerAutomation::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

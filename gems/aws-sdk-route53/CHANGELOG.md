@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.154.0 (2026-11-20)
+------------------
+
+* Feature - Amazon Route 53 support for advanced hosted zones. Including change guardrails, public dns fallback, change history. Also support for AZAffinityRouting.
+
 1.153.0 (2026-11-19)
 ------------------
 

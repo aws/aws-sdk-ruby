@@ -88,6 +88,24 @@ module Aws::AgentRegistryControl
       SENSITIVE: []
     end
 
+    class AssociatePublisherRequest
+      attr_accessor record_arn: ::String
+      attr_accessor publisher_arn: ::String
+      attr_accessor subdomain: ::String
+      attr_accessor categories: ::Array[::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociatePublisherResponse
+      attr_accessor record_arn: ::String
+      attr_accessor public_identifier: ::String
+      attr_accessor publisher: ::String
+      attr_accessor status: ("PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "SUSPENDED")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
     class AuthorizationData
       attr_accessor oauth2: Types::OAuth2AuthorizationData
       attr_accessor unknown: untyped
@@ -148,12 +166,32 @@ module Aws::AgentRegistryControl
       SENSITIVE: []
     end
 
+    class CreatePublisherRequest
+      attr_accessor value: Types::Identifier
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePublisherResponse
+      attr_accessor value: Types::Identifier
+      attr_accessor identifier_type: ("DOMAIN")
+      attr_accessor status: ("ACTION_REQUIRED" | "ACTIVE" | "FAILED" | "SUSPENDED" | "DELETING")
+      attr_accessor status_reason: ::String
+      attr_accessor domain_challenge: Types::DomainChallenge
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor publisher_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateRegistryRecordRequest
       attr_accessor registry_id: ::String
       attr_accessor name: ::String
       attr_accessor display_name: ::String
       attr_accessor description: ::String
-      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY" | "WEB_BOT")
       attr_accessor descriptors: Types::Descriptors
       attr_accessor artifact: Types::RegistryRecordArtifactUpload
       attr_accessor record_version: ::String
@@ -218,6 +256,11 @@ module Aws::AgentRegistryControl
       SENSITIVE: [:default_schema]
     end
 
+    class DeletePublisherRequest
+      attr_accessor publisher_arn: ::String
+      SENSITIVE: []
+    end
+
     class DeleteRegistryRecordRequest
       attr_accessor registry_id: ::String
       attr_accessor record_id: ::String
@@ -234,6 +277,11 @@ module Aws::AgentRegistryControl
 
     class DeleteRegistryResponse
       attr_accessor status: ("CREATING" | "READY" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class DependencyException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -255,6 +303,12 @@ module Aws::AgentRegistryControl
       attr_accessor custom: Types::CustomDescriptor
       attr_accessor http: Types::HttpDescriptor
       attr_accessor agui: Types::AgUiDescriptor
+      attr_accessor signature_agent_card: Types::SignatureAgentCardDescriptor
+      SENSITIVE: []
+    end
+
+    class DisassociatePublisherRequest
+      attr_accessor record_arn: ::String
       SENSITIVE: []
     end
 
@@ -264,8 +318,19 @@ module Aws::AgentRegistryControl
       SENSITIVE: []
     end
 
+    class DomainChallenge
+      attr_accessor record_name: ::String
+      attr_accessor record_value: ::String
+      SENSITIVE: []
+    end
+
     class EncryptionConfiguration
       attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPublisherRequest
+      attr_accessor publisher_arn: ::String
       SENSITIVE: []
     end
 
@@ -282,7 +347,7 @@ module Aws::AgentRegistryControl
       attr_accessor name: ::String
       attr_accessor display_name: ::String
       attr_accessor description: ::String
-      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY" | "WEB_BOT")
       attr_accessor descriptors: Types::Descriptors
       attr_accessor record_version: ::String
       attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "CREATE_PENDING_AUTH" | "UPDATE_PENDING_AUTH")
@@ -333,8 +398,44 @@ module Aws::AgentRegistryControl
       SENSITIVE: []
     end
 
+    class Identifier
+      attr_accessor domain: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Domain < Identifier
+      end
+      class Unknown < Identifier
+      end
+    end
+
     class InternalServerException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListPublisherAssociationsRequest
+      attr_accessor publisher_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPublisherAssociationsResponse
+      attr_accessor items: ::Array[Types::PublisherAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPublishersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPublishersResponse
+      attr_accessor items: ::Array[Types::PublisherSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -447,8 +548,41 @@ module Aws::AgentRegistryControl
       SENSITIVE: []
     end
 
+    class Publisher
+      attr_accessor value: Types::Identifier
+      attr_accessor identifier_type: ("DOMAIN")
+      attr_accessor status: ("ACTION_REQUIRED" | "ACTIVE" | "FAILED" | "SUSPENDED" | "DELETING")
+      attr_accessor status_reason: ::String
+      attr_accessor domain_challenge: Types::DomainChallenge
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor publisher_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PublisherAssociation
+      attr_accessor record_arn: ::String
+      attr_accessor public_identifier: ::String
+      attr_accessor publisher: ::String
+      attr_accessor status: ("PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "SUSPENDED")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class PublisherSummary
+      attr_accessor value: Types::Identifier
+      attr_accessor identifier_type: ("DOMAIN")
+      attr_accessor status: ("ACTION_REQUIRED" | "ACTIVE" | "FAILED" | "SUSPENDED" | "DELETING")
+      attr_accessor created_at: ::Time
+      attr_accessor publisher_arn: ::String
+      attr_accessor association_count: ::Integer
+      attr_accessor pending_association_approval_count: ::Integer
+      SENSITIVE: []
+    end
+
     class RecordTypeSchemaOverride
-      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY" | "WEB_BOT")
       attr_accessor schema: ::String
       SENSITIVE: [:schema]
     end
@@ -520,7 +654,7 @@ module Aws::AgentRegistryControl
       attr_accessor name: ::String
       attr_accessor display_name: ::String
       attr_accessor description: ::String
-      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY" | "WEB_BOT")
       attr_accessor record_version: ::String
       attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "CREATE_PENDING_AUTH" | "UPDATE_PENDING_AUTH")
       attr_accessor created_at: ::Time
@@ -594,6 +728,19 @@ module Aws::AgentRegistryControl
       SENSITIVE: []
     end
 
+    class SignatureAgentCardAdditionalData
+      attr_accessor category: ("advertising" | "archiver" | "content_fetcher" | "email_client" | "http_library" | "link_checker" | "miscellaneous" | "monitoring" | "page_preview" | "scraping_framework" | "search_engine" | "security" | "seo" | "social_media" | "ai_training" | "ai_search" | "ai_assistant" | "ai_content_optimization")
+      SENSITIVE: []
+    end
+
+    class SignatureAgentCardDescriptor
+      attr_accessor data: ::String
+      attr_accessor data_schema_version: ::String
+      attr_accessor source: Types::DescriptorSource
+      attr_accessor additional_data: Types::SignatureAgentCardAdditionalData
+      SENSITIVE: [:data]
+    end
+
     class SourceDetails
       attr_accessor agentcore_runtime: Types::AgentCoreRuntimeSourceDetails
       attr_accessor agentcore_gateway: Types::AgentCoreGatewaySourceDetails
@@ -646,13 +793,23 @@ module Aws::AgentRegistryControl
     class UntagResourceResponse < Aws::EmptyStructure
     end
 
+    class UpdatePublisherAssociationApprovalStatusRequest
+      attr_accessor record_arn: ::String
+      attr_accessor approval_status: ("APPROVED" | "REJECTED")
+      attr_accessor approval_status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePublisherAssociationApprovalStatusResponse < Aws::EmptyStructure
+    end
+
     class UpdateRegistryRecordRequest
       attr_accessor registry_id: ::String
       attr_accessor record_id: ::String
       attr_accessor name: ::String
       attr_accessor display_name: Types::UpdatedDisplayName
       attr_accessor description: Types::UpdatedDescription
-      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY" | "WEB_BOT")
       attr_accessor descriptors: Types::UpdatedDescriptors
       attr_accessor artifact: Types::UpdatedRegistryRecordArtifact
       attr_accessor record_version: ::String
@@ -670,7 +827,7 @@ module Aws::AgentRegistryControl
       attr_accessor name: ::String
       attr_accessor display_name: ::String
       attr_accessor description: ::String
-      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY" | "WEB_BOT")
       attr_accessor descriptors: Types::Descriptors
       attr_accessor record_version: ::String
       attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "CREATE_PENDING_AUTH" | "UPDATE_PENDING_AUTH")
@@ -821,6 +978,11 @@ module Aws::AgentRegistryControl
       SENSITIVE: []
     end
 
+    class UpdatedBotCategory
+      attr_accessor optional_value: ("advertising" | "archiver" | "content_fetcher" | "email_client" | "http_library" | "link_checker" | "miscellaneous" | "monitoring" | "page_preview" | "scraping_framework" | "search_engine" | "security" | "seo" | "social_media" | "ai_training" | "ai_search" | "ai_assistant" | "ai_content_optimization")
+      SENSITIVE: []
+    end
+
     class UpdatedCustomDescriptor
       attr_accessor optional_value: Types::UpdatedCustomDescriptorFields
       SENSITIVE: []
@@ -873,6 +1035,7 @@ module Aws::AgentRegistryControl
       attr_accessor custom: Types::UpdatedCustomDescriptor
       attr_accessor http: Types::UpdatedHttpDescriptor
       attr_accessor agui: Types::UpdatedAgUiDescriptor
+      attr_accessor signature_agent_card: Types::UpdatedSignatureAgentCardDescriptor
       SENSITIVE: []
     end
 
@@ -932,6 +1095,47 @@ module Aws::AgentRegistryControl
 
     class UpdatedRegistryRecordArtifact
       attr_accessor optional_value: Types::RegistryRecordArtifactUpload
+      SENSITIVE: []
+    end
+
+    class UpdatedSignatureAgentCardAdditionalData
+      attr_accessor optional_value: Types::UpdatedSignatureAgentCardAdditionalDataFields
+      SENSITIVE: []
+    end
+
+    class UpdatedSignatureAgentCardAdditionalDataFields
+      attr_accessor category: Types::UpdatedBotCategory
+      SENSITIVE: []
+    end
+
+    class UpdatedSignatureAgentCardDescriptor
+      attr_accessor optional_value: Types::UpdatedSignatureAgentCardDescriptorFields
+      SENSITIVE: []
+    end
+
+    class UpdatedSignatureAgentCardDescriptorFields
+      attr_accessor data: Types::UpdatedDescriptorData
+      attr_accessor data_schema_version: Types::UpdatedDataSchemaVersion
+      attr_accessor source: Types::UpdatedDescriptorSource
+      attr_accessor additional_data: Types::UpdatedSignatureAgentCardAdditionalData
+      SENSITIVE: []
+    end
+
+    class ValidatePublisherRequest
+      attr_accessor publisher_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ValidatePublisherResponse
+      attr_accessor value: Types::Identifier
+      attr_accessor identifier_type: ("DOMAIN")
+      attr_accessor status: ("ACTION_REQUIRED" | "ACTIVE" | "FAILED" | "SUSPENDED" | "DELETING")
+      attr_accessor status_reason: ::String
+      attr_accessor domain_challenge: Types::DomainChallenge
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor publisher_arn: ::String
       SENSITIVE: []
     end
 

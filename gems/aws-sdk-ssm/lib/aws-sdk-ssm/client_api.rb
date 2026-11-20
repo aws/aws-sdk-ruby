@@ -179,6 +179,8 @@ module Aws::SSM
     CloudConnectorMaxResults = Shapes::IntegerShape.new(name: 'CloudConnectorMaxResults')
     CloudConnectorSummary = Shapes::StructureShape.new(name: 'CloudConnectorSummary')
     CloudConnectorSummaryList = Shapes::ListShape.new(name: 'CloudConnectorSummaryList')
+    CloudProvider = Shapes::StringShape.new(name: 'CloudProvider')
+    CloudProviderList = Shapes::ListShape.new(name: 'CloudProviderList')
     CloudWatchLogGroupName = Shapes::StringShape.new(name: 'CloudWatchLogGroupName')
     CloudWatchOutputConfig = Shapes::StructureShape.new(name: 'CloudWatchOutputConfig')
     CloudWatchOutputEnabled = Shapes::BooleanShape.new(name: 'CloudWatchOutputEnabled')
@@ -1803,6 +1805,8 @@ module Aws::SSM
 
     CloudConnectorSummaryList.member = Shapes::ShapeRef.new(shape: CloudConnectorSummary)
 
+    CloudProviderList.member = Shapes::ShapeRef.new(shape: CloudProvider)
+
     CloudWatchOutputConfig.add_member(:cloud_watch_log_group_name, Shapes::ShapeRef.new(shape: CloudWatchLogGroupName, location_name: "CloudWatchLogGroupName"))
     CloudWatchOutputConfig.add_member(:cloud_watch_output_enabled, Shapes::ShapeRef.new(shape: CloudWatchOutputEnabled, location_name: "CloudWatchOutputEnabled"))
     CloudWatchOutputConfig.struct_class = Types::CloudWatchOutputConfig
@@ -2038,6 +2042,7 @@ module Aws::SSM
     CreateDocumentRequest.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
     CreateDocumentRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, location_name: "TargetType"))
     CreateDocumentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateDocumentRequest.add_member(:cloud_providers, Shapes::ShapeRef.new(shape: CloudProviderList, location_name: "CloudProviders"))
     CreateDocumentRequest.struct_class = Types::CreateDocumentRequest
 
     CreateDocumentResult.add_member(:document_description, Shapes::ShapeRef.new(shape: DocumentDescription, location_name: "DocumentDescription"))
@@ -2626,6 +2631,7 @@ module Aws::SSM
     DocumentDescription.add_member(:review_status, Shapes::ShapeRef.new(shape: ReviewStatus, location_name: "ReviewStatus"))
     DocumentDescription.add_member(:category, Shapes::ShapeRef.new(shape: CategoryList, location_name: "Category"))
     DocumentDescription.add_member(:category_enum, Shapes::ShapeRef.new(shape: CategoryEnumList, location_name: "CategoryEnum"))
+    DocumentDescription.add_member(:cloud_providers, Shapes::ShapeRef.new(shape: CloudProviderList, location_name: "CloudProviders"))
     DocumentDescription.struct_class = Types::DocumentDescription
 
     DocumentFilter.add_member(:key, Shapes::ShapeRef.new(shape: DocumentFilterKey, required: true, location_name: "key"))
@@ -2649,6 +2655,7 @@ module Aws::SSM
     DocumentIdentifier.add_member(:requires, Shapes::ShapeRef.new(shape: DocumentRequiresList, location_name: "Requires"))
     DocumentIdentifier.add_member(:review_status, Shapes::ShapeRef.new(shape: ReviewStatus, location_name: "ReviewStatus"))
     DocumentIdentifier.add_member(:author, Shapes::ShapeRef.new(shape: DocumentAuthor, location_name: "Author"))
+    DocumentIdentifier.add_member(:cloud_providers, Shapes::ShapeRef.new(shape: CloudProviderList, location_name: "CloudProviders"))
     DocumentIdentifier.struct_class = Types::DocumentIdentifier
 
     DocumentIdentifierList.member = Shapes::ShapeRef.new(shape: DocumentIdentifier)
@@ -2715,6 +2722,7 @@ module Aws::SSM
     DocumentVersionInfo.add_member(:status, Shapes::ShapeRef.new(shape: DocumentStatus, location_name: "Status"))
     DocumentVersionInfo.add_member(:status_information, Shapes::ShapeRef.new(shape: DocumentStatusInformation, location_name: "StatusInformation"))
     DocumentVersionInfo.add_member(:review_status, Shapes::ShapeRef.new(shape: ReviewStatus, location_name: "ReviewStatus"))
+    DocumentVersionInfo.add_member(:cloud_providers, Shapes::ShapeRef.new(shape: CloudProviderList, location_name: "CloudProviders"))
     DocumentVersionInfo.struct_class = Types::DocumentVersionInfo
 
     DocumentVersionLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -5144,6 +5152,7 @@ module Aws::SSM
     UpdateDocumentRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     UpdateDocumentRequest.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
     UpdateDocumentRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, location_name: "TargetType"))
+    UpdateDocumentRequest.add_member(:cloud_providers, Shapes::ShapeRef.new(shape: CloudProviderList, location_name: "CloudProviders"))
     UpdateDocumentRequest.struct_class = Types::UpdateDocumentRequest
 
     UpdateDocumentResult.add_member(:document_description, Shapes::ShapeRef.new(shape: DocumentDescription, location_name: "DocumentDescription"))

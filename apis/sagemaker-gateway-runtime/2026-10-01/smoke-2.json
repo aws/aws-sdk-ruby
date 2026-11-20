@@ -1,0 +1,23 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "InvokeGlobalInferenceGatewayUnknownGatewayNotFound",
+    "operationName" : "InvokeGlobalInferenceGateway",
+    "input" : {
+      "GatewayId" : "smoketestnonexistentgateway",
+      "ContentType" : "application/json",
+      "Body" : "{\"model\":\"smoke-test\",\"messages\":[]}"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

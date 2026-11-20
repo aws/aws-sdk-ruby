@@ -1059,10 +1059,6 @@ module Aws::EC2
     #
     # @!attribute [rw] service_managed
     #   The service that manages the elastic IP address.
-    #
-    #   <note markdown="1"> The only option supported today is `alb`.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -49904,7 +49900,15 @@ module Aws::EC2
     #
     #   * Elastic IP addresses
     #
-    #   ^
+    #   * Application Load Balancers
+    #
+    #   * Amazon RDS
+    #
+    #   * NAT gateways in regional availability mode
+    #
+    #   * Lambda Network Connector
+    #
+    #   * Automated Internet Firewall
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -53344,6 +53348,29 @@ module Aws::EC2
       :deadline,
       :resource,
       :use_long_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the Automated Internet Firewall that inspects traffic for an
+    # internet gateway or egress-only internet gateway route.
+    #
+    # @!attribute [rw] firewall_arn
+    #   The ARN of the firewall that inspects traffic for this route.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the firewall that inspects traffic for this route.
+    #   Uses the same values as
+    #   `NetworkFirewallAssociation$firewallOnboardingStatus`: `active`,
+    #   `disabling`, or `pending`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IgwFirewall AWS API Documentation
+    #
+    class IgwFirewall < Struct.new(
+      :firewall_arn,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -60905,7 +60932,15 @@ module Aws::EC2
     #
     #   * Elastic IP addresses
     #
-    #   ^
+    #   * Application Load Balancers
+    #
+    #   * Amazon RDS
+    #
+    #   * NAT gateways in regional availability mode
+    #
+    #   * Lambda Network Connector
+    #
+    #   * Automated Internet Firewall
     #   @return [String]
     #
     # @!attribute [rw] allocation_rules
@@ -69100,7 +69135,15 @@ module Aws::EC2
     #
     #   * Elastic IP addresses
     #
-    #   ^
+    #   * Application Load Balancers
+    #
+    #   * Amazon RDS
+    #
+    #   * NAT gateways in regional availability mode
+    #
+    #   * Lambda Network Connector
+    #
+    #   * Automated Internet Firewall
     #   @return [String]
     #
     # @!attribute [rw] allocation_rules
@@ -74422,6 +74465,43 @@ module Aws::EC2
       :maximum_ena_queue_count,
       :maximum_ena_queue_count_per_interface,
       :interface_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Automated Internet Firewall that inspects traffic between
+    # a VPC and its internet gateway or egress-only internet gateway.
+    #
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_onboarding_status
+    #   The status of the firewall for the VPC. Possible values:
+    #
+    #   * `active`: The firewall inspects traffic for the VPC.
+    #
+    #   * `disabling`: AWS is removing the firewall from the VPC.
+    #
+    #   * `pending`: AWS is setting up the firewall for the VPC. The
+    #     firewall might not inspect traffic yet.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_mode
+    #   The mode of the firewall. Possible values:
+    #
+    #   * `enforce`: The firewall applies its policy to traffic.
+    #
+    #   * `monitor`: The firewall logs traffic that its policy would act on,
+    #     but doesn't block it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkFirewallAssociation AWS API Documentation
+    #
+    class NetworkFirewallAssociation < Struct.new(
+      :firewall_arn,
+      :firewall_onboarding_status,
+      :firewall_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -82530,6 +82610,14 @@ module Aws::EC2
     #   into VPC route tables.
     #   @return [String]
     #
+    # @!attribute [rw] igw_firewall
+    #   Information about the Automated Internet Firewall that inspects
+    #   traffic for this route. The response includes this value only for
+    #   routes that target an internet gateway or egress-only internet
+    #   gateway in a VPC that has a firewall. The route target remains the
+    #   internet gateway or egress-only internet gateway.
+    #   @return [Types::IgwFirewall]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Route AWS API Documentation
     #
     class Route < Struct.new(
@@ -82550,7 +82638,8 @@ module Aws::EC2
       :vpc_peering_connection_id,
       :core_network_arn,
       :odb_network_arn,
-      :ip_address)
+      :ip_address,
+      :igw_firewall)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -88833,6 +88922,39 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/evs/latest/APIReference/Welcome.html
     #   @return [String]
     #
+    # @!attribute [rw] network_firewall_connectivity_type
+    #   The internet connectivity treatment that the Automated Internet
+    #   Firewall applies to the subnet. The response includes this value
+    #   only if the subnet is in a VPC that has a firewall. Possible values:
+    #
+    #   * `az-unsupported`: The firewall doesn't support the subnet's
+    #     Availability Zone, so it doesn't inspect traffic for the subnet.
+    #
+    #   * `bidirectional`: Provides bidirectional internet connectivity to
+    #     every network interface that has a public IP association. Any
+    #     network interface without a public IP cannot communicate with the
+    #     internet unless a NAT device is explicitly inserted in the path.
+    #     All inbound and outbound traffic is inspected against your
+    #     firewall rules.
+    #
+    #   * `exclude`: The firewall doesn't inspect traffic for the subnet.
+    #     The subnet bypasses the firewall, and its traffic passes directly
+    #     through the internet gateway.
+    #
+    #   * `flexible`: Sets the connectivity for each network interface in
+    #     the subnet based on whether it is associated with a public IP
+    #     address. A network interface with a public IP address gets
+    #     bidirectional internet connectivity. A network interface without a
+    #     public IP address gets outbound-only connectivity. All traffic is
+    #     inspected against your firewall rules.
+    #
+    #   * `outbound-only`: Provides egress-only connectivity for all network
+    #     interfaces in the subnet. All outbound traffic and inbound
+    #     responses are inspected against your firewall rules. Unsolicited
+    #     inbound connections are dropped. For IPv4 traffic, the firewall
+    #     performs NAT.
+    #   @return [String]
+    #
     # @!attribute [rw] subnet_id
     #   The ID of the subnet.
     #   @return [String]
@@ -88902,6 +89024,7 @@ module Aws::EC2
       :private_dns_name_options_on_launch,
       :block_public_access_states,
       :type,
+      :network_firewall_connectivity_type,
       :subnet_id,
       :state,
       :vpc_id,
@@ -94879,6 +95002,14 @@ module Aws::EC2
     #   The state of VPC Block Public Access (BPA).
     #   @return [Types::BlockPublicAccessStates]
     #
+    # @!attribute [rw] network_firewall_associations
+    #   Information about the firewall associations for the VPC. Automated
+    #   Internet Firewall, a feature of Amazon Virtual Private Cloud (Amazon
+    #   VPC), inspects traffic between the VPC and its internet gateway or
+    #   egress-only internet gateway. This list is empty if the VPC doesn't
+    #   have a firewall.
+    #   @return [Array<Types::NetworkFirewallAssociation>]
+    #
     # @!attribute [rw] vpc_id
     #   The ID of the VPC.
     #   @return [String]
@@ -94906,6 +95037,7 @@ module Aws::EC2
       :encryption_control,
       :tags,
       :block_public_access_states,
+      :network_firewall_associations,
       :vpc_id,
       :state,
       :cidr_block,

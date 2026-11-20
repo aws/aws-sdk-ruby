@@ -81,6 +81,8 @@ module Aws::DataZone
     AssetListingItemAdditionalAttributes = Shapes::StructureShape.new(name: 'AssetListingItemAdditionalAttributes')
     AssetListingItemGovernedGlossaryTermsList = Shapes::ListShape.new(name: 'AssetListingItemGovernedGlossaryTermsList')
     AssetName = Shapes::StringShape.new(name: 'AssetName')
+    AssetOwnershipTransfer = Shapes::StructureShape.new(name: 'AssetOwnershipTransfer')
+    AssetOwnershipTransferStatus = Shapes::StringShape.new(name: 'AssetOwnershipTransferStatus')
     AssetPermission = Shapes::StructureShape.new(name: 'AssetPermission')
     AssetPermissions = Shapes::ListShape.new(name: 'AssetPermissions')
     AssetRevision = Shapes::StructureShape.new(name: 'AssetRevision')
@@ -949,6 +951,7 @@ module Aws::DataZone
     ProjectMembershipAssignments = Shapes::ListShape.new(name: 'ProjectMembershipAssignments')
     ProjectName = Shapes::StringShape.new(name: 'ProjectName')
     ProjectPolicyGrantPrincipal = Shapes::StructureShape.new(name: 'ProjectPolicyGrantPrincipal')
+    ProjectProfileAction = Shapes::StringShape.new(name: 'ProjectProfileAction')
     ProjectProfileId = Shapes::StringShape.new(name: 'ProjectProfileId')
     ProjectProfileList = Shapes::ListShape.new(name: 'ProjectProfileList')
     ProjectProfileName = Shapes::StringShape.new(name: 'ProjectProfileName')
@@ -1284,6 +1287,8 @@ module Aws::DataZone
     UpdateAccountPoolOutput = Shapes::StructureShape.new(name: 'UpdateAccountPoolOutput')
     UpdateAssetFilterInput = Shapes::StructureShape.new(name: 'UpdateAssetFilterInput')
     UpdateAssetFilterOutput = Shapes::StructureShape.new(name: 'UpdateAssetFilterOutput')
+    UpdateAssetOwnerInput = Shapes::StructureShape.new(name: 'UpdateAssetOwnerInput')
+    UpdateAssetOwnerOutput = Shapes::StructureShape.new(name: 'UpdateAssetOwnerOutput')
     UpdateConnectionInput = Shapes::StructureShape.new(name: 'UpdateConnectionInput')
     UpdateConnectionInputDescriptionString = Shapes::StringShape.new(name: 'UpdateConnectionInputDescriptionString')
     UpdateConnectionOutput = Shapes::StructureShape.new(name: 'UpdateConnectionOutput')
@@ -1617,6 +1622,13 @@ module Aws::DataZone
     AssetListingItemAdditionalAttributes.struct_class = Types::AssetListingItemAdditionalAttributes
 
     AssetListingItemGovernedGlossaryTermsList.member = Shapes::ShapeRef.new(shape: DetailedGlossaryTerm)
+
+    AssetOwnershipTransfer.add_member(:status, Shapes::ShapeRef.new(shape: AssetOwnershipTransferStatus, required: true, location_name: "status"))
+    AssetOwnershipTransfer.add_member(:source_project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "sourceProjectId"))
+    AssetOwnershipTransfer.add_member(:target_project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "targetProjectId"))
+    AssetOwnershipTransfer.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startedAt"))
+    AssetOwnershipTransfer.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    AssetOwnershipTransfer.struct_class = Types::AssetOwnershipTransfer
 
     AssetPermission.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "assetId"))
     AssetPermission.add_member(:permissions, Shapes::ShapeRef.new(shape: Permissions, required: true, location_name: "permissions"))
@@ -3296,6 +3308,7 @@ module Aws::DataZone
     EnvironmentConfigurationParametersList.member = Shapes::ShapeRef.new(shape: EnvironmentConfigurationParameter)
 
     EnvironmentConfigurationUserParameter.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId"))
+    EnvironmentConfigurationUserParameter.add_member(:environment_blueprint_id, Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, location_name: "environmentBlueprintId"))
     EnvironmentConfigurationUserParameter.add_member(:environment_resolved_account, Shapes::ShapeRef.new(shape: EnvironmentResolvedAccount, location_name: "environmentResolvedAccount"))
     EnvironmentConfigurationUserParameter.add_member(:environment_configuration_name, Shapes::ShapeRef.new(shape: EnvironmentConfigurationName, location_name: "environmentConfigurationName"))
     EnvironmentConfigurationUserParameter.add_member(:environment_parameters, Shapes::ShapeRef.new(shape: EnvironmentParametersList, location_name: "environmentParameters"))
@@ -3519,6 +3532,7 @@ module Aws::DataZone
     GetAssetOutput.add_member(:forms_output, Shapes::ShapeRef.new(shape: FormOutputList, required: true, location_name: "formsOutput"))
     GetAssetOutput.add_member(:read_only_forms_output, Shapes::ShapeRef.new(shape: FormOutputList, location_name: "readOnlyFormsOutput"))
     GetAssetOutput.add_member(:latest_time_series_data_point_forms_output, Shapes::ShapeRef.new(shape: TimeSeriesDataPointSummaryFormOutputList, location_name: "latestTimeSeriesDataPointFormsOutput"))
+    GetAssetOutput.add_member(:ownership_transfer, Shapes::ShapeRef.new(shape: AssetOwnershipTransfer, location_name: "ownershipTransfer"))
     GetAssetOutput.struct_class = Types::GetAssetOutput
 
     GetAssetOutputGovernedGlossaryTermsList.member = Shapes::ShapeRef.new(shape: GlossaryTermId)
@@ -6686,6 +6700,17 @@ module Aws::DataZone
     UpdateAssetFilterOutput.add_member(:effective_row_filter, Shapes::ShapeRef.new(shape: String, location_name: "effectiveRowFilter"))
     UpdateAssetFilterOutput.struct_class = Types::UpdateAssetFilterOutput
 
+    UpdateAssetOwnerInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    UpdateAssetOwnerInput.add_member(:identifier, Shapes::ShapeRef.new(shape: AssetIdentifier, required: true, location: "uri", location_name: "identifier"))
+    UpdateAssetOwnerInput.add_member(:target_project_identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "targetProjectIdentifier"))
+    UpdateAssetOwnerInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    UpdateAssetOwnerInput.struct_class = Types::UpdateAssetOwnerInput
+
+    UpdateAssetOwnerOutput.add_member(:id, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "id"))
+    UpdateAssetOwnerOutput.add_member(:revision, Shapes::ShapeRef.new(shape: Revision, required: true, location_name: "revision"))
+    UpdateAssetOwnerOutput.add_member(:ownership_transfer, Shapes::ShapeRef.new(shape: AssetOwnershipTransfer, required: true, location_name: "ownershipTransfer"))
+    UpdateAssetOwnerOutput.struct_class = Types::UpdateAssetOwnerOutput
+
     UpdateConnectionInput.add_member(:configurations, Shapes::ShapeRef.new(shape: Configurations, location_name: "configurations"))
     UpdateConnectionInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     UpdateConnectionInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location: "uri", location_name: "identifier"))
@@ -6995,6 +7020,7 @@ module Aws::DataZone
     UpdateProjectInput.add_member(:environment_deployment_details, Shapes::ShapeRef.new(shape: EnvironmentDeploymentDetails, location_name: "environmentDeploymentDetails"))
     UpdateProjectInput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: EnvironmentConfigurationUserParametersList, location_name: "userParameters"))
     UpdateProjectInput.add_member(:project_profile_version, Shapes::ShapeRef.new(shape: String, location_name: "projectProfileVersion"))
+    UpdateProjectInput.add_member(:project_profile_action, Shapes::ShapeRef.new(shape: ProjectProfileAction, location_name: "projectProfileAction"))
     UpdateProjectInput.struct_class = Types::UpdateProjectInput
 
     UpdateProjectInputResourceTagsMap.key = Shapes::ShapeRef.new(shape: TagKey)
@@ -10029,6 +10055,22 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:update_asset_owner, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAssetOwner"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/assets/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAssetOwnerInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAssetOwnerOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)

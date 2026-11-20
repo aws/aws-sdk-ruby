@@ -17,6 +17,9 @@ module Aws::Route53
     ARN = Shapes::StringShape.new(name: 'ARN')
     AWSAccountID = Shapes::StringShape.new(name: 'AWSAccountID')
     AWSRegion = Shapes::StringShape.new(name: 'AWSRegion')
+    AZAffinity = Shapes::StructureShape.new(name: 'AZAffinity')
+    AZAffinityLocationId = Shapes::StringShape.new(name: 'AZAffinityLocationId')
+    AZAffinityLocationType = Shapes::StringShape.new(name: 'AZAffinityLocationType')
     AcceleratedRecoveryEnabled = Shapes::BooleanShape.new(name: 'AcceleratedRecoveryEnabled')
     AcceleratedRecoveryStatus = Shapes::StringShape.new(name: 'AcceleratedRecoveryStatus')
     AccountLimit = Shapes::StructureShape.new(name: 'AccountLimit')
@@ -35,13 +38,26 @@ module Aws::Route53
     Change = Shapes::StructureShape.new(name: 'Change')
     ChangeAction = Shapes::StringShape.new(name: 'ChangeAction')
     ChangeBatch = Shapes::StructureShape.new(name: 'ChangeBatch')
+    ChangeBatchSummaries = Shapes::ListShape.new(name: 'ChangeBatchSummaries')
+    ChangeBatchSummary = Shapes::StructureShape.new(name: 'ChangeBatchSummary')
     ChangeCidrCollectionRequest = Shapes::StructureShape.new(name: 'ChangeCidrCollectionRequest')
     ChangeCidrCollectionResponse = Shapes::StructureShape.new(name: 'ChangeCidrCollectionResponse')
+    ChangeCount = Shapes::IntegerShape.new(name: 'ChangeCount')
+    ChangeGuardrail = Shapes::StructureShape.new(name: 'ChangeGuardrail')
+    ChangeGuardrailName = Shapes::StringShape.new(name: 'ChangeGuardrailName')
+    ChangeGuardrailStatus = Shapes::StringShape.new(name: 'ChangeGuardrailStatus')
+    ChangeGuardrails = Shapes::ListShape.new(name: 'ChangeGuardrails')
+    ChangeHistoryFeature = Shapes::StructureShape.new(name: 'ChangeHistoryFeature')
+    ChangeHistoryOperation = Shapes::StringShape.new(name: 'ChangeHistoryOperation')
+    ChangeHistorySortOrder = Shapes::StringShape.new(name: 'ChangeHistorySortOrder')
+    ChangeHistoryTimeBound = Shapes::StringShape.new(name: 'ChangeHistoryTimeBound')
     ChangeId = Shapes::StringShape.new(name: 'ChangeId')
     ChangeInfo = Shapes::StructureShape.new(name: 'ChangeInfo')
+    ChangeRequestId = Shapes::StringShape.new(name: 'ChangeRequestId')
     ChangeResourceRecordSetsRequest = Shapes::StructureShape.new(name: 'ChangeResourceRecordSetsRequest')
     ChangeResourceRecordSetsResponse = Shapes::StructureShape.new(name: 'ChangeResourceRecordSetsResponse')
     ChangeStatus = Shapes::StringShape.new(name: 'ChangeStatus')
+    ChangeSubmitter = Shapes::StringShape.new(name: 'ChangeSubmitter')
     ChangeTagsForResourceRequest = Shapes::StructureShape.new(name: 'ChangeTagsForResourceRequest')
     ChangeTagsForResourceResponse = Shapes::StructureShape.new(name: 'ChangeTagsForResourceResponse')
     Changes = Shapes::ListShape.new(name: 'Changes')
@@ -144,6 +160,7 @@ module Aws::Route53
     DisassociateVPCComment = Shapes::StringShape.new(name: 'DisassociateVPCComment')
     DisassociateVPCFromHostedZoneRequest = Shapes::StructureShape.new(name: 'DisassociateVPCFromHostedZoneRequest')
     DisassociateVPCFromHostedZoneResponse = Shapes::StructureShape.new(name: 'DisassociateVPCFromHostedZoneResponse')
+    DryRun = Shapes::BooleanShape.new(name: 'DryRun')
     EnableHostedZoneDNSSECRequest = Shapes::StructureShape.new(name: 'EnableHostedZoneDNSSECRequest')
     EnableHostedZoneDNSSECResponse = Shapes::StructureShape.new(name: 'EnableHostedZoneDNSSECResponse')
     EnableSNI = Shapes::BooleanShape.new(name: 'EnableSNI')
@@ -153,6 +170,9 @@ module Aws::Route53
     EvaluationPeriods = Shapes::IntegerShape.new(name: 'EvaluationPeriods')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FailureThreshold = Shapes::IntegerShape.new(name: 'FailureThreshold')
+    FeatureEnablement = Shapes::StringShape.new(name: 'FeatureEnablement')
+    FeatureNotEnabled = Shapes::StructureShape.new(name: 'FeatureNotEnabled')
+    FeatureStatus = Shapes::StringShape.new(name: 'FeatureStatus')
     FullyQualifiedDomainName = Shapes::StringShape.new(name: 'FullyQualifiedDomainName')
     GeoLocation = Shapes::StructureShape.new(name: 'GeoLocation')
     GeoLocationContinentCode = Shapes::StringShape.new(name: 'GeoLocationContinentCode')
@@ -184,6 +204,8 @@ module Aws::Route53
     GetHealthCheckSourceResponse = Shapes::StructureShape.new(name: 'GetHealthCheckSourceResponse')
     GetHealthCheckStatusRequest = Shapes::StructureShape.new(name: 'GetHealthCheckStatusRequest')
     GetHealthCheckStatusResponse = Shapes::StructureShape.new(name: 'GetHealthCheckStatusResponse')
+    GetHostedZoneChangeBatchRequest = Shapes::StructureShape.new(name: 'GetHostedZoneChangeBatchRequest')
+    GetHostedZoneChangeBatchResponse = Shapes::StructureShape.new(name: 'GetHostedZoneChangeBatchResponse')
     GetHostedZoneCountRequest = Shapes::StructureShape.new(name: 'GetHostedZoneCountRequest')
     GetHostedZoneCountResponse = Shapes::StructureShape.new(name: 'GetHostedZoneCountResponse')
     GetHostedZoneLimitRequest = Shapes::StructureShape.new(name: 'GetHostedZoneLimitRequest')
@@ -243,6 +265,7 @@ module Aws::Route53
     HostedZoneRRSetCount = Shapes::IntegerShape.new(name: 'HostedZoneRRSetCount')
     HostedZoneSummaries = Shapes::ListShape.new(name: 'HostedZoneSummaries')
     HostedZoneSummary = Shapes::StructureShape.new(name: 'HostedZoneSummary')
+    HostedZoneTier = Shapes::StringShape.new(name: 'HostedZoneTier')
     HostedZoneType = Shapes::StringShape.new(name: 'HostedZoneType')
     HostedZones = Shapes::ListShape.new(name: 'HostedZones')
     IPAddress = Shapes::StringShape.new(name: 'IPAddress')
@@ -289,6 +312,8 @@ module Aws::Route53
     ListHealthChecksBySourceResponse = Shapes::StructureShape.new(name: 'ListHealthChecksBySourceResponse')
     ListHealthChecksRequest = Shapes::StructureShape.new(name: 'ListHealthChecksRequest')
     ListHealthChecksResponse = Shapes::StructureShape.new(name: 'ListHealthChecksResponse')
+    ListHostedZoneChangeBatchesRequest = Shapes::StructureShape.new(name: 'ListHostedZoneChangeBatchesRequest')
+    ListHostedZoneChangeBatchesResponse = Shapes::StructureShape.new(name: 'ListHostedZoneChangeBatchesResponse')
     ListHostedZonesByNameRequest = Shapes::StructureShape.new(name: 'ListHostedZonesByNameRequest')
     ListHostedZonesByNameResponse = Shapes::StructureShape.new(name: 'ListHostedZonesByNameResponse')
     ListHostedZonesByVPCRequest = Shapes::StructureShape.new(name: 'ListHostedZonesByVPCRequest')
@@ -297,6 +322,8 @@ module Aws::Route53
     ListHostedZonesResponse = Shapes::StructureShape.new(name: 'ListHostedZonesResponse')
     ListQueryLoggingConfigsRequest = Shapes::StructureShape.new(name: 'ListQueryLoggingConfigsRequest')
     ListQueryLoggingConfigsResponse = Shapes::StructureShape.new(name: 'ListQueryLoggingConfigsResponse')
+    ListResourceRecordSetChangesRequest = Shapes::StructureShape.new(name: 'ListResourceRecordSetChangesRequest')
+    ListResourceRecordSetChangesResponse = Shapes::StructureShape.new(name: 'ListResourceRecordSetChangesResponse')
     ListResourceRecordSetProtectionsRequest = Shapes::StructureShape.new(name: 'ListResourceRecordSetProtectionsRequest')
     ListResourceRecordSetProtectionsResponse = Shapes::StructureShape.new(name: 'ListResourceRecordSetProtectionsResponse')
     ListResourceRecordSetsRequest = Shapes::StructureShape.new(name: 'ListResourceRecordSetsRequest')
@@ -355,6 +382,7 @@ module Aws::Route53
     ProtectionError = Shapes::StructureShape.new(name: 'ProtectionError')
     ProtectionErrorCode = Shapes::StringShape.new(name: 'ProtectionErrorCode')
     ProtectionErrors = Shapes::ListShape.new(name: 'ProtectionErrors')
+    PublicDNSFallbackEnabled = Shapes::BooleanShape.new(name: 'PublicDNSFallbackEnabled')
     PublicZoneVPCAssociation = Shapes::StructureShape.new(name: 'PublicZoneVPCAssociation')
     QueryLoggingConfig = Shapes::StructureShape.new(name: 'QueryLoggingConfig')
     QueryLoggingConfigAlreadyExists = Shapes::StructureShape.new(name: 'QueryLoggingConfigAlreadyExists')
@@ -372,6 +400,8 @@ module Aws::Route53
     ResourcePath = Shapes::StringShape.new(name: 'ResourcePath')
     ResourceRecord = Shapes::StructureShape.new(name: 'ResourceRecord')
     ResourceRecordSet = Shapes::StructureShape.new(name: 'ResourceRecordSet')
+    ResourceRecordSetChange = Shapes::StructureShape.new(name: 'ResourceRecordSetChange')
+    ResourceRecordSetChanges = Shapes::ListShape.new(name: 'ResourceRecordSetChanges')
     ResourceRecordSetFailover = Shapes::StringShape.new(name: 'ResourceRecordSetFailover')
     ResourceRecordSetIdentifier = Shapes::StringShape.new(name: 'ResourceRecordSetIdentifier')
     ResourceRecordSetMultiValueAnswer = Shapes::BooleanShape.new(name: 'ResourceRecordSetMultiValueAnswer')
@@ -457,6 +487,8 @@ module Aws::Route53
     UpdateHostedZoneCommentResponse = Shapes::StructureShape.new(name: 'UpdateHostedZoneCommentResponse')
     UpdateHostedZoneFeaturesRequest = Shapes::StructureShape.new(name: 'UpdateHostedZoneFeaturesRequest')
     UpdateHostedZoneFeaturesResponse = Shapes::StructureShape.new(name: 'UpdateHostedZoneFeaturesResponse')
+    UpdateHostedZoneTierRequest = Shapes::StructureShape.new(name: 'UpdateHostedZoneTierRequest')
+    UpdateHostedZoneTierResponse = Shapes::StructureShape.new(name: 'UpdateHostedZoneTierResponse')
     UpdateTrafficPolicyCommentRequest = Shapes::StructureShape.new(name: 'UpdateTrafficPolicyCommentRequest')
     UpdateTrafficPolicyCommentResponse = Shapes::StructureShape.new(name: 'UpdateTrafficPolicyCommentResponse')
     UpdateTrafficPolicyInstanceRequest = Shapes::StructureShape.new(name: 'UpdateTrafficPolicyInstanceRequest')
@@ -468,6 +500,10 @@ module Aws::Route53
     VPCId = Shapes::StringShape.new(name: 'VPCId')
     VPCRegion = Shapes::StringShape.new(name: 'VPCRegion')
     VPCs = Shapes::ListShape.new(name: 'VPCs')
+
+    AZAffinity.add_member(:location_type, Shapes::ShapeRef.new(shape: AZAffinityLocationType, location_name: "LocationType"))
+    AZAffinity.add_member(:location_id, Shapes::ShapeRef.new(shape: AZAffinityLocationId, location_name: "LocationId"))
+    AZAffinity.struct_class = Types::AZAffinity
 
     AccountLimit.add_member(:type, Shapes::ShapeRef.new(shape: AccountLimitType, required: true, location_name: "Type"))
     AccountLimit.add_member(:value, Shapes::ShapeRef.new(shape: LimitValue, required: true, location_name: "Value"))
@@ -505,6 +541,17 @@ module Aws::Route53
     ChangeBatch.add_member(:changes, Shapes::ShapeRef.new(shape: Changes, required: true, location_name: "Changes"))
     ChangeBatch.struct_class = Types::ChangeBatch
 
+    ChangeBatchSummaries.member = Shapes::ShapeRef.new(shape: ChangeBatchSummary, location_name: "ChangeBatchSummary")
+
+    ChangeBatchSummary.add_member(:change_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ChangeId"))
+    ChangeBatchSummary.add_member(:operation, Shapes::ShapeRef.new(shape: ChangeHistoryOperation, required: true, location_name: "Operation"))
+    ChangeBatchSummary.add_member(:submitted_at, Shapes::ShapeRef.new(shape: TimeStamp, required: true, location_name: "SubmittedAt"))
+    ChangeBatchSummary.add_member(:submitted_by, Shapes::ShapeRef.new(shape: ChangeSubmitter, location_name: "SubmittedBy"))
+    ChangeBatchSummary.add_member(:request_id, Shapes::ShapeRef.new(shape: ChangeRequestId, location_name: "RequestId"))
+    ChangeBatchSummary.add_member(:comment, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Comment"))
+    ChangeBatchSummary.add_member(:change_count, Shapes::ShapeRef.new(shape: ChangeCount, required: true, location_name: "ChangeCount"))
+    ChangeBatchSummary.struct_class = Types::ChangeBatchSummary
+
     ChangeCidrCollectionRequest.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "CidrCollectionId"))
     ChangeCidrCollectionRequest.add_member(:collection_version, Shapes::ShapeRef.new(shape: CollectionVersion, location_name: "CollectionVersion"))
     ChangeCidrCollectionRequest.add_member(:changes, Shapes::ShapeRef.new(shape: CidrCollectionChanges, required: true, location_name: "Changes"))
@@ -512,6 +559,16 @@ module Aws::Route53
 
     ChangeCidrCollectionResponse.add_member(:id, Shapes::ShapeRef.new(shape: ChangeId, required: true, location_name: "Id"))
     ChangeCidrCollectionResponse.struct_class = Types::ChangeCidrCollectionResponse
+
+    ChangeGuardrail.add_member(:name, Shapes::ShapeRef.new(shape: ChangeGuardrailName, required: true, location_name: "Name"))
+    ChangeGuardrail.add_member(:status, Shapes::ShapeRef.new(shape: ChangeGuardrailStatus, required: true, location_name: "Status"))
+    ChangeGuardrail.struct_class = Types::ChangeGuardrail
+
+    ChangeGuardrails.member = Shapes::ShapeRef.new(shape: ChangeGuardrail, location_name: "ChangeGuardrail")
+
+    ChangeHistoryFeature.add_member(:status, Shapes::ShapeRef.new(shape: FeatureEnablement, location_name: "Status"))
+    ChangeHistoryFeature.add_member(:retention_starts_at, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "RetentionStartsAt"))
+    ChangeHistoryFeature.struct_class = Types::ChangeHistoryFeature
 
     ChangeInfo.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "Id"))
     ChangeInfo.add_member(:status, Shapes::ShapeRef.new(shape: ChangeStatus, required: true, location_name: "Status"))
@@ -639,6 +696,8 @@ module Aws::Route53
     CreateHostedZoneRequest.add_member(:caller_reference, Shapes::ShapeRef.new(shape: Nonce, required: true, location_name: "CallerReference"))
     CreateHostedZoneRequest.add_member(:hosted_zone_config, Shapes::ShapeRef.new(shape: HostedZoneConfig, location_name: "HostedZoneConfig"))
     CreateHostedZoneRequest.add_member(:delegation_set_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "DelegationSetId"))
+    CreateHostedZoneRequest.add_member(:enable_public_dns_fallback, Shapes::ShapeRef.new(shape: PublicDNSFallbackEnabled, location_name: "EnablePublicDNSFallback"))
+    CreateHostedZoneRequest.add_member(:change_guardrails, Shapes::ShapeRef.new(shape: ChangeGuardrails, location_name: "ChangeGuardrails"))
     CreateHostedZoneRequest.struct_class = Types::CreateHostedZoneRequest
 
     CreateHostedZoneResponse.add_member(:hosted_zone, Shapes::ShapeRef.new(shape: HostedZone, required: true, location_name: "HostedZone"))
@@ -848,6 +907,9 @@ module Aws::Route53
 
     ErrorMessages.member = Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message")
 
+    FeatureNotEnabled.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    FeatureNotEnabled.struct_class = Types::FeatureNotEnabled
+
     GeoLocation.add_member(:continent_code, Shapes::ShapeRef.new(shape: GeoLocationContinentCode, location_name: "ContinentCode"))
     GeoLocation.add_member(:country_code, Shapes::ShapeRef.new(shape: GeoLocationCountryCode, location_name: "CountryCode"))
     GeoLocation.add_member(:subdivision_code, Shapes::ShapeRef.new(shape: GeoLocationSubdivisionCode, location_name: "SubdivisionCode"))
@@ -930,6 +992,14 @@ module Aws::Route53
 
     GetHealthCheckStatusResponse.add_member(:health_check_observations, Shapes::ShapeRef.new(shape: HealthCheckObservations, required: true, location_name: "HealthCheckObservations"))
     GetHealthCheckStatusResponse.struct_class = Types::GetHealthCheckStatusResponse
+
+    GetHostedZoneChangeBatchRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
+    GetHostedZoneChangeBatchRequest.add_member(:change_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "ChangeId"))
+    GetHostedZoneChangeBatchRequest.struct_class = Types::GetHostedZoneChangeBatchRequest
+
+    GetHostedZoneChangeBatchResponse.add_member(:change_batch_summary, Shapes::ShapeRef.new(shape: ChangeBatchSummary, required: true, location_name: "ChangeBatchSummary"))
+    GetHostedZoneChangeBatchResponse.add_member(:change_batch, Shapes::ShapeRef.new(shape: ChangeBatch, required: true, location_name: "ChangeBatch"))
+    GetHostedZoneChangeBatchResponse.struct_class = Types::GetHostedZoneChangeBatchResponse
 
     GetHostedZoneCountRequest.struct_class = Types::GetHostedZoneCountRequest
 
@@ -1070,13 +1140,17 @@ module Aws::Route53
 
     HostedZoneConfig.add_member(:comment, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Comment"))
     HostedZoneConfig.add_member(:private_zone, Shapes::ShapeRef.new(shape: IsPrivateZone, location_name: "PrivateZone"))
+    HostedZoneConfig.add_member(:hosted_zone_tier, Shapes::ShapeRef.new(shape: HostedZoneTier, location_name: "HostedZoneTier"))
     HostedZoneConfig.struct_class = Types::HostedZoneConfig
 
     HostedZoneFailureReasons.add_member(:accelerated_recovery, Shapes::ShapeRef.new(shape: FailureReason, location_name: "AcceleratedRecovery"))
     HostedZoneFailureReasons.struct_class = Types::HostedZoneFailureReasons
 
     HostedZoneFeatures.add_member(:accelerated_recovery_status, Shapes::ShapeRef.new(shape: AcceleratedRecoveryStatus, location_name: "AcceleratedRecoveryStatus"))
+    HostedZoneFeatures.add_member(:public_dns_fallback_status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "PublicDNSFallbackStatus"))
+    HostedZoneFeatures.add_member(:change_history, Shapes::ShapeRef.new(shape: ChangeHistoryFeature, location_name: "ChangeHistory"))
     HostedZoneFeatures.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: HostedZoneFailureReasons, location_name: "FailureReasons"))
+    HostedZoneFeatures.add_member(:change_guardrails, Shapes::ShapeRef.new(shape: ChangeGuardrails, location_name: "ChangeGuardrails"))
     HostedZoneFeatures.struct_class = Types::HostedZoneFeatures
 
     HostedZoneLimit.add_member(:type, Shapes::ShapeRef.new(shape: HostedZoneLimitType, required: true, location_name: "Type"))
@@ -1266,6 +1340,19 @@ module Aws::Route53
     ListHealthChecksResponse.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, required: true, location_name: "MaxItems"))
     ListHealthChecksResponse.struct_class = Types::ListHealthChecksResponse
 
+    ListHostedZoneChangeBatchesRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
+    ListHostedZoneChangeBatchesRequest.add_member(:submitted_after, Shapes::ShapeRef.new(shape: ChangeHistoryTimeBound, location: "querystring", location_name: "submittedafter"))
+    ListHostedZoneChangeBatchesRequest.add_member(:submitted_before, Shapes::ShapeRef.new(shape: ChangeHistoryTimeBound, location: "querystring", location_name: "submittedbefore"))
+    ListHostedZoneChangeBatchesRequest.add_member(:start_after_change_id, Shapes::ShapeRef.new(shape: ResourceId, location: "querystring", location_name: "startafterchangeid"))
+    ListHostedZoneChangeBatchesRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: ChangeHistorySortOrder, location: "querystring", location_name: "sortorder"))
+    ListHostedZoneChangeBatchesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxresults"))
+    ListHostedZoneChangeBatchesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nexttoken"))
+    ListHostedZoneChangeBatchesRequest.struct_class = Types::ListHostedZoneChangeBatchesRequest
+
+    ListHostedZoneChangeBatchesResponse.add_member(:change_batch_summaries, Shapes::ShapeRef.new(shape: ChangeBatchSummaries, required: true, location_name: "ChangeBatchSummaries"))
+    ListHostedZoneChangeBatchesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListHostedZoneChangeBatchesResponse.struct_class = Types::ListHostedZoneChangeBatchesResponse
+
     ListHostedZonesByNameRequest.add_member(:dns_name, Shapes::ShapeRef.new(shape: DNSName, location: "querystring", location_name: "dnsname"))
     ListHostedZonesByNameRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, location: "querystring", location_name: "hostedzoneid"))
     ListHostedZonesByNameRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, location: "querystring", location_name: "maxitems"))
@@ -1312,6 +1399,20 @@ module Aws::Route53
     ListQueryLoggingConfigsResponse.add_member(:query_logging_configs, Shapes::ShapeRef.new(shape: QueryLoggingConfigs, required: true, location_name: "QueryLoggingConfigs"))
     ListQueryLoggingConfigsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListQueryLoggingConfigsResponse.struct_class = Types::ListQueryLoggingConfigsResponse
+
+    ListResourceRecordSetChangesRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
+    ListResourceRecordSetChangesRequest.add_member(:record_name, Shapes::ShapeRef.new(shape: DNSName, location: "querystring", location_name: "recordname"))
+    ListResourceRecordSetChangesRequest.add_member(:record_type, Shapes::ShapeRef.new(shape: RRType, location: "querystring", location_name: "recordtype"))
+    ListResourceRecordSetChangesRequest.add_member(:submitted_after, Shapes::ShapeRef.new(shape: ChangeHistoryTimeBound, location: "querystring", location_name: "submittedafter"))
+    ListResourceRecordSetChangesRequest.add_member(:submitted_before, Shapes::ShapeRef.new(shape: ChangeHistoryTimeBound, location: "querystring", location_name: "submittedbefore"))
+    ListResourceRecordSetChangesRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: ChangeHistorySortOrder, location: "querystring", location_name: "sortorder"))
+    ListResourceRecordSetChangesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxresults"))
+    ListResourceRecordSetChangesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nexttoken"))
+    ListResourceRecordSetChangesRequest.struct_class = Types::ListResourceRecordSetChangesRequest
+
+    ListResourceRecordSetChangesResponse.add_member(:resource_record_set_changes, Shapes::ShapeRef.new(shape: ResourceRecordSetChanges, required: true, location_name: "ResourceRecordSetChanges"))
+    ListResourceRecordSetChangesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListResourceRecordSetChangesResponse.struct_class = Types::ListResourceRecordSetChangesResponse
 
     ListResourceRecordSetProtectionsRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
     ListResourceRecordSetProtectionsRequest.add_member(:start_record_name, Shapes::ShapeRef.new(shape: DNSName, location: "querystring", location_name: "name"))
@@ -1535,7 +1636,19 @@ module Aws::Route53
     ResourceRecordSet.add_member(:traffic_policy_instance_id, Shapes::ShapeRef.new(shape: TrafficPolicyInstanceId, location_name: "TrafficPolicyInstanceId"))
     ResourceRecordSet.add_member(:cidr_routing_config, Shapes::ShapeRef.new(shape: CidrRoutingConfig, location_name: "CidrRoutingConfig"))
     ResourceRecordSet.add_member(:geo_proximity_location, Shapes::ShapeRef.new(shape: GeoProximityLocation, location_name: "GeoProximityLocation"))
+    ResourceRecordSet.add_member(:az_affinity, Shapes::ShapeRef.new(shape: AZAffinity, location_name: "AZAffinity"))
     ResourceRecordSet.struct_class = Types::ResourceRecordSet
+
+    ResourceRecordSetChange.add_member(:change_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ChangeId"))
+    ResourceRecordSetChange.add_member(:operation, Shapes::ShapeRef.new(shape: ChangeHistoryOperation, required: true, location_name: "Operation"))
+    ResourceRecordSetChange.add_member(:submitted_at, Shapes::ShapeRef.new(shape: TimeStamp, required: true, location_name: "SubmittedAt"))
+    ResourceRecordSetChange.add_member(:submitted_by, Shapes::ShapeRef.new(shape: ChangeSubmitter, location_name: "SubmittedBy"))
+    ResourceRecordSetChange.add_member(:request_id, Shapes::ShapeRef.new(shape: ChangeRequestId, location_name: "RequestId"))
+    ResourceRecordSetChange.add_member(:action, Shapes::ShapeRef.new(shape: ChangeAction, required: true, location_name: "Action"))
+    ResourceRecordSetChange.add_member(:resource_record_set, Shapes::ShapeRef.new(shape: ResourceRecordSet, required: true, location_name: "ResourceRecordSet"))
+    ResourceRecordSetChange.struct_class = Types::ResourceRecordSetChange
+
+    ResourceRecordSetChanges.member = Shapes::ShapeRef.new(shape: ResourceRecordSetChange, location_name: "ResourceRecordSetChange")
 
     ResourceRecordSetProtection.add_member(:record_name, Shapes::ShapeRef.new(shape: DNSName, required: true, location_name: "RecordName"))
     ResourceRecordSetProtection.add_member(:record_type, Shapes::ShapeRef.new(shape: RRType, required: true, location_name: "RecordType"))
@@ -1711,9 +1824,19 @@ module Aws::Route53
 
     UpdateHostedZoneFeaturesRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
     UpdateHostedZoneFeaturesRequest.add_member(:enable_accelerated_recovery, Shapes::ShapeRef.new(shape: AcceleratedRecoveryEnabled, location_name: "EnableAcceleratedRecovery"))
+    UpdateHostedZoneFeaturesRequest.add_member(:enable_public_dns_fallback, Shapes::ShapeRef.new(shape: PublicDNSFallbackEnabled, location_name: "EnablePublicDNSFallback"))
+    UpdateHostedZoneFeaturesRequest.add_member(:change_guardrails, Shapes::ShapeRef.new(shape: ChangeGuardrails, location_name: "ChangeGuardrails"))
+    UpdateHostedZoneFeaturesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
     UpdateHostedZoneFeaturesRequest.struct_class = Types::UpdateHostedZoneFeaturesRequest
 
     UpdateHostedZoneFeaturesResponse.struct_class = Types::UpdateHostedZoneFeaturesResponse
+
+    UpdateHostedZoneTierRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
+    UpdateHostedZoneTierRequest.add_member(:hosted_zone_tier, Shapes::ShapeRef.new(shape: HostedZoneTier, required: true, location_name: "HostedZoneTier"))
+    UpdateHostedZoneTierRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
+    UpdateHostedZoneTierRequest.struct_class = Types::UpdateHostedZoneTierRequest
+
+    UpdateHostedZoneTierResponse.struct_class = Types::UpdateHostedZoneTierResponse
 
     UpdateTrafficPolicyCommentRequest.add_member(:id, Shapes::ShapeRef.new(shape: TrafficPolicyId, required: true, location: "uri", location_name: "Id"))
     UpdateTrafficPolicyCommentRequest.add_member(:version, Shapes::ShapeRef.new(shape: TrafficPolicyVersion, required: true, location: "uri", location_name: "Version"))
@@ -2394,6 +2517,18 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
       end)
 
+      api.add_operation(:get_hosted_zone_change_batch, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetHostedZoneChangeBatch"
+        o.http_method = "GET"
+        o.http_request_uri = "/2013-04-01/hostedzone/{Id}/changebatches/{ChangeId}"
+        o.input = Shapes::ShapeRef.new(shape: GetHostedZoneChangeBatchRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetHostedZoneChangeBatchResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchChange)
+        o.errors << Shapes::ShapeRef.new(shape: FeatureNotEnabled)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+      end)
+
       api.add_operation(:get_hosted_zone_count, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetHostedZoneCount"
         o.http_method = "GET"
@@ -2579,6 +2714,24 @@ module Aws::Route53
         )
       end)
 
+      api.add_operation(:list_hosted_zone_change_batches, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListHostedZoneChangeBatches"
+        o.http_method = "GET"
+        o.http_request_uri = "/2013-04-01/hostedzone/{Id}/changebatches"
+        o.input = Shapes::ShapeRef.new(shape: ListHostedZoneChangeBatchesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListHostedZoneChangeBatchesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+        o.errors << Shapes::ShapeRef.new(shape: FeatureNotEnabled)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_hosted_zones, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListHostedZones"
         o.http_method = "GET"
@@ -2626,6 +2779,24 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationToken)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_resource_record_set_changes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResourceRecordSetChanges"
+        o.http_method = "GET"
+        o.http_request_uri = "/2013-04-01/hostedzone/{Id}/rrsetchanges"
+        o.input = Shapes::ShapeRef.new(shape: ListResourceRecordSetChangesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResourceRecordSetChangesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+        o.errors << Shapes::ShapeRef.new(shape: FeatureNotEnabled)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationToken)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2831,6 +3002,22 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
         o.errors << Shapes::ShapeRef.new(shape: LimitsExceeded)
+      end)
+
+      api.add_operation(:update_hosted_zone_tier, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateHostedZoneTier"
+        o.http_method = "POST"
+        o.http_request_uri = "/2013-04-01/hostedzone/{Id}/tier"
+        o.input = Shapes::ShapeRef.new(shape: UpdateHostedZoneTierRequest,
+          location_name: "UpdateHostedZoneTierRequest",
+          metadata: {
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: UpdateHostedZoneTierResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
       end)
 
       api.add_operation(:update_traffic_policy_comment, Seahorse::Model::Operation.new.tap do |o|

@@ -799,6 +799,14 @@ module Aws::PCS
     #   of a compute node's lifecycle, such as when a compute node finishes
     #   bootstrapping or becomes ready to accept jobs.
     #
+    # @option params [Types::InstanceHealthChecksRequest] :instance_health_checks
+    #   The instance health check settings for the compute node group.
+    #   Instance health checks detect faults on instances in the compute node
+    #   group and respond with the repair action that you choose. You can
+    #   configure health monitoring, deep health checks, or both. You can't
+    #   specify an empty object (`{}`). Instance health checks require Slurm
+    #   version 26.05 or later.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -892,6 +900,18 @@ module Aws::PCS
     #       },
     #       script_caching_policy: "CACHE_ONCE", # accepts CACHE_ONCE, REFRESH_ON_REBOOT
     #     },
+    #     instance_health_checks: {
+    #       health_monitoring: {
+    #         mode: "NONE", # accepts NONE, STANDARD
+    #         repair_action: "AUTO", # accepts AUTO, REPLACE, ISOLATE, NONE
+    #       },
+    #       deep_health_checks: {
+    #         on_start: {
+    #           profile: "NONE", # accepts NONE, QUICK, MEDIUM, LONG
+    #           repair_action: "AUTO", # accepts AUTO, REPLACE, ISOLATE, NONE
+    #         },
+    #       },
+    #     },
     #     client_token: "SBClientToken",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -949,6 +969,10 @@ module Aws::PCS
     #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].on_error #=> String, one of "TERMINATE", "STOP_SEQUENCE", "CONTINUE"
     #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].execution_policy #=> String, one of "FIRST_BOOT_ONLY", "EVERY_BOOT"
     #   resp.compute_node_group.node_lifecycle_actions.script_caching_policy #=> String, one of "CACHE_ONCE", "REFRESH_ON_REBOOT"
+    #   resp.compute_node_group.instance_health_checks.health_monitoring.mode #=> String, one of "NONE", "STANDARD"
+    #   resp.compute_node_group.instance_health_checks.health_monitoring.repair_action #=> String, one of "AUTO", "REPLACE", "ISOLATE", "NONE"
+    #   resp.compute_node_group.instance_health_checks.deep_health_checks.on_start.profile #=> String, one of "NONE", "QUICK", "MEDIUM", "LONG"
+    #   resp.compute_node_group.instance_health_checks.deep_health_checks.on_start.repair_action #=> String, one of "AUTO", "REPLACE", "ISOLATE", "NONE"
     #   resp.compute_node_group.error_info #=> Array
     #   resp.compute_node_group.error_info[0].code #=> String
     #   resp.compute_node_group.error_info[0].message #=> String
@@ -1315,6 +1339,10 @@ module Aws::PCS
     #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].on_error #=> String, one of "TERMINATE", "STOP_SEQUENCE", "CONTINUE"
     #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].execution_policy #=> String, one of "FIRST_BOOT_ONLY", "EVERY_BOOT"
     #   resp.compute_node_group.node_lifecycle_actions.script_caching_policy #=> String, one of "CACHE_ONCE", "REFRESH_ON_REBOOT"
+    #   resp.compute_node_group.instance_health_checks.health_monitoring.mode #=> String, one of "NONE", "STANDARD"
+    #   resp.compute_node_group.instance_health_checks.health_monitoring.repair_action #=> String, one of "AUTO", "REPLACE", "ISOLATE", "NONE"
+    #   resp.compute_node_group.instance_health_checks.deep_health_checks.on_start.profile #=> String, one of "NONE", "QUICK", "MEDIUM", "LONG"
+    #   resp.compute_node_group.instance_health_checks.deep_health_checks.on_start.repair_action #=> String, one of "AUTO", "REPLACE", "ISOLATE", "NONE"
     #   resp.compute_node_group.error_info #=> Array
     #   resp.compute_node_group.error_info[0].code #=> String
     #   resp.compute_node_group.error_info[0].message #=> String
@@ -1586,6 +1614,7 @@ module Aws::PCS
     #   * {Types::RegisterComputeNodeGroupInstanceResponse#compute_node_group_name #compute_node_group_name} => String
     #   * {Types::RegisterComputeNodeGroupInstanceResponse#node_lifecycle_actions #node_lifecycle_actions} => Types::NodeLifecycleActions
     #   * {Types::RegisterComputeNodeGroupInstanceResponse#scheduler_version #scheduler_version} => String
+    #   * {Types::RegisterComputeNodeGroupInstanceResponse#instance_health_checks #instance_health_checks} => Types::InstanceHealthChecks
     #
     # @example Request syntax with placeholder values
     #
@@ -1627,6 +1656,10 @@ module Aws::PCS
     #   resp.node_lifecycle_actions.stages.node_ready[0].execution_policy #=> String, one of "FIRST_BOOT_ONLY", "EVERY_BOOT"
     #   resp.node_lifecycle_actions.script_caching_policy #=> String, one of "CACHE_ONCE", "REFRESH_ON_REBOOT"
     #   resp.scheduler_version #=> String
+    #   resp.instance_health_checks.health_monitoring.mode #=> String, one of "NONE", "STANDARD"
+    #   resp.instance_health_checks.health_monitoring.repair_action #=> String, one of "AUTO", "REPLACE", "ISOLATE", "NONE"
+    #   resp.instance_health_checks.deep_health_checks.on_start.profile #=> String, one of "NONE", "QUICK", "MEDIUM", "LONG"
+    #   resp.instance_health_checks.deep_health_checks.on_start.repair_action #=> String, one of "AUTO", "REPLACE", "ISOLATE", "NONE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/RegisterComputeNodeGroupInstance AWS API Documentation
     #
@@ -1981,6 +2014,23 @@ module Aws::PCS
     #   of a compute node's lifecycle, such as when a compute node finishes
     #   bootstrapping or becomes ready to accept jobs.
     #
+    # @option params [Types::UpdateInstanceHealthChecksRequest] :instance_health_checks
+    #   The instance health check settings for the compute node group.
+    #   Instance health checks detect faults on instances in the compute node
+    #   group and respond with the repair action that you choose. You can
+    #   configure health monitoring, deep health checks, or both. You can't
+    #   specify an empty object (`{}`). Instance health checks require Slurm
+    #   version 26.05 or later.
+    #
+    #   The settings that you specify replace all of the current instance
+    #   health check settings of the compute node group. Include every setting
+    #   that you want to keep. If you omit this member, the current settings
+    #   don't change. If you omit `healthMonitoring` or `deepHealthChecks`,
+    #   that check is turned off. You can also turn off a check: set
+    #   `healthMonitoring.mode` or `deepHealthChecks.onStart.profile` to
+    #   `NONE` and omit its `repairAction`. When you change these settings,
+    #   PCS drains and replaces the instances in the compute node group.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -2065,6 +2115,18 @@ module Aws::PCS
     #       },
     #       script_caching_policy: "CACHE_ONCE", # accepts CACHE_ONCE, REFRESH_ON_REBOOT
     #     },
+    #     instance_health_checks: {
+    #       health_monitoring: {
+    #         mode: "NONE", # accepts NONE, STANDARD
+    #         repair_action: "AUTO", # accepts AUTO, REPLACE, ISOLATE, NONE
+    #       },
+    #       deep_health_checks: {
+    #         on_start: {
+    #           profile: "NONE", # accepts NONE, QUICK, MEDIUM, LONG
+    #           repair_action: "AUTO", # accepts AUTO, REPLACE, ISOLATE, NONE
+    #         },
+    #       },
+    #     },
     #     client_token: "SBClientToken",
     #   })
     #
@@ -2119,6 +2181,10 @@ module Aws::PCS
     #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].on_error #=> String, one of "TERMINATE", "STOP_SEQUENCE", "CONTINUE"
     #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].execution_policy #=> String, one of "FIRST_BOOT_ONLY", "EVERY_BOOT"
     #   resp.compute_node_group.node_lifecycle_actions.script_caching_policy #=> String, one of "CACHE_ONCE", "REFRESH_ON_REBOOT"
+    #   resp.compute_node_group.instance_health_checks.health_monitoring.mode #=> String, one of "NONE", "STANDARD"
+    #   resp.compute_node_group.instance_health_checks.health_monitoring.repair_action #=> String, one of "AUTO", "REPLACE", "ISOLATE", "NONE"
+    #   resp.compute_node_group.instance_health_checks.deep_health_checks.on_start.profile #=> String, one of "NONE", "QUICK", "MEDIUM", "LONG"
+    #   resp.compute_node_group.instance_health_checks.deep_health_checks.on_start.repair_action #=> String, one of "AUTO", "REPLACE", "ISOLATE", "NONE"
     #   resp.compute_node_group.error_info #=> Array
     #   resp.compute_node_group.error_info[0].code #=> String
     #   resp.compute_node_group.error_info[0].message #=> String
@@ -2230,7 +2296,7 @@ module Aws::PCS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pcs'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

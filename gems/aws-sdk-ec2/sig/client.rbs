@@ -10733,7 +10733,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#get_default_credit_specification-instance_method
       def get_default_credit_specification: (
                                               ?dry_run: bool,
-                                              instance_family: ("t2" | "t3" | "t3a" | "t4g" | "t8i")
+                                              instance_family: ("t2" | "t3" | "t3a" | "t4g" | "t8i" | "t9g")
                                             ) -> _GetDefaultCreditSpecificationResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDefaultCreditSpecificationResponseSuccess
 
@@ -11070,7 +11070,7 @@ module Aws
                                                 }
                                               ],
                                               ?locale: ::String,
-                                              ?resource_type: ("alb" | "eip" | "rds" | "rnat"),
+                                              ?resource_type: ("alb" | "eip" | "rds" | "rnat" | "lambda-network-connector" | "igw-firewall"),
                                               ?max_results: ::Integer,
                                               ?next_token: ::String
                                             ) -> _GetIpamPolicyAllocationRulesResponseSuccess
@@ -12270,7 +12270,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#modify_default_credit_specification-instance_method
       def modify_default_credit_specification: (
                                                  ?dry_run: bool,
-                                                 instance_family: ("t2" | "t3" | "t3a" | "t4g" | "t8i"),
+                                                 instance_family: ("t2" | "t3" | "t3a" | "t4g" | "t8i" | "t9g"),
                                                  cpu_credits: ::String
                                                ) -> _ModifyDefaultCreditSpecificationResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDefaultCreditSpecificationResponseSuccess
@@ -12666,7 +12666,7 @@ module Aws
                                                  ?dry_run: bool,
                                                  ipam_policy_id: ::String,
                                                  locale: ::String,
-                                                 resource_type: ("alb" | "eip" | "rds" | "rnat"),
+                                                 resource_type: ("alb" | "eip" | "rds" | "rnat" | "lambda-network-connector" | "igw-firewall"),
                                                  ?allocation_rules: Array[
                                                    {
                                                      source_ipam_pool_id: ::String?

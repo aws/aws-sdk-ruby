@@ -2307,6 +2307,10 @@ module Aws::BedrockAgentCoreControl
     #             ],
     #           },
     #         },
+    #         response_interception_mode: "BUFFERED", # accepts BUFFERED, STREAM
+    #         response_streaming_configuration: {
+    #           max_events_per_invocation: 1,
+    #         },
     #       },
     #     ],
     #     policy_engine_configuration: {
@@ -2400,6 +2404,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.interceptor_configurations[0].input_configuration.pass_request_headers #=> Boolean
     #   resp.interceptor_configurations[0].input_configuration.payload_filter.exclude #=> Array
     #   resp.interceptor_configurations[0].input_configuration.payload_filter.exclude[0].field #=> String, one of "RESPONSE_BODY"
+    #   resp.interceptor_configurations[0].response_interception_mode #=> String, one of "BUFFERED", "STREAM"
+    #   resp.interceptor_configurations[0].response_streaming_configuration.max_events_per_invocation #=> Integer
     #   resp.policy_engine_configuration.arn #=> String
     #   resp.policy_engine_configuration.mode #=> String, one of "LOG_ONLY", "ENFORCE"
     #   resp.workload_identity_details.workload_identity_arn #=> String
@@ -8395,6 +8401,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.interceptor_configurations[0].input_configuration.pass_request_headers #=> Boolean
     #   resp.interceptor_configurations[0].input_configuration.payload_filter.exclude #=> Array
     #   resp.interceptor_configurations[0].input_configuration.payload_filter.exclude[0].field #=> String, one of "RESPONSE_BODY"
+    #   resp.interceptor_configurations[0].response_interception_mode #=> String, one of "BUFFERED", "STREAM"
+    #   resp.interceptor_configurations[0].response_streaming_configuration.max_events_per_invocation #=> Integer
     #   resp.policy_engine_configuration.arn #=> String
     #   resp.policy_engine_configuration.mode #=> String, one of "LOG_ONLY", "ENFORCE"
     #   resp.workload_identity_details.workload_identity_arn #=> String
@@ -14333,6 +14341,10 @@ module Aws::BedrockAgentCoreControl
     #             ],
     #           },
     #         },
+    #         response_interception_mode: "BUFFERED", # accepts BUFFERED, STREAM
+    #         response_streaming_configuration: {
+    #           max_events_per_invocation: 1,
+    #         },
     #       },
     #     ],
     #     policy_engine_configuration: {
@@ -14426,6 +14438,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.interceptor_configurations[0].input_configuration.pass_request_headers #=> Boolean
     #   resp.interceptor_configurations[0].input_configuration.payload_filter.exclude #=> Array
     #   resp.interceptor_configurations[0].input_configuration.payload_filter.exclude[0].field #=> String, one of "RESPONSE_BODY"
+    #   resp.interceptor_configurations[0].response_interception_mode #=> String, one of "BUFFERED", "STREAM"
+    #   resp.interceptor_configurations[0].response_streaming_configuration.max_events_per_invocation #=> Integer
     #   resp.policy_engine_configuration.arn #=> String
     #   resp.policy_engine_configuration.mode #=> String, one of "LOG_ONLY", "ENFORCE"
     #   resp.workload_identity_details.workload_identity_arn #=> String
@@ -18155,7 +18169,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

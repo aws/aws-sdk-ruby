@@ -283,7 +283,7 @@ module Aws::EC2
       attr_accessor customer_owned_ipv_4_pool: ::String
       attr_accessor carrier_ip: ::String
       attr_accessor subnet_id: ::String
-      attr_accessor service_managed: ("alb" | "nlb" | "rnat" | "rds")
+      attr_accessor service_managed: ("alb" | "nlb" | "rnat" | "rds" | "lambda-network-connector" | "igw-firewall")
       attr_accessor instance_id: ::String
       attr_accessor public_ip: ::String
       SENSITIVE: []
@@ -10659,7 +10659,7 @@ module Aws::EC2
 
     class GetDefaultCreditSpecificationRequest
       attr_accessor dry_run: bool
-      attr_accessor instance_family: ("t2" | "t3" | "t3a" | "t4g" | "t8i")
+      attr_accessor instance_family: ("t2" | "t3" | "t3a" | "t4g" | "t8i" | "t9g")
       SENSITIVE: []
     end
 
@@ -10951,7 +10951,7 @@ module Aws::EC2
       attr_accessor ipam_policy_id: ::String
       attr_accessor filters: ::Array[Types::Filter]
       attr_accessor locale: ::String
-      attr_accessor resource_type: ("alb" | "eip" | "rds" | "rnat")
+      attr_accessor resource_type: ("alb" | "eip" | "rds" | "rnat" | "lambda-network-connector" | "igw-firewall")
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -11815,6 +11815,12 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class IgwFirewall
+      attr_accessor firewall_arn: ::String
+      attr_accessor status: ("pending" | "active" | "disabling")
+      SENSITIVE: []
+    end
+
     class Image
       attr_accessor platform_details: ::String
       attr_accessor usage_operation: ::String
@@ -12479,7 +12485,7 @@ module Aws::EC2
     end
 
     class InstanceFamilyCreditSpecification
-      attr_accessor instance_family: ("t2" | "t3" | "t3a" | "t4g" | "t8i")
+      attr_accessor instance_family: ("t2" | "t3" | "t3a" | "t4g" | "t8i" | "t9g")
       attr_accessor cpu_credits: ::String
       SENSITIVE: []
     end
@@ -13181,7 +13187,7 @@ module Aws::EC2
     class IpamPolicyDocument
       attr_accessor ipam_policy_id: ::String
       attr_accessor locale: ::String
-      attr_accessor resource_type: ("alb" | "eip" | "rds" | "rnat")
+      attr_accessor resource_type: ("alb" | "eip" | "rds" | "rnat" | "lambda-network-connector" | "igw-firewall")
       attr_accessor allocation_rules: ::Array[Types::IpamPolicyAllocationRule]
       SENSITIVE: []
     end
@@ -13464,7 +13470,7 @@ module Aws::EC2
       attr_accessor max_length: ::Integer
       attr_accessor description: ::String
       attr_accessor latest_delta_id: ::String
-      attr_accessor state: ("pending-activate" | "activate-failed" | "create-in-progress" | "create-complete" | "update-in-progress" | "update-complete" | "delete-in-progress" | "delete-complete")
+      attr_accessor state: ("pending-activate" | "activate-failed" | "create-in-progress" | "create-complete" | "update-in-progress" | "update-complete" | "delete-in-progress" | "delete-complete" | "disable-complete")
       SENSITIVE: []
     end
 
@@ -14534,7 +14540,7 @@ module Aws::EC2
 
     class ModifyDefaultCreditSpecificationRequest
       attr_accessor dry_run: bool
-      attr_accessor instance_family: ("t2" | "t3" | "t3a" | "t4g" | "t8i")
+      attr_accessor instance_family: ("t2" | "t3" | "t3a" | "t4g" | "t8i" | "t9g")
       attr_accessor cpu_credits: ::String
       SENSITIVE: []
     end
@@ -14826,7 +14832,7 @@ module Aws::EC2
       attr_accessor dry_run: bool
       attr_accessor ipam_policy_id: ::String
       attr_accessor locale: ::String
-      attr_accessor resource_type: ("alb" | "eip" | "rds" | "rnat")
+      attr_accessor resource_type: ("alb" | "eip" | "rds" | "rnat" | "lambda-network-connector" | "igw-firewall")
       attr_accessor allocation_rules: ::Array[Types::IpamPolicyAllocationRuleRequest]
       SENSITIVE: []
     end
@@ -16030,6 +16036,13 @@ module Aws::EC2
       attr_accessor maximum_ena_queue_count: ::Integer
       attr_accessor maximum_ena_queue_count_per_interface: ::Integer
       attr_accessor interface_types: ::Array[("interface" | "efa" | "efa-only" | "secondary")]
+      SENSITIVE: []
+    end
+
+    class NetworkFirewallAssociation
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_onboarding_status: ("pending" | "active" | "disabling")
+      attr_accessor firewall_mode: ("monitor" | "enforce")
       SENSITIVE: []
     end
 
@@ -17848,6 +17861,7 @@ module Aws::EC2
       attr_accessor core_network_arn: ::String
       attr_accessor odb_network_arn: ::String
       attr_accessor ip_address: ::String
+      attr_accessor igw_firewall: Types::IgwFirewall
       SENSITIVE: []
     end
 
@@ -18996,6 +19010,7 @@ module Aws::EC2
       attr_accessor private_dns_name_options_on_launch: Types::PrivateDnsNameOptionsOnLaunch
       attr_accessor block_public_access_states: Types::BlockPublicAccessStates
       attr_accessor type: ::String
+      attr_accessor network_firewall_connectivity_type: ("flexible" | "outbound-only" | "bidirectional" | "exclude" | "az-unsupported")
       attr_accessor subnet_id: ::String
       attr_accessor state: ("pending" | "available" | "unavailable" | "failed" | "failed-insufficient-capacity")
       attr_accessor vpc_id: ::String
@@ -20478,6 +20493,7 @@ module Aws::EC2
       attr_accessor encryption_control: Types::VpcEncryptionControl
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor block_public_access_states: Types::BlockPublicAccessStates
+      attr_accessor network_firewall_associations: ::Array[Types::NetworkFirewallAssociation]
       attr_accessor vpc_id: ::String
       attr_accessor state: ("pending" | "available" | "deleting")
       attr_accessor cidr_block: ::String

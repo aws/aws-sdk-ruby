@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+1.1310.0 (2026-11-20)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SageMakerGatewayRuntime`.
+
+* Feature - Added support for enumerating regions for `Aws::Payments`.
+
+* Feature - Added support for enumerating regions for `Aws::AgentDiscovery`.
+
+* Feature - Added support for enumerating regions for `Aws::APIPortal`.
+
 1.1309.0 (2026-11-19)
 ------------------
 

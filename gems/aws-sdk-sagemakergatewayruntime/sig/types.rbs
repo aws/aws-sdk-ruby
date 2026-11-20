@@ -1,0 +1,104 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SageMakerGatewayRuntime
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BadGatewayException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GatewayTimeoutException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalStreamFailure
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class InvokeGlobalInferenceGatewayInput
+      attr_accessor gateway_id: ::String
+      attr_accessor accept: ::String
+      attr_accessor content_type: ::String
+      attr_accessor customer_identity_token: ::String
+      attr_accessor body: ::String
+      SENSITIVE: [:customer_identity_token, :body]
+    end
+
+    class InvokeGlobalInferenceGatewayOutput
+      attr_accessor body: ::String
+      SENSITIVE: [:body]
+    end
+
+    class InvokeGlobalInferenceGatewayWithResponseStreamInput
+      attr_accessor gateway_id: ::String
+      attr_accessor accept: ::String
+      attr_accessor content_type: ::String
+      attr_accessor customer_identity_token: ::String
+      attr_accessor body: ::String
+      SENSITIVE: [:customer_identity_token, :body]
+    end
+
+    class InvokeGlobalInferenceGatewayWithResponseStreamOutput
+      attr_accessor body: Types::ResponseStream
+      SENSITIVE: []
+    end
+
+    class ModelStreamError
+      attr_accessor message: ::String
+      attr_accessor error_code: ("StreamBroken" | "ModelInvocationTimeExceeded")
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class PayloadPart
+      attr_accessor bytes: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: [:bytes]
+    end
+
+    class PayloadTooLargeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResponseStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:payload_part, :model_stream_error, :internal_stream_failure]
+    end
+  end
+end

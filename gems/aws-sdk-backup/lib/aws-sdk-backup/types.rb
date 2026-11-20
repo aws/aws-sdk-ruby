@@ -4073,11 +4073,29 @@ module Aws::Backup
     #   [3]: https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli
     #   @return [Hash<String,Boolean>]
     #
+    # @!attribute [rw] resource_type_opt_in_incremental
+    #   Specifies whether you have opted in to incremental backups for each
+    #   resource type in the Region. When you opt in, each backup captures
+    #   only the changes made since your previous backup. Incremental backup
+    #   opt-in is currently available for Amazon DynamoDB.
+    #
+    #   Consider opting in if your resources are large and change
+    #   infrequently, because incremental backups can reduce your backup
+    #   storage and backup time. To opt in, use the `UpdateRegionSettings`
+    #   API. For a list of the Backup features that each resource type
+    #   supports, see [Feature availability by resource][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
+    #   @return [Hash<String,Boolean>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRegionSettingsOutput AWS API Documentation
     #
     class DescribeRegionSettingsOutput < Struct.new(
       :resource_type_opt_in_preference,
-      :resource_type_management_preference)
+      :resource_type_management_preference,
+      :resource_type_opt_in_incremental)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11734,11 +11752,29 @@ module Aws::Backup
     #   [2]: https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli
     #   @return [Hash<String,Boolean>]
     #
+    # @!attribute [rw] resource_type_opt_in_incremental
+    #   Specifies whether you opt in to incremental backups for each
+    #   resource type in the Region. Opt in when you want to reduce backup
+    #   storage and backup time for large resources that change
+    #   infrequently. Incremental backup opt-in is currently available for
+    #   Amazon DynamoDB.
+    #
+    #   To view your current incremental backup settings, use the
+    #   `DescribeRegionSettings` API. For the resource types that each
+    #   Backup feature supports, see the [Feature availability by
+    #   resource][1] table.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
+    #   @return [Hash<String,Boolean>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateRegionSettingsInput AWS API Documentation
     #
     class UpdateRegionSettingsInput < Struct.new(
       :resource_type_opt_in_preference,
-      :resource_type_management_preference)
+      :resource_type_management_preference,
+      :resource_type_opt_in_incremental)
       SENSITIVE = []
       include Aws::Structure
     end

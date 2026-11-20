@@ -1643,6 +1643,19 @@ module Aws::Inspector2
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #             value: "StringInput", # required
     #           },
+    #           runtime_reachability: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #             value: "REACHABLE", # required, accepts REACHABLE, NOT_REACHABLE, UNKNOWN
+    #           },
+    #           runtime_reachability_reason: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #             value: "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH", # required, accepts PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH, PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH, PROCESS_OBSERVED_IN_EC2_RUNTIME, PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME
+    #           },
+    #           purl_qualifier: {
+    #             comparison: "EQUALS", # required, accepts EQUALS
+    #             key: "arch", # required, accepts arch, collector, dev_dependency, distro, epoch, go_toolchain, hardened, private, rust_toolchain, scope, skip_chromium_download, source, stream, transitive_dependency, unresolved, vendor
+    #             value: "MapValue",
+    #           },
     #         },
     #       ],
     #       related_vulnerabilities: [
@@ -2129,6 +2142,19 @@ module Aws::Inspector2
     #           file_path: {
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #             value: "StringInput", # required
+    #           },
+    #           runtime_reachability: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #             value: "REACHABLE", # required, accepts REACHABLE, NOT_REACHABLE, UNKNOWN
+    #           },
+    #           runtime_reachability_reason: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #             value: "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH", # required, accepts PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH, PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH, PROCESS_OBSERVED_IN_EC2_RUNTIME, PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME
+    #           },
+    #           purl_qualifier: {
+    #             comparison: "EQUALS", # required, accepts EQUALS
+    #             key: "arch", # required, accepts arch, collector, dev_dependency, distro, epoch, go_toolchain, hardened, private, rust_toolchain, scope, skip_chromium_download, source, stream, transitive_dependency, unresolved, vendor
+    #             value: "MapValue",
     #           },
     #         },
     #       ],
@@ -3613,6 +3639,13 @@ module Aws::Inspector2
     #   resp.filter_criteria.vulnerable_packages[0].source_lambda_layer_arn.value #=> String
     #   resp.filter_criteria.vulnerable_packages[0].file_path.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filter_criteria.vulnerable_packages[0].file_path.value #=> String
+    #   resp.filter_criteria.vulnerable_packages[0].runtime_reachability.comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filter_criteria.vulnerable_packages[0].runtime_reachability.value #=> String, one of "REACHABLE", "NOT_REACHABLE", "UNKNOWN"
+    #   resp.filter_criteria.vulnerable_packages[0].runtime_reachability_reason.comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filter_criteria.vulnerable_packages[0].runtime_reachability_reason.value #=> String, one of "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH", "PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH", "PROCESS_OBSERVED_IN_EC2_RUNTIME", "PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME"
+    #   resp.filter_criteria.vulnerable_packages[0].purl_qualifier.comparison #=> String, one of "EQUALS"
+    #   resp.filter_criteria.vulnerable_packages[0].purl_qualifier.key #=> String, one of "arch", "collector", "dev_dependency", "distro", "epoch", "go_toolchain", "hardened", "private", "rust_toolchain", "scope", "skip_chromium_download", "source", "stream", "transitive_dependency", "unresolved", "vendor"
+    #   resp.filter_criteria.vulnerable_packages[0].purl_qualifier.value #=> String
     #   resp.filter_criteria.related_vulnerabilities #=> Array
     #   resp.filter_criteria.related_vulnerabilities[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filter_criteria.related_vulnerabilities[0].value #=> String
@@ -5722,6 +5755,13 @@ module Aws::Inspector2
     #   resp.filters[0].criteria.vulnerable_packages[0].source_lambda_layer_arn.value #=> String
     #   resp.filters[0].criteria.vulnerable_packages[0].file_path.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filters[0].criteria.vulnerable_packages[0].file_path.value #=> String
+    #   resp.filters[0].criteria.vulnerable_packages[0].runtime_reachability.comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filters[0].criteria.vulnerable_packages[0].runtime_reachability.value #=> String, one of "REACHABLE", "NOT_REACHABLE", "UNKNOWN"
+    #   resp.filters[0].criteria.vulnerable_packages[0].runtime_reachability_reason.comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filters[0].criteria.vulnerable_packages[0].runtime_reachability_reason.value #=> String, one of "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH", "PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH", "PROCESS_OBSERVED_IN_EC2_RUNTIME", "PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME"
+    #   resp.filters[0].criteria.vulnerable_packages[0].purl_qualifier.comparison #=> String, one of "EQUALS"
+    #   resp.filters[0].criteria.vulnerable_packages[0].purl_qualifier.key #=> String, one of "arch", "collector", "dev_dependency", "distro", "epoch", "go_toolchain", "hardened", "private", "rust_toolchain", "scope", "skip_chromium_download", "source", "stream", "transitive_dependency", "unresolved", "vendor"
+    #   resp.filters[0].criteria.vulnerable_packages[0].purl_qualifier.value #=> String
     #   resp.filters[0].criteria.related_vulnerabilities #=> Array
     #   resp.filters[0].criteria.related_vulnerabilities[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filters[0].criteria.related_vulnerabilities[0].value #=> String
@@ -6860,6 +6900,19 @@ module Aws::Inspector2
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #             value: "StringInput", # required
     #           },
+    #           runtime_reachability: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #             value: "REACHABLE", # required, accepts REACHABLE, NOT_REACHABLE, UNKNOWN
+    #           },
+    #           runtime_reachability_reason: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #             value: "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH", # required, accepts PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH, PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH, PROCESS_OBSERVED_IN_EC2_RUNTIME, PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME
+    #           },
+    #           purl_qualifier: {
+    #             comparison: "EQUALS", # required, accepts EQUALS
+    #             key: "arch", # required, accepts arch, collector, dev_dependency, distro, epoch, go_toolchain, hardened, private, rust_toolchain, scope, skip_chromium_download, source, stream, transitive_dependency, unresolved, vendor
+    #             value: "MapValue",
+    #           },
     #         },
     #       ],
     #       related_vulnerabilities: [
@@ -7242,6 +7295,9 @@ module Aws::Inspector2
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].fixed_in_version #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].remediation #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].source_lambda_layer_arn #=> String
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].runtime_reachability #=> String, one of "REACHABLE", "NOT_REACHABLE", "UNKNOWN"
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].runtime_reachability_reason #=> String, one of "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH", "PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH", "PROCESS_OBSERVED_IN_EC2_RUNTIME", "PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME"
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].purl #=> String
     #   resp.findings[0].package_vulnerability_details.source #=> String
     #   resp.findings[0].package_vulnerability_details.cvss #=> Array
     #   resp.findings[0].package_vulnerability_details.cvss[0].base_score #=> Float
@@ -8714,6 +8770,19 @@ module Aws::Inspector2
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #             value: "StringInput", # required
     #           },
+    #           runtime_reachability: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #             value: "REACHABLE", # required, accepts REACHABLE, NOT_REACHABLE, UNKNOWN
+    #           },
+    #           runtime_reachability_reason: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #             value: "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH", # required, accepts PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH, PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH, PROCESS_OBSERVED_IN_EC2_RUNTIME, PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME
+    #           },
+    #           purl_qualifier: {
+    #             comparison: "EQUALS", # required, accepts EQUALS
+    #             key: "arch", # required, accepts arch, collector, dev_dependency, distro, epoch, go_toolchain, hardened, private, rust_toolchain, scope, skip_chromium_download, source, stream, transitive_dependency, unresolved, vendor
+    #             value: "MapValue",
+    #           },
     #         },
     #       ],
     #       related_vulnerabilities: [
@@ -9041,7 +9110,7 @@ module Aws::Inspector2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

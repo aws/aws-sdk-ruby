@@ -206,6 +206,66 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Identifies the project to archive.
+    #
+    # @!attribute [rw] project_identifier
+    #   The id or ARN of the project to archive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ArchiveProjectRequest AWS API Documentation
+    #
+    class ArchiveProjectRequest < Struct.new(
+      :project_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The project after the archive operation.
+    #
+    # @!attribute [rw] id
+    #   The project ID. The account's default project uses `default`; a
+    #   named project's generated ID starts with `proj_`.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The project's display name. Project names do not have to be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The project's lifecycle status.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time the project was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] archived_at
+    #   The time the project was archived.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data_retention
+    #   The project's data retention setting. A mode of `inherit` defers to
+    #   the account setting or model default.
+    #   @return [Types::ProjectDataRetention]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ArchiveProjectResponse AWS API Documentation
+    #
+    class ArchiveProjectResponse < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :status,
+      :created_at,
+      :archived_at,
+      :data_retention)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
     # The configuration details of an automated evaluation job. The
     # `EvaluationDatasetMetricConfig` object is used to specify the prompt
     # datasets, task type, and metric names.
@@ -4298,6 +4358,80 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # The display name, optional tags, and optional data retention setting
+    # for the new project.
+    #
+    # @!attribute [rw] name
+    #   The display name for the project. Project names do not have to be
+    #   unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to associate with the project.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] data_retention
+    #   The project's data-retention mode. If you omit this field, Amazon
+    #   Bedrock sets the mode to `inherit`. The project then uses the
+    #   account setting or the model default.
+    #   @return [Types::ProjectDataRetention]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateProjectRequest AWS API Documentation
+    #
+    class CreateProjectRequest < Struct.new(
+      :name,
+      :tags,
+      :data_retention)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # The newly created project.
+    #
+    # @!attribute [rw] id
+    #   The project ID. The account's default project uses `default`; a
+    #   named project's generated ID starts with `proj_`.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The project's display name. Project names do not have to be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The project's lifecycle status.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time the project was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] archived_at
+    #   The time the project was archived.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data_retention
+    #   The project's data retention setting. A mode of `inherit` defers to
+    #   the account setting or model default.
+    #   @return [Types::ProjectDataRetention]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateProjectResponse AWS API Documentation
+    #
+    class CreateProjectResponse < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :status,
+      :created_at,
+      :archived_at,
+      :data_retention)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure
     #   idempotency of your requests. If not specified, the Amazon Web
@@ -4795,6 +4929,84 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # You provide the Amazon S3 destination and AWS Key Management Service
+    # (AWS KMS) key for retained data.
+    #
+    # Before saving a customer-managed destination, Amazon Bedrock validates
+    # that you can use the bucket and key and that their resource policies
+    # permit the required Amazon Bedrock access. If validation fails, Amazon
+    # Bedrock rejects the configuration without saving it.
+    #
+    # You need `s3:PutObject`, `s3:GetObject`, `kms:GenerateDataKey`, and
+    # `kms:Decrypt` permissions. The Amazon S3 bucket policy must allow the
+    # Amazon Bedrock service principal, `bedrock.amazonaws.com`, to put,
+    # get, and delete objects with conditions appropriate to the
+    # configuration scope.
+    #
+    # Use `aws:SourceAccount` for account scope, `aws:SourceOrgID` for
+    # organization scope, and both `aws:SourceAccount` and the project's
+    # `aws:SourceArn` for project scope. Validation rejects resource
+    # policies that allow the service principal to access the destination
+    # without the required scope conditions.
+    #
+    # The key policy must permit `kms:GenerateDataKey` and `kms:Decrypt` for
+    # both uses of the key: direct use by Amazon Bedrock with the scope
+    # conditions, and use through Amazon S3 with a `kms:ViaService`
+    # condition for the bucket's Region and
+    # `kms:EncryptionContext:aws:s3:arn` scoped to the bucket.
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer managed AWS Key
+    #   Management Service (AWS KMS) key you use to encrypt retained data.
+    #   Specify an enabled symmetric encryption key in the AWS Region where
+    #   you register the configuration. You cannot specify a key alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_arn
+    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket that receives
+    #   retained data. The bucket must be in the AWS Region where you
+    #   register the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_owner
+    #   The AWS account ID of the destination bucket's owner. You must
+    #   specify the owner, even when the bucket belongs to another account.
+    #   Amazon Bedrock uses this ID to verify bucket ownership for each
+    #   delivery request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DataRetentionStorageConfiguration AWS API Documentation
+    #
+    class DataRetentionStorageConfiguration < Struct.new(
+      :kms_key_arn,
+      :s3_bucket_arn,
+      :s3_bucket_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the model provider whose account retention storage
+    # configuration to delete.
+    #
+    # @!attribute [rw] model_provider
+    #   The model provider whose retention storage configuration is
+    #   addressed by this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteAccountDataRetentionStorageRequest AWS API Documentation
+    #
+    class DeleteAccountDataRetentionStorageRequest < Struct.new(
+      :model_provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A successful deletion returns no response fields.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteAccountDataRetentionStorageResponse AWS API Documentation
+    #
+    class DeleteAccountDataRetentionStorageResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the Automated Reasoning policy
     #   whose build workflow you want to delete.
@@ -5024,6 +5236,57 @@ module Aws::Bedrock
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteModelInvocationLoggingConfigurationResponse AWS API Documentation
     #
     class DeleteModelInvocationLoggingConfigurationResponse < Aws::EmptyStructure; end
+
+    # Identifies the model provider whose organization retention storage
+    # configuration to delete.
+    #
+    # @!attribute [rw] model_provider
+    #   The model provider whose retention storage configuration is
+    #   addressed by this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteOrganizationDataRetentionStorageRequest AWS API Documentation
+    #
+    class DeleteOrganizationDataRetentionStorageRequest < Struct.new(
+      :model_provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A successful deletion returns no response fields.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteOrganizationDataRetentionStorageResponse AWS API Documentation
+    #
+    class DeleteOrganizationDataRetentionStorageResponse < Aws::EmptyStructure; end
+
+    # Identifies the project and model provider whose retention storage
+    # configuration to delete.
+    #
+    # @!attribute [rw] project_identifier
+    #   The ID or ARN of a named project owned by the calling account in
+    #   this AWS Region. The default project is not supported; use the
+    #   account-level retention storage operations instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_provider
+    #   The model provider whose retention storage configuration is
+    #   addressed by this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteProjectDataRetentionStorageRequest AWS API Documentation
+    #
+    class DeleteProjectDataRetentionStorageRequest < Struct.new(
+      :project_identifier,
+      :model_provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A successful deletion returns no response fields.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteProjectDataRetentionStorageResponse AWS API Documentation
+    #
+    class DeleteProjectDataRetentionStorageResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] prompt_router_arn
     #   The Amazon Resource Name (ARN) of the prompt router to delete.
@@ -6056,6 +6319,70 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Identifies the model provider whose account retention storage
+    # configuration to retrieve.
+    #
+    # @!attribute [rw] model_provider
+    #   The model provider whose retention storage configuration is
+    #   addressed by this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetAccountDataRetentionStorageRequest AWS API Documentation
+    #
+    class GetAccountDataRetentionStorageRequest < Struct.new(
+      :model_provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The calling account's stored retention storage configuration for the
+    # requested model provider.
+    #
+    # @!attribute [rw] scope
+    #   Scope addressed by the operation that returned this record.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_provider
+    #   Model provider this configuration applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_destination
+    #   Where this record delivers retained data.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_configuration
+    #   The stored destination and key. Present only when storageDestination
+    #   is customer\_managed.
+    #   @return [Types::DataRetentionStorageConfiguration]
+    #
+    # @!attribute [rw] updated_at
+    #   Time the stored record last changed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] kms_key_status
+    #   Validation state of the KMS key. Present only when
+    #   storageDestination is customer\_managed.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_status
+    #   Validation state of the bucket. Present only when storageDestination
+    #   is customer\_managed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetAccountDataRetentionStorageResponse AWS API Documentation
+    #
+    class GetAccountDataRetentionStorageResponse < Struct.new(
+      :scope,
+      :model_provider,
+      :storage_destination,
+      :storage_configuration,
+      :updated_at,
+      :kms_key_status,
+      :s3_bucket_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Get Advanced Prompt Optimization Job Request
     #
     # @!attribute [rw] job_identifier
@@ -6857,10 +7184,25 @@ module Aws::Bedrock
     #   The model identifier.
     #   @return [String]
     #
+    # @!attribute [rw] project_identifier
+    #   The ID or Amazon Resource Name (ARN) of a project. Amazon Bedrock
+    #   uses the project's trusted access program participation when
+    #   determining whether to return the model. The project must belong to
+    #   your account in the same AWS Region and partition as the request.
+    #
+    #   If you omit this parameter or specify `default`, Amazon Bedrock uses
+    #   your account's participation, including organization inheritance.
+    #
+    #   A project that doesn't exist or is archived causes a
+    #   `ValidationException`. A model outside the project's available
+    #   model catalog causes a `ResourceNotFoundException`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetFoundationModelRequest AWS API Documentation
     #
     class GetFoundationModelRequest < Struct.new(
-      :model_identifier)
+      :model_identifier,
+      :project_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7085,10 +7427,27 @@ module Aws::Bedrock
     #   The ID or Amazon Resource Name (ARN) of the inference profile.
     #   @return [String]
     #
+    # @!attribute [rw] project_identifier
+    #   The ID or Amazon Resource Name (ARN) of a project. Amazon Bedrock
+    #   uses the project's trusted access program participation when
+    #   determining whether to return a system-defined inference profile.
+    #   The project must belong to your account in the same AWS Region and
+    #   partition as the request.
+    #
+    #   If you omit this parameter or specify `default`, Amazon Bedrock uses
+    #   your account's participation, including organization inheritance.
+    #
+    #   A project that doesn't exist or is archived causes a
+    #   `ValidationException`. Specifying a project other than `default` for
+    #   an application inference profile also causes a
+    #   `ValidationException`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetInferenceProfileRequest AWS API Documentation
     #
     class GetInferenceProfileRequest < Struct.new(
-      :inference_profile_identifier)
+      :inference_profile_identifier,
+      :project_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7702,6 +8061,206 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Identifies the model provider whose organization retention storage
+    # configuration to retrieve.
+    #
+    # @!attribute [rw] model_provider
+    #   The model provider whose retention storage configuration is
+    #   addressed by this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetOrganizationDataRetentionStorageRequest AWS API Documentation
+    #
+    class GetOrganizationDataRetentionStorageRequest < Struct.new(
+      :model_provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The organization's stored retention storage configuration for the
+    # requested model provider.
+    #
+    # @!attribute [rw] scope
+    #   Scope addressed by the operation that returned this record.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_provider
+    #   Model provider this configuration applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_destination
+    #   Where this record delivers retained data.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_configuration
+    #   The stored destination and key. Present only when storageDestination
+    #   is customer\_managed.
+    #   @return [Types::DataRetentionStorageConfiguration]
+    #
+    # @!attribute [rw] updated_at
+    #   Time the stored record last changed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] kms_key_status
+    #   Validation state of the KMS key. Present only when
+    #   storageDestination is customer\_managed.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_status
+    #   Validation state of the bucket. Present only when storageDestination
+    #   is customer\_managed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetOrganizationDataRetentionStorageResponse AWS API Documentation
+    #
+    class GetOrganizationDataRetentionStorageResponse < Struct.new(
+      :scope,
+      :model_provider,
+      :storage_destination,
+      :storage_configuration,
+      :updated_at,
+      :kms_key_status,
+      :s3_bucket_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the project and model provider whose retention storage
+    # configuration to retrieve.
+    #
+    # @!attribute [rw] project_identifier
+    #   The ID or ARN of a named project owned by the calling account in
+    #   this AWS Region. The default project is not supported; use the
+    #   account-level retention storage operations instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_provider
+    #   The model provider whose retention storage configuration is
+    #   addressed by this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetProjectDataRetentionStorageRequest AWS API Documentation
+    #
+    class GetProjectDataRetentionStorageRequest < Struct.new(
+      :project_identifier,
+      :model_provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The project's stored retention storage configuration for the
+    # requested model provider.
+    #
+    # @!attribute [rw] scope
+    #   Scope addressed by the operation that returned this record.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_provider
+    #   Model provider this configuration applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_destination
+    #   Where this record delivers retained data.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_configuration
+    #   The stored destination and key. Present only when storageDestination
+    #   is customer\_managed.
+    #   @return [Types::DataRetentionStorageConfiguration]
+    #
+    # @!attribute [rw] updated_at
+    #   Time the stored record last changed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] kms_key_status
+    #   Validation state of the KMS key. Present only when
+    #   storageDestination is customer\_managed.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_status
+    #   Validation state of the bucket. Present only when storageDestination
+    #   is customer\_managed.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_arn
+    #   ARN of the configured project.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetProjectDataRetentionStorageResponse AWS API Documentation
+    #
+    class GetProjectDataRetentionStorageResponse < Struct.new(
+      :scope,
+      :model_provider,
+      :storage_destination,
+      :storage_configuration,
+      :updated_at,
+      :kms_key_status,
+      :s3_bucket_status,
+      :project_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the project to retrieve.
+    #
+    # @!attribute [rw] project_identifier
+    #   The id or ARN of the project to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetProjectRequest AWS API Documentation
+    #
+    class GetProjectRequest < Struct.new(
+      :project_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The requested project's details and data retention setting.
+    #
+    # @!attribute [rw] id
+    #   The project ID. The account's default project uses `default`; a
+    #   named project's generated ID starts with `proj_`.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The project's display name. Project names do not have to be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The project's lifecycle status.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time the project was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] archived_at
+    #   The time the project was archived.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data_retention
+    #   The project's data retention setting. A mode of `inherit` defers to
+    #   the account setting or model default.
+    #   @return [Types::ProjectDataRetention]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetProjectResponse AWS API Documentation
+    #
+    class GetProjectResponse < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :status,
+      :created_at,
+      :archived_at,
+      :data_retention)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] prompt_router_arn
     #   The prompt router's ARN
     #   @return [String]
@@ -7887,6 +8446,241 @@ module Aws::Bedrock
     #
     class GetResourcePolicyResponse < Struct.new(
       :resource_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the trusted access program whose saved account enrollment
+    # preference to retrieve.
+    #
+    # @!attribute [rw] program_identifier
+    #   The identifier of the trusted access program.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetTrustedAccessProgramAccountEnrollmentRequest AWS API Documentation
+    #
+    class GetTrustedAccessProgramAccountEnrollmentRequest < Struct.new(
+      :program_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The account's stored enrollment. updatedAt is present whenever a row
+    # exists, including an explicit inherit setting.
+    #
+    # @!attribute [rw] opt_in
+    #   Stored preference at the addressed scope. A missing enrollment
+    #   returns inherit without updatedAt.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   Last change to the stored enrollment. Present whenever a row exists,
+    #   including an explicitly stored inherit setting.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetTrustedAccessProgramAccountEnrollmentResponse AWS API Documentation
+    #
+    class GetTrustedAccessProgramAccountEnrollmentResponse < Struct.new(
+      :opt_in,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the trusted access program whose saved organization
+    # enrollment preference to retrieve.
+    #
+    # @!attribute [rw] program_identifier
+    #   The identifier of the trusted access program.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetTrustedAccessProgramOrganizationEnrollmentRequest AWS API Documentation
+    #
+    class GetTrustedAccessProgramOrganizationEnrollmentRequest < Struct.new(
+      :program_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The organization's stored enrollment. updatedAt is present whenever a
+    # row exists, including an explicit inherit setting.
+    #
+    # @!attribute [rw] opt_in
+    #   Stored preference at the addressed scope. A missing enrollment
+    #   returns inherit without updatedAt.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   Last change to the stored enrollment. Present whenever a row exists,
+    #   including an explicitly stored inherit setting.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetTrustedAccessProgramOrganizationEnrollmentResponse AWS API Documentation
+    #
+    class GetTrustedAccessProgramOrganizationEnrollmentResponse < Struct.new(
+      :opt_in,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the trusted access program and named project whose saved
+    # enrollment preference to retrieve.
+    #
+    # @!attribute [rw] program_identifier
+    #   The identifier of the trusted access program.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_identifier
+    #   The id or ARN of the named Bedrock project. The default project is
+    #   not supported; use GetTrustedAccessProgramAccountEnrollment for
+    #   account-level enrollment. An ARN from another account, Region, or
+    #   partition returns ValidationException. A project that does not exist
+    #   in the calling account returns ResourceNotFoundException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetTrustedAccessProgramProjectEnrollmentRequest AWS API Documentation
+    #
+    class GetTrustedAccessProgramProjectEnrollmentRequest < Struct.new(
+      :program_identifier,
+      :project_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The project's stored enrollment. updatedAt is present whenever a row
+    # exists, including an explicit inherit setting.
+    #
+    # @!attribute [rw] opt_in
+    #   Stored preference at the addressed scope. A missing enrollment
+    #   returns inherit without updatedAt.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   Last change to the stored enrollment. Present whenever a row exists,
+    #   including an explicitly stored inherit setting.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetTrustedAccessProgramProjectEnrollmentResponse AWS API Documentation
+    #
+    class GetTrustedAccessProgramProjectEnrollmentResponse < Struct.new(
+      :opt_in,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the trusted access program and optional named project for
+    # which to resolve participation.
+    #
+    # @!attribute [rw] program_identifier
+    #   Identifier of the trusted access program.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_identifier
+    #   The ID or ARN of a named Bedrock project owned by the calling
+    #   account in this Region. When omitted, resolves participation for the
+    #   calling account, including participation inherited from its current
+    #   organization. When specified, resolves participation for the
+    #   project, including participation inherited from the account and its
+    #   current organization. You cannot specify the default project. Omit
+    #   this field to resolve its inherited participation. An ARN from
+    #   another account, Region, or partition returns ValidationException. A
+    #   project that does not exist in the calling account returns
+    #   ResourceNotFoundException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetTrustedAccessProgramRequest AWS API Documentation
+    #
+    class GetTrustedAccessProgramRequest < Struct.new(
+      :program_identifier,
+      :project_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The program's details and participation resolved for the calling
+    # account or requested project.
+    #
+    # @!attribute [rw] program_id
+    #   Identifier of the trusted access program.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Display name of the program.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description of the program and its effects on model access or data
+    #   handling.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_name
+    #   Name of the model provider offering the program.
+    #   @return [String]
+    #
+    # @!attribute [rw] details_url
+    #   URL with program details, terms, and instructions for obtaining
+    #   access.
+    #   @return [String]
+    #
+    # @!attribute [rw] enrollment_url
+    #   Provider application intake URL. Omitted when the program has no
+    #   customer-facing intake URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Participation status resolved for the account and optional project
+    #   context.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Nonempty explanation for requestable or revoked status. Omitted for
+    #   other statuses.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   Scope deciding the status. This can differ from the scope supplying
+    #   the resolved opt-in preference and enrollment timestamps.
+    #   @return [String]
+    #
+    # @!attribute [rw] eligibility_scope
+    #   Scope supplying the applicable approval or most-specific revocation.
+    #   Omitted when no approval or revocation applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolved_for
+    #   Account and optional project context for which participation was
+    #   resolved.
+    #   @return [Types::TrustedAccessResolutionContext]
+    #
+    # @!attribute [rw] opt_in
+    #   Resolved customer preference, preserved independently of
+    #   eligibility, including while revoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   Last change to the enrollment supplying the resolved opt-in. Present
+    #   for enabled or disabled, including while revoked; omitted for
+    #   inherit.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetTrustedAccessProgramResponse AWS API Documentation
+    #
+    class GetTrustedAccessProgramResponse < Struct.new(
+      :program_id,
+      :name,
+      :description,
+      :provider_name,
+      :details_url,
+      :enrollment_url,
+      :status,
+      :status_reason,
+      :source,
+      :eligibility_scope,
+      :resolved_for,
+      :opt_in,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10768,13 +11562,26 @@ module Aws::Bedrock
     #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #   @return [String]
     #
+    # @!attribute [rw] project_identifier
+    #   The ID or Amazon Resource Name (ARN) of a project. Amazon Bedrock
+    #   uses the project's trusted access program participation when
+    #   determining which models to return. The project must belong to your
+    #   account in the same AWS Region and partition as the request.
+    #
+    #   If you omit this parameter or specify `default`, Amazon Bedrock uses
+    #   your account's participation, including organization inheritance. A
+    #   project that doesn't exist or is archived causes a
+    #   `ValidationException`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListFoundationModelsRequest AWS API Documentation
     #
     class ListFoundationModelsRequest < Struct.new(
       :by_provider,
       :by_customization_type,
       :by_output_modality,
-      :by_inference_type)
+      :by_inference_type,
+      :project_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10932,12 +11739,31 @@ module Aws::Bedrock
     #     to one or multiple regions.
     #   @return [String]
     #
+    # @!attribute [rw] project_identifier
+    #   The ID or Amazon Resource Name (ARN) of a project. Amazon Bedrock
+    #   uses the project's trusted access program participation when
+    #   determining which system-defined inference profiles to return. The
+    #   project must belong to your account in the same AWS Region and
+    #   partition as the request.
+    #
+    #   If you omit this parameter or specify `default`, Amazon Bedrock uses
+    #   your account's participation, including organization inheritance.
+    #
+    #   A project that doesn't exist or is archived causes a
+    #   `ValidationException`. Specifying a project other than `default`
+    #   with `typeEquals` set to `APPLICATION` also causes a
+    #   `ValidationException`. Omit `typeEquals` or set it to
+    #   `SYSTEM_DEFINED` to list system-defined inference profiles for the
+    #   project.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListInferenceProfilesRequest AWS API Documentation
     #
     class ListInferenceProfilesRequest < Struct.new(
       :max_results,
       :next_token,
-      :type_equals)
+      :type_equals,
+      :project_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11369,6 +12195,57 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # The page size, continuation token, and optional lifecycle status
+    # filter for listing projects.
+    #
+    # @!attribute [rw] next_token
+    #   Continuation token from a previous ListProjects response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of projects to return in one response, from 1 to
+    #   100. The default is 20.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status_filter
+    #   Returns only the projects in this lifecycle status. When absent, no
+    #   status filtering is applied and every project is returned. New
+    #   lifecycle states extend the `ProjectStatus` enum, and with it this
+    #   filter, compatibly.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListProjectsRequest AWS API Documentation
+    #
+    class ListProjectsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :status_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A page of projects and a continuation token when more results are
+    # available.
+    #
+    # @!attribute [rw] project_summaries
+    #   The projects returned for this page, including their details and
+    #   data retention settings.
+    #   @return [Array<Types::ProjectSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Continuation token; present only when more results exist. Pass it in
+    #   the next request to fetch the following page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListProjectsResponse AWS API Documentation
+    #
+    class ListProjectsResponse < Struct.new(
+      :project_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   The maximum number of prompt routers to return in one page of
     #   results.
@@ -11517,6 +12394,64 @@ module Aws::Bedrock
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The optional named project for which to resolve participation in
+    # visible trusted access programs.
+    #
+    # @!attribute [rw] project_identifier
+    #   The ID or ARN of a named Bedrock project owned by the calling
+    #   account in this Region. When omitted, resolves participation for the
+    #   calling account, including participation inherited from its current
+    #   organization. When specified, resolves participation for the
+    #   project, including participation inherited from the account and its
+    #   current organization. You cannot specify the default project. Omit
+    #   this field to resolve its inherited participation. An ARN from
+    #   another account, Region, or partition returns ValidationException. A
+    #   project that does not exist in the calling account returns
+    #   ResourceNotFoundException.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Reserved for future pagination support. Currently ignored; the
+    #   response includes all visible programs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Reserved for future pagination support. Omit this field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListTrustedAccessProgramsRequest AWS API Documentation
+    #
+    class ListTrustedAccessProgramsRequest < Struct.new(
+      :project_identifier,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The visible trusted access programs and their resolved participation
+    # statuses.
+    #
+    # @!attribute [rw] program_summaries
+    #   All visible programs with resolved participation, ordered by program
+    #   ID. Always present, including an empty array when no programs are
+    #   visible.
+    #   @return [Array<Types::TrustedAccessProgramSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Reserved for future pagination support. Currently omitted because
+    #   the response contains the complete list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListTrustedAccessProgramsResponse AWS API Documentation
+    #
+    class ListTrustedAccessProgramsResponse < Struct.new(
+      :program_summaries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12389,6 +13324,73 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # A project's data-retention setting: the project-scope mode, which may
+    # be `inherit` to defer to the account scope or the model default. Uses
+    # the same mode space as the account-level data-retention operations;
+    # the effective mode for a request resolves project, then account, then
+    # model default.
+    #
+    # @!attribute [rw] mode
+    #   The project's data retention mode. Use `inherit` to defer to the
+    #   account setting or model default.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ProjectDataRetention AWS API Documentation
+    #
+    class ProjectDataRetention < Struct.new(
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A project. The same field set every project-returning operation uses:
+    # create, get, update, and archive all return the full project, and list
+    # returns one per project.
+    #
+    # @!attribute [rw] id
+    #   The project ID. The account's default project uses `default`; a
+    #   named project's generated ID starts with `proj_`.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The project's display name. Project names do not have to be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The project's lifecycle status.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time the project was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] archived_at
+    #   The time the project was archived.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data_retention
+    #   The project's data retention setting. A mode of `inherit` defers to
+    #   the account setting or model default.
+    #   @return [Types::ProjectDataRetention]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ProjectSummary AWS API Documentation
+    #
+    class ProjectSummary < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :status,
+      :created_at,
+      :archived_at,
+      :data_retention)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
     # Details about a prompt router.
     #
     # @!attribute [rw] prompt_router_name
@@ -12605,6 +13607,82 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # The model provider and retention storage destination to configure for
+    # the calling account.
+    #
+    # @!attribute [rw] model_provider
+    #   The model provider whose retention storage configuration is
+    #   addressed by this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_destination
+    #   Where retained data is delivered for this scope. customer\_managed
+    #   requires storageConfiguration; amazon\_managed forbids it.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_configuration
+    #   Destination bucket and key. Required when storageDestination is
+    #   customer\_managed; rejected with ValidationException when
+    #   amazon\_managed.
+    #   @return [Types::DataRetentionStorageConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutAccountDataRetentionStorageRequest AWS API Documentation
+    #
+    class PutAccountDataRetentionStorageRequest < Struct.new(
+      :model_provider,
+      :storage_destination,
+      :storage_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The stored configuration after the write.
+    #
+    # @!attribute [rw] scope
+    #   Scope addressed by the operation that returned this record.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_provider
+    #   Model provider this configuration applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_destination
+    #   Where this record delivers retained data.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_configuration
+    #   The stored destination and key. Present only when storageDestination
+    #   is customer\_managed.
+    #   @return [Types::DataRetentionStorageConfiguration]
+    #
+    # @!attribute [rw] updated_at
+    #   Time the stored record last changed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] kms_key_status
+    #   Validation state of the KMS key. Present only when
+    #   storageDestination is customer\_managed.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_status
+    #   Validation state of the bucket. Present only when storageDestination
+    #   is customer\_managed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutAccountDataRetentionStorageResponse AWS API Documentation
+    #
+    class PutAccountDataRetentionStorageResponse < Struct.new(
+      :scope,
+      :model_provider,
+      :storage_destination,
+      :storage_configuration,
+      :updated_at,
+      :kms_key_status,
+      :s3_bucket_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] config_id
     #   Unique ID for the account enforced configuration.
     #   @return [String]
@@ -12660,6 +13738,171 @@ module Aws::Bedrock
     #
     class PutModelInvocationLoggingConfigurationResponse < Aws::EmptyStructure; end
 
+    # The model provider and retention storage destination to configure for
+    # the organization.
+    #
+    # @!attribute [rw] model_provider
+    #   The model provider whose retention storage configuration is
+    #   addressed by this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_destination
+    #   Where retained data is delivered for this scope. customer\_managed
+    #   requires storageConfiguration; amazon\_managed forbids it.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_configuration
+    #   Destination bucket and key. Required when storageDestination is
+    #   customer\_managed; rejected with ValidationException when
+    #   amazon\_managed.
+    #   @return [Types::DataRetentionStorageConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutOrganizationDataRetentionStorageRequest AWS API Documentation
+    #
+    class PutOrganizationDataRetentionStorageRequest < Struct.new(
+      :model_provider,
+      :storage_destination,
+      :storage_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The organization's stored retention storage configuration after the
+    # write.
+    #
+    # @!attribute [rw] scope
+    #   Scope addressed by the operation that returned this record.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_provider
+    #   Model provider this configuration applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_destination
+    #   Where this record delivers retained data.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_configuration
+    #   The stored destination and key. Present only when storageDestination
+    #   is customer\_managed.
+    #   @return [Types::DataRetentionStorageConfiguration]
+    #
+    # @!attribute [rw] updated_at
+    #   Time the stored record last changed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] kms_key_status
+    #   Validation state of the KMS key. Present only when
+    #   storageDestination is customer\_managed.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_status
+    #   Validation state of the bucket. Present only when storageDestination
+    #   is customer\_managed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutOrganizationDataRetentionStorageResponse AWS API Documentation
+    #
+    class PutOrganizationDataRetentionStorageResponse < Struct.new(
+      :scope,
+      :model_provider,
+      :storage_destination,
+      :storage_configuration,
+      :updated_at,
+      :kms_key_status,
+      :s3_bucket_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The project, model provider, and retention storage destination to
+    # configure.
+    #
+    # @!attribute [rw] project_identifier
+    #   The ID or ARN of a named project owned by the calling account in
+    #   this AWS Region. The default project is not supported; use the
+    #   account-level retention storage operations instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_provider
+    #   The model provider whose retention storage configuration is
+    #   addressed by this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_destination
+    #   Where retained data is delivered for this scope. customer\_managed
+    #   requires storageConfiguration; amazon\_managed forbids it.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_configuration
+    #   Destination bucket and key. Required when storageDestination is
+    #   customer\_managed; rejected with ValidationException when
+    #   amazon\_managed.
+    #   @return [Types::DataRetentionStorageConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutProjectDataRetentionStorageRequest AWS API Documentation
+    #
+    class PutProjectDataRetentionStorageRequest < Struct.new(
+      :project_identifier,
+      :model_provider,
+      :storage_destination,
+      :storage_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The project's stored retention storage configuration after the write.
+    #
+    # @!attribute [rw] scope
+    #   Scope addressed by the operation that returned this record.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_provider
+    #   Model provider this configuration applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_destination
+    #   Where this record delivers retained data.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_configuration
+    #   The stored destination and key. Present only when storageDestination
+    #   is customer\_managed.
+    #   @return [Types::DataRetentionStorageConfiguration]
+    #
+    # @!attribute [rw] updated_at
+    #   Time the stored record last changed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] kms_key_status
+    #   Validation state of the KMS key. Present only when
+    #   storageDestination is customer\_managed.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_status
+    #   Validation state of the bucket. Present only when storageDestination
+    #   is customer\_managed.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_arn
+    #   ARN of the configured project.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutProjectDataRetentionStorageResponse AWS API Documentation
+    #
+    class PutProjectDataRetentionStorageResponse < Struct.new(
+      :scope,
+      :model_provider,
+      :storage_destination,
+      :storage_configuration,
+      :updated_at,
+      :kms_key_status,
+      :s3_bucket_status,
+      :project_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the Bedrock resource to which this resource policy
     #   applies.
@@ -12687,6 +13930,145 @@ module Aws::Bedrock
     #
     class PutResourcePolicyResponse < Struct.new(
       :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The trusted access program and enrollment preference to save for the
+    # calling account.
+    #
+    # @!attribute [rw] program_identifier
+    #   The identifier of the trusted access program.
+    #   @return [String]
+    #
+    # @!attribute [rw] opt_in
+    #   The enrollment preference to store. A transition to enabled accepts
+    #   the program's terms. Changing the preference records a new
+    #   updatedAt. Repeating the same stored preference preserves updatedAt.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutTrustedAccessProgramAccountEnrollmentRequest AWS API Documentation
+    #
+    class PutTrustedAccessProgramAccountEnrollmentRequest < Struct.new(
+      :program_identifier,
+      :opt_in)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The account's resulting stored enrollment setting. An initial inherit
+    # write creates a stored setting with updatedAt.
+    #
+    # @!attribute [rw] opt_in
+    #   Stored preference at the addressed scope. A missing enrollment
+    #   returns inherit without updatedAt.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The time the stored enrollment setting last changed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutTrustedAccessProgramAccountEnrollmentResponse AWS API Documentation
+    #
+    class PutTrustedAccessProgramAccountEnrollmentResponse < Struct.new(
+      :opt_in,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The trusted access program and enrollment preference to save for the
+    # organization.
+    #
+    # @!attribute [rw] program_identifier
+    #   The identifier of the trusted access program.
+    #   @return [String]
+    #
+    # @!attribute [rw] opt_in
+    #   The enrollment preference to store for the organization. A
+    #   transition to enabled accepts the program's terms. Changing the
+    #   preference records a new updatedAt. Repeating the same stored
+    #   preference preserves updatedAt.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutTrustedAccessProgramOrganizationEnrollmentRequest AWS API Documentation
+    #
+    class PutTrustedAccessProgramOrganizationEnrollmentRequest < Struct.new(
+      :program_identifier,
+      :opt_in)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The organization's resulting stored enrollment setting. An initial
+    # inherit write creates a stored setting with updatedAt.
+    #
+    # @!attribute [rw] opt_in
+    #   Stored preference at the addressed scope. A missing enrollment
+    #   returns inherit without updatedAt.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The time the stored enrollment setting last changed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutTrustedAccessProgramOrganizationEnrollmentResponse AWS API Documentation
+    #
+    class PutTrustedAccessProgramOrganizationEnrollmentResponse < Struct.new(
+      :opt_in,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The trusted access program, named project, and enrollment preference
+    # to save.
+    #
+    # @!attribute [rw] program_identifier
+    #   The identifier of the trusted access program.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_identifier
+    #   The id or ARN of the named Bedrock project. The default project is
+    #   not supported; use PutTrustedAccessProgramAccountEnrollment for
+    #   account-level enrollment. An ARN from another account, Region, or
+    #   partition returns ValidationException. A project that does not exist
+    #   in the calling account returns ResourceNotFoundException.
+    #   @return [String]
+    #
+    # @!attribute [rw] opt_in
+    #   The enrollment preference to store. A transition to enabled accepts
+    #   the program's terms. Changing the preference records a new
+    #   updatedAt. Repeating the same stored preference preserves updatedAt.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutTrustedAccessProgramProjectEnrollmentRequest AWS API Documentation
+    #
+    class PutTrustedAccessProgramProjectEnrollmentRequest < Struct.new(
+      :program_identifier,
+      :project_identifier,
+      :opt_in)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The project's resulting stored enrollment setting. An initial inherit
+    # write creates a stored setting with updatedAt.
+    #
+    # @!attribute [rw] opt_in
+    #   Stored preference at the addressed scope. A missing enrollment
+    #   returns inherit without updatedAt.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The time the stored enrollment setting last changed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutTrustedAccessProgramProjectEnrollmentResponse AWS API Documentation
+    #
+    class PutTrustedAccessProgramProjectEnrollmentResponse < Struct.new(
+      :opt_in,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13525,6 +14907,105 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Identifies the trusted access program for which to prepare an account
+    # application handoff.
+    #
+    # @!attribute [rw] program_identifier
+    #   Identifier of the trusted access program.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StartTrustedAccessProgramAccountApplicationRequest AWS API Documentation
+    #
+    class StartTrustedAccessProgramAccountApplicationRequest < Struct.new(
+      :program_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The information needed to continue the account's application with the
+    # provider.
+    #
+    # @!attribute [rw] result
+    #   Provider handoff for the calling account.
+    #   @return [Types::TrustedAccessProgramApplicationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StartTrustedAccessProgramAccountApplicationResponse AWS API Documentation
+    #
+    class StartTrustedAccessProgramAccountApplicationResponse < Struct.new(
+      :result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the trusted access program for which to prepare an
+    # organization application handoff.
+    #
+    # @!attribute [rw] program_identifier
+    #   Identifier of the trusted access program.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StartTrustedAccessProgramOrganizationApplicationRequest AWS API Documentation
+    #
+    class StartTrustedAccessProgramOrganizationApplicationRequest < Struct.new(
+      :program_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The information needed to continue the organization's application
+    # with the provider.
+    #
+    # @!attribute [rw] result
+    #   Provider handoff for the calling account's current organization.
+    #   @return [Types::TrustedAccessProgramApplicationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StartTrustedAccessProgramOrganizationApplicationResponse AWS API Documentation
+    #
+    class StartTrustedAccessProgramOrganizationApplicationResponse < Struct.new(
+      :result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the trusted access program and named project for which to
+    # prepare an application handoff.
+    #
+    # @!attribute [rw] program_identifier
+    #   Identifier of the trusted access program.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_identifier
+    #   The id or ARN of the named Bedrock project. The default project is
+    #   not supported; use StartTrustedAccessProgramAccountApplication for
+    #   an account-level application. An ARN from another account, Region,
+    #   or partition returns ValidationException. A project that does not
+    #   exist in the calling account returns ResourceNotFoundException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StartTrustedAccessProgramProjectApplicationRequest AWS API Documentation
+    #
+    class StartTrustedAccessProgramProjectApplicationRequest < Struct.new(
+      :program_identifier,
+      :project_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The information needed to continue the project's application with the
+    # provider.
+    #
+    # @!attribute [rw] result
+    #   Provider handoff for the named project.
+    #   @return [Types::TrustedAccessProgramApplicationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StartTrustedAccessProgramProjectApplicationResponse AWS API Documentation
+    #
+    class StartTrustedAccessProgramProjectApplicationResponse < Struct.new(
+      :result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # For a Distillation job, the status details for sub-tasks of the job.
     # Possible statuses for each sub-task include the following:
     #
@@ -13866,6 +15347,167 @@ module Aws::Bedrock
     #
     class TrainingMetrics < Struct.new(
       :training_loss)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Result of preparing an application. A provider handoff does not submit
+    # an application, grant eligibility, or change enrollment. Clients must
+    # tolerate unknown union members.
+    #
+    # @note TrustedAccessProgramApplicationResult is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TrustedAccessProgramApplicationResult corresponding to the set member.
+    #
+    # @!attribute [rw] provider_handoff
+    #   Information for continuing the application with the provider.
+    #   @return [Types::TrustedAccessProgramProviderHandoff]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/TrustedAccessProgramApplicationResult AWS API Documentation
+    #
+    class TrustedAccessProgramApplicationResult < Struct.new(
+      :provider_handoff,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ProviderHandoff < TrustedAccessProgramApplicationResult; end
+      class Unknown < TrustedAccessProgramApplicationResult; end
+    end
+
+    # Information needed to continue an application with the provider.
+    #
+    # @!attribute [rw] enrollment_url
+    #   Provider intake URL. When present, open it and paste the complete
+    #   application token into the provider's token field. Omitted when the
+    #   provider receives the application token through a separate
+    #   integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_token
+    #   Opaque token binding the application to the authenticated customer,
+    #   requested program, and scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_token_expires_at
+    #   Deadline for the provider to accept the application context. Start
+    #   another application handoff if the token expires before acceptance.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/TrustedAccessProgramProviderHandoff AWS API Documentation
+    #
+    class TrustedAccessProgramProviderHandoff < Struct.new(
+      :enrollment_url,
+      :application_token,
+      :application_token_expires_at)
+      SENSITIVE = [:application_token]
+      include Aws::Structure
+    end
+
+    # Program details and participation resolved for the calling account and
+    # optional named project.
+    #
+    # @!attribute [rw] program_id
+    #   Identifier of the trusted access program.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Display name of the program.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description of the program and its effects on model access or data
+    #   handling.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_name
+    #   Name of the model provider offering the program.
+    #   @return [String]
+    #
+    # @!attribute [rw] details_url
+    #   URL with program details, terms, and instructions for obtaining
+    #   access.
+    #   @return [String]
+    #
+    # @!attribute [rw] enrollment_url
+    #   Provider application intake URL. Omitted when the program has no
+    #   customer-facing intake URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Participation status resolved for the account and optional project
+    #   context.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Nonempty explanation for requestable or revoked status. Omitted for
+    #   other statuses.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   Scope deciding the status. This can differ from the scope supplying
+    #   the resolved opt-in preference and enrollment timestamps.
+    #   @return [String]
+    #
+    # @!attribute [rw] eligibility_scope
+    #   Scope supplying the applicable approval or most-specific revocation.
+    #   Omitted when no approval or revocation applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolved_for
+    #   Account and optional project context for which participation was
+    #   resolved.
+    #   @return [Types::TrustedAccessResolutionContext]
+    #
+    # @!attribute [rw] opt_in
+    #   Resolved customer preference, preserved independently of
+    #   eligibility, including while revoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   Last change to the enrollment supplying the resolved opt-in. Present
+    #   for enabled or disabled, including while revoked; omitted for
+    #   inherit.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/TrustedAccessProgramSummary AWS API Documentation
+    #
+    class TrustedAccessProgramSummary < Struct.new(
+      :program_id,
+      :name,
+      :description,
+      :provider_name,
+      :details_url,
+      :enrollment_url,
+      :status,
+      :status_reason,
+      :source,
+      :eligibility_scope,
+      :resolved_for,
+      :opt_in,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Account and optional project context evaluated when resolving a
+    # trusted access program's status.
+    #
+    # @!attribute [rw] account_id
+    #   AWS account for which the program status was resolved, including
+    #   applicable organization settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_arn
+    #   The canonical ARN of the authorized named project for which
+    #   participation was resolved. Omitted when the request has no project
+    #   context.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/TrustedAccessResolutionContext AWS API Documentation
+    #
+    class TrustedAccessResolutionContext < Struct.new(
+      :account_id,
+      :project_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14263,6 +15905,78 @@ module Aws::Bedrock
     class UpdateMarketplaceModelEndpointResponse < Struct.new(
       :marketplace_model_endpoint)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the project and the field to update. Specify exactly one of
+    # `name` or `dataRetention`.
+    #
+    # @!attribute [rw] project_identifier
+    #   The id or ARN of the project to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The project's new display name. Specify this field only when
+    #   `dataRetention` is omitted. Project names do not have to be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_retention
+    #   The project's new data-retention mode. Must be set on its own.
+    #   @return [Types::ProjectDataRetention]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/UpdateProjectRequest AWS API Documentation
+    #
+    class UpdateProjectRequest < Struct.new(
+      :project_identifier,
+      :name,
+      :data_retention)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # The project after the update.
+    #
+    # @!attribute [rw] id
+    #   The project ID. The account's default project uses `default`; a
+    #   named project's generated ID starts with `proj_`.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The project's display name. Project names do not have to be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The project's lifecycle status.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time the project was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] archived_at
+    #   The time the project was archived.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data_retention
+    #   The project's data retention setting. A mode of `inherit` defers to
+    #   the account setting or model default.
+    #   @return [Types::ProjectDataRetention]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/UpdateProjectResponse AWS API Documentation
+    #
+    class UpdateProjectResponse < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :status,
+      :created_at,
+      :archived_at,
+      :data_retention)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 

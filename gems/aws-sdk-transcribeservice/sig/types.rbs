@@ -18,6 +18,7 @@ module Aws::TranscribeService
 
     class BadRequestException
       attr_accessor message: ::String
+      attr_accessor reason: ("audioTooLong" | "audioTooShort" | "unsupportedAudioFormat" | "unsupportedChannelCount" | "invalidAudio" | "audioFileTooLarge" | "mediaDownloadFailed")
       SENSITIVE: []
     end
 
@@ -852,6 +853,49 @@ module Aws::TranscribeService
       SENSITIVE: []
     end
 
+    class SyncItem
+      attr_accessor id: ::Integer
+      attr_accessor content: ::String
+      attr_accessor start_time: ::Float
+      attr_accessor end_time: ::Float
+      attr_accessor language_code: ("en-US" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-WL" | "en-ZA" | "en-NZ" | "es-US" | "es-ES" | "es-MX" | "fr-FR" | "fr-CA" | "it-IT" | "de-DE" | "de-CH" | "ja-JP" | "pt-BR" | "pt-PT" | "zh-CN" | "zh-TW" | "zh-HK" | "ko-KR")
+      attr_accessor channel_label: ::String
+      attr_accessor speaker_label: ::String
+      attr_accessor vocabulary_filter_match: bool
+      attr_accessor redactions: ::Array[Types::SyncRedaction]
+      SENSITIVE: []
+    end
+
+    class SyncLanguageCodeItem
+      attr_accessor language_code: ("en-US" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-WL" | "en-ZA" | "en-NZ" | "es-US" | "es-ES" | "es-MX" | "fr-FR" | "fr-CA" | "it-IT" | "de-DE" | "de-CH" | "ja-JP" | "pt-BR" | "pt-PT" | "zh-CN" | "zh-TW" | "zh-HK" | "ko-KR")
+      attr_accessor duration_in_seconds: ::Float
+      SENSITIVE: []
+    end
+
+    class SyncMedia
+      attr_accessor media_bytes: ::String
+      attr_accessor media_file_uri: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MediaBytes < SyncMedia
+      end
+      class MediaFileUri < SyncMedia
+      end
+      class Unknown < SyncMedia
+      end
+    end
+
+    class SyncOutputConfiguration
+      attr_accessor output_media_file_uri: ::String
+      SENSITIVE: []
+    end
+
+    class SyncRedaction
+      attr_accessor type: ("BANK_ACCOUNT_NUMBER" | "BANK_ROUTING" | "CREDIT_DEBIT_NUMBER" | "CREDIT_DEBIT_CVV" | "CREDIT_DEBIT_EXPIRY" | "PIN" | "EMAIL" | "ADDRESS" | "NAME" | "PHONE" | "SSN" | "DATE_TIME" | "PASSPORT_NUMBER" | "DRIVER_ID" | "URL" | "AGE" | "USERNAME" | "PASSWORD" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "IP_ADDRESS" | "MAC_ADDRESS" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "ALL")
+      SENSITIVE: []
+    end
+
     class Tag
       attr_accessor key: ::String
       attr_accessor value: ::String
@@ -872,6 +916,43 @@ module Aws::TranscribeService
       SENSITIVE: []
     end
 
+    class TranscribeAudioMetadata
+      attr_accessor language_code: ("en-US" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-WL" | "en-ZA" | "en-NZ" | "es-US" | "es-ES" | "es-MX" | "fr-FR" | "fr-CA" | "it-IT" | "de-DE" | "de-CH" | "ja-JP" | "pt-BR" | "pt-PT" | "zh-CN" | "zh-TW" | "zh-HK" | "ko-KR")
+      attr_accessor language_codes: ::Array[Types::SyncLanguageCodeItem]
+      attr_accessor media_format: ("mp3" | "mp4" | "wav" | "flac" | "ogg" | "amr" | "webm" | "m4a")
+      attr_accessor media_sample_rate_hertz: ::Integer
+      attr_accessor speakers_count: ::Integer
+      attr_accessor number_of_channels: ::Integer
+      SENSITIVE: []
+    end
+
+    class TranscribeAudioRequest
+      attr_accessor media: Types::SyncMedia
+      attr_accessor language: ("en" | "es" | "fr" | "it" | "de" | "ja" | "pt" | "ko" | "zh-CN" | "zh-TW" | "zh-HK")
+      attr_accessor language_detection_mode: ("IDENTIFY_LANGUAGE")
+      attr_accessor language_options: ::Array[("en" | "es" | "fr" | "it" | "de" | "ja" | "pt" | "ko" | "zh-CN" | "zh-TW" | "zh-HK")]
+      attr_accessor channel_identification: bool
+      attr_accessor show_speaker_labels: bool
+      attr_accessor max_speaker_labels: ::Integer
+      attr_accessor vocabulary_settings: ::Array[Types::VocabularySettingsEntry]
+      attr_accessor vocabulary_filter_settings: Types::VocabularyFilterSettings
+      attr_accessor content_redaction: Types::ContentRedaction
+      attr_accessor output_configuration: Types::SyncOutputConfiguration
+      SENSITIVE: []
+    end
+
+    class TranscribeAudioResponse
+      attr_accessor output_configuration: Types::SyncOutputConfiguration
+      attr_accessor transcript_response: Types::TranscriptResponse
+      SENSITIVE: []
+    end
+
+    class TranscribeAudioResults
+      attr_accessor transcript: ::String
+      attr_accessor items: ::Array[Types::SyncItem]
+      SENSITIVE: []
+    end
+
     class Transcript
       attr_accessor transcript_file_uri: ::String
       attr_accessor redacted_transcript_file_uri: ::String
@@ -885,6 +966,13 @@ module Aws::TranscribeService
       attr_accessor participant_role: ("AGENT" | "CUSTOMER")
       attr_accessor negate: bool
       attr_accessor targets: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TranscriptResponse
+      attr_accessor metadata: Types::TranscribeAudioMetadata
+      attr_accessor results: Types::TranscribeAudioResults
+      attr_accessor redacted_results: Types::TranscribeAudioResults
       SENSITIVE: []
     end
 
@@ -1019,10 +1107,23 @@ module Aws::TranscribeService
       SENSITIVE: []
     end
 
+    class VocabularyFilterEntry
+      attr_accessor language: ("en" | "es" | "fr" | "it" | "de" | "ja" | "pt" | "ko" | "zh-CN" | "zh-TW" | "zh-HK")
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor words: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class VocabularyFilterInfo
       attr_accessor vocabulary_filter_name: ::String
       attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "am-ET" | "cy-GB" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-MX" | "es-US" | "fa-AF" | "fa-IR" | "fr-CA" | "fr-FR" | "ga-IE" | "gd-GB" | "he-IL" | "hi-IN" | "ht-HT" | "id-ID" | "it-IT" | "ja-JP" | "jv-ID" | "km-KH" | "ko-KR" | "my-MM" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-EE" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "ne-NP" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sq-AL" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zh-HK" | "zu-ZA")
       attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class VocabularyFilterSettings
+      attr_accessor vocabulary_filter_method: ("remove" | "mask" | "tag")
+      attr_accessor filters: ::Array[Types::VocabularyFilterEntry]
       SENSITIVE: []
     end
 
@@ -1031,6 +1132,19 @@ module Aws::TranscribeService
       attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "am-ET" | "cy-GB" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-MX" | "es-US" | "fa-AF" | "fa-IR" | "fr-CA" | "fr-FR" | "ga-IE" | "gd-GB" | "he-IL" | "hi-IN" | "ht-HT" | "id-ID" | "it-IT" | "ja-JP" | "jv-ID" | "km-KH" | "ko-KR" | "my-MM" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-EE" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "ne-NP" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sq-AL" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zh-HK" | "zu-ZA")
       attr_accessor last_modified_time: ::Time
       attr_accessor vocabulary_state: ("PENDING" | "READY" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class VocabularyPhrase
+      attr_accessor text: ::String
+      attr_accessor display_as: ::String
+      SENSITIVE: []
+    end
+
+    class VocabularySettingsEntry
+      attr_accessor language: ("en" | "es" | "fr" | "it" | "de" | "ja" | "pt" | "ko" | "zh-CN" | "zh-TW" | "zh-HK")
+      attr_accessor vocabulary_name: ::String
+      attr_accessor phrases: ::Array[Types::VocabularyPhrase]
       SENSITIVE: []
     end
   end

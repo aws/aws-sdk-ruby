@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.208.0 (2026-11-20)
+------------------
+
+* Feature - This release adds support for the DTS-X and DTS audio codecs, AV1 encoding improvements including Fast decode, GOP size in seconds, and temporal adaptive quantization, and Dynamic Multiview for H.264 and H.265 outputs.
+
 1.207.0 (2026-11-18)
 ------------------
 

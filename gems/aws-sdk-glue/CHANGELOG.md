@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.299.0 (2026-11-20)
+------------------
+
+* Feature - Minor updates to the Glue Business Context APIs
+
 1.298.0 (2026-11-18)
 ------------------
 

@@ -2916,6 +2916,8 @@ module Aws::MediaLive
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.page_number #=> String
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.smart_subtitle_source_settings.caption_synchronization_mode #=> String, one of "NO_VIDEO_DELAY", "VIDEO_ALIGNED_CAPTIONS"
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.smart_subtitle_source_settings.inference_feed_output #=> String
+    #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.webvtt_source_settings.group_id #=> String
+    #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.webvtt_source_settings.name #=> String
     #   resp.channels[0].input_attachments[0].input_settings.deblock_filter #=> String, one of "DISABLED", "ENABLED"
     #   resp.channels[0].input_attachments[0].input_settings.denoise_filter #=> String, one of "DISABLED", "ENABLED"
     #   resp.channels[0].input_attachments[0].input_settings.filter_strength #=> Integer
@@ -8157,7 +8159,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.213.0'
+      context[:gem_version] = '1.214.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

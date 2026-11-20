@@ -646,6 +646,21 @@ module Aws
       sensitivity_to_block: ("LOW" | "MEDIUM" | "HIGH")?
     }
 
+      type bedrock_guardrails = {
+      disable: {
+      }?,
+      protect_request_only: {
+        role_arn: ::String
+      }?,
+      protect_request_and_response: {
+        role_arn: ::String
+      }?
+    }
+
+      type aws_managed_rules_ai_security_rule_set = {
+      bedrock_guardrails: Params::bedrock_guardrails
+    }
+
       type managed_rule_group_config = {
       login_path: ::String?,
       payload_type: ("JSON" | "FORM_ENCODED")?,
@@ -661,7 +676,8 @@ module Aws
       }?,
       aws_managed_rules_atp_rule_set: Params::aws_managed_rules_atp_rule_set?,
       aws_managed_rules_acfp_rule_set: Params::aws_managed_rules_acfp_rule_set?,
-      aws_managed_rules_anti_d_do_s_rule_set: Params::aws_managed_rules_anti_d_do_s_rule_set?
+      aws_managed_rules_anti_d_do_s_rule_set: Params::aws_managed_rules_anti_d_do_s_rule_set?,
+      aws_managed_rules_ai_security_rule_set: Params::aws_managed_rules_ai_security_rule_set?
     }
 
       type crypto_config = {

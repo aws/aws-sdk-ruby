@@ -69,7 +69,7 @@ module Aws::Route53
   #
   # | waiter_name                  | params                           | :delay   | :max_attempts |
   # | ---------------------------- | -------------------------------- | -------- | ------------- |
-  # | health_check_source_created  | {Client#get_health_check_source} | 15       | 40            |
+  # | health_check_source_created  | {Client#get_health_check_source} | 15       | 100           |
   # | health_check_source_deleted  | {Client#get_health_check_source} | 15       | 40            |
   # | resource_record_sets_changed | {Client#get_change}              | 30       | 60            |
   #
@@ -79,14 +79,14 @@ module Aws::Route53
 
       # @param [Hash] options
       # @option options [required, Client] :client
-      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :max_attempts (100)
       # @option options [Integer] :delay (15)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       def initialize(options)
         @client = options.fetch(:client)
         @waiter = Aws::Waiters::Waiter.new({
-          max_attempts: 40,
+          max_attempts: 100,
           delay: 15,
           poller: Aws::Waiters::Poller.new(
             operation_name: :get_health_check_source,

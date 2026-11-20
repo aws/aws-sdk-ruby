@@ -800,7 +800,16 @@ module Aws::MediaConvert
     #               channels: 1,
     #               sample_rate: 1,
     #             },
-    #             codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, AC4, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH, FLAC
+    #             codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, AC4, DTSX, DTSC, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH, FLAC
+    #             dtsc_settings: {
+    #               bitrate: 1,
+    #               sample_rate: 1,
+    #             },
+    #             dtsx_settings: {
+    #               bitrate: 1,
+    #               coding_mode: "CODING_MODE_5_1", # accepts CODING_MODE_5_1, CODING_MODE_5_1_4
+    #               sample_rate: 1,
+    #             },
     #             eac_3_atmos_settings: {
     #               bitrate: 1,
     #               bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -1159,15 +1168,17 @@ module Aws::MediaConvert
     #         chroma_position_mode: "AUTO", # accepts AUTO, FORCE_CENTER, FORCE_TOP_LEFT
     #         codec_settings: {
     #           av_1_settings: {
-    #             adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #             adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #             bit_depth: "BIT_8", # accepts BIT_8, BIT_10
     #             bitrate: 1,
+    #             fast_decode: "DISABLED", # accepts DISABLED, ENABLED
     #             film_grain_synthesis: "DISABLED", # accepts DISABLED, ENABLED
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER, MAINTAIN_FRAME_COUNT
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
     #             gop_size: 1.0,
+    #             gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
     #             max_bitrate: 1,
     #             number_b_frames_between_reference_frames: 1,
     #             per_frame_metrics: ["PSNR"], # accepts PSNR, SSIM, MS_SSIM, PSNR_HVS, VMAF, QVBR, SHOT_CHANGE
@@ -1181,6 +1192,7 @@ module Aws::MediaConvert
     #             sliding_window_ms: 1,
     #             sliding_window_peak_bitrate: 1,
     #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #             temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #           },
     #           avc_intra_settings: {
     #             avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200, CLASS_4K_2K
@@ -1496,6 +1508,17 @@ module Aws::MediaConvert
     #           y: 1,
     #         },
     #         drop_frame_timecode: "DISABLED", # accepts DISABLED, ENABLED
+    #         dynamic_multiview_settings: {
+    #           enabled: "DISABLED", # accepts DISABLED, ENABLED
+    #           regions: [
+    #             {
+    #               height: 1,
+    #               width: 1,
+    #               x: 1,
+    #               y: 1,
+    #             },
+    #           ],
+    #         },
     #         fixed_afd: 1,
     #         height: 1,
     #         position: {
@@ -1685,7 +1708,12 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "DTSX", "DTSC", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.dtsc_settings.bitrate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.dtsc_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.dtsx_settings.bitrate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.dtsx_settings.coding_mode #=> String, one of "CODING_MODE_5_1", "CODING_MODE_5_1_4"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.dtsx_settings.sample_rate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_AUTO", "CODING_MODE_5_1_4", "CODING_MODE_7_1_4", "CODING_MODE_9_1_6"
@@ -1970,15 +1998,17 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.preset.settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.chroma_position_mode #=> String, one of "AUTO", "FORCE_CENTER", "FORCE_TOP_LEFT"
-    #   resp.preset.settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.bit_depth #=> String, one of "BIT_8", "BIT_10"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.fast_decode #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.film_grain_synthesis #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.per_frame_metrics #=> Array
@@ -1991,6 +2021,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.sliding_window_ms #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.temporal_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.avc_intra_class #=> String, one of "CLASS_50", "CLASS_100", "CLASS_200", "CLASS_4K_2K"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.avc_intra_uhd_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "MULTI_PASS"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
@@ -2262,6 +2293,12 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.crop.x #=> Integer
     #   resp.preset.settings.video_description.crop.y #=> Integer
     #   resp.preset.settings.video_description.drop_frame_timecode #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.dynamic_multiview_settings.enabled #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.dynamic_multiview_settings.regions #=> Array
+    #   resp.preset.settings.video_description.dynamic_multiview_settings.regions[0].height #=> Integer
+    #   resp.preset.settings.video_description.dynamic_multiview_settings.regions[0].width #=> Integer
+    #   resp.preset.settings.video_description.dynamic_multiview_settings.regions[0].x #=> Integer
+    #   resp.preset.settings.video_description.dynamic_multiview_settings.regions[0].y #=> Integer
     #   resp.preset.settings.video_description.fixed_afd #=> Integer
     #   resp.preset.settings.video_description.height #=> Integer
     #   resp.preset.settings.video_description.position.height #=> Integer
@@ -2808,7 +2845,12 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "DTSX", "DTSC", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.dtsc_settings.bitrate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.dtsc_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.dtsx_settings.bitrate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.dtsx_settings.coding_mode #=> String, one of "CODING_MODE_5_1", "CODING_MODE_5_1_4"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.dtsx_settings.sample_rate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_AUTO", "CODING_MODE_5_1_4", "CODING_MODE_7_1_4", "CODING_MODE_9_1_6"
@@ -3093,15 +3135,17 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.preset.settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.chroma_position_mode #=> String, one of "AUTO", "FORCE_CENTER", "FORCE_TOP_LEFT"
-    #   resp.preset.settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.bit_depth #=> String, one of "BIT_8", "BIT_10"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.fast_decode #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.film_grain_synthesis #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.per_frame_metrics #=> Array
@@ -3114,6 +3158,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.sliding_window_ms #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.temporal_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.avc_intra_class #=> String, one of "CLASS_50", "CLASS_100", "CLASS_200", "CLASS_4K_2K"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.avc_intra_uhd_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "MULTI_PASS"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
@@ -3385,6 +3430,12 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.crop.x #=> Integer
     #   resp.preset.settings.video_description.crop.y #=> Integer
     #   resp.preset.settings.video_description.drop_frame_timecode #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.dynamic_multiview_settings.enabled #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.dynamic_multiview_settings.regions #=> Array
+    #   resp.preset.settings.video_description.dynamic_multiview_settings.regions[0].height #=> Integer
+    #   resp.preset.settings.video_description.dynamic_multiview_settings.regions[0].width #=> Integer
+    #   resp.preset.settings.video_description.dynamic_multiview_settings.regions[0].x #=> Integer
+    #   resp.preset.settings.video_description.dynamic_multiview_settings.regions[0].y #=> Integer
     #   resp.preset.settings.video_description.fixed_afd #=> Integer
     #   resp.preset.settings.video_description.height #=> Integer
     #   resp.preset.settings.video_description.position.height #=> Integer
@@ -3740,7 +3791,12 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "DTSX", "DTSC", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.dtsc_settings.bitrate #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.dtsc_settings.sample_rate #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.dtsx_settings.bitrate #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.dtsx_settings.coding_mode #=> String, one of "CODING_MODE_5_1", "CODING_MODE_5_1_4"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.dtsx_settings.sample_rate #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_AUTO", "CODING_MODE_5_1_4", "CODING_MODE_7_1_4", "CODING_MODE_9_1_6"
@@ -4025,15 +4081,17 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.presets[0].settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.chroma_position_mode #=> String, one of "AUTO", "FORCE_CENTER", "FORCE_TOP_LEFT"
-    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.bit_depth #=> String, one of "BIT_8", "BIT_10"
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.bitrate #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.fast_decode #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.film_grain_synthesis #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.per_frame_metrics #=> Array
@@ -4046,6 +4104,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.sliding_window_ms #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.temporal_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.avc_intra_settings.avc_intra_class #=> String, one of "CLASS_50", "CLASS_100", "CLASS_200", "CLASS_4K_2K"
     #   resp.presets[0].settings.video_description.codec_settings.avc_intra_settings.avc_intra_uhd_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "MULTI_PASS"
     #   resp.presets[0].settings.video_description.codec_settings.avc_intra_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
@@ -4317,6 +4376,12 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.crop.x #=> Integer
     #   resp.presets[0].settings.video_description.crop.y #=> Integer
     #   resp.presets[0].settings.video_description.drop_frame_timecode #=> String, one of "DISABLED", "ENABLED"
+    #   resp.presets[0].settings.video_description.dynamic_multiview_settings.enabled #=> String, one of "DISABLED", "ENABLED"
+    #   resp.presets[0].settings.video_description.dynamic_multiview_settings.regions #=> Array
+    #   resp.presets[0].settings.video_description.dynamic_multiview_settings.regions[0].height #=> Integer
+    #   resp.presets[0].settings.video_description.dynamic_multiview_settings.regions[0].width #=> Integer
+    #   resp.presets[0].settings.video_description.dynamic_multiview_settings.regions[0].x #=> Integer
+    #   resp.presets[0].settings.video_description.dynamic_multiview_settings.regions[0].y #=> Integer
     #   resp.presets[0].settings.video_description.fixed_afd #=> Integer
     #   resp.presets[0].settings.video_description.height #=> Integer
     #   resp.presets[0].settings.video_description.position.height #=> Integer
@@ -5043,7 +5108,16 @@ module Aws::MediaConvert
     #               channels: 1,
     #               sample_rate: 1,
     #             },
-    #             codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, AC4, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH, FLAC
+    #             codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, AC4, DTSX, DTSC, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH, FLAC
+    #             dtsc_settings: {
+    #               bitrate: 1,
+    #               sample_rate: 1,
+    #             },
+    #             dtsx_settings: {
+    #               bitrate: 1,
+    #               coding_mode: "CODING_MODE_5_1", # accepts CODING_MODE_5_1, CODING_MODE_5_1_4
+    #               sample_rate: 1,
+    #             },
     #             eac_3_atmos_settings: {
     #               bitrate: 1,
     #               bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -5402,15 +5476,17 @@ module Aws::MediaConvert
     #         chroma_position_mode: "AUTO", # accepts AUTO, FORCE_CENTER, FORCE_TOP_LEFT
     #         codec_settings: {
     #           av_1_settings: {
-    #             adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #             adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #             bit_depth: "BIT_8", # accepts BIT_8, BIT_10
     #             bitrate: 1,
+    #             fast_decode: "DISABLED", # accepts DISABLED, ENABLED
     #             film_grain_synthesis: "DISABLED", # accepts DISABLED, ENABLED
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER, MAINTAIN_FRAME_COUNT
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
     #             gop_size: 1.0,
+    #             gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
     #             max_bitrate: 1,
     #             number_b_frames_between_reference_frames: 1,
     #             per_frame_metrics: ["PSNR"], # accepts PSNR, SSIM, MS_SSIM, PSNR_HVS, VMAF, QVBR, SHOT_CHANGE
@@ -5424,6 +5500,7 @@ module Aws::MediaConvert
     #             sliding_window_ms: 1,
     #             sliding_window_peak_bitrate: 1,
     #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #             temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #           },
     #           avc_intra_settings: {
     #             avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200, CLASS_4K_2K
@@ -5739,6 +5816,17 @@ module Aws::MediaConvert
     #           y: 1,
     #         },
     #         drop_frame_timecode: "DISABLED", # accepts DISABLED, ENABLED
+    #         dynamic_multiview_settings: {
+    #           enabled: "DISABLED", # accepts DISABLED, ENABLED
+    #           regions: [
+    #             {
+    #               height: 1,
+    #               width: 1,
+    #               x: 1,
+    #               y: 1,
+    #             },
+    #           ],
+    #         },
     #         fixed_afd: 1,
     #         height: 1,
     #         position: {
@@ -5925,7 +6013,12 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "DTSX", "DTSC", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.dtsc_settings.bitrate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.dtsc_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.dtsx_settings.bitrate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.dtsx_settings.coding_mode #=> String, one of "CODING_MODE_5_1", "CODING_MODE_5_1_4"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.dtsx_settings.sample_rate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_AUTO", "CODING_MODE_5_1_4", "CODING_MODE_7_1_4", "CODING_MODE_9_1_6"
@@ -6210,15 +6303,17 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.preset.settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.chroma_position_mode #=> String, one of "AUTO", "FORCE_CENTER", "FORCE_TOP_LEFT"
-    #   resp.preset.settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.bit_depth #=> String, one of "BIT_8", "BIT_10"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.fast_decode #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.film_grain_synthesis #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.per_frame_metrics #=> Array
@@ -6231,6 +6326,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.sliding_window_ms #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.temporal_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.avc_intra_class #=> String, one of "CLASS_50", "CLASS_100", "CLASS_200", "CLASS_4K_2K"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.avc_intra_uhd_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "MULTI_PASS"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
@@ -6502,6 +6598,12 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.crop.x #=> Integer
     #   resp.preset.settings.video_description.crop.y #=> Integer
     #   resp.preset.settings.video_description.drop_frame_timecode #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.dynamic_multiview_settings.enabled #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.dynamic_multiview_settings.regions #=> Array
+    #   resp.preset.settings.video_description.dynamic_multiview_settings.regions[0].height #=> Integer
+    #   resp.preset.settings.video_description.dynamic_multiview_settings.regions[0].width #=> Integer
+    #   resp.preset.settings.video_description.dynamic_multiview_settings.regions[0].x #=> Integer
+    #   resp.preset.settings.video_description.dynamic_multiview_settings.regions[0].y #=> Integer
     #   resp.preset.settings.video_description.fixed_afd #=> Integer
     #   resp.preset.settings.video_description.height #=> Integer
     #   resp.preset.settings.video_description.position.height #=> Integer
@@ -6700,7 +6802,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.207.0'
+      context[:gem_version] = '1.208.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

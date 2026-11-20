@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2026-11-20)
+------------------
+
+* Feature - Added support for Instance Health Checks in AWS PCS.
+
 1.68.0 (2026-11-19)
 ------------------
 

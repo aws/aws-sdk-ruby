@@ -3797,6 +3797,54 @@ module Aws::Odb
       req.send_request(options)
     end
 
+    # Lists the refreshable clones of the specified Autonomous Database.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output.
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [required, String] :autonomous_database_id
+    #   The unique identifier of the source Autonomous Database whose
+    #   refreshable clones you want to list.
+    #
+    # @return [Types::ListAutonomousDatabaseRefreshableClonesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAutonomousDatabaseRefreshableClonesOutput#next_token #next_token} => String
+    #   * {Types::ListAutonomousDatabaseRefreshableClonesOutput#autonomous_database_refreshable_clones #autonomous_database_refreshable_clones} => Array&lt;Types::AutonomousDatabaseRefreshableCloneSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_autonomous_database_refreshable_clones({
+    #     max_results: 1,
+    #     next_token: "ListAutonomousDatabaseRefreshableClonesInputNextTokenString",
+    #     autonomous_database_id: "ResourceIdOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.autonomous_database_refreshable_clones #=> Array
+    #   resp.autonomous_database_refreshable_clones[0].autonomous_database_id #=> String
+    #   resp.autonomous_database_refreshable_clones[0].autonomous_database_arn #=> String
+    #   resp.autonomous_database_refreshable_clones[0].ocid #=> String
+    #   resp.autonomous_database_refreshable_clones[0].region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListAutonomousDatabaseRefreshableClones AWS API Documentation
+    #
+    # @overload list_autonomous_database_refreshable_clones(params = {})
+    # @param [Hash] params ({})
+    def list_autonomous_database_refreshable_clones(params = {}, options = {})
+      req = build_request(:list_autonomous_database_refreshable_clones, params)
+      req.send_request(options)
+    end
+
     # Lists the available Oracle Database software versions for Autonomous
     # Databases.
     #
@@ -5467,6 +5515,54 @@ module Aws::Odb
       req.send_request(options)
     end
 
+    # Starts a refresh of the specified refreshable clone Autonomous
+    # Database with data from its source database. The refresh runs
+    # asynchronously. To track its progress, check the `refreshableStatus`
+    # of the Autonomous Database.
+    #
+    # @option params [required, String] :autonomous_database_id
+    #   The unique identifier of the refreshable clone Autonomous Database to
+    #   refresh.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :time_of_refresh_cutoff
+    #   The date and time up to which the refreshable clone Autonomous
+    #   Database is refreshed from its source database. Data committed on the
+    #   source database after this time isn't applied to the refreshable
+    #   clone. The time must be at least 1 minute and at most 7 days in the
+    #   past, and later than the clone's last refresh point.
+    #
+    # @return [Types::StartAutonomousDatabaseRefreshOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartAutonomousDatabaseRefreshOutput#autonomous_database_id #autonomous_database_id} => String
+    #   * {Types::StartAutonomousDatabaseRefreshOutput#display_name #display_name} => String
+    #   * {Types::StartAutonomousDatabaseRefreshOutput#status #status} => String
+    #   * {Types::StartAutonomousDatabaseRefreshOutput#status_reason #status_reason} => String
+    #   * {Types::StartAutonomousDatabaseRefreshOutput#refreshable_status #refreshable_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_autonomous_database_refresh({
+    #     autonomous_database_id: "ResourceIdOrArn", # required
+    #     time_of_refresh_cutoff: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.autonomous_database_id #=> String
+    #   resp.display_name #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS", "STOPPING", "STOPPED", "STARTING", "UNAVAILABLE", "RESTORE_IN_PROGRESS", "RESTORE_FAILED", "BACKUP_IN_PROGRESS", "SCALE_IN_PROGRESS", "AVAILABLE_NEEDS_ATTENTION", "RESTARTING", "RECREATING", "ROLE_CHANGE_IN_PROGRESS", "UPGRADING", "INACCESSIBLE", "STANDBY"
+    #   resp.status_reason #=> String
+    #   resp.refreshable_status #=> String, one of "REFRESHING", "NOT_REFRESHING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/StartAutonomousDatabaseRefresh AWS API Documentation
+    #
+    # @overload start_autonomous_database_refresh(params = {})
+    # @param [Hash] params ({})
+    def start_autonomous_database_refresh(params = {}, options = {})
+      req = build_request(:start_autonomous_database_refresh, params)
+      req.send_request(options)
+    end
+
     # Starts the specified DB node in a VM cluster.
     #
     # @option params [String] :cloud_vm_cluster_id
@@ -6633,7 +6729,7 @@ module Aws::Odb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-odb'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

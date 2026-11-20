@@ -332,7 +332,11 @@ module Aws
         }?
       },
       interception_points: Array[("REQUEST" | "RESPONSE")],
-      input_configuration: Params::interceptor_input_configuration?
+      input_configuration: Params::interceptor_input_configuration?,
+      response_interception_mode: ("BUFFERED" | "STREAM")?,
+      response_streaming_configuration: {
+        max_events_per_invocation: ::Integer?
+      }?
     }
 
       type match_principals = {

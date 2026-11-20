@@ -1069,6 +1069,71 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] identifier
+    #   The name, Amazon Resource Name (ARN), or ID of the global inference
+    #   gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster
+    #   that runs the in-cluster inference gateway. The cluster must be in
+    #   the same account and partition as the global inference gateway. It
+    #   can be in a different Region, but not in an opt-in Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The Kubernetes namespace of the in-cluster inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the `InferenceGatewayConfig` resource that defines the
+    #   in-cluster inference gateway.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AddInferenceGatewayRequest AWS API Documentation
+    #
+    class AddInferenceGatewayRequest < Struct.new(
+      :identifier,
+      :cluster_arn,
+      :namespace,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway
+    #   The in-cluster inference gateway that you added.
+    #   @return [Types::GlobalInferenceGatewayMember]
+    #
+    # @!attribute [rw] status
+    #   The status of the in-cluster inference gateway in the global
+    #   inference gateway.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AddInferenceGatewayResponse AWS API Documentation
+    #
+    class AddInferenceGatewayResponse < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :gateway,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to tag.
     #   @return [String]
@@ -11695,6 +11760,123 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the global inference gateway. The name must be unique in
+    #   your account in the current Region, and is case-sensitive. The name
+    #   can't be exactly 12 lowercase letters or digits, because the global
+    #   inference gateway ID uses that format.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing
+    #   The routing configuration of the global inference gateway. If you
+    #   omit it, the global inference gateway uses default routing weights.
+    #   @return [Types::GlobalInferenceGatewayRouting]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the global
+    #   inference gateway assumes to access your SageMaker HyperPod
+    #   clusters. The role must be in your account and partition, and you
+    #   must have `iam:PassRole` permission for it. You can't change the
+    #   role after you create the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateways
+    #   The 1 to 10 in-cluster inference gateways to add to the global
+    #   inference gateway. A global inference gateway must always have at
+    #   least one in-cluster inference gateway, so `RemoveInferenceGateway`
+    #   can't remove the last one.
+    #   @return [Array<Types::GlobalInferenceGatewayMember>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. An idempotent operation completes no
+    #   more than one time. If you don't specify a client token, the Amazon
+    #   Web Services SDKs and the Amazon Web Services CLI generate one for
+    #   you.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Custom tags for managing the global inference gateway as an Amazon
+    #   Web Services resource. You can add tags to your global inference
+    #   gateway in the same way you add them in other Amazon Web Services
+    #   services that support tagging. For more information about tagging
+    #   Amazon Web Services resources, see [Tagging your Amazon Web Services
+    #   resources][1] in the *Tagging Amazon Web Services Resources User
+    #   Guide*.
+    #
+    #   The global inference gateway doesn't return tags in its responses.
+    #   To read the tags, use `ListTags`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateGlobalInferenceGatewayRequest AWS API Documentation
+    #
+    class CreateGlobalInferenceGatewayRequest < Struct.new(
+      :name,
+      :routing,
+      :execution_role_arn,
+      :gateways,
+      :client_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the identifiers and status of the new global inference
+    # gateway, and the parameters from the request except `Tags`. To read
+    # the tags, use `ListTags`.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the global inference gateway. A new global inference
+    #   gateway starts in the `CREATING` status.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the global
+    #   inference gateway assumes to access your SageMaker HyperPod
+    #   clusters.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing
+    #   The routing configuration of the global inference gateway.
+    #   @return [Types::GlobalInferenceGatewayRouting]
+    #
+    # @!attribute [rw] gateways
+    #   The in-cluster inference gateways that you specified in the request.
+    #   @return [Array<Types::GlobalInferenceGatewayMember>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateGlobalInferenceGatewayResponse AWS API Documentation
+    #
+    class CreateGlobalInferenceGatewayResponse < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :status,
+      :execution_role_arn,
+      :routing,
+      :gateways)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] hub_name
     #   The name or Amazon Resource Name (ARN) of the hub that contains the
     #   content. For public content, use `SageMakerPublicHub`.
@@ -17182,6 +17364,44 @@ module Aws::SageMaker
     #
     class DeleteFlowDefinitionResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] identifier
+    #   The name, Amazon Resource Name (ARN), or ID of the global inference
+    #   gateway to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteGlobalInferenceGatewayRequest AWS API Documentation
+    #
+    class DeleteGlobalInferenceGatewayRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   Set when a global inference gateway was deleted, and for an
+    #   already-gone one when the Identifier was an ARN or Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   Set when a global inference gateway was deleted, and for an
+    #   already-gone one when the Identifier was an ARN or Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Set when a global inference gateway was deleted, and for an
+    #   already-gone one when the Identifier was a name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteGlobalInferenceGatewayResponse AWS API Documentation
+    #
+    class DeleteGlobalInferenceGatewayResponse < Struct.new(
+      :arn,
+      :id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] hub_name
     #   The name of the hub to delete the hub content reference from.
     #   @return [String]
@@ -21028,6 +21248,84 @@ module Aws::SageMaker
       :human_loop_config,
       :output_config,
       :role_arn,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The name, Amazon Resource Name (ARN), or ID of the global inference
+    #   gateway.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeGlobalInferenceGatewayRequest AWS API Documentation
+    #
+    class DescribeGlobalInferenceGatewayRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the global
+    #   inference gateway assumes to access your SageMaker HyperPod
+    #   clusters. You can't change the role after you create the global
+    #   inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_url
+    #   The URL that you use to invoke the global inference gateway. This
+    #   value is set after the global inference gateway becomes `ACTIVE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_service_name
+    #   The name of the VPC endpoint service to create an interface VPC
+    #   endpoint (AWS PrivateLink) from, so that you can call `EndpointUrl`
+    #   without going over the internet. This value is set after the global
+    #   inference gateway becomes `ACTIVE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing
+    #   The routing configuration of the global inference gateway.
+    #   @return [Types::GlobalInferenceGatewayRouting]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the global inference gateway was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason that the global inference gateway failed. SageMaker
+    #   returns this value only when the status is `FAILED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeGlobalInferenceGatewayResponse AWS API Documentation
+    #
+    class DescribeGlobalInferenceGatewayResponse < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :execution_role_arn,
+      :status,
+      :endpoint_url,
+      :vpc_endpoint_service_name,
+      :routing,
+      :creation_time,
       :failure_reason)
       SENSITIVE = []
       include Aws::Structure
@@ -29783,6 +30081,210 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A filter for `ListGlobalInferenceGateways`. The filter matches the
+    # global inference gateways whose attribute named by `Name` equals
+    # `Value`.
+    #
+    # @!attribute [rw] name
+    #   The attribute to filter global inference gateways on. The only
+    #   supported value is `Status`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value to match. For the `Status` filter, specify a global
+    #   inference gateway status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GlobalInferenceGatewayFilter AWS API Documentation
+    #
+    class GlobalInferenceGatewayFilter < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An in-cluster inference gateway, identified by the SageMaker HyperPod
+    # cluster that runs it (`ClusterArn`), its Kubernetes namespace
+    # (`Namespace`), and the name of the `InferenceGatewayConfig` resource
+    # that defines it (`Name`).
+    #
+    # @!attribute [rw] name
+    #   The name of the `InferenceGatewayConfig` resource that defines the
+    #   in-cluster inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The Kubernetes namespace of the in-cluster inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster
+    #   that runs the in-cluster inference gateway. The cluster must be in
+    #   the same account and partition as the global inference gateway. It
+    #   can be in a different Region, but not in an opt-in Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GlobalInferenceGatewayMember AWS API Documentation
+    #
+    class GlobalInferenceGatewayMember < Struct.new(
+      :name,
+      :namespace,
+      :cluster_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter for `ListInferenceGateways`. The filter matches the
+    # in-cluster inference gateways whose attribute named by `Name` equals
+    # `Value`.
+    #
+    # @!attribute [rw] name
+    #   The attribute to filter in-cluster inference gateways on. Supported
+    #   values are `Status` and `ClusterArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value to match. For the `Status` filter, specify a status of an
+    #   in-cluster inference gateway. For the `ClusterArn` filter, specify
+    #   the Amazon Resource Name (ARN) of a SageMaker HyperPod cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GlobalInferenceGatewayMemberFilter AWS API Documentation
+    #
+    class GlobalInferenceGatewayMemberFilter < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about an in-cluster inference gateway in a global
+    # inference gateway, including its status.
+    #
+    # @!attribute [rw] name
+    #   The name of the `InferenceGatewayConfig` resource that defines the
+    #   in-cluster inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The Kubernetes namespace of the in-cluster inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster
+    #   that runs the in-cluster inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the in-cluster inference gateway in the global
+    #   inference gateway. This status describes the membership in the
+    #   global inference gateway, not the health of the in-cluster inference
+    #   gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason that adding or removing the in-cluster inference gateway
+    #   failed. This value is set only when the status is `FAILED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GlobalInferenceGatewayMemberSummary AWS API Documentation
+    #
+    class GlobalInferenceGatewayMemberSummary < Struct.new(
+      :name,
+      :namespace,
+      :cluster_arn,
+      :status,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The routing configuration of a global inference gateway. To add or
+    # remove in-cluster inference gateways, use `AddInferenceGateway` and
+    # `RemoveInferenceGateway`.
+    #
+    # @!attribute [rw] weights
+    #   The weights that the global inference gateway applies to each
+    #   routing signal when it scores the in-cluster inference gateways for
+    #   a request.
+    #   @return [Types::GlobalInferenceGatewayRoutingWeights]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GlobalInferenceGatewayRouting AWS API Documentation
+    #
+    class GlobalInferenceGatewayRouting < Struct.new(
+      :weights)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The relative weights of the four routing signals, each from 0 to 1.
+    # Specify all four weights or none. If you specify them, they must sum
+    # to 1.0, within 0.001. If you specify none, the global inference
+    # gateway uses default weights.
+    #
+    # @!attribute [rw] kv_headroom
+    #   The weight of the free key-value (KV) cache capacity on the cluster.
+    #   @return [Float]
+    #
+    # @!attribute [rw] queue_depth
+    #   The weight of the number of requests that are waiting on the
+    #   cluster.
+    #   @return [Float]
+    #
+    # @!attribute [rw] region_proximity
+    #   The weight of how close the cluster is to the caller.
+    #   @return [Float]
+    #
+    # @!attribute [rw] error_rate
+    #   The weight of the recent error rate of the cluster.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GlobalInferenceGatewayRoutingWeights AWS API Documentation
+    #
+    class GlobalInferenceGatewayRoutingWeights < Struct.new(
+      :kv_headroom,
+      :queue_depth,
+      :region_proximity,
+      :error_rate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a global inference gateway.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the global inference gateway was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GlobalInferenceGatewaySummary AWS API Documentation
+    #
+    class GlobalInferenceGatewaySummary < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :status,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The SageMaker images that are hidden from the Studio user interface.
     # You must specify the SageMaker image name and version aliases.
     #
@@ -38128,6 +38630,53 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] filters
+    #   The filters to apply to the results. You can filter by `Status`.
+    #   Multiple filters are combined with a logical AND.
+    #   @return [Array<Types::GlobalInferenceGatewayFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous `ListGlobalInferenceGateways` request
+    #   was truncated, the response includes a `NextToken`. To retrieve the
+    #   next set of global inference gateways, use the token in the next
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of global inference gateways to return in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListGlobalInferenceGatewaysRequest AWS API Documentation
+    #
+    class ListGlobalInferenceGatewaysRequest < Struct.new(
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_inference_gateway_summaries
+    #   The summaries of the global inference gateways.
+    #   @return [Array<Types::GlobalInferenceGatewaySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous `ListGlobalInferenceGateways` request
+    #   was truncated, the response includes a `NextToken`. To retrieve the
+    #   next set of global inference gateways, use the token in the next
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListGlobalInferenceGatewaysResponse AWS API Documentation
+    #
+    class ListGlobalInferenceGatewaysResponse < Struct.new(
+      :global_inference_gateway_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] hub_name
     #   The name of the hub to list the content versions of.
     #   @return [String]
@@ -38851,6 +39400,60 @@ module Aws::SageMaker
     #
     class ListInferenceExperimentsResponse < Struct.new(
       :inference_experiments,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The name, Amazon Resource Name (ARN), or ID of the global inference
+    #   gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The filters to apply to the results. You can filter by `Status` and
+    #   `ClusterArn`. Multiple filters are combined with a logical AND.
+    #   @return [Array<Types::GlobalInferenceGatewayMemberFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous `ListInferenceGateways` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of in-cluster inference gateways, use the token in the next
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of in-cluster inference gateways to return in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceGatewaysRequest AWS API Documentation
+    #
+    class ListInferenceGatewaysRequest < Struct.new(
+      :identifier,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_gateway_summaries
+    #   The summaries of the in-cluster inference gateways, in the order
+    #   that they were added.
+    #   @return [Array<Types::GlobalInferenceGatewayMemberSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous `ListInferenceGateways` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of in-cluster inference gateways, use the token in the next
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceGatewaysResponse AWS API Documentation
+    #
+    class ListInferenceGatewaysResponse < Struct.new(
+      :inference_gateway_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -41223,7 +41826,7 @@ module Aws::SageMaker
     #   Filters the pipelines by who manages them. Specify `AWS` to return
     #   pipelines that Amazon Web Services manages, or `CUSTOMER` to return
     #   pipelines that you created. If you don't specify a value, the
-    #   response includes both.
+    #   response includes only pipelines that you created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelinesRequest AWS API Documentation
@@ -45942,6 +46545,203 @@ module Aws::SageMaker
     #
     class MonitoringStoppingCondition < Struct.new(
       :max_runtime_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes why a node, identified by its `NodeLogicalId`, could not be
+    # moved in a `MoveClusterNodes` request. Contains the `NodeLogicalId`,
+    # an error code, and an error message.
+    #
+    # @!attribute [rw] code
+    #   The error code associated with the error encountered when moving the
+    #   node. The error code is one of the following values:
+    #
+    #   * `NodeIdNotFound`: The node does not exist in the source instance
+    #     group.
+    #
+    #   * `InvalidNodeStatus`: The node is not in a state that allows the
+    #     move. For example, the node is not `Running`, is not in a subnet
+    #     of the target instance group, or has an attached Amazon EBS volume
+    #     that you must detach first.
+    #
+    #   * `NodeIdInUse`: Another operation is already in progress for this
+    #     node. Wait for the operation to complete before retrying.
+    #
+    #   * `NodeInstanceTypeMismatch`: The target instance group does not
+    #     support the node's instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable message describing the error encountered when
+    #   moving the node.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_logical_id
+    #   The `NodeLogicalId` of the node that could not be moved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MoveClusterNodeLogicalIdsError AWS API Documentation
+    #
+    class MoveClusterNodeLogicalIdsError < Struct.new(
+      :code,
+      :message,
+      :node_logical_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes why a node, identified by its instance ID, could not be
+    # moved in a `MoveClusterNodes` request. Contains the instance ID, an
+    # error code, and an error message.
+    #
+    # @!attribute [rw] code
+    #   The error code associated with the error encountered when moving the
+    #   node. The error code is one of the following values:
+    #
+    #   * `NodeIdNotFound`: The node does not exist in the source instance
+    #     group.
+    #
+    #   * `InvalidNodeStatus`: The node is not in a state that allows the
+    #     move. For example, the node is not `Running`, is not in a subnet
+    #     of the target instance group, or has an attached Amazon EBS volume
+    #     that you must detach first.
+    #
+    #   * `NodeIdInUse`: Another operation is already in progress for this
+    #     node. Wait for the operation to complete before retrying.
+    #
+    #   * `NodeInstanceTypeMismatch`: The target instance group does not
+    #     support the node's instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable message describing the error encountered when
+    #   moving the node.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   The instance ID of the node that could not be moved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MoveClusterNodesError AWS API Documentation
+    #
+    class MoveClusterNodesError < Struct.new(
+      :code,
+      :message,
+      :node_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_cluster_arn
+    #   The Amazon Resource Name (ARN) of the HyperPod cluster that the
+    #   nodes are moved from.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_instance_group_name
+    #   The name of the instance group in the source cluster that the nodes
+    #   are moved from.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_cluster_arn
+    #   The Amazon Resource Name (ARN) of the HyperPod cluster that the
+    #   nodes are moved to. The target cluster must be in the same account
+    #   and Region as the source cluster, and can be the same cluster as the
+    #   source.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_instance_group_name
+    #   The name of the instance group in the target cluster that the nodes
+    #   are moved to. If the target cluster is the same as the source
+    #   cluster, the target instance group must be different from the source
+    #   instance group.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of nodes to move, from 1 to 50. HyperPod selects the
+    #   nodes from the source instance group. If fewer than this number of
+    #   nodes are eligible to move, the request fails and no nodes are
+    #   moved. Specify exactly one of `NodeIds`, `NodeLogicalIds`, or
+    #   `InstanceCount`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] node_ids
+    #   A list of instance IDs of the nodes to move. You can specify up to
+    #   50 instance IDs. Each node is evaluated separately, so some nodes
+    #   can be moved while others fail. The request fails if moving the
+    #   eligible nodes would reduce the source instance group below its
+    #   minimum instance count. Specify exactly one of `NodeIds`,
+    #   `NodeLogicalIds`, or `InstanceCount`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] node_logical_ids
+    #   A list of `NodeLogicalIds` of the nodes to move. You can specify up
+    #   to 50 `NodeLogicalIds`. Each node is evaluated separately, so some
+    #   nodes can be moved while others fail. The request fails if moving
+    #   the eligible nodes would reduce the source instance group below its
+    #   minimum instance count. Specify exactly one of `NodeIds`,
+    #   `NodeLogicalIds`, or `InstanceCount`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you retry the
+    #   request with the same client token and the same parameters within 8
+    #   hours, the service returns the original response. It doesn't start
+    #   a new move. If you reuse a client token with different parameters,
+    #   the request fails.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MoveClusterNodesRequest AWS API Documentation
+    #
+    class MoveClusterNodesRequest < Struct.new(
+      :source_cluster_arn,
+      :source_instance_group_name,
+      :target_cluster_arn,
+      :target_instance_group_name,
+      :instance_count,
+      :node_ids,
+      :node_logical_ids,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful
+    #   This list contains the instance IDs of the nodes that were accepted
+    #   for the move. The response includes this list when you specify
+    #   `NodeIds` or `InstanceCount`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failed
+    #   The instance IDs that could not be moved, each with an error code
+    #   and message. The response includes this list when you specify
+    #   `NodeIds`. If none of the specified nodes can be moved, the request
+    #   fails and no nodes are moved.
+    #   @return [Array<Types::MoveClusterNodesError>]
+    #
+    # @!attribute [rw] successful_node_logical_ids
+    #   The `NodeLogicalIds` of the nodes that were accepted for the move.
+    #   The response includes this list when you specify `NodeLogicalIds`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failed_node_logical_ids
+    #   The `NodeLogicalIds` that could not be moved, each with an error
+    #   code and message. The response includes this list when you specify
+    #   `NodeLogicalIds`. If none of the specified nodes can be moved, the
+    #   request fails and no nodes are moved.
+    #   @return [Array<Types::MoveClusterNodeLogicalIdsError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MoveClusterNodesResponse AWS API Documentation
+    #
+    class MoveClusterNodesResponse < Struct.new(
+      :successful,
+      :failed,
+      :successful_node_logical_ids,
+      :failed_node_logical_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -51492,6 +52292,70 @@ module Aws::SageMaker
     #
     class RemoteDebugConfigForUpdate < Struct.new(
       :enable_remote_debug)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The name, Amazon Resource Name (ARN), or ID of the global inference
+    #   gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster
+    #   that runs the in-cluster inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The Kubernetes namespace of the in-cluster inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the `InferenceGatewayConfig` resource that defines the
+    #   in-cluster inference gateway.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RemoveInferenceGatewayRequest AWS API Documentation
+    #
+    class RemoveInferenceGatewayRequest < Struct.new(
+      :identifier,
+      :cluster_arn,
+      :namespace,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway
+    #   The in-cluster inference gateway that you removed.
+    #   @return [Types::GlobalInferenceGatewayMember]
+    #
+    # @!attribute [rw] status
+    #   The status of the in-cluster inference gateway in the global
+    #   inference gateway. This value is absent if the in-cluster inference
+    #   gateway wasn't in the global inference gateway.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RemoveInferenceGatewayResponse AWS API Documentation
+    #
+    class RemoveInferenceGatewayResponse < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :gateway,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -60175,6 +61039,56 @@ module Aws::SageMaker
       :description,
       :parameter_additions,
       :parameter_removals)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The name, Amazon Resource Name (ARN), or ID of the global inference
+    #   gateway to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing
+    #   The new routing configuration of the global inference gateway.
+    #   @return [Types::GlobalInferenceGatewayRouting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateGlobalInferenceGatewayRequest AWS API Documentation
+    #
+    class UpdateGlobalInferenceGatewayRequest < Struct.new(
+      :identifier,
+      :routing)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the global inference gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing
+    #   The routing configuration that you specified in the request.
+    #   @return [Types::GlobalInferenceGatewayRouting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateGlobalInferenceGatewayResponse AWS API Documentation
+    #
+    class UpdateGlobalInferenceGatewayResponse < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :status,
+      :routing)
       SENSITIVE = []
       include Aws::Structure
     end

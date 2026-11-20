@@ -475,16 +475,39 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # A reference to a form type that is included in an asset type.
+    # A form to set on an asset, consisting of the form type identifier and
+    # its JSON content.
     #
     # @!attribute [rw] form_type_identifier
-    #   The identifier of the referenced form type.
+    #   The identifier of the form type that defines this form's schema.
+    #   This field is required.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AssetTypeFormReference AWS API Documentation
+    # @!attribute [rw] content
+    #   The JSON content of the form, conforming to the schema of the
+    #   specified form type.
+    #   @return [String]
     #
-    class AssetTypeFormReference < Struct.new(
-      :form_type_identifier)
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AssetFormInput AWS API Documentation
+    #
+    class AssetFormInput < Struct.new(
+      :form_type_identifier,
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A form that is included in an asset type, identified by the form type
+    # that defines its schema.
+    #
+    # @!attribute [rw] form_type_id
+    #   The identifier of the form type that defines the form's schema.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AssetTypeFormOutput AWS API Documentation
+    #
+    class AssetTypeFormOutput < Struct.new(
+      :form_type_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -504,6 +527,41 @@ module Aws::Glue
     class AssetTypeItem < Struct.new(
       :id,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The export setting for asset metadata.
+    #
+    # @!attribute [rw] s3_tables_export
+    #   Whether asset metadata is exported to S3 Tables. Valid values are
+    #   `ENABLED` and `DISABLED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AssetsExport AWS API Documentation
+    #
+    class AssetsExport < Struct.new(
+      :s3_tables_export)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The export setting and current export state for asset metadata.
+    #
+    # @!attribute [rw] s3_tables_export
+    #   Whether asset metadata is exported to S3 Tables. Valid values are
+    #   `ENABLED` and `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_tables_export_state
+    #   The current state of the asset metadata export to S3 Tables.
+    #   @return [Types::S3TablesExportState]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AssetsExportResult AWS API Documentation
+    #
+    class AssetsExportResult < Struct.new(
+      :s3_tables_export,
+      :s3_tables_export_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -547,7 +605,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # @!attribute [rw] asset_identifier
+    # @!attribute [rw] asset_id
     #   The unique identifier of the asset.
     #   @return [String]
     #
@@ -555,7 +613,7 @@ module Aws::Glue
     #   The name of the iterable form, if the association targets an item.
     #   @return [String]
     #
-    # @!attribute [rw] item_identifier
+    # @!attribute [rw] item_id
     #   The identifier of the item within the iterable form, if applicable.
     #   @return [String]
     #
@@ -566,9 +624,9 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AssociateGlossaryTermsResponse AWS API Documentation
     #
     class AssociateGlossaryTermsResponse < Struct.new(
-      :asset_identifier,
+      :asset_id,
       :iterable_form_name,
-      :item_identifier,
+      :item_id,
       :glossary_terms)
       SENSITIVE = []
       include Aws::Structure
@@ -10718,22 +10776,6 @@ module Aws::Glue
     #
     class DeleteAssetResponse < Aws::EmptyStructure; end
 
-    # @!attribute [rw] identifier
-    #   The identifier of the asset type to delete.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteAssetTypeRequest AWS API Documentation
-    #
-    class DeleteAssetTypeRequest < Struct.new(
-      :identifier)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteAssetTypeResponse AWS API Documentation
-    #
-    class DeleteAssetTypeResponse < Aws::EmptyStructure; end
-
     # @!attribute [rw] asset_identifier
     #   The unique identifier of the asset from which to delete the
     #   attachment.
@@ -10765,7 +10807,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # @!attribute [rw] asset_identifier
+    # @!attribute [rw] asset_id
     #   The unique identifier of the asset.
     #   @return [String]
     #
@@ -10773,16 +10815,16 @@ module Aws::Glue
     #   The name of the iterable form, if the deletion targets an item.
     #   @return [String]
     #
-    # @!attribute [rw] item_identifier
+    # @!attribute [rw] item_id
     #   The identifier of the item within the iterable form, if applicable.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteAttachmentResponse AWS API Documentation
     #
     class DeleteAttachmentResponse < Struct.new(
-      :asset_identifier,
+      :asset_id,
       :iterable_form_name,
-      :item_identifier)
+      :item_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12485,7 +12527,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # @!attribute [rw] asset_identifier
+    # @!attribute [rw] asset_id
     #   The unique identifier of the asset.
     #   @return [String]
     #
@@ -12494,7 +12536,7 @@ module Aws::Glue
     #   item.
     #   @return [String]
     #
-    # @!attribute [rw] item_identifier
+    # @!attribute [rw] item_id
     #   The identifier of the item within the iterable form, if applicable.
     #   @return [String]
     #
@@ -12505,9 +12547,9 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DisassociateGlossaryTermsResponse AWS API Documentation
     #
     class DisassociateGlossaryTermsResponse < Struct.new(
-      :asset_identifier,
+      :asset_id,
       :iterable_form_name,
-      :item_identifier,
+      :item_id,
       :glossary_terms)
       SENSITIVE = []
       include Aws::Structure
@@ -14090,7 +14132,7 @@ module Aws::Glue
     #
     # @!attribute [rw] forms
     #   The forms that make up the asset type, keyed by form name.
-    #   @return [Hash<String,Types::AssetTypeFormReference>]
+    #   @return [Hash<String,Types::AssetTypeFormOutput>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetAssetTypeResponse AWS API Documentation
     #
@@ -14930,24 +14972,6 @@ module Aws::Glue
     # The export configuration returned by the
     # `GetDataCatalogExportConfiguration` operation.
     #
-    # @!attribute [rw] export_setting
-    #   The export setting for the data catalog. Valid values are `ENABLED`
-    #   and `DISABLED`.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The current status of the export. Valid values are `ENABLING`,
-    #   `ENABLED`, `DISABLING`, `DISABLED`, and `FAILED`.
-    #   @return [String]
-    #
-    # @!attribute [rw] encryption_configuration
-    #   The encryption configuration for the exported data.
-    #   @return [Types::ExportEncryptionConfiguration]
-    #
-    # @!attribute [rw] s3_table_bucket_arn
-    #   The ARN of the S3 Tables bucket where catalog metadata is exported.
-    #   @return [String]
-    #
     # @!attribute [rw] created_at
     #   The timestamp at which the export configuration was created.
     #   @return [Time]
@@ -14956,15 +14980,23 @@ module Aws::Glue
     #   The timestamp at which the export configuration was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] s3_tables_configuration
+    #   The S3 Tables configuration for the export, including the table
+    #   bucket that holds the exported catalog metadata and its encryption
+    #   configuration.
+    #   @return [Types::S3TablesConfigurationResult]
+    #
+    # @!attribute [rw] assets
+    #   The export setting and current export state for asset metadata.
+    #   @return [Types::AssetsExportResult]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataCatalogExportConfigurationOutput AWS API Documentation
     #
     class GetDataCatalogExportConfigurationOutput < Struct.new(
-      :export_setting,
-      :status,
-      :encryption_configuration,
-      :s3_table_bucket_arn,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :s3_tables_configuration,
+      :assets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26387,8 +26419,9 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # @!attribute [rw] asset_type_id
-    #   The identifier of the asset type for the asset.
+    # @!attribute [rw] asset_type_identifier
+    #   The identifier of the asset type for the asset. This field is
+    #   required.
     #   @return [String]
     #
     # @!attribute [rw] identifier
@@ -26407,7 +26440,7 @@ module Aws::Glue
     # @!attribute [rw] forms
     #   The forms to set on the asset, keyed by form name. Each entry
     #   specifies the form type and its JSON content.
-    #   @return [Hash<String,Types::AssetFormEntry>]
+    #   @return [Hash<String,Types::AssetFormInput>]
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -26420,7 +26453,7 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutAssetRequest AWS API Documentation
     #
     class PutAssetRequest < Struct.new(
-      :asset_type_id,
+      :asset_type_identifier,
       :identifier,
       :name,
       :description,
@@ -26442,6 +26475,10 @@ module Aws::Glue
     #   The description of the asset.
     #   @return [String]
     #
+    # @!attribute [rw] asset_type_id
+    #   The identifier of the asset type for this asset.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The timestamp at which the asset was created.
     #   @return [Time]
@@ -26456,56 +26493,8 @@ module Aws::Glue
       :id,
       :name,
       :description,
+      :asset_type_id,
       :created_at,
-      :forms)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] name
-    #   The name of the asset type.
-    #   @return [String]
-    #
-    # @!attribute [rw] forms
-    #   The forms that make up the asset type, keyed by form name. Each
-    #   entry references the form type that defines the form's schema.
-    #   @return [Hash<String,Types::AssetTypeFormReference>]
-    #
-    # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutAssetTypeRequest AWS API Documentation
-    #
-    class PutAssetTypeRequest < Struct.new(
-      :name,
-      :forms,
-      :client_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] id
-    #   The identifier of the asset type.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the asset type.
-    #   @return [String]
-    #
-    # @!attribute [rw] forms
-    #   The forms that make up the asset type, keyed by form name.
-    #   @return [Hash<String,Types::AssetTypeFormReference>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutAssetTypeResponse AWS API Documentation
-    #
-    class PutAssetTypeResponse < Struct.new(
-      :id,
-      :name,
       :forms)
       SENSITIVE = []
       include Aws::Structure
@@ -26535,8 +26524,9 @@ module Aws::Glue
     #   specified form type.
     #   @return [String]
     #
-    # @!attribute [rw] form_type_id
-    #   The identifier of the form type for this attachment.
+    # @!attribute [rw] form_type_identifier
+    #   The identifier of the form type for this attachment. This field is
+    #   required.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -26555,13 +26545,13 @@ module Aws::Glue
       :item_identifier,
       :attachment_name,
       :content,
-      :form_type_id,
+      :form_type_identifier,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] asset_identifier
+    # @!attribute [rw] asset_id
     #   The unique identifier of the asset.
     #   @return [String]
     #
@@ -26569,7 +26559,7 @@ module Aws::Glue
     #   The name of the iterable form, if the attachment targets an item.
     #   @return [String]
     #
-    # @!attribute [rw] item_identifier
+    # @!attribute [rw] item_id
     #   The identifier of the item within the iterable form, if applicable.
     #   @return [String]
     #
@@ -26584,9 +26574,9 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutAttachmentResponse AWS API Documentation
     #
     class PutAttachmentResponse < Struct.new(
-      :asset_identifier,
+      :asset_id,
       :iterable_form_name,
-      :item_identifier,
+      :item_id,
       :attachment_name,
       :form_type_id)
       SENSITIVE = []
@@ -26616,17 +26606,6 @@ module Aws::Glue
     #
     class PutDataCatalogEncryptionSettingsResponse < Aws::EmptyStructure; end
 
-    # @!attribute [rw] export_setting
-    #   The export setting for the data catalog. Specify `ENABLED` to start
-    #   exporting catalog metadata to S3 Tables, or `DISABLED` to stop
-    #   exporting. This field is required.
-    #   @return [String]
-    #
-    # @!attribute [rw] encryption_configuration
-    #   The encryption configuration for the exported data. If not
-    #   specified, the default encryption settings are used.
-    #   @return [Types::ExportEncryptionConfiguration]
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -26635,12 +26614,25 @@ module Aws::Glue
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] s3_tables_configuration
+    #   The S3 Tables configuration for the export. The encryption
+    #   configuration applies only when Glue creates the table bucket that
+    #   holds the exported catalog metadata. If not specified, the default
+    #   encryption settings are used.
+    #   @return [Types::S3TablesConfiguration]
+    #
+    # @!attribute [rw] assets
+    #   The export setting for asset metadata. Set `S3TablesExport` to
+    #   `ENABLED` to start exporting asset metadata to S3 Tables, or to
+    #   `DISABLED` to stop exporting.
+    #   @return [Types::AssetsExport]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataCatalogExportConfigurationInput AWS API Documentation
     #
     class PutDataCatalogExportConfigurationInput < Struct.new(
-      :export_setting,
-      :encryption_configuration,
-      :client_token)
+      :client_token,
+      :s3_tables_configuration,
+      :assets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26648,19 +26640,19 @@ module Aws::Glue
     # The export configuration returned by the
     # `PutDataCatalogExportConfiguration` operation.
     #
-    # @!attribute [rw] export_setting
-    #   The export setting for the data catalog.
-    #   @return [String]
+    # @!attribute [rw] s3_tables_configuration
+    #   The S3 Tables configuration for the export.
+    #   @return [Types::S3TablesConfiguration]
     #
-    # @!attribute [rw] encryption_configuration
-    #   The encryption configuration for the exported data.
-    #   @return [Types::ExportEncryptionConfiguration]
+    # @!attribute [rw] assets
+    #   The export setting for asset metadata.
+    #   @return [Types::AssetsExport]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataCatalogExportConfigurationOutput AWS API Documentation
     #
     class PutDataCatalogExportConfigurationOutput < Struct.new(
-      :export_setting,
-      :encryption_configuration)
+      :s3_tables_configuration,
+      :assets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29177,6 +29169,59 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The S3 Tables configuration for a data catalog export.
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the table bucket that holds the
+    #   exported catalog metadata. It applies only when Glue creates the
+    #   table bucket.
+    #   @return [Types::ExportEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3TablesConfiguration AWS API Documentation
+    #
+    class S3TablesConfiguration < Struct.new(
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The S3 Tables configuration for a data catalog export, including the
+    # table bucket that holds the exported catalog metadata.
+    #
+    # @!attribute [rw] table_bucket_arn
+    #   The ARN of the S3 table bucket that holds the exported catalog
+    #   metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the table bucket that holds the
+    #   exported catalog metadata.
+    #   @return [Types::ExportEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3TablesConfigurationResult AWS API Documentation
+    #
+    class S3TablesConfigurationResult < Struct.new(
+      :table_bucket_arn,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The state of an export to S3 Tables. Glue sets this state.
+    #
+    # @!attribute [rw] status
+    #   The current status of the export. Valid values are `ENABLING`,
+    #   `ENABLED`, `DISABLING`, `DISABLED`, and `FAILED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3TablesExportState AWS API Documentation
+    #
+    class S3TablesExportState < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a data store in Amazon Simple Storage Service (Amazon S3).
     #
     # @!attribute [rw] path
@@ -29563,10 +29608,10 @@ module Aws::Glue
     #   The attribute name to filter on.
     #   @return [String]
     #
-    # @!attribute [rw] operator
-    #   The comparison operator. Valid values are `equals`, `greaterThan`,
-    #   `greaterThanOrEquals`, `lessThan`, `lessThanOrEquals`, and
-    #   `notExists`.
+    # @!attribute [rw] comparator
+    #   The comparison operator. Valid values are `EQUALS`, `GREATER_THAN`,
+    #   `GREATER_THAN_OR_EQUALS`, `LESS_THAN`, `LESS_THAN_OR_EQUALS`, and
+    #   `NOT_EXISTS`. This field is required.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -29577,7 +29622,7 @@ module Aws::Glue
     #
     class SearchAttributeFilter < Struct.new(
       :attribute,
-      :operator,
+      :comparator,
       :value)
       SENSITIVE = []
       include Aws::Structure
@@ -29703,13 +29748,17 @@ module Aws::Glue
     #   The unique identifier of the matched asset.
     #   @return [String]
     #
-    # @!attribute [rw] asset_name
+    # @!attribute [rw] name
     #   The name of the matched asset.
     #   @return [String]
     #
-    # @!attribute [rw] asset_description
+    # @!attribute [rw] description
     #   The description of the matched asset.
     #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp at which the matched asset was created.
+    #   @return [Time]
     #
     # @!attribute [rw] updated_at
     #   The timestamp at which the matched asset was last updated.
@@ -29723,8 +29772,9 @@ module Aws::Glue
     #
     class SearchResultItem < Struct.new(
       :id,
-      :asset_name,
-      :asset_description,
+      :name,
+      :description,
+      :created_at,
       :updated_at,
       :asset_type_id)
       SENSITIVE = []
@@ -34644,7 +34694,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The updated description of the glossary.
+    #   The new description. Omit it to keep the current description; set it
+    #   to an empty string to clear it.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -34697,11 +34748,13 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] short_description
-    #   The updated short description of the glossary term.
+    #   The new short description. Omit it to keep the current one; set it
+    #   to an empty string to clear it.
     #   @return [String]
     #
     # @!attribute [rw] long_description
-    #   The updated long description of the glossary term.
+    #   The new long description. Omit it to keep the current one; set it to
+    #   an empty string to clear it.
     #   @return [String]
     #
     # @!attribute [rw] client_token

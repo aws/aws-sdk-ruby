@@ -1,0 +1,744 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module APIPortal
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateManagedApisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateManagedApisResponse]
+        def failed_items: () -> ::Array[Types::FailedManagedApiItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#associate_managed_apis-instance_method
+      def associate_managed_apis: (
+                                    product_id: ::String,
+                                    managed_api_ids: Array[::String]
+                                  ) -> _AssociateManagedApisResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateManagedApisResponseSuccess
+
+      interface _CreateManagedApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateManagedApiResponse]
+        def managed_api_id: () -> ::String
+        def managed_api_arn: () -> ::String
+        def api_signature: () -> Types::ApiSignature
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#create_managed_api-instance_method
+      def create_managed_api: (
+                                api_signature: {
+                                  resource_arn: ::String,
+                                  method: ("GET" | "POST" | "PUT" | "DELETE" | "PATCH" | "ANY" | "HEAD" | "OPTIONS"),
+                                  hostname: ::String,
+                                  port: ::Integer,
+                                  path: ::String
+                                },
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreateManagedApiResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateManagedApiResponseSuccess
+
+      interface _CreatePortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePortalResponse]
+        def portal_id: () -> ::String
+        def portal_arn: () -> ::String
+        def endpoint_configuration: () -> Types::EndpointConfigurationResponse
+        def authorization: () -> Types::Authorization
+        def portal_content: () -> Types::PortalContent
+        def included_product_arns: () -> ::Array[::String]
+        def publish_status: () -> ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLE_IN_PROGRESS" | "DISABLE_FAILED" | "DISABLED")
+        def status_exception: () -> Types::PortalStatusException
+        def updated_at: () -> ::Time
+        def published_at: () -> ::Time
+        def publish_description: () -> ::String
+        def rum_app_monitor_name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#create_portal-instance_method
+      def create_portal: (
+                           portal_content: Params::portal_content,
+                           endpoint_configuration: Params::endpoint_configuration_request,
+                           authorization: Params::authorization,
+                           ?included_product_arns: Array[::String],
+                           ?logo_uri: ::String,
+                           ?rum_app_monitor_name: ::String,
+                           ?tags: Hash[::String, ::String]
+                         ) -> _CreatePortalResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePortalResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#create_portal_preview-instance_method
+      def create_portal_preview: (
+                                   portal_id: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProductResponse]
+        def product_id: () -> ::String
+        def product_arn: () -> ::String
+        def display_name: () -> ::String
+        def display_order: () -> Types::DisplayOrder
+        def description: () -> ::String
+        def updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+        def api_selection_configuration: () -> Types::ApiSelectionConfiguration
+        def status: () -> ("ACTIVE" | "IN_PROGRESS" | "FAILED")
+        def failure_reason: () -> ("API_PAGE_ATTACHED" | "EVALUATION_ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#create_product-instance_method
+      def create_product: (
+                            display_name: ::String,
+                            ?description: ::String,
+                            ?tags: Hash[::String, ::String],
+                            ?api_selection_configuration: {
+                              api_selection_mode: ("CUSTOM" | "RULE_BASED"),
+                              rule_filters: Array[
+                                {
+                                  key: ("RESOURCE_ARN" | "HOST" | "METHOD" | "PATH" | "PORT" | "ACCOUNT"),
+                                  values: Array[::String]
+                                }
+                              ]?
+                            }
+                          ) -> _CreateProductResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProductResponseSuccess
+
+      interface _CreateProductApiPageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProductApiPageResponse]
+        def product_api_page_id: () -> ::String
+        def product_api_page_arn: () -> ::String
+        def api_id: () -> Types::ApiId
+        def display_content: () -> Types::ApiPageDisplayContentResponse
+        def try_it_state: () -> ("ENABLED" | "DISABLED")
+        def updated_at: () -> ::Time
+        def status: () -> ("AVAILABLE" | "IN_PROGRESS" | "FAILED")
+        def status_exception: () -> Types::ProductApiPageStatusException
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#create_product_api_page-instance_method
+      def create_product_api_page: (
+                                     product_id: ::String,
+                                     managed_api_id: ::String,
+                                     ?display_content: Params::api_page_display_content,
+                                     ?try_it_state: ("ENABLED" | "DISABLED"),
+                                     ?tags: Hash[::String, ::String]
+                                   ) -> _CreateProductApiPageResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProductApiPageResponseSuccess
+
+      interface _CreateProductPageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProductPageResponse]
+        def product_page_id: () -> ::String
+        def product_page_arn: () -> ::String
+        def display_content: () -> Types::DisplayContent
+        def updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#create_product_page-instance_method
+      def create_product_page: (
+                                 product_id: ::String,
+                                 display_content: {
+                                   title: ::String,
+                                   body: ::String
+                                 },
+                                 ?tags: Hash[::String, ::String]
+                               ) -> _CreateProductPageResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProductPageResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#delete_discovery_configuration-instance_method
+      def delete_discovery_configuration: (
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteManagedApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteManagedApiResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#delete_managed_api-instance_method
+      def delete_managed_api: (
+                                managed_api_id: ::String
+                              ) -> _DeleteManagedApiResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteManagedApiResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#delete_organization_discovery_configuration-instance_method
+      def delete_organization_discovery_configuration: (
+                                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#delete_portal-instance_method
+      def delete_portal: (
+                           portal_id: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#delete_product-instance_method
+      def delete_product: (
+                            product_id: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#delete_product_api_page-instance_method
+      def delete_product_api_page: (
+                                     product_id: ::String,
+                                     product_api_page_id: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#delete_product_page-instance_method
+      def delete_product_page: (
+                                 product_id: ::String,
+                                 product_page_id: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#delete_product_sharing_policy-instance_method
+      def delete_product_sharing_policy: (
+                                           product_id: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DisassociateManagedApisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateManagedApisResponse]
+        def failed_items: () -> ::Array[Types::FailedManagedApiItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#disassociate_managed_apis-instance_method
+      def disassociate_managed_apis: (
+                                       product_id: ::String,
+                                       managed_api_ids: Array[::String]
+                                     ) -> _DisassociateManagedApisResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateManagedApisResponseSuccess
+
+      interface _GetApiInventoryItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApiInventoryItemResponse]
+        def item: () -> Types::ApiInventoryItemDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#get_api_inventory_item-instance_method
+      def get_api_inventory_item: (
+                                    method: ("GET" | "POST" | "PUT" | "DELETE" | "PATCH" | "ANY" | "HEAD" | "OPTIONS"),
+                                    host: ::String,
+                                    port: ::Integer,
+                                    path: ::String,
+                                    resource_arn: ::String
+                                  ) -> _GetApiInventoryItemResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApiInventoryItemResponseSuccess
+
+      interface _GetDiscoveryConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDiscoveryConfigurationResponse]
+        def discovery_configuration: () -> Types::DiscoveryConfigurationData
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#get_discovery_configuration-instance_method
+      def get_discovery_configuration: (
+                                       ) -> _GetDiscoveryConfigurationResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDiscoveryConfigurationResponseSuccess
+
+      interface _GetManagedApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetManagedApiResponse]
+        def managed_api_id: () -> ::String
+        def managed_api_arn: () -> ::String
+        def api_signature: () -> Types::ApiSignature
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def findings: () -> ::Array[Types::ManagedApiFinding]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#get_managed_api-instance_method
+      def get_managed_api: (
+                             managed_api_id: ::String
+                           ) -> _GetManagedApiResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetManagedApiResponseSuccess
+
+      interface _GetOrganizationDiscoveryConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOrganizationDiscoveryConfigurationResponse]
+        def discovery_configuration: () -> Types::OrganizationDiscoveryConfigurationData
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#get_organization_discovery_configuration-instance_method
+      def get_organization_discovery_configuration: (
+                                                    ) -> _GetOrganizationDiscoveryConfigurationResponseSuccess
+                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOrganizationDiscoveryConfigurationResponseSuccess
+
+      interface _GetPortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPortalResponse]
+        def portal_id: () -> ::String
+        def portal_arn: () -> ::String
+        def endpoint_configuration: () -> Types::EndpointConfigurationResponse
+        def authorization: () -> Types::Authorization
+        def portal_content: () -> Types::PortalContent
+        def included_product_arns: () -> ::Array[::String]
+        def publish_status: () -> ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLE_IN_PROGRESS" | "DISABLE_FAILED" | "DISABLED")
+        def status_exception: () -> Types::PortalStatusException
+        def updated_at: () -> ::Time
+        def published_at: () -> ::Time
+        def publish_description: () -> ::String
+        def rum_app_monitor_name: () -> ::String
+        def preview: () -> Types::Preview
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#get_portal-instance_method
+      def get_portal: (
+                        portal_id: ::String
+                      ) -> _GetPortalResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPortalResponseSuccess
+
+      interface _GetProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProductResponse]
+        def product_id: () -> ::String
+        def product_arn: () -> ::String
+        def display_name: () -> ::String
+        def display_order: () -> Types::DisplayOrder
+        def description: () -> ::String
+        def updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+        def api_selection_configuration: () -> Types::ApiSelectionConfiguration
+        def status: () -> ("ACTIVE" | "IN_PROGRESS" | "FAILED")
+        def failure_reason: () -> ("API_PAGE_ATTACHED" | "EVALUATION_ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#get_product-instance_method
+      def get_product: (
+                         product_id: ::String,
+                         ?resource_owner_account_id: ::String
+                       ) -> _GetProductResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProductResponseSuccess
+
+      interface _GetProductApiPageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProductApiPageResponse]
+        def product_api_page_id: () -> ::String
+        def product_api_page_arn: () -> ::String
+        def api_id: () -> Types::ApiId
+        def display_content: () -> Types::ApiPageDisplayContentResponse
+        def try_it_state: () -> ("ENABLED" | "DISABLED")
+        def updated_at: () -> ::Time
+        def status: () -> ("AVAILABLE" | "IN_PROGRESS" | "FAILED")
+        def raw_display_content: () -> ::String
+        def status_exception: () -> Types::ProductApiPageStatusException
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#get_product_api_page-instance_method
+      def get_product_api_page: (
+                                  product_id: ::String,
+                                  product_api_page_id: ::String,
+                                  ?resource_owner_account_id: ::String,
+                                  ?include_raw_display_content: bool
+                                ) -> _GetProductApiPageResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProductApiPageResponseSuccess
+
+      interface _GetProductPageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProductPageResponse]
+        def product_page_id: () -> ::String
+        def product_page_arn: () -> ::String
+        def display_content: () -> Types::DisplayContent
+        def updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#get_product_page-instance_method
+      def get_product_page: (
+                              product_id: ::String,
+                              product_page_id: ::String,
+                              ?resource_owner_account_id: ::String
+                            ) -> _GetProductPageResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProductPageResponseSuccess
+
+      interface _GetProductSharingPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProductSharingPolicyResponse]
+        def product_id: () -> ::String
+        def policy_document: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#get_product_sharing_policy-instance_method
+      def get_product_sharing_policy: (
+                                        product_id: ::String
+                                      ) -> _GetProductSharingPolicyResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProductSharingPolicyResponseSuccess
+
+      interface _ListApiInventoryItemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApiInventoryItemsResponse]
+        def items: () -> ::Array[Types::ApiInventoryItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#list_api_inventory_items-instance_method
+      def list_api_inventory_items: (
+                                      ?filters: {
+                                        discovery_source: ("API_GATEWAY" | "ELB" | "CLOUDFRONT")?,
+                                        resource_arn: ::String?
+                                      },
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListApiInventoryItemsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApiInventoryItemsResponseSuccess
+
+      interface _ListDiscoveryStatusesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDiscoveryStatusesResponse]
+        def items: () -> ::Array[Types::DiscoveryStatus]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#list_discovery_statuses-instance_method
+      def list_discovery_statuses: (
+                                     ?discovery_source: ("API_GATEWAY" | "ELB" | "CLOUDFRONT"),
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListDiscoveryStatusesResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDiscoveryStatusesResponseSuccess
+
+      interface _ListManagedApiEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListManagedApiEventsResponse]
+        def items: () -> ::Array[Types::ManagedApiEventSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#list_managed_api_events-instance_method
+      def list_managed_api_events: (
+                                     managed_api_id: ::String,
+                                     ?started_after: ::Time,
+                                     ?started_before: ::Time,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListManagedApiEventsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedApiEventsResponseSuccess
+
+      interface _ListManagedApisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListManagedApisResponse]
+        def next_token: () -> ::String
+        def items: () -> ::Array[Types::ManagedApiSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#list_managed_apis-instance_method
+      def list_managed_apis: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String,
+                               ?product_id: ::String
+                             ) -> _ListManagedApisResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedApisResponseSuccess
+
+      interface _ListPortalsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPortalsResponse]
+        def items: () -> ::Array[Types::PortalSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#list_portals-instance_method
+      def list_portals: (
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListPortalsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPortalsResponseSuccess
+
+      interface _ListProductApiPagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProductApiPagesResponse]
+        def next_token: () -> ::String
+        def items: () -> ::Array[Types::ProductApiPageSummaryNoBody]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#list_product_api_pages-instance_method
+      def list_product_api_pages: (
+                                    product_id: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer,
+                                    ?resource_owner_account_id: ::String
+                                  ) -> _ListProductApiPagesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProductApiPagesResponseSuccess
+
+      interface _ListProductPagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProductPagesResponse]
+        def next_token: () -> ::String
+        def items: () -> ::Array[Types::ProductPageSummaryNoBody]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#list_product_pages-instance_method
+      def list_product_pages: (
+                                product_id: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer,
+                                ?resource_owner_account_id: ::String
+                              ) -> _ListProductPagesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProductPagesResponseSuccess
+
+      interface _ListProductsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProductsResponse]
+        def next_token: () -> ::String
+        def items: () -> ::Array[Types::ProductSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#list_products-instance_method
+      def list_products: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           ?resource_owner: ("ALL" | "SELF" | "OTHER_ACCOUNTS"),
+                           ?managed_api_id: ::String
+                         ) -> _ListProductsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProductsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutDiscoveryConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDiscoveryConfigurationResponse]
+        def discovery_configuration: () -> Types::DiscoveryConfigurationData
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#put_discovery_configuration-instance_method
+      def put_discovery_configuration: (
+                                         ?discovery_sources: Array[("API_GATEWAY" | "ELB" | "CLOUDFRONT")],
+                                         ?excluded_resources: Array[::String],
+                                         ?features: Array[("AI_DISCOVERY")],
+                                         ?tags: Hash[::String, ::String]
+                                       ) -> _PutDiscoveryConfigurationResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDiscoveryConfigurationResponseSuccess
+
+      interface _PutOrganizationDiscoveryConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutOrganizationDiscoveryConfigurationResponse]
+        def discovery_configuration: () -> Types::OrganizationDiscoveryConfigurationData
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#put_organization_discovery_configuration-instance_method
+      def put_organization_discovery_configuration: (
+                                                      ?discovery_sources: Array[("API_GATEWAY" | "ELB" | "CLOUDFRONT")],
+                                                      ?exclusion_filters: {
+                                                        organizational_unit_ids: Array[::String]?,
+                                                        account_ids: Array[::String]?,
+                                                        resource_arns: Array[::String]?
+                                                      },
+                                                      ?discovery_filters: {
+                                                        exclusion_filters: {
+                                                          organizational_unit_ids: Array[::String]?,
+                                                          account_ids: Array[::String]?,
+                                                          resource_arns: Array[::String]?
+                                                        }?,
+                                                        inclusion_filters: {
+                                                          organizational_unit_ids: Array[::String]?,
+                                                          account_ids: Array[::String]?
+                                                        }?
+                                                      },
+                                                      ?features: Array[("AI_DISCOVERY")],
+                                                      ?tags: Hash[::String, ::String]
+                                                    ) -> _PutOrganizationDiscoveryConfigurationResponseSuccess
+                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutOrganizationDiscoveryConfigurationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#put_product_sharing_policy-instance_method
+      def put_product_sharing_policy: (
+                                        product_id: ::String,
+                                        policy_document: ::String,
+                                        ?tags: Hash[::String, ::String]
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#start_discovery-instance_method
+      def start_discovery: (
+                             id: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#stop_discovery-instance_method
+      def stop_discovery: (
+                            id: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdatePortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePortalResponse]
+        def portal_id: () -> ::String
+        def portal_arn: () -> ::String
+        def endpoint_configuration: () -> Types::EndpointConfigurationResponse
+        def authorization: () -> Types::Authorization
+        def portal_content: () -> Types::PortalContent
+        def included_product_arns: () -> ::Array[::String]
+        def publish_status: () -> ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLE_IN_PROGRESS" | "DISABLE_FAILED" | "DISABLED")
+        def status_exception: () -> Types::PortalStatusException
+        def updated_at: () -> ::Time
+        def published_at: () -> ::Time
+        def publish_description: () -> ::String
+        def rum_app_monitor_name: () -> ::String
+        def preview: () -> Types::Preview
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#update_portal-instance_method
+      def update_portal: (
+                           portal_id: ::String,
+                           ?portal_content: Params::portal_content,
+                           ?endpoint_configuration: Params::endpoint_configuration_request,
+                           ?authorization: Params::authorization,
+                           ?rum_app_monitor_name: ::String,
+                           ?included_product_arns: Array[::String],
+                           ?logo_uri: ::String
+                         ) -> _UpdatePortalResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePortalResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#update_portal_publish_status-instance_method
+      def update_portal_publish_status: (
+                                          portal_id: ::String,
+                                          status: ("PUBLISHED" | "DISABLED"),
+                                          ?description: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProductResponse]
+        def product_id: () -> ::String
+        def product_arn: () -> ::String
+        def display_name: () -> ::String
+        def display_order: () -> Types::DisplayOrder
+        def description: () -> ::String
+        def updated_at: () -> ::Time
+        def api_selection_configuration: () -> Types::ApiSelectionConfiguration
+        def status: () -> ("ACTIVE" | "IN_PROGRESS" | "FAILED")
+        def failure_reason: () -> ("API_PAGE_ATTACHED" | "EVALUATION_ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#update_product-instance_method
+      def update_product: (
+                            product_id: ::String,
+                            ?display_name: ::String,
+                            ?description: ::String,
+                            ?display_order: {
+                              overview_page_arn: ::String?,
+                              product_page_arns: Array[::String]?,
+                              contents: Array[
+                                {
+                                  section_name: ::String?,
+                                  product_api_page_arns: Array[::String]?
+                                }
+                              ]?
+                            },
+                            ?api_selection_configuration: {
+                              api_selection_mode: ("CUSTOM" | "RULE_BASED"),
+                              rule_filters: Array[
+                                {
+                                  key: ("RESOURCE_ARN" | "HOST" | "METHOD" | "PATH" | "PORT" | "ACCOUNT"),
+                                  values: Array[::String]
+                                }
+                              ]?
+                            }
+                          ) -> _UpdateProductResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProductResponseSuccess
+
+      interface _UpdateProductApiPageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProductApiPageResponse]
+        def product_api_page_id: () -> ::String
+        def product_api_page_arn: () -> ::String
+        def api_id: () -> Types::ApiId
+        def display_content: () -> Types::ApiPageDisplayContentResponse
+        def try_it_state: () -> ("ENABLED" | "DISABLED")
+        def updated_at: () -> ::Time
+        def status: () -> ("AVAILABLE" | "IN_PROGRESS" | "FAILED")
+        def status_exception: () -> Types::ProductApiPageStatusException
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#update_product_api_page-instance_method
+      def update_product_api_page: (
+                                     product_id: ::String,
+                                     product_api_page_id: ::String,
+                                     ?display_content: Params::api_page_display_content,
+                                     ?try_it_state: ("ENABLED" | "DISABLED")
+                                   ) -> _UpdateProductApiPageResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProductApiPageResponseSuccess
+
+      interface _UpdateProductPageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProductPageResponse]
+        def product_page_id: () -> ::String
+        def product_page_arn: () -> ::String
+        def display_content: () -> Types::DisplayContent
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIPortal/Client.html#update_product_page-instance_method
+      def update_product_page: (
+                                 product_id: ::String,
+                                 product_page_id: ::String,
+                                 ?display_content: {
+                                   title: ::String,
+                                   body: ::String
+                                 }
+                               ) -> _UpdateProductPageResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProductPageResponseSuccess
+    end
+  end
+end
+

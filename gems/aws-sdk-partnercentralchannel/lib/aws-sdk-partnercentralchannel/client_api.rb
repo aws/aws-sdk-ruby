@@ -20,24 +20,51 @@ module Aws::PartnerCentralChannel
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIdList = Shapes::ListShape.new(name: 'AccountIdList')
+    AccountScope = Shapes::StringShape.new(name: 'AccountScope')
+    Address = Shapes::StructureShape.new(name: 'Address')
+    AddressLine = Shapes::StringShape.new(name: 'AddressLine')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociatedResourceId = Shapes::StringShape.new(name: 'AssociatedResourceId')
     AssociatedResourceIdentifier = Shapes::StringShape.new(name: 'AssociatedResourceIdentifier')
     AssociatedResourceIdentifierList = Shapes::ListShape.new(name: 'AssociatedResourceIdentifierList')
     AssociationType = Shapes::StringShape.new(name: 'AssociationType')
     AssociationTypeList = Shapes::ListShape.new(name: 'AssociationTypeList')
+    CancelChannelContractDetail = Shapes::StructureShape.new(name: 'CancelChannelContractDetail')
+    CancelChannelContractRequest = Shapes::StructureShape.new(name: 'CancelChannelContractRequest')
+    CancelChannelContractResponse = Shapes::StructureShape.new(name: 'CancelChannelContractResponse')
     CancelChannelHandshakeDetail = Shapes::StructureShape.new(name: 'CancelChannelHandshakeDetail')
     CancelChannelHandshakeRequest = Shapes::StructureShape.new(name: 'CancelChannelHandshakeRequest')
     CancelChannelHandshakeResponse = Shapes::StructureShape.new(name: 'CancelChannelHandshakeResponse')
+    CancellationReason = Shapes::StringShape.new(name: 'CancellationReason')
     Catalog = Shapes::StringShape.new(name: 'Catalog')
+    ChannelContractDetail = Shapes::StructureShape.new(name: 'ChannelContractDetail')
+    ChannelContractDetails = Shapes::UnionShape.new(name: 'ChannelContractDetails')
+    ChannelContractId = Shapes::StringShape.new(name: 'ChannelContractId')
+    ChannelContractIdentifier = Shapes::StringShape.new(name: 'ChannelContractIdentifier')
+    ChannelContractLegalEntityName = Shapes::StringShape.new(name: 'ChannelContractLegalEntityName')
+    ChannelContractLegalEntityNameFilterList = Shapes::ListShape.new(name: 'ChannelContractLegalEntityNameFilterList')
+    ChannelContractPayload = Shapes::UnionShape.new(name: 'ChannelContractPayload')
+    ChannelContractSignatoryEmail = Shapes::StringShape.new(name: 'ChannelContractSignatoryEmail')
+    ChannelContractSignatoryName = Shapes::StringShape.new(name: 'ChannelContractSignatoryName')
+    ChannelContractStatus = Shapes::StringShape.new(name: 'ChannelContractStatus')
+    ChannelContractStatusFilterList = Shapes::ListShape.new(name: 'ChannelContractStatusFilterList')
+    ChannelContractSummaries = Shapes::ListShape.new(name: 'ChannelContractSummaries')
+    ChannelContractSummary = Shapes::StructureShape.new(name: 'ChannelContractSummary')
+    ChannelContractSummaryDetails = Shapes::UnionShape.new(name: 'ChannelContractSummaryDetails')
+    ChannelContractType = Shapes::StringShape.new(name: 'ChannelContractType')
     ChannelHandshakeId = Shapes::StringShape.new(name: 'ChannelHandshakeId')
     ChannelHandshakeIdentifier = Shapes::StringShape.new(name: 'ChannelHandshakeIdentifier')
     ChannelHandshakePayload = Shapes::UnionShape.new(name: 'ChannelHandshakePayload')
     ChannelHandshakeSummaries = Shapes::ListShape.new(name: 'ChannelHandshakeSummaries')
     ChannelHandshakeSummary = Shapes::StructureShape.new(name: 'ChannelHandshakeSummary')
+    City = Shapes::StringShape.new(name: 'City')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CountryCode = Shapes::StringShape.new(name: 'CountryCode')
     Coverage = Shapes::StringShape.new(name: 'Coverage')
+    CreateChannelContractDetail = Shapes::StructureShape.new(name: 'CreateChannelContractDetail')
+    CreateChannelContractRequest = Shapes::StructureShape.new(name: 'CreateChannelContractRequest')
+    CreateChannelContractResponse = Shapes::StructureShape.new(name: 'CreateChannelContractResponse')
     CreateChannelHandshakeDetail = Shapes::StructureShape.new(name: 'CreateChannelHandshakeDetail')
     CreateChannelHandshakeRequest = Shapes::StructureShape.new(name: 'CreateChannelHandshakeRequest')
     CreateChannelHandshakeResponse = Shapes::StructureShape.new(name: 'CreateChannelHandshakeResponse')
@@ -52,6 +79,8 @@ module Aws::PartnerCentralChannel
     DeleteProgramManagementAccountResponse = Shapes::StructureShape.new(name: 'DeleteProgramManagementAccountResponse')
     DeleteRelationshipRequest = Shapes::StructureShape.new(name: 'DeleteRelationshipRequest')
     DeleteRelationshipResponse = Shapes::StructureShape.new(name: 'DeleteRelationshipResponse')
+    GetChannelContractRequest = Shapes::StructureShape.new(name: 'GetChannelContractRequest')
+    GetChannelContractResponse = Shapes::StructureShape.new(name: 'GetChannelContractResponse')
     GetRelationshipRequest = Shapes::StructureShape.new(name: 'GetRelationshipRequest')
     GetRelationshipResponse = Shapes::StructureShape.new(name: 'GetRelationshipResponse')
     HandshakeDetail = Shapes::UnionShape.new(name: 'HandshakeDetail')
@@ -59,6 +88,11 @@ module Aws::PartnerCentralChannel
     HandshakeStatusList = Shapes::ListShape.new(name: 'HandshakeStatusList')
     HandshakeType = Shapes::StringShape.new(name: 'HandshakeType')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    ListChannelContractsRequest = Shapes::StructureShape.new(name: 'ListChannelContractsRequest')
+    ListChannelContractsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListChannelContractsRequestMaxResultsInteger')
+    ListChannelContractsResponse = Shapes::StructureShape.new(name: 'ListChannelContractsResponse')
+    ListChannelContractsTypeFilters = Shapes::UnionShape.new(name: 'ListChannelContractsTypeFilters')
+    ListChannelContractsTypeSort = Shapes::UnionShape.new(name: 'ListChannelContractsTypeSort')
     ListChannelHandshakesRequest = Shapes::StructureShape.new(name: 'ListChannelHandshakesRequest')
     ListChannelHandshakesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListChannelHandshakesRequestMaxResultsInteger')
     ListChannelHandshakesResponse = Shapes::StructureShape.new(name: 'ListChannelHandshakesResponse')
@@ -76,12 +110,22 @@ module Aws::PartnerCentralChannel
     ListRelationshipsSortName = Shapes::StringShape.new(name: 'ListRelationshipsSortName')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ManagedServicesAttestationDetails = Shapes::StructureShape.new(name: 'ManagedServicesAttestationDetails')
+    ManagedServicesAttestationPayload = Shapes::StructureShape.new(name: 'ManagedServicesAttestationPayload')
+    ManagedServicesAttestationSummaryDetails = Shapes::StructureShape.new(name: 'ManagedServicesAttestationSummaryDetails')
+    ManagedServicesAttestationTypeFilters = Shapes::StructureShape.new(name: 'ManagedServicesAttestationTypeFilters')
+    ManagedServicesAttestationTypeSort = Shapes::StructureShape.new(name: 'ManagedServicesAttestationTypeSort')
+    ManagedServicesAttestationTypeSortName = Shapes::StringShape.new(name: 'ManagedServicesAttestationTypeSortName')
+    ManagedServicesSupportedService = Shapes::StringShape.new(name: 'ManagedServicesSupportedService')
+    ManagedServicesSupportedServiceList = Shapes::ListShape.new(name: 'ManagedServicesSupportedServiceList')
+    MemberAccountIdList = Shapes::ListShape.new(name: 'MemberAccountIdList')
     MinimumNoticeDays = Shapes::StringShape.new(name: 'MinimumNoticeDays')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     Note = Shapes::StringShape.new(name: 'Note')
     ParticipantType = Shapes::StringShape.new(name: 'ParticipantType')
     PartnerLedSupport = Shapes::StructureShape.new(name: 'PartnerLedSupport')
     PartnerProfileDisplayName = Shapes::StringShape.new(name: 'PartnerProfileDisplayName')
+    PostalCode = Shapes::StringShape.new(name: 'PostalCode')
     Program = Shapes::StringShape.new(name: 'Program')
     ProgramList = Shapes::ListShape.new(name: 'ProgramList')
     ProgramManagementAccountDisplayName = Shapes::StringShape.new(name: 'ProgramManagementAccountDisplayName')
@@ -94,6 +138,7 @@ module Aws::PartnerCentralChannel
     ProgramManagementAccountStatusList = Shapes::ListShape.new(name: 'ProgramManagementAccountStatusList')
     ProgramManagementAccountSummaries = Shapes::ListShape.new(name: 'ProgramManagementAccountSummaries')
     ProgramManagementAccountSummary = Shapes::StructureShape.new(name: 'ProgramManagementAccountSummary')
+    ProgramManagementAccountType = Shapes::StringShape.new(name: 'ProgramManagementAccountType')
     ProgramManagementAccountTypeFilters = Shapes::StructureShape.new(name: 'ProgramManagementAccountTypeFilters')
     ProgramManagementAccountTypeSort = Shapes::StructureShape.new(name: 'ProgramManagementAccountTypeSort')
     ProgramManagementAccountTypeSortName = Shapes::StringShape.new(name: 'ProgramManagementAccountTypeSortName')
@@ -106,6 +151,7 @@ module Aws::PartnerCentralChannel
     RelationshipDisplayNameList = Shapes::ListShape.new(name: 'RelationshipDisplayNameList')
     RelationshipId = Shapes::StringShape.new(name: 'RelationshipId')
     RelationshipIdentifier = Shapes::StringShape.new(name: 'RelationshipIdentifier')
+    RelationshipIdentifierFilterList = Shapes::ListShape.new(name: 'RelationshipIdentifierFilterList')
     RelationshipSummaries = Shapes::ListShape.new(name: 'RelationshipSummaries')
     RelationshipSummary = Shapes::StructureShape.new(name: 'RelationshipSummary')
     ResaleAccountModel = Shapes::StringShape.new(name: 'ResaleAccountModel')
@@ -128,6 +174,7 @@ module Aws::PartnerCentralChannel
     StartServicePeriodTypeFilters = Shapes::StructureShape.new(name: 'StartServicePeriodTypeFilters')
     StartServicePeriodTypeSort = Shapes::StructureShape.new(name: 'StartServicePeriodTypeSort')
     StartServicePeriodTypeSortName = Shapes::StringShape.new(name: 'StartServicePeriodTypeSortName')
+    StateOrRegion = Shapes::StringShape.new(name: 'StateOrRegion')
     String = Shapes::StringShape.new(name: 'String')
     SupportPlan = Shapes::UnionShape.new(name: 'SupportPlan')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -170,9 +217,32 @@ module Aws::PartnerCentralChannel
 
     AccountIdList.member = Shapes::ShapeRef.new(shape: AccountId)
 
+    Address.add_member(:city, Shapes::ShapeRef.new(shape: City, required: true, location_name: "city"))
+    Address.add_member(:state_or_region, Shapes::ShapeRef.new(shape: StateOrRegion, required: true, location_name: "stateOrRegion"))
+    Address.add_member(:postal_code, Shapes::ShapeRef.new(shape: PostalCode, required: true, location_name: "postalCode"))
+    Address.add_member(:country_code, Shapes::ShapeRef.new(shape: CountryCode, required: true, location_name: "countryCode"))
+    Address.add_member(:address_line, Shapes::ShapeRef.new(shape: AddressLine, required: true, location_name: "addressLine"))
+    Address.add_member(:address_line_2, Shapes::ShapeRef.new(shape: AddressLine, location_name: "addressLine2"))
+    Address.struct_class = Types::Address
+
     AssociatedResourceIdentifierList.member = Shapes::ShapeRef.new(shape: AssociatedResourceIdentifier)
 
     AssociationTypeList.member = Shapes::ShapeRef.new(shape: AssociationType)
+
+    CancelChannelContractDetail.add_member(:id, Shapes::ShapeRef.new(shape: ChannelContractId, location_name: "id"))
+    CancelChannelContractDetail.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    CancelChannelContractDetail.add_member(:status, Shapes::ShapeRef.new(shape: ChannelContractStatus, location_name: "status"))
+    CancelChannelContractDetail.add_member(:cancellation_reason, Shapes::ShapeRef.new(shape: CancellationReason, location_name: "cancellationReason"))
+    CancelChannelContractDetail.struct_class = Types::CancelChannelContractDetail
+
+    CancelChannelContractRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "catalog"))
+    CancelChannelContractRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ChannelContractIdentifier, required: true, location_name: "identifier"))
+    CancelChannelContractRequest.add_member(:reason, Shapes::ShapeRef.new(shape: CancellationReason, location_name: "reason"))
+    CancelChannelContractRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CancelChannelContractRequest.struct_class = Types::CancelChannelContractRequest
+
+    CancelChannelContractResponse.add_member(:channel_contract_detail, Shapes::ShapeRef.new(shape: CancelChannelContractDetail, location_name: "channelContractDetail"))
+    CancelChannelContractResponse.struct_class = Types::CancelChannelContractResponse
 
     CancelChannelHandshakeDetail.add_member(:id, Shapes::ShapeRef.new(shape: ChannelHandshakeId, location_name: "id"))
     CancelChannelHandshakeDetail.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
@@ -185,6 +255,53 @@ module Aws::PartnerCentralChannel
 
     CancelChannelHandshakeResponse.add_member(:channel_handshake_detail, Shapes::ShapeRef.new(shape: CancelChannelHandshakeDetail, location_name: "channelHandshakeDetail"))
     CancelChannelHandshakeResponse.struct_class = Types::CancelChannelHandshakeResponse
+
+    ChannelContractDetail.add_member(:id, Shapes::ShapeRef.new(shape: ChannelContractId, required: true, location_name: "id"))
+    ChannelContractDetail.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    ChannelContractDetail.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "catalog"))
+    ChannelContractDetail.add_member(:contract_type, Shapes::ShapeRef.new(shape: ChannelContractType, required: true, location_name: "contractType"))
+    ChannelContractDetail.add_member(:status, Shapes::ShapeRef.new(shape: ChannelContractStatus, required: true, location_name: "status"))
+    ChannelContractDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "createdAt"))
+    ChannelContractDetail.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "updatedAt"))
+    ChannelContractDetail.add_member(:responded_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "respondedAt"))
+    ChannelContractDetail.add_member(:cancellation_reason, Shapes::ShapeRef.new(shape: CancellationReason, location_name: "cancellationReason"))
+    ChannelContractDetail.add_member(:details, Shapes::ShapeRef.new(shape: ChannelContractDetails, required: true, location_name: "details"))
+    ChannelContractDetail.struct_class = Types::ChannelContractDetail
+
+    ChannelContractDetails.add_member(:managed_services_attestation_details, Shapes::ShapeRef.new(shape: ManagedServicesAttestationDetails, location_name: "managedServicesAttestationDetails"))
+    ChannelContractDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ChannelContractDetails.add_member_subclass(:managed_services_attestation_details, Types::ChannelContractDetails::ManagedServicesAttestationDetails)
+    ChannelContractDetails.add_member_subclass(:unknown, Types::ChannelContractDetails::Unknown)
+    ChannelContractDetails.struct_class = Types::ChannelContractDetails
+
+    ChannelContractLegalEntityNameFilterList.member = Shapes::ShapeRef.new(shape: ChannelContractLegalEntityName)
+
+    ChannelContractPayload.add_member(:managed_services_attestation_payload, Shapes::ShapeRef.new(shape: ManagedServicesAttestationPayload, location_name: "managedServicesAttestationPayload"))
+    ChannelContractPayload.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ChannelContractPayload.add_member_subclass(:managed_services_attestation_payload, Types::ChannelContractPayload::ManagedServicesAttestationPayload)
+    ChannelContractPayload.add_member_subclass(:unknown, Types::ChannelContractPayload::Unknown)
+    ChannelContractPayload.struct_class = Types::ChannelContractPayload
+
+    ChannelContractStatusFilterList.member = Shapes::ShapeRef.new(shape: ChannelContractStatus)
+
+    ChannelContractSummaries.member = Shapes::ShapeRef.new(shape: ChannelContractSummary)
+
+    ChannelContractSummary.add_member(:id, Shapes::ShapeRef.new(shape: ChannelContractId, required: true, location_name: "id"))
+    ChannelContractSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    ChannelContractSummary.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "catalog"))
+    ChannelContractSummary.add_member(:contract_type, Shapes::ShapeRef.new(shape: ChannelContractType, required: true, location_name: "contractType"))
+    ChannelContractSummary.add_member(:status, Shapes::ShapeRef.new(shape: ChannelContractStatus, required: true, location_name: "status"))
+    ChannelContractSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "createdAt"))
+    ChannelContractSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "updatedAt"))
+    ChannelContractSummary.add_member(:responded_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "respondedAt"))
+    ChannelContractSummary.add_member(:details, Shapes::ShapeRef.new(shape: ChannelContractSummaryDetails, required: true, location_name: "details"))
+    ChannelContractSummary.struct_class = Types::ChannelContractSummary
+
+    ChannelContractSummaryDetails.add_member(:managed_services_attestation_details, Shapes::ShapeRef.new(shape: ManagedServicesAttestationSummaryDetails, location_name: "managedServicesAttestationDetails"))
+    ChannelContractSummaryDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ChannelContractSummaryDetails.add_member_subclass(:managed_services_attestation_details, Types::ChannelContractSummaryDetails::ManagedServicesAttestationDetails)
+    ChannelContractSummaryDetails.add_member_subclass(:unknown, Types::ChannelContractSummaryDetails::Unknown)
+    ChannelContractSummaryDetails.struct_class = Types::ChannelContractSummaryDetails
 
     ChannelHandshakePayload.add_member(:start_service_period_payload, Shapes::ShapeRef.new(shape: StartServicePeriodPayload, location_name: "startServicePeriodPayload"))
     ChannelHandshakePayload.add_member(:revoke_service_period_payload, Shapes::ShapeRef.new(shape: RevokeServicePeriodPayload, location_name: "revokeServicePeriodPayload"))
@@ -216,6 +333,20 @@ module Aws::PartnerCentralChannel
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
+    CreateChannelContractDetail.add_member(:id, Shapes::ShapeRef.new(shape: ChannelContractId, location_name: "id"))
+    CreateChannelContractDetail.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    CreateChannelContractDetail.struct_class = Types::CreateChannelContractDetail
+
+    CreateChannelContractRequest.add_member(:contract_type, Shapes::ShapeRef.new(shape: ChannelContractType, required: true, location_name: "contractType"))
+    CreateChannelContractRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "catalog"))
+    CreateChannelContractRequest.add_member(:payload, Shapes::ShapeRef.new(shape: ChannelContractPayload, required: true, location_name: "payload"))
+    CreateChannelContractRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateChannelContractRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateChannelContractRequest.struct_class = Types::CreateChannelContractRequest
+
+    CreateChannelContractResponse.add_member(:channel_contract_detail, Shapes::ShapeRef.new(shape: CreateChannelContractDetail, location_name: "channelContractDetail"))
+    CreateChannelContractResponse.struct_class = Types::CreateChannelContractResponse
+
     CreateChannelHandshakeDetail.add_member(:id, Shapes::ShapeRef.new(shape: ChannelHandshakeId, location_name: "id"))
     CreateChannelHandshakeDetail.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     CreateChannelHandshakeDetail.struct_class = Types::CreateChannelHandshakeDetail
@@ -241,6 +372,7 @@ module Aws::PartnerCentralChannel
     CreateProgramManagementAccountRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     CreateProgramManagementAccountRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateProgramManagementAccountRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateProgramManagementAccountRequest.add_member(:type, Shapes::ShapeRef.new(shape: ProgramManagementAccountType, location_name: "type"))
     CreateProgramManagementAccountRequest.struct_class = Types::CreateProgramManagementAccountRequest
 
     CreateProgramManagementAccountResponse.add_member(:program_management_account_detail, Shapes::ShapeRef.new(shape: CreateProgramManagementAccountDetail, location_name: "programManagementAccountDetail"))
@@ -253,13 +385,15 @@ module Aws::PartnerCentralChannel
     CreateRelationshipRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "catalog"))
     CreateRelationshipRequest.add_member(:association_type, Shapes::ShapeRef.new(shape: AssociationType, required: true, location_name: "associationType"))
     CreateRelationshipRequest.add_member(:program_management_account_identifier, Shapes::ShapeRef.new(shape: ProgramManagementAccountIdentifier, required: true, location_name: "programManagementAccountIdentifier"))
-    CreateRelationshipRequest.add_member(:associated_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "associatedAccountId"))
+    CreateRelationshipRequest.add_member(:associated_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "associatedAccountId"))
     CreateRelationshipRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: RelationshipDisplayName, required: true, location_name: "displayName"))
     CreateRelationshipRequest.add_member(:resale_account_model, Shapes::ShapeRef.new(shape: ResaleAccountModel, location_name: "resaleAccountModel"))
     CreateRelationshipRequest.add_member(:sector, Shapes::ShapeRef.new(shape: Sector, required: true, location_name: "sector"))
     CreateRelationshipRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateRelationshipRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateRelationshipRequest.add_member(:requested_support_plan, Shapes::ShapeRef.new(shape: SupportPlan, location_name: "requestedSupportPlan"))
+    CreateRelationshipRequest.add_member(:account_scope, Shapes::ShapeRef.new(shape: AccountScope, location_name: "accountScope"))
+    CreateRelationshipRequest.add_member(:start_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "startDate"))
     CreateRelationshipRequest.struct_class = Types::CreateRelationshipRequest
 
     CreateRelationshipResponse.add_member(:relationship_detail, Shapes::ShapeRef.new(shape: CreateRelationshipDetail, location_name: "relationshipDetail"))
@@ -279,6 +413,13 @@ module Aws::PartnerCentralChannel
     DeleteRelationshipRequest.struct_class = Types::DeleteRelationshipRequest
 
     DeleteRelationshipResponse.struct_class = Types::DeleteRelationshipResponse
+
+    GetChannelContractRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "catalog"))
+    GetChannelContractRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ChannelContractIdentifier, required: true, location_name: "identifier"))
+    GetChannelContractRequest.struct_class = Types::GetChannelContractRequest
+
+    GetChannelContractResponse.add_member(:channel_contract_detail, Shapes::ShapeRef.new(shape: ChannelContractDetail, location_name: "channelContractDetail"))
+    GetChannelContractResponse.struct_class = Types::GetChannelContractResponse
 
     GetRelationshipRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "catalog"))
     GetRelationshipRequest.add_member(:program_management_account_identifier, Shapes::ShapeRef.new(shape: ProgramManagementAccountIdentifier, required: true, location_name: "programManagementAccountIdentifier"))
@@ -302,6 +443,31 @@ module Aws::PartnerCentralChannel
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    ListChannelContractsRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "catalog"))
+    ListChannelContractsRequest.add_member(:contract_type, Shapes::ShapeRef.new(shape: ChannelContractType, required: true, location_name: "contractType"))
+    ListChannelContractsRequest.add_member(:statuses, Shapes::ShapeRef.new(shape: ChannelContractStatusFilterList, location_name: "statuses"))
+    ListChannelContractsRequest.add_member(:contract_type_filters, Shapes::ShapeRef.new(shape: ListChannelContractsTypeFilters, location_name: "contractTypeFilters"))
+    ListChannelContractsRequest.add_member(:contract_type_sort, Shapes::ShapeRef.new(shape: ListChannelContractsTypeSort, location_name: "contractTypeSort"))
+    ListChannelContractsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListChannelContractsRequestMaxResultsInteger, location_name: "maxResults"))
+    ListChannelContractsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListChannelContractsRequest.struct_class = Types::ListChannelContractsRequest
+
+    ListChannelContractsResponse.add_member(:items, Shapes::ShapeRef.new(shape: ChannelContractSummaries, required: true, location_name: "items"))
+    ListChannelContractsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListChannelContractsResponse.struct_class = Types::ListChannelContractsResponse
+
+    ListChannelContractsTypeFilters.add_member(:managed_services_attestation_type_filters, Shapes::ShapeRef.new(shape: ManagedServicesAttestationTypeFilters, location_name: "managedServicesAttestationTypeFilters"))
+    ListChannelContractsTypeFilters.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ListChannelContractsTypeFilters.add_member_subclass(:managed_services_attestation_type_filters, Types::ListChannelContractsTypeFilters::ManagedServicesAttestationTypeFilters)
+    ListChannelContractsTypeFilters.add_member_subclass(:unknown, Types::ListChannelContractsTypeFilters::Unknown)
+    ListChannelContractsTypeFilters.struct_class = Types::ListChannelContractsTypeFilters
+
+    ListChannelContractsTypeSort.add_member(:managed_services_attestation_type_sort, Shapes::ShapeRef.new(shape: ManagedServicesAttestationTypeSort, location_name: "managedServicesAttestationTypeSort"))
+    ListChannelContractsTypeSort.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ListChannelContractsTypeSort.add_member_subclass(:managed_services_attestation_type_sort, Types::ListChannelContractsTypeSort::ManagedServicesAttestationTypeSort)
+    ListChannelContractsTypeSort.add_member_subclass(:unknown, Types::ListChannelContractsTypeSort::Unknown)
+    ListChannelContractsTypeSort.struct_class = Types::ListChannelContractsTypeSort
 
     ListChannelHandshakesRequest.add_member(:handshake_type, Shapes::ShapeRef.new(shape: HandshakeType, required: true, location_name: "handshakeType"))
     ListChannelHandshakesRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "catalog"))
@@ -346,6 +512,7 @@ module Aws::PartnerCentralChannel
     ListProgramManagementAccountsRequest.add_member(:statuses, Shapes::ShapeRef.new(shape: ProgramManagementAccountStatusList, location_name: "statuses"))
     ListProgramManagementAccountsRequest.add_member(:sort, Shapes::ShapeRef.new(shape: ListProgramManagementAccountsSortBase, location_name: "sort"))
     ListProgramManagementAccountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListProgramManagementAccountsRequest.add_member(:type, Shapes::ShapeRef.new(shape: ProgramManagementAccountType, location_name: "type"))
     ListProgramManagementAccountsRequest.struct_class = Types::ListProgramManagementAccountsRequest
 
     ListProgramManagementAccountsResponse.add_member(:items, Shapes::ShapeRef.new(shape: ProgramManagementAccountSummaries, location_name: "items"))
@@ -380,6 +547,48 @@ module Aws::PartnerCentralChannel
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    ManagedServicesAttestationDetails.add_member(:legal_entity_name, Shapes::ShapeRef.new(shape: ChannelContractLegalEntityName, required: true, location_name: "legalEntityName"))
+    ManagedServicesAttestationDetails.add_member(:relationship_identifier, Shapes::ShapeRef.new(shape: RelationshipIdentifier, required: true, location_name: "relationshipIdentifier"))
+    ManagedServicesAttestationDetails.add_member(:program_management_account_identifier, Shapes::ShapeRef.new(shape: ProgramManagementAccountIdentifier, required: true, location_name: "programManagementAccountIdentifier"))
+    ManagedServicesAttestationDetails.add_member(:member_account_ids, Shapes::ShapeRef.new(shape: MemberAccountIdList, location_name: "memberAccountIds"))
+    ManagedServicesAttestationDetails.add_member(:end_date, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "endDate"))
+    ManagedServicesAttestationDetails.add_member(:supported_services, Shapes::ShapeRef.new(shape: ManagedServicesSupportedServiceList, required: true, location_name: "supportedServices"))
+    ManagedServicesAttestationDetails.add_member(:signatory_name, Shapes::ShapeRef.new(shape: ChannelContractSignatoryName, required: true, location_name: "signatoryName"))
+    ManagedServicesAttestationDetails.add_member(:signatory_email, Shapes::ShapeRef.new(shape: ChannelContractSignatoryEmail, required: true, location_name: "signatoryEmail"))
+    ManagedServicesAttestationDetails.add_member(:legal_entity_address, Shapes::ShapeRef.new(shape: Address, location_name: "legalEntityAddress"))
+    ManagedServicesAttestationDetails.struct_class = Types::ManagedServicesAttestationDetails
+
+    ManagedServicesAttestationPayload.add_member(:legal_entity_name, Shapes::ShapeRef.new(shape: ChannelContractLegalEntityName, required: true, location_name: "legalEntityName"))
+    ManagedServicesAttestationPayload.add_member(:relationship_identifier, Shapes::ShapeRef.new(shape: RelationshipIdentifier, required: true, location_name: "relationshipIdentifier"))
+    ManagedServicesAttestationPayload.add_member(:program_management_account_identifier, Shapes::ShapeRef.new(shape: ProgramManagementAccountIdentifier, required: true, location_name: "programManagementAccountIdentifier"))
+    ManagedServicesAttestationPayload.add_member(:member_account_ids, Shapes::ShapeRef.new(shape: MemberAccountIdList, location_name: "memberAccountIds"))
+    ManagedServicesAttestationPayload.add_member(:end_date, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "endDate"))
+    ManagedServicesAttestationPayload.add_member(:supported_services, Shapes::ShapeRef.new(shape: ManagedServicesSupportedServiceList, required: true, location_name: "supportedServices"))
+    ManagedServicesAttestationPayload.add_member(:legal_entity_address, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "legalEntityAddress"))
+    ManagedServicesAttestationPayload.add_member(:signatory_name, Shapes::ShapeRef.new(shape: ChannelContractSignatoryName, required: true, location_name: "signatoryName"))
+    ManagedServicesAttestationPayload.add_member(:signatory_email, Shapes::ShapeRef.new(shape: ChannelContractSignatoryEmail, required: true, location_name: "signatoryEmail"))
+    ManagedServicesAttestationPayload.struct_class = Types::ManagedServicesAttestationPayload
+
+    ManagedServicesAttestationSummaryDetails.add_member(:legal_entity_name, Shapes::ShapeRef.new(shape: ChannelContractLegalEntityName, required: true, location_name: "legalEntityName"))
+    ManagedServicesAttestationSummaryDetails.add_member(:relationship_identifier, Shapes::ShapeRef.new(shape: RelationshipIdentifier, required: true, location_name: "relationshipIdentifier"))
+    ManagedServicesAttestationSummaryDetails.add_member(:program_management_account_identifier, Shapes::ShapeRef.new(shape: ProgramManagementAccountIdentifier, required: true, location_name: "programManagementAccountIdentifier"))
+    ManagedServicesAttestationSummaryDetails.add_member(:member_account_ids, Shapes::ShapeRef.new(shape: MemberAccountIdList, location_name: "memberAccountIds"))
+    ManagedServicesAttestationSummaryDetails.add_member(:end_date, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "endDate"))
+    ManagedServicesAttestationSummaryDetails.add_member(:supported_services, Shapes::ShapeRef.new(shape: ManagedServicesSupportedServiceList, required: true, location_name: "supportedServices"))
+    ManagedServicesAttestationSummaryDetails.struct_class = Types::ManagedServicesAttestationSummaryDetails
+
+    ManagedServicesAttestationTypeFilters.add_member(:relationship_identifiers, Shapes::ShapeRef.new(shape: RelationshipIdentifierFilterList, location_name: "relationshipIdentifiers"))
+    ManagedServicesAttestationTypeFilters.add_member(:legal_entity_names, Shapes::ShapeRef.new(shape: ChannelContractLegalEntityNameFilterList, location_name: "legalEntityNames"))
+    ManagedServicesAttestationTypeFilters.struct_class = Types::ManagedServicesAttestationTypeFilters
+
+    ManagedServicesAttestationTypeSort.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "sortOrder"))
+    ManagedServicesAttestationTypeSort.add_member(:sort_by, Shapes::ShapeRef.new(shape: ManagedServicesAttestationTypeSortName, required: true, location_name: "sortBy"))
+    ManagedServicesAttestationTypeSort.struct_class = Types::ManagedServicesAttestationTypeSort
+
+    ManagedServicesSupportedServiceList.member = Shapes::ShapeRef.new(shape: ManagedServicesSupportedService)
+
+    MemberAccountIdList.member = Shapes::ShapeRef.new(shape: AccountId)
+
     PartnerLedSupport.add_member(:coverage, Shapes::ShapeRef.new(shape: Coverage, required: true, location_name: "coverage"))
     PartnerLedSupport.add_member(:provider, Shapes::ShapeRef.new(shape: Provider, location_name: "provider"))
     PartnerLedSupport.add_member(:tam_location, Shapes::ShapeRef.new(shape: String, required: true, location_name: "tamLocation"))
@@ -409,6 +618,7 @@ module Aws::PartnerCentralChannel
     ProgramManagementAccountSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "updatedAt"))
     ProgramManagementAccountSummary.add_member(:start_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "startDate"))
     ProgramManagementAccountSummary.add_member(:status, Shapes::ShapeRef.new(shape: ProgramManagementAccountStatus, location_name: "status"))
+    ProgramManagementAccountSummary.add_member(:type, Shapes::ShapeRef.new(shape: ProgramManagementAccountType, location_name: "type"))
     ProgramManagementAccountSummary.struct_class = Types::ProgramManagementAccountSummary
 
     ProgramManagementAccountTypeFilters.add_member(:programs, Shapes::ShapeRef.new(shape: ProgramList, location_name: "programs"))
@@ -440,12 +650,17 @@ module Aws::PartnerCentralChannel
     RelationshipDetail.add_member(:display_name, Shapes::ShapeRef.new(shape: RelationshipDisplayName, location_name: "displayName"))
     RelationshipDetail.add_member(:resale_account_model, Shapes::ShapeRef.new(shape: ResaleAccountModel, location_name: "resaleAccountModel"))
     RelationshipDetail.add_member(:sector, Shapes::ShapeRef.new(shape: Sector, location_name: "sector"))
+    RelationshipDetail.add_member(:account_scope, Shapes::ShapeRef.new(shape: AccountScope, location_name: "accountScope"))
+    RelationshipDetail.add_member(:channel_contract_id, Shapes::ShapeRef.new(shape: ChannelContractId, location_name: "channelContractId"))
     RelationshipDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "createdAt"))
     RelationshipDetail.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "updatedAt"))
     RelationshipDetail.add_member(:start_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "startDate"))
+    RelationshipDetail.add_member(:end_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "endDate"))
     RelationshipDetail.struct_class = Types::RelationshipDetail
 
     RelationshipDisplayNameList.member = Shapes::ShapeRef.new(shape: RelationshipDisplayName)
+
+    RelationshipIdentifierFilterList.member = Shapes::ShapeRef.new(shape: RelationshipIdentifier)
 
     RelationshipSummaries.member = Shapes::ShapeRef.new(shape: RelationshipSummary)
 
@@ -638,6 +853,20 @@ module Aws::PartnerCentralChannel
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:cancel_channel_contract, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelChannelContract"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelChannelContractRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelChannelContractResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:cancel_channel_handshake, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CancelChannelHandshake"
         o.http_method = "POST"
@@ -649,6 +878,21 @@ module Aws::PartnerCentralChannel
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_channel_contract, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateChannelContract"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateChannelContractRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateChannelContractResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_channel_handshake, Seahorse::Model::Operation.new.tap do |o|
@@ -724,6 +968,19 @@ module Aws::PartnerCentralChannel
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:get_channel_contract, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetChannelContract"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetChannelContractRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetChannelContractResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_relationship, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetRelationship"
         o.http_method = "POST"
@@ -735,6 +992,25 @@ module Aws::PartnerCentralChannel
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:list_channel_contracts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListChannelContracts"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListChannelContractsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListChannelContractsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_channel_handshakes, Seahorse::Model::Operation.new.tap do |o|

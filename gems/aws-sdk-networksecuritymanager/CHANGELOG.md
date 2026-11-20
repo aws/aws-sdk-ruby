@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2026-11-20)
+------------------
+
+* Feature - Adds support for Network Firewall automated internet firewall to Network Security Manager
+
 1.12.0 (2026-11-18)
 ------------------
 

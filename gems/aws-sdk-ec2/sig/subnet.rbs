@@ -63,6 +63,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#type-instance_method
       def type: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#network_firewall_connectivity_type-instance_method
+      def network_firewall_connectivity_type: () -> ("flexible" | "outbound-only" | "bidirectional" | "exclude" | "az-unsupported")
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#state-instance_method
       def state: () -> ("pending" | "available" | "unavailable" | "failed" | "failed-insufficient-capacity")
 

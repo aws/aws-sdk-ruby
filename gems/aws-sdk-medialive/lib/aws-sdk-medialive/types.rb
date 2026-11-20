@@ -1818,6 +1818,10 @@ module Aws::MediaLive
     #   Smart Subtitle Source Settings
     #   @return [Types::SmartSubtitleSourceSettings]
     #
+    # @!attribute [rw] webvtt_source_settings
+    #   Webvtt Source Settings
+    #   @return [Types::WebvttSourceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CaptionSelectorSettings AWS API Documentation
     #
     class CaptionSelectorSettings < Struct.new(
@@ -1828,7 +1832,8 @@ module Aws::MediaLive
       :scte_20_source_settings,
       :scte_27_source_settings,
       :teletext_source_settings,
-      :smart_subtitle_source_settings)
+      :smart_subtitle_source_settings,
+      :webvtt_source_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4699,11 +4704,32 @@ module Aws::MediaLive
     #   is given default values.
     #   @return [String]
     #
+    # @!attribute [rw] caption_service_channel
+    #   CC Channel / Service number for 608/708 encode mode. Serves as both
+    #   the 608 CC channel and the 708 service number (e.g., 1 = CC1 +
+    #   Service 1). Only takes effect when the source is non-embedded
+    #   (teletext, smart captions, etc.) — ignored in passthrough mode.
+    #   Range 1-4: valid for embedded608Only, embedded708Only, or
+    #   embedded608And708. Range 5-63: valid for embedded708Only.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] embedded_mode
+    #   Controls what the encoder generates when in encode mode
+    #   (non-embedded source → embedded destination). Ignored in passthrough
+    #   mode (embedded source → embedded destination). -
+    #   "embedded608Only": Generate CEA-608 CC pairs only (channel must be
+    #   1-4) - "embedded708Only": Generate CEA-708 service blocks only
+    #   (channel 1-63) - "embedded608And708": Generate both 608 CC pairs
+    #   and 708 service blocks (channel 1-4 gets both, 5-63 gets 708 only)
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EmbeddedDestinationSettings AWS API Documentation
     #
     class EmbeddedDestinationSettings < Struct.new(
       :position,
-      :style_control)
+      :style_control,
+      :caption_service_channel,
+      :embedded_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14388,8 +14414,8 @@ module Aws::MediaLive
     # @!attribute [rw] style_control
     #   Controls whether the color and position of the source captions is
     #   passed through to the WebVTT output captions. PASSTHROUGH - Valid
-    #   only if the source captions are EMBEDDED, TELETEXT, or SMART
-    #   SUBTITLES. NO\_STYLE\_DATA - Don't pass through the style. The
+    #   only if the source captions are EMBEDDED, TELETEXT, SMART SUBTITLES,
+    #   or WEBVTT. NO\_STYLE\_DATA - Don't pass through the style. The
     #   output captions will not contain any font styling information.
     #   MANUAL - Applies the specified styling and positioning. All other
     #   styling and positioning is given default values.
@@ -23958,6 +23984,39 @@ module Aws::MediaLive
       :codec,
       :maximum_bitrate,
       :resolution)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Webvtt Source Settings
+    #
+    # @!attribute [rw] group_id
+    #   Optional. The "GROUP-ID" attribute of the #EXT-X-MEDIA subtitle
+    #   rendition to use from the HLS source. Specify it together with name;
+    #   the pair must exactly match one rendition, otherwise this caption
+    #   selector produces no captions. If neither groupId nor name is
+    #   specified, MediaLive selects the rendition whose LANGUAGE matches
+    #   the caption selector's language code (case-insensitive), then the
+    #   DEFAULT=YES rendition, then the first subtitle rendition listed in
+    #   the master playlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Optional. The "NAME" attribute of the #EXT-X-MEDIA subtitle
+    #   rendition to use from the HLS source. Specify it together with
+    #   groupId; the pair must exactly match one rendition, otherwise this
+    #   caption selector produces no captions. If neither groupId nor name
+    #   is specified, MediaLive selects the rendition whose LANGUAGE matches
+    #   the caption selector's language code (case-insensitive), then the
+    #   DEFAULT=YES rendition, then the first subtitle rendition listed in
+    #   the master playlist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/WebvttSourceSettings AWS API Documentation
+    #
+    class WebvttSourceSettings < Struct.new(
+      :group_id,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end

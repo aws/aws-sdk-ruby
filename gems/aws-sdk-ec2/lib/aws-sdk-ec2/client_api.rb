@@ -1890,6 +1890,9 @@ module Aws::EC2
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterPortRange = Shapes::StructureShape.new(name: 'FilterPortRange')
     FindingsFound = Shapes::StringShape.new(name: 'FindingsFound')
+    FirewallArn = Shapes::StringShape.new(name: 'FirewallArn')
+    FirewallMode = Shapes::StringShape.new(name: 'FirewallMode')
+    FirewallOnboardingStatus = Shapes::StringShape.new(name: 'FirewallOnboardingStatus')
     FirewallStatefulRule = Shapes::StructureShape.new(name: 'FirewallStatefulRule')
     FirewallStatelessRule = Shapes::StructureShape.new(name: 'FirewallStatelessRule')
     FleetActivityStatus = Shapes::StringShape.new(name: 'FleetActivityStatus')
@@ -2239,6 +2242,7 @@ module Aws::EC2
     IdFormat = Shapes::StructureShape.new(name: 'IdFormat')
     IdFormatList = Shapes::ListShape.new(name: 'IdFormatList')
     Igmpv2SupportValue = Shapes::StringShape.new(name: 'Igmpv2SupportValue')
+    IgwFirewall = Shapes::StructureShape.new(name: 'IgwFirewall')
     Image = Shapes::StructureShape.new(name: 'Image')
     ImageAncestryEntry = Shapes::StructureShape.new(name: 'ImageAncestryEntry')
     ImageAncestryEntryList = Shapes::ListShape.new(name: 'ImageAncestryEntryList')
@@ -3181,6 +3185,9 @@ module Aws::EC2
     NetworkCardInfoList = Shapes::ListShape.new(name: 'NetworkCardInfoList')
     NetworkCardInterfaceType = Shapes::StringShape.new(name: 'NetworkCardInterfaceType')
     NetworkCardInterfaceTypeList = Shapes::ListShape.new(name: 'NetworkCardInterfaceTypeList')
+    NetworkFirewallAssociation = Shapes::StructureShape.new(name: 'NetworkFirewallAssociation')
+    NetworkFirewallAssociationSet = Shapes::ListShape.new(name: 'NetworkFirewallAssociationSet')
+    NetworkFirewallConnectivityType = Shapes::StringShape.new(name: 'NetworkFirewallConnectivityType')
     NetworkFunctionAttachmentAZIdList = Shapes::ListShape.new(name: 'NetworkFunctionAttachmentAZIdList')
     NetworkFunctionAttachmentAZNameList = Shapes::ListShape.new(name: 'NetworkFunctionAttachmentAZNameList')
     NetworkInfo = Shapes::StructureShape.new(name: 'NetworkInfo')
@@ -13550,6 +13557,10 @@ module Aws::EC2
 
     IdFormatList.member = Shapes::ShapeRef.new(shape: IdFormat, location_name: "item")
 
+    IgwFirewall.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: FirewallArn, location_name: "firewallArn"))
+    IgwFirewall.add_member(:status, Shapes::ShapeRef.new(shape: FirewallOnboardingStatus, location_name: "status"))
+    IgwFirewall.struct_class = Types::IgwFirewall
+
     Image.add_member(:platform_details, Shapes::ShapeRef.new(shape: String, location_name: "platformDetails"))
     Image.add_member(:usage_operation, Shapes::ShapeRef.new(shape: String, location_name: "usageOperation"))
     Image.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: BlockDeviceMappingList, location_name: "blockDeviceMapping"))
@@ -17242,6 +17253,13 @@ module Aws::EC2
 
     NetworkCardInterfaceTypeList.member = Shapes::ShapeRef.new(shape: NetworkCardInterfaceType, location_name: "item")
 
+    NetworkFirewallAssociation.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: FirewallArn, location_name: "firewallArn"))
+    NetworkFirewallAssociation.add_member(:firewall_onboarding_status, Shapes::ShapeRef.new(shape: FirewallOnboardingStatus, location_name: "firewallOnboardingStatus"))
+    NetworkFirewallAssociation.add_member(:firewall_mode, Shapes::ShapeRef.new(shape: FirewallMode, location_name: "firewallMode"))
+    NetworkFirewallAssociation.struct_class = Types::NetworkFirewallAssociation
+
+    NetworkFirewallAssociationSet.member = Shapes::ShapeRef.new(shape: NetworkFirewallAssociation, location_name: "item")
+
     NetworkFunctionAttachmentAZIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
     NetworkFunctionAttachmentAZNameList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
@@ -18866,6 +18884,7 @@ module Aws::EC2
     Route.add_member(:core_network_arn, Shapes::ShapeRef.new(shape: CoreNetworkArn, location_name: "coreNetworkArn"))
     Route.add_member(:odb_network_arn, Shapes::ShapeRef.new(shape: OdbNetworkArn, location_name: "odbNetworkArn"))
     Route.add_member(:ip_address, Shapes::ShapeRef.new(shape: String, location_name: "ipAddress"))
+    Route.add_member(:igw_firewall, Shapes::ShapeRef.new(shape: IgwFirewall, location_name: "igwFirewall"))
     Route.struct_class = Types::Route
 
     RouteList.member = Shapes::ShapeRef.new(shape: Route, location_name: "item")
@@ -19926,6 +19945,7 @@ module Aws::EC2
     Subnet.add_member(:private_dns_name_options_on_launch, Shapes::ShapeRef.new(shape: PrivateDnsNameOptionsOnLaunch, location_name: "privateDnsNameOptionsOnLaunch"))
     Subnet.add_member(:block_public_access_states, Shapes::ShapeRef.new(shape: BlockPublicAccessStates, location_name: "blockPublicAccessStates"))
     Subnet.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    Subnet.add_member(:network_firewall_connectivity_type, Shapes::ShapeRef.new(shape: NetworkFirewallConnectivityType, location_name: "networkFirewallConnectivityType"))
     Subnet.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
     Subnet.add_member(:state, Shapes::ShapeRef.new(shape: SubnetState, location_name: "state"))
     Subnet.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
@@ -21326,6 +21346,7 @@ module Aws::EC2
     Vpc.add_member(:encryption_control, Shapes::ShapeRef.new(shape: VpcEncryptionControl, location_name: "encryptionControl"))
     Vpc.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     Vpc.add_member(:block_public_access_states, Shapes::ShapeRef.new(shape: BlockPublicAccessStates, location_name: "blockPublicAccessStates"))
+    Vpc.add_member(:network_firewall_associations, Shapes::ShapeRef.new(shape: NetworkFirewallAssociationSet, location_name: "networkFirewallAssociationSet"))
     Vpc.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
     Vpc.add_member(:state, Shapes::ShapeRef.new(shape: VpcState, location_name: "state"))
     Vpc.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "cidrBlock"))

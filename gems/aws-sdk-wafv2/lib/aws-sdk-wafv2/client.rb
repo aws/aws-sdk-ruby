@@ -1317,6 +1317,18 @@ module Aws::WAFV2
     #                   },
     #                   sensitivity_to_block: "LOW", # accepts LOW, MEDIUM, HIGH
     #                 },
+    #                 aws_managed_rules_ai_security_rule_set: {
+    #                   bedrock_guardrails: { # required
+    #                     disable: {
+    #                     },
+    #                     protect_request_only: {
+    #                       role_arn: "IAMRoleArn", # required
+    #                     },
+    #                     protect_request_and_response: {
+    #                       role_arn: "IAMRoleArn", # required
+    #                     },
+    #                   },
+    #                 },
     #               },
     #             ],
     #             rule_action_overrides: [
@@ -1905,997 +1917,6 @@ module Aws::WAFV2
     #
     #   * {Types::CreateRuleGroupResponse#summary #summary} => Types::RuleGroupSummary
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.create_rule_group({
-    #     name: "EntityName", # required
-    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
-    #     capacity: 1, # required
-    #     description: "EntityDescription",
-    #     rules: [
-    #       {
-    #         name: "EntityName", # required
-    #         priority: 1, # required
-    #         statement: { # required
-    #           byte_match_statement: {
-    #             search_string: "data", # required
-    #             field_to_match: { # required
-    #               single_header: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               single_query_argument: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               all_query_arguments: {
-    #               },
-    #               uri_path: {
-    #               },
-    #               query_string: {
-    #               },
-    #               body: {
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               method: {
-    #               },
-    #               json_body: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_paths: ["JsonPointerPath"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               headers: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_headers: ["FieldToMatchData"],
-    #                   excluded_headers: ["FieldToMatchData"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               cookies: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_cookies: ["SingleCookieName"],
-    #                   excluded_cookies: ["SingleCookieName"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               header_order: {
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               ja3_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               ja4_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               uri_fragment: {
-    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
-    #               },
-    #             },
-    #             text_transformations: [ # required
-    #               {
-    #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
-    #               },
-    #             ],
-    #             pre_parse_text_transformations: [
-    #               {
-    #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
-    #               },
-    #             ],
-    #             positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
-    #           },
-    #           sqli_match_statement: {
-    #             field_to_match: { # required
-    #               single_header: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               single_query_argument: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               all_query_arguments: {
-    #               },
-    #               uri_path: {
-    #               },
-    #               query_string: {
-    #               },
-    #               body: {
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               method: {
-    #               },
-    #               json_body: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_paths: ["JsonPointerPath"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               headers: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_headers: ["FieldToMatchData"],
-    #                   excluded_headers: ["FieldToMatchData"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               cookies: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_cookies: ["SingleCookieName"],
-    #                   excluded_cookies: ["SingleCookieName"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               header_order: {
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               ja3_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               ja4_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               uri_fragment: {
-    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
-    #               },
-    #             },
-    #             text_transformations: [ # required
-    #               {
-    #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
-    #               },
-    #             ],
-    #             pre_parse_text_transformations: [
-    #               {
-    #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
-    #               },
-    #             ],
-    #             sensitivity_level: "LOW", # accepts LOW, HIGH
-    #           },
-    #           xss_match_statement: {
-    #             field_to_match: { # required
-    #               single_header: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               single_query_argument: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               all_query_arguments: {
-    #               },
-    #               uri_path: {
-    #               },
-    #               query_string: {
-    #               },
-    #               body: {
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               method: {
-    #               },
-    #               json_body: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_paths: ["JsonPointerPath"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               headers: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_headers: ["FieldToMatchData"],
-    #                   excluded_headers: ["FieldToMatchData"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               cookies: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_cookies: ["SingleCookieName"],
-    #                   excluded_cookies: ["SingleCookieName"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               header_order: {
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               ja3_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               ja4_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               uri_fragment: {
-    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
-    #               },
-    #             },
-    #             text_transformations: [ # required
-    #               {
-    #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
-    #               },
-    #             ],
-    #             pre_parse_text_transformations: [
-    #               {
-    #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
-    #               },
-    #             ],
-    #           },
-    #           size_constraint_statement: {
-    #             field_to_match: { # required
-    #               single_header: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               single_query_argument: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               all_query_arguments: {
-    #               },
-    #               uri_path: {
-    #               },
-    #               query_string: {
-    #               },
-    #               body: {
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               method: {
-    #               },
-    #               json_body: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_paths: ["JsonPointerPath"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               headers: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_headers: ["FieldToMatchData"],
-    #                   excluded_headers: ["FieldToMatchData"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               cookies: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_cookies: ["SingleCookieName"],
-    #                   excluded_cookies: ["SingleCookieName"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               header_order: {
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               ja3_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               ja4_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               uri_fragment: {
-    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
-    #               },
-    #             },
-    #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
-    #             size: 1, # required
-    #             text_transformations: [ # required
-    #               {
-    #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
-    #               },
-    #             ],
-    #             pre_parse_text_transformations: [
-    #               {
-    #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
-    #               },
-    #             ],
-    #           },
-    #           geo_match_statement: {
-    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
-    #             forwarded_ip_config: {
-    #               header_name: "ForwardedIPHeaderName", # required
-    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #             },
-    #           },
-    #           rule_group_reference_statement: {
-    #             arn: "ResourceArn", # required
-    #             excluded_rules: [
-    #               {
-    #                 name: "EntityName", # required
-    #               },
-    #             ],
-    #             rule_action_overrides: [
-    #               {
-    #                 name: "EntityName", # required
-    #                 action_to_use: { # required
-    #                   block: {
-    #                     custom_response: {
-    #                       response_code: 1, # required
-    #                       custom_response_body_key: "EntityName",
-    #                       response_headers: [
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   allow: {
-    #                     custom_request_handling: {
-    #                       insert_headers: [ # required
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   count: {
-    #                     custom_request_handling: {
-    #                       insert_headers: [ # required
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   captcha: {
-    #                     custom_request_handling: {
-    #                       insert_headers: [ # required
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   challenge: {
-    #                     custom_request_handling: {
-    #                       insert_headers: [ # required
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   monetize: {
-    #                     price_multiplier: "PriceMultiplier",
-    #                   },
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           ip_set_reference_statement: {
-    #             arn: "ResourceArn", # required
-    #             ip_set_forwarded_ip_config: {
-    #               header_name: "ForwardedIPHeaderName", # required
-    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               position: "FIRST", # required, accepts FIRST, LAST, ANY
-    #             },
-    #           },
-    #           regex_pattern_set_reference_statement: {
-    #             arn: "ResourceArn", # required
-    #             field_to_match: { # required
-    #               single_header: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               single_query_argument: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               all_query_arguments: {
-    #               },
-    #               uri_path: {
-    #               },
-    #               query_string: {
-    #               },
-    #               body: {
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               method: {
-    #               },
-    #               json_body: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_paths: ["JsonPointerPath"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               headers: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_headers: ["FieldToMatchData"],
-    #                   excluded_headers: ["FieldToMatchData"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               cookies: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_cookies: ["SingleCookieName"],
-    #                   excluded_cookies: ["SingleCookieName"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               header_order: {
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               ja3_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               ja4_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               uri_fragment: {
-    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
-    #               },
-    #             },
-    #             text_transformations: [ # required
-    #               {
-    #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
-    #               },
-    #             ],
-    #             pre_parse_text_transformations: [
-    #               {
-    #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
-    #               },
-    #             ],
-    #           },
-    #           rate_based_statement: {
-    #             limit: 1, # required
-    #             evaluation_window_sec: 1,
-    #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP, CUSTOM_KEYS, CONSTANT
-    #             scope_down_statement: {
-    #               # recursive Statement
-    #             },
-    #             forwarded_ip_config: {
-    #               header_name: "ForwardedIPHeaderName", # required
-    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #             },
-    #             custom_keys: [
-    #               {
-    #                 header: {
-    #                   name: "FieldToMatchData", # required
-    #                   text_transformations: [ # required
-    #                     {
-    #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
-    #                     },
-    #                   ],
-    #                 },
-    #                 cookie: {
-    #                   name: "FieldToMatchData", # required
-    #                   text_transformations: [ # required
-    #                     {
-    #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
-    #                     },
-    #                   ],
-    #                 },
-    #                 query_argument: {
-    #                   name: "FieldToMatchData", # required
-    #                   text_transformations: [ # required
-    #                     {
-    #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
-    #                     },
-    #                   ],
-    #                 },
-    #                 query_string: {
-    #                   text_transformations: [ # required
-    #                     {
-    #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
-    #                     },
-    #                   ],
-    #                 },
-    #                 http_method: {
-    #                 },
-    #                 forwarded_ip: {
-    #                 },
-    #                 ip: {
-    #                 },
-    #                 label_namespace: {
-    #                   namespace: "LabelNamespace", # required
-    #                 },
-    #                 uri_path: {
-    #                   text_transformations: [ # required
-    #                     {
-    #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
-    #                     },
-    #                   ],
-    #                 },
-    #                 ja3_fingerprint: {
-    #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #                 },
-    #                 ja4_fingerprint: {
-    #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #                 },
-    #                 asn: {
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           and_statement: {
-    #             statements: [ # required
-    #               {
-    #                 # recursive Statement
-    #               },
-    #             ],
-    #           },
-    #           or_statement: {
-    #             statements: [ # required
-    #               {
-    #                 # recursive Statement
-    #               },
-    #             ],
-    #           },
-    #           not_statement: {
-    #             statement: { # required
-    #               # recursive Statement
-    #             },
-    #           },
-    #           managed_rule_group_statement: {
-    #             vendor_name: "VendorName", # required
-    #             name: "EntityName", # required
-    #             version: "VersionKeyString",
-    #             excluded_rules: [
-    #               {
-    #                 name: "EntityName", # required
-    #               },
-    #             ],
-    #             scope_down_statement: {
-    #               # recursive Statement
-    #             },
-    #             managed_rule_group_configs: [
-    #               {
-    #                 login_path: "LoginPathString",
-    #                 payload_type: "JSON", # accepts JSON, FORM_ENCODED
-    #                 username_field: {
-    #                   identifier: "FieldIdentifier", # required
-    #                 },
-    #                 password_field: {
-    #                   identifier: "FieldIdentifier", # required
-    #                 },
-    #                 aws_managed_rules_bot_control_rule_set: {
-    #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
-    #                   enable_machine_learning: false,
-    #                 },
-    #                 aws_managed_rules_atp_rule_set: {
-    #                   login_path: "String", # required
-    #                   request_inspection: {
-    #                     payload_type: "JSON", # required, accepts JSON, FORM_ENCODED
-    #                     username_field: { # required
-    #                       identifier: "FieldIdentifier", # required
-    #                     },
-    #                     password_field: { # required
-    #                       identifier: "FieldIdentifier", # required
-    #                     },
-    #                   },
-    #                   response_inspection: {
-    #                     status_code: {
-    #                       success_codes: [1], # required
-    #                       failure_codes: [1], # required
-    #                     },
-    #                     header: {
-    #                       name: "ResponseInspectionHeaderName", # required
-    #                       success_values: ["SuccessValue"], # required
-    #                       failure_values: ["FailureValue"], # required
-    #                     },
-    #                     body_contains: {
-    #                       success_strings: ["SuccessValue"], # required
-    #                       failure_strings: ["FailureValue"], # required
-    #                     },
-    #                     json: {
-    #                       identifier: "FieldIdentifier", # required
-    #                       success_values: ["SuccessValue"], # required
-    #                       failure_values: ["FailureValue"], # required
-    #                     },
-    #                   },
-    #                   enable_regex_in_path: false,
-    #                 },
-    #                 aws_managed_rules_acfp_rule_set: {
-    #                   creation_path: "CreationPathString", # required
-    #                   registration_page_path: "RegistrationPagePathString", # required
-    #                   request_inspection: { # required
-    #                     payload_type: "JSON", # required, accepts JSON, FORM_ENCODED
-    #                     username_field: {
-    #                       identifier: "FieldIdentifier", # required
-    #                     },
-    #                     password_field: {
-    #                       identifier: "FieldIdentifier", # required
-    #                     },
-    #                     email_field: {
-    #                       identifier: "FieldIdentifier", # required
-    #                     },
-    #                     phone_number_fields: [
-    #                       {
-    #                         identifier: "FieldIdentifier", # required
-    #                       },
-    #                     ],
-    #                     address_fields: [
-    #                       {
-    #                         identifier: "FieldIdentifier", # required
-    #                       },
-    #                     ],
-    #                   },
-    #                   response_inspection: {
-    #                     status_code: {
-    #                       success_codes: [1], # required
-    #                       failure_codes: [1], # required
-    #                     },
-    #                     header: {
-    #                       name: "ResponseInspectionHeaderName", # required
-    #                       success_values: ["SuccessValue"], # required
-    #                       failure_values: ["FailureValue"], # required
-    #                     },
-    #                     body_contains: {
-    #                       success_strings: ["SuccessValue"], # required
-    #                       failure_strings: ["FailureValue"], # required
-    #                     },
-    #                     json: {
-    #                       identifier: "FieldIdentifier", # required
-    #                       success_values: ["SuccessValue"], # required
-    #                       failure_values: ["FailureValue"], # required
-    #                     },
-    #                   },
-    #                   enable_regex_in_path: false,
-    #                 },
-    #                 aws_managed_rules_anti_d_do_s_rule_set: {
-    #                   client_side_action_config: { # required
-    #                     challenge: { # required
-    #                       usage_of_action: "ENABLED", # required, accepts ENABLED, DISABLED
-    #                       sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH
-    #                       exempt_uri_regular_expressions: [
-    #                         {
-    #                           regex_string: "RegexPatternString",
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   sensitivity_to_block: "LOW", # accepts LOW, MEDIUM, HIGH
-    #                 },
-    #               },
-    #             ],
-    #             rule_action_overrides: [
-    #               {
-    #                 name: "EntityName", # required
-    #                 action_to_use: { # required
-    #                   block: {
-    #                     custom_response: {
-    #                       response_code: 1, # required
-    #                       custom_response_body_key: "EntityName",
-    #                       response_headers: [
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   allow: {
-    #                     custom_request_handling: {
-    #                       insert_headers: [ # required
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   count: {
-    #                     custom_request_handling: {
-    #                       insert_headers: [ # required
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   captcha: {
-    #                     custom_request_handling: {
-    #                       insert_headers: [ # required
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   challenge: {
-    #                     custom_request_handling: {
-    #                       insert_headers: [ # required
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   monetize: {
-    #                     price_multiplier: "PriceMultiplier",
-    #                   },
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           label_match_statement: {
-    #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
-    #             key: "LabelMatchKey", # required
-    #           },
-    #           regex_match_statement: {
-    #             regex_string: "RegexPatternString", # required
-    #             field_to_match: { # required
-    #               single_header: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               single_query_argument: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               all_query_arguments: {
-    #               },
-    #               uri_path: {
-    #               },
-    #               query_string: {
-    #               },
-    #               body: {
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               method: {
-    #               },
-    #               json_body: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_paths: ["JsonPointerPath"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               headers: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_headers: ["FieldToMatchData"],
-    #                   excluded_headers: ["FieldToMatchData"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               cookies: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_cookies: ["SingleCookieName"],
-    #                   excluded_cookies: ["SingleCookieName"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               header_order: {
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               ja3_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               ja4_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               uri_fragment: {
-    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
-    #               },
-    #             },
-    #             text_transformations: [ # required
-    #               {
-    #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
-    #               },
-    #             ],
-    #             pre_parse_text_transformations: [
-    #               {
-    #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
-    #               },
-    #             ],
-    #           },
-    #           asn_match_statement: {
-    #             asn_list: [1], # required
-    #             forwarded_ip_config: {
-    #               header_name: "ForwardedIPHeaderName", # required
-    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #             },
-    #           },
-    #         },
-    #         action: {
-    #           block: {
-    #             custom_response: {
-    #               response_code: 1, # required
-    #               custom_response_body_key: "EntityName",
-    #               response_headers: [
-    #                 {
-    #                   name: "CustomHTTPHeaderName", # required
-    #                   value: "CustomHTTPHeaderValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           allow: {
-    #             custom_request_handling: {
-    #               insert_headers: [ # required
-    #                 {
-    #                   name: "CustomHTTPHeaderName", # required
-    #                   value: "CustomHTTPHeaderValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           count: {
-    #             custom_request_handling: {
-    #               insert_headers: [ # required
-    #                 {
-    #                   name: "CustomHTTPHeaderName", # required
-    #                   value: "CustomHTTPHeaderValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           captcha: {
-    #             custom_request_handling: {
-    #               insert_headers: [ # required
-    #                 {
-    #                   name: "CustomHTTPHeaderName", # required
-    #                   value: "CustomHTTPHeaderValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           challenge: {
-    #             custom_request_handling: {
-    #               insert_headers: [ # required
-    #                 {
-    #                   name: "CustomHTTPHeaderName", # required
-    #                   value: "CustomHTTPHeaderValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           monetize: {
-    #             price_multiplier: "PriceMultiplier",
-    #           },
-    #         },
-    #         override_action: {
-    #           count: {
-    #             custom_request_handling: {
-    #               insert_headers: [ # required
-    #                 {
-    #                   name: "CustomHTTPHeaderName", # required
-    #                   value: "CustomHTTPHeaderValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           none: {
-    #           },
-    #         },
-    #         rule_labels: [
-    #           {
-    #             name: "LabelName", # required
-    #           },
-    #         ],
-    #         visibility_config: { # required
-    #           sampled_requests_enabled: false, # required
-    #           cloud_watch_metrics_enabled: false, # required
-    #           metric_name: "MetricName", # required
-    #         },
-    #         captcha_config: {
-    #           immunity_time_property: {
-    #             immunity_time: 1, # required
-    #           },
-    #         },
-    #         challenge_config: {
-    #           immunity_time_property: {
-    #             immunity_time: 1, # required
-    #           },
-    #         },
-    #       },
-    #     ],
-    #     visibility_config: { # required
-    #       sampled_requests_enabled: false, # required
-    #       cloud_watch_metrics_enabled: false, # required
-    #       metric_name: "MetricName", # required
-    #     },
-    #     tags: [
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       },
-    #     ],
-    #     custom_response_bodies: {
-    #       "EntityName" => {
-    #         content_type: "TEXT_PLAIN", # required, accepts TEXT_PLAIN, TEXT_HTML, APPLICATION_JSON
-    #         content: "ResponseContent", # required
-    #       },
-    #     },
-    #     monetization_config: {
-    #       crypto_config: {
-    #         payment_networks: [ # required
-    #           {
-    #             chain: "BASE", # required, accepts BASE, SOLANA, BASE_SEPOLIA, SOLANA_DEVNET
-    #             wallet_address: "WalletAddress", # required
-    #             prices: [ # required
-    #               {
-    #                 amount: "PriceAmount", # required
-    #                 currency: "USDC", # required, accepts USDC
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       },
-    #       connected_account_configs: [
-    #         {
-    #           connected_account_arn: "ConnectedAccountArn", # required
-    #           payment_networks: [ # required
-    #             {
-    #               chain: "BASE", # required, accepts BASE, SOLANA
-    #               prices: [ # required
-    #                 {
-    #                   amount: "ConnectedAccountPriceAmount", # required
-    #                   currency: "USDC", # required, accepts USDC
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #       ],
-    #       currency_mode: "REAL", # accepts REAL, TEST
-    #     },
-    #   })
-    #
     # @example Response structure
     #
     #   resp.summary.name #=> String
@@ -3027,9 +2048,10 @@ module Aws::WAFV2
     #
     #   Use this to customize the maximum size of the request body that your
     #   protected resources forward to WAF for inspection. You can customize
-    #   this setting for CloudFront, API Gateway, Amazon Cognito, App Runner,
-    #   or Verified Access resources. The default setting is 16 KB (16,384
-    #   bytes).
+    #   this setting for Application Load Balancer, CloudFront, API Gateway,
+    #   Amazon Cognito, App Runner, or Verified Access resources. The default
+    #   setting is 8 KB (8,192 bytes) for Application Load Balancer and 16 KB
+    #   (16,384 bytes) for the other resource types.
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources forward
     #   body sizes that are larger than the default. For more information, see
@@ -3037,8 +2059,7 @@ module Aws::WAFV2
     #
     #    </note>
     #
-    #   For Application Load Balancer and AppSync, the limit is fixed at 8 KB
-    #   (8,192 bytes).
+    #   For AppSync, the limit is fixed at 8 KB (8,192 bytes).
     #
     #   You can also use this to have your CloudFront distributions insert the
     #   WAF challenge JavaScript SDK into the HTML responses that they return.
@@ -3851,6 +2872,159 @@ module Aws::WAFV2
     # @param [Hash] params ({})
     def get_decrypted_api_key(params = {}, options = {})
       req = build_request(:get_decrypted_api_key, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of the specified event for the specified web
+    # ACL, including the event actors that are associated with the event and
+    # the event timeline. Currently, this operation supports API Security
+    # Amazon Web Services Managed Rules.
+    #
+    # @option params [required, String] :scope
+    #   Specifies whether this is for a global resource type, such as a Amazon
+    #   CloudFront distribution. For an Amplify application, use `CLOUDFRONT`.
+    #
+    #   To work with CloudFront, you must also specify the Region US East (N.
+    #   Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #
+    # @option params [required, String] :event_id
+    #   The unique identifier of the event. WAF returns the event ID in the
+    #   responses to ListEvents and ListEventsByWebACL.
+    #
+    # @option params [required, String] :web_acl_arn
+    #   The Amazon Resource Name (ARN) of the web ACL that the event is
+    #   associated with.
+    #
+    # @return [Types::GetEventResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEventResponse#event #event} => Types::EventDetailSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_event({
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #     event_id: "EntityId", # required
+    #     web_acl_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event.event_id #=> String
+    #   resp.event.event_status #=> String, one of "EVENT_STARTED", "EVENT_IN_PROGRESS", "EVENT_COMPLETED", "EVENT_ENDED"
+    #   resp.event.event_category #=> String, one of "API_SECURITY"
+    #   resp.event.start_time #=> Time
+    #   resp.event.last_updated_time #=> Time
+    #   resp.event.end_time #=> Time
+    #   resp.event.resource_arn #=> String
+    #   resp.event.web_acl_arn #=> String
+    #   resp.event.api_security_event_detail.label #=> String
+    #   resp.event.api_security_event_detail.category #=> String
+    #   resp.event.api_security_event_detail.confidence #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.event.api_security_event_detail.api_patterns #=> Array
+    #   resp.event.api_security_event_detail.api_patterns[0].method #=> String
+    #   resp.event.api_security_event_detail.api_patterns[0].path_pattern #=> String
+    #   resp.event.api_security_event_detail.api_patterns[0].port #=> Integer
+    #   resp.event.api_security_event_detail.api_patterns[0].domains #=> Array
+    #   resp.event.api_security_event_detail.api_patterns[0].domains[0] #=> String
+    #   resp.event.api_security_event_detail.event_actors #=> Array
+    #   resp.event.api_security_event_detail.event_actors[0].event_actor_id #=> String
+    #   resp.event.api_security_event_detail.event_actors[0].event_actor_value #=> String
+    #   resp.event.api_security_event_detail.timeline #=> Array
+    #   resp.event.api_security_event_detail.timeline[0].change_time #=> Time
+    #   resp.event.api_security_event_detail.timeline[0].label #=> String
+    #   resp.event.api_security_event_detail.timeline[0].confidence #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.event.api_security_event_detail.timeline[0].api_patterns #=> Array
+    #   resp.event.api_security_event_detail.timeline[0].api_patterns[0].method #=> String
+    #   resp.event.api_security_event_detail.timeline[0].api_patterns[0].path_pattern #=> String
+    #   resp.event.api_security_event_detail.timeline[0].api_patterns[0].port #=> Integer
+    #   resp.event.api_security_event_detail.timeline[0].api_patterns[0].domains #=> Array
+    #   resp.event.api_security_event_detail.timeline[0].api_patterns[0].domains[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetEvent AWS API Documentation
+    #
+    # @overload get_event(params = {})
+    # @param [Hash] params ({})
+    def get_event(params = {}, options = {})
+      req = build_request(:get_event, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of the specified event actor. An event actor is
+    # a client that is associated with one or more events. The details
+    # include the latest observed attributes of the event actor, the events
+    # that it's associated with, and the history of changes to its
+    # attributes. Currently, this operation supports API Security Amazon Web
+    # Services Managed Rules.
+    #
+    # @option params [required, String] :scope
+    #   Specifies whether this is for a global resource type, such as a Amazon
+    #   CloudFront distribution. For an Amplify application, use `CLOUDFRONT`.
+    #
+    #   To work with CloudFront, you must also specify the Region US East (N.
+    #   Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #
+    # @option params [required, String] :event_actor_id
+    #   The unique identifier of the event actor. WAF returns the event actor
+    #   ID in the event details of ListEvents, ListEventsByWebACL, and
+    #   GetEvent, and in the response to ListEventActors.
+    #
+    # @return [Types::GetEventActorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEventActorResponse#event_actor #event_actor} => Types::EventActorDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_event_actor({
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #     event_actor_id: "EntityId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_actor.summary.event_actor_id #=> String
+    #   resp.event_actor.summary.client_ip #=> String
+    #   resp.event_actor.summary.tls_fingerprint #=> String
+    #   resp.event_actor.summary.asn #=> String
+    #   resp.event_actor.summary.asn_organization #=> String
+    #   resp.event_actor.summary.country #=> String
+    #   resp.event_actor.summary.auth_fingerprint #=> String
+    #   resp.event_actor.summary.created_at #=> Time
+    #   resp.event_actor.events #=> Array
+    #   resp.event_actor.events[0].event_id #=> String
+    #   resp.event_actor.events[0].start_time #=> Time
+    #   resp.event_actor.events[0].label #=> String
+    #   resp.event_actor.events[0].category #=> String
+    #   resp.event_actor.events[0].confidence #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.event_actor.events[0].api_patterns #=> Array
+    #   resp.event_actor.events[0].api_patterns[0].method #=> String
+    #   resp.event_actor.events[0].api_patterns[0].path_pattern #=> String
+    #   resp.event_actor.events[0].api_patterns[0].port #=> Integer
+    #   resp.event_actor.events[0].api_patterns[0].domains #=> Array
+    #   resp.event_actor.events[0].api_patterns[0].domains[0] #=> String
+    #   resp.event_actor.changes #=> Array
+    #   resp.event_actor.changes[0].change_time #=> Time
+    #   resp.event_actor.changes[0].client_ip #=> String
+    #   resp.event_actor.changes[0].tls_fingerprint #=> String
+    #   resp.event_actor.changes[0].asn #=> String
+    #   resp.event_actor.changes[0].asn_organization #=> String
+    #   resp.event_actor.changes[0].country #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetEventActor AWS API Documentation
+    #
+    # @overload get_event_actor(params = {})
+    # @param [Hash] params ({})
+    def get_event_actor(params = {}, options = {})
+      req = build_request(:get_event_actor, params)
       req.send_request(options)
     end
 
@@ -4904,6 +4078,8 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_anti_d_do_s_rule_set.client_side_action_config.challenge.exempt_uri_regular_expressions #=> Array
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_anti_d_do_s_rule_set.client_side_action_config.challenge.exempt_uri_regular_expressions[0].regex_string #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_anti_d_do_s_rule_set.sensitivity_to_block #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_ai_security_rule_set.bedrock_guardrails.protect_request_only.role_arn #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_ai_security_rule_set.bedrock_guardrails.protect_request_and_response.role_arn #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides #=> Array
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].name #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
@@ -5587,6 +4763,412 @@ module Aws::WAFV2
     # @param [Hash] params ({})
     def list_available_managed_rule_groups(params = {}, options = {})
       req = build_request(:list_available_managed_rule_groups, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a paginated list of the event actors in your account that
+    # are associated with events in the specified time window. An event
+    # actor is a client that is associated with one or more events. The
+    # operation returns up to the top 100 event actors by event count.
+    # Results are paginated. Use the `NextMarker` value from the response to
+    # retrieve the next batch of results. Currently, this operation supports
+    # API Security Amazon Web Services Managed Rules.
+    #
+    # @option params [required, String] :scope
+    #   Specifies whether this is for a global resource type, such as a Amazon
+    #   CloudFront distribution. For an Amplify application, use `CLOUDFRONT`.
+    #
+    #   To work with CloudFront, you must also specify the Region US East (N.
+    #   Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #
+    # @option params [required, Types::TimeWindow] :time_window
+    #   The time range for the event actors to return. The time window can't
+    #   be longer than one year.
+    #
+    # @option params [String] :sort_by
+    #   The field to sort event actors by. The only supported value is
+    #   `EVENT_COUNT`.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of event actors that you want WAF to return for
+    #   this request. Valid values are 1 to 100. If more event actors are
+    #   available, WAF returns a `NextMarker` value in the response that you
+    #   can use in a subsequent call to get the next batch of event actors.
+    #
+    # @option params [String] :next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #
+    # @return [Types::ListEventActorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEventActorsResponse#event_actors #event_actors} => Array&lt;Types::EventActorSummary&gt;
+    #   * {Types::ListEventActorsResponse#next_marker #next_marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_event_actors({
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #     time_window: { # required
+    #       start_time: Time.now, # required
+    #       end_time: Time.now, # required
+    #     },
+    #     sort_by: "EVENT_COUNT", # accepts EVENT_COUNT
+    #     limit: 1,
+    #     next_marker: "EventNextMarker",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_actors #=> Array
+    #   resp.event_actors[0].event_actor_id #=> String
+    #   resp.event_actors[0].client_ip #=> String
+    #   resp.event_actors[0].tls_fingerprint #=> String
+    #   resp.event_actors[0].asn #=> String
+    #   resp.event_actors[0].asn_organization #=> String
+    #   resp.event_actors[0].country #=> String
+    #   resp.event_actors[0].auth_fingerprint #=> String
+    #   resp.event_actors[0].created_at #=> Time
+    #   resp.event_actors[0].event_count #=> Integer
+    #   resp.next_marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListEventActors AWS API Documentation
+    #
+    # @overload list_event_actors(params = {})
+    # @param [Hash] params ({})
+    def list_event_actors(params = {}, options = {})
+      req = build_request(:list_event_actors, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a paginated list of event summaries for your account. Use
+    # this operation to monitor and investigate potential threats to the
+    # resources that your web ACLs protect. Results are paginated. Use the
+    # `NextMarker` value from the response to retrieve the next batch of
+    # results. Currently, this operation supports API Security Amazon Web
+    # Services Managed Rules.
+    #
+    # You can filter the results by time window, event category, resource,
+    # and API pattern, and sort them by start time, end time, or confidence.
+    #
+    # To retrieve the events for a single web ACL, use ListEventsByWebACL.
+    # To retrieve the full details of a single event, use GetEvent.
+    #
+    # @option params [required, String] :scope
+    #   Specifies whether this is for a global resource type, such as a Amazon
+    #   CloudFront distribution. For an Amplify application, use `CLOUDFRONT`.
+    #
+    #   To work with CloudFront, you must also specify the Region US East (N.
+    #   Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #
+    # @option params [Types::TimeWindow] :time_window
+    #   The time range for the events to return. If you don't specify a time
+    #   window, WAF returns events from the past year. The time window can't
+    #   be longer than one year.
+    #
+    # @option params [Array<Types::EventFilter>] :filters
+    #   Filters that narrow the results by event category or by the Amazon
+    #   Resource Name (ARN) of the protected resource. You can specify up to 8
+    #   filters.
+    #
+    # @option params [Array<Types::ApiPatternFilter>] :api_pattern_filters
+    #   Filters that narrow the results to events that involve the specified
+    #   API patterns. If you specify more than one API pattern filter, WAF
+    #   returns the events that match any of the filters. You can specify up
+    #   to 20 API pattern filters.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of events that you want WAF to return for this
+    #   request. Valid values are 1 to 20. If more events are available, WAF
+    #   returns a `NextMarker` value in the response that you can use in a
+    #   subsequent call to get the next batch of events.
+    #
+    # @option params [String] :next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #
+    #   The marker is valid only for a request with the same `TimeWindow`,
+    #   `Filters`, `SortBy`, and `SortOrder` settings as the request that
+    #   returned it.
+    #
+    # @option params [String] :sort_order
+    #   The order in which WAF sorts the events. Valid values:
+    #
+    #   * `ASC` - Sort in ascending order.
+    #
+    #   * `DESC` - Sort in descending order. This is the default.
+    #
+    # @option params [String] :sort_by
+    #   The field that WAF sorts the events by. Valid values:
+    #
+    #   * `CONFIDENCE` - Sort by the confidence level of the event detection.
+    #
+    #   * `END_TIME` - Sort by the time that the event ended.
+    #
+    #   * `START_TIME` - Sort by the time that the event started.
+    #
+    # @option params [Array<String>] :include
+    #   Additional fields to return with each event summary. By default, the
+    #   response includes only the default summary fields.
+    #
+    #   Specify `TIMELINE` to return the timeline of each event in
+    #   `ApiSecurityEventDetail$Timeline`.
+    #
+    # @return [Types::ListEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEventsResponse#events #events} => Array&lt;Types::EventDetailSummary&gt;
+    #   * {Types::ListEventsResponse#next_marker #next_marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_events({
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #     time_window: {
+    #       start_time: Time.now, # required
+    #       end_time: Time.now, # required
+    #     },
+    #     filters: [
+    #       {
+    #         name: "EVENT_CATEGORY", # required, accepts EVENT_CATEGORY, RESOURCE_ARN
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     api_pattern_filters: [
+    #       {
+    #         method: "HttpMethodString",
+    #         path_pattern: "PathPatternString",
+    #         port: 1,
+    #         domains: ["DomainString"],
+    #       },
+    #     ],
+    #     limit: 1,
+    #     next_marker: "EventNextMarker",
+    #     sort_order: "ASC", # accepts ASC, DESC
+    #     sort_by: "START_TIME", # accepts START_TIME, END_TIME, CONFIDENCE
+    #     include: ["TIMELINE"], # accepts TIMELINE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.events #=> Array
+    #   resp.events[0].event_id #=> String
+    #   resp.events[0].event_status #=> String, one of "EVENT_STARTED", "EVENT_IN_PROGRESS", "EVENT_COMPLETED", "EVENT_ENDED"
+    #   resp.events[0].event_category #=> String, one of "API_SECURITY"
+    #   resp.events[0].start_time #=> Time
+    #   resp.events[0].last_updated_time #=> Time
+    #   resp.events[0].end_time #=> Time
+    #   resp.events[0].resource_arn #=> String
+    #   resp.events[0].web_acl_arn #=> String
+    #   resp.events[0].api_security_event_detail.label #=> String
+    #   resp.events[0].api_security_event_detail.category #=> String
+    #   resp.events[0].api_security_event_detail.confidence #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.events[0].api_security_event_detail.api_patterns #=> Array
+    #   resp.events[0].api_security_event_detail.api_patterns[0].method #=> String
+    #   resp.events[0].api_security_event_detail.api_patterns[0].path_pattern #=> String
+    #   resp.events[0].api_security_event_detail.api_patterns[0].port #=> Integer
+    #   resp.events[0].api_security_event_detail.api_patterns[0].domains #=> Array
+    #   resp.events[0].api_security_event_detail.api_patterns[0].domains[0] #=> String
+    #   resp.events[0].api_security_event_detail.event_actors #=> Array
+    #   resp.events[0].api_security_event_detail.event_actors[0].event_actor_id #=> String
+    #   resp.events[0].api_security_event_detail.event_actors[0].event_actor_value #=> String
+    #   resp.events[0].api_security_event_detail.timeline #=> Array
+    #   resp.events[0].api_security_event_detail.timeline[0].change_time #=> Time
+    #   resp.events[0].api_security_event_detail.timeline[0].label #=> String
+    #   resp.events[0].api_security_event_detail.timeline[0].confidence #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.events[0].api_security_event_detail.timeline[0].api_patterns #=> Array
+    #   resp.events[0].api_security_event_detail.timeline[0].api_patterns[0].method #=> String
+    #   resp.events[0].api_security_event_detail.timeline[0].api_patterns[0].path_pattern #=> String
+    #   resp.events[0].api_security_event_detail.timeline[0].api_patterns[0].port #=> Integer
+    #   resp.events[0].api_security_event_detail.timeline[0].api_patterns[0].domains #=> Array
+    #   resp.events[0].api_security_event_detail.timeline[0].api_patterns[0].domains[0] #=> String
+    #   resp.next_marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListEvents AWS API Documentation
+    #
+    # @overload list_events(params = {})
+    # @param [Hash] params ({})
+    def list_events(params = {}, options = {})
+      req = build_request(:list_events, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a paginated list of event summaries for the specified web
+    # ACL. Use this operation to monitor and investigate potential threats
+    # to the resources that the web ACL protects. Results are paginated. Use
+    # the `NextMarker` value from the response to retrieve the next batch of
+    # results. Currently, this operation supports API Security Amazon Web
+    # Services Managed Rules.
+    #
+    # You can filter the results by time window, event category, resource,
+    # and API pattern, and sort them by start time, end time, or confidence.
+    #
+    # To retrieve the events for all of the web ACLs in your account, use
+    # ListEvents. To retrieve the full details of a single event, use
+    # GetEvent.
+    #
+    # @option params [required, String] :scope
+    #   Specifies whether this is for a global resource type, such as a Amazon
+    #   CloudFront distribution. For an Amplify application, use `CLOUDFRONT`.
+    #
+    #   To work with CloudFront, you must also specify the Region US East (N.
+    #   Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #
+    # @option params [required, String] :web_acl_arn
+    #   The Amazon Resource Name (ARN) of the web ACL whose events you want to
+    #   retrieve.
+    #
+    # @option params [Types::TimeWindow] :time_window
+    #   The time range for the events to return. If you don't specify a time
+    #   window, WAF returns events from the past year. The time window can't
+    #   be longer than one year.
+    #
+    # @option params [Array<Types::EventFilter>] :filters
+    #   Filters that narrow the results by event category or by the Amazon
+    #   Resource Name (ARN) of the protected resource. You can specify up to 8
+    #   filters.
+    #
+    # @option params [Array<Types::ApiPatternFilter>] :api_pattern_filters
+    #   Filters that narrow the results to events that involve the specified
+    #   API patterns. If you specify more than one API pattern filter, WAF
+    #   returns the events that match any of the filters. You can specify up
+    #   to 20 API pattern filters.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of events that you want WAF to return for this
+    #   request. Valid values are 1 to 20. If more events are available, WAF
+    #   returns a `NextMarker` value in the response that you can use in a
+    #   subsequent call to get the next batch of events.
+    #
+    # @option params [String] :next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #
+    #   The marker is valid only for a request with the same `WebAclArn`,
+    #   `TimeWindow`, `Filters`, `SortBy`, and `SortOrder` settings as the
+    #   request that returned it.
+    #
+    # @option params [String] :sort_order
+    #   The order in which WAF sorts the events. Valid values:
+    #
+    #   * `ASC` - Sort in ascending order.
+    #
+    #   * `DESC` - Sort in descending order. This is the default.
+    #
+    # @option params [String] :sort_by
+    #   The field that WAF sorts the events by. Valid values:
+    #
+    #   * `CONFIDENCE` - Sort by the confidence level of the event detection.
+    #
+    #   * `END_TIME` - Sort by the time that the event ended.
+    #
+    #   * `START_TIME` - Sort by the time that the event started.
+    #
+    # @option params [Array<String>] :include
+    #   Additional fields to return with each event summary. By default, the
+    #   response includes only the default summary fields.
+    #
+    #   Specify `TIMELINE` to return the timeline of each event in
+    #   `ApiSecurityEventDetail$Timeline`.
+    #
+    # @return [Types::ListEventsByWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEventsByWebACLResponse#events #events} => Array&lt;Types::EventDetailSummary&gt;
+    #   * {Types::ListEventsByWebACLResponse#next_marker #next_marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_events_by_web_acl({
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #     web_acl_arn: "ResourceArn", # required
+    #     time_window: {
+    #       start_time: Time.now, # required
+    #       end_time: Time.now, # required
+    #     },
+    #     filters: [
+    #       {
+    #         name: "EVENT_CATEGORY", # required, accepts EVENT_CATEGORY, RESOURCE_ARN
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     api_pattern_filters: [
+    #       {
+    #         method: "HttpMethodString",
+    #         path_pattern: "PathPatternString",
+    #         port: 1,
+    #         domains: ["DomainString"],
+    #       },
+    #     ],
+    #     limit: 1,
+    #     next_marker: "EventNextMarker",
+    #     sort_order: "ASC", # accepts ASC, DESC
+    #     sort_by: "START_TIME", # accepts START_TIME, END_TIME, CONFIDENCE
+    #     include: ["TIMELINE"], # accepts TIMELINE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.events #=> Array
+    #   resp.events[0].event_id #=> String
+    #   resp.events[0].event_status #=> String, one of "EVENT_STARTED", "EVENT_IN_PROGRESS", "EVENT_COMPLETED", "EVENT_ENDED"
+    #   resp.events[0].event_category #=> String, one of "API_SECURITY"
+    #   resp.events[0].start_time #=> Time
+    #   resp.events[0].last_updated_time #=> Time
+    #   resp.events[0].end_time #=> Time
+    #   resp.events[0].resource_arn #=> String
+    #   resp.events[0].web_acl_arn #=> String
+    #   resp.events[0].api_security_event_detail.label #=> String
+    #   resp.events[0].api_security_event_detail.category #=> String
+    #   resp.events[0].api_security_event_detail.confidence #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.events[0].api_security_event_detail.api_patterns #=> Array
+    #   resp.events[0].api_security_event_detail.api_patterns[0].method #=> String
+    #   resp.events[0].api_security_event_detail.api_patterns[0].path_pattern #=> String
+    #   resp.events[0].api_security_event_detail.api_patterns[0].port #=> Integer
+    #   resp.events[0].api_security_event_detail.api_patterns[0].domains #=> Array
+    #   resp.events[0].api_security_event_detail.api_patterns[0].domains[0] #=> String
+    #   resp.events[0].api_security_event_detail.event_actors #=> Array
+    #   resp.events[0].api_security_event_detail.event_actors[0].event_actor_id #=> String
+    #   resp.events[0].api_security_event_detail.event_actors[0].event_actor_value #=> String
+    #   resp.events[0].api_security_event_detail.timeline #=> Array
+    #   resp.events[0].api_security_event_detail.timeline[0].change_time #=> Time
+    #   resp.events[0].api_security_event_detail.timeline[0].label #=> String
+    #   resp.events[0].api_security_event_detail.timeline[0].confidence #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.events[0].api_security_event_detail.timeline[0].api_patterns #=> Array
+    #   resp.events[0].api_security_event_detail.timeline[0].api_patterns[0].method #=> String
+    #   resp.events[0].api_security_event_detail.timeline[0].api_patterns[0].path_pattern #=> String
+    #   resp.events[0].api_security_event_detail.timeline[0].api_patterns[0].port #=> Integer
+    #   resp.events[0].api_security_event_detail.timeline[0].api_patterns[0].domains #=> Array
+    #   resp.events[0].api_security_event_detail.timeline[0].api_patterns[0].domains[0] #=> String
+    #   resp.next_marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListEventsByWebACL AWS API Documentation
+    #
+    # @overload list_events_by_web_acl(params = {})
+    # @param [Hash] params ({})
+    def list_events_by_web_acl(params = {}, options = {})
+      req = build_request(:list_events_by_web_acl, params)
       req.send_request(options)
     end
 
@@ -7899,6 +7481,18 @@ module Aws::WAFV2
     #                   },
     #                   sensitivity_to_block: "LOW", # accepts LOW, MEDIUM, HIGH
     #                 },
+    #                 aws_managed_rules_ai_security_rule_set: {
+    #                   bedrock_guardrails: { # required
+    #                     disable: {
+    #                     },
+    #                     protect_request_only: {
+    #                       role_arn: "IAMRoleArn", # required
+    #                     },
+    #                     protect_request_and_response: {
+    #                       role_arn: "IAMRoleArn", # required
+    #                     },
+    #                   },
+    #                 },
     #               },
     #             ],
     #             rule_action_overrides: [
@@ -8372,9 +7966,10 @@ module Aws::WAFV2
     #
     #   Use this to customize the maximum size of the request body that your
     #   protected resources forward to WAF for inspection. You can customize
-    #   this setting for CloudFront, API Gateway, Amazon Cognito, App Runner,
-    #   or Verified Access resources. The default setting is 16 KB (16,384
-    #   bytes).
+    #   this setting for Application Load Balancer, CloudFront, API Gateway,
+    #   Amazon Cognito, App Runner, or Verified Access resources. The default
+    #   setting is 8 KB (8,192 bytes) for Application Load Balancer and 16 KB
+    #   (16,384 bytes) for the other resource types.
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources forward
     #   body sizes that are larger than the default. For more information, see
@@ -8382,8 +7977,7 @@ module Aws::WAFV2
     #
     #    </note>
     #
-    #   For Application Load Balancer and AppSync, the limit is fixed at 8 KB
-    #   (8,192 bytes).
+    #   For AppSync, the limit is fixed at 8 KB (8,192 bytes).
     #
     #   You can also use this to have your CloudFront distributions insert the
     #   WAF challenge JavaScript SDK into the HTML responses that they return.
@@ -8459,7 +8053,7 @@ module Aws::WAFV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.152.0'
+      context[:gem_version] = '1.153.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

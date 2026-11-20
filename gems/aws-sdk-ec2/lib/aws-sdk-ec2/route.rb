@@ -159,6 +159,16 @@ module Aws::EC2
       data[:ip_address]
     end
 
+    # Information about the Automated Internet Firewall that inspects
+    # traffic for this route. The response includes this value only for
+    # routes that target an internet gateway or egress-only internet gateway
+    # in a VPC that has a firewall. The route target remains the internet
+    # gateway or egress-only internet gateway.
+    # @return [Types::IgwFirewall]
+    def igw_firewall
+      data[:igw_firewall]
+    end
+
     # @!endgroup
 
     # @return [Client]

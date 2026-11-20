@@ -275,6 +275,14 @@ module Aws::Odb
       SENSITIVE: []
     end
 
+    class AutonomousDatabaseRefreshableCloneSummary
+      attr_accessor autonomous_database_id: ::String
+      attr_accessor autonomous_database_arn: ::String
+      attr_accessor ocid: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
     class AutonomousDatabaseSummary
       attr_accessor autonomous_database_id: ::String
       attr_accessor autonomous_database_arn: ::String
@@ -1907,6 +1915,19 @@ module Aws::Odb
       SENSITIVE: []
     end
 
+    class ListAutonomousDatabaseRefreshableClonesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor autonomous_database_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListAutonomousDatabaseRefreshableClonesOutput
+      attr_accessor next_token: ::String
+      attr_accessor autonomous_database_refreshable_clones: ::Array[Types::AutonomousDatabaseRefreshableCloneSummary]
+      SENSITIVE: []
+    end
+
     class ListAutonomousDatabaseVersionsInput
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -2464,6 +2485,21 @@ module Aws::Odb
       attr_accessor display_name: ::String
       attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS" | "STOPPING" | "STOPPED" | "STARTING" | "UNAVAILABLE" | "RESTORE_IN_PROGRESS" | "RESTORE_FAILED" | "BACKUP_IN_PROGRESS" | "SCALE_IN_PROGRESS" | "AVAILABLE_NEEDS_ATTENTION" | "RESTARTING" | "RECREATING" | "ROLE_CHANGE_IN_PROGRESS" | "UPGRADING" | "INACCESSIBLE" | "STANDBY")
       attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class StartAutonomousDatabaseRefreshInput
+      attr_accessor autonomous_database_id: ::String
+      attr_accessor time_of_refresh_cutoff: ::Time
+      SENSITIVE: []
+    end
+
+    class StartAutonomousDatabaseRefreshOutput
+      attr_accessor autonomous_database_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS" | "STOPPING" | "STOPPED" | "STARTING" | "UNAVAILABLE" | "RESTORE_IN_PROGRESS" | "RESTORE_FAILED" | "BACKUP_IN_PROGRESS" | "SCALE_IN_PROGRESS" | "AVAILABLE_NEEDS_ATTENTION" | "RESTARTING" | "RECREATING" | "ROLE_CHANGE_IN_PROGRESS" | "UPGRADING" | "INACCESSIBLE" | "STANDBY")
+      attr_accessor status_reason: ::String
+      attr_accessor refreshable_status: ("REFRESHING" | "NOT_REFRESHING")
       SENSITIVE: []
     end
 

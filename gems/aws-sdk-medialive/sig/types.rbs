@@ -469,6 +469,7 @@ module Aws::MediaLive
       attr_accessor scte_27_source_settings: Types::Scte27SourceSettings
       attr_accessor teletext_source_settings: Types::TeletextSourceSettings
       attr_accessor smart_subtitle_source_settings: Types::SmartSubtitleSourceSettings
+      attr_accessor webvtt_source_settings: Types::WebvttSourceSettings
       SENSITIVE: []
     end
 
@@ -1250,6 +1251,8 @@ module Aws::MediaLive
     class EmbeddedDestinationSettings
       attr_accessor position: Types::EmbeddedCaptionPositionSettings
       attr_accessor style_control: ("MANUAL" | "PASSTHROUGH")
+      attr_accessor caption_service_channel: ::Integer
+      attr_accessor embedded_mode: ("EMBEDDED_608_AND_708" | "EMBEDDED_608_ONLY" | "EMBEDDED_708_ONLY")
       SENSITIVE: []
     end
 
@@ -6167,6 +6170,12 @@ module Aws::MediaLive
       attr_accessor codec: ("MPEG2" | "AVC" | "HEVC" | "JPEGXS")
       attr_accessor maximum_bitrate: ("MAX_500_MBPS")
       attr_accessor resolution: ("HD")
+      SENSITIVE: []
+    end
+
+    class WebvttSourceSettings
+      attr_accessor group_id: ::String
+      attr_accessor name: ::String
       SENSITIVE: []
     end
   end

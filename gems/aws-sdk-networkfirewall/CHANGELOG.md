@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2026-11-20)
+------------------
+
+* Feature - Adds read-only support for internet gateway firewalls, which are created and managed by AWS Network Security Manager. Adds FirewallType to firewall operations and IgwFirewallConfiguration to Firewall.
+
 1.112.0 (2026-11-18)
 ------------------
 

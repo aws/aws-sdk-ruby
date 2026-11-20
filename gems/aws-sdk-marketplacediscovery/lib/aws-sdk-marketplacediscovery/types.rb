@@ -10,7 +10,8 @@
 module Aws::MarketplaceDiscovery
   module Types
 
-    # You don't have sufficient access to perform this action.
+    # You don't have sufficient access to perform this action. Verify that
+    # you have the required permissions.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -31,7 +32,8 @@ module Aws::MarketplaceDiscovery
     #   @return [Array<String>]
     #
     # @!attribute [rw] iops
-    #   The total number of provisioned IOPS supported.
+    #   The total number of provisioned input/output operations per second
+    #   (IOPS) that the volume supports.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/AmazonMachineImageEbsVolume AWS API Documentation
@@ -72,12 +74,12 @@ module Aws::MarketplaceDiscovery
     #   @return [Array<Types::AmazonMachineImageOperatingSystem>]
     #
     # @!attribute [rw] recommendation
-    #   Recommended instance types for running this AMI.
+    #   The recommended instance types for running this AMI.
     #   @return [Types::AmazonMachineImageRecommendation]
     #
     # @!attribute [rw] release_notes
-    #   Release notes describing changes in this version of the fulfillment
-    #   option.
+    #   Release notes that describe the changes in this version of the
+    #   fulfillment option.
     #   @return [String]
     #
     # @!attribute [rw] usage_instructions
@@ -102,7 +104,8 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] ebs_volume
-    #   The supported Amazon EBS volume configuration for the AMI.
+    #   The supported Amazon Elastic Block Store (Amazon EBS) volume
+    #   configuration for the AMI.
     #   @return [Types::AmazonMachineImageEbsVolume]
     #
     # @!attribute [rw] short_description
@@ -131,7 +134,7 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Describes an operating system supported by an AMI fulfillment option.
+    # Describes an operating system that an AMI fulfillment option supports.
     #
     # @!attribute [rw] operating_system_family_name
     #   The operating system family, such as Linux or Windows.
@@ -156,10 +159,11 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Recommended instance types for running an AMI fulfillment option.
+    # The recommended instance types for running an AMI fulfillment option.
     #
     # @!attribute [rw] instance_type
-    #   The recommended EC2 instance type for this AMI.
+    #   The recommended Amazon Elastic Compute Cloud (Amazon EC2) instance
+    #   type for this AMI.
     #   @return [String]
     #
     # @!attribute [rw] security_groups
@@ -191,7 +195,8 @@ module Aws::MarketplaceDiscovery
     #   @return [Integer]
     #
     # @!attribute [rw] cidr_ip_addresses
-    #   The IP address ranges in CIDR format.
+    #   The IP address ranges in Classless Inter-Domain Routing (CIDR)
+    #   format.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/AmazonMachineImageSecurityGroup AWS API Documentation
@@ -205,8 +210,8 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Describes an API-based fulfillment option, where the product is
-    # accessed through an API integration.
+    # Describes an API-based fulfillment option, where you access the
+    # product through an API integration.
     #
     # @!attribute [rw] fulfillment_option_id
     #   The unique identifier of the fulfillment option.
@@ -264,8 +269,8 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Defines a Bring Your Own License (BYOL) pricing term, where buyers use
-    # their existing license for the product.
+    # Describes a Bring Your Own License (BYOL) pricing term. With this
+    # term, you use your existing license for the product.
     #
     # @!attribute [rw] id
     #   The unique identifier of the term.
@@ -284,7 +289,105 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # A category used to classify a listing or product into a logical group.
+    # A summary of the case studies associated with a listing.
+    #
+    # @!attribute [rw] case_study_count
+    #   The total number of case studies associated with the listing.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/CaseStudiesSummary AWS API Documentation
+    #
+    class CaseStudiesSummary < Struct.new(
+      :case_study_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A case study associated with a listing.
+    #
+    # @!attribute [rw] case_study_id
+    #   The unique identifier of the case study.
+    #   @return [String]
+    #
+    # @!attribute [rw] case_study_name
+    #   The case study name displayed to you.
+    #   @return [String]
+    #
+    # @!attribute [rw] short_description
+    #   A brief value proposition for the case study.
+    #   @return [String]
+    #
+    # @!attribute [rw] engagement_dates
+    #   The key implementation dates for the engagement.
+    #   @return [Types::EngagementDates]
+    #
+    # @!attribute [rw] challenge
+    #   The business challenge that the engagement addresses.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolution
+    #   How the partner resolved the challenge.
+    #   @return [String]
+    #
+    # @!attribute [rw] implementation_approach
+    #   The implementation approach used for the engagement.
+    #   @return [String]
+    #
+    # @!attribute [rw] outcome
+    #   The results and outcomes achieved by the engagement.
+    #   @return [String]
+    #
+    # @!attribute [rw] resources
+    #   Resources related to the case study.
+    #   @return [Array<Types::CaseStudyResource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/CaseStudy AWS API Documentation
+    #
+    class CaseStudy < Struct.new(
+      :case_study_id,
+      :case_study_name,
+      :short_description,
+      :engagement_dates,
+      :challenge,
+      :resolution,
+      :implementation_approach,
+      :outcome,
+      :resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A resource that a case study cites, such as supporting documentation
+    # or a web page.
+    #
+    # @!attribute [rw] content_type
+    #   The format of the resource value.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The resource value, such as a URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The resource name displayed to you.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of case study resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/CaseStudyResource AWS API Documentation
+    #
+    class CaseStudyResource < Struct.new(
+      :content_type,
+      :value,
+      :display_name,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A category that classifies a listing or product into a logical group.
     #
     # @!attribute [rw] category_id
     #   The machine-readable identifier of the category.
@@ -327,8 +430,8 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] release_notes
-    #   Release notes describing changes in this version of the fulfillment
-    #   option.
+    #   Release notes that describe the changes in this version of the
+    #   fulfillment option.
     #   @return [String]
     #
     # @!attribute [rw] usage_instructions
@@ -339,6 +442,14 @@ module Aws::MarketplaceDiscovery
     #   The date and time when the CloudFormation fulfillment option became
     #   available for fulfillment.
     #   @return [Time]
+    #
+    # @!attribute [rw] architecture_diagram_url
+    #   The URL of the architecture diagram for the CloudFormation template.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_template_url
+    #   The URL of the CloudFormation template.
+    #   @return [String]
     #
     # @!attribute [rw] short_description
     #   A short description of the fulfillment option.
@@ -359,14 +470,16 @@ module Aws::MarketplaceDiscovery
       :release_notes,
       :usage_instructions,
       :available_from_time,
+      :architecture_diagram_url,
+      :deployment_template_url,
       :short_description,
       :long_description)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Defines a configurable upfront pricing term with selectable rate
-    # cards, where buyers choose from predefined pricing configurations.
+    # Describes a configurable upfront pricing term with selectable rate
+    # cards. You choose from predefined pricing configurations.
     #
     # @!attribute [rw] id
     #   The unique identifier of the term.
@@ -404,8 +517,8 @@ module Aws::MarketplaceDiscovery
     #   @return [Types::Selector]
     #
     # @!attribute [rw] constraints
-    #   Constraints on how the buyer can configure this rate card, such as
-    #   whether multiple dimensions can be selected.
+    #   Constraints on how you can configure this rate card, such as whether
+    #   you can select multiple dimensions.
     #   @return [Types::Constraints]
     #
     # @!attribute [rw] rate_card
@@ -422,16 +535,32 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Constraints that control how a buyer can configure a rate card.
+    # Constraints that control how you can configure a rate card.
     #
     # @!attribute [rw] multiple_dimension_selection
-    #   Whether the buyer can select multiple dimensions. Values are
-    #   `Allowed` or `Disallowed`.
+    #   Specifies whether you can select multiple dimensions. This field has
+    #   one of the following values:
+    #
+    #   Allowed
+    #
+    #   : You can select more than one dimension.
+    #
+    #   Disallowed
+    #
+    #   : You can select only one dimension.
     #   @return [String]
     #
     # @!attribute [rw] quantity_configuration
-    #   Whether the buyer can configure quantities. Values are `Allowed` or
-    #   `Disallowed`.
+    #   Specifies whether you can configure quantities. This field has one
+    #   of the following values:
+    #
+    #   Allowed
+    #
+    #   : You can set the quantity of each dimension.
+    #
+    #   Disallowed
+    #
+    #   : You cannot change the quantity.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/Constraints AWS API Documentation
@@ -475,8 +604,8 @@ module Aws::MarketplaceDiscovery
     #   @return [Array<Types::AwsSupportedService>]
     #
     # @!attribute [rw] release_notes
-    #   Release notes describing changes in this version of the fulfillment
-    #   option.
+    #   Release notes that describe the changes in this version of the
+    #   fulfillment option.
     #   @return [String]
     #
     # @!attribute [rw] usage_instructions
@@ -499,8 +628,8 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Describes an operating system supported by a container fulfillment
-    # option.
+    # Describes an operating system that a container fulfillment option
+    # supports.
     #
     # @!attribute [rw] operating_system_family_name
     #   The operating system family, such as Linux.
@@ -579,12 +708,20 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # A label used to group or categorize pricing dimensions, such as by
+    # A label that groups or categorizes pricing dimensions, such as by
     # region or SageMaker option.
     #
     # @!attribute [rw] label_type
-    #   The type of the dimension label, such as `Region` or
-    #   `SagemakerOption`.
+    #   The type of the dimension label. This field has one of the following
+    #   values:
+    #
+    #   Region
+    #
+    #   : The label groups dimensions by AWS Region.
+    #
+    #   SagemakerOption
+    #
+    #   : The label groups dimensions by Amazon SageMaker option.
     #   @return [String]
     #
     # @!attribute [rw] label_value
@@ -605,8 +742,8 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # A legal document associated with a legal term, such as a EULA or data
-    # subscription agreement.
+    # A legal document associated with a legal term, such as an End User
+    # License Agreement (EULA) or a data subscription agreement.
     #
     # @!attribute [rw] type
     #   The category of the legal document, such as `StandardEula` or
@@ -631,7 +768,8 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Describes an EC2 Image Builder component fulfillment option.
+    # Describes an Amazon Elastic Compute Cloud (Amazon EC2) Image Builder
+    # component fulfillment option.
     #
     # @!attribute [rw] fulfillment_option_id
     #   The unique identifier of the fulfillment option.
@@ -658,12 +796,12 @@ module Aws::MarketplaceDiscovery
     #   @return [Array<Types::ContainerOperatingSystem>]
     #
     # @!attribute [rw] aws_supported_services
-    #   The AWS services supported by this EC2 Image Builder component.
+    #   The AWS services that this EC2 Image Builder component supports.
     #   @return [Array<Types::AwsSupportedService>]
     #
     # @!attribute [rw] release_notes
-    #   Release notes describing changes in this version of the fulfillment
-    #   option.
+    #   Release notes that describe the changes in this version of the
+    #   fulfillment option.
     #   @return [String]
     #
     # @!attribute [rw] usage_instructions
@@ -687,7 +825,8 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Describes an Amazon EKS add-on fulfillment option.
+    # Describes an Amazon Elastic Kubernetes Service (Amazon EKS) add-on
+    # fulfillment option.
     #
     # @!attribute [rw] fulfillment_option_id
     #   The unique identifier of the fulfillment option.
@@ -714,8 +853,8 @@ module Aws::MarketplaceDiscovery
     #   @return [Array<Types::EksAddOnOperatingSystem>]
     #
     # @!attribute [rw] release_notes
-    #   Release notes describing changes in this version of the fulfillment
-    #   option.
+    #   Release notes that describe the changes in this version of the
+    #   fulfillment option.
     #   @return [String]
     #
     # @!attribute [rw] usage_instructions
@@ -742,8 +881,8 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Describes an operating system supported by an EKS add-on fulfillment
-    # option.
+    # Describes an operating system that an Amazon EKS add-on fulfillment
+    # option supports.
     #
     # @!attribute [rw] operating_system_family_name
     #   The operating system family, such as Linux.
@@ -758,6 +897,26 @@ module Aws::MarketplaceDiscovery
     class EksAddOnOperatingSystem < Struct.new(
       :operating_system_family_name,
       :operating_system_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Key implementation dates for a case study.
+    #
+    # @!attribute [rw] start_date
+    #   The implementation start date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completion_date
+    #   The implementation completion date. The service omits this field for
+    #   an engagement in progress.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/EngagementDates AWS API Documentation
+    #
+    class EngagementDates < Struct.new(
+      :start_date,
+      :completion_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -777,7 +936,7 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Defines a fixed upfront pricing term with a pre-paid amount and
+    # Describes a fixed upfront pricing term with a pre-paid amount and
     # granted entitlements.
     #
     # @!attribute [rw] id
@@ -801,7 +960,7 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] grants
-    #   The entitlements granted to the buyer as part of this term.
+    #   The entitlements that you receive as part of this term.
     #   @return [Array<Types::GrantItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/FixedUpfrontPricingTerm AWS API Documentation
@@ -817,8 +976,8 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Defines a free trial pricing term that enables customers to try the
-    # product before purchasing.
+    # Describes a free trial pricing term. With this term, you can try the
+    # product before you purchase it.
     #
     # @!attribute [rw] id
     #   The unique identifier of the term.
@@ -833,7 +992,7 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] grants
-    #   The entitlements granted to the buyer during the free trial.
+    #   The entitlements that you receive during the free trial.
     #   @return [Array<Types::GrantItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/FreeTrialPricingTerm AWS API Documentation
@@ -853,7 +1012,8 @@ module Aws::MarketplaceDiscovery
     # @note FulfillmentOption is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FulfillmentOption corresponding to the set member.
     #
     # @!attribute [rw] amazon_machine_image_fulfillment_option
-    #   An Amazon Machine Image (AMI) fulfillment option for EC2 deployment.
+    #   An Amazon Machine Image (AMI) fulfillment option for Amazon Elastic
+    #   Compute Cloud (Amazon EC2) deployment.
     #   @return [Types::AmazonMachineImageFulfillmentOption]
     #
     # @!attribute [rw] api_fulfillment_option
@@ -878,7 +1038,8 @@ module Aws::MarketplaceDiscovery
     #   @return [Types::EksAddOnFulfillmentOption]
     #
     # @!attribute [rw] ec2_image_builder_component_fulfillment_option
-    #   An EC2 Image Builder component fulfillment option.
+    #   An Amazon Elastic Compute Cloud (Amazon EC2) Image Builder component
+    #   fulfillment option.
     #   @return [Types::Ec2ImageBuilderComponentFulfillmentOption]
     #
     # @!attribute [rw] data_exchange_fulfillment_option
@@ -958,11 +1119,11 @@ module Aws::MarketplaceDiscovery
     end
 
     # @!attribute [rw] locale
-    #   A BCP 47 language tag or comma-separated priority list specifying
-    #   the preferred locale for response content. See `Locale` for
-    #   supported values, constraints, fallback behavior, and the default
-    #   locale. If omitted, the service returns content in the default
-    #   locale.
+    #   The preferred locale for response content, as a Best Current
+    #   Practice 47 (BCP 47) language tag or a comma-separated priority list
+    #   of language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field,
+    #   the service returns content in the default locale.
     #   @return [String]
     #
     # @!attribute [rw] listing_id
@@ -979,9 +1140,9 @@ module Aws::MarketplaceDiscovery
     end
 
     # @!attribute [rw] locale
-    #   The locale of the returned content. Indicates whether the response
-    #   contains content in the requested locale, or fell back to the
-    #   default locale. See `Locale` for details.
+    #   The locale of the returned content. This value indicates whether the
+    #   response contains content in the requested locale or fell back to
+    #   the default locale. See `Locale` for details.
     #   @return [String]
     #
     # @!attribute [rw] associated_entities
@@ -999,12 +1160,13 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] categories
-    #   The categories used to classify this listing into logical groups.
+    #   The categories that classify this listing into logical groups.
     #   @return [Array<Types::Category>]
     #
     # @!attribute [rw] fulfillment_option_summaries
     #   A summary of fulfillment options available for deploying or
-    #   accessing the listing, such as AMI, SaaS, or Container.
+    #   accessing the listing, such as Amazon Machine Image (AMI), Software
+    #   as a Service (SaaS), or Container.
     #   @return [Array<Types::FulfillmentOptionSummary>]
     #
     # @!attribute [rw] highlights
@@ -1035,7 +1197,7 @@ module Aws::MarketplaceDiscovery
     #
     # @!attribute [rw] pricing_models
     #   The pricing models for offers associated with this listing, such as
-    #   usage-based, contract, BYOL, or free.
+    #   usage-based, contract, Bring Your Own License (BYOL), or free.
     #   @return [Array<Types::PricingModel>]
     #
     # @!attribute [rw] pricing_units
@@ -1064,8 +1226,8 @@ module Aws::MarketplaceDiscovery
     #   @return [Types::ReviewSummary]
     #
     # @!attribute [rw] seller_engagements
-    #   Engagement options available to potential buyers, such as requesting
-    #   a private offer or requesting a demo.
+    #   The engagement options available to you, such as buying now,
+    #   requesting a private offer, or requesting a demo.
     #   @return [Array<Types::SellerEngagement>]
     #
     # @!attribute [rw] short_description
@@ -1074,8 +1236,14 @@ module Aws::MarketplaceDiscovery
     #
     # @!attribute [rw] use_cases
     #   Use cases associated with the listing, describing scenarios where
-    #   the product can be applied.
+    #   you can apply the product.
     #   @return [Array<Types::UseCaseEntry>]
+    #
+    # @!attribute [rw] purchase_indicators
+    #   Indicators describing purchase characteristics of this listing, such
+    #   as whether you can subscribe to it or use it without a subscription.
+    #   The list is empty when no special purchase conditions apply.
+    #   @return [Array<Types::PurchaseIndicator>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetListingOutput AWS API Documentation
     #
@@ -1100,17 +1268,18 @@ module Aws::MarketplaceDiscovery
       :review_summary,
       :seller_engagements,
       :short_description,
-      :use_cases)
+      :use_cases,
+      :purchase_indicators)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] locale
-    #   A BCP 47 language tag or comma-separated priority list specifying
-    #   the preferred locale for response content. See `Locale` for
-    #   supported values, constraints, fallback behavior, and the default
-    #   locale. If omitted, the service returns content in the default
-    #   locale.
+    #   The preferred locale for response content, as a Best Current
+    #   Practice 47 (BCP 47) language tag or a comma-separated priority list
+    #   of language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field,
+    #   the service returns content in the default locale.
     #   @return [String]
     #
     # @!attribute [rw] offer_id
@@ -1127,9 +1296,9 @@ module Aws::MarketplaceDiscovery
     end
 
     # @!attribute [rw] locale
-    #   The locale of the returned content. Indicates whether the response
-    #   contains content in the requested locale, or fell back to the
-    #   default locale. See `Locale` for details.
+    #   The locale of the returned content. This value indicates whether the
+    #   response contains content in the requested locale or fell back to
+    #   the default locale. See `Locale` for details.
     #   @return [String]
     #
     # @!attribute [rw] offer_id
@@ -1141,17 +1310,17 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] offer_name
-    #   The display name of the offer. This is free-form text provided by
-    #   the seller.
+    #   The display name of the offer. The seller provides this free-form
+    #   text.
     #   @return [String]
     #
     # @!attribute [rw] expiration_time
-    #   The date and time until when the offer can be procured. This value
+    #   The date and time until which you can procure the offer. This value
     #   is null for offers that never expire.
     #   @return [Time]
     #
     # @!attribute [rw] available_from_time
-    #   The date and time when the offer became available to the buyer.
+    #   The date and time when the offer became available to you.
     #   @return [Time]
     #
     # @!attribute [rw] seller_of_record
@@ -1163,23 +1332,23 @@ module Aws::MarketplaceDiscovery
     #   @return [Array<Types::OfferAssociatedEntity>]
     #
     # @!attribute [rw] agreement_proposal_id
-    #   An encoded string to be passed by the acceptor of the terms when
-    #   creating an agreement.
+    #   An encoded string that you pass when you accept the terms and create
+    #   an agreement.
     #   @return [String]
     #
     # @!attribute [rw] replacement_agreement_id
     #   The identifier of the existing agreement that this offer would
-    #   replace. Enables agreement-based offer functionality.
+    #   replace.
     #   @return [String]
     #
     # @!attribute [rw] pricing_model
-    #   The pricing model that determines how buyers are charged, such as
-    #   usage-based, contract, BYOL, or free.
+    #   The pricing model that determines how you are charged, such as
+    #   usage-based, contract, Bring Your Own License (BYOL), or free.
     #   @return [Types::PricingModel]
     #
     # @!attribute [rw] badges
     #   Badges indicating special attributes of the offer, such as private
-    #   pricing, future dated, or replacement offer.
+    #   pricing, future-dated, or replacement offer.
     #   @return [Array<Types::PurchaseOptionBadge>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetOfferOutput AWS API Documentation
@@ -1202,11 +1371,11 @@ module Aws::MarketplaceDiscovery
     end
 
     # @!attribute [rw] locale
-    #   A BCP 47 language tag or comma-separated priority list specifying
-    #   the preferred locale for response content. See `Locale` for
-    #   supported values, constraints, fallback behavior, and the default
-    #   locale. If omitted, the service returns content in the default
-    #   locale.
+    #   The preferred locale for response content, as a Best Current
+    #   Practice 47 (BCP 47) language tag or a comma-separated priority list
+    #   of language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field,
+    #   the service returns content in the default locale.
     #   @return [String]
     #
     # @!attribute [rw] offer_set_id
@@ -1223,9 +1392,9 @@ module Aws::MarketplaceDiscovery
     end
 
     # @!attribute [rw] locale
-    #   The locale of the returned content. Indicates whether the response
-    #   contains content in the requested locale, or fell back to the
-    #   default locale. See `Locale` for details.
+    #   The locale of the returned content. This value indicates whether the
+    #   response contains content in the requested locale or fell back to
+    #   the default locale. See `Locale` for details.
     #   @return [String]
     #
     # @!attribute [rw] offer_set_id
@@ -1241,7 +1410,7 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] available_from_time
-    #   The date and time when the offer set became available to the buyer.
+    #   The date and time when the offer set became available to you.
     #   @return [Time]
     #
     # @!attribute [rw] expiration_time
@@ -1250,8 +1419,8 @@ module Aws::MarketplaceDiscovery
     #   @return [Time]
     #
     # @!attribute [rw] buyer_notes
-    #   Detailed information about the offer set that helps buyers
-    #   understand its purpose and contents.
+    #   Detailed information about the offer set that helps you understand
+    #   its purpose and contents.
     #   @return [String]
     #
     # @!attribute [rw] seller_of_record
@@ -1261,7 +1430,7 @@ module Aws::MarketplaceDiscovery
     #
     # @!attribute [rw] badges
     #   Badges indicating special attributes of the offer set, such as
-    #   private pricing or future dated.
+    #   private pricing or future-dated.
     #   @return [Array<Types::PurchaseOptionBadge>]
     #
     # @!attribute [rw] associated_entities
@@ -1286,11 +1455,11 @@ module Aws::MarketplaceDiscovery
     end
 
     # @!attribute [rw] locale
-    #   A BCP 47 language tag or comma-separated priority list specifying
-    #   the preferred locale for response content. See `Locale` for
-    #   supported values, constraints, fallback behavior, and the default
-    #   locale. If omitted, the service returns content in the default
-    #   locale.
+    #   The preferred locale for response content, as a Best Current
+    #   Practice 47 (BCP 47) language tag or a comma-separated priority list
+    #   of language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field,
+    #   the service returns content in the default locale.
     #   @return [String]
     #
     # @!attribute [rw] offer_id
@@ -1298,13 +1467,17 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned per call. You can
-    #   use `nextToken` to get more results.
+    #   The maximum number of terms to return in each call. If you omit this
+    #   field, the default is 10. Use `nextToken` to retrieve the next page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   If `nextToken` is returned, there are more results available. Make
-    #   the call again using the returned token to retrieve the next page.
+    #   If the service returns `nextToken`, more results are available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again with the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. An expired pagination token returns a
+    #   `ValidationException`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetOfferTermsInput AWS API Documentation
@@ -1319,9 +1492,9 @@ module Aws::MarketplaceDiscovery
     end
 
     # @!attribute [rw] locale
-    #   The locale of the returned content. Indicates whether the response
-    #   contains content in the requested locale, or fell back to the
-    #   default locale. See `Locale` for details.
+    #   The locale of the returned content. This value indicates whether the
+    #   response contains content in the requested locale or fell back to
+    #   the default locale. See `Locale` for details.
     #   @return [String]
     #
     # @!attribute [rw] offer_terms
@@ -1330,8 +1503,12 @@ module Aws::MarketplaceDiscovery
     #   @return [Array<Types::OfferTerm>]
     #
     # @!attribute [rw] next_token
-    #   If `nextToken` is returned, there are more results available. Make
-    #   the call again using the returned token to retrieve the next page.
+    #   If the service returns `nextToken`, more results are available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again with the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. An expired pagination token returns a
+    #   `ValidationException`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetOfferTermsOutput AWS API Documentation
@@ -1345,11 +1522,11 @@ module Aws::MarketplaceDiscovery
     end
 
     # @!attribute [rw] locale
-    #   A BCP 47 language tag or comma-separated priority list specifying
-    #   the preferred locale for response content. See `Locale` for
-    #   supported values, constraints, fallback behavior, and the default
-    #   locale. If omitted, the service returns content in the default
-    #   locale.
+    #   The preferred locale for response content, as a Best Current
+    #   Practice 47 (BCP 47) language tag or a comma-separated priority list
+    #   of language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field,
+    #   the service returns content in the default locale.
     #   @return [String]
     #
     # @!attribute [rw] product_id
@@ -1366,9 +1543,9 @@ module Aws::MarketplaceDiscovery
     end
 
     # @!attribute [rw] locale
-    #   The locale of the returned content. Indicates whether the response
-    #   contains content in the requested locale, or fell back to the
-    #   default locale. See `Locale` for details.
+    #   The locale of the returned content. This value indicates whether the
+    #   response contains content in the requested locale or fell back to
+    #   the default locale. See `Locale` for details.
     #   @return [String]
     #
     # @!attribute [rw] product_id
@@ -1388,7 +1565,7 @@ module Aws::MarketplaceDiscovery
     #   @return [Types::SellerInformation]
     #
     # @!attribute [rw] deployed_on_aws
-    #   Indicates whether the product is deployed on AWS infrastructure.
+    #   Specifies whether the product is deployed on AWS infrastructure.
     #   @return [String]
     #
     # @!attribute [rw] short_description
@@ -1406,11 +1583,12 @@ module Aws::MarketplaceDiscovery
     #
     # @!attribute [rw] fulfillment_option_summaries
     #   A summary of fulfillment options available for deploying or
-    #   accessing the product, such as AMI, SaaS, or Container.
+    #   accessing the product, such as Amazon Machine Image (AMI), Software
+    #   as a Service (SaaS), or Container.
     #   @return [Array<Types::FulfillmentOptionSummary>]
     #
     # @!attribute [rw] categories
-    #   The categories used to classify this product into logical groups.
+    #   The categories that classify this product into logical groups.
     #   @return [Array<Types::Category>]
     #
     # @!attribute [rw] highlights
@@ -1429,13 +1607,19 @@ module Aws::MarketplaceDiscovery
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] seller_engagements
-    #   Engagement options available to potential buyers, such as requesting
-    #   a private offer or requesting a demo.
+    #   The engagement options available to you, such as buying now,
+    #   requesting a private offer, or requesting a demo.
     #   @return [Array<Types::SellerEngagement>]
     #
     # @!attribute [rw] listing_id
     #   The default listing identifier associated with the product.
     #   @return [String]
+    #
+    # @!attribute [rw] purchase_indicators
+    #   Indicators describing purchase characteristics of this product, such
+    #   as whether you can subscribe to it or use it without a subscription.
+    #   The list is empty when no special purchase conditions apply.
+    #   @return [Array<Types::PurchaseIndicator>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetProductOutput AWS API Documentation
     #
@@ -1455,12 +1639,13 @@ module Aws::MarketplaceDiscovery
       :promotional_media,
       :resources,
       :seller_engagements,
-      :listing_id)
+      :listing_id,
+      :purchase_indicators)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # An entitlement granted to the buyer as part of a pricing term.
+    # An entitlement that you receive as part of a pricing term.
     #
     # @!attribute [rw] dimension_key
     #   The machine-readable key identifying the entitlement dimension.
@@ -1475,7 +1660,7 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] dimension_labels
-    #   Labels used to categorize this entitlement, such as by region.
+    #   Labels that categorize this entitlement, such as by region.
     #   @return [Array<Types::DimensionLabel>]
     #
     # @!attribute [rw] unit
@@ -1483,7 +1668,7 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] max_quantity
-    #   The maximum quantity of the entitlement that can be granted.
+    #   The maximum quantity of the entitlement that you can receive.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GrantItem AWS API Documentation
@@ -1526,8 +1711,8 @@ module Aws::MarketplaceDiscovery
     #   @return [Array<Types::HelmOperatingSystem>]
     #
     # @!attribute [rw] release_notes
-    #   Release notes describing changes in this version of the fulfillment
-    #   option.
+    #   Release notes that describe the changes in this version of the
+    #   fulfillment option.
     #   @return [String]
     #
     # @!attribute [rw] aws_supported_services
@@ -1554,8 +1739,8 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Describes an operating system supported by a Helm chart fulfillment
-    # option.
+    # Describes an operating system that a Helm chart fulfillment option
+    # supports.
     #
     # @!attribute [rw] operating_system_family_name
     #   The operating system family, such as Linux.
@@ -1587,8 +1772,8 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Defines a legal term containing documents proposed to buyers, such as
-    # EULAs and data subscription agreements.
+    # Describes a legal term containing documents proposed to you, such as
+    # End User License Agreements (EULAs) and data subscription agreements.
     #
     # @!attribute [rw] id
     #   The unique identifier of the term.
@@ -1599,7 +1784,7 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] documents
-    #   The legal documents proposed to the buyer as part of this term.
+    #   The legal documents proposed to you as part of this term.
     #   @return [Array<Types::DocumentItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/LegalTerm AWS API Documentation
@@ -1613,11 +1798,11 @@ module Aws::MarketplaceDiscovery
     end
 
     # @!attribute [rw] locale
-    #   A BCP 47 language tag or comma-separated priority list specifying
-    #   the preferred locale for response content. See `Locale` for
-    #   supported values, constraints, fallback behavior, and the default
-    #   locale. If omitted, the service returns content in the default
-    #   locale.
+    #   The preferred locale for response content, as a Best Current
+    #   Practice 47 (BCP 47) language tag or a comma-separated priority list
+    #   of language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field,
+    #   the service returns content in the default locale.
     #   @return [String]
     #
     # @!attribute [rw] product_id
@@ -1626,13 +1811,18 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned per call. You can
-    #   use `nextToken` to get more results.
+    #   The maximum number of fulfillment options to return in each call. If
+    #   you omit this field, the default is 25. Use `nextToken` to retrieve
+    #   the next page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   If `nextToken` is returned, there are more results available. Make
-    #   the call again using the returned token to retrieve the next page.
+    #   If the service returns `nextToken`, more results are available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again with the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. An expired pagination token returns a
+    #   `ValidationException`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/ListFulfillmentOptionsInput AWS API Documentation
@@ -1647,13 +1837,14 @@ module Aws::MarketplaceDiscovery
     end
 
     # @!attribute [rw] locale
-    #   A BCP 47 language tag or comma-separated priority list of language
-    #   tags that specifies the preferred locale for response content. The
-    #   field accepts a maximum of two language tags.
+    #   A Best Current Practice 47 (BCP 47) language tag or comma-separated
+    #   priority list of language tags that specifies the preferred locale
+    #   for response content. The field accepts a maximum of two language
+    #   tags.
     #
     #   The service resolves a locale string to the nearest supported
     #   locale. If no supported locale matches, the service applies the
-    #   fallback behavior described below.
+    #   fallback behavior described in the following lists.
     #
     #   * **Preferred locale** (first tag) – The locale you want the service
     #     to return content in.
@@ -1663,57 +1854,75 @@ module Aws::MarketplaceDiscovery
     #     locale when translated content for the preferred locale is
     #     unavailable.
     #
-    #   The field is optional. If omitted or null, the service returns
-    #   content in the default locale (`en-US`).
+    #   The field is optional. If you omit this field or set it to null, the
+    #   service returns content in the default locale (`en-US`).
     #
-    #   **Supported locales:**
+    #   The service supports the following locales:
     #
-    #   * `en-US` – English (service default, also resolves from `en`)
+    #   en-US
     #
-    #   * `fr` – French
+    #   : English (service default, also resolves from `en`)
     #
-    #   * `es` – Spanish
+    #   fr
     #
-    #   * `ko` – Korean
+    #   : French
     #
-    #   * `ja` – Japanese
+    #   es
     #
-    #   **Fallback behavior:**
+    #   : Spanish
+    #
+    #   ko
+    #
+    #   : Korean
+    #
+    #   ja
+    #
+    #   : Japanese
+    #
+    #   The fallback behavior is as follows:
     #
     #   * If translated content for the preferred locale is unavailable, the
     #     service returns content in the default locale.
     #
-    #   * If the preferred locale is not supported and no fallback is
-    #     provided, the service returns a `ValidationException`.
+    #   * If the preferred locale is not supported and you provide no
+    #     fallback, the service returns a `ValidationException`.
     #
     #   * If you provide an unsupported locale with the default locale as
     #     fallback (for example, `xx, en-US`), the service returns content
     #     in the default locale.
     #
-    #   **Response locale field (Get APIs):** The `locale` field in Get API
-    #   responses indicates the locale of the returned content. You can use
-    #   this field to determine whether the response contains content in the
-    #   requested locale or the default locale.
+    #   The `locale` field in Get API responses indicates the locale of the
+    #   returned content. You can use this field to determine whether the
+    #   response contains content in the requested locale or the default
+    #   locale.
     #
-    #   **Examples:**
+    #   The following examples show how the field works:
     #
-    #   * `fr` – Request French content. If unavailable, falls back to
-    #     `en-US`.
+    #   fr
     #
-    #   * `fr, en-US` – Request French content with explicit fallback to
-    #     English.
+    #   : Request French content. If unavailable, falls back to `en-US`.
     #
-    #   * `en-US` – Request content in the default locale.
+    #   fr, en-US
+    #
+    #   : Request French content with explicit fallback to English.
+    #
+    #   en-US
+    #
+    #   : Request content in the default locale.
     #   @return [String]
     #
     # @!attribute [rw] fulfillment_options
     #   The fulfillment options available for the product. Each option
-    #   describes how the buyer can deploy or access the product.
+    #   describes how you can deploy or access the product.
     #   @return [Array<Types::FulfillmentOption>]
     #
     # @!attribute [rw] next_token
-    #   If `nextToken` is returned, there are more results available. Make
-    #   the call again using the returned token to retrieve the next page.
+    #   If the service returns `nextToken`, more results are available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again with the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. An expired pagination token returns a
+    #   `ValidationException`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/ListFulfillmentOptionsOutput AWS API Documentation
@@ -1726,28 +1935,139 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
+    # Contains the listing and attribute types to retrieve.
+    #
     # @!attribute [rw] locale
-    #   A BCP 47 language tag or comma-separated priority list specifying
-    #   the preferred locale for response content. See `Locale` for
-    #   supported values, constraints, fallback behavior, and the default
-    #   locale. If omitted, the service returns content in the default
-    #   locale.
+    #   The preferred locale for response content, as a Best Current
+    #   Practice 47 (BCP 47) language tag or a comma-separated priority list
+    #   of language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field,
+    #   the service returns content in the default locale.
     #   @return [String]
     #
-    # @!attribute [rw] filters
-    #   Filters to narrow the results. Multiple filters are combined with
-    #   AND logic. Multiple values within the same filter are combined with
-    #   OR logic.
-    #   @return [Array<Types::PurchaseOptionFilter>]
+    # @!attribute [rw] listing_id
+    #   The unique identifier of the listing whose attributes are requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_types
+    #   The attribute types to retrieve. Specify one or more of the
+    #   following values:
+    #
+    #   CASE\_STUDY
+    #
+    #   : Case studies associated with the listing.
+    #
+    #   SPECIALIZATION\_DETAIL
+    #
+    #   : Specializations earned for the listing.
+    #
+    #   TRUST\_CENTER\_CERTIFICATION
+    #
+    #   : Trust center certifications associated with the listing.
+    #
+    #   TRUST\_CENTER\_CONTROL
+    #
+    #   : Trust center controls associated with the listing.
+    #
+    #   TRUST\_CENTER\_DOCUMENT
+    #
+    #   : Trust center documents associated with the listing.
+    #
+    #   TRUST\_CENTER\_FAQ
+    #
+    #   : The trust center FAQ associated with the listing.
+    #
+    #   TRUST\_CENTER\_SOURCE
+    #
+    #   : Trust center sources associated with the listing.
+    #
+    #   TRUST\_CENTER\_UPDATE
+    #
+    #   : Trust center updates associated with the listing.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned per call. You can
-    #   use `nextToken` to get more results.
+    #   The maximum number of attributes to return in each call. If you omit
+    #   this field, the default is 25. Use `nextToken` to retrieve the next
+    #   page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   If `nextToken` is returned, there are more results available. Make
-    #   the call again using the returned token to retrieve the next page.
+    #   If the service returns `nextToken`, more results are available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again with the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. An expired pagination token returns a
+    #   `ValidationException`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/ListListingAttributesInput AWS API Documentation
+    #
+    class ListListingAttributesInput < Struct.new(
+      :locale,
+      :listing_id,
+      :attribute_types,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the requested listing attributes and pagination information.
+    #
+    # @!attribute [rw] locale
+    #   The locale of the returned content. See `Locale` for details.
+    #   @return [String]
+    #
+    # @!attribute [rw] listing_attributes
+    #   The requested attributes. Each entry contains one attribute type.
+    #   @return [Array<Types::ListingAttributeResults>]
+    #
+    # @!attribute [rw] next_token
+    #   If the service returns `nextToken`, more results are available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again with the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. An expired pagination token returns a
+    #   `ValidationException`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/ListListingAttributesOutput AWS API Documentation
+    #
+    class ListListingAttributesOutput < Struct.new(
+      :locale,
+      :listing_attributes,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] locale
+    #   The preferred locale for response content, as a Best Current
+    #   Practice 47 (BCP 47) language tag or a comma-separated priority list
+    #   of language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field,
+    #   the service returns content in the default locale.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters to narrow the results. A result must match every filter.
+    #   Within one filter, a result matches if it has any of the values.
+    #   @return [Array<Types::PurchaseOptionFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of purchase options to return in each call. If
+    #   you omit this field, the default is 25. Use `nextToken` to retrieve
+    #   the next page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the service returns `nextToken`, more results are available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again with the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. An expired pagination token returns a
+    #   `ValidationException`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/ListPurchaseOptionsInput AWS API Documentation
@@ -1762,14 +2082,18 @@ module Aws::MarketplaceDiscovery
     end
 
     # @!attribute [rw] purchase_options
-    #   The purchase options available to the buyer. Each option is either
-    #   an offer for a single product or an offer set spanning multiple
+    #   The purchase options available to you. Each option is either an
+    #   offer for a single product or an offer set spanning multiple
     #   products.
     #   @return [Array<Types::PurchaseOptionSummary>]
     #
     # @!attribute [rw] next_token
-    #   If `nextToken` is returned, there are more results available. Make
-    #   the call again using the returned token to retrieve the next page.
+    #   If the service returns `nextToken`, more results are available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again with the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. An expired pagination token returns a
+    #   `ValidationException`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/ListPurchaseOptionsOutput AWS API Documentation
@@ -1800,6 +2124,72 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
+    # An attribute associated with a listing. Each entry contains one
+    # attribute type.
+    #
+    # @note ListingAttributeResults is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ListingAttributeResults corresponding to the set member.
+    #
+    # @!attribute [rw] case_study
+    #   A case study associated with the listing.
+    #   @return [Types::CaseStudy]
+    #
+    # @!attribute [rw] specialization_detail
+    #   A specialization earned for the listing. Each result is either a
+    #   specialization or a category under a specialization.
+    #   @return [Types::SpecializationDetail]
+    #
+    # @!attribute [rw] trust_center_source
+    #   A trust center source associated with the listing.
+    #   @return [Types::TrustCenterSource]
+    #
+    # @!attribute [rw] trust_center_certification
+    #   A trust center certification associated with the listing.
+    #   @return [Types::TrustCenterCertificationAttribute]
+    #
+    # @!attribute [rw] trust_center_document
+    #   A trust center document associated with the listing.
+    #   @return [Types::TrustCenterDocumentAttribute]
+    #
+    # @!attribute [rw] trust_center_control
+    #   A trust center control associated with the listing.
+    #   @return [Types::TrustCenterControl]
+    #
+    # @!attribute [rw] trust_center_faq
+    #   A trust center frequently asked question associated with the
+    #   listing.
+    #   @return [Types::TrustCenterFaqAttribute]
+    #
+    # @!attribute [rw] trust_center_update
+    #   A trust center update associated with the listing.
+    #   @return [Types::TrustCenterUpdateAttribute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/ListingAttributeResults AWS API Documentation
+    #
+    class ListingAttributeResults < Struct.new(
+      :case_study,
+      :specialization_detail,
+      :trust_center_source,
+      :trust_center_certification,
+      :trust_center_document,
+      :trust_center_control,
+      :trust_center_faq,
+      :trust_center_update,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CaseStudy < ListingAttributeResults; end
+      class SpecializationDetail < ListingAttributeResults; end
+      class TrustCenterSource < ListingAttributeResults; end
+      class TrustCenterCertification < ListingAttributeResults; end
+      class TrustCenterDocument < ListingAttributeResults; end
+      class TrustCenterControl < ListingAttributeResults; end
+      class TrustCenterFaq < ListingAttributeResults; end
+      class TrustCenterUpdate < ListingAttributeResults; end
+      class Unknown < ListingAttributeResults; end
+    end
+
     # A badge indicating a special attribute of a listing, such as free tier
     # eligibility or Quick Launch support.
     #
@@ -1808,7 +2198,8 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] badge_type
-    #   The machine-readable type of the badge.
+    #   The machine-readable type of the badge. See `ListingBadgeType` for
+    #   the values.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/ListingBadge AWS API Documentation
@@ -1886,7 +2277,7 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] categories
-    #   The categories used to classify this listing into logical groups.
+    #   The categories that classify this listing into logical groups.
     #   @return [Array<Types::Category>]
     #
     # @!attribute [rw] badges
@@ -1910,6 +2301,27 @@ module Aws::MarketplaceDiscovery
     #   The products associated with this listing.
     #   @return [Array<Types::ListingSummaryAssociatedEntity>]
     #
+    # @!attribute [rw] trust_center_summary
+    #   A summary of trust center sources and certifications associated with
+    #   the listing.
+    #   @return [Types::TrustCenterSummary]
+    #
+    # @!attribute [rw] case_studies_summary
+    #   A summary of the case studies associated with the listing. Retrieve
+    #   the case studies with `ListListingAttributes`.
+    #   @return [Types::CaseStudiesSummary]
+    #
+    # @!attribute [rw] use_case_summary
+    #   A summary of the use cases the listing is written for: the name and
+    #   identifier of each, without descriptions. The summary is empty when
+    #   the listing has none.
+    #   @return [Types::UseCaseSummary]
+    #
+    # @!attribute [rw] seller_engagements
+    #   The seller engagement options available for this listing, such as
+    #   buying now, requesting a private offer, or requesting a demo.
+    #   @return [Array<Types::SellerEngagement>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/ListingSummary AWS API Documentation
     #
     class ListingSummary < Struct.new(
@@ -1925,7 +2337,11 @@ module Aws::MarketplaceDiscovery
       :review_summary,
       :pricing_models,
       :pricing_units,
-      :associated_entities)
+      :associated_entities,
+      :trust_center_summary,
+      :case_studies_summary,
+      :use_case_summary,
+      :seller_engagements)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1944,7 +2360,7 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Defines a net payment term that sets how many days after the invoice
+    # Describes a net payment term that sets how many days after the invoice
     # date the payment is due.
     #
     # @!attribute [rw] id
@@ -2060,61 +2476,63 @@ module Aws::MarketplaceDiscovery
     # @note OfferTerm is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of OfferTerm corresponding to the set member.
     #
     # @!attribute [rw] byol_pricing_term
-    #   Defines a Bring Your Own License (BYOL) pricing term, where buyers
-    #   use their existing license for the product.
+    #   Describes a Bring Your Own License (BYOL) pricing term. With this
+    #   term, you use your existing license for the product.
     #   @return [Types::ByolPricingTerm]
     #
     # @!attribute [rw] configurable_upfront_pricing_term
-    #   Defines a configurable upfront pricing term with selectable rate
-    #   cards, where buyers choose from predefined pricing configurations.
+    #   Describes a configurable upfront pricing term with selectable rate
+    #   cards. You choose from predefined pricing configurations.
     #   @return [Types::ConfigurableUpfrontPricingTerm]
     #
     # @!attribute [rw] fixed_upfront_pricing_term
-    #   Defines a fixed upfront pricing term with a pre-paid amount and
+    #   Describes a fixed upfront pricing term with a pre-paid amount and
     #   granted entitlements.
     #   @return [Types::FixedUpfrontPricingTerm]
     #
     # @!attribute [rw] free_trial_pricing_term
-    #   Defines a free trial pricing term that enables customers to try the
-    #   product before purchasing.
+    #   Describes a free trial pricing term. With this term, you can try the
+    #   product before you purchase it.
     #   @return [Types::FreeTrialPricingTerm]
     #
     # @!attribute [rw] legal_term
-    #   Defines a legal term containing documents proposed to buyers, such
-    #   as EULAs and data subscription agreements.
+    #   Describes a legal term containing documents proposed to you, such as
+    #   End User License Agreements (EULAs) and data subscription
+    #   agreements.
     #   @return [Types::LegalTerm]
     #
     # @!attribute [rw] payment_schedule_term
-    #   Defines a payment schedule term with installment payments at
+    #   Describes a payment schedule term with installment payments at
     #   specified dates.
     #   @return [Types::PaymentScheduleTerm]
     #
     # @!attribute [rw] recurring_payment_term
-    #   Defines a recurring payment term with fixed charges at regular
+    #   Describes a recurring payment term with fixed charges at regular
     #   billing intervals.
     #   @return [Types::RecurringPaymentTerm]
     #
     # @!attribute [rw] renewal_term
-    #   Defines a renewal term that enables automatic agreement renewal.
+    #   Describes a renewal term that renews the agreement automatically.
     #   @return [Types::RenewalTerm]
     #
     # @!attribute [rw] support_term
-    #   Defines a support term that includes the refund policy for the
+    #   Describes a support term that includes the refund policy for the
     #   offer.
     #   @return [Types::SupportTerm]
     #
     # @!attribute [rw] usage_based_pricing_term
-    #   Defines a usage-based pricing term (typically pay-as-you-go), where
-    #   buyers are charged based on product usage.
+    #   Describes a usage-based pricing term, typically pay-as-you-go. You
+    #   are charged based on your use of the product.
     #   @return [Types::UsageBasedPricingTerm]
     #
     # @!attribute [rw] validity_term
-    #   Defines a validity term that specifies the duration or date range of
-    #   an agreement.
+    #   Describes a validity term that specifies the duration or date range
+    #   of an agreement.
     #   @return [Types::ValidityTerm]
     #
     # @!attribute [rw] variable_payment_term
-    #   Defines a variable payment term with a maximum total charge amount.
+    #   Describes a variable payment term with a maximum total charge
+    #   amount.
     #   @return [Types::VariablePaymentTerm]
     #
     # @!attribute [rw] net_payment_term
@@ -2189,8 +2607,8 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Defines a payment schedule term with installment payments at specified
-    # dates.
+    # Describes a payment schedule term with installment payments at
+    # specified dates.
     #
     # @!attribute [rw] id
     #   The unique identifier of the term.
@@ -2265,8 +2683,17 @@ module Aws::MarketplaceDiscovery
     end
 
     # The pricing adjustment that applies at each renewal cycle, expressed
-    # as either a fixed percentage or a percentage range. Exactly one
-    # variant is present.
+    # as either a fixed percentage or a percentage range. Exactly one of the
+    # following members is present:
+    #
+    # fixedPercentage
+    #
+    # : A single fixed percentage applied uniformly at every renewal cycle.
+    #
+    # percentageRange
+    #
+    # : A percentage range with minimum, maximum, and default values that
+    #   bound the price increase at each renewal cycle.
     #
     # @note PriceIncrease is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PriceIncrease corresponding to the set member.
     #
@@ -2294,11 +2721,12 @@ module Aws::MarketplaceDiscovery
       class Unknown < PriceIncrease; end
     end
 
-    # A pricing model that determines how buyers are charged for a listing,
-    # such as usage-based, contract, BYOL, or free.
+    # A pricing model that determines how you are charged for a listing,
+    # such as usage-based, contract, Bring Your Own License (BYOL), or free.
     #
     # @!attribute [rw] pricing_model_type
-    #   The machine-readable type of the pricing model.
+    #   The machine-readable type of the pricing model. See
+    #   `PricingModelType` for the values.
     #   @return [String]
     #
     # @!attribute [rw] display_name
@@ -2469,6 +2897,21 @@ module Aws::MarketplaceDiscovery
       class Unknown < PromotionalMedia; end
     end
 
+    # An indicator describing a purchase characteristic, such as
+    # availability for use without a subscription.
+    #
+    # @!attribute [rw] indicator_type
+    #   The type of purchase indicator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/PurchaseIndicator AWS API Documentation
+    #
+    class PurchaseIndicator < Struct.new(
+      :indicator_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A product, offer, and optional offer set associated with a purchase
     # option.
     #
@@ -2496,14 +2939,15 @@ module Aws::MarketplaceDiscovery
     end
 
     # A badge indicating a special attribute of a purchase option, such as
-    # private pricing or future dated.
+    # private pricing or future-dated.
     #
     # @!attribute [rw] display_name
     #   The human-readable name of the badge.
     #   @return [String]
     #
     # @!attribute [rw] badge_type
-    #   The machine-readable type of the badge.
+    #   The machine-readable type of the badge. See
+    #   `PurchaseOptionBadgeType` for the values.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/PurchaseOptionBadge AWS API Documentation
@@ -2519,29 +2963,60 @@ module Aws::MarketplaceDiscovery
     # type, visibility, or availability.
     #
     # @!attribute [rw] filter_type
-    #   The type of filter to apply, such as `PRODUCT_ID`,
-    #   `VISIBILITY_SCOPE`, or `PURCHASE_OPTION_TYPE`.
+    #   The type of filter to apply. This field has one of the following
+    #   values:
+    #
+    #   AVAILABILITY\_STATUS
+    #
+    #   : Filters by whether the purchase option is available or expired.
+    #
+    #   PRODUCT\_ID
+    #
+    #   : Filters by product.
+    #
+    #   PURCHASE\_OPTION\_TYPE
+    #
+    #   : Filters by offer or offer set.
+    #
+    #   SELLER\_OF\_RECORD\_PROFILE\_ID
+    #
+    #   : Filters by seller.
+    #
+    #   VISIBILITY\_SCOPE
+    #
+    #   : Filters by visibility.
+    #
+    #   See `filterValues` for the values that each type accepts.
     #   @return [String]
     #
     # @!attribute [rw] filter_values
     #   The values to filter by. Supported values depend on `filterType`:
     #
-    #   * `PRODUCT_ID` – One or more product identifiers to filter by.
+    #   AVAILABILITY\_STATUS
     #
-    #   * `SELLER_OF_RECORD_PROFILE_ID` – One or more seller profile
-    #     identifiers to filter by.
+    #   : One or more availability statuses to filter by: `AVAILABLE` or
+    #     `EXPIRED`.
     #
-    #   * `PURCHASE_OPTION_TYPE` – One or more purchase option types to
-    #     filter by: `OFFER` or `OFFERSET`.
+    #   PRODUCT\_ID
     #
-    #   * `VISIBILITY_SCOPE` – The visibility scope to filter by: `PRIVATE`.
+    #   : One or more product identifiers to filter by.
     #
-    #   * `AVAILABILITY_STATUS` – One or more availability statuses to
-    #     filter by: `AVAILABLE` or `EXPIRED`.
+    #   PURCHASE\_OPTION\_TYPE
+    #
+    #   : One or more purchase option types to filter by: `OFFER` or
+    #     `OFFERSET`.
+    #
+    #   SELLER\_OF\_RECORD\_PROFILE\_ID
+    #
+    #   : One or more seller profile identifiers to filter by.
+    #
+    #   VISIBILITY\_SCOPE
+    #
+    #   : The visibility scope to filter by: `PRIVATE`.
     #
     #   To retrieve private offers and offer sets visible to you, use
-    #   `VISIBILITY_SCOPE` with `PRIVATE`. OR logic combines multiple values
-    #   within the same filter.
+    #   `VISIBILITY_SCOPE` with `PRIVATE`. Within one filter, a result
+    #   matches if it has any of the values.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/PurchaseOptionFilter AWS API Documentation
@@ -2554,7 +3029,7 @@ module Aws::MarketplaceDiscovery
     end
 
     # Summary information about a purchase option (offer or offer set)
-    # available to the buyer, including the seller, badges, and associated
+    # available to you, including the seller, badges, and associated
     # products.
     #
     # @!attribute [rw] purchase_option_id
@@ -2566,8 +3041,16 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] purchase_option_type
-    #   The type of purchase option. Values are `OFFER` for a single-product
-    #   offer or `OFFERSET` for a bundled offer set.
+    #   The type of purchase option. This field has one of the following
+    #   values:
+    #
+    #   OFFER
+    #
+    #   : An offer for a single product.
+    #
+    #   OFFERSET
+    #
+    #   : An offer set that bundles offers for several products.
     #   @return [String]
     #
     # @!attribute [rw] purchase_option_name
@@ -2575,8 +3058,7 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] available_from_time
-    #   The date and time when the purchase option became available to the
-    #   buyer.
+    #   The date and time when the purchase option became available to you.
     #   @return [Time]
     #
     # @!attribute [rw] expiration_time
@@ -2591,7 +3073,7 @@ module Aws::MarketplaceDiscovery
     #
     # @!attribute [rw] badges
     #   Badges indicating special attributes of the purchase option, such as
-    #   private pricing or future dated.
+    #   private pricing or future-dated.
     #   @return [Array<Types::PurchaseOptionBadge>]
     #
     # @!attribute [rw] associated_entities
@@ -2631,7 +3113,7 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] dimension_labels
-    #   Labels used to categorize this dimension, such as by region.
+    #   Labels that categorize this dimension, such as by region.
     #   @return [Array<Types::DimensionLabel>]
     #
     # @!attribute [rw] unit
@@ -2642,6 +3124,12 @@ module Aws::MarketplaceDiscovery
     #   The price per unit for the dimension.
     #   @return [String]
     #
+    # @!attribute [rw] regional_prices
+    #   The price overrides for the dimension in individual AWS Regions.
+    #   When a Regional price is present for an AWS Region, it replaces the
+    #   default price.
+    #   @return [Array<Types::RegionalPrice>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/RateCardItem AWS API Documentation
     #
     class RateCardItem < Struct.new(
@@ -2650,13 +3138,14 @@ module Aws::MarketplaceDiscovery
       :description,
       :dimension_labels,
       :unit,
-      :price)
+      :price,
+      :regional_prices)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Defines a recurring payment term with fixed charges at regular billing
-    # intervals.
+    # Describes a recurring payment term with fixed charges at regular
+    # billing intervals.
     #
     # @!attribute [rw] id
     #   The unique identifier of the term.
@@ -2690,7 +3179,31 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Defines a renewal term that enables automatic agreement renewal.
+    # A price override for a pricing dimension in one AWS Region.
+    #
+    # @!attribute [rw] region
+    #   The AWS Region the override applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The human-readable display name of the Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] price
+    #   The per-unit price for the dimension in this Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/RegionalPrice AWS API Documentation
+    #
+    class RegionalPrice < Struct.new(
+      :region,
+      :display_name,
+      :price)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a renewal term that renews the agreement automatically.
     #
     # @!attribute [rw] id
     #   The unique identifier of the term.
@@ -2714,7 +3227,7 @@ module Aws::MarketplaceDiscovery
     # @!attribute [rw] adjustment_deadline
     #   The duration before the agreement end date by which the renewal
     #   price is finalized, represented in ISO 8601 format (for example,
-    #   P30D). Only applicable with `PercentageRange`.
+    #   P30D). This field applies only with `PercentageRange`.
     #   @return [String]
     #
     # @!attribute [rw] price_increase
@@ -2746,12 +3259,36 @@ module Aws::MarketplaceDiscovery
     #
     # @!attribute [rw] resource_type
     #   The category of the resource, such as manufacturer support or usage
-    #   instructions.
+    #   instructions. This field has one of the following values:
+    #
+    #   MANUFACTURER\_INSTRUCTIONS
+    #
+    #   : Usage instructions from the seller.
+    #
+    #   MANUFACTURER\_SUPPORT
+    #
+    #   : Support information from the seller.
     #   @return [String]
     #
     # @!attribute [rw] content_type
     #   The format of the resource content, such as a URL, email address, or
-    #   text.
+    #   text. This field has one of the following values:
+    #
+    #   EMAIL
+    #
+    #   : An email address.
+    #
+    #   LINK
+    #
+    #   : A URL.
+    #
+    #   OTHER
+    #
+    #   : Text in another format.
+    #
+    #   PHONE\_NUMBER
+    #
+    #   : A phone number.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -2773,7 +3310,8 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # The specified resource doesn't exist.
+    # The specified resource doesn't exist. Verify that the identifier is
+    # correct.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2804,15 +3342,21 @@ module Aws::MarketplaceDiscovery
     #   The machine-readable identifier of the review source. This field has
     #   one of the following values:
     #
-    #   * `AWS_MARKETPLACE` – The reviews come from AWS Marketplace.
+    #   AWS\_MARKETPLACE
     #
-    #   * `G2` – The reviews come from G2.
+    #   : The reviews come from AWS Marketplace.
     #
-    #   * `PEERSPOT` – The reviews come from PeerSpot.
+    #   G2
+    #
+    #   : The reviews come from G2.
+    #
+    #   PEERSPOT
+    #
+    #   : The reviews come from PeerSpot.
     #   @return [String]
     #
     # @!attribute [rw] source_url
-    #   The URL where the reviews can be accessed at the source.
+    #   The URL where you can read the reviews at their source.
     #   @return [String]
     #
     # @!attribute [rw] average_rating
@@ -2851,6 +3395,65 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
+    # Contains a single AWS CloudFormation deployment template for a
+    # Software as a Service (SaaS) product.
+    #
+    # @!attribute [rw] template_name
+    #   The display name of the deployment template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the deployment template.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_stack_name
+    #   The default CloudFormation stack name used when deploying this
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_url
+    #   The URL of the CloudFormation deployment template.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_policy
+    #   The AWS Identity and Access Management (IAM) policy that you need to
+    #   deploy this template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/SaasCloudFormationDeploymentTemplate AWS API Documentation
+    #
+    class SaasCloudFormationDeploymentTemplate < Struct.new(
+      :template_name,
+      :description,
+      :default_stack_name,
+      :template_url,
+      :iam_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a deployment template for a SaaS product. Exactly one member
+    # is set, indicating the deployment template type.
+    #
+    # @note SaasDeploymentTemplate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SaasDeploymentTemplate corresponding to the set member.
+    #
+    # @!attribute [rw] cloud_formation_deployment_template
+    #   An AWS CloudFormation deployment template.
+    #   @return [Types::SaasCloudFormationDeploymentTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/SaasDeploymentTemplate AWS API Documentation
+    #
+    class SaasDeploymentTemplate < Struct.new(
+      :cloud_formation_deployment_template,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CloudFormationDeploymentTemplate < SaasDeploymentTemplate; end
+      class Unknown < SaasDeploymentTemplate; end
+    end
+
     # Describes a Software as a Service (SaaS) fulfillment option.
     #
     # @!attribute [rw] fulfillment_option_id
@@ -2870,7 +3473,7 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] usage_instructions
-    #   Instructions on how to access and use this SaaS product.
+    #   Instructions on how you access and use this SaaS product.
     #   @return [String]
     #
     # @!attribute [rw] available_from_time
@@ -2879,14 +3482,29 @@ module Aws::MarketplaceDiscovery
     #   @return [Time]
     #
     # @!attribute [rw] launch_url
-    #   The URL that a buyer uses to launch the seller's SaaS product. This
-    #   URL is distinct from `fulfillmentUrl`, which is the seller's
-    #   software registration landing page.
+    #   The URL that you use to launch the seller's SaaS product. This URL
+    #   is distinct from `fulfillmentUrl`, which is the seller's software
+    #   registration landing page.
     #   @return [String]
     #
     # @!attribute [rw] quick_launch
-    #   Specifies whether the SaaS product supports quick-launch deployment.
+    #   Specifies whether the SaaS product supports Quick Launch deployment.
+    #   This field has one of the following values:
+    #
+    #   DISABLED
+    #
+    #   : The product does not support Quick Launch.
+    #
+    #   ENABLED
+    #
+    #   : The product supports Quick Launch.
     #   @return [String]
+    #
+    # @!attribute [rw] deployment_templates
+    #   The AWS CloudFormation deployment templates available for this SaaS
+    #   product. The list is empty when no deployment templates are
+    #   available.
+    #   @return [Array<Types::SaasDeploymentTemplate>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/SaasFulfillmentOption AWS API Documentation
     #
@@ -2898,7 +3516,8 @@ module Aws::MarketplaceDiscovery
       :usage_instructions,
       :available_from_time,
       :launch_url,
-      :quick_launch)
+      :quick_launch,
+      :deployment_templates)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2923,8 +3542,8 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] release_notes
-    #   Release notes describing changes in this version of the fulfillment
-    #   option.
+    #   Release notes that describe the changes in this version of the
+    #   fulfillment option.
     #   @return [String]
     #
     # @!attribute [rw] usage_instructions
@@ -2932,7 +3551,7 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] recommendation
-    #   Recommended instance types for training and inference with this
+    #   The recommended instance types for training and inference with this
     #   algorithm.
     #   @return [Types::SageMakerAlgorithmRecommendation]
     #
@@ -2950,15 +3569,17 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Recommended instance types for training and inference with a SageMaker
-    # algorithm.
+    # The recommended instance types for training and inference with a
+    # SageMaker algorithm.
     #
     # @!attribute [rw] recommended_batch_transform_instance_type
-    #   The recommended instance type for batch inference.
+    #   The instance type that the seller recommends for batch transform
+    #   jobs with this algorithm.
     #   @return [String]
     #
     # @!attribute [rw] recommended_realtime_inference_instance_type
-    #   The recommended instance type for real-time inference.
+    #   The instance type that the seller recommends for real-time inference
+    #   endpoints with this algorithm.
     #   @return [String]
     #
     # @!attribute [rw] recommended_training_instance_type
@@ -2995,8 +3616,8 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] release_notes
-    #   Release notes describing changes in this version of the fulfillment
-    #   option.
+    #   Release notes that describe the changes in this version of the
+    #   fulfillment option.
     #   @return [String]
     #
     # @!attribute [rw] usage_instructions
@@ -3004,11 +3625,12 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] recommendation
-    #   Recommended instance types for inference with this model.
+    #   The recommended instance types for inference with this model.
     #   @return [Types::SageMakerModelRecommendation]
     #
     # @!attribute [rw] supported_content_types
-    #   The MIME types that this model accepts as input.
+    #   The Multipurpose Internet Mail Extensions (MIME) types that this
+    #   model accepts as input.
     #   @return [Array<String>]
     #
     # @!attribute [rw] supported_response_mime_types
@@ -3031,14 +3653,16 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Recommended instance types for inference with a SageMaker model.
+    # The recommended instance types for inference with a SageMaker model.
     #
     # @!attribute [rw] recommended_batch_transform_instance_type
-    #   The recommended instance type for batch inference.
+    #   The instance type that the seller recommends for batch transform
+    #   jobs with this model package.
     #   @return [String]
     #
     # @!attribute [rw] recommended_realtime_inference_instance_type
-    #   The recommended instance type for real-time inference.
+    #   The instance type that the seller recommends for real-time inference
+    #   endpoints with this model package.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/SageMakerModelRecommendation AWS API Documentation
@@ -3070,11 +3694,11 @@ module Aws::MarketplaceDiscovery
     end
 
     # @!attribute [rw] locale
-    #   A BCP 47 language tag or comma-separated priority list specifying
-    #   the preferred locale for response content. See `Locale` for
-    #   supported values, constraints, fallback behavior, and the default
-    #   locale. If omitted, the service returns content in the default
-    #   locale.
+    #   The preferred locale for response content, as a Best Current
+    #   Practice 47 (BCP 47) language tag or a comma-separated priority list
+    #   of language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field,
+    #   the service returns content in the default locale.
     #   @return [String]
     #
     # @!attribute [rw] search_text
@@ -3082,19 +3706,23 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   Filters to apply before retrieving facets. Multiple filters are
-    #   combined with AND logic. Multiple values within the same filter are
-    #   combined with OR logic.
+    #   Filters to apply before retrieving facets. A result must match every
+    #   filter. Within one filter, a result matches if it has any of the
+    #   values.
     #   @return [Array<Types::SearchFilter>]
     #
     # @!attribute [rw] facet_types
-    #   A list of specific facet types to retrieve. If empty or null, all
-    #   available facets are returned.
+    #   The facet types to retrieve. If you omit this field or leave it
+    #   empty, the service returns all available facets.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   If `nextToken` is returned, there are more results available. Make
-    #   the call again using the returned token to retrieve the next page.
+    #   If the service returns `nextToken`, more results are available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again with the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. An expired pagination token returns a
+    #   `ValidationException`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/SearchFacetsInput AWS API Documentation
@@ -3120,8 +3748,12 @@ module Aws::MarketplaceDiscovery
     #   @return [Hash<String,Array<Types::ListingFacet>>]
     #
     # @!attribute [rw] next_token
-    #   If `nextToken` is returned, there are more results available. Make
-    #   the call again using the returned token to retrieve the next page.
+    #   If the service returns `nextToken`, more results are available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again with the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. An expired pagination token returns a
+    #   `ValidationException`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/SearchFacetsOutput AWS API Documentation
@@ -3138,13 +3770,95 @@ module Aws::MarketplaceDiscovery
     # pricing model, or fulfillment type.
     #
     # @!attribute [rw] filter_type
-    #   The type of filter to apply.
+    #   The type of filter to apply. See `filterValues` for the supported
+    #   types and their values.
     #   @return [String]
     #
     # @!attribute [rw] filter_values
-    #   The values to filter by. Term filters accept multiple values (OR
-    #   logic). Range filters (MIN/MAX\_AVERAGE\_CUSTOMER\_RATING) accept a
-    #   single value between 0.0 and 5.0.
+    #   The values to filter by. Term filters accept multiple values, and a
+    #   result matches if it has any of them. Range filters accept a single
+    #   value. The supported values for each `filterType` are as follows:
+    #
+    #   CATEGORY
+    #
+    #   : One or more category identifiers. Matches listings in those
+    #     categories.
+    #
+    #   CERTIFICATES
+    #
+    #   : One or more certification identifiers, such as `ISO_27001` or
+    #     `SOC2_TYPE_2`. Matches listings that hold those certifications.
+    #
+    #   DEPLOYED\_ON\_AWS
+    #
+    #   : The single value `DEPLOYED_ON_AWS`. Matches listings whose
+    #     products are deployed on AWS infrastructure.
+    #
+    #   FULFILLMENT\_OPTION\_TYPE
+    #
+    #   : One or more fulfillment option types, such as `SAAS`,
+    #     `AMAZON_MACHINE_IMAGE`, or `CONTAINER`. Matches listings that you
+    #     can deploy or access in those ways.
+    #
+    #   MAX\_AVERAGE\_CUSTOMER\_RATING
+    #
+    #   : A single rating between `0.0` and `5.0`. Matches listings whose
+    #     average customer rating is at or below that value.
+    #
+    #   MIN\_AVERAGE\_CUSTOMER\_RATING
+    #
+    #   : A single rating between `0.0` and `5.0`. Matches listings whose
+    #     average customer rating is at or above that value.
+    #
+    #   NUMBER\_OF\_PRODUCTS
+    #
+    #   : `SINGLE_PRODUCT` or `MULTI_PRODUCT`. Matches single-product
+    #     listings or multi-product solutions.
+    #
+    #   PRICING\_MODEL
+    #
+    #   : One or more of `BYOL`, `CONTRACT`, `FREE`, and `USAGE`. Matches
+    #     listings with offers that use those pricing models.
+    #
+    #   PRICING\_UNIT
+    #
+    #   : One or more pricing units, such as `USERS`, `HOSTS`, or
+    #     `REQUESTS`. Matches listings that bill by those units.
+    #
+    #   PRODUCT\_ID
+    #
+    #   : One or more product identifiers. Matches listings that contain
+    #     those products.
+    #
+    #   PUBLISHER
+    #
+    #   : One or more publisher identifiers. Matches listings from those
+    #     sellers.
+    #
+    #   SELLER\_ENGAGEMENT
+    #
+    #   : One or more `SellerEngagementType` values, such as `BUY_NOW` or
+    #     `REQUEST_FOR_DEMO`. Matches listings that offer those ways to
+    #     engage with the seller.
+    #
+    #   SPECIALIZATION
+    #
+    #   : One or more specialization identifiers. Matches listings that
+    #     earned those specializations.
+    #
+    #   SPECIALIZATION\_CATEGORY
+    #
+    #   : One or more specialization category identifiers. Matches listings
+    #     that earned a category under a specialization.
+    #
+    #   TRUST\_CENTER
+    #
+    #   : The single value `HAS_TRUST_CENTER`. Matches listings that have a
+    #     trust center.
+    #
+    #   Use `SearchFacets` to retrieve the values available for `CATEGORY`,
+    #   `PUBLISHER`, `CERTIFICATES`, `SPECIALIZATION`, and
+    #   `SPECIALIZATION_CATEGORY`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/SearchFilter AWS API Documentation
@@ -3157,11 +3871,11 @@ module Aws::MarketplaceDiscovery
     end
 
     # @!attribute [rw] locale
-    #   A BCP 47 language tag or comma-separated priority list specifying
-    #   the preferred locale for response content. See `Locale` for
-    #   supported values, constraints, fallback behavior, and the default
-    #   locale. If omitted, the service returns content in the default
-    #   locale.
+    #   The preferred locale for response content, as a Best Current
+    #   Practice 47 (BCP 47) language tag or a comma-separated priority list
+    #   of language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field,
+    #   the service returns content in the default locale.
     #   @return [String]
     #
     # @!attribute [rw] search_text
@@ -3169,28 +3883,50 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   Filters to narrow search results. Multiple filters are combined with
-    #   AND logic. Multiple values within the same filter are combined with
-    #   OR logic.
+    #   Filters to narrow search results. A result must match every filter.
+    #   Within one filter, a result matches if it has any of the values.
     #   @return [Array<Types::SearchFilter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned per call. You can
-    #   use `nextToken` to get more results.
+    #   The maximum number of listings to return in each call. If you omit
+    #   this field, the default is 25. Use `nextToken` to retrieve the next
+    #   page.
     #   @return [Integer]
     #
     # @!attribute [rw] sort_by
-    #   The field to sort results by. Valid values are `RELEVANCE` and
-    #   `AVERAGE_CUSTOMER_RATING`.
+    #   The field to sort results by. If you do not specify a value, the
+    #   service sorts by `RELEVANCE`. This field has one of the following
+    #   values:
+    #
+    #   AVERAGE\_CUSTOMER\_RATING
+    #
+    #   : Sorts by average customer rating.
+    #
+    #   RELEVANCE
+    #
+    #   : Sorts by relevance to the search query.
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   The sort direction. Valid values are `DESCENDING` and `ASCENDING`.
+    #   The sort direction. If you do not specify a value, the service sorts
+    #   in `DESCENDING` order. This field has one of the following values:
+    #
+    #   ASCENDING
+    #
+    #   : Sorts from lowest to highest.
+    #
+    #   DESCENDING
+    #
+    #   : Sorts from highest to lowest.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   If `nextToken` is returned, there are more results available. Make
-    #   the call again using the returned token to retrieve the next page.
+    #   If the service returns `nextToken`, more results are available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again with the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. An expired pagination token returns a
+    #   `ValidationException`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/SearchListingsInput AWS API Documentation
@@ -3218,8 +3954,12 @@ module Aws::MarketplaceDiscovery
     #   @return [Array<Types::ListingSummary>]
     #
     # @!attribute [rw] next_token
-    #   If `nextToken` is returned, there are more results available. Make
-    #   the call again using the returned token to retrieve the next page.
+    #   If the service returns `nextToken`, more results are available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again with the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. An expired pagination token returns a
+    #   `ValidationException`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/SearchListingsOutput AWS API Documentation
@@ -3252,12 +3992,32 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # An engagement option available to potential buyers of a product, such
-    # as requesting a private offer or a demo.
+    # A way you can engage with the seller of a product, such as requesting
+    # a private offer or a demo.
     #
     # @!attribute [rw] engagement_type
-    #   The type of engagement, such as `REQUEST_FOR_PRIVATE_OFFER` or
-    #   `REQUEST_FOR_DEMO`.
+    #   The type of engagement. This field has one of the following values:
+    #
+    #   BUY\_NOW
+    #
+    #   : The product is available for immediate purchase.
+    #
+    #   EXPRESS\_PRIVATE\_OFFER
+    #
+    #   : You can request an express private offer and accept it
+    #     immediately.
+    #
+    #   REQUEST\_FOR\_DEMO
+    #
+    #   : You can request a demo from the seller.
+    #
+    #   REQUEST\_FOR\_PRIVATE\_OFFER
+    #
+    #   : You can request a private offer from the seller.
+    #
+    #   TRY\_FOR\_FREE
+    #
+    #   : The product offers a free trial.
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -3298,7 +4058,114 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Defines a support term that includes the refund policy for the offer.
+    # A specialization earned for the listing, such as an AWS Competency.
+    #
+    # @!attribute [rw] specialization_id
+    #   The unique identifier of the specialization.
+    #   @return [String]
+    #
+    # @!attribute [rw] specialization_name
+    #   The name of the specialization displayed to you.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the specialization displayed to you.
+    #   @return [String]
+    #
+    # @!attribute [rw] specialization_types
+    #   The types that categorize this specialization.
+    #   @return [Array<Types::SpecializationTypeDetail>]
+    #
+    # @!attribute [rw] case_study_ids
+    #   The identifiers of the case studies that this specialization cites.
+    #   Retrieve the case studies with the `CASE_STUDY` attribute type.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/Specialization AWS API Documentation
+    #
+    class Specialization < Struct.new(
+      :specialization_id,
+      :specialization_name,
+      :description,
+      :specialization_types,
+      :case_study_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A category under a specialization that the listing earned.
+    #
+    # @!attribute [rw] specialization_category_id
+    #   The unique identifier of the category.
+    #   @return [String]
+    #
+    # @!attribute [rw] specialization_category_name
+    #   The name of the category displayed to you.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_specialization_id
+    #   The identifier of the parent specialization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/SpecializationCategory AWS API Documentation
+    #
+    class SpecializationCategory < Struct.new(
+      :specialization_category_id,
+      :specialization_category_name,
+      :parent_specialization_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A specialization result for a listing. Exactly one member is set: a
+    # specialization or a category under one.
+    #
+    # @note SpecializationDetail is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SpecializationDetail corresponding to the set member.
+    #
+    # @!attribute [rw] specialization
+    #   A specialization earned for the listing.
+    #   @return [Types::Specialization]
+    #
+    # @!attribute [rw] specialization_category
+    #   A category under a specialization that the listing earned.
+    #   @return [Types::SpecializationCategory]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/SpecializationDetail AWS API Documentation
+    #
+    class SpecializationDetail < Struct.new(
+      :specialization,
+      :specialization_category,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Specialization < SpecializationDetail; end
+      class SpecializationCategory < SpecializationDetail; end
+      class Unknown < SpecializationDetail; end
+    end
+
+    # Describes a specialization type with its display information.
+    #
+    # @!attribute [rw] specialization_type
+    #   The specialization type.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The name of the specialization type displayed to you.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/SpecializationTypeDetail AWS API Documentation
+    #
+    class SpecializationTypeDetail < Struct.new(
+      :specialization_type,
+      :display_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a support term that includes the refund policy for the
+    # offer.
     #
     # @!attribute [rw] id
     #   The unique identifier of the term.
@@ -3345,7 +4212,8 @@ module Aws::MarketplaceDiscovery
       class Unknown < TermTemplate; end
     end
 
-    # The request was denied due to request throttling.
+    # The request was denied due to request throttling. Reduce the frequency
+    # of your requests and retry.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3358,8 +4226,249 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Defines a usage-based pricing term (typically pay-as-you-go), where
-    # buyers are charged based on product usage.
+    # A trust center certification associated with a listing.
+    #
+    # @!attribute [rw] certification_type
+    #   The certification type. The set of values is open and can include
+    #   provider-defined certifications.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The authoritative certification name displayed to you.
+    #   @return [String]
+    #
+    # @!attribute [rw] logo_url
+    #   The URL of the certification logo.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/TrustCenterCertificationAttribute AWS API Documentation
+    #
+    class TrustCenterCertificationAttribute < Struct.new(
+      :certification_type,
+      :display_name,
+      :logo_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information for a certification associated with a listing.
+    #
+    # @!attribute [rw] certification_type
+    #   The certification type. The set of values is open and can include
+    #   provider-defined certifications.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The certification name displayed to you.
+    #   @return [String]
+    #
+    # @!attribute [rw] logo_url
+    #   The URL of the certification logo.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/TrustCenterCertificationSummary AWS API Documentation
+    #
+    class TrustCenterCertificationSummary < Struct.new(
+      :certification_type,
+      :display_name,
+      :logo_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A control that a trust center publishes.
+    #
+    # @!attribute [rw] name
+    #   The name of the control.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the control.
+    #   @return [String]
+    #
+    # @!attribute [rw] domains
+    #   The trust center domains to which the control applies.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/TrustCenterControl AWS API Documentation
+    #
+    class TrustCenterControl < Struct.new(
+      :name,
+      :description,
+      :domains)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A trust center document associated with a listing.
+    #
+    # @!attribute [rw] content_type
+    #   The format of the document resource value.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The URL used to download, view, or request access to the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The document name displayed to you.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_area
+    #   The subject area of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_type
+    #   How the document can be accessed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/TrustCenterDocumentAttribute AWS API Documentation
+    #
+    class TrustCenterDocumentAttribute < Struct.new(
+      :content_type,
+      :value,
+      :display_name,
+      :subject_area,
+      :access_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A frequently asked question that a trust center publishes.
+    #
+    # @!attribute [rw] question
+    #   The question.
+    #   @return [String]
+    #
+    # @!attribute [rw] answer
+    #   The answer.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_area
+    #   The subject area of the question.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/TrustCenterFaqAttribute AWS API Documentation
+    #
+    class TrustCenterFaqAttribute < Struct.new(
+      :question,
+      :answer,
+      :subject_area)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A source of trust center information.
+    #
+    # @!attribute [rw] content_type
+    #   The format of the trust center source value.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The URL of the trust center.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The trust center provider name displayed to you.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The provider hosting the trust center.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/TrustCenterSource AWS API Documentation
+    #
+    class TrustCenterSource < Struct.new(
+      :content_type,
+      :value,
+      :display_name,
+      :provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information for a source of trust center information.
+    #
+    # @!attribute [rw] content_type
+    #   The format of the trust center source value.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The URL of the trust center.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The trust center provider name displayed to you.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The provider hosting the trust center.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/TrustCenterSourceSummary AWS API Documentation
+    #
+    class TrustCenterSourceSummary < Struct.new(
+      :content_type,
+      :value,
+      :display_name,
+      :provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of trust center information associated with a listing.
+    #
+    # @!attribute [rw] source_summaries
+    #   Trust center source summaries associated with the listing.
+    #   @return [Array<Types::TrustCenterSourceSummary>]
+    #
+    # @!attribute [rw] certification_summaries
+    #   A subset of certifications associated with the listing, selected by
+    #   importance.
+    #   @return [Array<Types::TrustCenterCertificationSummary>]
+    #
+    # @!attribute [rw] total_certification_count
+    #   The total number of distinct certifications associated with the
+    #   listing, including certifications omitted from
+    #   `certificationSummaries`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/TrustCenterSummary AWS API Documentation
+    #
+    class TrustCenterSummary < Struct.new(
+      :source_summaries,
+      :certification_summaries,
+      :total_certification_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An update that a trust center publishes.
+    #
+    # @!attribute [rw] title
+    #   The update title.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The update description.
+    #   @return [String]
+    #
+    # @!attribute [rw] published_time
+    #   The time when the update was published.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/TrustCenterUpdateAttribute AWS API Documentation
+    #
+    class TrustCenterUpdateAttribute < Struct.new(
+      :title,
+      :description,
+      :published_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a usage-based pricing term, typically pay-as-you-go. You are
+    # charged based on your use of the product.
     #
     # @!attribute [rw] id
     #   The unique identifier of the term.
@@ -3441,14 +4550,78 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
+    # The name and identifier of a use case.
+    #
+    # @!attribute [rw] display_name
+    #   The human-readable name of the use case.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The machine-readable identifier of the use case.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/UseCaseInformation AWS API Documentation
+    #
+    class UseCaseInformation < Struct.new(
+      :display_name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The use cases of a listing, in summary form.
+    #
+    # @!attribute [rw] use_cases
+    #   The use cases, in the order the seller defined them.
+    #   @return [Array<Types::UseCaseSummaryEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/UseCaseSummary AWS API Documentation
+    #
+    class UseCaseSummary < Struct.new(
+      :use_cases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A use case entry, as in `GetListing` without the description.
+    #
+    # @!attribute [rw] use_case
+    #   The name and identifier of the use case.
+    #   @return [Types::UseCaseInformation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/UseCaseSummaryEntry AWS API Documentation
+    #
+    class UseCaseSummaryEntry < Struct.new(
+      :use_case)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input fails to satisfy the constraints specified by the service.
+    # Check the `reason` field for the constraint that failed.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
     # @!attribute [rw] reason
-    #   The reason that the input fails to satisfy the constraints specified
-    #   by the service.
+    #   The reason that the input fails to satisfy the constraints that the
+    #   Discovery API specifies. This field has one of the following values:
+    #
+    #   INVALID\_PAGINATION\_TOKEN
+    #
+    #   : The `nextToken` value is malformed, expired, or belongs to a
+    #     different request. Start the pagination again from the first page.
+    #
+    #   MALFORMED\_REQUEST\_PARAMETERS
+    #
+    #   : One or more request parameters have an invalid value. Correct the
+    #     parameters that you specified, and then resubmit your request.
+    #
+    #   PAGINATION\_LIMIT\_EXCEEDED
+    #
+    #   : The request asks for results beyond the deepest page that the
+    #     operation returns. Narrow your request with filters or a more
+    #     specific search.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/ValidationException AWS API Documentation
@@ -3460,7 +4633,7 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Defines a validity term that specifies the duration or date range of
+    # Describes a validity term that specifies the duration or date range of
     # an agreement.
     #
     # @!attribute [rw] id
@@ -3495,7 +4668,7 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
-    # Defines a variable payment term with a maximum total charge amount.
+    # Describes a variable payment term with a maximum total charge amount.
     #
     # @!attribute [rw] id
     #   The unique identifier of the term.

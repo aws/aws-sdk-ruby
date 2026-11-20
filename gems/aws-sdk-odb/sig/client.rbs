@@ -847,6 +847,19 @@ module Aws
                                           ) -> _ListAutonomousDatabasePeersResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAutonomousDatabasePeersResponseSuccess
 
+      interface _ListAutonomousDatabaseRefreshableClonesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAutonomousDatabaseRefreshableClonesOutput]
+        def next_token: () -> ::String
+        def autonomous_database_refreshable_clones: () -> ::Array[Types::AutonomousDatabaseRefreshableCloneSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#list_autonomous_database_refreshable_clones-instance_method
+      def list_autonomous_database_refreshable_clones: (
+                                                         ?max_results: ::Integer,
+                                                         ?next_token: ::String,
+                                                         autonomous_database_id: ::String
+                                                       ) -> _ListAutonomousDatabaseRefreshableClonesResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAutonomousDatabaseRefreshableClonesResponseSuccess
+
       interface _ListAutonomousDatabaseVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAutonomousDatabaseVersionsOutput]
         def next_token: () -> ::String
@@ -1150,6 +1163,21 @@ module Aws
                                        autonomous_database_id: ::String
                                      ) -> _StartAutonomousDatabaseResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAutonomousDatabaseResponseSuccess
+
+      interface _StartAutonomousDatabaseRefreshResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAutonomousDatabaseRefreshOutput]
+        def autonomous_database_id: () -> ::String
+        def display_name: () -> ::String
+        def status: () -> ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS" | "STOPPING" | "STOPPED" | "STARTING" | "UNAVAILABLE" | "RESTORE_IN_PROGRESS" | "RESTORE_FAILED" | "BACKUP_IN_PROGRESS" | "SCALE_IN_PROGRESS" | "AVAILABLE_NEEDS_ATTENTION" | "RESTARTING" | "RECREATING" | "ROLE_CHANGE_IN_PROGRESS" | "UPGRADING" | "INACCESSIBLE" | "STANDBY")
+        def status_reason: () -> ::String
+        def refreshable_status: () -> ("REFRESHING" | "NOT_REFRESHING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#start_autonomous_database_refresh-instance_method
+      def start_autonomous_database_refresh: (
+                                               autonomous_database_id: ::String,
+                                               ?time_of_refresh_cutoff: ::Time
+                                             ) -> _StartAutonomousDatabaseRefreshResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAutonomousDatabaseRefreshResponseSuccess
 
       interface _StartDbNodeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartDbNodeOutput]

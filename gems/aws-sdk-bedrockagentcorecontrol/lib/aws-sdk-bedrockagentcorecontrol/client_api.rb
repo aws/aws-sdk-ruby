@@ -958,6 +958,7 @@ module Aws::BedrockAgentCoreControl
     MatchPrincipalsAnyOfList = Shapes::ListShape.new(name: 'MatchPrincipalsAnyOfList')
     MatchValueString = Shapes::StringShape.new(name: 'MatchValueString')
     MatchValueStringList = Shapes::ListShape.new(name: 'MatchValueStringList')
+    MaxEventsPerInvocation = Shapes::IntegerShape.new(name: 'MaxEventsPerInvocation')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxTokens = Shapes::IntegerShape.new(name: 'MaxTokens')
     McpDescriptor = Shapes::StructureShape.new(name: 'McpDescriptor')
@@ -1207,7 +1208,9 @@ module Aws::BedrockAgentCoreControl
     ResourceOauth2ReturnUrlType = Shapes::StringShape.new(name: 'ResourceOauth2ReturnUrlType')
     ResourcePolicyBody = Shapes::StringShape.new(name: 'ResourcePolicyBody')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    ResponseInterceptionMode = Shapes::StringShape.new(name: 'ResponseInterceptionMode')
     ResponseListType = Shapes::ListShape.new(name: 'ResponseListType')
+    ResponseStreamingConfiguration = Shapes::StructureShape.new(name: 'ResponseStreamingConfiguration')
     ResponseType = Shapes::StringShape.new(name: 'ResponseType')
     RestApiMethod = Shapes::StringShape.new(name: 'RestApiMethod')
     RestApiMethods = Shapes::ListShape.new(name: 'RestApiMethods')
@@ -3357,6 +3360,8 @@ module Aws::BedrockAgentCoreControl
     GatewayInterceptorConfiguration.add_member(:interceptor, Shapes::ShapeRef.new(shape: InterceptorConfiguration, required: true, location_name: "interceptor"))
     GatewayInterceptorConfiguration.add_member(:interception_points, Shapes::ShapeRef.new(shape: GatewayInterceptionPoints, required: true, location_name: "interceptionPoints"))
     GatewayInterceptorConfiguration.add_member(:input_configuration, Shapes::ShapeRef.new(shape: InterceptorInputConfiguration, location_name: "inputConfiguration"))
+    GatewayInterceptorConfiguration.add_member(:response_interception_mode, Shapes::ShapeRef.new(shape: ResponseInterceptionMode, location_name: "responseInterceptionMode"))
+    GatewayInterceptorConfiguration.add_member(:response_streaming_configuration, Shapes::ShapeRef.new(shape: ResponseStreamingConfiguration, location_name: "responseStreamingConfiguration"))
     GatewayInterceptorConfiguration.struct_class = Types::GatewayInterceptorConfiguration
 
     GatewayInterceptorConfigurations.member = Shapes::ShapeRef.new(shape: GatewayInterceptorConfiguration)
@@ -5726,6 +5731,9 @@ module Aws::BedrockAgentCoreControl
     ResourceOauth2ReturnUrlListType.member = Shapes::ShapeRef.new(shape: ResourceOauth2ReturnUrlType)
 
     ResponseListType.member = Shapes::ShapeRef.new(shape: ResponseType)
+
+    ResponseStreamingConfiguration.add_member(:max_events_per_invocation, Shapes::ShapeRef.new(shape: MaxEventsPerInvocation, location_name: "maxEventsPerInvocation"))
+    ResponseStreamingConfiguration.struct_class = Types::ResponseStreamingConfiguration
 
     RestApiMethods.member = Shapes::ShapeRef.new(shape: RestApiMethod)
 

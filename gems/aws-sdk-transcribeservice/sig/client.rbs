@@ -728,6 +728,56 @@ module Aws
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
 
+      interface _TranscribeAudioResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TranscribeAudioResponse]
+        def output_configuration: () -> Types::SyncOutputConfiguration
+        def transcript_response: () -> Types::TranscriptResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#transcribe_audio-instance_method
+      def transcribe_audio: (
+                              media: {
+                                media_bytes: ::String?,
+                                media_file_uri: ::String?
+                              },
+                              ?language: ("en" | "es" | "fr" | "it" | "de" | "ja" | "pt" | "ko" | "zh-CN" | "zh-TW" | "zh-HK"),
+                              ?language_detection_mode: ("IDENTIFY_LANGUAGE"),
+                              ?language_options: Array[("en" | "es" | "fr" | "it" | "de" | "ja" | "pt" | "ko" | "zh-CN" | "zh-TW" | "zh-HK")],
+                              ?channel_identification: bool,
+                              ?show_speaker_labels: bool,
+                              ?max_speaker_labels: ::Integer,
+                              ?vocabulary_settings: Array[
+                                {
+                                  language: ("en" | "es" | "fr" | "it" | "de" | "ja" | "pt" | "ko" | "zh-CN" | "zh-TW" | "zh-HK"),
+                                  vocabulary_name: ::String?,
+                                  phrases: Array[
+                                    {
+                                      text: ::String,
+                                      display_as: ::String?
+                                    }
+                                  ]?
+                                }
+                              ],
+                              ?vocabulary_filter_settings: {
+                                vocabulary_filter_method: ("remove" | "mask" | "tag"),
+                                filters: Array[
+                                  {
+                                    language: ("en" | "es" | "fr" | "it" | "de" | "ja" | "pt" | "ko" | "zh-CN" | "zh-TW" | "zh-HK"),
+                                    vocabulary_filter_name: ::String?,
+                                    words: Array[::String]?
+                                  }
+                                ]
+                              },
+                              ?content_redaction: {
+                                redaction_type: ("PII"),
+                                redaction_output: ("redacted" | "redacted_and_unredacted"),
+                                pii_entity_types: Array[("BANK_ACCOUNT_NUMBER" | "BANK_ROUTING" | "CREDIT_DEBIT_NUMBER" | "CREDIT_DEBIT_CVV" | "CREDIT_DEBIT_EXPIRY" | "PIN" | "EMAIL" | "ADDRESS" | "NAME" | "PHONE" | "SSN" | "DATE_TIME" | "PASSPORT_NUMBER" | "DRIVER_ID" | "URL" | "AGE" | "USERNAME" | "PASSWORD" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "IP_ADDRESS" | "MAC_ADDRESS" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "ALL")]?
+                              },
+                              ?output_configuration: {
+                                output_media_file_uri: ::String
+                              }
+                            ) -> _TranscribeAudioResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TranscribeAudioResponseSuccess
+
       interface _UntagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
       end

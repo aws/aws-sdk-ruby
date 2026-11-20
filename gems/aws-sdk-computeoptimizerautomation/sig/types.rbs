@@ -17,6 +17,7 @@ module Aws::ComputeOptimizerAutomation
       attr_accessor account_id: ::String
       attr_accessor status: ("Active" | "Inactive" | "Pending" | "Failed")
       attr_accessor organization_rule_mode: ("AnyAllowed" | "NoneAllowed")
+      attr_accessor organization_rule_mode_source: Types::OrganizationRuleModeSource
       attr_accessor status_reason: ::String
       attr_accessor last_updated_timestamp: ::Time
       SENSITIVE: []
@@ -97,6 +98,11 @@ module Aws::ComputeOptimizerAutomation
       SENSITIVE: []
     end
 
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class CreateAutomationRuleRequest
       attr_accessor name: ::String
       attr_accessor description: ::String
@@ -150,6 +156,16 @@ module Aws::ComputeOptimizerAutomation
     end
 
     class DeleteAutomationRuleResponse < Aws::EmptyStructure
+    end
+
+    class DeleteOrganizationEnrollmentConfigurationRequest
+      attr_accessor target: Types::OrganizationTarget
+      attr_accessor configuration_types: ::Array[("OrganizationRuleMode")]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOrganizationEnrollmentConfigurationResponse < Aws::EmptyStructure
     end
 
     class DisassociateAccountsRequest
@@ -259,6 +275,7 @@ module Aws::ComputeOptimizerAutomation
       attr_accessor status_reason: ::String
       attr_accessor organization_rule_mode: ("AnyAllowed" | "NoneAllowed")
       attr_accessor last_updated_timestamp: ::Time
+      attr_accessor organization_enrollment_configuration_status: ("Active" | "Inactive")
       SENSITIVE: []
     end
 
@@ -315,6 +332,7 @@ module Aws::ComputeOptimizerAutomation
 
     class ListAutomationEventSummariesRequest
       attr_accessor filters: ::Array[Types::AutomationEventFilter]
+      attr_accessor organizational_unit_ids: ::Array[::String]
       attr_accessor start_date_inclusive: ::String
       attr_accessor end_date_exclusive: ::String
       attr_accessor max_results: ::Integer
@@ -330,6 +348,7 @@ module Aws::ComputeOptimizerAutomation
 
     class ListAutomationEventsRequest
       attr_accessor filters: ::Array[Types::AutomationEventFilter]
+      attr_accessor organizational_unit_ids: ::Array[::String]
       attr_accessor start_time_inclusive: ::Time
       attr_accessor end_time_exclusive: ::Time
       attr_accessor max_results: ::Integer
@@ -388,8 +407,35 @@ module Aws::ComputeOptimizerAutomation
       SENSITIVE: []
     end
 
+    class ListOrganizationEnrollmentConfigurationsRequest
+      attr_accessor target_type: ("Account" | "OrganizationalUnit")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrganizationEnrollmentConfigurationsResponse
+      attr_accessor organization_enrollment_configurations: ::Array[Types::OrganizationEnrollmentConfiguration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrganizationalUnitsRequest
+      attr_accessor organizational_unit_ids: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrganizationalUnitsResponse
+      attr_accessor organizational_units: ::Array[Types::OrganizationalUnitInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListRecommendedActionSummariesRequest
       attr_accessor filters: ::Array[Types::RecommendedActionFilter]
+      attr_accessor organizational_unit_ids: ::Array[::String]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -403,6 +449,7 @@ module Aws::ComputeOptimizerAutomation
 
     class ListRecommendedActionsRequest
       attr_accessor filters: ::Array[Types::RecommendedActionFilter]
+      attr_accessor organizational_unit_ids: ::Array[::String]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -437,11 +484,52 @@ module Aws::ComputeOptimizerAutomation
     class OrganizationConfiguration
       attr_accessor rule_apply_order: ("BeforeAccountRules" | "AfterAccountRules")
       attr_accessor account_ids: ::Array[::String]
+      attr_accessor organizational_unit_ids: ::Array[::String]
+      attr_accessor excluded_organizational_unit_ids: ::Array[::String]
+      attr_accessor excluded_account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class OrganizationEnrollmentConfiguration
+      attr_accessor target_id: ::String
+      attr_accessor target_type: ("Account" | "OrganizationalUnit")
+      attr_accessor organization_rule_mode: ("AnyAllowed" | "NoneAllowed")
+      SENSITIVE: []
+    end
+
+    class OrganizationRuleModeSource
+      attr_accessor source_type: ("Applied" | "Inherited" | "Direct" | "Default")
+      attr_accessor source_target_id: ::String
       SENSITIVE: []
     end
 
     class OrganizationScope
       attr_accessor account_ids: ::Array[::String]
+      attr_accessor organizational_unit_ids: ::Array[::String]
+      attr_accessor excluded_organizational_unit_ids: ::Array[::String]
+      attr_accessor excluded_account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class OrganizationTarget
+      attr_accessor account_id: ::String
+      attr_accessor organizational_unit_id: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AccountId < OrganizationTarget
+      end
+      class OrganizationalUnitId < OrganizationTarget
+      end
+      class Unknown < OrganizationTarget
+      end
+    end
+
+    class OrganizationalUnitInfo
+      attr_accessor organizational_unit_id: ::String
+      attr_accessor auto_enroll_member_accounts: ("All" | "None")
+      attr_accessor organization_rule_mode: ("AnyAllowed" | "NoneAllowed")
+      attr_accessor organization_rule_mode_source: Types::OrganizationRuleModeSource
       SENSITIVE: []
     end
 
@@ -468,6 +556,16 @@ module Aws::ComputeOptimizerAutomation
       attr_accessor key: ::String
       attr_accessor total: Types::RulePreviewTotal
       SENSITIVE: []
+    end
+
+    class PutOrganizationEnrollmentConfigurationRequest
+      attr_accessor target: Types::OrganizationTarget
+      attr_accessor organization_rule_mode: ("AnyAllowed" | "NoneAllowed")
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class PutOrganizationEnrollmentConfigurationResponse < Aws::EmptyStructure
     end
 
     class RecommendedAction

@@ -376,6 +376,7 @@ module Aws::MediaLive
     EmbeddedConvert608To708 = Shapes::StringShape.new(name: 'EmbeddedConvert608To708')
     EmbeddedDestinationSettings = Shapes::StructureShape.new(name: 'EmbeddedDestinationSettings')
     EmbeddedDestinationStyleControl = Shapes::StringShape.new(name: 'EmbeddedDestinationStyleControl')
+    EmbeddedModeType = Shapes::StringShape.new(name: 'EmbeddedModeType')
     EmbeddedPlusScte20DestinationSettings = Shapes::StructureShape.new(name: 'EmbeddedPlusScte20DestinationSettings')
     EmbeddedScte20Detection = Shapes::StringShape.new(name: 'EmbeddedScte20Detection')
     EmbeddedSourceSettings = Shapes::StructureShape.new(name: 'EmbeddedSourceSettings')
@@ -1115,6 +1116,7 @@ module Aws::MediaLive
     WavSettings = Shapes::StructureShape.new(name: 'WavSettings')
     WebvttDestinationSettings = Shapes::StructureShape.new(name: 'WebvttDestinationSettings')
     WebvttDestinationStyleControl = Shapes::StringShape.new(name: 'WebvttDestinationStyleControl')
+    WebvttSourceSettings = Shapes::StructureShape.new(name: 'WebvttSourceSettings')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __doubleMin0 = Shapes::FloatShape.new(name: '__doubleMin0')
@@ -1179,6 +1181,7 @@ module Aws::MediaLive
     __integerMin1Max51 = Shapes::IntegerShape.new(name: '__integerMin1Max51')
     __integerMin1Max511 = Shapes::IntegerShape.new(name: '__integerMin1Max511')
     __integerMin1Max6 = Shapes::IntegerShape.new(name: '__integerMin1Max6')
+    __integerMin1Max63 = Shapes::IntegerShape.new(name: '__integerMin1Max63')
     __integerMin1Max65535 = Shapes::IntegerShape.new(name: '__integerMin1Max65535')
     __integerMin1Max8 = Shapes::IntegerShape.new(name: '__integerMin1Max8')
     __integerMin1Max800 = Shapes::IntegerShape.new(name: '__integerMin1Max800')
@@ -1757,6 +1760,7 @@ module Aws::MediaLive
     CaptionSelectorSettings.add_member(:scte_27_source_settings, Shapes::ShapeRef.new(shape: Scte27SourceSettings, location_name: "scte27SourceSettings"))
     CaptionSelectorSettings.add_member(:teletext_source_settings, Shapes::ShapeRef.new(shape: TeletextSourceSettings, location_name: "teletextSourceSettings"))
     CaptionSelectorSettings.add_member(:smart_subtitle_source_settings, Shapes::ShapeRef.new(shape: SmartSubtitleSourceSettings, location_name: "smartSubtitleSourceSettings"))
+    CaptionSelectorSettings.add_member(:webvtt_source_settings, Shapes::ShapeRef.new(shape: WebvttSourceSettings, location_name: "webvttSourceSettings"))
     CaptionSelectorSettings.struct_class = Types::CaptionSelectorSettings
 
     CdiInputSpecification.add_member(:resolution, Shapes::ShapeRef.new(shape: CdiInputResolution, location_name: "resolution"))
@@ -3057,6 +3061,8 @@ module Aws::MediaLive
 
     EmbeddedDestinationSettings.add_member(:position, Shapes::ShapeRef.new(shape: EmbeddedCaptionPositionSettings, location_name: "position"))
     EmbeddedDestinationSettings.add_member(:style_control, Shapes::ShapeRef.new(shape: EmbeddedDestinationStyleControl, location_name: "styleControl"))
+    EmbeddedDestinationSettings.add_member(:caption_service_channel, Shapes::ShapeRef.new(shape: __integerMin1Max63, location_name: "captionServiceChannel"))
+    EmbeddedDestinationSettings.add_member(:embedded_mode, Shapes::ShapeRef.new(shape: EmbeddedModeType, location_name: "embeddedMode"))
     EmbeddedDestinationSettings.struct_class = Types::EmbeddedDestinationSettings
 
     EmbeddedPlusScte20DestinationSettings.struct_class = Types::EmbeddedPlusScte20DestinationSettings
@@ -6104,6 +6110,10 @@ module Aws::MediaLive
     WebvttDestinationSettings.add_member(:style_control, Shapes::ShapeRef.new(shape: WebvttDestinationStyleControl, location_name: "styleControl"))
     WebvttDestinationSettings.add_member(:position, Shapes::ShapeRef.new(shape: TextCaptionPositionSettings, location_name: "position"))
     WebvttDestinationSettings.struct_class = Types::WebvttDestinationSettings
+
+    WebvttSourceSettings.add_member(:group_id, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "groupId"))
+    WebvttSourceSettings.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "name"))
+    WebvttSourceSettings.struct_class = Types::WebvttSourceSettings
 
     __listOfAdditionalDestinations.member = Shapes::ShapeRef.new(shape: AdditionalDestinations)
 

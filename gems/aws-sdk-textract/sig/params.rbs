@@ -17,6 +17,49 @@ module Aws
       }?
     }
 
+      type output_format = {
+      additional_file_format: {
+        state: ("ENABLED" | "DISABLED")
+      },
+      text_format: {
+        types: Array[("PLAIN_TEXT" | "MARKDOWN" | "HTML" | "CSV")]?
+      }
+    }
+
+      type extraction_configuration = {
+      bounding_box: {
+        state: ("ENABLED" | "DISABLED")
+      },
+      granularity: {
+        types: Array[("DOCUMENT" | "PAGE" | "ELEMENT" | "WORD" | "LINE")]?
+      },
+      output_format: Params::output_format
+    }
+
+      type generative_configuration = {
+      summarization: {
+        state: ("ENABLED" | "DISABLED")
+      }?,
+      figure_caption: {
+        state: ("ENABLED" | "DISABLED")
+      }?
+    }
+
+      type custom_configuration = {
+      blueprints: Array[
+        {
+          blueprint_arn: ::String,
+          blueprint_version: ::String?
+        }
+      ],
+      fallback_blueprints: Array[
+        {
+          blueprint_arn: ::String,
+          blueprint_version: ::String?
+        }
+      ]?
+    }
+
     end
   end
 end

@@ -272,6 +272,14 @@ module Aws::DeviceFarm
     #
     # @!attribute [rw] rules
     #   The device pool's rules.
+    #
+    #   <note markdown="1"> A device pool contains either physical devices or virtual devices,
+    #   but not both. If you define the pool with attribute rules and those
+    #   rules do not include a `DEVICE_TYPE` rule, the pool contains only
+    #   physical devices. If you define the pool by listing device ARNs, the
+    #   pool contains the devices you list.
+    #
+    #    </note>
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] max_devices
@@ -1066,7 +1074,7 @@ module Aws::DeviceFarm
     #
     class DeleteVPCEConfigurationResult < Aws::EmptyStructure; end
 
-    # Represents a device type that an app is tested against.
+    # Represents a device that an app is tested against.
     #
     # @!attribute [rw] arn
     #   The device's ARN.
@@ -1106,6 +1114,23 @@ module Aws::DeviceFarm
     #   * ANDROID
     #
     #   * IOS
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The device type.
+    #
+    #   Allowed values include:
+    #
+    #   * PHYSICAL: A physical device.
+    #
+    #   * VIRTUAL: An emulator or simulator hosted by Device Farm.
+    #
+    #   <note markdown="1"> For iOS, a virtual device requires a simulator build of your app,
+    #   and a physical device requires a device build. If the app does not
+    #   match the device type, the device is reported as incompatible with a
+    #   `DEVICE_TYPE` incompatibility message.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] os
@@ -1184,6 +1209,7 @@ module Aws::DeviceFarm
       :model_id,
       :form_factor,
       :platform,
+      :type,
       :os,
       :cpu,
       :resolution,
@@ -1257,6 +1283,12 @@ module Aws::DeviceFarm
     #
     #     Supported operators: `EQUALS`
     #
+    #   DEVICE\_TYPE
+    #
+    #   : The device type. Valid values are PHYSICAL or VIRTUAL.
+    #
+    #     Supported operators: `EQUALS`
+    #
     #   MANUFACTURER
     #
     #   : The device manufacturer (for example, Apple).
@@ -1326,6 +1358,8 @@ module Aws::DeviceFarm
     #     HIGHLY\_AVAILABLE, BUSY, or TEMPORARY\_NOT\_AVAILABLE.
     #
     #   * The FORM\_FACTOR attribute can be set to PHONE or TABLET.
+    #
+    #   * The DEVICE\_TYPE attribute can be set to PHYSICAL or VIRTUAL.
     #
     #   * The FLEET\_TYPE attribute can be set to PUBLIC or PRIVATE.
     #   @return [Array<String>]
@@ -1436,6 +1470,14 @@ module Aws::DeviceFarm
     #
     # @!attribute [rw] rules
     #   Information about the device pool's rules.
+    #
+    #   <note markdown="1"> A device pool contains either physical devices or virtual devices,
+    #   but not both. If you define the pool with attribute rules and those
+    #   rules do not include a `DEVICE_TYPE` rule, the pool contains only
+    #   physical devices. If you define the pool by listing device ARNs, the
+    #   pool contains the devices you list.
+    #
+    #    </note>
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] max_devices
@@ -1537,6 +1579,9 @@ module Aws::DeviceFarm
     #     * FORM\_FACTOR: The device form factor. Valid values are PHONE or
     #       TABLET.
     #
+    #     * DEVICE\_TYPE: The device type. Valid values are PHYSICAL or
+    #       VIRTUAL.
+    #
     #     * MANUFACTURER: The device manufacturer (for example, Apple).
     #
     #     * REMOTE\_ACCESS\_ENABLED: Whether the device is enabled for
@@ -1587,7 +1632,15 @@ module Aws::DeviceFarm
     #
     #     * The FORM\_FACTOR attribute can be set to PHONE or TABLET.
     #
+    #     * The DEVICE\_TYPE attribute can be set to PHYSICAL or VIRTUAL.
+    #
     #     * The FLEET\_TYPE attribute can be set to PUBLIC or PRIVATE.
+    #
+    #   <note markdown="1"> If the filters select devices by attribute and do not include a
+    #   `DEVICE_TYPE` filter, only physical devices are selected. If the
+    #   filters select devices by ARN, the run uses the devices you list.
+    #
+    #    </note>
     #
     #
     #
@@ -2301,6 +2354,8 @@ module Aws::DeviceFarm
     #
     #   * ARN
     #
+    #   * DEVICE\_TYPE (for example, physical or virtual)
+    #
     #   * FORM\_FACTOR (for example, phone or tablet)
     #
     #   * MANUFACTURER
@@ -2894,6 +2949,9 @@ module Aws::DeviceFarm
     #
     #     * FORM\_FACTOR: The device form factor. Valid values are PHONE or
     #       TABLET.
+    #
+    #     * DEVICE\_TYPE: The device type. Valid values are PHYSICAL or
+    #       VIRTUAL.
     #
     #     * MANUFACTURER: The device manufacturer (for example, Apple).
     #
@@ -4648,6 +4706,12 @@ module Aws::DeviceFarm
     #
     #     Supported operators: `EQUALS`
     #
+    #   DEVICE\_TYPE
+    #
+    #   : The device type. Valid values are PHYSICAL or VIRTUAL.
+    #
+    #     Supported operators: `EQUALS`
+    #
     #   FLEET\_TYPE
     #
     #   : The fleet type. Valid values are PUBLIC or PRIVATE.
@@ -5251,6 +5315,12 @@ module Aws::DeviceFarm
     #   Either <b> <code>devicePoolArn</code> </b> or <b>
     #   <code>deviceSelectionConfiguration</code> </b> is required in a
     #   request.
+    #
+    #   <note markdown="1"> If the filters select devices by attribute and do not include a
+    #   `DEVICE_TYPE` filter, only physical devices are selected. If the
+    #   filters select devices by ARN, the run uses the devices you list.
+    #
+    #    </note>
     #   @return [Types::DeviceSelectionConfiguration]
     #
     # @!attribute [rw] name
@@ -6230,6 +6300,14 @@ module Aws::DeviceFarm
     #   Represents the rules to modify for the device pool. Updating rules
     #   is optional. If you update rules for your request, the update
     #   replaces the existing rules.
+    #
+    #   <note markdown="1"> A device pool contains either physical devices or virtual devices,
+    #   but not both. If you define the pool with attribute rules and those
+    #   rules do not include a `DEVICE_TYPE` rule, the pool contains only
+    #   physical devices. If you define the pool by listing device ARNs, the
+    #   pool contains the devices you list.
+    #
+    #    </note>
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] max_devices

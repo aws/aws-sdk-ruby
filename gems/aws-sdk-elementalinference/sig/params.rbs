@@ -9,7 +9,7 @@ module Aws
   module ElementalInference
     module Params
       type subtitling_config = {
-      language: ("eng" | "eng-au" | "eng-gb" | "eng-us" | "fra" | "ita" | "deu" | "spa" | "por"),
+      language: ("eng" | "eng-au" | "eng-gb" | "eng-us" | "fra" | "ita" | "deu" | "spa" | "por" | "ara"),
       aspect_ratio: {
         width: ::Integer,
         height: ::Integer

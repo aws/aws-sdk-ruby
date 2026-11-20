@@ -737,10 +737,12 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.ip_address_type #=> String, one of "ipv4", "ipv6", "dualstack"
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_mtls_config.client_certificate_arn #=> String
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.vpc_origin_id #=> String
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.owner_account_id #=> String
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].response_completion_timeout #=> Integer
@@ -1440,12 +1442,14 @@ module Aws::CloudFront
     #               origin_mtls_config: {
     #                 client_certificate_arn: "string", # required
     #               },
+    #               origin_http_version: "http1.1", # accepts http1.1, http2
     #             },
     #             vpc_origin_config: {
     #               vpc_origin_id: "string", # required
     #               owner_account_id: "string",
     #               origin_read_timeout: 1,
     #               origin_keepalive_timeout: 1,
+    #               origin_http_version: "http1.1", # accepts http1.1, http2
     #             },
     #             connection_attempts: 1,
     #             connection_timeout: 1,
@@ -1753,10 +1757,12 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.ip_address_type #=> String, one of "ipv4", "ipv6", "dualstack"
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_mtls_config.client_certificate_arn #=> String
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.vpc_origin_id #=> String
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.owner_account_id #=> String
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].response_completion_timeout #=> Integer
@@ -2140,12 +2146,14 @@ module Aws::CloudFront
     #                 origin_mtls_config: {
     #                   client_certificate_arn: "string", # required
     #                 },
+    #                 origin_http_version: "http1.1", # accepts http1.1, http2
     #               },
     #               vpc_origin_config: {
     #                 vpc_origin_id: "string", # required
     #                 owner_account_id: "string",
     #                 origin_read_timeout: 1,
     #                 origin_keepalive_timeout: 1,
+    #                 origin_http_version: "http1.1", # accepts http1.1, http2
     #               },
     #               connection_attempts: 1,
     #               connection_timeout: 1,
@@ -2462,10 +2470,12 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.ip_address_type #=> String, one of "ipv4", "ipv6", "dualstack"
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_mtls_config.client_certificate_arn #=> String
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.vpc_origin_id #=> String
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.owner_account_id #=> String
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].response_completion_timeout #=> Integer
@@ -5572,10 +5582,12 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.ip_address_type #=> String, one of "ipv4", "ipv6", "dualstack"
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_mtls_config.client_certificate_arn #=> String
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.vpc_origin_id #=> String
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.owner_account_id #=> String
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].response_completion_timeout #=> Integer
@@ -5795,10 +5807,12 @@ module Aws::CloudFront
     #   resp.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_config.origins.items[0].custom_origin_config.ip_address_type #=> String, one of "ipv4", "ipv6", "dualstack"
     #   resp.distribution_config.origins.items[0].custom_origin_config.origin_mtls_config.client_certificate_arn #=> String
+    #   resp.distribution_config.origins.items[0].custom_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_config.origins.items[0].vpc_origin_config.vpc_origin_id #=> String
     #   resp.distribution_config.origins.items[0].vpc_origin_config.owner_account_id #=> String
     #   resp.distribution_config.origins.items[0].vpc_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution_config.origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution_config.origins.items[0].vpc_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_config.origins.items[0].connection_timeout #=> Integer
     #   resp.distribution_config.origins.items[0].response_completion_timeout #=> Integer
@@ -7892,10 +7906,12 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.ip_address_type #=> String, one of "ipv4", "ipv6", "dualstack"
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_mtls_config.client_certificate_arn #=> String
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.vpc_origin_id #=> String
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.owner_account_id #=> String
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].response_completion_timeout #=> Integer
@@ -8119,10 +8135,12 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.ip_address_type #=> String, one of "ipv4", "ipv6", "dualstack"
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_mtls_config.client_certificate_arn #=> String
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.vpc_origin_id #=> String
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.owner_account_id #=> String
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].response_completion_timeout #=> Integer
@@ -8402,10 +8420,12 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.ip_address_type #=> String, one of "ipv4", "ipv6", "dualstack"
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_mtls_config.client_certificate_arn #=> String
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.vpc_origin_id #=> String
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.owner_account_id #=> String
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].response_completion_timeout #=> Integer
@@ -8628,10 +8648,12 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.ip_address_type #=> String, one of "ipv4", "ipv6", "dualstack"
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_mtls_config.client_certificate_arn #=> String
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.vpc_origin_id #=> String
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.owner_account_id #=> String
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].response_completion_timeout #=> Integer
@@ -9032,10 +9054,12 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.ip_address_type #=> String, one of "ipv4", "ipv6", "dualstack"
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_mtls_config.client_certificate_arn #=> String
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.vpc_origin_id #=> String
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.owner_account_id #=> String
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].response_completion_timeout #=> Integer
@@ -9317,10 +9341,12 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.ip_address_type #=> String, one of "ipv4", "ipv6", "dualstack"
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_mtls_config.client_certificate_arn #=> String
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.vpc_origin_id #=> String
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.owner_account_id #=> String
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].response_completion_timeout #=> Integer
@@ -9617,10 +9643,12 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.ip_address_type #=> String, one of "ipv4", "ipv6", "dualstack"
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_mtls_config.client_certificate_arn #=> String
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.vpc_origin_id #=> String
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.owner_account_id #=> String
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].response_completion_timeout #=> Integer
@@ -11730,12 +11758,14 @@ module Aws::CloudFront
     #               origin_mtls_config: {
     #                 client_certificate_arn: "string", # required
     #               },
+    #               origin_http_version: "http1.1", # accepts http1.1, http2
     #             },
     #             vpc_origin_config: {
     #               vpc_origin_id: "string", # required
     #               owner_account_id: "string",
     #               origin_read_timeout: 1,
     #               origin_keepalive_timeout: 1,
+    #               origin_http_version: "http1.1", # accepts http1.1, http2
     #             },
     #             connection_attempts: 1,
     #             connection_timeout: 1,
@@ -12045,10 +12075,12 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.ip_address_type #=> String, one of "ipv4", "ipv6", "dualstack"
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_mtls_config.client_certificate_arn #=> String
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.vpc_origin_id #=> String
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.owner_account_id #=> String
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].response_completion_timeout #=> Integer
@@ -12459,10 +12491,12 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.ip_address_type #=> String, one of "ipv4", "ipv6", "dualstack"
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_mtls_config.client_certificate_arn #=> String
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.vpc_origin_id #=> String
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.owner_account_id #=> String
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].response_completion_timeout #=> Integer
@@ -13885,7 +13919,7 @@ module Aws::CloudFront
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.170.0'
+      context[:gem_version] = '1.171.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

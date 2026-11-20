@@ -516,9 +516,9 @@ module Aws::Glue
     #
     # @return [Types::AssociateGlossaryTermsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::AssociateGlossaryTermsResponse#asset_identifier #asset_identifier} => String
+    #   * {Types::AssociateGlossaryTermsResponse#asset_id #asset_id} => String
     #   * {Types::AssociateGlossaryTermsResponse#iterable_form_name #iterable_form_name} => String
-    #   * {Types::AssociateGlossaryTermsResponse#item_identifier #item_identifier} => String
+    #   * {Types::AssociateGlossaryTermsResponse#item_id #item_id} => String
     #   * {Types::AssociateGlossaryTermsResponse#glossary_terms #glossary_terms} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
@@ -533,9 +533,9 @@ module Aws::Glue
     #
     # @example Response structure
     #
-    #   resp.asset_identifier #=> String
+    #   resp.asset_id #=> String
     #   resp.iterable_form_name #=> String
-    #   resp.item_identifier #=> String
+    #   resp.item_id #=> String
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
     #
@@ -3588,8 +3588,8 @@ module Aws::Glue
     #   resp = client.create_glossary_term({
     #     glossary_identifier: "GlossaryId", # required
     #     name: "GlossaryTermName", # required
-    #     short_description: "GlossaryShortDescription",
-    #     long_description: "GlossaryLongDescription",
+    #     short_description: "GlossaryTermShortDescription",
+    #     long_description: "GlossaryTermLongDescription",
     #     client_token: "HashString",
     #   })
     #
@@ -5719,28 +5719,6 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Deletes an asset type from Glue Data Catalog.
-    #
-    # @option params [required, String] :identifier
-    #   The identifier of the asset type to delete.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.delete_asset_type({
-    #     identifier: "AssetTypeId", # required
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteAssetType AWS API Documentation
-    #
-    # @overload delete_asset_type(params = {})
-    # @param [Hash] params ({})
-    def delete_asset_type(params = {}, options = {})
-      req = build_request(:delete_asset_type, params)
-      req.send_request(options)
-    end
-
     # Deletes a form attachment from an asset in Glue Data Catalog.
     #
     # @option params [required, String] :asset_identifier
@@ -5761,9 +5739,9 @@ module Aws::Glue
     #
     # @return [Types::DeleteAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DeleteAttachmentResponse#asset_identifier #asset_identifier} => String
+    #   * {Types::DeleteAttachmentResponse#asset_id #asset_id} => String
     #   * {Types::DeleteAttachmentResponse#iterable_form_name #iterable_form_name} => String
-    #   * {Types::DeleteAttachmentResponse#item_identifier #item_identifier} => String
+    #   * {Types::DeleteAttachmentResponse#item_id #item_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -5776,9 +5754,9 @@ module Aws::Glue
     #
     # @example Response structure
     #
-    #   resp.asset_identifier #=> String
+    #   resp.asset_id #=> String
     #   resp.iterable_form_name #=> String
-    #   resp.item_identifier #=> String
+    #   resp.item_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteAttachment AWS API Documentation
     #
@@ -7600,9 +7578,9 @@ module Aws::Glue
     #
     # @return [Types::DisassociateGlossaryTermsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DisassociateGlossaryTermsResponse#asset_identifier #asset_identifier} => String
+    #   * {Types::DisassociateGlossaryTermsResponse#asset_id #asset_id} => String
     #   * {Types::DisassociateGlossaryTermsResponse#iterable_form_name #iterable_form_name} => String
-    #   * {Types::DisassociateGlossaryTermsResponse#item_identifier #item_identifier} => String
+    #   * {Types::DisassociateGlossaryTermsResponse#item_id #item_id} => String
     #   * {Types::DisassociateGlossaryTermsResponse#glossary_terms #glossary_terms} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
@@ -7617,9 +7595,9 @@ module Aws::Glue
     #
     # @example Response structure
     #
-    #   resp.asset_identifier #=> String
+    #   resp.asset_id #=> String
     #   resp.iterable_form_name #=> String
-    #   resp.item_identifier #=> String
+    #   resp.item_id #=> String
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
     #
@@ -7694,7 +7672,7 @@ module Aws::Glue
     #
     #   * {Types::GetAssetTypeResponse#id #id} => String
     #   * {Types::GetAssetTypeResponse#name #name} => String
-    #   * {Types::GetAssetTypeResponse#forms #forms} => Hash&lt;String,Types::AssetTypeFormReference&gt;
+    #   * {Types::GetAssetTypeResponse#forms #forms} => Hash&lt;String,Types::AssetTypeFormOutput&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -7707,7 +7685,7 @@ module Aws::Glue
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.forms #=> Hash
-    #   resp.forms["AssetTypeFormKey"].form_type_identifier #=> String
+    #   resp.forms["AssetTypeFormKey"].form_type_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetAssetType AWS API Documentation
     #
@@ -9083,22 +9061,20 @@ module Aws::Glue
     #
     # @return [Types::GetDataCatalogExportConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetDataCatalogExportConfigurationOutput#export_setting #export_setting} => String
-    #   * {Types::GetDataCatalogExportConfigurationOutput#status #status} => String
-    #   * {Types::GetDataCatalogExportConfigurationOutput#encryption_configuration #encryption_configuration} => Types::ExportEncryptionConfiguration
-    #   * {Types::GetDataCatalogExportConfigurationOutput#s3_table_bucket_arn #s3_table_bucket_arn} => String
     #   * {Types::GetDataCatalogExportConfigurationOutput#created_at #created_at} => Time
     #   * {Types::GetDataCatalogExportConfigurationOutput#updated_at #updated_at} => Time
+    #   * {Types::GetDataCatalogExportConfigurationOutput#s3_tables_configuration #s3_tables_configuration} => Types::S3TablesConfigurationResult
+    #   * {Types::GetDataCatalogExportConfigurationOutput#assets #assets} => Types::AssetsExportResult
     #
     # @example Response structure
     #
-    #   resp.export_setting #=> String, one of "ENABLED", "DISABLED"
-    #   resp.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "FAILED"
-    #   resp.encryption_configuration.sse_algorithm #=> String
-    #   resp.encryption_configuration.kms_key_arn #=> String
-    #   resp.s3_table_bucket_arn #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
+    #   resp.s3_tables_configuration.table_bucket_arn #=> String
+    #   resp.s3_tables_configuration.encryption_configuration.sse_algorithm #=> String
+    #   resp.s3_tables_configuration.encryption_configuration.kms_key_arn #=> String
+    #   resp.assets.s3_tables_export #=> String, one of "ENABLED", "DISABLED"
+    #   resp.assets.s3_tables_export_state.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataCatalogExportConfiguration AWS API Documentation
     #
@@ -17058,8 +17034,9 @@ module Aws::Glue
     # Creates or updates an asset in Glue Data Catalog. If the asset already
     # exists, this operation updates it; otherwise, a new asset is created.
     #
-    # @option params [required, String] :asset_type_id
-    #   The identifier of the asset type for the asset.
+    # @option params [String] :asset_type_identifier
+    #   The identifier of the asset type for the asset. This field is
+    #   required.
     #
     # @option params [required, String] :identifier
     #   The unique identifier of the asset. If an asset with this identifier
@@ -17071,7 +17048,7 @@ module Aws::Glue
     # @option params [String] :description
     #   The description of the asset.
     #
-    # @option params [required, Hash<String,Types::AssetFormEntry>] :forms
+    # @option params [required, Hash<String,Types::AssetFormInput>] :forms
     #   The forms to set on the asset, keyed by form name. Each entry
     #   specifies the form type and its JSON content.
     #
@@ -17087,19 +17064,20 @@ module Aws::Glue
     #   * {Types::PutAssetResponse#id #id} => String
     #   * {Types::PutAssetResponse#name #name} => String
     #   * {Types::PutAssetResponse#description #description} => String
+    #   * {Types::PutAssetResponse#asset_type_id #asset_type_id} => String
     #   * {Types::PutAssetResponse#created_at #created_at} => Time
     #   * {Types::PutAssetResponse#forms #forms} => Hash&lt;String,Types::AssetFormEntry&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_asset({
-    #     asset_type_id: "AssetTypeId", # required
+    #     asset_type_identifier: "AssetTypeId",
     #     identifier: "AssetId", # required
     #     name: "AssetName", # required
     #     description: "AssetDescription",
     #     forms: { # required
     #       "AssetFormKey" => {
-    #         form_type_id: "FormTypeId",
+    #         form_type_identifier: "FormTypeId",
     #         content: "FormContent",
     #       },
     #     },
@@ -17111,6 +17089,7 @@ module Aws::Glue
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.description #=> String
+    #   resp.asset_type_id #=> String
     #   resp.created_at #=> Time
     #   resp.forms #=> Hash
     #   resp.forms["AssetFormKey"].form_type_id #=> String
@@ -17122,59 +17101,6 @@ module Aws::Glue
     # @param [Hash] params ({})
     def put_asset(params = {}, options = {})
       req = build_request(:put_asset, params)
-      req.send_request(options)
-    end
-
-    # Creates or updates an asset type in Glue Data Catalog. An asset type
-    # defines the structure of assets by specifying which forms they
-    # include. If an asset type with the given name already exists, it is
-    # updated.
-    #
-    # @option params [required, String] :name
-    #   The name of the asset type.
-    #
-    # @option params [required, Hash<String,Types::AssetTypeFormReference>] :forms
-    #   The forms that make up the asset type, keyed by form name. Each entry
-    #   references the form type that defines the form's schema.
-    #
-    # @option params [String] :client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
-    # @return [Types::PutAssetTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::PutAssetTypeResponse#id #id} => String
-    #   * {Types::PutAssetTypeResponse#name #name} => String
-    #   * {Types::PutAssetTypeResponse#forms #forms} => Hash&lt;String,Types::AssetTypeFormReference&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.put_asset_type({
-    #     name: "AssetTypeName", # required
-    #     forms: { # required
-    #       "AssetTypeFormKey" => {
-    #         form_type_identifier: "FormTypeId", # required
-    #       },
-    #     },
-    #     client_token: "HashString",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.id #=> String
-    #   resp.name #=> String
-    #   resp.forms #=> Hash
-    #   resp.forms["AssetTypeFormKey"].form_type_identifier #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutAssetType AWS API Documentation
-    #
-    # @overload put_asset_type(params = {})
-    # @param [Hash] params ({})
-    def put_asset_type(params = {}, options = {})
-      req = build_request(:put_asset_type, params)
       req.send_request(options)
     end
 
@@ -17201,8 +17127,9 @@ module Aws::Glue
     #   The JSON content of the form, conforming to the schema of the
     #   specified form type.
     #
-    # @option params [required, String] :form_type_id
-    #   The identifier of the form type for this attachment.
+    # @option params [String] :form_type_identifier
+    #   The identifier of the form type for this attachment. This field is
+    #   required.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -17213,9 +17140,9 @@ module Aws::Glue
     #
     # @return [Types::PutAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::PutAttachmentResponse#asset_identifier #asset_identifier} => String
+    #   * {Types::PutAttachmentResponse#asset_id #asset_id} => String
     #   * {Types::PutAttachmentResponse#iterable_form_name #iterable_form_name} => String
-    #   * {Types::PutAttachmentResponse#item_identifier #item_identifier} => String
+    #   * {Types::PutAttachmentResponse#item_id #item_id} => String
     #   * {Types::PutAttachmentResponse#attachment_name #attachment_name} => String
     #   * {Types::PutAttachmentResponse#form_type_id #form_type_id} => String
     #
@@ -17227,15 +17154,15 @@ module Aws::Glue
     #     item_identifier: "ItemIdentifier",
     #     attachment_name: "AttachmentName", # required
     #     content: "FormContent", # required
-    #     form_type_id: "FormTypeId", # required
+    #     form_type_identifier: "FormTypeId",
     #     client_token: "HashString",
     #   })
     #
     # @example Response structure
     #
-    #   resp.asset_identifier #=> String
+    #   resp.asset_id #=> String
     #   resp.iterable_form_name #=> String
-    #   resp.item_identifier #=> String
+    #   resp.item_id #=> String
     #   resp.attachment_name #=> String
     #   resp.form_type_id #=> String
     #
@@ -17292,15 +17219,6 @@ module Aws::Glue
     # Use this operation to enable or disable the export of catalog metadata
     # to S3 Tables.
     #
-    # @option params [required, String] :export_setting
-    #   The export setting for the data catalog. Specify `ENABLED` to start
-    #   exporting catalog metadata to S3 Tables, or `DISABLED` to stop
-    #   exporting. This field is required.
-    #
-    # @option params [Types::ExportEncryptionConfiguration] :encryption_configuration
-    #   The encryption configuration for the exported data. If not specified,
-    #   the default encryption settings are used.
-    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -17308,27 +17226,42 @@ module Aws::Glue
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::S3TablesConfiguration] :s3_tables_configuration
+    #   The S3 Tables configuration for the export. The encryption
+    #   configuration applies only when Glue creates the table bucket that
+    #   holds the exported catalog metadata. If not specified, the default
+    #   encryption settings are used.
+    #
+    # @option params [Types::AssetsExport] :assets
+    #   The export setting for asset metadata. Set `S3TablesExport` to
+    #   `ENABLED` to start exporting asset metadata to S3 Tables, or to
+    #   `DISABLED` to stop exporting.
+    #
     # @return [Types::PutDataCatalogExportConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::PutDataCatalogExportConfigurationOutput#export_setting #export_setting} => String
-    #   * {Types::PutDataCatalogExportConfigurationOutput#encryption_configuration #encryption_configuration} => Types::ExportEncryptionConfiguration
+    #   * {Types::PutDataCatalogExportConfigurationOutput#s3_tables_configuration #s3_tables_configuration} => Types::S3TablesConfiguration
+    #   * {Types::PutDataCatalogExportConfigurationOutput#assets #assets} => Types::AssetsExport
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_data_catalog_export_configuration({
-    #     export_setting: "ENABLED", # required, accepts ENABLED, DISABLED
-    #     encryption_configuration: {
-    #       sse_algorithm: "SseAlgorithm",
-    #       kms_key_arn: "KmsKeyArnString",
-    #     },
     #     client_token: "HashString",
+    #     s3_tables_configuration: {
+    #       encryption_configuration: {
+    #         sse_algorithm: "SseAlgorithm",
+    #         kms_key_arn: "KmsKeyArnString",
+    #       },
+    #     },
+    #     assets: {
+    #       s3_tables_export: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.export_setting #=> String, one of "ENABLED", "DISABLED"
-    #   resp.encryption_configuration.sse_algorithm #=> String
-    #   resp.encryption_configuration.kms_key_arn #=> String
+    #   resp.s3_tables_configuration.encryption_configuration.sse_algorithm #=> String
+    #   resp.s3_tables_configuration.encryption_configuration.kms_key_arn #=> String
+    #   resp.assets.s3_tables_export #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataCatalogExportConfiguration AWS API Documentation
     #
@@ -18507,8 +18440,8 @@ module Aws::Glue
     end
 
     # Searches for assets in Glue Data Catalog using full-text search,
-    # filters, sorting, and aggregations. Returns matching assets with
-    # relevance-ranked results.
+    # filters, and sorting. Returns matching assets with relevance-ranked
+    # results.
     #
     # @option params [String] :search_text
     #   The text to search for. At least one of `searchText` or `filterClause`
@@ -18557,7 +18490,7 @@ module Aws::Glue
     #       ],
     #       attribute_filter: {
     #         attribute: "SearchAttribute", # required
-    #         operator: "equals", # required, accepts equals, greaterThan, greaterThanOrEquals, lessThan, lessThanOrEquals, notExists
+    #         comparator: "EQUALS", # accepts EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, NOT_EXISTS
     #         value: {
     #           string_value: "SearchFilterStringValue",
     #           long_value: 1,
@@ -18577,8 +18510,9 @@ module Aws::Glue
     #
     #   resp.items #=> Array
     #   resp.items[0].id #=> String
-    #   resp.items[0].asset_name #=> String
-    #   resp.items[0].asset_description #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].created_at #=> Time
     #   resp.items[0].updated_at #=> Time
     #   resp.items[0].asset_type_id #=> String
     #   resp.next_token #=> String
@@ -21610,7 +21544,8 @@ module Aws::Glue
     #   The updated name of the glossary.
     #
     # @option params [String] :description
-    #   The updated description of the glossary.
+    #   The new description. Omit it to keep the current description; set it
+    #   to an empty string to clear it.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -21630,7 +21565,7 @@ module Aws::Glue
     #   resp = client.update_glossary({
     #     identifier: "GlossaryId", # required
     #     name: "GlossaryName",
-    #     description: "MetadataDescription",
+    #     description: "UpdateGlossaryDescription",
     #     client_token: "HashString",
     #   })
     #
@@ -21658,10 +21593,12 @@ module Aws::Glue
     #   The updated name of the glossary term.
     #
     # @option params [String] :short_description
-    #   The updated short description of the glossary term.
+    #   The new short description. Omit it to keep the current one; set it to
+    #   an empty string to clear it.
     #
     # @option params [String] :long_description
-    #   The updated long description of the glossary term.
+    #   The new long description. Omit it to keep the current one; set it to
+    #   an empty string to clear it.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -21683,8 +21620,8 @@ module Aws::Glue
     #   resp = client.update_glossary_term({
     #     identifier: "GlossaryTermId", # required
     #     name: "GlossaryTermName",
-    #     short_description: "GlossaryShortDescription",
-    #     long_description: "GlossaryLongDescription",
+    #     short_description: "UpdateGlossaryTermShortDescription",
+    #     long_description: "UpdateGlossaryTermLongDescription",
     #     client_token: "HashString",
     #   })
     #
@@ -22942,7 +22879,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.298.0'
+      context[:gem_version] = '1.299.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

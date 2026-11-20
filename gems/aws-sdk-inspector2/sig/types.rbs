@@ -2435,6 +2435,9 @@ module Aws::Inspector2
       attr_accessor source_layer_hash: Types::StringFilter
       attr_accessor source_lambda_layer_arn: Types::StringFilter
       attr_accessor file_path: Types::StringFilter
+      attr_accessor runtime_reachability: Types::RuntimeReachabilityFilter
+      attr_accessor runtime_reachability_reason: Types::RuntimeReachabilityReasonFilter
+      attr_accessor purl_qualifier: Types::PurlQualifierFilter
       SENSITIVE: []
     end
 
@@ -2525,6 +2528,13 @@ module Aws::Inspector2
     class ProviderFilter
       attr_accessor comparison: ("EQUALS")
       attr_accessor value: ("AZURE" | "GCP")
+      SENSITIVE: []
+    end
+
+    class PurlQualifierFilter
+      attr_accessor comparison: ("EQUALS")
+      attr_accessor key: ("arch" | "collector" | "dev_dependency" | "distro" | "epoch" | "go_toolchain" | "hardened" | "private" | "rust_toolchain" | "scope" | "skip_chromium_download" | "source" | "stream" | "transitive_dependency" | "unresolved" | "vendor")
+      attr_accessor value: ::String
       SENSITIVE: []
     end
 
@@ -2666,6 +2676,18 @@ module Aws::Inspector2
     class ResourceStringFilter
       attr_accessor comparison: ("EQUALS" | "NOT_EQUALS")
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class RuntimeReachabilityFilter
+      attr_accessor comparison: ("EQUALS" | "NOT_EQUALS")
+      attr_accessor value: ("REACHABLE" | "NOT_REACHABLE" | "UNKNOWN")
+      SENSITIVE: []
+    end
+
+    class RuntimeReachabilityReasonFilter
+      attr_accessor comparison: ("EQUALS" | "NOT_EQUALS")
+      attr_accessor value: ("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH" | "PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH" | "PROCESS_OBSERVED_IN_EC2_RUNTIME" | "PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME")
       SENSITIVE: []
     end
 
@@ -3310,6 +3332,9 @@ module Aws::Inspector2
       attr_accessor fixed_in_version: ::String
       attr_accessor remediation: ::String
       attr_accessor source_lambda_layer_arn: ::String
+      attr_accessor runtime_reachability: ("REACHABLE" | "NOT_REACHABLE" | "UNKNOWN")
+      attr_accessor runtime_reachability_reason: ("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH" | "PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH" | "PROCESS_OBSERVED_IN_EC2_RUNTIME" | "PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME")
+      attr_accessor purl: ::String
       SENSITIVE: []
     end
 

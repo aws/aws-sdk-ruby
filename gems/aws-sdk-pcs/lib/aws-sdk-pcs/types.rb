@@ -566,6 +566,12 @@ module Aws::PCS
     #   bootstrapping or becomes ready to accept jobs.
     #   @return [Types::NodeLifecycleActions]
     #
+    # @!attribute [rw] instance_health_checks
+    #   The instance health check settings of the compute node group.
+    #   Instance health checks detect faults on instances in the compute
+    #   node group and respond with the repair action that you choose.
+    #   @return [Types::InstanceHealthChecks]
+    #
     # @!attribute [rw] error_info
     #   The list of errors that occurred during compute node group
     #   provisioning.
@@ -594,6 +600,7 @@ module Aws::PCS
       :spot_options,
       :slurm_configuration,
       :node_lifecycle_actions,
+      :instance_health_checks,
       :error_info)
       SENSITIVE = []
       include Aws::Structure
@@ -985,6 +992,15 @@ module Aws::PCS
     #   bootstrapping or becomes ready to accept jobs.
     #   @return [Types::NodeLifecycleActionsRequest]
     #
+    # @!attribute [rw] instance_health_checks
+    #   The instance health check settings for the compute node group.
+    #   Instance health checks detect faults on instances in the compute
+    #   node group and respond with the repair action that you choose. You
+    #   can configure health monitoring, deep health checks, or both. You
+    #   can't specify an empty object (`{}`). Instance health checks
+    #   require Slurm version 26.05 or later.
+    #   @return [Types::InstanceHealthChecksRequest]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -1021,6 +1037,7 @@ module Aws::PCS
       :spot_options,
       :slurm_configuration,
       :node_lifecycle_actions,
+      :instance_health_checks,
       :client_token,
       :tags)
       SENSITIVE = []
@@ -1119,6 +1136,83 @@ module Aws::PCS
     class CustomLaunchTemplate < Struct.new(
       :id,
       :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The deep health check that runs each time an instance starts,
+    # including after a reboot, before the compute node accepts jobs.
+    #
+    # @!attribute [rw] profile
+    #   The deep health check profile to run. Each profile other than `NONE`
+    #   runs NVIDIA Data Center GPU Manager (DCGM) diagnostics. More
+    #   thorough profiles run more tests and add more time to instance
+    #   launch. A profile other than `NONE` requires instance types with
+    #   NVIDIA GPUs. This value is required when you specify `onStart`.
+    #   There is no default value. Valid values:
+    #
+    #   * `NONE` – Turns off the deep health check. You can't specify
+    #     `repairAction` with this profile.
+    #
+    #   * `QUICK` – Runs basic GPU tests (DCGM diagnostics level 1). This
+    #     profile adds the least time to instance launch.
+    #
+    #   * `MEDIUM` – Runs extended GPU tests (DCGM diagnostics level 2).
+    #
+    #   * `LONG` – Runs GPU stress and diagnostic tests (DCGM diagnostics
+    #     level 3). This profile adds the most time to instance launch.
+    #   @return [String]
+    #
+    # @!attribute [rw] repair_action
+    #   The action that PCS takes when an instance fails the deep health
+    #   check. You can't specify this value when `profile` is `NONE`. If
+    #   you don't specify this value and `profile` isn't `NONE`, PCS uses
+    #   `AUTO`. `GetComputeNodeGroup` doesn't return a `repairAction` that
+    #   you didn't specify. Valid values:
+    #
+    #   * `AUTO` – PCS chooses the repair action based on the fault.
+    #
+    #   * `REPLACE` – Replaces the instance before it accepts jobs.
+    #
+    #   * `ISOLATE` – Stops new jobs on the instance and keeps the instance
+    #     running until you investigate.
+    #
+    #   * `NONE` – Records the fault in Slurm and leaves the instance
+    #     available for jobs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/DeepHealthCheckOnStart AWS API Documentation
+    #
+    class DeepHealthCheckOnStart < Struct.new(
+      :profile,
+      :repair_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The deep health check settings of a compute node group. Deep health
+    # checks test the graphics processing units (GPUs) of an instance each
+    # time it starts, including after a reboot, before it accepts jobs. Deep
+    # health checks with a profile other than `NONE` require instance types
+    # with NVIDIA GPUs.
+    #
+    # @!attribute [rw] on_start
+    #   The deep health check to run each time an instance starts, including
+    #   after a reboot, before the compute node accepts jobs. If the check
+    #   fails after a reboot, PCS takes the same `repairAction` as at
+    #   launch. For example, with `REPLACE`, PCS replaces the instance
+    #   instead of returning it to service. If the compute node group has
+    #   scripts in the `nodeBootstrapped` stage of `nodeLifecycleActions`,
+    #   the deep health check runs after those scripts. If a script fails
+    #   and its `onError` setting terminates the compute node, the deep
+    #   health check doesn't run. This value is required when you specify
+    #   `deepHealthChecks`.
+    #   @return [Types::DeepHealthCheckOnStart]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/DeepHealthChecks AWS API Documentation
+    #
+    class DeepHealthChecks < Struct.new(
+      :on_start)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1369,6 +1463,48 @@ module Aws::PCS
       include Aws::Structure
     end
 
+    # The health monitoring settings of a compute node group. Health
+    # monitoring continuously checks running instances for hardware and
+    # software faults.
+    #
+    # @!attribute [rw] mode
+    #   The health monitoring mode. This value is required when you specify
+    #   `healthMonitoring`. There is no default value. Valid values:
+    #
+    #   * `NONE` – Turns off health monitoring. You can't specify
+    #     `repairAction` with this mode.
+    #
+    #   * `STANDARD` – Continuously checks running instances for hardware
+    #     and software faults.
+    #   @return [String]
+    #
+    # @!attribute [rw] repair_action
+    #   The action that PCS takes when health monitoring finds a fault on an
+    #   instance. You can't specify this value when `mode` is `NONE`. If
+    #   you don't specify this value and `mode` isn't `NONE`, PCS uses
+    #   `AUTO`. `GetComputeNodeGroup` doesn't return a `repairAction` that
+    #   you didn't specify. Valid values:
+    #
+    #   * `AUTO` – PCS chooses the repair action based on the fault.
+    #
+    #   * `REPLACE` – Replaces the instance after running jobs finish.
+    #
+    #   * `ISOLATE` – Stops new jobs on the instance and keeps the instance
+    #     running until you investigate.
+    #
+    #   * `NONE` – Records the fault in Slurm and leaves the instance
+    #     available for jobs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/HealthMonitoring AWS API Documentation
+    #
+    class HealthMonitoring < Struct.new(
+      :mode,
+      :repair_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An EC2 instance configuration PCS uses to launch compute nodes.
     #
     # @!attribute [rw] instance_type
@@ -1382,6 +1518,57 @@ module Aws::PCS
     #
     class InstanceConfig < Struct.new(
       :instance_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The instance health check settings of a compute node group. Instance
+    # health checks detect faults on instances in the compute node group and
+    # respond with the repair action that you choose.
+    #
+    # @!attribute [rw] health_monitoring
+    #   The health monitoring settings. Health monitoring continuously
+    #   checks running instances for hardware and software faults.
+    #   @return [Types::HealthMonitoring]
+    #
+    # @!attribute [rw] deep_health_checks
+    #   The deep health check settings. Deep health checks test the graphics
+    #   processing units (GPUs) of an instance each time it starts,
+    #   including after a reboot, before it accepts jobs.
+    #   @return [Types::DeepHealthChecks]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/InstanceHealthChecks AWS API Documentation
+    #
+    class InstanceHealthChecks < Struct.new(
+      :health_monitoring,
+      :deep_health_checks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The instance health check settings to configure on a compute node
+    # group when you create it. Specify `healthMonitoring`,
+    # `deepHealthChecks`, or both. You can't specify an empty object
+    # (`{}`).
+    #
+    # @!attribute [rw] health_monitoring
+    #   The health monitoring settings. Health monitoring continuously
+    #   checks running instances for hardware and software faults. If you
+    #   specify this object, it can't be empty.
+    #   @return [Types::HealthMonitoring]
+    #
+    # @!attribute [rw] deep_health_checks
+    #   The deep health check settings. Deep health checks test the graphics
+    #   processing units (GPUs) of an instance each time it starts,
+    #   including after a reboot, before it accepts jobs. If you specify
+    #   this object, it can't be empty.
+    #   @return [Types::DeepHealthChecks]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/InstanceHealthChecksRequest AWS API Documentation
+    #
+    class InstanceHealthChecksRequest < Struct.new(
+      :health_monitoring,
+      :deep_health_checks)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2124,6 +2311,13 @@ module Aws::PCS
     #   uses this value to run the matching scheduler version.
     #   @return [String]
     #
+    # @!attribute [rw] instance_health_checks
+    #   The instance health check settings configured for the compute node
+    #   group that the compute node registered into. The compute node uses
+    #   these settings to configure health monitoring and deep health
+    #   checks.
+    #   @return [Types::InstanceHealthChecks]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/RegisterComputeNodeGroupInstanceResponse AWS API Documentation
     #
     class RegisterComputeNodeGroupInstanceResponse < Struct.new(
@@ -2134,7 +2328,8 @@ module Aws::PCS
       :compute_node_group_id,
       :compute_node_group_name,
       :node_lifecycle_actions,
-      :scheduler_version)
+      :scheduler_version,
+      :instance_health_checks)
       SENSITIVE = [:shared_secret]
       include Aws::Structure
     end
@@ -2842,6 +3037,25 @@ module Aws::PCS
     #   bootstrapping or becomes ready to accept jobs.
     #   @return [Types::UpdateNodeLifecycleActionsRequest]
     #
+    # @!attribute [rw] instance_health_checks
+    #   The instance health check settings for the compute node group.
+    #   Instance health checks detect faults on instances in the compute
+    #   node group and respond with the repair action that you choose. You
+    #   can configure health monitoring, deep health checks, or both. You
+    #   can't specify an empty object (`{}`). Instance health checks
+    #   require Slurm version 26.05 or later.
+    #
+    #   The settings that you specify replace all of the current instance
+    #   health check settings of the compute node group. Include every
+    #   setting that you want to keep. If you omit this member, the current
+    #   settings don't change. If you omit `healthMonitoring` or
+    #   `deepHealthChecks`, that check is turned off. You can also turn off
+    #   a check: set `healthMonitoring.mode` or
+    #   `deepHealthChecks.onStart.profile` to `NONE` and omit its
+    #   `repairAction`. When you change these settings, PCS drains and
+    #   replaces the instances in the compute node group.
+    #   @return [Types::UpdateInstanceHealthChecksRequest]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -2872,6 +3086,7 @@ module Aws::PCS
       :iam_instance_profile_arn,
       :slurm_configuration,
       :node_lifecycle_actions,
+      :instance_health_checks,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2918,6 +3133,36 @@ module Aws::PCS
       :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
       :gres_custom_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The instance health check settings to configure on a compute node
+    # group when you update it. These settings replace all of the current
+    # instance health check settings of the compute node group. Specify
+    # `healthMonitoring`, `deepHealthChecks`, or both. You can't specify an
+    # empty object (`{}`).
+    #
+    # @!attribute [rw] health_monitoring
+    #   The health monitoring settings. Health monitoring continuously
+    #   checks running instances for hardware and software faults. If you
+    #   specify this object, it can't be empty. If you omit this object,
+    #   health monitoring is turned off.
+    #   @return [Types::HealthMonitoring]
+    #
+    # @!attribute [rw] deep_health_checks
+    #   The deep health check settings. Deep health checks test the graphics
+    #   processing units (GPUs) of an instance each time it starts,
+    #   including after a reboot, before it accepts jobs. If you specify
+    #   this object, it can't be empty. If you omit this object, deep
+    #   health checks are turned off.
+    #   @return [Types::DeepHealthChecks]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/UpdateInstanceHealthChecksRequest AWS API Documentation
+    #
+    class UpdateInstanceHealthChecksRequest < Struct.new(
+      :health_monitoring,
+      :deep_health_checks)
       SENSITIVE = []
       include Aws::Structure
     end

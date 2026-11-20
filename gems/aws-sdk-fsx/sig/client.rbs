@@ -318,7 +318,7 @@ module Aws
                                 ?ontap_configuration: {
                                   automatic_backup_retention_days: ::Integer?,
                                   daily_automatic_backup_start_time: ::String?,
-                                  deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2" | "MULTI_AZ_2"),
+                                  deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2" | "MULTI_AZ_2" | "SINGLE_AZ_3" | "MULTI_AZ_3"),
                                   endpoint_ip_address_range: ::String?,
                                   fsx_admin_password: ::String?,
                                   disk_iops_configuration: {

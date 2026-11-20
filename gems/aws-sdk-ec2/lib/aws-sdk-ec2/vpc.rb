@@ -90,6 +90,16 @@ module Aws::EC2
       data[:block_public_access_states]
     end
 
+    # Information about the firewall associations for the VPC. Automated
+    # Internet Firewall, a feature of Amazon Virtual Private Cloud (Amazon
+    # VPC), inspects traffic between the VPC and its internet gateway or
+    # egress-only internet gateway. This list is empty if the VPC doesn't
+    # have a firewall.
+    # @return [Array<Types::NetworkFirewallAssociation>]
+    def network_firewall_associations
+      data[:network_firewall_associations]
+    end
+
     # The current state of the VPC.
     # @return [String]
     def state

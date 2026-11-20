@@ -4068,6 +4068,7 @@ module Aws::DataZone
     #     user_parameters: [
     #       {
     #         environment_id: "EnvironmentId",
+    #         environment_blueprint_id: "EnvironmentBlueprintId",
     #         environment_resolved_account: {
     #           aws_account_id: "AwsAccountId", # required
     #           region_name: "AwsRegion", # required
@@ -4119,6 +4120,7 @@ module Aws::DataZone
     #   resp.project_profile_id #=> String
     #   resp.user_parameters #=> Array
     #   resp.user_parameters[0].environment_id #=> String
+    #   resp.user_parameters[0].environment_blueprint_id #=> String
     #   resp.user_parameters[0].environment_resolved_account.aws_account_id #=> String
     #   resp.user_parameters[0].environment_resolved_account.region_name #=> String
     #   resp.user_parameters[0].environment_resolved_account.source_account_pool_id #=> String
@@ -6234,6 +6236,7 @@ module Aws::DataZone
     #   * {Types::GetAssetOutput#forms_output #forms_output} => Array&lt;Types::FormOutput&gt;
     #   * {Types::GetAssetOutput#read_only_forms_output #read_only_forms_output} => Array&lt;Types::FormOutput&gt;
     #   * {Types::GetAssetOutput#latest_time_series_data_point_forms_output #latest_time_series_data_point_forms_output} => Array&lt;Types::TimeSeriesDataPointSummaryFormOutput&gt;
+    #   * {Types::GetAssetOutput#ownership_transfer #ownership_transfer} => Types::AssetOwnershipTransfer
     #
     # @example Request syntax with placeholder values
     #
@@ -6281,6 +6284,11 @@ module Aws::DataZone
     #   resp.latest_time_series_data_point_forms_output[0].timestamp #=> Time
     #   resp.latest_time_series_data_point_forms_output[0].content_summary #=> String
     #   resp.latest_time_series_data_point_forms_output[0].id #=> String
+    #   resp.ownership_transfer.status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.ownership_transfer.source_project_id #=> String
+    #   resp.ownership_transfer.target_project_id #=> String
+    #   resp.ownership_transfer.started_at #=> Time
+    #   resp.ownership_transfer.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetAsset AWS API Documentation
     #
@@ -8450,6 +8458,7 @@ module Aws::DataZone
     #   resp.project_profile_id #=> String
     #   resp.user_parameters #=> Array
     #   resp.user_parameters[0].environment_id #=> String
+    #   resp.user_parameters[0].environment_blueprint_id #=> String
     #   resp.user_parameters[0].environment_resolved_account.aws_account_id #=> String
     #   resp.user_parameters[0].environment_resolved_account.region_name #=> String
     #   resp.user_parameters[0].environment_resolved_account.source_account_pool_id #=> String
@@ -14695,6 +14704,83 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Transfers the ownership of an asset to another project in the same
+    # Amazon DataZone domain. The transfer changes the asset's owning
+    # project and moves its published listing, subscriptions, and
+    # subscription grants to the target project.
+    #
+    # The transfer runs asynchronously, and the operation returns HTTP
+    # status code 202. To follow the transfer, call `GetAsset` and check
+    # `ownershipTransfer.status` until it is `SUCCEEDED` or `FAILED`.
+    #
+    # You need to be an owner of the project that currently owns the asset.
+    # You can transfer an asset from the domain's administration project to
+    # any project. You can also transfer an asset from any project to the
+    # administration project.
+    #
+    # An asset can have only one ownership transfer in progress at a time.
+    # While a transfer is in progress, requests that change the asset or its
+    # listing fail with a `ConflictException`.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain that contains the asset.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the asset whose ownership is transferred.
+    #
+    # @option params [required, String] :target_project_identifier
+    #   The ID of the project that the asset is transferred to. The project
+    #   must be in the same domain and must be different from the project that
+    #   currently owns the asset.
+    #
+    #   If the domain's administration project owns the asset, the target can
+    #   be any project. Otherwise, the target must be the administration
+    #   project.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request while its transfer is in progress, the service returns that
+    #   transfer and doesn't start a new one. This field is automatically
+    #   populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateAssetOwnerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAssetOwnerOutput#id #id} => String
+    #   * {Types::UpdateAssetOwnerOutput#revision #revision} => String
+    #   * {Types::UpdateAssetOwnerOutput#ownership_transfer #ownership_transfer} => Types::AssetOwnershipTransfer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_asset_owner({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "AssetIdentifier", # required
+    #     target_project_identifier: "ProjectId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.revision #=> String
+    #   resp.ownership_transfer.status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.ownership_transfer.source_project_id #=> String
+    #   resp.ownership_transfer.target_project_id #=> String
+    #   resp.ownership_transfer.started_at #=> Time
+    #   resp.ownership_transfer.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateAssetOwner AWS API Documentation
+    #
+    # @overload update_asset_owner(params = {})
+    # @param [Hash] params ({})
+    def update_asset_owner(params = {}, options = {})
+      req = build_request(:update_asset_owner, params)
+      req.send_request(options)
+    end
+
     # Updates a connection. In Amazon DataZone, a connection enables you to
     # connect your resources (domains, projects, and environments) to
     # external resources and services.
@@ -16247,6 +16333,10 @@ module Aws::DataZone
     #   You can only specify the following string for this parameter:
     #   `latest`.
     #
+    # @option params [String] :project_profile_action
+    #   The action to perform on the project profile of the project. Specify
+    #   `DISASSOCIATE` to disassociate the project from its project profile.
+    #
     # @return [Types::UpdateProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateProjectOutput#domain_id #domain_id} => String
@@ -16292,6 +16382,7 @@ module Aws::DataZone
     #     user_parameters: [
     #       {
     #         environment_id: "EnvironmentId",
+    #         environment_blueprint_id: "EnvironmentBlueprintId",
     #         environment_resolved_account: {
     #           aws_account_id: "AwsAccountId", # required
     #           region_name: "AwsRegion", # required
@@ -16307,6 +16398,7 @@ module Aws::DataZone
     #       },
     #     ],
     #     project_profile_version: "String",
+    #     project_profile_action: "DISASSOCIATE", # accepts DISASSOCIATE
     #   })
     #
     # @example Response structure
@@ -16332,6 +16424,7 @@ module Aws::DataZone
     #   resp.project_profile_id #=> String
     #   resp.user_parameters #=> Array
     #   resp.user_parameters[0].environment_id #=> String
+    #   resp.user_parameters[0].environment_blueprint_id #=> String
     #   resp.user_parameters[0].environment_resolved_account.aws_account_id #=> String
     #   resp.user_parameters[0].environment_resolved_account.region_name #=> String
     #   resp.user_parameters[0].environment_resolved_account.source_account_pool_id #=> String
@@ -17062,7 +17155,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

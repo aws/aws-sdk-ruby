@@ -3973,6 +3973,19 @@ module Aws::SSM
     #    </note>
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] cloud_providers
+    #   The cloud providers that the document can run against. Valid values
+    #   include the following:
+    #
+    #   * `AWS` - The document runs against Amazon Web Services resources.
+    #
+    #   * `Azure` - The document runs against Microsoft Azure resources.
+    #
+    #   * `GCP` - The document runs against Google Cloud resources.
+    #
+    #   If you don't specify a value, the default is `AWS`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateDocumentRequest AWS API Documentation
     #
     class CreateDocumentRequest < Struct.new(
@@ -3985,7 +3998,8 @@ module Aws::SSM
       :document_type,
       :document_format,
       :target_type,
-      :tags)
+      :tags,
+      :cloud_providers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7348,6 +7362,11 @@ module Aws::SSM
     #   The value that identifies a document's category.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] cloud_providers
+    #   This field specifies the cloud providers that the returned version
+    #   of the document can run against.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentDescription AWS API Documentation
     #
     class DocumentDescription < Struct.new(
@@ -7380,7 +7399,8 @@ module Aws::SSM
       :pending_review_version,
       :review_status,
       :category,
-      :category_enum)
+      :category_enum,
+      :cloud_providers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7479,6 +7499,11 @@ module Aws::SSM
     #   The user in your organization who created the document.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_providers
+    #   This field specifies the cloud providers that the default version of
+    #   the document can run against.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentIdentifier AWS API Documentation
     #
     class DocumentIdentifier < Struct.new(
@@ -7496,7 +7521,8 @@ module Aws::SSM
       :tags,
       :requires,
       :review_status,
-      :author)
+      :author,
+      :cloud_providers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7510,6 +7536,21 @@ module Aws::SSM
     # You can also use Amazon Web Services-provided keys, some of which have
     # specific allowed values. These keys and their associated values are as
     # follows:
+    #
+    # CloudProviders
+    #
+    # : Returns documents whose default version can run against any of the
+    #   specified cloud providers. The `CloudProviders` key supports the
+    #   following values:
+    #
+    #   * `AWS` - Documents that run against Amazon Web Services resources.
+    #
+    #   * `Azure` - Documents that run against Microsoft Azure resources.
+    #
+    #   * `GCP` - Documents that run against Google Cloud resources.
+    #
+    #   If you created a document before Systems Manager supported cloud
+    #   providers, the document runs against `AWS`.
     #
     # DocumentType
     # : * `ApplicationConfiguration`
@@ -7847,6 +7888,11 @@ module Aws::SSM
     #   the document.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_providers
+    #   This field specifies the cloud providers that this version of the
+    #   document can run against.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentVersionInfo AWS API Documentation
     #
     class DocumentVersionInfo < Struct.new(
@@ -7859,7 +7905,8 @@ module Aws::SSM
       :document_format,
       :status,
       :status_information,
-      :review_status)
+      :review_status,
+      :cloud_providers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12819,9 +12866,10 @@ module Aws::SSM
     #   return a more specific list of results. For keys, you can specify
     #   one or more key-value pair tags that have been applied to a
     #   document. Other valid keys include `Owner`, `Name`, `PlatformTypes`,
-    #   `DocumentType`, and `TargetType`. For example, to return documents
-    #   you own use `Key=Owner,Values=Self`. To specify a custom key-value
-    #   pair, use the format `Key=tag:tagName,Values=valueName`.
+    #   `DocumentType`, `TargetType`, and `CloudProviders`. For example, to
+    #   return documents you own use `Key=Owner,Values=Self`. To specify a
+    #   custom key-value pair, use the format
+    #   `Key=tag:tagName,Values=valueName`.
     #
     #   <note markdown="1"> This API operation only supports filtering documents by using a
     #   single tag key and one or more tag values. For example:
@@ -19809,10 +19857,27 @@ module Aws::SSM
     #   * `Key=CloudConnector,Values=cloud-connector-id`
     #
     #   * `Key=CloudConnector,Values={"CloudConnectorId":"cloud-connector-id","SsmManagedNodeFilter":"MANAGED","CloudProviderRegions":["eastus"]}`
-    #   Supported JSON keys: `CloudConnectorId` (required),
-    #   `SsmManagedNodeFilter`, `CloudProviderRegions`, and, for GCP,
-    #   `IncludesLabels`, `ExcludesLabels`, `OsPolicyComplianceFilter`, and
-    #   `OsPolicyOrchestratorId`.
+    #   Instead of `CloudConnector`, you can use `AzureCloudConnector` or
+    #   `GcpCloudConnector` for a cloud connector to that provider. You must
+    #   specify exactly one value. A cloud connector ID alone targets every
+    #   running virtual machine (VM) in the cloud connector's scope. In the
+    #   JSON value, `CloudConnectorId` is required, and the following
+    #   optional keys narrow that scope:
+    #
+    #   * For both providers: `SsmManagedNodeFilter`, which filters VMs by
+    #     whether they are Systems Manager managed nodes.
+    #
+    #   * For Microsoft Azure: `CloudProviderRegions`, `AzureSubscriptions`,
+    #     `AzureResourceGroups`, `AzureTag`, `AzureVmPowerStates`, and
+    #     `AzureResourceType`.
+    #
+    #   * For GCP: `Zones`, `GcpProjects`, `IncludesLabels`,
+    #     `ExcludesLabels`, `GcpInstanceStates`, `OsPolicyComplianceFilter`,
+    #     `OsPolicyOrchestratorName`, `OsPolicyOrchestratorId`, and
+    #     `GcpAssetType`.
+    #   For descriptions, valid values, and defaults of these keys, see
+    #   [Cloud Connector target reference][2] in the *Amazon Web Services
+    #   Systems Manager User Guide*.
     #
     # **For Run Command and Maintenance Windows:**
     #
@@ -19850,12 +19915,13 @@ module Aws::SSM
     #
     # For more information about how to send commands that target managed
     # nodes using `Key,Value` parameters, see [Targeting multiple managed
-    # nodes][2] in the *Amazon Web Services Systems Manager User Guide*.
+    # nodes][3] in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
-    # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting
+    # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/automation-cloud-connector-target.html
+    # [3]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting
     #
     # @!attribute [rw] key
     #   User-defined criteria for sending commands that target managed nodes
@@ -20806,6 +20872,20 @@ module Aws::SSM
     #   Specify a new target type for the document.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_providers
+    #   The cloud providers that the new document version can run against.
+    #   Valid values include the following:
+    #
+    #   * `AWS` - The document runs against Amazon Web Services resources.
+    #
+    #   * `Azure` - The document runs against Microsoft Azure resources.
+    #
+    #   * `GCP` - The document runs against Google Cloud resources.
+    #
+    #   If you don't specify a value, the new version uses the cloud
+    #   providers of the latest version.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocumentRequest AWS API Documentation
     #
     class UpdateDocumentRequest < Struct.new(
@@ -20816,7 +20896,8 @@ module Aws::SSM
       :version_name,
       :document_version,
       :document_format,
-      :target_type)
+      :target_type,
+      :cloud_providers)
       SENSITIVE = []
       include Aws::Structure
     end

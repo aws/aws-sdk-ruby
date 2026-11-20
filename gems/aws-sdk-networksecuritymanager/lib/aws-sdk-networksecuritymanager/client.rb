@@ -632,11 +632,11 @@ module Aws::NetworkSecurityManager
     #   resp.is_snapshot #=> Boolean
     #   resp.has_published_version #=> Boolean
     #   resp.deployment_coverage #=> Array
-    #   resp.deployment_coverage[0].firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED"
+    #   resp.deployment_coverage[0].firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED", "IGW_FIREWALL"
     #   resp.deployment_coverage[0].policy_arns #=> Array
     #   resp.deployment_coverage[0].policy_arns[0] #=> String
     #   resp.deployment_coverage[0].in_scope_resource_types #=> Array
-    #   resp.deployment_coverage[0].in_scope_resource_types[0] #=> String, one of "AWS::ApiGateway::Stage", "AWS::CloudFront::Distribution", "AWS::EC2::EIP", "AWS::ElasticLoadBalancingV2::LoadBalancer::application", "AWS::ElasticLoadBalancing::LoadBalancer"
+    #   resp.deployment_coverage[0].in_scope_resource_types[0] #=> String, one of "AWS::ApiGateway::Stage", "AWS::CloudFront::Distribution", "AWS::EC2::EIP", "AWS::ElasticLoadBalancingV2::LoadBalancer::application", "AWS::ElasticLoadBalancing::LoadBalancer", "AWS::EC2::VPC", "AWS::EC2::Subnet"
     #   resp.warnings #=> Array
     #   resp.warnings[0].code #=> String
     #   resp.warnings[0].policy_arn #=> String
@@ -889,13 +889,22 @@ module Aws::NetworkSecurityManager
     #         rule_identifier: "RuleIdentifier",
     #       },
     #     ],
-    #     firewall_type: "WAF", # required, accepts WAF, SHIELD_ADVANCED
+    #     firewall_type: "WAF", # required, accepts WAF, SHIELD_ADVANCED, IGW_FIREWALL
     #     policy_configuration: { # required
     #       remediation_enabled: false, # required
     #       resources_clean_up: false, # required
     #       waf_config: {
     #         existing_customer_web_acl_resolution: "RETROFIT", # required, accepts RETROFIT, OVERRIDE_ASSOCIATION, NO_REMEDIATION
     #         conflict_resolution: "MERGE_WHERE_APPLICABLE", # required, accepts MERGE_WHERE_APPLICABLE
+    #       },
+    #       igw_firewall_config: {
+    #         default_subnet_connectivity: "flexible", # accepts flexible, bidirectional, outbound-only
+    #         subnet_connectivity_overrides: [
+    #           {
+    #             connectivity_type: "flexible", # required, accepts flexible, bidirectional, outbound-only, exclude
+    #             scopes: ["Arn"], # required
+    #           },
+    #         ],
     #       },
     #     },
     #     is_published: false,
@@ -919,11 +928,16 @@ module Aws::NetworkSecurityManager
     #   resp.update_token #=> String
     #   resp.is_snapshot #=> Boolean
     #   resp.has_published_version #=> Boolean
-    #   resp.firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED"
+    #   resp.firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED", "IGW_FIREWALL"
     #   resp.policy_configuration.remediation_enabled #=> Boolean
     #   resp.policy_configuration.resources_clean_up #=> Boolean
     #   resp.policy_configuration.waf_config.existing_customer_web_acl_resolution #=> String, one of "RETROFIT", "OVERRIDE_ASSOCIATION", "NO_REMEDIATION"
     #   resp.policy_configuration.waf_config.conflict_resolution #=> String, one of "MERGE_WHERE_APPLICABLE"
+    #   resp.policy_configuration.igw_firewall_config.default_subnet_connectivity #=> String, one of "flexible", "bidirectional", "outbound-only"
+    #   resp.policy_configuration.igw_firewall_config.subnet_connectivity_overrides #=> Array
+    #   resp.policy_configuration.igw_firewall_config.subnet_connectivity_overrides[0].connectivity_type #=> String, one of "flexible", "bidirectional", "outbound-only", "exclude"
+    #   resp.policy_configuration.igw_firewall_config.subnet_connectivity_overrides[0].scopes #=> Array
+    #   resp.policy_configuration.igw_firewall_config.subnet_connectivity_overrides[0].scopes[0] #=> String
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/CreatePolicy AWS API Documentation
@@ -1033,11 +1047,16 @@ module Aws::NetworkSecurityManager
     #   resp.update_token #=> String
     #   resp.is_snapshot #=> Boolean
     #   resp.has_published_version #=> Boolean
-    #   resp.firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED"
+    #   resp.firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED", "IGW_FIREWALL"
     #   resp.policy_configuration.remediation_enabled #=> Boolean
     #   resp.policy_configuration.resources_clean_up #=> Boolean
     #   resp.policy_configuration.waf_config.existing_customer_web_acl_resolution #=> String, one of "RETROFIT", "OVERRIDE_ASSOCIATION", "NO_REMEDIATION"
     #   resp.policy_configuration.waf_config.conflict_resolution #=> String, one of "MERGE_WHERE_APPLICABLE"
+    #   resp.policy_configuration.igw_firewall_config.default_subnet_connectivity #=> String, one of "flexible", "bidirectional", "outbound-only"
+    #   resp.policy_configuration.igw_firewall_config.subnet_connectivity_overrides #=> Array
+    #   resp.policy_configuration.igw_firewall_config.subnet_connectivity_overrides[0].connectivity_type #=> String, one of "flexible", "bidirectional", "outbound-only", "exclude"
+    #   resp.policy_configuration.igw_firewall_config.subnet_connectivity_overrides[0].scopes #=> Array
+    #   resp.policy_configuration.igw_firewall_config.subnet_connectivity_overrides[0].scopes[0] #=> String
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/CreatePolicySnapshot AWS API Documentation
@@ -1157,7 +1176,7 @@ module Aws::NetworkSecurityManager
     #   resp = client.create_rule({
     #     client_token: "IdempotencyToken",
     #     rule_name: "RuleName", # required
-    #     firewall_type: "WAF", # required, accepts WAF
+    #     firewall_type: "WAF", # required, accepts WAF, IGW_FIREWALL
     #     rule_type: "CONFIGURATION", # required, accepts CONFIGURATION, INSPECTION
     #     rule_description: "Description",
     #     configuration: { # required
@@ -1173,7 +1192,7 @@ module Aws::NetworkSecurityManager
     #   resp.rule_id #=> String
     #   resp.rule_arn #=> String
     #   resp.rule_name #=> String
-    #   resp.firewall_type #=> String, one of "WAF"
+    #   resp.firewall_type #=> String, one of "WAF", "IGW_FIREWALL"
     #   resp.rule_type #=> String, one of "CONFIGURATION", "INSPECTION"
     #   resp.rule_description #=> String
     #   resp.status #=> String, one of "DRAFT", "ACTIVE", "DISABLED"
@@ -1269,7 +1288,7 @@ module Aws::NetworkSecurityManager
     #   resp.rule_id #=> String
     #   resp.rule_arn #=> String
     #   resp.rule_name #=> String
-    #   resp.firewall_type #=> String, one of "WAF"
+    #   resp.firewall_type #=> String, one of "WAF", "IGW_FIREWALL"
     #   resp.rule_type #=> String, one of "CONFIGURATION", "INSPECTION"
     #   resp.rule_description #=> String
     #   resp.status #=> String, one of "DRAFT", "ACTIVE", "DISABLED"
@@ -1311,6 +1330,15 @@ module Aws::NetworkSecurityManager
     #   The configuration that defines which accounts and resources are in
     #   scope.
     #
+    # @option params [String] :specialized_scope_type
+    #   The specialized type of the scope. Omit this value to create a
+    #   standard scope that you can associate with a deployment. Set it to
+    #   create a scope that is built for one specific purpose: a specialized
+    #   scope can be used only for the purpose that its type defines, is
+    #   validated against that use, and can't be associated with a
+    #   deployment. This value is set when the scope is created and can't be
+    #   changed.
+    #
     # @option params [Boolean] :is_published
     #   Specifies whether to publish the resource. When `true`, the resource
     #   is saved in published (`ACTIVE`) state. When `false`, it is saved as a
@@ -1326,6 +1354,7 @@ module Aws::NetworkSecurityManager
     #   * {Types::CreateScopeOutput#scope_name #scope_name} => String
     #   * {Types::CreateScopeOutput#scope_description #scope_description} => String
     #   * {Types::CreateScopeOutput#scope_configuration #scope_configuration} => Types::ScopeConfiguration
+    #   * {Types::CreateScopeOutput#specialized_scope_type #specialized_scope_type} => String
     #   * {Types::CreateScopeOutput#status #status} => String
     #   * {Types::CreateScopeOutput#version #version} => String
     #   * {Types::CreateScopeOutput#update_token #update_token} => String
@@ -1453,6 +1482,7 @@ module Aws::NetworkSecurityManager
     #         },
     #       },
     #     },
+    #     specialized_scope_type: "IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE", # accepts IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE
     #     is_published: false,
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -1497,6 +1527,7 @@ module Aws::NetworkSecurityManager
     #   resp.scope_configuration.resource_scopes["ScopeResourceType"].exclude.expression.or #=> Array
     #   resp.scope_configuration.resource_scopes["ScopeResourceType"].exclude.expression.or[0] #=> Types::ResourceLogicalExpression
     #   resp.scope_configuration.resource_scopes["ScopeResourceType"].exclude.expression.not #=> Types::ResourceLogicalExpression
+    #   resp.specialized_scope_type #=> String, one of "IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"
     #   resp.status #=> String, one of "DRAFT", "ACTIVE", "DISABLED"
     #   resp.version #=> String
     #   resp.update_token #=> String
@@ -1539,6 +1570,7 @@ module Aws::NetworkSecurityManager
     #   * {Types::CreateScopeSnapshotOutput#scope_name #scope_name} => String
     #   * {Types::CreateScopeSnapshotOutput#scope_description #scope_description} => String
     #   * {Types::CreateScopeSnapshotOutput#scope_configuration #scope_configuration} => Types::ScopeConfiguration
+    #   * {Types::CreateScopeSnapshotOutput#specialized_scope_type #specialized_scope_type} => String
     #   * {Types::CreateScopeSnapshotOutput#status #status} => String
     #   * {Types::CreateScopeSnapshotOutput#version #version} => String
     #   * {Types::CreateScopeSnapshotOutput#update_token #update_token} => String
@@ -1624,6 +1656,7 @@ module Aws::NetworkSecurityManager
     #   resp.scope_configuration.resource_scopes["ScopeResourceType"].exclude.expression.or #=> Array
     #   resp.scope_configuration.resource_scopes["ScopeResourceType"].exclude.expression.or[0] #=> Types::ResourceLogicalExpression
     #   resp.scope_configuration.resource_scopes["ScopeResourceType"].exclude.expression.not #=> Types::ResourceLogicalExpression
+    #   resp.specialized_scope_type #=> String, one of "IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"
     #   resp.status #=> String, one of "DRAFT", "ACTIVE", "DISABLED"
     #   resp.version #=> String
     #   resp.update_token #=> String
@@ -1737,7 +1770,7 @@ module Aws::NetworkSecurityManager
     #         rule_identifier: "RuleIdentifier", # required
     #       },
     #     ],
-    #     firewall_type: "WAF", # required, accepts WAF
+    #     firewall_type: "WAF", # required, accepts WAF, IGW_FIREWALL
     #     is_published: false,
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -1757,7 +1790,7 @@ module Aws::NetworkSecurityManager
     #   resp.update_token #=> String
     #   resp.is_snapshot #=> Boolean
     #   resp.has_published_version #=> Boolean
-    #   resp.firewall_type #=> String, one of "WAF"
+    #   resp.firewall_type #=> String, one of "WAF", "IGW_FIREWALL"
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/CreateTemplate AWS API Documentation
@@ -1854,7 +1887,7 @@ module Aws::NetworkSecurityManager
     #   resp.update_token #=> String
     #   resp.is_snapshot #=> Boolean
     #   resp.has_published_version #=> Boolean
-    #   resp.firewall_type #=> String, one of "WAF"
+    #   resp.firewall_type #=> String, one of "WAF", "IGW_FIREWALL"
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/CreateTemplateSnapshot AWS API Documentation
@@ -2122,7 +2155,7 @@ module Aws::NetworkSecurityManager
     #
     #   resp = client.generate_rule_configuration({
     #     prompt: "GenerateRuleConfigurationRequestPromptString", # required
-    #     rule_firewall_type: "WAF", # required, accepts WAF
+    #     rule_firewall_type: "WAF", # required, accepts WAF, IGW_FIREWALL
     #     rule_type: "CONFIGURATION", # required, accepts CONFIGURATION, INSPECTION
     #     waf_config_data_type: "DefaultAction", # accepts DefaultAction, VisibilityConfig, CaptchaConfig, ChallengeConfig, CustomResponseBodies, LoggingConfiguration, DataProtectionConfig, AssociationConfig, OnSourceDDoSProtectionConfig, TokenDomains
     #     current_configuration: "GenerateRuleConfigurationRequestCurrentConfigurationString",
@@ -2215,7 +2248,7 @@ module Aws::NetworkSecurityManager
     #   resp.admin_account_details.admin_scope.scope_filter.exclude_only.organizational_units[0].name #=> String
     #   resp.admin_account_details.admin_scope.firewall_type_scope.all_firewall_types_enabled #=> Boolean
     #   resp.admin_account_details.admin_scope.firewall_type_scope.firewall_types #=> Array
-    #   resp.admin_account_details.admin_scope.firewall_type_scope.firewall_types[0] #=> String, one of "WAF", "SHIELD_ADVANCED"
+    #   resp.admin_account_details.admin_scope.firewall_type_scope.firewall_types[0] #=> String, one of "WAF", "SHIELD_ADVANCED", "IGW_FIREWALL"
     #   resp.admin_account_details.status #=> String, one of "ONBOARDED", "OFFBOARDED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/GetAdminAccount AWS API Documentation
@@ -2324,11 +2357,11 @@ module Aws::NetworkSecurityManager
     #   resp.has_published_version #=> Boolean
     #   resp.updated_at #=> Time
     #   resp.deployment_coverage #=> Array
-    #   resp.deployment_coverage[0].firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED"
+    #   resp.deployment_coverage[0].firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED", "IGW_FIREWALL"
     #   resp.deployment_coverage[0].policy_arns #=> Array
     #   resp.deployment_coverage[0].policy_arns[0] #=> String
     #   resp.deployment_coverage[0].in_scope_resource_types #=> Array
-    #   resp.deployment_coverage[0].in_scope_resource_types[0] #=> String, one of "AWS::ApiGateway::Stage", "AWS::CloudFront::Distribution", "AWS::EC2::EIP", "AWS::ElasticLoadBalancingV2::LoadBalancer::application", "AWS::ElasticLoadBalancing::LoadBalancer"
+    #   resp.deployment_coverage[0].in_scope_resource_types[0] #=> String, one of "AWS::ApiGateway::Stage", "AWS::CloudFront::Distribution", "AWS::EC2::EIP", "AWS::ElasticLoadBalancingV2::LoadBalancer::application", "AWS::ElasticLoadBalancing::LoadBalancer", "AWS::EC2::VPC", "AWS::EC2::Subnet"
     #   resp.warnings #=> Array
     #   resp.warnings[0].code #=> String
     #   resp.warnings[0].policy_arn #=> String
@@ -2425,11 +2458,16 @@ module Aws::NetworkSecurityManager
     #   resp.update_token #=> String
     #   resp.is_snapshot #=> Boolean
     #   resp.has_published_version #=> Boolean
-    #   resp.firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED"
+    #   resp.firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED", "IGW_FIREWALL"
     #   resp.policy_configuration.remediation_enabled #=> Boolean
     #   resp.policy_configuration.resources_clean_up #=> Boolean
     #   resp.policy_configuration.waf_config.existing_customer_web_acl_resolution #=> String, one of "RETROFIT", "OVERRIDE_ASSOCIATION", "NO_REMEDIATION"
     #   resp.policy_configuration.waf_config.conflict_resolution #=> String, one of "MERGE_WHERE_APPLICABLE"
+    #   resp.policy_configuration.igw_firewall_config.default_subnet_connectivity #=> String, one of "flexible", "bidirectional", "outbound-only"
+    #   resp.policy_configuration.igw_firewall_config.subnet_connectivity_overrides #=> Array
+    #   resp.policy_configuration.igw_firewall_config.subnet_connectivity_overrides[0].connectivity_type #=> String, one of "flexible", "bidirectional", "outbound-only", "exclude"
+    #   resp.policy_configuration.igw_firewall_config.subnet_connectivity_overrides[0].scopes #=> Array
+    #   resp.policy_configuration.igw_firewall_config.subnet_connectivity_overrides[0].scopes[0] #=> String
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/GetPolicy AWS API Documentation
@@ -2524,7 +2562,7 @@ module Aws::NetworkSecurityManager
     #   resp.rule_id #=> String
     #   resp.rule_arn #=> String
     #   resp.rule_name #=> String
-    #   resp.firewall_type #=> String, one of "WAF"
+    #   resp.firewall_type #=> String, one of "WAF", "IGW_FIREWALL"
     #   resp.rule_type #=> String, one of "CONFIGURATION", "INSPECTION"
     #   resp.rule_description #=> String
     #   resp.status #=> String, one of "DRAFT", "ACTIVE", "DISABLED"
@@ -2556,6 +2594,7 @@ module Aws::NetworkSecurityManager
     #   * {Types::GetScopeOutput#scope_name #scope_name} => String
     #   * {Types::GetScopeOutput#scope_description #scope_description} => String
     #   * {Types::GetScopeOutput#scope_configuration #scope_configuration} => Types::ScopeConfiguration
+    #   * {Types::GetScopeOutput#specialized_scope_type #specialized_scope_type} => String
     #   * {Types::GetScopeOutput#status #status} => String
     #   * {Types::GetScopeOutput#version #version} => String
     #   * {Types::GetScopeOutput#update_token #update_token} => String
@@ -2637,6 +2676,7 @@ module Aws::NetworkSecurityManager
     #   resp.scope_configuration.resource_scopes["ScopeResourceType"].exclude.expression.or #=> Array
     #   resp.scope_configuration.resource_scopes["ScopeResourceType"].exclude.expression.or[0] #=> Types::ResourceLogicalExpression
     #   resp.scope_configuration.resource_scopes["ScopeResourceType"].exclude.expression.not #=> Types::ResourceLogicalExpression
+    #   resp.specialized_scope_type #=> String, one of "IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"
     #   resp.status #=> String, one of "DRAFT", "ACTIVE", "DISABLED"
     #   resp.version #=> String
     #   resp.update_token #=> String
@@ -2721,7 +2761,7 @@ module Aws::NetworkSecurityManager
     #   resp.update_token #=> String
     #   resp.is_snapshot #=> Boolean
     #   resp.has_published_version #=> Boolean
-    #   resp.firewall_type #=> String, one of "WAF"
+    #   resp.firewall_type #=> String, one of "WAF", "IGW_FIREWALL"
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/GetTemplate AWS API Documentation
@@ -2862,7 +2902,7 @@ module Aws::NetworkSecurityManager
     #   resp.resource_synchronization_statuses[0].account_id #=> String
     #   resp.resource_synchronization_statuses[0].resource_arn #=> String
     #   resp.resource_synchronization_statuses[0].deployment_arn #=> String
-    #   resp.resource_synchronization_statuses[0].resource_type #=> String, one of "AWS::ApiGateway::Stage", "AWS::CloudFront::Distribution", "AWS::EC2::EIP", "AWS::ElasticLoadBalancingV2::LoadBalancer::application", "AWS::ElasticLoadBalancing::LoadBalancer", "AWS::WAFv2::WebACL", "AWS::Shield::Protection", "AWS::ShieldRegional::Protection"
+    #   resp.resource_synchronization_statuses[0].resource_type #=> String, one of "AWS::ApiGateway::Stage", "AWS::CloudFront::Distribution", "AWS::EC2::EIP", "AWS::ElasticLoadBalancingV2::LoadBalancer::application", "AWS::ElasticLoadBalancing::LoadBalancer", "AWS::WAFv2::WebACL", "AWS::Shield::Protection", "AWS::ShieldRegional::Protection", "AWS::EC2::VPC"
     #   resp.resource_synchronization_statuses[0].updated_at #=> Time
     #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons #=> Hash
     #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons["PolicyFirewallType"].missing_firewall #=> String
@@ -2890,6 +2930,11 @@ module Aws::NetworkSecurityManager
     #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons["PolicyFirewallType"].invalid_firewall.unexpected_mergeable_configuration_values[0].configuration_name #=> String
     #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons["PolicyFirewallType"].invalid_firewall.unexpected_mergeable_configuration_values[0].expected_value #=> String
     #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons["PolicyFirewallType"].invalid_firewall.unexpected_mergeable_configuration_values[0].actual_value #=> String
+    #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons["PolicyFirewallType"].invalid_resource #=> Hash
+    #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons["PolicyFirewallType"].invalid_resource["ScopeResourceType"] #=> Array
+    #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons["PolicyFirewallType"].invalid_resource["ScopeResourceType"][0].resource_id #=> String
+    #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons["PolicyFirewallType"].invalid_resource["ScopeResourceType"][0].expected_value #=> String
+    #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons["PolicyFirewallType"].invalid_resource["ScopeResourceType"][0].actual_value #=> String
     #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.not_visible.reason #=> String
     #   resp.resource_synchronization_statuses[0].remediation_issues.issues #=> Hash
     #   resp.resource_synchronization_statuses[0].remediation_issues.issues["PolicyFirewallType"].issue_type #=> String
@@ -3060,6 +3105,71 @@ module Aws::NetworkSecurityManager
       req.send_request(options)
     end
 
+    # Lists the protected resources that the specified Network Security
+    # Manager entity covers. You can filter the results to the resources
+    # owned by a single account and page through them. You must call this
+    # operation from the administrator account that owns the Network
+    # Security Manager entity.
+    #
+    # @option params [required, String] :entity_arn
+    #   The Amazon Resource Name (ARN) of the Network Security Manager entity
+    #   to list covered resources for. The ARN must not include a `:DRAFT`
+    #   qualifier.
+    #
+    # @option params [String] :resource_owner_account_id
+    #   Filters the results to the protected resources owned by the specified
+    #   AWS account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Valid range:
+    #   1–100. The default value is 100. To retrieve the remaining results,
+    #   use the returned `nextToken` value in a subsequent call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results. To retrieve the next page,
+    #   call the operation again and provide this value. When there are no
+    #   more results, this value is null.
+    #
+    # @return [Types::ListEntityCoveragesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEntityCoveragesOutput#next_token #next_token} => String
+    #   * {Types::ListEntityCoveragesOutput#resource_coverages #resource_coverages} => Array&lt;Types::ResourceCoverageSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_entity_coverages({
+    #     entity_arn: "Arn", # required
+    #     resource_owner_account_id: "AccountId",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.resource_coverages #=> Array
+    #   resp.resource_coverages[0].resource_arn #=> String
+    #   resp.resource_coverages[0].entity_type #=> String, one of "Rule", "Template", "Policy", "Deployment", "Scope"
+    #   resp.resource_coverages[0].entity_arn #=> String
+    #   resp.resource_coverages[0].resource_owner_account_id #=> String
+    #   resp.resource_coverages[0].resource_type #=> String, one of "AWS::ApiGateway::Stage", "AWS::CloudFront::Distribution", "AWS::EC2::EIP", "AWS::ElasticLoadBalancingV2::LoadBalancer::application", "AWS::ElasticLoadBalancing::LoadBalancer", "AWS::EC2::VPC", "AWS::EC2::Subnet"
+    #   resp.resource_coverages[0].firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED", "IGW_FIREWALL"
+    #   resp.resource_coverages[0].coverage_status #=> String, one of "IN_EFFECT", "SUPERSEDED"
+    #   resp.resource_coverages[0].deployment_arns #=> Array
+    #   resp.resource_coverages[0].deployment_arns[0] #=> String
+    #   resp.resource_coverages[0].updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/ListEntityCoverages AWS API Documentation
+    #
+    # @overload list_entity_coverages(params = {})
+    # @param [Hash] params ({})
+    def list_entity_coverages(params = {}, options = {})
+      req = build_request(:list_entity_coverages, params)
+      req.send_request(options)
+    end
+
     # Lists the policies in the account. You can filter the results by
     # status and page through them using `maxResults` and `nextToken`.
     #
@@ -3128,7 +3238,7 @@ module Aws::NetworkSecurityManager
     #   resp.policies[0].status #=> String, one of "DRAFT", "ACTIVE", "DISABLED"
     #   resp.policies[0].version #=> String
     #   resp.policies[0].has_published_version #=> Boolean
-    #   resp.policies[0].firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED"
+    #   resp.policies[0].firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED", "IGW_FIREWALL"
     #   resp.policies[0].priority #=> Integer
     #   resp.policies[0].updated_at #=> Time
     #
@@ -3208,7 +3318,7 @@ module Aws::NetworkSecurityManager
     #   resp.snapshots[0].status #=> String, one of "DRAFT", "ACTIVE", "DISABLED"
     #   resp.snapshots[0].version #=> String
     #   resp.snapshots[0].has_published_version #=> Boolean
-    #   resp.snapshots[0].firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED"
+    #   resp.snapshots[0].firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED", "IGW_FIREWALL"
     #   resp.snapshots[0].priority #=> Integer
     #   resp.snapshots[0].updated_at #=> Time
     #
@@ -3218,6 +3328,68 @@ module Aws::NetworkSecurityManager
     # @param [Hash] params ({})
     def list_policy_snapshots(params = {}, options = {})
       req = build_request(:list_policy_snapshots, params)
+      req.send_request(options)
+    end
+
+    # Lists the AWS Network Security Manager entities that cover the
+    # specified protected resource. You can filter the results by entity
+    # type and page through them. You must own the resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the protected resource to list
+    #   coverage for. You must own the resource.
+    #
+    # @option params [String] :entity_type
+    #   Filters the results by the type of the entity that covers the
+    #   resource. The only supported value is `Policy`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Valid range:
+    #   1–100. The default value is 100. To retrieve the remaining results,
+    #   use the returned `nextToken` value in a subsequent call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results. To retrieve the next page,
+    #   call the operation again and provide this value. When there are no
+    #   more results, this value is null.
+    #
+    # @return [Types::ListProtectedResourceCoveragesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProtectedResourceCoveragesOutput#next_token #next_token} => String
+    #   * {Types::ListProtectedResourceCoveragesOutput#resource_coverages #resource_coverages} => Array&lt;Types::ResourceCoverageSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_protected_resource_coverages({
+    #     resource_arn: "Arn", # required
+    #     entity_type: "Rule", # accepts Rule, Template, Policy, Deployment, Scope
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.resource_coverages #=> Array
+    #   resp.resource_coverages[0].resource_arn #=> String
+    #   resp.resource_coverages[0].entity_type #=> String, one of "Rule", "Template", "Policy", "Deployment", "Scope"
+    #   resp.resource_coverages[0].entity_arn #=> String
+    #   resp.resource_coverages[0].resource_owner_account_id #=> String
+    #   resp.resource_coverages[0].resource_type #=> String, one of "AWS::ApiGateway::Stage", "AWS::CloudFront::Distribution", "AWS::EC2::EIP", "AWS::ElasticLoadBalancingV2::LoadBalancer::application", "AWS::ElasticLoadBalancing::LoadBalancer", "AWS::EC2::VPC", "AWS::EC2::Subnet"
+    #   resp.resource_coverages[0].firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED", "IGW_FIREWALL"
+    #   resp.resource_coverages[0].coverage_status #=> String, one of "IN_EFFECT", "SUPERSEDED"
+    #   resp.resource_coverages[0].deployment_arns #=> Array
+    #   resp.resource_coverages[0].deployment_arns[0] #=> String
+    #   resp.resource_coverages[0].updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/ListProtectedResourceCoverages AWS API Documentation
+    #
+    # @overload list_protected_resource_coverages(params = {})
+    # @param [Hash] params ({})
+    def list_protected_resource_coverages(params = {}, options = {})
+      req = build_request(:list_protected_resource_coverages, params)
       req.send_request(options)
     end
 
@@ -3372,7 +3544,7 @@ module Aws::NetworkSecurityManager
     #   resp.resource_synchronization_statuses[0].account_id #=> String
     #   resp.resource_synchronization_statuses[0].resource_arn #=> String
     #   resp.resource_synchronization_statuses[0].deployment_arn #=> String
-    #   resp.resource_synchronization_statuses[0].resource_type #=> String, one of "AWS::ApiGateway::Stage", "AWS::CloudFront::Distribution", "AWS::EC2::EIP", "AWS::ElasticLoadBalancingV2::LoadBalancer::application", "AWS::ElasticLoadBalancing::LoadBalancer", "AWS::WAFv2::WebACL", "AWS::Shield::Protection", "AWS::ShieldRegional::Protection"
+    #   resp.resource_synchronization_statuses[0].resource_type #=> String, one of "AWS::ApiGateway::Stage", "AWS::CloudFront::Distribution", "AWS::EC2::EIP", "AWS::ElasticLoadBalancingV2::LoadBalancer::application", "AWS::ElasticLoadBalancing::LoadBalancer", "AWS::WAFv2::WebACL", "AWS::Shield::Protection", "AWS::ShieldRegional::Protection", "AWS::EC2::VPC"
     #   resp.resource_synchronization_statuses[0].updated_at #=> Time
     #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons #=> Hash
     #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons["PolicyFirewallType"].missing_firewall #=> String
@@ -3400,6 +3572,11 @@ module Aws::NetworkSecurityManager
     #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons["PolicyFirewallType"].invalid_firewall.unexpected_mergeable_configuration_values[0].configuration_name #=> String
     #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons["PolicyFirewallType"].invalid_firewall.unexpected_mergeable_configuration_values[0].expected_value #=> String
     #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons["PolicyFirewallType"].invalid_firewall.unexpected_mergeable_configuration_values[0].actual_value #=> String
+    #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons["PolicyFirewallType"].invalid_resource #=> Hash
+    #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons["PolicyFirewallType"].invalid_resource["ScopeResourceType"] #=> Array
+    #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons["PolicyFirewallType"].invalid_resource["ScopeResourceType"][0].resource_id #=> String
+    #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons["PolicyFirewallType"].invalid_resource["ScopeResourceType"][0].expected_value #=> String
+    #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.reasons["PolicyFirewallType"].invalid_resource["ScopeResourceType"][0].actual_value #=> String
     #   resp.resource_synchronization_statuses[0].out_of_sync_reasons.not_visible.reason #=> String
     #   resp.resource_synchronization_statuses[0].remediation_issues.issues #=> Hash
     #   resp.resource_synchronization_statuses[0].remediation_issues.issues["PolicyFirewallType"].issue_type #=> String
@@ -3491,7 +3668,7 @@ module Aws::NetworkSecurityManager
     #   resp.snapshots[0].rule_id #=> String
     #   resp.snapshots[0].rule_arn #=> String
     #   resp.snapshots[0].rule_name #=> String
-    #   resp.snapshots[0].firewall_type #=> String, one of "WAF"
+    #   resp.snapshots[0].firewall_type #=> String, one of "WAF", "IGW_FIREWALL"
     #   resp.snapshots[0].rule_type #=> String, one of "CONFIGURATION", "INSPECTION"
     #   resp.snapshots[0].status #=> String, one of "DRAFT", "ACTIVE", "DISABLED"
     #   resp.snapshots[0].version #=> String
@@ -3572,7 +3749,7 @@ module Aws::NetworkSecurityManager
     #   resp.rules[0].rule_id #=> String
     #   resp.rules[0].rule_arn #=> String
     #   resp.rules[0].rule_name #=> String
-    #   resp.rules[0].firewall_type #=> String, one of "WAF"
+    #   resp.rules[0].firewall_type #=> String, one of "WAF", "IGW_FIREWALL"
     #   resp.rules[0].rule_type #=> String, one of "CONFIGURATION", "INSPECTION"
     #   resp.rules[0].status #=> String, one of "DRAFT", "ACTIVE", "DISABLED"
     #   resp.rules[0].version #=> String
@@ -3650,6 +3827,7 @@ module Aws::NetworkSecurityManager
     #   resp.snapshots[0].scope_id #=> String
     #   resp.snapshots[0].scope_arn #=> String
     #   resp.snapshots[0].scope_name #=> String
+    #   resp.snapshots[0].specialized_scope_type #=> String, one of "IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"
     #   resp.snapshots[0].status #=> String, one of "DRAFT", "ACTIVE", "DISABLED"
     #   resp.snapshots[0].version #=> String
     #   resp.snapshots[0].has_published_version #=> Boolean
@@ -3728,6 +3906,7 @@ module Aws::NetworkSecurityManager
     #   resp.scopes[0].scope_id #=> String
     #   resp.scopes[0].scope_arn #=> String
     #   resp.scopes[0].scope_name #=> String
+    #   resp.scopes[0].specialized_scope_type #=> String, one of "IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"
     #   resp.scopes[0].status #=> String, one of "DRAFT", "ACTIVE", "DISABLED"
     #   resp.scopes[0].version #=> String
     #   resp.scopes[0].has_published_version #=> Boolean
@@ -3852,10 +4031,11 @@ module Aws::NetworkSecurityManager
     #   resp.snapshots[0].template_id #=> String
     #   resp.snapshots[0].template_arn #=> String
     #   resp.snapshots[0].template_name #=> String
+    #   resp.snapshots[0].template_owner #=> String, one of "CUSTOMER", "AWS"
     #   resp.snapshots[0].status #=> String, one of "DRAFT", "ACTIVE", "DISABLED"
     #   resp.snapshots[0].version #=> String
     #   resp.snapshots[0].has_published_version #=> Boolean
-    #   resp.snapshots[0].firewall_type #=> String, one of "WAF"
+    #   resp.snapshots[0].firewall_type #=> String, one of "WAF", "IGW_FIREWALL"
     #   resp.snapshots[0].updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/ListTemplateSnapshots AWS API Documentation
@@ -3882,6 +4062,14 @@ module Aws::NetworkSecurityManager
     #
     # @option params [String] :status
     #   Filters the results by status, either `ACTIVE` or `DRAFT`.
+    #
+    # @option params [String] :template_owner
+    #   Specifies which templates to list. The default is `CUSTOMER`. Valid
+    #   values:
+    #
+    #   * `CUSTOMER` – Lists the templates in your account.
+    #
+    #   * `AWS` – Lists the AWS managed templates.
     #
     # @return [Types::ListTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3922,6 +4110,7 @@ module Aws::NetworkSecurityManager
     #     max_results: 1,
     #     next_token: "NextToken",
     #     status: "ACTIVE", # accepts ACTIVE, DRAFT, DISABLED
+    #     template_owner: "CUSTOMER", # accepts CUSTOMER, AWS
     #   })
     #
     # @example Response structure
@@ -3931,10 +4120,11 @@ module Aws::NetworkSecurityManager
     #   resp.templates[0].template_id #=> String
     #   resp.templates[0].template_arn #=> String
     #   resp.templates[0].template_name #=> String
+    #   resp.templates[0].template_owner #=> String, one of "CUSTOMER", "AWS"
     #   resp.templates[0].status #=> String, one of "DRAFT", "ACTIVE", "DISABLED"
     #   resp.templates[0].version #=> String
     #   resp.templates[0].has_published_version #=> Boolean
-    #   resp.templates[0].firewall_type #=> String, one of "WAF"
+    #   resp.templates[0].firewall_type #=> String, one of "WAF", "IGW_FIREWALL"
     #   resp.templates[0].updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/ListTemplates AWS API Documentation
@@ -4042,7 +4232,7 @@ module Aws::NetworkSecurityManager
     #       },
     #       firewall_type_scope: {
     #         all_firewall_types_enabled: false,
-    #         firewall_types: ["WAF"], # accepts WAF, SHIELD_ADVANCED
+    #         firewall_types: ["WAF"], # accepts WAF, SHIELD_ADVANCED, IGW_FIREWALL
     #       },
     #     },
     #   })
@@ -4067,7 +4257,7 @@ module Aws::NetworkSecurityManager
     #   resp.admin_account_details.admin_scope.scope_filter.exclude_only.organizational_units[0].name #=> String
     #   resp.admin_account_details.admin_scope.firewall_type_scope.all_firewall_types_enabled #=> Boolean
     #   resp.admin_account_details.admin_scope.firewall_type_scope.firewall_types #=> Array
-    #   resp.admin_account_details.admin_scope.firewall_type_scope.firewall_types[0] #=> String, one of "WAF", "SHIELD_ADVANCED"
+    #   resp.admin_account_details.admin_scope.firewall_type_scope.firewall_types[0] #=> String, one of "WAF", "SHIELD_ADVANCED", "IGW_FIREWALL"
     #   resp.admin_account_details.status #=> String, one of "ONBOARDED", "OFFBOARDED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/PutAdminAccount AWS API Documentation
@@ -4324,11 +4514,11 @@ module Aws::NetworkSecurityManager
     #   resp.is_snapshot #=> Boolean
     #   resp.has_published_version #=> Boolean
     #   resp.deployment_coverage #=> Array
-    #   resp.deployment_coverage[0].firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED"
+    #   resp.deployment_coverage[0].firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED", "IGW_FIREWALL"
     #   resp.deployment_coverage[0].policy_arns #=> Array
     #   resp.deployment_coverage[0].policy_arns[0] #=> String
     #   resp.deployment_coverage[0].in_scope_resource_types #=> Array
-    #   resp.deployment_coverage[0].in_scope_resource_types[0] #=> String, one of "AWS::ApiGateway::Stage", "AWS::CloudFront::Distribution", "AWS::EC2::EIP", "AWS::ElasticLoadBalancingV2::LoadBalancer::application", "AWS::ElasticLoadBalancing::LoadBalancer"
+    #   resp.deployment_coverage[0].in_scope_resource_types[0] #=> String, one of "AWS::ApiGateway::Stage", "AWS::CloudFront::Distribution", "AWS::EC2::EIP", "AWS::ElasticLoadBalancingV2::LoadBalancer::application", "AWS::ElasticLoadBalancing::LoadBalancer", "AWS::EC2::VPC", "AWS::EC2::Subnet"
     #   resp.warnings #=> Array
     #   resp.warnings[0].code #=> String
     #   resp.warnings[0].policy_arn #=> String
@@ -4481,6 +4671,15 @@ module Aws::NetworkSecurityManager
     #         existing_customer_web_acl_resolution: "RETROFIT", # required, accepts RETROFIT, OVERRIDE_ASSOCIATION, NO_REMEDIATION
     #         conflict_resolution: "MERGE_WHERE_APPLICABLE", # required, accepts MERGE_WHERE_APPLICABLE
     #       },
+    #       igw_firewall_config: {
+    #         default_subnet_connectivity: "flexible", # accepts flexible, bidirectional, outbound-only
+    #         subnet_connectivity_overrides: [
+    #           {
+    #             connectivity_type: "flexible", # required, accepts flexible, bidirectional, outbound-only, exclude
+    #             scopes: ["Arn"], # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     is_published: false, # required
     #     client_token: "IdempotencyToken",
@@ -4501,11 +4700,16 @@ module Aws::NetworkSecurityManager
     #   resp.update_token #=> String
     #   resp.is_snapshot #=> Boolean
     #   resp.has_published_version #=> Boolean
-    #   resp.firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED"
+    #   resp.firewall_type #=> String, one of "WAF", "SHIELD_ADVANCED", "IGW_FIREWALL"
     #   resp.policy_configuration.remediation_enabled #=> Boolean
     #   resp.policy_configuration.resources_clean_up #=> Boolean
     #   resp.policy_configuration.waf_config.existing_customer_web_acl_resolution #=> String, one of "RETROFIT", "OVERRIDE_ASSOCIATION", "NO_REMEDIATION"
     #   resp.policy_configuration.waf_config.conflict_resolution #=> String, one of "MERGE_WHERE_APPLICABLE"
+    #   resp.policy_configuration.igw_firewall_config.default_subnet_connectivity #=> String, one of "flexible", "bidirectional", "outbound-only"
+    #   resp.policy_configuration.igw_firewall_config.subnet_connectivity_overrides #=> Array
+    #   resp.policy_configuration.igw_firewall_config.subnet_connectivity_overrides[0].connectivity_type #=> String, one of "flexible", "bidirectional", "outbound-only", "exclude"
+    #   resp.policy_configuration.igw_firewall_config.subnet_connectivity_overrides[0].scopes #=> Array
+    #   resp.policy_configuration.igw_firewall_config.subnet_connectivity_overrides[0].scopes[0] #=> String
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/UpdatePolicy AWS API Documentation
@@ -4638,7 +4842,7 @@ module Aws::NetworkSecurityManager
     #   resp.rule_id #=> String
     #   resp.rule_arn #=> String
     #   resp.rule_name #=> String
-    #   resp.firewall_type #=> String, one of "WAF"
+    #   resp.firewall_type #=> String, one of "WAF", "IGW_FIREWALL"
     #   resp.rule_type #=> String, one of "CONFIGURATION", "INSPECTION"
     #   resp.rule_description #=> String
     #   resp.status #=> String, one of "DRAFT", "ACTIVE", "DISABLED"
@@ -4704,6 +4908,7 @@ module Aws::NetworkSecurityManager
     #   * {Types::UpdateScopeOutput#scope_name #scope_name} => String
     #   * {Types::UpdateScopeOutput#scope_description #scope_description} => String
     #   * {Types::UpdateScopeOutput#scope_configuration #scope_configuration} => Types::ScopeConfiguration
+    #   * {Types::UpdateScopeOutput#specialized_scope_type #specialized_scope_type} => String
     #   * {Types::UpdateScopeOutput#status #status} => String
     #   * {Types::UpdateScopeOutput#version #version} => String
     #   * {Types::UpdateScopeOutput#update_token #update_token} => String
@@ -4875,6 +5080,7 @@ module Aws::NetworkSecurityManager
     #   resp.scope_configuration.resource_scopes["ScopeResourceType"].exclude.expression.or #=> Array
     #   resp.scope_configuration.resource_scopes["ScopeResourceType"].exclude.expression.or[0] #=> Types::ResourceLogicalExpression
     #   resp.scope_configuration.resource_scopes["ScopeResourceType"].exclude.expression.not #=> Types::ResourceLogicalExpression
+    #   resp.specialized_scope_type #=> String, one of "IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"
     #   resp.status #=> String, one of "DRAFT", "ACTIVE", "DISABLED"
     #   resp.version #=> String
     #   resp.update_token #=> String
@@ -5005,7 +5211,7 @@ module Aws::NetworkSecurityManager
     #   resp.update_token #=> String
     #   resp.is_snapshot #=> Boolean
     #   resp.has_published_version #=> Boolean
-    #   resp.firewall_type #=> String, one of "WAF"
+    #   resp.firewall_type #=> String, one of "WAF", "IGW_FIREWALL"
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/UpdateTemplate AWS API Documentation
@@ -5035,7 +5241,7 @@ module Aws::NetworkSecurityManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networksecuritymanager'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.153.0 (2026-11-20)
+------------------
+
+* Feature - Adds support for FSx for NetApp ONTAP 3rd Generation file systems and API operations for new FSx for NetApp ONTAP resources
+
 1.152.0 (2026-11-18)
 ------------------
 

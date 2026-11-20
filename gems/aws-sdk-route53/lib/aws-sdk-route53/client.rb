@@ -1499,6 +1499,10 @@ module Aws::Route53
     #               },
     #               bias: 1,
     #             },
+    #             az_affinity: {
+    #               location_type: "AvailabilityZone", # accepts AvailabilityZone, AvailabilityZoneGroup, Region, Partition, Global
+    #               location_id: "AZAffinityLocationId",
+    #             },
     #           },
     #         },
     #       ],
@@ -1546,8 +1550,8 @@ module Aws::Route53
     #
     # @option params [Array<Types::Tag>] :add_tags
     #   A complex type that contains a list of the tags that you want to add
-    #   to the specified health check or hosted zone and/or the tags that you
-    #   want to edit `Value` for.
+    #   to the specified health check, health check source, or hosted zone
+    #   and/or the tags that you want to edit `Value` for.
     #
     #   You can add a maximum of 10 tags to a health check, a health check
     #   source, or a hosted zone.
@@ -2030,6 +2034,31 @@ module Aws::Route53
     #
     #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html
     #
+    # @option params [Boolean] :enable_public_dns_fallback
+    #   Specifies whether to enable public DNS fallback for the hosted zone.
+    #   When public DNS fallback is enabled and a query for a domain name in
+    #   the private hosted zone matches no existing name (`NXDOMAIN`), Route
+    #   53 retries the query against public DNS instead of returning a
+    #   negative response. Fallback does not occur when the name exists but
+    #   has no record of the requested type.
+    #
+    #   Set to `true` to enable public DNS fallback, or `false` to disable it.
+    #   The default is `false`.
+    #
+    #   Public DNS fallback is supported only for private hosted zones. If you
+    #   specify `true` for a public hosted zone, the request fails with an
+    #   `InvalidInput` error.
+    #
+    # @option params [Array<Types::ChangeGuardrail>] :change_guardrails
+    #   Specify the optional Change Guardrails to turn on for the hosted zone.
+    #   Each entry specifies the name and status of a guardrail. For the
+    #   guardrail names and statuses, see `ChangeGuardrail`.
+    #
+    #   Route 53 turns on the guardrails that the tier of the hosted zone
+    #   includes, so you don't need to specify them. If you turn on a
+    #   guardrail that the tier doesn't offer, Route 53 returns an
+    #   `InvalidInput` error.
+    #
     # @return [Types::CreateHostedZoneResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateHostedZoneResponse#hosted_zone #hosted_zone} => Types::HostedZone
@@ -2050,8 +2079,16 @@ module Aws::Route53
     #     hosted_zone_config: {
     #       comment: "ResourceDescription",
     #       private_zone: false,
+    #       hosted_zone_tier: "STANDARD", # accepts STANDARD, ADVANCED
     #     },
     #     delegation_set_id: "ResourceId",
+    #     enable_public_dns_fallback: false,
+    #     change_guardrails: [
+    #       {
+    #         name: "NS_FORMAT_CHECK", # required, accepts NS_FORMAT_CHECK, NS_DELEGATION_AUTHORITY_CHECK, NS_OCCLUSION_CHECK, ALIAS_TARGET_CHECK, ACTIVE_RECORD_CHECK, ACTIVE_DELEGATION_CHECK
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2061,11 +2098,18 @@ module Aws::Route53
     #   resp.hosted_zone.caller_reference #=> String
     #   resp.hosted_zone.config.comment #=> String
     #   resp.hosted_zone.config.private_zone #=> Boolean
+    #   resp.hosted_zone.config.hosted_zone_tier #=> String, one of "STANDARD", "ADVANCED"
     #   resp.hosted_zone.resource_record_set_count #=> Integer
     #   resp.hosted_zone.linked_service.service_principal #=> String
     #   resp.hosted_zone.linked_service.description #=> String
     #   resp.hosted_zone.features.accelerated_recovery_status #=> String, one of "ENABLING", "ENABLE_FAILED", "ENABLING_HOSTED_ZONE_LOCKED", "ENABLED", "DISABLING", "DISABLE_FAILED", "DISABLED", "DISABLING_HOSTED_ZONE_LOCKED"
+    #   resp.hosted_zone.features.public_dns_fallback_status #=> String, one of "ENABLED", "DISABLED", "ENABLING", "DISABLING"
+    #   resp.hosted_zone.features.change_history.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.hosted_zone.features.change_history.retention_starts_at #=> Time
     #   resp.hosted_zone.features.failure_reasons.accelerated_recovery #=> String
+    #   resp.hosted_zone.features.change_guardrails #=> Array
+    #   resp.hosted_zone.features.change_guardrails[0].name #=> String, one of "NS_FORMAT_CHECK", "NS_DELEGATION_AUTHORITY_CHECK", "NS_OCCLUSION_CHECK", "ALIAS_TARGET_CHECK", "ACTIVE_RECORD_CHECK", "ACTIVE_DELEGATION_CHECK"
+    #   resp.hosted_zone.features.change_guardrails[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.change_info.id #=> String
     #   resp.change_info.status #=> String, one of "PENDING", "INSYNC"
     #   resp.change_info.submitted_at #=> Time
@@ -3497,7 +3541,7 @@ module Aws::Route53
     #   * **MAX\_HEALTH\_CHECKS\_BY\_OWNER**: The maximum number of health
     #     checks that you can create using the current account.
     #
-    #   * **MAX\_HEALTH\_CHECK\_SOURCES\_BY\_OWNER** The maximum number of
+    #   * **MAX\_HEALTH\_CHECK\_SOURCES\_BY\_OWNER**: The maximum number of
     #     health check sources that you can create using the current account.
     #
     #   * **MAX\_HOSTED\_ZONES\_BY\_OWNER**: The maximum number of hosted
@@ -4042,11 +4086,18 @@ module Aws::Route53
     #   resp.hosted_zone.caller_reference #=> String
     #   resp.hosted_zone.config.comment #=> String
     #   resp.hosted_zone.config.private_zone #=> Boolean
+    #   resp.hosted_zone.config.hosted_zone_tier #=> String, one of "STANDARD", "ADVANCED"
     #   resp.hosted_zone.resource_record_set_count #=> Integer
     #   resp.hosted_zone.linked_service.service_principal #=> String
     #   resp.hosted_zone.linked_service.description #=> String
     #   resp.hosted_zone.features.accelerated_recovery_status #=> String, one of "ENABLING", "ENABLE_FAILED", "ENABLING_HOSTED_ZONE_LOCKED", "ENABLED", "DISABLING", "DISABLE_FAILED", "DISABLED", "DISABLING_HOSTED_ZONE_LOCKED"
+    #   resp.hosted_zone.features.public_dns_fallback_status #=> String, one of "ENABLED", "DISABLED", "ENABLING", "DISABLING"
+    #   resp.hosted_zone.features.change_history.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.hosted_zone.features.change_history.retention_starts_at #=> Time
     #   resp.hosted_zone.features.failure_reasons.accelerated_recovery #=> String
+    #   resp.hosted_zone.features.change_guardrails #=> Array
+    #   resp.hosted_zone.features.change_guardrails[0].name #=> String, one of "NS_FORMAT_CHECK", "NS_DELEGATION_AUTHORITY_CHECK", "NS_OCCLUSION_CHECK", "ALIAS_TARGET_CHECK", "ACTIVE_RECORD_CHECK", "ACTIVE_DELEGATION_CHECK"
+    #   resp.hosted_zone.features.change_guardrails[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.delegation_set.id #=> String
     #   resp.delegation_set.caller_reference #=> String
     #   resp.delegation_set.name_servers #=> Array
@@ -4061,6 +4112,88 @@ module Aws::Route53
     # @param [Hash] params ({})
     def get_hosted_zone(params = {}, options = {})
       req = build_request(:get_hosted_zone, params)
+      req.send_request(options)
+    end
+
+    # Returns one change batch from the change history of a hosted zone,
+    # including every change in the batch. Each resource record set is in
+    # the same form that `ListResourceRecordSets` returns. For example, the
+    # name is in lowercase and ends with a dot. For an `UPSERT` or a
+    # `DELETE`, the response doesn't contain the values that the resource
+    # record set had before the change.
+    #
+    # If the change batch isn't in the hosted zone's retained change
+    # history, for example because it's in another hosted zone, it expired,
+    # or it's from before `RetentionStartsAt`, Route 53 returns a
+    # `NoSuchChange` error. If Change History isn't turned on for the
+    # hosted zone, Route 53 returns a `FeatureNotEnabled` error.
+    #
+    # @option params [required, String] :hosted_zone_id
+    #   The ID of the hosted zone that contains the change batch.
+    #
+    # @option params [required, String] :change_id
+    #   The ID of the change batch that you want to get. This is the ID that
+    #   `ChangeResourceRecordSets` returns in `ChangeInfo/Id`. You can specify
+    #   the ID with or without the `/change/` prefix.
+    #
+    # @return [Types::GetHostedZoneChangeBatchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetHostedZoneChangeBatchResponse#change_batch_summary #change_batch_summary} => Types::ChangeBatchSummary
+    #   * {Types::GetHostedZoneChangeBatchResponse#change_batch #change_batch} => Types::ChangeBatch
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_hosted_zone_change_batch({
+    #     hosted_zone_id: "ResourceId", # required
+    #     change_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.change_batch_summary.change_id #=> String
+    #   resp.change_batch_summary.operation #=> String, one of "CreateHostedZone", "DeleteHostedZone", "ChangeResourceRecordSets"
+    #   resp.change_batch_summary.submitted_at #=> Time
+    #   resp.change_batch_summary.submitted_by #=> String
+    #   resp.change_batch_summary.request_id #=> String
+    #   resp.change_batch_summary.comment #=> String
+    #   resp.change_batch_summary.change_count #=> Integer
+    #   resp.change_batch.comment #=> String
+    #   resp.change_batch.changes #=> Array
+    #   resp.change_batch.changes[0].action #=> String, one of "CREATE", "DELETE", "UPSERT"
+    #   resp.change_batch.changes[0].resource_record_set.name #=> String
+    #   resp.change_batch.changes[0].resource_record_set.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS", "TLSA", "SSHFP", "SVCB", "HTTPS"
+    #   resp.change_batch.changes[0].resource_record_set.set_identifier #=> String
+    #   resp.change_batch.changes[0].resource_record_set.weight #=> Integer
+    #   resp.change_batch.changes[0].resource_record_set.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "eu-central-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-north-1", "cn-northwest-1", "ap-east-1", "me-south-1", "me-central-1", "ap-south-1", "ap-south-2", "af-south-1", "eu-south-1", "eu-south-2", "ap-southeast-4", "il-central-1", "ca-west-1", "ap-southeast-5", "mx-central-1", "ap-southeast-7", "us-gov-east-1", "us-gov-west-1", "ap-east-2", "ap-southeast-6", "eusc-de-east-1"
+    #   resp.change_batch.changes[0].resource_record_set.geo_location.continent_code #=> String
+    #   resp.change_batch.changes[0].resource_record_set.geo_location.country_code #=> String
+    #   resp.change_batch.changes[0].resource_record_set.geo_location.subdivision_code #=> String
+    #   resp.change_batch.changes[0].resource_record_set.failover #=> String, one of "PRIMARY", "SECONDARY"
+    #   resp.change_batch.changes[0].resource_record_set.multi_value_answer #=> Boolean
+    #   resp.change_batch.changes[0].resource_record_set.ttl #=> Integer
+    #   resp.change_batch.changes[0].resource_record_set.resource_records #=> Array
+    #   resp.change_batch.changes[0].resource_record_set.resource_records[0].value #=> String
+    #   resp.change_batch.changes[0].resource_record_set.alias_target.hosted_zone_id #=> String
+    #   resp.change_batch.changes[0].resource_record_set.alias_target.dns_name #=> String
+    #   resp.change_batch.changes[0].resource_record_set.alias_target.evaluate_target_health #=> Boolean
+    #   resp.change_batch.changes[0].resource_record_set.health_check_id #=> String
+    #   resp.change_batch.changes[0].resource_record_set.traffic_policy_instance_id #=> String
+    #   resp.change_batch.changes[0].resource_record_set.cidr_routing_config.collection_id #=> String
+    #   resp.change_batch.changes[0].resource_record_set.cidr_routing_config.location_name #=> String
+    #   resp.change_batch.changes[0].resource_record_set.geo_proximity_location.aws_region #=> String
+    #   resp.change_batch.changes[0].resource_record_set.geo_proximity_location.local_zone_group #=> String
+    #   resp.change_batch.changes[0].resource_record_set.geo_proximity_location.coordinates.latitude #=> String
+    #   resp.change_batch.changes[0].resource_record_set.geo_proximity_location.coordinates.longitude #=> String
+    #   resp.change_batch.changes[0].resource_record_set.geo_proximity_location.bias #=> Integer
+    #   resp.change_batch.changes[0].resource_record_set.az_affinity.location_type #=> String, one of "AvailabilityZone", "AvailabilityZoneGroup", "Region", "Partition", "Global"
+    #   resp.change_batch.changes[0].resource_record_set.az_affinity.location_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneChangeBatch AWS API Documentation
+    #
+    # @overload get_hosted_zone_change_batch(params = {})
+    # @param [Hash] params ({})
+    def get_hosted_zone_change_batch(params = {}, options = {})
+      req = build_request(:get_hosted_zone_change_batch, params)
       req.send_request(options)
     end
 
@@ -4845,6 +4978,132 @@ module Aws::Route53
       req.send_request(options)
     end
 
+    # Lists the change batches in an Amazon Route 53 hosted zone. For each
+    # change batch, the response contains its change ID, the operation that
+    # submitted it, and when and by whom it was submitted. It also contains
+    # the request ID, the comment if there is one, and the number of
+    # changes. Use this list to review who changed the hosted zone and when.
+    #
+    # Each change batch records one `ChangeResourceRecordSets` or
+    # `CreateHostedZone` request. A `CreateHostedZone` change batch has a
+    # `ChangeCount` of 0.
+    #
+    # You can read a change batch for 365 days after it was submitted, but
+    # not from before the `RetentionStartsAt` time that `GetHostedZone`
+    # returns in `Features/ChangeHistory`. If Change History isn't turned
+    # on for the hosted zone, Route 53 returns a `FeatureNotEnabled` error.
+    #
+    # Results are paginated. To get the next page, use the `NextToken` value
+    # from the response. To get the changes in a change batch, use
+    # `GetHostedZoneChangeBatch`.
+    #
+    # @option params [required, String] :hosted_zone_id
+    #   The ID of the hosted zone that you want to list change batches for.
+    #
+    # @option params [String] :submitted_after
+    #   The start of the time range, in ISO 8601 format with a UTC offset, for
+    #   example `2026-12-01T00:00:00Z` or `2026-12-01T05:30:00.123+05:30`. You
+    #   can specify up to nine fractional digits. Route 53 rounds a value with
+    #   more than millisecond precision up to the next millisecond. The range
+    #   includes `SubmittedAfter`.
+    #
+    #   If you don't specify a value, the range starts at
+    #   `RetentionStartsAt`. If you specify a value that's earlier than
+    #   `RetentionStartsAt`, Route 53 returns an `InvalidInput` error that
+    #   includes the earliest time that you can specify.
+    #
+    #   Because submit times can be slightly out of order, a returned
+    #   `SubmittedAt` can fall just outside the range that you requested.
+    #
+    # @option params [String] :submitted_before
+    #   The end of the time range, in ISO 8601 format with a UTC offset, for
+    #   example `2026-12-02T00:00:00Z` or `2026-12-02T05:30:00.123+05:30`. You
+    #   can specify up to nine fractional digits. Route 53 rounds a value with
+    #   more than millisecond precision up to the next millisecond. The range
+    #   excludes `SubmittedBefore`. The value must be at least one millisecond
+    #   later than `SubmittedAfter`, or later than `RetentionStartsAt` if you
+    #   omit `SubmittedAfter`.
+    #
+    #   If the range ends within a few seconds of the current time, a later
+    #   request for the same range might return more change batches.
+    #
+    # @option params [String] :start_after_change_id
+    #   Returns the change batches after the specified change batch, not
+    #   including it. Use this to read new change batches since the last
+    #   change batch that you processed.
+    #
+    #   If you specify `StartAfterChangeId`, you must also specify `SortOrder`
+    #   `ASCENDING`, and you can't specify `SubmittedAfter` or
+    #   `SubmittedBefore`. If the change batch has expired, is from before
+    #   `RetentionStartsAt`, or isn't in the hosted zone, Route 53 returns an
+    #   `InvalidInput` error.
+    #
+    # @option params [String] :sort_order
+    #   The order in which you want Route 53 to return change batches. Valid
+    #   values:
+    #
+    #   * `DESCENDING` – Newest first. This is the default.
+    #
+    #   * `ASCENDING` – Oldest first.
+    #
+    # @option params [String] :max_results
+    #   The maximum number of change batches that you want Route 53 to return
+    #   in this response. Specify a value from 1 to 1,000. If you don't
+    #   specify a value, Route 53 returns up to 100 change batches.
+    #
+    # @option params [String] :next_token
+    #   If the response to a previous `ListHostedZoneChangeBatches` request
+    #   included a `NextToken` element, specify that value here to get the
+    #   next page of results. If the previous request included any of the
+    #   following parameters, include them with exactly the same values:
+    #   `SubmittedAfter`, `SubmittedBefore`, `SortOrder`, and
+    #   `StartAfterChangeId`. If you don't, Route 53 returns an
+    #   `InvalidInput` error. If you don't specify `NextToken`, Route 53
+    #   returns the first page of results.
+    #
+    #   A `NextToken` expires 24 hours after Route 53 returns it, and you can
+    #   use it only with the hosted zone that it was returned for.
+    #
+    # @return [Types::ListHostedZoneChangeBatchesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListHostedZoneChangeBatchesResponse#change_batch_summaries #change_batch_summaries} => Array&lt;Types::ChangeBatchSummary&gt;
+    #   * {Types::ListHostedZoneChangeBatchesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_hosted_zone_change_batches({
+    #     hosted_zone_id: "ResourceId", # required
+    #     submitted_after: "ChangeHistoryTimeBound",
+    #     submitted_before: "ChangeHistoryTimeBound",
+    #     start_after_change_id: "ResourceId",
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #     max_results: "MaxResults",
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.change_batch_summaries #=> Array
+    #   resp.change_batch_summaries[0].change_id #=> String
+    #   resp.change_batch_summaries[0].operation #=> String, one of "CreateHostedZone", "DeleteHostedZone", "ChangeResourceRecordSets"
+    #   resp.change_batch_summaries[0].submitted_at #=> Time
+    #   resp.change_batch_summaries[0].submitted_by #=> String
+    #   resp.change_batch_summaries[0].request_id #=> String
+    #   resp.change_batch_summaries[0].comment #=> String
+    #   resp.change_batch_summaries[0].change_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZoneChangeBatches AWS API Documentation
+    #
+    # @overload list_hosted_zone_change_batches(params = {})
+    # @param [Hash] params ({})
+    def list_hosted_zone_change_batches(params = {}, options = {})
+      req = build_request(:list_hosted_zone_change_batches, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of the public and private hosted zones that are
     # associated with the current Amazon Web Services account. The response
     # includes a `HostedZones` child element for each hosted zone.
@@ -4907,11 +5166,18 @@ module Aws::Route53
     #   resp.hosted_zones[0].caller_reference #=> String
     #   resp.hosted_zones[0].config.comment #=> String
     #   resp.hosted_zones[0].config.private_zone #=> Boolean
+    #   resp.hosted_zones[0].config.hosted_zone_tier #=> String, one of "STANDARD", "ADVANCED"
     #   resp.hosted_zones[0].resource_record_set_count #=> Integer
     #   resp.hosted_zones[0].linked_service.service_principal #=> String
     #   resp.hosted_zones[0].linked_service.description #=> String
     #   resp.hosted_zones[0].features.accelerated_recovery_status #=> String, one of "ENABLING", "ENABLE_FAILED", "ENABLING_HOSTED_ZONE_LOCKED", "ENABLED", "DISABLING", "DISABLE_FAILED", "DISABLED", "DISABLING_HOSTED_ZONE_LOCKED"
+    #   resp.hosted_zones[0].features.public_dns_fallback_status #=> String, one of "ENABLED", "DISABLED", "ENABLING", "DISABLING"
+    #   resp.hosted_zones[0].features.change_history.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.hosted_zones[0].features.change_history.retention_starts_at #=> Time
     #   resp.hosted_zones[0].features.failure_reasons.accelerated_recovery #=> String
+    #   resp.hosted_zones[0].features.change_guardrails #=> Array
+    #   resp.hosted_zones[0].features.change_guardrails[0].name #=> String, one of "NS_FORMAT_CHECK", "NS_DELEGATION_AUTHORITY_CHECK", "NS_OCCLUSION_CHECK", "ALIAS_TARGET_CHECK", "ACTIVE_RECORD_CHECK", "ACTIVE_DELEGATION_CHECK"
+    #   resp.hosted_zones[0].features.change_guardrails[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.marker #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.next_marker #=> String
@@ -5041,11 +5307,18 @@ module Aws::Route53
     #   resp.hosted_zones[0].caller_reference #=> String
     #   resp.hosted_zones[0].config.comment #=> String
     #   resp.hosted_zones[0].config.private_zone #=> Boolean
+    #   resp.hosted_zones[0].config.hosted_zone_tier #=> String, one of "STANDARD", "ADVANCED"
     #   resp.hosted_zones[0].resource_record_set_count #=> Integer
     #   resp.hosted_zones[0].linked_service.service_principal #=> String
     #   resp.hosted_zones[0].linked_service.description #=> String
     #   resp.hosted_zones[0].features.accelerated_recovery_status #=> String, one of "ENABLING", "ENABLE_FAILED", "ENABLING_HOSTED_ZONE_LOCKED", "ENABLED", "DISABLING", "DISABLE_FAILED", "DISABLED", "DISABLING_HOSTED_ZONE_LOCKED"
+    #   resp.hosted_zones[0].features.public_dns_fallback_status #=> String, one of "ENABLED", "DISABLED", "ENABLING", "DISABLING"
+    #   resp.hosted_zones[0].features.change_history.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.hosted_zones[0].features.change_history.retention_starts_at #=> Time
     #   resp.hosted_zones[0].features.failure_reasons.accelerated_recovery #=> String
+    #   resp.hosted_zones[0].features.change_guardrails #=> Array
+    #   resp.hosted_zones[0].features.change_guardrails[0].name #=> String, one of "NS_FORMAT_CHECK", "NS_DELEGATION_AUTHORITY_CHECK", "NS_OCCLUSION_CHECK", "ALIAS_TARGET_CHECK", "ACTIVE_RECORD_CHECK", "ACTIVE_DELEGATION_CHECK"
+    #   resp.hosted_zones[0].features.change_guardrails[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.dns_name #=> String
     #   resp.hosted_zone_id #=> String
     #   resp.is_truncated #=> Boolean
@@ -5240,6 +5513,159 @@ module Aws::Route53
     # @param [Hash] params ({})
     def list_query_logging_configs(params = {}, options = {})
       req = build_request(:list_query_logging_configs, params)
+      req.send_request(options)
+    end
+
+    # Lists the individual changes in the change history of a hosted zone.
+    # Each entry is one change, with the full resource record set that the
+    # change wrote or deleted. To list only the changes to the resource
+    # record sets that have a specific name and type, specify `RecordName`
+    # and `RecordType`. Weighted, latency, and other resource record sets
+    # that have the same name and type appear as separate entries, each with
+    # its `SetIdentifier`.
+    #
+    # A change can take a few seconds to appear in
+    # `ListResourceRecordSetChanges` after it appears in
+    # `ListHostedZoneChangeBatches`. For a complete, ordered list of
+    # changes, use `ListHostedZoneChangeBatches`.
+    #
+    # Results are paginated. To get the next page, use the `NextToken` value
+    # from the response.
+    #
+    # If Change History isn't turned on for the hosted zone, Route 53
+    # returns a `FeatureNotEnabled` error.
+    #
+    # @option params [required, String] :hosted_zone_id
+    #   The ID of the hosted zone that you want to list changes for.
+    #
+    # @option params [String] :record_name
+    #   The name of the resource record sets that you want to list changes
+    #   for, for example, `www.example.com`. The name must be the name of the
+    #   hosted zone or a subdomain of it. If you specify `RecordName`, you
+    #   must also specify `RecordType`. If you specify neither, the results
+    #   include every change in the hosted zone.
+    #
+    # @option params [String] :record_type
+    #   The DNS record type of the resource record sets that you want to list
+    #   changes for. If you specify `RecordType`, you must also specify
+    #   `RecordName`.
+    #
+    # @option params [String] :submitted_after
+    #   The start of the time range, in ISO 8601 format with a UTC offset, for
+    #   example `2026-12-01T00:00:00Z` or `2026-12-01T05:30:00.123+05:30`. You
+    #   can specify up to nine fractional digits. Route 53 rounds a value with
+    #   more than millisecond precision up to the next millisecond. The range
+    #   includes `SubmittedAfter`.
+    #
+    #   If you don't specify a value, the range starts at
+    #   `RetentionStartsAt`. If you specify a value that's earlier than
+    #   `RetentionStartsAt`, Route 53 returns an `InvalidInput` error that
+    #   includes the earliest time that you can specify.
+    #
+    #   Because submit times can be slightly out of order, a returned
+    #   `SubmittedAt` can fall just outside the range that you requested.
+    #
+    # @option params [String] :submitted_before
+    #   The end of the time range, in ISO 8601 format with a UTC offset, for
+    #   example `2026-12-02T00:00:00Z` or `2026-12-02T05:30:00.123+05:30`. You
+    #   can specify up to nine fractional digits. Route 53 rounds a value with
+    #   more than millisecond precision up to the next millisecond. The range
+    #   excludes `SubmittedBefore`. The value must be at least one millisecond
+    #   later than `SubmittedAfter`, or later than `RetentionStartsAt` if you
+    #   omit `SubmittedAfter`.
+    #
+    #   If the range ends within a few seconds of the current time, a later
+    #   request for the same range might return more changes.
+    #
+    # @option params [String] :sort_order
+    #   The order in which you want Route 53 to return changes. Valid values:
+    #
+    #   * `DESCENDING` – Newest first. This is the default.
+    #
+    #   * `ASCENDING` – Oldest first.
+    #
+    # @option params [String] :max_results
+    #   The maximum number of changes that you want Route 53 to return in this
+    #   response. Specify a value from 1 to 100. If you don't specify a
+    #   value, Route 53 returns up to 100 changes.
+    #
+    # @option params [String] :next_token
+    #   If the response to a previous `ListResourceRecordSetChanges` request
+    #   included a `NextToken` element, specify that value here to get the
+    #   next page of results. If the previous request included any of the
+    #   following parameters, include them with exactly the same values:
+    #   `SubmittedAfter`, `SubmittedBefore`, `SortOrder`, `RecordName`, and
+    #   `RecordType`. If you don't, Route 53 returns an `InvalidInput` error.
+    #   If you don't specify `NextToken`, Route 53 returns the first page of
+    #   results.
+    #
+    #   A `NextToken` expires 24 hours after Route 53 returns it, and you can
+    #   use it only with the hosted zone that it was returned for.
+    #
+    # @return [Types::ListResourceRecordSetChangesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceRecordSetChangesResponse#resource_record_set_changes #resource_record_set_changes} => Array&lt;Types::ResourceRecordSetChange&gt;
+    #   * {Types::ListResourceRecordSetChangesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_record_set_changes({
+    #     hosted_zone_id: "ResourceId", # required
+    #     record_name: "DNSName",
+    #     record_type: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS, TLSA, SSHFP, SVCB, HTTPS
+    #     submitted_after: "ChangeHistoryTimeBound",
+    #     submitted_before: "ChangeHistoryTimeBound",
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #     max_results: "MaxResults",
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_record_set_changes #=> Array
+    #   resp.resource_record_set_changes[0].change_id #=> String
+    #   resp.resource_record_set_changes[0].operation #=> String, one of "CreateHostedZone", "DeleteHostedZone", "ChangeResourceRecordSets"
+    #   resp.resource_record_set_changes[0].submitted_at #=> Time
+    #   resp.resource_record_set_changes[0].submitted_by #=> String
+    #   resp.resource_record_set_changes[0].request_id #=> String
+    #   resp.resource_record_set_changes[0].action #=> String, one of "CREATE", "DELETE", "UPSERT"
+    #   resp.resource_record_set_changes[0].resource_record_set.name #=> String
+    #   resp.resource_record_set_changes[0].resource_record_set.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS", "TLSA", "SSHFP", "SVCB", "HTTPS"
+    #   resp.resource_record_set_changes[0].resource_record_set.set_identifier #=> String
+    #   resp.resource_record_set_changes[0].resource_record_set.weight #=> Integer
+    #   resp.resource_record_set_changes[0].resource_record_set.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "eu-central-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-north-1", "cn-northwest-1", "ap-east-1", "me-south-1", "me-central-1", "ap-south-1", "ap-south-2", "af-south-1", "eu-south-1", "eu-south-2", "ap-southeast-4", "il-central-1", "ca-west-1", "ap-southeast-5", "mx-central-1", "ap-southeast-7", "us-gov-east-1", "us-gov-west-1", "ap-east-2", "ap-southeast-6", "eusc-de-east-1"
+    #   resp.resource_record_set_changes[0].resource_record_set.geo_location.continent_code #=> String
+    #   resp.resource_record_set_changes[0].resource_record_set.geo_location.country_code #=> String
+    #   resp.resource_record_set_changes[0].resource_record_set.geo_location.subdivision_code #=> String
+    #   resp.resource_record_set_changes[0].resource_record_set.failover #=> String, one of "PRIMARY", "SECONDARY"
+    #   resp.resource_record_set_changes[0].resource_record_set.multi_value_answer #=> Boolean
+    #   resp.resource_record_set_changes[0].resource_record_set.ttl #=> Integer
+    #   resp.resource_record_set_changes[0].resource_record_set.resource_records #=> Array
+    #   resp.resource_record_set_changes[0].resource_record_set.resource_records[0].value #=> String
+    #   resp.resource_record_set_changes[0].resource_record_set.alias_target.hosted_zone_id #=> String
+    #   resp.resource_record_set_changes[0].resource_record_set.alias_target.dns_name #=> String
+    #   resp.resource_record_set_changes[0].resource_record_set.alias_target.evaluate_target_health #=> Boolean
+    #   resp.resource_record_set_changes[0].resource_record_set.health_check_id #=> String
+    #   resp.resource_record_set_changes[0].resource_record_set.traffic_policy_instance_id #=> String
+    #   resp.resource_record_set_changes[0].resource_record_set.cidr_routing_config.collection_id #=> String
+    #   resp.resource_record_set_changes[0].resource_record_set.cidr_routing_config.location_name #=> String
+    #   resp.resource_record_set_changes[0].resource_record_set.geo_proximity_location.aws_region #=> String
+    #   resp.resource_record_set_changes[0].resource_record_set.geo_proximity_location.local_zone_group #=> String
+    #   resp.resource_record_set_changes[0].resource_record_set.geo_proximity_location.coordinates.latitude #=> String
+    #   resp.resource_record_set_changes[0].resource_record_set.geo_proximity_location.coordinates.longitude #=> String
+    #   resp.resource_record_set_changes[0].resource_record_set.geo_proximity_location.bias #=> Integer
+    #   resp.resource_record_set_changes[0].resource_record_set.az_affinity.location_type #=> String, one of "AvailabilityZone", "AvailabilityZoneGroup", "Region", "Partition", "Global"
+    #   resp.resource_record_set_changes[0].resource_record_set.az_affinity.location_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListResourceRecordSetChanges AWS API Documentation
+    #
+    # @overload list_resource_record_set_changes(params = {})
+    # @param [Hash] params ({})
+    def list_resource_record_set_changes(params = {}, options = {})
+      req = build_request(:list_resource_record_set_changes, params)
       req.send_request(options)
     end
 
@@ -5495,6 +5921,8 @@ module Aws::Route53
     #   resp.resource_record_sets[0].geo_proximity_location.coordinates.latitude #=> String
     #   resp.resource_record_sets[0].geo_proximity_location.coordinates.longitude #=> String
     #   resp.resource_record_sets[0].geo_proximity_location.bias #=> Integer
+    #   resp.resource_record_sets[0].az_affinity.location_type #=> String, one of "AvailabilityZone", "AvailabilityZoneGroup", "Region", "Partition", "Global"
+    #   resp.resource_record_sets[0].az_affinity.location_id #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.next_record_name #=> String
     #   resp.next_record_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS", "TLSA", "SSHFP", "SVCB", "HTTPS"
@@ -6730,11 +7158,18 @@ module Aws::Route53
     #   resp.hosted_zone.caller_reference #=> String
     #   resp.hosted_zone.config.comment #=> String
     #   resp.hosted_zone.config.private_zone #=> Boolean
+    #   resp.hosted_zone.config.hosted_zone_tier #=> String, one of "STANDARD", "ADVANCED"
     #   resp.hosted_zone.resource_record_set_count #=> Integer
     #   resp.hosted_zone.linked_service.service_principal #=> String
     #   resp.hosted_zone.linked_service.description #=> String
     #   resp.hosted_zone.features.accelerated_recovery_status #=> String, one of "ENABLING", "ENABLE_FAILED", "ENABLING_HOSTED_ZONE_LOCKED", "ENABLED", "DISABLING", "DISABLE_FAILED", "DISABLED", "DISABLING_HOSTED_ZONE_LOCKED"
+    #   resp.hosted_zone.features.public_dns_fallback_status #=> String, one of "ENABLED", "DISABLED", "ENABLING", "DISABLING"
+    #   resp.hosted_zone.features.change_history.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.hosted_zone.features.change_history.retention_starts_at #=> Time
     #   resp.hosted_zone.features.failure_reasons.accelerated_recovery #=> String
+    #   resp.hosted_zone.features.change_guardrails #=> Array
+    #   resp.hosted_zone.features.change_guardrails[0].name #=> String, one of "NS_FORMAT_CHECK", "NS_DELEGATION_AUTHORITY_CHECK", "NS_OCCLUSION_CHECK", "ALIAS_TARGET_CHECK", "ACTIVE_RECORD_CHECK", "ACTIVE_DELEGATION_CHECK"
+    #   resp.hosted_zone.features.change_guardrails[0].status #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneComment AWS API Documentation
     #
@@ -6747,10 +7182,16 @@ module Aws::Route53
 
     # Updates the features configuration for a hosted zone. This operation
     # allows you to enable or disable specific features for your hosted
-    # zone, such as accelerated recovery.
+    # zone, such as accelerated recovery and public DNS fallback.
     #
     # Accelerated recovery enables you to update DNS records in your public
     # hosted zone even when the us-east-1 region is unavailable.
+    #
+    # Public DNS fallback enables Route 53 to retry a query against public
+    # DNS when a query for a domain name in a private hosted zone matches no
+    # existing name (`NXDOMAIN`). Fallback does not occur when the name
+    # exists but has no record of the requested type. Public DNS fallback is
+    # supported only for private hosted zones.
     #
     # @option params [required, String] :hosted_zone_id
     #   The ID of the hosted zone for which you want to update features. This
@@ -6761,6 +7202,38 @@ module Aws::Route53
     #   Set to `true` to enable accelerated recovery, or `false` to disable
     #   it.
     #
+    # @option params [Boolean] :enable_public_dns_fallback
+    #   Specifies whether to enable public DNS fallback for the hosted zone.
+    #   Set to `true` to enable public DNS fallback, or `false` to disable it.
+    #
+    #   Public DNS fallback applies to the entire hosted zone and to all VPCs
+    #   that are associated with it. To check whether a change has propagated,
+    #   call `GetHostedZone` and review `PublicDNSFallbackStatus` in the
+    #   response.
+    #
+    #   Public DNS fallback is supported only for private hosted zones.
+    #
+    # @option params [Array<Types::ChangeGuardrail>] :change_guardrails
+    #   Specify the Change Guardrails to turn on or off for the hosted zone.
+    #   Each entry specifies the name of a guardrail and one of the following
+    #   statuses:
+    #
+    #   * `ENABLED`: Turns on the guardrail.
+    #
+    #   * `DISABLED`: Turns off the guardrail.
+    #
+    #   Guardrails that aren't in the request keep their current status.
+    #
+    #   You can turn on an optional guardrail only if the tier of the hosted
+    #   zone offers it. You can't turn off a guardrail that the tier
+    #   includes, such as `NS_FORMAT_CHECK`. In either case, Route 53 returns
+    #   an `InvalidInput` error.
+    #
+    # @option params [Boolean] :dry_run
+    #   Specifies whether to validate the request without changing any
+    #   features. Route 53 returns the same errors as for a real request, but
+    #   doesn't change the hosted zone. The default is `false`.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -6768,6 +7241,14 @@ module Aws::Route53
     #   resp = client.update_hosted_zone_features({
     #     hosted_zone_id: "ResourceId", # required
     #     enable_accelerated_recovery: false,
+    #     enable_public_dns_fallback: false,
+    #     change_guardrails: [
+    #       {
+    #         name: "NS_FORMAT_CHECK", # required, accepts NS_FORMAT_CHECK, NS_DELEGATION_AUTHORITY_CHECK, NS_OCCLUSION_CHECK, ALIAS_TARGET_CHECK, ACTIVE_RECORD_CHECK, ACTIVE_DELEGATION_CHECK
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
+    #     ],
+    #     dry_run: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneFeatures AWS API Documentation
@@ -6776,6 +7257,60 @@ module Aws::Route53
     # @param [Hash] params ({})
     def update_hosted_zone_features(params = {}, options = {})
       req = build_request(:update_hosted_zone_features, params)
+      req.send_request(options)
+    end
+
+    # Changes the tier of a hosted zone. The tier determines which features
+    # the hosted zone includes and which optional features you can turn on.
+    # For pricing information, see [Amazon Route 53 pricing][1] on the AWS
+    # website.
+    #
+    # When the hosted zone moves to a new tier, Route 53 turns on the
+    # features that the new tier includes. Route 53 also disables any
+    # enabled features that the new tier doesn't include.
+    #
+    # Before you move a hosted zone to a tier that doesn't offer an
+    # optional feature that you turned on, turn off that feature. You can't
+    # change the tier of a hosted zone that uses a CloudFront flat-rate
+    # pricing plan.
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/route53/pricing/
+    #
+    # @option params [required, String] :hosted_zone_id
+    #   Specify the ID of the hosted zone whose tier you want to change.
+    #
+    # @option params [required, String] :hosted_zone_tier
+    #   Specify the tier to move the hosted zone to. Valid values are the
+    #   following:
+    #
+    #   * `STANDARD`: The default tier for new hosted zones.
+    #
+    #   * `ADVANCED`: A tier that includes Change History and offers more
+    #     optional features.
+    #
+    # @option params [Boolean] :dry_run
+    #   Specifies whether to validate the request without changing the tier.
+    #   Route 53 returns the same errors as for a real request, but doesn't
+    #   change the hosted zone. The default is `false`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_hosted_zone_tier({
+    #     hosted_zone_id: "ResourceId", # required
+    #     hosted_zone_tier: "STANDARD", # required, accepts STANDARD, ADVANCED
+    #     dry_run: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneTier AWS API Documentation
+    #
+    # @overload update_hosted_zone_tier(params = {})
+    # @param [Hash] params ({})
+    def update_hosted_zone_tier(params = {}, options = {})
+      req = build_request(:update_hosted_zone_tier, params)
       req.send_request(options)
     end
 
@@ -6921,7 +7456,7 @@ module Aws::Route53
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.153.0'
+      context[:gem_version] = '1.154.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -6989,7 +7524,7 @@ module Aws::Route53
     #
     # | waiter_name                  | params                           | :delay   | :max_attempts |
     # | ---------------------------- | -------------------------------- | -------- | ------------- |
-    # | health_check_source_created  | {Client#get_health_check_source} | 15       | 40            |
+    # | health_check_source_created  | {Client#get_health_check_source} | 15       | 100           |
     # | health_check_source_deleted  | {Client#get_health_check_source} | 15       | 40            |
     # | resource_record_sets_changed | {Client#get_change}              | 30       | 60            |
     #

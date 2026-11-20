@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.237.0 (2026-11-20)
+------------------
+
+* Feature - This release adds a CloudProviders field to SSM documents. Specify the cloud providers (AWS, Azure, GCP) a document can run on in CreateDocument and UpdateDocument, view it in DescribeDocument, ListDocuments and ListDocumentVersions, and filter ListDocuments by cloud provider.
+
 1.236.0 (2026-11-18)
 ------------------
 

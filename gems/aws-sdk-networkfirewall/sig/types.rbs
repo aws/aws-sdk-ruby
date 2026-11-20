@@ -34,6 +34,12 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class AddressTranslations
+      attr_accessor public_i_pv_6_addresses: ::Array[::String]
+      attr_accessor public_i_pv_4_addresses: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class AnalysisReport
       attr_accessor analysis_report_id: ::String
       attr_accessor analysis_type: ("TLS_SNI" | "HTTP_HOST")
@@ -64,6 +70,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor availability_zone_mappings: ::Array[Types::AvailabilityZoneMapping]
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -80,6 +87,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor firewall_policy_arn: ::String
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -111,7 +119,7 @@ module Aws::NetworkFirewall
     class Attachment
       attr_accessor subnet_id: ::String
       attr_accessor endpoint_id: ::String
-      attr_accessor status: ("CREATING" | "DELETING" | "FAILED" | "ERROR" | "SCALING" | "READY")
+      attr_accessor status: ("CREATING" | "DELETING" | "FAILED" | "ERROR" | "SCALING" | "READY" | "STANDBY")
       attr_accessor status_message: ::String
       attr_accessor dns_name: ::String
       SENSITIVE: []
@@ -254,6 +262,7 @@ module Aws::NetworkFirewall
       attr_accessor transit_gateway_id: ::String
       attr_accessor availability_zone_mappings: ::Array[Types::AvailabilityZoneMapping]
       attr_accessor availability_zone_change_protection: bool
+      attr_accessor igw_firewall_configuration: Types::IgwFirewallConfiguration
       attr_accessor nat_gateway_create_mappings: ::Array[Types::NatGatewayCreateMapping]
       attr_accessor proxy_settings: Types::ProxySettings
       attr_accessor vpc_endpoint: Types::VpcEndpoint
@@ -365,6 +374,7 @@ module Aws::NetworkFirewall
     class DeleteFirewallRequest
       attr_accessor firewall_name: ::String
       attr_accessor firewall_arn: ::String
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       attr_accessor delete_associated_nat_gateways: bool
       SENSITIVE: []
     end
@@ -471,7 +481,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_policy_arn: ::String
       attr_accessor description: ::String
-      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY" | "FAILED")
+      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY" | "FAILED" | "STANDBY")
       attr_accessor supported_availability_zones: ::Hash[::String, Types::AvailabilityZoneMetadata]
       attr_accessor transit_gateway_attachment_id: ::String
       SENSITIVE: []
@@ -507,6 +517,7 @@ module Aws::NetworkFirewall
     class DescribeFirewallRequest
       attr_accessor firewall_name: ::String
       attr_accessor firewall_arn: ::String
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -545,6 +556,7 @@ module Aws::NetworkFirewall
     class DescribeLoggingConfigurationRequest
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -685,6 +697,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor availability_zone_mappings: ::Array[Types::AvailabilityZoneMapping]
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -742,6 +755,7 @@ module Aws::NetworkFirewall
       attr_accessor transit_gateway_owner_account_id: ::String
       attr_accessor availability_zone_mappings: ::Array[Types::AvailabilityZoneMapping]
       attr_accessor availability_zone_change_protection: bool
+      attr_accessor igw_firewall_configuration: Types::IgwFirewallConfiguration
       attr_accessor nat_gateway_create_mappings: ::Array[Types::NatGatewayCreateMapping]
       attr_accessor proxy_settings: Types::ProxySettings
       attr_accessor vpc_endpoint: Types::VpcEndpoint
@@ -879,7 +893,7 @@ module Aws::NetworkFirewall
     end
 
     class FirewallStatus
-      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY" | "FAILED")
+      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY" | "FAILED" | "STANDBY")
       attr_accessor configuration_sync_state_summary: ("PENDING" | "IN_SYNC" | "CAPACITY_CONSTRAINED")
       attr_accessor sync_states: ::Hash[::String, Types::SyncState]
       attr_accessor capacity_usage_summary: Types::CapacityUsageSummary
@@ -975,6 +989,11 @@ module Aws::NetworkFirewall
 
     class IPSetReference
       attr_accessor reference_arn: ::String
+      SENSITIVE: []
+    end
+
+    class IgwFirewallConfiguration
+      attr_accessor enforcement_mode: ("POLICY_CONTROLLED")
       SENSITIVE: []
     end
 
@@ -1103,6 +1122,7 @@ module Aws::NetworkFirewall
       attr_accessor next_token: ::String
       attr_accessor vpc_ids: ::Array[::String]
       attr_accessor max_results: ::Integer
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -1597,6 +1617,7 @@ module Aws::NetworkFirewall
     class SyncState
       attr_accessor attachment: Types::Attachment
       attr_accessor config: ::Hash[::String, Types::PerObjectStatus]
+      attr_accessor address_translations: Types::AddressTranslations
       attr_accessor nat_gateway_attachments: ::Array[Types::NatGatewayAttachment]
       SENSITIVE: []
     end
@@ -1737,6 +1758,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor update_token: ::String
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -1753,6 +1775,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor delete_protection: bool
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -1769,6 +1792,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor description: ::String
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -1785,6 +1809,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -1801,6 +1826,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor firewall_policy_change_protection: bool
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -1849,6 +1875,7 @@ module Aws::NetworkFirewall
     class UpdateLoggingConfigurationRequest
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       attr_accessor logging_configuration: Types::LoggingConfiguration
       attr_accessor enable_monitoring_dashboard: bool
       SENSITIVE: []
@@ -1957,7 +1984,7 @@ module Aws::NetworkFirewall
     end
 
     class VpcEndpointAssociationStatus
-      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY" | "FAILED")
+      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY" | "FAILED" | "STANDBY")
       attr_accessor association_sync_state: ::Hash[::String, Types::AZSyncState]
       SENSITIVE: []
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.674.0 (2026-11-20)
+------------------
+
+* Feature - This release adds documentation for the T9g instance family to the EC2 ModifyDefaultCreditSpecification and GetDefaultCreditSpecification APIs, adds the disable-complete state for IPAM routing policy registrations, and adds Network Firewall automated Internet firewall API changes.
+
 1.673.0 (2026-11-18)
 ------------------
 

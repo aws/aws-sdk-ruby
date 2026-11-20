@@ -173,6 +173,10 @@ module Aws
                                                      longitude: ::String
                                                    }?,
                                                    bias: ::Integer?
+                                                 }?,
+                                                 az_affinity: {
+                                                   location_type: ("AvailabilityZone" | "AvailabilityZoneGroup" | "Region" | "Partition" | "Global")?,
+                                                   location_id: ::String?
                                                  }?
                                                }
                                              }
@@ -292,9 +296,17 @@ module Aws
                                 caller_reference: ::String,
                                 ?hosted_zone_config: {
                                   comment: ::String?,
-                                  private_zone: bool?
+                                  private_zone: bool?,
+                                  hosted_zone_tier: ("STANDARD" | "ADVANCED")?
                                 },
-                                ?delegation_set_id: ::String
+                                ?delegation_set_id: ::String,
+                                ?enable_public_dns_fallback: bool,
+                                ?change_guardrails: Array[
+                                  {
+                                    name: ("NS_FORMAT_CHECK" | "NS_DELEGATION_AUTHORITY_CHECK" | "NS_OCCLUSION_CHECK" | "ALIAS_TARGET_CHECK" | "ACTIVE_RECORD_CHECK" | "ACTIVE_DELEGATION_CHECK"),
+                                    status: ("ENABLED" | "DISABLED")
+                                  }
+                                ]
                               ) -> _CreateHostedZoneResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHostedZoneResponseSuccess
 
@@ -685,6 +697,18 @@ module Aws
                            ) -> _GetHostedZoneResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHostedZoneResponseSuccess
 
+      interface _GetHostedZoneChangeBatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHostedZoneChangeBatchResponse]
+        def change_batch_summary: () -> Types::ChangeBatchSummary
+        def change_batch: () -> Types::ChangeBatch
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_hosted_zone_change_batch-instance_method
+      def get_hosted_zone_change_batch: (
+                                          hosted_zone_id: ::String,
+                                          change_id: ::String
+                                        ) -> _GetHostedZoneChangeBatchResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHostedZoneChangeBatchResponseSuccess
+
       interface _GetHostedZoneCountResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetHostedZoneCountResponse]
         def hosted_zone_count: () -> ::Integer
@@ -868,6 +892,23 @@ module Aws
                                         ) -> _ListHealthChecksBySourceResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHealthChecksBySourceResponseSuccess
 
+      interface _ListHostedZoneChangeBatchesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHostedZoneChangeBatchesResponse]
+        def change_batch_summaries: () -> ::Array[Types::ChangeBatchSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_hosted_zone_change_batches-instance_method
+      def list_hosted_zone_change_batches: (
+                                             hosted_zone_id: ::String,
+                                             ?submitted_after: ::String,
+                                             ?submitted_before: ::String,
+                                             ?start_after_change_id: ::String,
+                                             ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                             ?max_results: ::String,
+                                             ?next_token: ::String
+                                           ) -> _ListHostedZoneChangeBatchesResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHostedZoneChangeBatchesResponseSuccess
+
       interface _ListHostedZonesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListHostedZonesResponse]
         def hosted_zones: () -> ::Array[Types::HostedZone]
@@ -930,6 +971,24 @@ module Aws
                                         ?max_results: ::String
                                       ) -> _ListQueryLoggingConfigsResponseSuccess
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueryLoggingConfigsResponseSuccess
+
+      interface _ListResourceRecordSetChangesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceRecordSetChangesResponse]
+        def resource_record_set_changes: () -> ::Array[Types::ResourceRecordSetChange]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_resource_record_set_changes-instance_method
+      def list_resource_record_set_changes: (
+                                              hosted_zone_id: ::String,
+                                              ?record_name: ::String,
+                                              ?record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS"),
+                                              ?submitted_after: ::String,
+                                              ?submitted_before: ::String,
+                                              ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                              ?max_results: ::String,
+                                              ?next_token: ::String
+                                            ) -> _ListResourceRecordSetChangesResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceRecordSetChangesResponseSuccess
 
       interface _ListResourceRecordSetProtectionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceRecordSetProtectionsResponse]
@@ -1167,9 +1226,28 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#update_hosted_zone_features-instance_method
       def update_hosted_zone_features: (
                                          hosted_zone_id: ::String,
-                                         ?enable_accelerated_recovery: bool
+                                         ?enable_accelerated_recovery: bool,
+                                         ?enable_public_dns_fallback: bool,
+                                         ?change_guardrails: Array[
+                                           {
+                                             name: ("NS_FORMAT_CHECK" | "NS_DELEGATION_AUTHORITY_CHECK" | "NS_OCCLUSION_CHECK" | "ALIAS_TARGET_CHECK" | "ACTIVE_RECORD_CHECK" | "ACTIVE_DELEGATION_CHECK"),
+                                             status: ("ENABLED" | "DISABLED")
+                                           }
+                                         ],
+                                         ?dry_run: bool
                                        ) -> _UpdateHostedZoneFeaturesResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHostedZoneFeaturesResponseSuccess
+
+      interface _UpdateHostedZoneTierResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateHostedZoneTierResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#update_hosted_zone_tier-instance_method
+      def update_hosted_zone_tier: (
+                                     hosted_zone_id: ::String,
+                                     hosted_zone_tier: ("STANDARD" | "ADVANCED"),
+                                     ?dry_run: bool
+                                   ) -> _UpdateHostedZoneTierResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHostedZoneTierResponseSuccess
 
       interface _UpdateTrafficPolicyCommentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTrafficPolicyCommentResponse]

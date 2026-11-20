@@ -311,6 +311,118 @@ module Aws::AgentRegistryControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] record_arn
+    #   The Record being associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] publisher_arn
+    #   The Publisher to associate the Record with.
+    #   @return [String]
+    #
+    # @!attribute [rw] subdomain
+    #   Optional single DNS label placed in front of the publisher domain
+    #   (e.g. "agents" -&gt; agents.acme.com). Absent means the Record sits
+    #   directly on the publisher domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] categories
+    #   Optional categorization/hierarchy applied to the public identifier.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_token
+    #   Optional client-provided idempotency token. Retries carrying the
+    #   same token return the originally-created association instead of
+    #   creating a duplicate.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/AssociatePublisherRequest AWS API Documentation
+    #
+    class AssociatePublisherRequest < Struct.new(
+      :record_arn,
+      :publisher_arn,
+      :subdomain,
+      :categories,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The new association between the registry record and the publisher,
+    # including the record's public identifier. A retry with the original
+    # clientToken returns the original association.
+    #
+    # @!attribute [rw] record_arn
+    #   Registry Record Amazon Resource Name
+    #   @return [String]
+    #
+    # @!attribute [rw] public_identifier
+    #   Server-generated public identifier. This is a URN, NOT an ARN: the
+    #   public identifier is a public-facing, provider-neutral name (a
+    #   Record may be hosted outside AWS), so it deliberately does not use
+    #   the arn: scheme.
+    #
+    #   Layout:
+    #   `urn:air:[<subdomain>.]<domain>:<namespace>:<identity>[;<kind>]`
+    #
+    #   * authority `[<subdomain>.]<domain>` — the publisher FQDN, with the
+    #     optional subdomain folded in as a leading label (e.g.
+    #     `agents.acme.com`; without a subdomain, just `acme.com`).
+    #   * `<namespace>` — the association's category values concatenated
+    #     with `:` (zero-or-more segments; absent when no categories were
+    #     supplied).
+    #   * `<identity>` — the Record name: letters, digits, `.`, `_`, `/` and
+    #     `-`, as Vestry allows.
+    #   * `<kind>` — the artifact kind from the Record's `recordType`
+    #     (ai-catalog issue 59): `MCP` is `mcp`, `AGENT` and `CUSTOM` are
+    #     `agent`, `SKILL` is `skill`, `WEB_BOT` is `webbot`. Absent for
+    #     `GATEWAY` and when the association carried no `recordType`. The
+    #     kind is part of the identifier, so `urn:air:acme.com:x;mcp` and
+    #     `urn:air:acme.com:x` are two identifiers. Belfry mints `;`; the
+    #     pattern also admits `#`, `+`, `$` and `@`, so identifiers minted
+    #     with `#` before the delimiter settled on `;` stay valid until
+    #     they're re-minted. Examples: `urn:air:acme.com:finance-agent` (no
+    #     subdomain/categories),
+    #     `urn:air:agents.acme.com:financial:money:finance-agent`,
+    #     `urn:air:acme.com:weather;mcp`.
+    #   @return [String]
+    #
+    # @!attribute [rw] publisher
+    #   ARN for an Identifier resource. Global (region-less) resource, so
+    #   the region field is empty; the resource segment carries the
+    #   identifier value, which may contain dots.
+    #
+    #   Named `PublisherIdentifierArn` (RegionalCP's local name) so
+    #   RegionalCP consumes it without a rename — which keeps its c2j/SDK
+    #   model (generated from the un-projected source, where the top-level
+    #   c2j plugin runs to preserve @idempotencyToken) showing the correct
+    #   shape name. GlobalCP renames this to `identifierArn` in its own
+    #   coral-export projection.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The Record&lt;-&gt;Publisher association's status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the association's current status, such as why it is
+    #   suspended. Present only when a reason is available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/AssociatePublisherResponse AWS API Documentation
+    #
+    class AssociatePublisherResponse < Struct.new(
+      :record_arn,
+      :public_identifier,
+      :publisher,
+      :status,
+      :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The authorization that a user must complete before a registry record
     # can synchronize from its source. Only `CreateRegistryRecord` and
     # `UpdateRegistryRecord` return it. `GetRegistryRecord` and
@@ -474,6 +586,119 @@ module Aws::AgentRegistryControl
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] value
+    #   The identifier value. Discriminated union — exactly one member is
+    #   set. GA supports `domain` only; other identifier types are added as
+    #   new members (backward-compatible) in a later task.
+    #   @return [Types::Identifier]
+    #
+    # @!attribute [rw] tags
+    #   The tags to attach to the publisher. Each tag is a key-value pair.
+    #   You can attach up to 50 tags.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   Optional client-provided idempotency token. Retries of the same
+    #   Create request carrying the same token return the originally-created
+    #   resource instead of creating a duplicate. Forwarded to
+    #   BelfryGlobalCP. Optional and backward-compatible.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/CreatePublisherRequest AWS API Documentation
+    #
+    class CreatePublisherRequest < Struct.new(
+      :value,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The new publisher, in ACTION\_REQUIRED, with the domainChallenge to
+    # publish as a DNS TXT record. A retry with the original clientToken
+    # returns the existing publisher.
+    #
+    # @!attribute [rw] value
+    #   The identifier value. Discriminated union — exactly one member is
+    #   set. GA supports `domain` only; other identifier types are added as
+    #   new members (backward-compatible) in a later task.
+    #   @return [Types::Identifier]
+    #
+    # @!attribute [rw] identifier_type
+    #   The identifier type. `DOMAIN` is the only supported value.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The domain verification status of the publisher:
+    #
+    #   * `ACTION_REQUIRED`: The registry is waiting to find the DNS TXT
+    #     record described by `domainChallenge`.
+    #   * `ACTIVE`: The domain is verified. You can associate registry
+    #     records with the publisher.
+    #   * `SUSPENDED`: The domain was verified, but a later check found the
+    #     TXT record missing or changed. The publisher returns to `ACTIVE`
+    #     when the record is found again, and becomes `FAILED` if the record
+    #     stays missing.
+    #   * `FAILED`: Verification didn't succeed, for example because the
+    #     TXT record wasn't found in time or another account verified the
+    #     domain first. Call `ValidatePublisher` to try again.
+    #   * `DELETING`: A delete is in progress.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the publisher's current status, such as why
+    #   verification failed. Present only when a reason is available.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_challenge
+    #   Server-generated DNS-01 challenge the caller must publish to prove
+    #   ownership.
+    #   @return [Types::DomainChallenge]
+    #
+    # @!attribute [rw] tags
+    #   The tags attached to the publisher.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the publisher was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time that the publisher was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] publisher_arn
+    #   ARN for an Identifier resource. Global (region-less) resource, so
+    #   the region field is empty; the resource segment carries the
+    #   identifier value, which may contain dots.
+    #
+    #   Named `PublisherIdentifierArn` (RegionalCP's local name) so
+    #   RegionalCP consumes it without a rename — which keeps its c2j/SDK
+    #   model (generated from the un-projected source, where the top-level
+    #   c2j plugin runs to preserve @idempotencyToken) showing the correct
+    #   shape name. GlobalCP renames this to `identifierArn` in its own
+    #   coral-export projection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/CreatePublisherResponse AWS API Documentation
+    #
+    class CreatePublisherResponse < Struct.new(
+      :value,
+      :identifier_type,
+      :status,
+      :status_reason,
+      :domain_challenge,
+      :tags,
+      :created_at,
+      :updated_at,
+      :publisher_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -792,6 +1017,27 @@ module Aws::AgentRegistryControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] publisher_arn
+    #   ARN for an Identifier resource. Global (region-less) resource, so
+    #   the region field is empty; the resource segment carries the
+    #   identifier value, which may contain dots.
+    #
+    #   Named `PublisherIdentifierArn` (RegionalCP's local name) so
+    #   RegionalCP consumes it without a rename — which keeps its c2j/SDK
+    #   model (generated from the un-projected source, where the top-level
+    #   c2j plugin runs to preserve @idempotencyToken) showing the correct
+    #   shape name. GlobalCP renames this to `identifierArn` in its own
+    #   coral-export projection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/DeletePublisherRequest AWS API Documentation
+    #
+    class DeletePublisherRequest < Struct.new(
+      :publisher_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] registry_id
     #   The identifier of the registry containing the record (ARN or ID)
     #   @return [String]
@@ -840,6 +1086,23 @@ module Aws::AgentRegistryControl
     #
     class DeleteRegistryResponse < Struct.new(
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This exception is thrown on a database (or other dependency) error.
+    # Modeled as a server error so SDKs retry it (5xx) and it feeds
+    # server-error alarming. Marked @retryable because it represents a
+    # transient downstream failure that is safe to retry (matches the
+    # forwarder's own retry-on-DependencyException behavior).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/DependencyException AWS API Documentation
+    #
+    class DependencyException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -917,6 +1180,11 @@ module Aws::AgentRegistryControl
     #   protocol source.
     #   @return [Types::AgUiDescriptor]
     #
+    # @!attribute [rw] signature_agent_card
+    #   The signature agent card descriptor, populated when the record type
+    #   is WEB\_BOT.
+    #   @return [Types::SignatureAgentCardDescriptor]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/Descriptors AWS API Documentation
     #
     class Descriptors < Struct.new(
@@ -925,7 +1193,20 @@ module Aws::AgentRegistryControl
       :agent_skills_definition,
       :custom,
       :http,
-      :agui)
+      :agui,
+      :signature_agent_card)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] record_arn
+    #   Registry Record Amazon Resource Name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/DisassociatePublisherRequest AWS API Documentation
+    #
+    class DisassociatePublisherRequest < Struct.new(
+      :record_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -952,6 +1233,29 @@ module Aws::AgentRegistryControl
       include Aws::Structure
     end
 
+    # Server-generated DNS-01 challenge the caller must publish to prove
+    # ownership.
+    #
+    # @!attribute [rw] record_name
+    #   The name of the DNS TXT record to create, such as
+    #   `_acme-challenge.example.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_value
+    #   The value to publish in the DNS TXT record. A new value is issued
+    #   each time verification restarts, and earlier values no longer verify
+    #   the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/DomainChallenge AWS API Documentation
+    #
+    class DomainChallenge < Struct.new(
+      :record_name,
+      :record_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The server-side encryption configuration for a registry. Specifies a
     # customer-managed Amazon Web Services KMS key used to encrypt the
     # registry's content.
@@ -967,6 +1271,27 @@ module Aws::AgentRegistryControl
     #
     class EncryptionConfiguration < Struct.new(
       :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] publisher_arn
+    #   ARN for an Identifier resource. Global (region-less) resource, so
+    #   the region field is empty; the resource segment carries the
+    #   identifier value, which may contain dots.
+    #
+    #   Named `PublisherIdentifierArn` (RegionalCP's local name) so
+    #   RegionalCP consumes it without a rename — which keeps its c2j/SDK
+    #   model (generated from the un-projected source, where the top-level
+    #   c2j plugin runs to preserve @idempotencyToken) showing the correct
+    #   shape name. GlobalCP renames this to `identifierArn` in its own
+    #   coral-export projection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/GetPublisherRequest AWS API Documentation
+    #
+    class GetPublisherRequest < Struct.new(
+      :publisher_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1264,6 +1589,31 @@ module Aws::AgentRegistryControl
       include Aws::Structure
     end
 
+    # The identifier value. Discriminated union — exactly one member is set.
+    # GA supports `domain` only; other identifier types are added as new
+    # members (backward-compatible) in a later task.
+    #
+    # @note Identifier is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Identifier is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Identifier corresponding to the set member.
+    #
+    # @!attribute [rw] domain
+    #   FQDN per RFC-1035/1123, case-insensitive, at least two labels.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/Identifier AWS API Documentation
+    #
+    class Identifier < Struct.new(
+      :domain,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Domain < Identifier; end
+      class Unknown < Identifier; end
+    end
+
     # The request failed due to an unexpected internal error; the caller may
     # retry.
     #
@@ -1274,6 +1624,88 @@ module Aws::AgentRegistryControl
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] publisher_arn
+    #   ARN for an Identifier resource. Global (region-less) resource, so
+    #   the region field is empty; the resource segment carries the
+    #   identifier value, which may contain dots.
+    #
+    #   Named `PublisherIdentifierArn` (RegionalCP's local name) so
+    #   RegionalCP consumes it without a rename — which keeps its c2j/SDK
+    #   model (generated from the un-projected source, where the top-level
+    #   c2j plugin runs to preserve @idempotencyToken) showing the correct
+    #   shape name. GlobalCP renames this to `identifierArn` in its own
+    #   coral-export projection.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of items to be listed
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Opaque continuation token of previous paginated response
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/ListPublisherAssociationsRequest AWS API Documentation
+    #
+    class ListPublisherAssociationsRequest < Struct.new(
+      :publisher_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The publisher associations on this page of results.
+    #   @return [Array<Types::PublisherAssociation>]
+    #
+    # @!attribute [rw] next_token
+    #   Opaque continuation token of previous paginated response
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/ListPublisherAssociationsResponse AWS API Documentation
+    #
+    class ListPublisherAssociationsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   Maximum number of items to be listed
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Opaque continuation token of previous paginated response
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/ListPublishersRequest AWS API Documentation
+    #
+    class ListPublishersRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   Summaries of the publishers on this page of results.
+    #   @return [Array<Types::PublisherSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Opaque continuation token of previous paginated response
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/ListPublishersResponse AWS API Documentation
+    #
+    class ListPublishersResponse < Struct.new(
+      :items,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1667,6 +2099,218 @@ module Aws::AgentRegistryControl
       :relation,
       :source_id,
       :source_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A publisher, including its verification status and the DNS challenge
+    # for its domain.
+    #
+    # @!attribute [rw] value
+    #   The identifier value. Discriminated union — exactly one member is
+    #   set. GA supports `domain` only; other identifier types are added as
+    #   new members (backward-compatible) in a later task.
+    #   @return [Types::Identifier]
+    #
+    # @!attribute [rw] identifier_type
+    #   The identifier type. `DOMAIN` is the only supported value.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The domain verification status of the publisher:
+    #
+    #   * `ACTION_REQUIRED`: The registry is waiting to find the DNS TXT
+    #     record described by `domainChallenge`.
+    #   * `ACTIVE`: The domain is verified. You can associate registry
+    #     records with the publisher.
+    #   * `SUSPENDED`: The domain was verified, but a later check found the
+    #     TXT record missing or changed. The publisher returns to `ACTIVE`
+    #     when the record is found again, and becomes `FAILED` if the record
+    #     stays missing.
+    #   * `FAILED`: Verification didn't succeed, for example because the
+    #     TXT record wasn't found in time or another account verified the
+    #     domain first. Call `ValidatePublisher` to try again.
+    #   * `DELETING`: A delete is in progress.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the publisher's current status, such as why
+    #   verification failed. Present only when a reason is available.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_challenge
+    #   Server-generated DNS-01 challenge the caller must publish to prove
+    #   ownership.
+    #   @return [Types::DomainChallenge]
+    #
+    # @!attribute [rw] tags
+    #   The tags attached to the publisher.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the publisher was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time that the publisher was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] publisher_arn
+    #   ARN for an Identifier resource. Global (region-less) resource, so
+    #   the region field is empty; the resource segment carries the
+    #   identifier value, which may contain dots.
+    #
+    #   Named `PublisherIdentifierArn` (RegionalCP's local name) so
+    #   RegionalCP consumes it without a rename — which keeps its c2j/SDK
+    #   model (generated from the un-projected source, where the top-level
+    #   c2j plugin runs to preserve @idempotencyToken) showing the correct
+    #   shape name. GlobalCP renames this to `identifierArn` in its own
+    #   coral-export projection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/Publisher AWS API Documentation
+    #
+    class Publisher < Struct.new(
+      :value,
+      :identifier_type,
+      :status,
+      :status_reason,
+      :domain_challenge,
+      :tags,
+      :created_at,
+      :updated_at,
+      :publisher_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An association between a registry record and a publisher, including
+    # the record's public identifier.
+    #
+    # @!attribute [rw] record_arn
+    #   Registry Record Amazon Resource Name
+    #   @return [String]
+    #
+    # @!attribute [rw] public_identifier
+    #   Server-generated public identifier. This is a URN, NOT an ARN: the
+    #   public identifier is a public-facing, provider-neutral name (a
+    #   Record may be hosted outside AWS), so it deliberately does not use
+    #   the arn: scheme.
+    #
+    #   Layout:
+    #   `urn:air:[<subdomain>.]<domain>:<namespace>:<identity>[;<kind>]`
+    #
+    #   * authority `[<subdomain>.]<domain>` — the publisher FQDN, with the
+    #     optional subdomain folded in as a leading label (e.g.
+    #     `agents.acme.com`; without a subdomain, just `acme.com`).
+    #   * `<namespace>` — the association's category values concatenated
+    #     with `:` (zero-or-more segments; absent when no categories were
+    #     supplied).
+    #   * `<identity>` — the Record name: letters, digits, `.`, `_`, `/` and
+    #     `-`, as Vestry allows.
+    #   * `<kind>` — the artifact kind from the Record's `recordType`
+    #     (ai-catalog issue 59): `MCP` is `mcp`, `AGENT` and `CUSTOM` are
+    #     `agent`, `SKILL` is `skill`, `WEB_BOT` is `webbot`. Absent for
+    #     `GATEWAY` and when the association carried no `recordType`. The
+    #     kind is part of the identifier, so `urn:air:acme.com:x;mcp` and
+    #     `urn:air:acme.com:x` are two identifiers. Belfry mints `;`; the
+    #     pattern also admits `#`, `+`, `$` and `@`, so identifiers minted
+    #     with `#` before the delimiter settled on `;` stay valid until
+    #     they're re-minted. Examples: `urn:air:acme.com:finance-agent` (no
+    #     subdomain/categories),
+    #     `urn:air:agents.acme.com:financial:money:finance-agent`,
+    #     `urn:air:acme.com:weather;mcp`.
+    #   @return [String]
+    #
+    # @!attribute [rw] publisher
+    #   ARN for an Identifier resource. Global (region-less) resource, so
+    #   the region field is empty; the resource segment carries the
+    #   identifier value, which may contain dots.
+    #
+    #   Named `PublisherIdentifierArn` (RegionalCP's local name) so
+    #   RegionalCP consumes it without a rename — which keeps its c2j/SDK
+    #   model (generated from the un-projected source, where the top-level
+    #   c2j plugin runs to preserve @idempotencyToken) showing the correct
+    #   shape name. GlobalCP renames this to `identifierArn` in its own
+    #   coral-export projection.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The Record&lt;-&gt;Publisher association's status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the association's current status, such as why it is
+    #   suspended. Present only when a reason is available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/PublisherAssociation AWS API Documentation
+    #
+    class PublisherAssociation < Struct.new(
+      :record_arn,
+      :public_identifier,
+      :publisher,
+      :status,
+      :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Lightweight projection for list results.
+    #
+    # @!attribute [rw] value
+    #   The identifier value. Discriminated union — exactly one member is
+    #   set. GA supports `domain` only; other identifier types are added as
+    #   new members (backward-compatible) in a later task.
+    #   @return [Types::Identifier]
+    #
+    # @!attribute [rw] identifier_type
+    #   The identifier type. `DOMAIN` is the only supported value.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The domain verification status of the publisher: `ACTION_REQUIRED`,
+    #   `ACTIVE`, `SUSPENDED`, `FAILED`, or `DELETING`. Only an `ACTIVE`
+    #   publisher accepts new registry record associations.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the publisher was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] publisher_arn
+    #   ARN for an Identifier resource. Global (region-less) resource, so
+    #   the region field is empty; the resource segment carries the
+    #   identifier value, which may contain dots.
+    #
+    #   Named `PublisherIdentifierArn` (RegionalCP's local name) so
+    #   RegionalCP consumes it without a rename — which keeps its c2j/SDK
+    #   model (generated from the un-projected source, where the top-level
+    #   c2j plugin runs to preserve @idempotencyToken) showing the correct
+    #   shape name. GlobalCP renames this to `identifierArn` in its own
+    #   coral-export projection.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_count
+    #   The number of registry records associated with the publisher, in any
+    #   association status. Omitted when the count isn't available.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pending_association_approval_count
+    #   The number of the publisher's associations that are in
+    #   PENDING\_APPROVAL. Omitted when the count isn't available.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/PublisherSummary AWS API Documentation
+    #
+    class PublisherSummary < Struct.new(
+      :value,
+      :identifier_type,
+      :status,
+      :created_at,
+      :publisher_arn,
+      :association_count,
+      :pending_association_approval_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2213,6 +2857,56 @@ module Aws::AgentRegistryControl
       include Aws::Structure
     end
 
+    # The additional data for a signature agent card descriptor, such as the
+    # bot category of the web bot.
+    #
+    # @!attribute [rw] category
+    #   The bot category that describes the purpose of the web bot
+    #   identified by the signature agent card descriptor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/SignatureAgentCardAdditionalData AWS API Documentation
+    #
+    class SignatureAgentCardAdditionalData < Struct.new(
+      :category)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Descriptor that defines the content of a signature agent card, which
+    # identifies a web bot and references the JSON Web Key Set used to
+    # verify its HTTP message signatures.
+    #
+    # @!attribute [rw] data
+    #   The signature agent card content, serialized as descriptor payload
+    #   data.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_schema_version
+    #   The schema version of the descriptor payload.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The optional source configuration used to synchronize the signature
+    #   agent card descriptor content.
+    #   @return [Types::DescriptorSource]
+    #
+    # @!attribute [rw] additional_data
+    #   Additional data associated with the signature agent card descriptor,
+    #   such as the bot category.
+    #   @return [Types::SignatureAgentCardAdditionalData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/SignatureAgentCardDescriptor AWS API Documentation
+    #
+    class SignatureAgentCardDescriptor < Struct.new(
+      :data,
+      :data_schema_version,
+      :source,
+      :additional_data)
+      SENSITIVE = [:data]
+      include Aws::Structure
+    end
+
     # The details about the upstream source from which a registry record was
     # detected. Exactly one member is populated, corresponding to the source
     # type.
@@ -2359,6 +3053,32 @@ module Aws::AgentRegistryControl
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] record_arn
+    #   Registry Record Amazon Resource Name
+    #   @return [String]
+    #
+    # @!attribute [rw] approval_status
+    #   The curator's decision on a Record's Publisher association.
+    #   @return [String]
+    #
+    # @!attribute [rw] approval_status_reason
+    #   The curator's reason for the decision; may be empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdatePublisherAssociationApprovalStatusRequest AWS API Documentation
+    #
+    class UpdatePublisherAssociationApprovalStatusRequest < Struct.new(
+      :record_arn,
+      :approval_status,
+      :approval_status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdatePublisherAssociationApprovalStatusResponse AWS API Documentation
+    #
+    class UpdatePublisherAssociationApprovalStatusResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] registry_id
     #   The identifier of the registry containing the record (ARN or ID)
@@ -3104,6 +3824,22 @@ module Aws::AgentRegistryControl
       include Aws::Structure
     end
 
+    # Leaf patch wrapper for a bot category. Omit to leave unchanged; supply
+    # an empty object to unset; supply optionalValue to set.
+    #
+    # @!attribute [rw] optional_value
+    #   The value to set for this field. Omit the wrapper to leave the field
+    #   unchanged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdatedBotCategory AWS API Documentation
+    #
+    class UpdatedBotCategory < Struct.new(
+      :optional_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The custom descriptor patch wrapper. Omit to leave the descriptor
     # unchanged; supply an empty object to remove it; supply optionalValue
     # to patch its fields.
@@ -3278,6 +4014,10 @@ module Aws::AgentRegistryControl
     #   The patch for the AG-UI descriptor.
     #   @return [Types::UpdatedAgUiDescriptor]
     #
+    # @!attribute [rw] signature_agent_card
+    #   The patch for the signature agent card descriptor.
+    #   @return [Types::UpdatedSignatureAgentCardDescriptor]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdatedDescriptorsFields AWS API Documentation
     #
     class UpdatedDescriptorsFields < Struct.new(
@@ -3286,7 +4026,8 @@ module Aws::AgentRegistryControl
       :agent_skills_definition,
       :custom,
       :http,
-      :agui)
+      :agui,
+      :signature_agent_card)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3483,6 +4224,187 @@ module Aws::AgentRegistryControl
     #
     class UpdatedRegistryRecordArtifact < Struct.new(
       :optional_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The signature agent card additional-data patch wrapper. Omit to leave
+    # the additional data unchanged; supply an empty object to remove it;
+    # supply optionalValue to patch its fields.
+    #
+    # @!attribute [rw] optional_value
+    #   The value to set for this field. Omit the wrapper to leave the field
+    #   unchanged.
+    #   @return [Types::UpdatedSignatureAgentCardAdditionalDataFields]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdatedSignatureAgentCardAdditionalData AWS API Documentation
+    #
+    class UpdatedSignatureAgentCardAdditionalData < Struct.new(
+      :optional_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The set of signature agent card additional-data fields that can be
+    # individually updated.
+    #
+    # @!attribute [rw] category
+    #   The patch for the bot category field.
+    #   @return [Types::UpdatedBotCategory]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdatedSignatureAgentCardAdditionalDataFields AWS API Documentation
+    #
+    class UpdatedSignatureAgentCardAdditionalDataFields < Struct.new(
+      :category)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The signature agent card descriptor patch wrapper. Omit to leave the
+    # descriptor unchanged; supply an empty object to remove it; supply
+    # optionalValue to patch its fields.
+    #
+    # @!attribute [rw] optional_value
+    #   The value to set for this field. Omit the wrapper to leave the field
+    #   unchanged.
+    #   @return [Types::UpdatedSignatureAgentCardDescriptorFields]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdatedSignatureAgentCardDescriptor AWS API Documentation
+    #
+    class UpdatedSignatureAgentCardDescriptor < Struct.new(
+      :optional_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The set of signature agent card descriptor fields that can be
+    # individually updated.
+    #
+    # @!attribute [rw] data
+    #   The patch for the descriptor's data field.
+    #   @return [Types::UpdatedDescriptorData]
+    #
+    # @!attribute [rw] data_schema_version
+    #   The patch for the descriptor's data schema version field.
+    #   @return [Types::UpdatedDataSchemaVersion]
+    #
+    # @!attribute [rw] source
+    #   The patch for the descriptor's source field.
+    #   @return [Types::UpdatedDescriptorSource]
+    #
+    # @!attribute [rw] additional_data
+    #   The patch for the descriptor's additional data field.
+    #   @return [Types::UpdatedSignatureAgentCardAdditionalData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdatedSignatureAgentCardDescriptorFields AWS API Documentation
+    #
+    class UpdatedSignatureAgentCardDescriptorFields < Struct.new(
+      :data,
+      :data_schema_version,
+      :source,
+      :additional_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] publisher_arn
+    #   ARN for an Identifier resource. Global (region-less) resource, so
+    #   the region field is empty; the resource segment carries the
+    #   identifier value, which may contain dots.
+    #
+    #   Named `PublisherIdentifierArn` (RegionalCP's local name) so
+    #   RegionalCP consumes it without a rename — which keeps its c2j/SDK
+    #   model (generated from the un-projected source, where the top-level
+    #   c2j plugin runs to preserve @idempotencyToken) showing the correct
+    #   shape name. GlobalCP renames this to `identifierArn` in its own
+    #   coral-export projection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/ValidatePublisherRequest AWS API Documentation
+    #
+    class ValidatePublisherRequest < Struct.new(
+      :publisher_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The publisher after verification restarts, in ACTION\_REQUIRED with a
+    # new domainChallenge.
+    #
+    # @!attribute [rw] value
+    #   The identifier value. Discriminated union — exactly one member is
+    #   set. GA supports `domain` only; other identifier types are added as
+    #   new members (backward-compatible) in a later task.
+    #   @return [Types::Identifier]
+    #
+    # @!attribute [rw] identifier_type
+    #   The identifier type. `DOMAIN` is the only supported value.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The domain verification status of the publisher:
+    #
+    #   * `ACTION_REQUIRED`: The registry is waiting to find the DNS TXT
+    #     record described by `domainChallenge`.
+    #   * `ACTIVE`: The domain is verified. You can associate registry
+    #     records with the publisher.
+    #   * `SUSPENDED`: The domain was verified, but a later check found the
+    #     TXT record missing or changed. The publisher returns to `ACTIVE`
+    #     when the record is found again, and becomes `FAILED` if the record
+    #     stays missing.
+    #   * `FAILED`: Verification didn't succeed, for example because the
+    #     TXT record wasn't found in time or another account verified the
+    #     domain first. Call `ValidatePublisher` to try again.
+    #   * `DELETING`: A delete is in progress.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the publisher's current status, such as why
+    #   verification failed. Present only when a reason is available.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_challenge
+    #   Server-generated DNS-01 challenge the caller must publish to prove
+    #   ownership.
+    #   @return [Types::DomainChallenge]
+    #
+    # @!attribute [rw] tags
+    #   The tags attached to the publisher.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the publisher was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time that the publisher was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] publisher_arn
+    #   ARN for an Identifier resource. Global (region-less) resource, so
+    #   the region field is empty; the resource segment carries the
+    #   identifier value, which may contain dots.
+    #
+    #   Named `PublisherIdentifierArn` (RegionalCP's local name) so
+    #   RegionalCP consumes it without a rename — which keeps its c2j/SDK
+    #   model (generated from the un-projected source, where the top-level
+    #   c2j plugin runs to preserve @idempotencyToken) showing the correct
+    #   shape name. GlobalCP renames this to `identifierArn` in its own
+    #   coral-export projection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/ValidatePublisherResponse AWS API Documentation
+    #
+    class ValidatePublisherResponse < Struct.new(
+      :value,
+      :identifier_type,
+      :status,
+      :status_reason,
+      :domain_challenge,
+      :tags,
+      :created_at,
+      :updated_at,
+      :publisher_arn)
       SENSITIVE = []
       include Aws::Structure
     end

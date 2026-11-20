@@ -142,6 +142,41 @@ module Aws::EC2
       data[:type]
     end
 
+    # The internet connectivity treatment that the Automated Internet
+    # Firewall applies to the subnet. The response includes this value only
+    # if the subnet is in a VPC that has a firewall. Possible values:
+    #
+    # * `az-unsupported`: The firewall doesn't support the subnet's
+    #   Availability Zone, so it doesn't inspect traffic for the subnet.
+    #
+    # * `bidirectional`: Provides bidirectional internet connectivity to
+    #   every network interface that has a public IP association. Any
+    #   network interface without a public IP cannot communicate with the
+    #   internet unless a NAT device is explicitly inserted in the path. All
+    #   inbound and outbound traffic is inspected against your firewall
+    #   rules.
+    #
+    # * `exclude`: The firewall doesn't inspect traffic for the subnet. The
+    #   subnet bypasses the firewall, and its traffic passes directly
+    #   through the internet gateway.
+    #
+    # * `flexible`: Sets the connectivity for each network interface in the
+    #   subnet based on whether it is associated with a public IP address. A
+    #   network interface with a public IP address gets bidirectional
+    #   internet connectivity. A network interface without a public IP
+    #   address gets outbound-only connectivity. All traffic is inspected
+    #   against your firewall rules.
+    #
+    # * `outbound-only`: Provides egress-only connectivity for all network
+    #   interfaces in the subnet. All outbound traffic and inbound responses
+    #   are inspected against your firewall rules. Unsolicited inbound
+    #   connections are dropped. For IPv4 traffic, the firewall performs
+    #   NAT.
+    # @return [String]
+    def network_firewall_connectivity_type
+      data[:network_firewall_connectivity_type]
+    end
+
     # The current state of the subnet.
     #
     # * `failed`: The underlying infrastructure to support the subnet failed

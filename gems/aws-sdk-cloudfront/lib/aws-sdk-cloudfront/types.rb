@@ -3796,6 +3796,29 @@ module Aws::CloudFront
     #   origin server.
     #   @return [Types::OriginMtlsConfig]
     #
+    # @!attribute [rw] origin_http_version
+    #   The HTTP version that CloudFront uses for requests to your custom
+    #   origin. Valid values are `http1.1` and `http2`. If you don't
+    #   specify a value, CloudFront uses HTTP/1.1.
+    #
+    #   When you specify `http2`, CloudFront offers HTTP/2 to the origin by
+    #   using ALPN. If the origin doesn't negotiate HTTP/2, CloudFront uses
+    #   HTTP/1.1. CloudFront uses HTTP/2 only over Transport Layer Security
+    #   (TLS) 1.2 or later. Otherwise, it uses HTTP/1.1.
+    #
+    #   If you use a version of an AWS SDK or the AWS CLI that doesn't
+    #   support this field, an update that sends back a configuration you
+    #   got from CloudFront removes the value, and CloudFront then uses
+    #   HTTP/1.1.
+    #
+    #   For more information, see [Origin HTTP version][1] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginHttpVersion
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CustomOriginConfig AWS API Documentation
     #
     class CustomOriginConfig < Struct.new(
@@ -3806,7 +3829,8 @@ module Aws::CloudFront
       :origin_read_timeout,
       :origin_keepalive_timeout,
       :ip_address_type,
-      :origin_mtls_config)
+      :origin_mtls_config,
+      :origin_http_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17510,13 +17534,37 @@ module Aws::CloudFront
     #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginKeepaliveTimeout
     #   @return [Integer]
     #
+    # @!attribute [rw] origin_http_version
+    #   The HTTP version that CloudFront uses for requests to the VPC origin
+    #   for this distribution. Valid values are `http1.1` and `http2`. If
+    #   you don't specify a value, CloudFront uses HTTP/1.1.
+    #
+    #   When you specify `http2`, CloudFront offers HTTP/2 to the origin by
+    #   using ALPN. If the origin doesn't negotiate HTTP/2, CloudFront uses
+    #   HTTP/1.1. CloudFront uses HTTP/2 only over Transport Layer Security
+    #   (TLS) 1.2 or later. Otherwise, it uses HTTP/1.1.
+    #
+    #   If you use a version of an AWS SDK or the AWS CLI that doesn't
+    #   support this field, an update that sends back a configuration you
+    #   got from CloudFront removes the value, and CloudFront then uses
+    #   HTTP/1.1.
+    #
+    #   For more information, see [Origin HTTP version][1] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginHttpVersion
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/VpcOriginConfig AWS API Documentation
     #
     class VpcOriginConfig < Struct.new(
       :vpc_origin_id,
       :owner_account_id,
       :origin_read_timeout,
-      :origin_keepalive_timeout)
+      :origin_keepalive_timeout,
+      :origin_http_version)
       SENSITIVE = []
       include Aws::Structure
     end

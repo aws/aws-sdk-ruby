@@ -39,6 +39,8 @@ module Aws::Bedrock
     AgreementAvailability = Shapes::StructureShape.new(name: 'AgreementAvailability')
     AgreementStatus = Shapes::StringShape.new(name: 'AgreementStatus')
     ApplicationType = Shapes::StringShape.new(name: 'ApplicationType')
+    ArchiveProjectRequest = Shapes::StructureShape.new(name: 'ArchiveProjectRequest')
+    ArchiveProjectResponse = Shapes::StructureShape.new(name: 'ArchiveProjectResponse')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AttributeType = Shapes::StringShape.new(name: 'AttributeType')
     AuthorizationStatus = Shapes::StringShape.new(name: 'AuthorizationStatus')
@@ -290,6 +292,8 @@ module Aws::Bedrock
     CreateModelImportJobResponse = Shapes::StructureShape.new(name: 'CreateModelImportJobResponse')
     CreateModelInvocationJobRequest = Shapes::StructureShape.new(name: 'CreateModelInvocationJobRequest')
     CreateModelInvocationJobResponse = Shapes::StructureShape.new(name: 'CreateModelInvocationJobResponse')
+    CreateProjectRequest = Shapes::StructureShape.new(name: 'CreateProjectRequest')
+    CreateProjectResponse = Shapes::StructureShape.new(name: 'CreateProjectResponse')
     CreatePromptRouterRequest = Shapes::StructureShape.new(name: 'CreatePromptRouterRequest')
     CreatePromptRouterResponse = Shapes::StructureShape.new(name: 'CreatePromptRouterResponse')
     CreateProvisionedModelThroughputRequest = Shapes::StructureShape.new(name: 'CreateProvisionedModelThroughputRequest')
@@ -318,6 +322,14 @@ module Aws::Bedrock
     CustomizationType = Shapes::StringShape.new(name: 'CustomizationType')
     DataProcessingDetails = Shapes::StructureShape.new(name: 'DataProcessingDetails')
     DataRetentionMode = Shapes::StringShape.new(name: 'DataRetentionMode')
+    DataRetentionStorageBucketArn = Shapes::StringShape.new(name: 'DataRetentionStorageBucketArn')
+    DataRetentionStorageConfiguration = Shapes::StructureShape.new(name: 'DataRetentionStorageConfiguration')
+    DataRetentionStorageDestination = Shapes::StringShape.new(name: 'DataRetentionStorageDestination')
+    DataRetentionStorageModelProvider = Shapes::StringShape.new(name: 'DataRetentionStorageModelProvider')
+    DataRetentionStorageResourceStatus = Shapes::StringShape.new(name: 'DataRetentionStorageResourceStatus')
+    DataRetentionStorageScope = Shapes::StringShape.new(name: 'DataRetentionStorageScope')
+    DeleteAccountDataRetentionStorageRequest = Shapes::StructureShape.new(name: 'DeleteAccountDataRetentionStorageRequest')
+    DeleteAccountDataRetentionStorageResponse = Shapes::StructureShape.new(name: 'DeleteAccountDataRetentionStorageResponse')
     DeleteAutomatedReasoningPolicyBuildWorkflowRequest = Shapes::StructureShape.new(name: 'DeleteAutomatedReasoningPolicyBuildWorkflowRequest')
     DeleteAutomatedReasoningPolicyBuildWorkflowResponse = Shapes::StructureShape.new(name: 'DeleteAutomatedReasoningPolicyBuildWorkflowResponse')
     DeleteAutomatedReasoningPolicyRequest = Shapes::StructureShape.new(name: 'DeleteAutomatedReasoningPolicyRequest')
@@ -342,6 +354,10 @@ module Aws::Bedrock
     DeleteMarketplaceModelEndpointResponse = Shapes::StructureShape.new(name: 'DeleteMarketplaceModelEndpointResponse')
     DeleteModelInvocationLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteModelInvocationLoggingConfigurationRequest')
     DeleteModelInvocationLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteModelInvocationLoggingConfigurationResponse')
+    DeleteOrganizationDataRetentionStorageRequest = Shapes::StructureShape.new(name: 'DeleteOrganizationDataRetentionStorageRequest')
+    DeleteOrganizationDataRetentionStorageResponse = Shapes::StructureShape.new(name: 'DeleteOrganizationDataRetentionStorageResponse')
+    DeleteProjectDataRetentionStorageRequest = Shapes::StructureShape.new(name: 'DeleteProjectDataRetentionStorageRequest')
+    DeleteProjectDataRetentionStorageResponse = Shapes::StructureShape.new(name: 'DeleteProjectDataRetentionStorageResponse')
     DeletePromptRouterRequest = Shapes::StructureShape.new(name: 'DeletePromptRouterRequest')
     DeletePromptRouterResponse = Shapes::StructureShape.new(name: 'DeletePromptRouterResponse')
     DeleteProvisionedModelThroughputRequest = Shapes::StructureShape.new(name: 'DeleteProvisionedModelThroughputRequest')
@@ -428,6 +444,8 @@ module Aws::Bedrock
     GenerationConfiguration = Shapes::StructureShape.new(name: 'GenerationConfiguration')
     GetAccountDataRetentionRequest = Shapes::StructureShape.new(name: 'GetAccountDataRetentionRequest')
     GetAccountDataRetentionResponse = Shapes::StructureShape.new(name: 'GetAccountDataRetentionResponse')
+    GetAccountDataRetentionStorageRequest = Shapes::StructureShape.new(name: 'GetAccountDataRetentionStorageRequest')
+    GetAccountDataRetentionStorageResponse = Shapes::StructureShape.new(name: 'GetAccountDataRetentionStorageResponse')
     GetAdvancedPromptOptimizationJobRequest = Shapes::StructureShape.new(name: 'GetAdvancedPromptOptimizationJobRequest')
     GetAdvancedPromptOptimizationJobResponse = Shapes::StructureShape.new(name: 'GetAdvancedPromptOptimizationJobResponse')
     GetAutomatedReasoningPolicyAnnotationsRequest = Shapes::StructureShape.new(name: 'GetAutomatedReasoningPolicyAnnotationsRequest')
@@ -473,12 +491,26 @@ module Aws::Bedrock
     GetModelInvocationJobResponse = Shapes::StructureShape.new(name: 'GetModelInvocationJobResponse')
     GetModelInvocationLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'GetModelInvocationLoggingConfigurationRequest')
     GetModelInvocationLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'GetModelInvocationLoggingConfigurationResponse')
+    GetOrganizationDataRetentionStorageRequest = Shapes::StructureShape.new(name: 'GetOrganizationDataRetentionStorageRequest')
+    GetOrganizationDataRetentionStorageResponse = Shapes::StructureShape.new(name: 'GetOrganizationDataRetentionStorageResponse')
+    GetProjectDataRetentionStorageRequest = Shapes::StructureShape.new(name: 'GetProjectDataRetentionStorageRequest')
+    GetProjectDataRetentionStorageResponse = Shapes::StructureShape.new(name: 'GetProjectDataRetentionStorageResponse')
+    GetProjectRequest = Shapes::StructureShape.new(name: 'GetProjectRequest')
+    GetProjectResponse = Shapes::StructureShape.new(name: 'GetProjectResponse')
     GetPromptRouterRequest = Shapes::StructureShape.new(name: 'GetPromptRouterRequest')
     GetPromptRouterResponse = Shapes::StructureShape.new(name: 'GetPromptRouterResponse')
     GetProvisionedModelThroughputRequest = Shapes::StructureShape.new(name: 'GetProvisionedModelThroughputRequest')
     GetProvisionedModelThroughputResponse = Shapes::StructureShape.new(name: 'GetProvisionedModelThroughputResponse')
     GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
     GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
+    GetTrustedAccessProgramAccountEnrollmentRequest = Shapes::StructureShape.new(name: 'GetTrustedAccessProgramAccountEnrollmentRequest')
+    GetTrustedAccessProgramAccountEnrollmentResponse = Shapes::StructureShape.new(name: 'GetTrustedAccessProgramAccountEnrollmentResponse')
+    GetTrustedAccessProgramOrganizationEnrollmentRequest = Shapes::StructureShape.new(name: 'GetTrustedAccessProgramOrganizationEnrollmentRequest')
+    GetTrustedAccessProgramOrganizationEnrollmentResponse = Shapes::StructureShape.new(name: 'GetTrustedAccessProgramOrganizationEnrollmentResponse')
+    GetTrustedAccessProgramProjectEnrollmentRequest = Shapes::StructureShape.new(name: 'GetTrustedAccessProgramProjectEnrollmentRequest')
+    GetTrustedAccessProgramProjectEnrollmentResponse = Shapes::StructureShape.new(name: 'GetTrustedAccessProgramProjectEnrollmentResponse')
+    GetTrustedAccessProgramRequest = Shapes::StructureShape.new(name: 'GetTrustedAccessProgramRequest')
+    GetTrustedAccessProgramResponse = Shapes::StructureShape.new(name: 'GetTrustedAccessProgramResponse')
     GetUseCaseForModelAccessRequest = Shapes::StructureShape.new(name: 'GetUseCaseForModelAccessRequest')
     GetUseCaseForModelAccessResponse = Shapes::StructureShape.new(name: 'GetUseCaseForModelAccessResponse')
     GraderConfig = Shapes::UnionShape.new(name: 'GraderConfig')
@@ -681,12 +713,16 @@ module Aws::Bedrock
     ListModelImportJobsResponse = Shapes::StructureShape.new(name: 'ListModelImportJobsResponse')
     ListModelInvocationJobsRequest = Shapes::StructureShape.new(name: 'ListModelInvocationJobsRequest')
     ListModelInvocationJobsResponse = Shapes::StructureShape.new(name: 'ListModelInvocationJobsResponse')
+    ListProjectsRequest = Shapes::StructureShape.new(name: 'ListProjectsRequest')
+    ListProjectsResponse = Shapes::StructureShape.new(name: 'ListProjectsResponse')
     ListPromptRoutersRequest = Shapes::StructureShape.new(name: 'ListPromptRoutersRequest')
     ListPromptRoutersResponse = Shapes::StructureShape.new(name: 'ListPromptRoutersResponse')
     ListProvisionedModelThroughputsRequest = Shapes::StructureShape.new(name: 'ListProvisionedModelThroughputsRequest')
     ListProvisionedModelThroughputsResponse = Shapes::StructureShape.new(name: 'ListProvisionedModelThroughputsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListTrustedAccessProgramsRequest = Shapes::StructureShape.new(name: 'ListTrustedAccessProgramsRequest')
+    ListTrustedAccessProgramsResponse = Shapes::StructureShape.new(name: 'ListTrustedAccessProgramsResponse')
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
     LoggingConfig = Shapes::StructureShape.new(name: 'LoggingConfig')
     MarketplaceModelEndpoint = Shapes::StructureShape.new(name: 'MarketplaceModelEndpoint')
@@ -762,6 +798,15 @@ module Aws::Bedrock
     PerformanceConfiguration = Shapes::StructureShape.new(name: 'PerformanceConfiguration')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
     PricingTerm = Shapes::StructureShape.new(name: 'PricingTerm')
+    ProjectArn = Shapes::StringShape.new(name: 'ProjectArn')
+    ProjectDataRetention = Shapes::StructureShape.new(name: 'ProjectDataRetention')
+    ProjectIdentifier = Shapes::StringShape.new(name: 'ProjectIdentifier')
+    ProjectMaxResults = Shapes::IntegerShape.new(name: 'ProjectMaxResults')
+    ProjectName = Shapes::StringShape.new(name: 'ProjectName')
+    ProjectResourceId = Shapes::StringShape.new(name: 'ProjectResourceId')
+    ProjectStatus = Shapes::StringShape.new(name: 'ProjectStatus')
+    ProjectSummary = Shapes::StructureShape.new(name: 'ProjectSummary')
+    ProjectSummaryList = Shapes::ListShape.new(name: 'ProjectSummaryList')
     PromptRouterArn = Shapes::StringShape.new(name: 'PromptRouterArn')
     PromptRouterDescription = Shapes::StringShape.new(name: 'PromptRouterDescription')
     PromptRouterName = Shapes::StringShape.new(name: 'PromptRouterName')
@@ -782,12 +827,24 @@ module Aws::Bedrock
     ProvisionedModelSummary = Shapes::StructureShape.new(name: 'ProvisionedModelSummary')
     PutAccountDataRetentionRequest = Shapes::StructureShape.new(name: 'PutAccountDataRetentionRequest')
     PutAccountDataRetentionResponse = Shapes::StructureShape.new(name: 'PutAccountDataRetentionResponse')
+    PutAccountDataRetentionStorageRequest = Shapes::StructureShape.new(name: 'PutAccountDataRetentionStorageRequest')
+    PutAccountDataRetentionStorageResponse = Shapes::StructureShape.new(name: 'PutAccountDataRetentionStorageResponse')
     PutEnforcedGuardrailConfigurationRequest = Shapes::StructureShape.new(name: 'PutEnforcedGuardrailConfigurationRequest')
     PutEnforcedGuardrailConfigurationResponse = Shapes::StructureShape.new(name: 'PutEnforcedGuardrailConfigurationResponse')
     PutModelInvocationLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'PutModelInvocationLoggingConfigurationRequest')
     PutModelInvocationLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'PutModelInvocationLoggingConfigurationResponse')
+    PutOrganizationDataRetentionStorageRequest = Shapes::StructureShape.new(name: 'PutOrganizationDataRetentionStorageRequest')
+    PutOrganizationDataRetentionStorageResponse = Shapes::StructureShape.new(name: 'PutOrganizationDataRetentionStorageResponse')
+    PutProjectDataRetentionStorageRequest = Shapes::StructureShape.new(name: 'PutProjectDataRetentionStorageRequest')
+    PutProjectDataRetentionStorageResponse = Shapes::StructureShape.new(name: 'PutProjectDataRetentionStorageResponse')
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
     PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
+    PutTrustedAccessProgramAccountEnrollmentRequest = Shapes::StructureShape.new(name: 'PutTrustedAccessProgramAccountEnrollmentRequest')
+    PutTrustedAccessProgramAccountEnrollmentResponse = Shapes::StructureShape.new(name: 'PutTrustedAccessProgramAccountEnrollmentResponse')
+    PutTrustedAccessProgramOrganizationEnrollmentRequest = Shapes::StructureShape.new(name: 'PutTrustedAccessProgramOrganizationEnrollmentRequest')
+    PutTrustedAccessProgramOrganizationEnrollmentResponse = Shapes::StructureShape.new(name: 'PutTrustedAccessProgramOrganizationEnrollmentResponse')
+    PutTrustedAccessProgramProjectEnrollmentRequest = Shapes::StructureShape.new(name: 'PutTrustedAccessProgramProjectEnrollmentRequest')
+    PutTrustedAccessProgramProjectEnrollmentResponse = Shapes::StructureShape.new(name: 'PutTrustedAccessProgramProjectEnrollmentResponse')
     PutUseCaseForModelAccessRequest = Shapes::StructureShape.new(name: 'PutUseCaseForModelAccessRequest')
     PutUseCaseForModelAccessResponse = Shapes::StructureShape.new(name: 'PutUseCaseForModelAccessResponse')
     QueryTransformationConfiguration = Shapes::StructureShape.new(name: 'QueryTransformationConfiguration')
@@ -857,6 +914,12 @@ module Aws::Bedrock
     StartAutomatedReasoningPolicyBuildWorkflowResponse = Shapes::StructureShape.new(name: 'StartAutomatedReasoningPolicyBuildWorkflowResponse')
     StartAutomatedReasoningPolicyTestWorkflowRequest = Shapes::StructureShape.new(name: 'StartAutomatedReasoningPolicyTestWorkflowRequest')
     StartAutomatedReasoningPolicyTestWorkflowResponse = Shapes::StructureShape.new(name: 'StartAutomatedReasoningPolicyTestWorkflowResponse')
+    StartTrustedAccessProgramAccountApplicationRequest = Shapes::StructureShape.new(name: 'StartTrustedAccessProgramAccountApplicationRequest')
+    StartTrustedAccessProgramAccountApplicationResponse = Shapes::StructureShape.new(name: 'StartTrustedAccessProgramAccountApplicationResponse')
+    StartTrustedAccessProgramOrganizationApplicationRequest = Shapes::StructureShape.new(name: 'StartTrustedAccessProgramOrganizationApplicationRequest')
+    StartTrustedAccessProgramOrganizationApplicationResponse = Shapes::StructureShape.new(name: 'StartTrustedAccessProgramOrganizationApplicationResponse')
+    StartTrustedAccessProgramProjectApplicationRequest = Shapes::StructureShape.new(name: 'StartTrustedAccessProgramProjectApplicationRequest')
+    StartTrustedAccessProgramProjectApplicationResponse = Shapes::StructureShape.new(name: 'StartTrustedAccessProgramProjectApplicationResponse')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusDetails = Shapes::StructureShape.new(name: 'StatusDetails')
     StopAdvancedPromptOptimizationJobRequest = Shapes::StructureShape.new(name: 'StopAdvancedPromptOptimizationJobRequest')
@@ -892,6 +955,19 @@ module Aws::Bedrock
     TrainingDataConfig = Shapes::StructureShape.new(name: 'TrainingDataConfig')
     TrainingDetails = Shapes::StructureShape.new(name: 'TrainingDetails')
     TrainingMetrics = Shapes::StructureShape.new(name: 'TrainingMetrics')
+    TrustedAccessProgramApplicationResult = Shapes::UnionShape.new(name: 'TrustedAccessProgramApplicationResult')
+    TrustedAccessProgramApplicationToken = Shapes::StringShape.new(name: 'TrustedAccessProgramApplicationToken')
+    TrustedAccessProgramId = Shapes::StringShape.new(name: 'TrustedAccessProgramId')
+    TrustedAccessProgramIdentifier = Shapes::StringShape.new(name: 'TrustedAccessProgramIdentifier')
+    TrustedAccessProgramName = Shapes::StringShape.new(name: 'TrustedAccessProgramName')
+    TrustedAccessProgramOptIn = Shapes::StringShape.new(name: 'TrustedAccessProgramOptIn')
+    TrustedAccessProgramProviderHandoff = Shapes::StructureShape.new(name: 'TrustedAccessProgramProviderHandoff')
+    TrustedAccessProgramScope = Shapes::StringShape.new(name: 'TrustedAccessProgramScope')
+    TrustedAccessProgramStatus = Shapes::StringShape.new(name: 'TrustedAccessProgramStatus')
+    TrustedAccessProgramSummaries = Shapes::ListShape.new(name: 'TrustedAccessProgramSummaries')
+    TrustedAccessProgramSummary = Shapes::StructureShape.new(name: 'TrustedAccessProgramSummary')
+    TrustedAccessProgramUrl = Shapes::StringShape.new(name: 'TrustedAccessProgramUrl')
+    TrustedAccessResolutionContext = Shapes::StructureShape.new(name: 'TrustedAccessResolutionContext')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAutomatedReasoningPolicyAnnotationsRequest = Shapes::StructureShape.new(name: 'UpdateAutomatedReasoningPolicyAnnotationsRequest')
@@ -906,6 +982,8 @@ module Aws::Bedrock
     UpdateGuardrailResponse = Shapes::StructureShape.new(name: 'UpdateGuardrailResponse')
     UpdateMarketplaceModelEndpointRequest = Shapes::StructureShape.new(name: 'UpdateMarketplaceModelEndpointRequest')
     UpdateMarketplaceModelEndpointResponse = Shapes::StructureShape.new(name: 'UpdateMarketplaceModelEndpointResponse')
+    UpdateProjectRequest = Shapes::StructureShape.new(name: 'UpdateProjectRequest')
+    UpdateProjectResponse = Shapes::StructureShape.new(name: 'UpdateProjectResponse')
     UpdateProvisionedModelThroughputRequest = Shapes::StructureShape.new(name: 'UpdateProvisionedModelThroughputRequest')
     UpdateProvisionedModelThroughputResponse = Shapes::StructureShape.new(name: 'UpdateProvisionedModelThroughputResponse')
     UsePromptResponse = Shapes::BooleanShape.new(name: 'UsePromptResponse')
@@ -973,6 +1051,18 @@ module Aws::Bedrock
     AgreementAvailability.add_member(:status, Shapes::ShapeRef.new(shape: AgreementStatus, required: true, location_name: "status"))
     AgreementAvailability.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
     AgreementAvailability.struct_class = Types::AgreementAvailability
+
+    ArchiveProjectRequest.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectIdentifier, required: true, location: "uri", location_name: "projectIdentifier"))
+    ArchiveProjectRequest.struct_class = Types::ArchiveProjectRequest
+
+    ArchiveProjectResponse.add_member(:id, Shapes::ShapeRef.new(shape: ProjectResourceId, required: true, location_name: "id"))
+    ArchiveProjectResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "arn"))
+    ArchiveProjectResponse.add_member(:name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "name"))
+    ArchiveProjectResponse.add_member(:status, Shapes::ShapeRef.new(shape: ProjectStatus, required: true, location_name: "status"))
+    ArchiveProjectResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    ArchiveProjectResponse.add_member(:archived_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "archivedAt"))
+    ArchiveProjectResponse.add_member(:data_retention, Shapes::ShapeRef.new(shape: ProjectDataRetention, required: true, location_name: "dataRetention"))
+    ArchiveProjectResponse.struct_class = Types::ArchiveProjectResponse
 
     AutomatedEvaluationConfig.add_member(:dataset_metric_configs, Shapes::ShapeRef.new(shape: EvaluationDatasetMetricConfigs, required: true, location_name: "datasetMetricConfigs"))
     AutomatedEvaluationConfig.add_member(:evaluator_model_config, Shapes::ShapeRef.new(shape: EvaluatorModelConfig, location_name: "evaluatorModelConfig"))
@@ -1841,6 +1931,20 @@ module Aws::Bedrock
     CreateModelInvocationJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelInvocationJobArn, required: true, location_name: "jobArn"))
     CreateModelInvocationJobResponse.struct_class = Types::CreateModelInvocationJobResponse
 
+    CreateProjectRequest.add_member(:name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "name"))
+    CreateProjectRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateProjectRequest.add_member(:data_retention, Shapes::ShapeRef.new(shape: ProjectDataRetention, location_name: "dataRetention"))
+    CreateProjectRequest.struct_class = Types::CreateProjectRequest
+
+    CreateProjectResponse.add_member(:id, Shapes::ShapeRef.new(shape: ProjectResourceId, required: true, location_name: "id"))
+    CreateProjectResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "arn"))
+    CreateProjectResponse.add_member(:name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "name"))
+    CreateProjectResponse.add_member(:status, Shapes::ShapeRef.new(shape: ProjectStatus, required: true, location_name: "status"))
+    CreateProjectResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    CreateProjectResponse.add_member(:archived_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "archivedAt"))
+    CreateProjectResponse.add_member(:data_retention, Shapes::ShapeRef.new(shape: ProjectDataRetention, required: true, location_name: "dataRetention"))
+    CreateProjectResponse.struct_class = Types::CreateProjectResponse
+
     CreatePromptRouterRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreatePromptRouterRequest.add_member(:prompt_router_name, Shapes::ShapeRef.new(shape: PromptRouterName, required: true, location_name: "promptRouterName"))
     CreatePromptRouterRequest.add_member(:models, Shapes::ShapeRef.new(shape: PromptRouterTargetModels, required: true, location_name: "models"))
@@ -1927,6 +2031,16 @@ module Aws::Bedrock
     DataProcessingDetails.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
     DataProcessingDetails.struct_class = Types::DataProcessingDetails
 
+    DataRetentionStorageConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, required: true, location_name: "kmsKeyArn"))
+    DataRetentionStorageConfiguration.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: DataRetentionStorageBucketArn, required: true, location_name: "s3BucketArn"))
+    DataRetentionStorageConfiguration.add_member(:s3_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "s3BucketOwner"))
+    DataRetentionStorageConfiguration.struct_class = Types::DataRetentionStorageConfiguration
+
+    DeleteAccountDataRetentionStorageRequest.add_member(:model_provider, Shapes::ShapeRef.new(shape: DataRetentionStorageModelProvider, required: true, location: "uri", location_name: "modelProvider"))
+    DeleteAccountDataRetentionStorageRequest.struct_class = Types::DeleteAccountDataRetentionStorageRequest
+
+    DeleteAccountDataRetentionStorageResponse.struct_class = Types::DeleteAccountDataRetentionStorageResponse
+
     DeleteAutomatedReasoningPolicyBuildWorkflowRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyArn, required: true, location: "uri", location_name: "policyArn"))
     DeleteAutomatedReasoningPolicyBuildWorkflowRequest.add_member(:build_workflow_id, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyBuildWorkflowId, required: true, location: "uri", location_name: "buildWorkflowId"))
     DeleteAutomatedReasoningPolicyBuildWorkflowRequest.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "updatedAt"))
@@ -1991,6 +2105,17 @@ module Aws::Bedrock
     DeleteModelInvocationLoggingConfigurationRequest.struct_class = Types::DeleteModelInvocationLoggingConfigurationRequest
 
     DeleteModelInvocationLoggingConfigurationResponse.struct_class = Types::DeleteModelInvocationLoggingConfigurationResponse
+
+    DeleteOrganizationDataRetentionStorageRequest.add_member(:model_provider, Shapes::ShapeRef.new(shape: DataRetentionStorageModelProvider, required: true, location: "uri", location_name: "modelProvider"))
+    DeleteOrganizationDataRetentionStorageRequest.struct_class = Types::DeleteOrganizationDataRetentionStorageRequest
+
+    DeleteOrganizationDataRetentionStorageResponse.struct_class = Types::DeleteOrganizationDataRetentionStorageResponse
+
+    DeleteProjectDataRetentionStorageRequest.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectIdentifier, required: true, location: "uri", location_name: "projectIdentifier"))
+    DeleteProjectDataRetentionStorageRequest.add_member(:model_provider, Shapes::ShapeRef.new(shape: DataRetentionStorageModelProvider, required: true, location: "uri", location_name: "modelProvider"))
+    DeleteProjectDataRetentionStorageRequest.struct_class = Types::DeleteProjectDataRetentionStorageRequest
+
+    DeleteProjectDataRetentionStorageResponse.struct_class = Types::DeleteProjectDataRetentionStorageResponse
 
     DeletePromptRouterRequest.add_member(:prompt_router_arn, Shapes::ShapeRef.new(shape: PromptRouterArn, required: true, location: "uri", location_name: "promptRouterArn"))
     DeletePromptRouterRequest.struct_class = Types::DeletePromptRouterRequest
@@ -2229,6 +2354,18 @@ module Aws::Bedrock
     GetAccountDataRetentionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     GetAccountDataRetentionResponse.struct_class = Types::GetAccountDataRetentionResponse
 
+    GetAccountDataRetentionStorageRequest.add_member(:model_provider, Shapes::ShapeRef.new(shape: DataRetentionStorageModelProvider, required: true, location: "uri", location_name: "modelProvider"))
+    GetAccountDataRetentionStorageRequest.struct_class = Types::GetAccountDataRetentionStorageRequest
+
+    GetAccountDataRetentionStorageResponse.add_member(:scope, Shapes::ShapeRef.new(shape: DataRetentionStorageScope, required: true, location_name: "scope"))
+    GetAccountDataRetentionStorageResponse.add_member(:model_provider, Shapes::ShapeRef.new(shape: DataRetentionStorageModelProvider, required: true, location_name: "modelProvider"))
+    GetAccountDataRetentionStorageResponse.add_member(:storage_destination, Shapes::ShapeRef.new(shape: DataRetentionStorageDestination, required: true, location_name: "storageDestination"))
+    GetAccountDataRetentionStorageResponse.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: DataRetentionStorageConfiguration, location_name: "storageConfiguration"))
+    GetAccountDataRetentionStorageResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    GetAccountDataRetentionStorageResponse.add_member(:kms_key_status, Shapes::ShapeRef.new(shape: DataRetentionStorageResourceStatus, location_name: "kmsKeyStatus"))
+    GetAccountDataRetentionStorageResponse.add_member(:s3_bucket_status, Shapes::ShapeRef.new(shape: DataRetentionStorageResourceStatus, location_name: "s3BucketStatus"))
+    GetAccountDataRetentionStorageResponse.struct_class = Types::GetAccountDataRetentionStorageResponse
+
     GetAdvancedPromptOptimizationJobRequest.add_member(:job_identifier, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobIdentifier, required: true, location: "uri", location_name: "jobIdentifier"))
     GetAdvancedPromptOptimizationJobRequest.struct_class = Types::GetAdvancedPromptOptimizationJobRequest
 
@@ -2387,6 +2524,7 @@ module Aws::Bedrock
     GetFoundationModelAvailabilityResponse.struct_class = Types::GetFoundationModelAvailabilityResponse
 
     GetFoundationModelRequest.add_member(:model_identifier, Shapes::ShapeRef.new(shape: GetFoundationModelIdentifier, required: true, location: "uri", location_name: "modelIdentifier"))
+    GetFoundationModelRequest.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectIdentifier, location: "querystring", location_name: "projectIdentifier"))
     GetFoundationModelRequest.struct_class = Types::GetFoundationModelRequest
 
     GetFoundationModelResponse.add_member(:model_details, Shapes::ShapeRef.new(shape: FoundationModelDetails, location_name: "modelDetails"))
@@ -2434,6 +2572,7 @@ module Aws::Bedrock
     GetImportedModelResponse.struct_class = Types::GetImportedModelResponse
 
     GetInferenceProfileRequest.add_member(:inference_profile_identifier, Shapes::ShapeRef.new(shape: InferenceProfileIdentifier, required: true, location: "uri", location_name: "inferenceProfileIdentifier"))
+    GetInferenceProfileRequest.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectIdentifier, location: "querystring", location_name: "projectIdentifier"))
     GetInferenceProfileRequest.struct_class = Types::GetInferenceProfileRequest
 
     GetInferenceProfileResponse.add_member(:inference_profile_name, Shapes::ShapeRef.new(shape: InferenceProfileName, required: true, location_name: "inferenceProfileName"))
@@ -2545,6 +2684,44 @@ module Aws::Bedrock
     GetModelInvocationLoggingConfigurationResponse.add_member(:logging_config, Shapes::ShapeRef.new(shape: LoggingConfig, location_name: "loggingConfig"))
     GetModelInvocationLoggingConfigurationResponse.struct_class = Types::GetModelInvocationLoggingConfigurationResponse
 
+    GetOrganizationDataRetentionStorageRequest.add_member(:model_provider, Shapes::ShapeRef.new(shape: DataRetentionStorageModelProvider, required: true, location: "uri", location_name: "modelProvider"))
+    GetOrganizationDataRetentionStorageRequest.struct_class = Types::GetOrganizationDataRetentionStorageRequest
+
+    GetOrganizationDataRetentionStorageResponse.add_member(:scope, Shapes::ShapeRef.new(shape: DataRetentionStorageScope, required: true, location_name: "scope"))
+    GetOrganizationDataRetentionStorageResponse.add_member(:model_provider, Shapes::ShapeRef.new(shape: DataRetentionStorageModelProvider, required: true, location_name: "modelProvider"))
+    GetOrganizationDataRetentionStorageResponse.add_member(:storage_destination, Shapes::ShapeRef.new(shape: DataRetentionStorageDestination, required: true, location_name: "storageDestination"))
+    GetOrganizationDataRetentionStorageResponse.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: DataRetentionStorageConfiguration, location_name: "storageConfiguration"))
+    GetOrganizationDataRetentionStorageResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    GetOrganizationDataRetentionStorageResponse.add_member(:kms_key_status, Shapes::ShapeRef.new(shape: DataRetentionStorageResourceStatus, location_name: "kmsKeyStatus"))
+    GetOrganizationDataRetentionStorageResponse.add_member(:s3_bucket_status, Shapes::ShapeRef.new(shape: DataRetentionStorageResourceStatus, location_name: "s3BucketStatus"))
+    GetOrganizationDataRetentionStorageResponse.struct_class = Types::GetOrganizationDataRetentionStorageResponse
+
+    GetProjectDataRetentionStorageRequest.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectIdentifier, required: true, location: "uri", location_name: "projectIdentifier"))
+    GetProjectDataRetentionStorageRequest.add_member(:model_provider, Shapes::ShapeRef.new(shape: DataRetentionStorageModelProvider, required: true, location: "uri", location_name: "modelProvider"))
+    GetProjectDataRetentionStorageRequest.struct_class = Types::GetProjectDataRetentionStorageRequest
+
+    GetProjectDataRetentionStorageResponse.add_member(:scope, Shapes::ShapeRef.new(shape: DataRetentionStorageScope, required: true, location_name: "scope"))
+    GetProjectDataRetentionStorageResponse.add_member(:model_provider, Shapes::ShapeRef.new(shape: DataRetentionStorageModelProvider, required: true, location_name: "modelProvider"))
+    GetProjectDataRetentionStorageResponse.add_member(:storage_destination, Shapes::ShapeRef.new(shape: DataRetentionStorageDestination, required: true, location_name: "storageDestination"))
+    GetProjectDataRetentionStorageResponse.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: DataRetentionStorageConfiguration, location_name: "storageConfiguration"))
+    GetProjectDataRetentionStorageResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    GetProjectDataRetentionStorageResponse.add_member(:kms_key_status, Shapes::ShapeRef.new(shape: DataRetentionStorageResourceStatus, location_name: "kmsKeyStatus"))
+    GetProjectDataRetentionStorageResponse.add_member(:s3_bucket_status, Shapes::ShapeRef.new(shape: DataRetentionStorageResourceStatus, location_name: "s3BucketStatus"))
+    GetProjectDataRetentionStorageResponse.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "projectArn"))
+    GetProjectDataRetentionStorageResponse.struct_class = Types::GetProjectDataRetentionStorageResponse
+
+    GetProjectRequest.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectIdentifier, required: true, location: "uri", location_name: "projectIdentifier"))
+    GetProjectRequest.struct_class = Types::GetProjectRequest
+
+    GetProjectResponse.add_member(:id, Shapes::ShapeRef.new(shape: ProjectResourceId, required: true, location_name: "id"))
+    GetProjectResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "arn"))
+    GetProjectResponse.add_member(:name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "name"))
+    GetProjectResponse.add_member(:status, Shapes::ShapeRef.new(shape: ProjectStatus, required: true, location_name: "status"))
+    GetProjectResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    GetProjectResponse.add_member(:archived_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "archivedAt"))
+    GetProjectResponse.add_member(:data_retention, Shapes::ShapeRef.new(shape: ProjectDataRetention, required: true, location_name: "dataRetention"))
+    GetProjectResponse.struct_class = Types::GetProjectResponse
+
     GetPromptRouterRequest.add_member(:prompt_router_arn, Shapes::ShapeRef.new(shape: PromptRouterArn, required: true, location: "uri", location_name: "promptRouterArn"))
     GetPromptRouterRequest.struct_class = Types::GetPromptRouterRequest
 
@@ -2583,6 +2760,47 @@ module Aws::Bedrock
 
     GetResourcePolicyResponse.add_member(:resource_policy, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, location_name: "resourcePolicy"))
     GetResourcePolicyResponse.struct_class = Types::GetResourcePolicyResponse
+
+    GetTrustedAccessProgramAccountEnrollmentRequest.add_member(:program_identifier, Shapes::ShapeRef.new(shape: TrustedAccessProgramIdentifier, required: true, location: "uri", location_name: "programIdentifier"))
+    GetTrustedAccessProgramAccountEnrollmentRequest.struct_class = Types::GetTrustedAccessProgramAccountEnrollmentRequest
+
+    GetTrustedAccessProgramAccountEnrollmentResponse.add_member(:opt_in, Shapes::ShapeRef.new(shape: TrustedAccessProgramOptIn, required: true, location_name: "optIn"))
+    GetTrustedAccessProgramAccountEnrollmentResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    GetTrustedAccessProgramAccountEnrollmentResponse.struct_class = Types::GetTrustedAccessProgramAccountEnrollmentResponse
+
+    GetTrustedAccessProgramOrganizationEnrollmentRequest.add_member(:program_identifier, Shapes::ShapeRef.new(shape: TrustedAccessProgramIdentifier, required: true, location: "uri", location_name: "programIdentifier"))
+    GetTrustedAccessProgramOrganizationEnrollmentRequest.struct_class = Types::GetTrustedAccessProgramOrganizationEnrollmentRequest
+
+    GetTrustedAccessProgramOrganizationEnrollmentResponse.add_member(:opt_in, Shapes::ShapeRef.new(shape: TrustedAccessProgramOptIn, required: true, location_name: "optIn"))
+    GetTrustedAccessProgramOrganizationEnrollmentResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    GetTrustedAccessProgramOrganizationEnrollmentResponse.struct_class = Types::GetTrustedAccessProgramOrganizationEnrollmentResponse
+
+    GetTrustedAccessProgramProjectEnrollmentRequest.add_member(:program_identifier, Shapes::ShapeRef.new(shape: TrustedAccessProgramIdentifier, required: true, location: "uri", location_name: "programIdentifier"))
+    GetTrustedAccessProgramProjectEnrollmentRequest.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectIdentifier, required: true, location: "uri", location_name: "projectIdentifier"))
+    GetTrustedAccessProgramProjectEnrollmentRequest.struct_class = Types::GetTrustedAccessProgramProjectEnrollmentRequest
+
+    GetTrustedAccessProgramProjectEnrollmentResponse.add_member(:opt_in, Shapes::ShapeRef.new(shape: TrustedAccessProgramOptIn, required: true, location_name: "optIn"))
+    GetTrustedAccessProgramProjectEnrollmentResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    GetTrustedAccessProgramProjectEnrollmentResponse.struct_class = Types::GetTrustedAccessProgramProjectEnrollmentResponse
+
+    GetTrustedAccessProgramRequest.add_member(:program_identifier, Shapes::ShapeRef.new(shape: TrustedAccessProgramIdentifier, required: true, location: "uri", location_name: "programIdentifier"))
+    GetTrustedAccessProgramRequest.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectIdentifier, location: "querystring", location_name: "projectIdentifier"))
+    GetTrustedAccessProgramRequest.struct_class = Types::GetTrustedAccessProgramRequest
+
+    GetTrustedAccessProgramResponse.add_member(:program_id, Shapes::ShapeRef.new(shape: TrustedAccessProgramId, required: true, location_name: "programId"))
+    GetTrustedAccessProgramResponse.add_member(:name, Shapes::ShapeRef.new(shape: TrustedAccessProgramName, required: true, location_name: "name"))
+    GetTrustedAccessProgramResponse.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "description"))
+    GetTrustedAccessProgramResponse.add_member(:provider_name, Shapes::ShapeRef.new(shape: BrandedName, required: true, location_name: "providerName"))
+    GetTrustedAccessProgramResponse.add_member(:details_url, Shapes::ShapeRef.new(shape: TrustedAccessProgramUrl, required: true, location_name: "detailsUrl"))
+    GetTrustedAccessProgramResponse.add_member(:enrollment_url, Shapes::ShapeRef.new(shape: TrustedAccessProgramUrl, location_name: "enrollmentUrl"))
+    GetTrustedAccessProgramResponse.add_member(:status, Shapes::ShapeRef.new(shape: TrustedAccessProgramStatus, required: true, location_name: "status"))
+    GetTrustedAccessProgramResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    GetTrustedAccessProgramResponse.add_member(:source, Shapes::ShapeRef.new(shape: TrustedAccessProgramScope, required: true, location_name: "source"))
+    GetTrustedAccessProgramResponse.add_member(:eligibility_scope, Shapes::ShapeRef.new(shape: TrustedAccessProgramScope, location_name: "eligibilityScope"))
+    GetTrustedAccessProgramResponse.add_member(:resolved_for, Shapes::ShapeRef.new(shape: TrustedAccessResolutionContext, required: true, location_name: "resolvedFor"))
+    GetTrustedAccessProgramResponse.add_member(:opt_in, Shapes::ShapeRef.new(shape: TrustedAccessProgramOptIn, required: true, location_name: "optIn"))
+    GetTrustedAccessProgramResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    GetTrustedAccessProgramResponse.struct_class = Types::GetTrustedAccessProgramResponse
 
     GetUseCaseForModelAccessRequest.struct_class = Types::GetUseCaseForModelAccessRequest
 
@@ -3069,6 +3287,7 @@ module Aws::Bedrock
     ListFoundationModelsRequest.add_member(:by_customization_type, Shapes::ShapeRef.new(shape: ModelCustomization, location: "querystring", location_name: "byCustomizationType"))
     ListFoundationModelsRequest.add_member(:by_output_modality, Shapes::ShapeRef.new(shape: ModelModality, location: "querystring", location_name: "byOutputModality"))
     ListFoundationModelsRequest.add_member(:by_inference_type, Shapes::ShapeRef.new(shape: InferenceType, location: "querystring", location_name: "byInferenceType"))
+    ListFoundationModelsRequest.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectIdentifier, location: "querystring", location_name: "projectIdentifier"))
     ListFoundationModelsRequest.struct_class = Types::ListFoundationModelsRequest
 
     ListFoundationModelsResponse.add_member(:model_summaries, Shapes::ShapeRef.new(shape: FoundationModelSummaryList, location_name: "modelSummaries"))
@@ -3099,6 +3318,7 @@ module Aws::Bedrock
     ListInferenceProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListInferenceProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListInferenceProfilesRequest.add_member(:type_equals, Shapes::ShapeRef.new(shape: InferenceProfileType, location: "querystring", location_name: "type"))
+    ListInferenceProfilesRequest.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectIdentifier, location: "querystring", location_name: "projectIdentifier"))
     ListInferenceProfilesRequest.struct_class = Types::ListInferenceProfilesRequest
 
     ListInferenceProfilesResponse.add_member(:inference_profile_summaries, Shapes::ShapeRef.new(shape: InferenceProfileSummaries, location_name: "inferenceProfileSummaries"))
@@ -3172,6 +3392,15 @@ module Aws::Bedrock
     ListModelInvocationJobsResponse.add_member(:invocation_job_summaries, Shapes::ShapeRef.new(shape: ModelInvocationJobSummaries, location_name: "invocationJobSummaries"))
     ListModelInvocationJobsResponse.struct_class = Types::ListModelInvocationJobsResponse
 
+    ListProjectsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListProjectsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ProjectMaxResults, location: "querystring", location_name: "maxResults"))
+    ListProjectsRequest.add_member(:status_filter, Shapes::ShapeRef.new(shape: ProjectStatus, location: "querystring", location_name: "statusFilter"))
+    ListProjectsRequest.struct_class = Types::ListProjectsRequest
+
+    ListProjectsResponse.add_member(:project_summaries, Shapes::ShapeRef.new(shape: ProjectSummaryList, required: true, location_name: "projectSummaries"))
+    ListProjectsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListProjectsResponse.struct_class = Types::ListProjectsResponse
+
     ListPromptRoutersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListPromptRoutersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListPromptRoutersRequest.add_member(:type, Shapes::ShapeRef.new(shape: PromptRouterType, location: "querystring", location_name: "type"))
@@ -3201,6 +3430,15 @@ module Aws::Bedrock
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListTrustedAccessProgramsRequest.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectIdentifier, location: "querystring", location_name: "projectIdentifier"))
+    ListTrustedAccessProgramsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListTrustedAccessProgramsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListTrustedAccessProgramsRequest.struct_class = Types::ListTrustedAccessProgramsRequest
+
+    ListTrustedAccessProgramsResponse.add_member(:program_summaries, Shapes::ShapeRef.new(shape: TrustedAccessProgramSummaries, required: true, location_name: "programSummaries"))
+    ListTrustedAccessProgramsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListTrustedAccessProgramsResponse.struct_class = Types::ListTrustedAccessProgramsResponse
 
     LoggingConfig.add_member(:cloud_watch_config, Shapes::ShapeRef.new(shape: CloudWatchConfig, location_name: "cloudWatchConfig"))
     LoggingConfig.add_member(:s3_config, Shapes::ShapeRef.new(shape: S3Config, location_name: "s3Config"))
@@ -3377,6 +3615,20 @@ module Aws::Bedrock
     PricingTerm.add_member(:rate_card, Shapes::ShapeRef.new(shape: RateCard, required: true, location_name: "rateCard"))
     PricingTerm.struct_class = Types::PricingTerm
 
+    ProjectDataRetention.add_member(:mode, Shapes::ShapeRef.new(shape: DataRetentionMode, required: true, location_name: "mode"))
+    ProjectDataRetention.struct_class = Types::ProjectDataRetention
+
+    ProjectSummary.add_member(:id, Shapes::ShapeRef.new(shape: ProjectResourceId, required: true, location_name: "id"))
+    ProjectSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "arn"))
+    ProjectSummary.add_member(:name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "name"))
+    ProjectSummary.add_member(:status, Shapes::ShapeRef.new(shape: ProjectStatus, required: true, location_name: "status"))
+    ProjectSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    ProjectSummary.add_member(:archived_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "archivedAt"))
+    ProjectSummary.add_member(:data_retention, Shapes::ShapeRef.new(shape: ProjectDataRetention, required: true, location_name: "dataRetention"))
+    ProjectSummary.struct_class = Types::ProjectSummary
+
+    ProjectSummaryList.member = Shapes::ShapeRef.new(shape: ProjectSummary)
+
     PromptRouterSummaries.member = Shapes::ShapeRef.new(shape: PromptRouterSummary)
 
     PromptRouterSummary.add_member(:prompt_router_name, Shapes::ShapeRef.new(shape: PromptRouterName, required: true, location_name: "promptRouterName"))
@@ -3422,6 +3674,20 @@ module Aws::Bedrock
     PutAccountDataRetentionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     PutAccountDataRetentionResponse.struct_class = Types::PutAccountDataRetentionResponse
 
+    PutAccountDataRetentionStorageRequest.add_member(:model_provider, Shapes::ShapeRef.new(shape: DataRetentionStorageModelProvider, required: true, location: "uri", location_name: "modelProvider"))
+    PutAccountDataRetentionStorageRequest.add_member(:storage_destination, Shapes::ShapeRef.new(shape: DataRetentionStorageDestination, required: true, location_name: "storageDestination"))
+    PutAccountDataRetentionStorageRequest.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: DataRetentionStorageConfiguration, location_name: "storageConfiguration"))
+    PutAccountDataRetentionStorageRequest.struct_class = Types::PutAccountDataRetentionStorageRequest
+
+    PutAccountDataRetentionStorageResponse.add_member(:scope, Shapes::ShapeRef.new(shape: DataRetentionStorageScope, required: true, location_name: "scope"))
+    PutAccountDataRetentionStorageResponse.add_member(:model_provider, Shapes::ShapeRef.new(shape: DataRetentionStorageModelProvider, required: true, location_name: "modelProvider"))
+    PutAccountDataRetentionStorageResponse.add_member(:storage_destination, Shapes::ShapeRef.new(shape: DataRetentionStorageDestination, required: true, location_name: "storageDestination"))
+    PutAccountDataRetentionStorageResponse.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: DataRetentionStorageConfiguration, location_name: "storageConfiguration"))
+    PutAccountDataRetentionStorageResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    PutAccountDataRetentionStorageResponse.add_member(:kms_key_status, Shapes::ShapeRef.new(shape: DataRetentionStorageResourceStatus, location_name: "kmsKeyStatus"))
+    PutAccountDataRetentionStorageResponse.add_member(:s3_bucket_status, Shapes::ShapeRef.new(shape: DataRetentionStorageResourceStatus, location_name: "s3BucketStatus"))
+    PutAccountDataRetentionStorageResponse.struct_class = Types::PutAccountDataRetentionStorageResponse
+
     PutEnforcedGuardrailConfigurationRequest.add_member(:config_id, Shapes::ShapeRef.new(shape: AccountEnforcedGuardrailConfigurationId, location_name: "configId"))
     PutEnforcedGuardrailConfigurationRequest.add_member(:guardrail_inference_config, Shapes::ShapeRef.new(shape: AccountEnforcedGuardrailInferenceInputConfiguration, required: true, location_name: "guardrailInferenceConfig"))
     PutEnforcedGuardrailConfigurationRequest.struct_class = Types::PutEnforcedGuardrailConfigurationRequest
@@ -3436,12 +3702,67 @@ module Aws::Bedrock
 
     PutModelInvocationLoggingConfigurationResponse.struct_class = Types::PutModelInvocationLoggingConfigurationResponse
 
+    PutOrganizationDataRetentionStorageRequest.add_member(:model_provider, Shapes::ShapeRef.new(shape: DataRetentionStorageModelProvider, required: true, location: "uri", location_name: "modelProvider"))
+    PutOrganizationDataRetentionStorageRequest.add_member(:storage_destination, Shapes::ShapeRef.new(shape: DataRetentionStorageDestination, required: true, location_name: "storageDestination"))
+    PutOrganizationDataRetentionStorageRequest.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: DataRetentionStorageConfiguration, location_name: "storageConfiguration"))
+    PutOrganizationDataRetentionStorageRequest.struct_class = Types::PutOrganizationDataRetentionStorageRequest
+
+    PutOrganizationDataRetentionStorageResponse.add_member(:scope, Shapes::ShapeRef.new(shape: DataRetentionStorageScope, required: true, location_name: "scope"))
+    PutOrganizationDataRetentionStorageResponse.add_member(:model_provider, Shapes::ShapeRef.new(shape: DataRetentionStorageModelProvider, required: true, location_name: "modelProvider"))
+    PutOrganizationDataRetentionStorageResponse.add_member(:storage_destination, Shapes::ShapeRef.new(shape: DataRetentionStorageDestination, required: true, location_name: "storageDestination"))
+    PutOrganizationDataRetentionStorageResponse.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: DataRetentionStorageConfiguration, location_name: "storageConfiguration"))
+    PutOrganizationDataRetentionStorageResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    PutOrganizationDataRetentionStorageResponse.add_member(:kms_key_status, Shapes::ShapeRef.new(shape: DataRetentionStorageResourceStatus, location_name: "kmsKeyStatus"))
+    PutOrganizationDataRetentionStorageResponse.add_member(:s3_bucket_status, Shapes::ShapeRef.new(shape: DataRetentionStorageResourceStatus, location_name: "s3BucketStatus"))
+    PutOrganizationDataRetentionStorageResponse.struct_class = Types::PutOrganizationDataRetentionStorageResponse
+
+    PutProjectDataRetentionStorageRequest.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectIdentifier, required: true, location: "uri", location_name: "projectIdentifier"))
+    PutProjectDataRetentionStorageRequest.add_member(:model_provider, Shapes::ShapeRef.new(shape: DataRetentionStorageModelProvider, required: true, location: "uri", location_name: "modelProvider"))
+    PutProjectDataRetentionStorageRequest.add_member(:storage_destination, Shapes::ShapeRef.new(shape: DataRetentionStorageDestination, required: true, location_name: "storageDestination"))
+    PutProjectDataRetentionStorageRequest.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: DataRetentionStorageConfiguration, location_name: "storageConfiguration"))
+    PutProjectDataRetentionStorageRequest.struct_class = Types::PutProjectDataRetentionStorageRequest
+
+    PutProjectDataRetentionStorageResponse.add_member(:scope, Shapes::ShapeRef.new(shape: DataRetentionStorageScope, required: true, location_name: "scope"))
+    PutProjectDataRetentionStorageResponse.add_member(:model_provider, Shapes::ShapeRef.new(shape: DataRetentionStorageModelProvider, required: true, location_name: "modelProvider"))
+    PutProjectDataRetentionStorageResponse.add_member(:storage_destination, Shapes::ShapeRef.new(shape: DataRetentionStorageDestination, required: true, location_name: "storageDestination"))
+    PutProjectDataRetentionStorageResponse.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: DataRetentionStorageConfiguration, location_name: "storageConfiguration"))
+    PutProjectDataRetentionStorageResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    PutProjectDataRetentionStorageResponse.add_member(:kms_key_status, Shapes::ShapeRef.new(shape: DataRetentionStorageResourceStatus, location_name: "kmsKeyStatus"))
+    PutProjectDataRetentionStorageResponse.add_member(:s3_bucket_status, Shapes::ShapeRef.new(shape: DataRetentionStorageResourceStatus, location_name: "s3BucketStatus"))
+    PutProjectDataRetentionStorageResponse.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "projectArn"))
+    PutProjectDataRetentionStorageResponse.struct_class = Types::PutProjectDataRetentionStorageResponse
+
     PutResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourcePolicyResourceArn, required: true, location_name: "resourceArn"))
     PutResourcePolicyRequest.add_member(:resource_policy, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, required: true, location_name: "resourcePolicy"))
     PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
 
     PutResourcePolicyResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourcePolicyResourceArn, location_name: "resourceArn"))
     PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
+
+    PutTrustedAccessProgramAccountEnrollmentRequest.add_member(:program_identifier, Shapes::ShapeRef.new(shape: TrustedAccessProgramIdentifier, required: true, location: "uri", location_name: "programIdentifier"))
+    PutTrustedAccessProgramAccountEnrollmentRequest.add_member(:opt_in, Shapes::ShapeRef.new(shape: TrustedAccessProgramOptIn, required: true, location_name: "optIn"))
+    PutTrustedAccessProgramAccountEnrollmentRequest.struct_class = Types::PutTrustedAccessProgramAccountEnrollmentRequest
+
+    PutTrustedAccessProgramAccountEnrollmentResponse.add_member(:opt_in, Shapes::ShapeRef.new(shape: TrustedAccessProgramOptIn, required: true, location_name: "optIn"))
+    PutTrustedAccessProgramAccountEnrollmentResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    PutTrustedAccessProgramAccountEnrollmentResponse.struct_class = Types::PutTrustedAccessProgramAccountEnrollmentResponse
+
+    PutTrustedAccessProgramOrganizationEnrollmentRequest.add_member(:program_identifier, Shapes::ShapeRef.new(shape: TrustedAccessProgramIdentifier, required: true, location: "uri", location_name: "programIdentifier"))
+    PutTrustedAccessProgramOrganizationEnrollmentRequest.add_member(:opt_in, Shapes::ShapeRef.new(shape: TrustedAccessProgramOptIn, required: true, location_name: "optIn"))
+    PutTrustedAccessProgramOrganizationEnrollmentRequest.struct_class = Types::PutTrustedAccessProgramOrganizationEnrollmentRequest
+
+    PutTrustedAccessProgramOrganizationEnrollmentResponse.add_member(:opt_in, Shapes::ShapeRef.new(shape: TrustedAccessProgramOptIn, required: true, location_name: "optIn"))
+    PutTrustedAccessProgramOrganizationEnrollmentResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    PutTrustedAccessProgramOrganizationEnrollmentResponse.struct_class = Types::PutTrustedAccessProgramOrganizationEnrollmentResponse
+
+    PutTrustedAccessProgramProjectEnrollmentRequest.add_member(:program_identifier, Shapes::ShapeRef.new(shape: TrustedAccessProgramIdentifier, required: true, location: "uri", location_name: "programIdentifier"))
+    PutTrustedAccessProgramProjectEnrollmentRequest.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectIdentifier, required: true, location: "uri", location_name: "projectIdentifier"))
+    PutTrustedAccessProgramProjectEnrollmentRequest.add_member(:opt_in, Shapes::ShapeRef.new(shape: TrustedAccessProgramOptIn, required: true, location_name: "optIn"))
+    PutTrustedAccessProgramProjectEnrollmentRequest.struct_class = Types::PutTrustedAccessProgramProjectEnrollmentRequest
+
+    PutTrustedAccessProgramProjectEnrollmentResponse.add_member(:opt_in, Shapes::ShapeRef.new(shape: TrustedAccessProgramOptIn, required: true, location_name: "optIn"))
+    PutTrustedAccessProgramProjectEnrollmentResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    PutTrustedAccessProgramProjectEnrollmentResponse.struct_class = Types::PutTrustedAccessProgramProjectEnrollmentResponse
 
     PutUseCaseForModelAccessRequest.add_member(:form_data, Shapes::ShapeRef.new(shape: AcknowledgementFormDataBody, required: true, location_name: "formData"))
     PutUseCaseForModelAccessRequest.struct_class = Types::PutUseCaseForModelAccessRequest
@@ -3629,6 +3950,25 @@ module Aws::Bedrock
     StartAutomatedReasoningPolicyTestWorkflowResponse.add_member(:policy_arn, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyArn, required: true, location_name: "policyArn"))
     StartAutomatedReasoningPolicyTestWorkflowResponse.struct_class = Types::StartAutomatedReasoningPolicyTestWorkflowResponse
 
+    StartTrustedAccessProgramAccountApplicationRequest.add_member(:program_identifier, Shapes::ShapeRef.new(shape: TrustedAccessProgramIdentifier, required: true, location: "uri", location_name: "programIdentifier"))
+    StartTrustedAccessProgramAccountApplicationRequest.struct_class = Types::StartTrustedAccessProgramAccountApplicationRequest
+
+    StartTrustedAccessProgramAccountApplicationResponse.add_member(:result, Shapes::ShapeRef.new(shape: TrustedAccessProgramApplicationResult, required: true, location_name: "result"))
+    StartTrustedAccessProgramAccountApplicationResponse.struct_class = Types::StartTrustedAccessProgramAccountApplicationResponse
+
+    StartTrustedAccessProgramOrganizationApplicationRequest.add_member(:program_identifier, Shapes::ShapeRef.new(shape: TrustedAccessProgramIdentifier, required: true, location: "uri", location_name: "programIdentifier"))
+    StartTrustedAccessProgramOrganizationApplicationRequest.struct_class = Types::StartTrustedAccessProgramOrganizationApplicationRequest
+
+    StartTrustedAccessProgramOrganizationApplicationResponse.add_member(:result, Shapes::ShapeRef.new(shape: TrustedAccessProgramApplicationResult, required: true, location_name: "result"))
+    StartTrustedAccessProgramOrganizationApplicationResponse.struct_class = Types::StartTrustedAccessProgramOrganizationApplicationResponse
+
+    StartTrustedAccessProgramProjectApplicationRequest.add_member(:program_identifier, Shapes::ShapeRef.new(shape: TrustedAccessProgramIdentifier, required: true, location: "uri", location_name: "programIdentifier"))
+    StartTrustedAccessProgramProjectApplicationRequest.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectIdentifier, required: true, location: "uri", location_name: "projectIdentifier"))
+    StartTrustedAccessProgramProjectApplicationRequest.struct_class = Types::StartTrustedAccessProgramProjectApplicationRequest
+
+    StartTrustedAccessProgramProjectApplicationResponse.add_member(:result, Shapes::ShapeRef.new(shape: TrustedAccessProgramApplicationResult, required: true, location_name: "result"))
+    StartTrustedAccessProgramProjectApplicationResponse.struct_class = Types::StartTrustedAccessProgramProjectApplicationResponse
+
     StatusDetails.add_member(:validation_details, Shapes::ShapeRef.new(shape: ValidationDetails, location_name: "validationDetails"))
     StatusDetails.add_member(:data_processing_details, Shapes::ShapeRef.new(shape: DataProcessingDetails, location_name: "dataProcessingDetails"))
     StatusDetails.add_member(:training_details, Shapes::ShapeRef.new(shape: TrainingDetails, location_name: "trainingDetails"))
@@ -3707,6 +4047,38 @@ module Aws::Bedrock
 
     TrainingMetrics.add_member(:training_loss, Shapes::ShapeRef.new(shape: MetricFloat, location_name: "trainingLoss"))
     TrainingMetrics.struct_class = Types::TrainingMetrics
+
+    TrustedAccessProgramApplicationResult.add_member(:provider_handoff, Shapes::ShapeRef.new(shape: TrustedAccessProgramProviderHandoff, location_name: "providerHandoff"))
+    TrustedAccessProgramApplicationResult.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    TrustedAccessProgramApplicationResult.add_member_subclass(:provider_handoff, Types::TrustedAccessProgramApplicationResult::ProviderHandoff)
+    TrustedAccessProgramApplicationResult.add_member_subclass(:unknown, Types::TrustedAccessProgramApplicationResult::Unknown)
+    TrustedAccessProgramApplicationResult.struct_class = Types::TrustedAccessProgramApplicationResult
+
+    TrustedAccessProgramProviderHandoff.add_member(:enrollment_url, Shapes::ShapeRef.new(shape: TrustedAccessProgramUrl, location_name: "enrollmentUrl"))
+    TrustedAccessProgramProviderHandoff.add_member(:application_token, Shapes::ShapeRef.new(shape: TrustedAccessProgramApplicationToken, required: true, location_name: "applicationToken"))
+    TrustedAccessProgramProviderHandoff.add_member(:application_token_expires_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "applicationTokenExpiresAt"))
+    TrustedAccessProgramProviderHandoff.struct_class = Types::TrustedAccessProgramProviderHandoff
+
+    TrustedAccessProgramSummaries.member = Shapes::ShapeRef.new(shape: TrustedAccessProgramSummary)
+
+    TrustedAccessProgramSummary.add_member(:program_id, Shapes::ShapeRef.new(shape: TrustedAccessProgramId, required: true, location_name: "programId"))
+    TrustedAccessProgramSummary.add_member(:name, Shapes::ShapeRef.new(shape: TrustedAccessProgramName, required: true, location_name: "name"))
+    TrustedAccessProgramSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "description"))
+    TrustedAccessProgramSummary.add_member(:provider_name, Shapes::ShapeRef.new(shape: BrandedName, required: true, location_name: "providerName"))
+    TrustedAccessProgramSummary.add_member(:details_url, Shapes::ShapeRef.new(shape: TrustedAccessProgramUrl, required: true, location_name: "detailsUrl"))
+    TrustedAccessProgramSummary.add_member(:enrollment_url, Shapes::ShapeRef.new(shape: TrustedAccessProgramUrl, location_name: "enrollmentUrl"))
+    TrustedAccessProgramSummary.add_member(:status, Shapes::ShapeRef.new(shape: TrustedAccessProgramStatus, required: true, location_name: "status"))
+    TrustedAccessProgramSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    TrustedAccessProgramSummary.add_member(:source, Shapes::ShapeRef.new(shape: TrustedAccessProgramScope, required: true, location_name: "source"))
+    TrustedAccessProgramSummary.add_member(:eligibility_scope, Shapes::ShapeRef.new(shape: TrustedAccessProgramScope, location_name: "eligibilityScope"))
+    TrustedAccessProgramSummary.add_member(:resolved_for, Shapes::ShapeRef.new(shape: TrustedAccessResolutionContext, required: true, location_name: "resolvedFor"))
+    TrustedAccessProgramSummary.add_member(:opt_in, Shapes::ShapeRef.new(shape: TrustedAccessProgramOptIn, required: true, location_name: "optIn"))
+    TrustedAccessProgramSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    TrustedAccessProgramSummary.struct_class = Types::TrustedAccessProgramSummary
+
+    TrustedAccessResolutionContext.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    TrustedAccessResolutionContext.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, location_name: "projectArn"))
+    TrustedAccessResolutionContext.struct_class = Types::TrustedAccessResolutionContext
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourcesArn, required: true, location_name: "resourceARN"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
@@ -3788,6 +4160,20 @@ module Aws::Bedrock
     UpdateMarketplaceModelEndpointResponse.add_member(:marketplace_model_endpoint, Shapes::ShapeRef.new(shape: MarketplaceModelEndpoint, required: true, location_name: "marketplaceModelEndpoint"))
     UpdateMarketplaceModelEndpointResponse.struct_class = Types::UpdateMarketplaceModelEndpointResponse
 
+    UpdateProjectRequest.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectIdentifier, required: true, location: "uri", location_name: "projectIdentifier"))
+    UpdateProjectRequest.add_member(:name, Shapes::ShapeRef.new(shape: ProjectName, location_name: "name"))
+    UpdateProjectRequest.add_member(:data_retention, Shapes::ShapeRef.new(shape: ProjectDataRetention, location_name: "dataRetention"))
+    UpdateProjectRequest.struct_class = Types::UpdateProjectRequest
+
+    UpdateProjectResponse.add_member(:id, Shapes::ShapeRef.new(shape: ProjectResourceId, required: true, location_name: "id"))
+    UpdateProjectResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "arn"))
+    UpdateProjectResponse.add_member(:name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "name"))
+    UpdateProjectResponse.add_member(:status, Shapes::ShapeRef.new(shape: ProjectStatus, required: true, location_name: "status"))
+    UpdateProjectResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    UpdateProjectResponse.add_member(:archived_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "archivedAt"))
+    UpdateProjectResponse.add_member(:data_retention, Shapes::ShapeRef.new(shape: ProjectDataRetention, required: true, location_name: "dataRetention"))
+    UpdateProjectResponse.struct_class = Types::UpdateProjectResponse
+
     UpdateProvisionedModelThroughputRequest.add_member(:provisioned_model_id, Shapes::ShapeRef.new(shape: ProvisionedModelId, required: true, location: "uri", location_name: "provisionedModelId"))
     UpdateProvisionedModelThroughputRequest.add_member(:desired_provisioned_model_name, Shapes::ShapeRef.new(shape: ProvisionedModelName, location_name: "desiredProvisionedModelName"))
     UpdateProvisionedModelThroughputRequest.add_member(:desired_model_id, Shapes::ShapeRef.new(shape: ModelIdentifier, location_name: "desiredModelId"))
@@ -3854,6 +4240,20 @@ module Aws::Bedrock
         "signingName" => "bedrock",
         "uid" => "bedrock-2023-04-20",
       }
+
+      api.add_operation(:archive_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ArchiveProject"
+        o.http_method = "POST"
+        o.http_request_uri = "/projects/{projectIdentifier}/archive"
+        o.input = Shapes::ShapeRef.new(shape: ArchiveProjectRequest)
+        o.output = Shapes::ShapeRef.new(shape: ArchiveProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
 
       api.add_operation(:batch_delete_advanced_prompt_optimization_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchDeleteAdvancedPromptOptimizationJob"
@@ -4138,6 +4538,21 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:create_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateProject"
+        o.http_method = "POST"
+        o.http_request_uri = "/projects"
+        o.input = Shapes::ShapeRef.new(shape: CreateProjectRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_prompt_router, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreatePromptRouter"
         o.http_method = "POST"
@@ -4166,6 +4581,18 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_account_data_retention_storage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccountDataRetentionStorage"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/data_retention/storage/{modelProvider}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccountDataRetentionStorageRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAccountDataRetentionStorageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
@@ -4336,6 +4763,31 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:delete_organization_data_retention_storage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteOrganizationDataRetentionStorage"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/data_retention/organization-storage/{modelProvider}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteOrganizationDataRetentionStorageRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteOrganizationDataRetentionStorageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_project_data_retention_storage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteProjectDataRetentionStorage"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/projects/{projectIdentifier}/data_retention/storage/{modelProvider}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteProjectDataRetentionStorageRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteProjectDataRetentionStorageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:delete_prompt_router, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeletePromptRouter"
         o.http_method = "DELETE"
@@ -4409,6 +4861,19 @@ module Aws::Bedrock
         o.http_request_uri = "/data-retention"
         o.input = Shapes::ShapeRef.new(shape: GetAccountDataRetentionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAccountDataRetentionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_account_data_retention_storage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccountDataRetentionStorage"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/data_retention/storage/{modelProvider}"
+        o.input = Shapes::ShapeRef.new(shape: GetAccountDataRetentionStorageRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAccountDataRetentionStorageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -4699,6 +5164,45 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:get_organization_data_retention_storage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetOrganizationDataRetentionStorage"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/data_retention/organization-storage/{modelProvider}"
+        o.input = Shapes::ShapeRef.new(shape: GetOrganizationDataRetentionStorageRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetOrganizationDataRetentionStorageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetProject"
+        o.http_method = "GET"
+        o.http_request_uri = "/projects/{projectIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetProjectRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_project_data_retention_storage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetProjectDataRetentionStorage"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/projects/{projectIdentifier}/data_retention/storage/{modelProvider}"
+        o.input = Shapes::ShapeRef.new(shape: GetProjectDataRetentionStorageRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetProjectDataRetentionStorageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_prompt_router, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetPromptRouter"
         o.http_method = "GET"
@@ -4731,6 +5235,58 @@ module Aws::Bedrock
         o.http_request_uri = "/resource-policy/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: GetResourcePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_trusted_access_program, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTrustedAccessProgram"
+        o.http_method = "GET"
+        o.http_request_uri = "/trusted-access-programs/{programIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetTrustedAccessProgramRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTrustedAccessProgramResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_trusted_access_program_account_enrollment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTrustedAccessProgramAccountEnrollment"
+        o.http_method = "GET"
+        o.http_request_uri = "/trusted-access-programs/{programIdentifier}/account-enrollment"
+        o.input = Shapes::ShapeRef.new(shape: GetTrustedAccessProgramAccountEnrollmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTrustedAccessProgramAccountEnrollmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_trusted_access_program_organization_enrollment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTrustedAccessProgramOrganizationEnrollment"
+        o.http_method = "GET"
+        o.http_request_uri = "/trusted-access-programs/{programIdentifier}/organization-enrollment"
+        o.input = Shapes::ShapeRef.new(shape: GetTrustedAccessProgramOrganizationEnrollmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTrustedAccessProgramOrganizationEnrollmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_trusted_access_program_project_enrollment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTrustedAccessProgramProjectEnrollment"
+        o.http_method = "GET"
+        o.http_request_uri = "/trusted-access-programs/{programIdentifier}/project-enrollment/{projectIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetTrustedAccessProgramProjectEnrollmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTrustedAccessProgramProjectEnrollmentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -5089,6 +5645,24 @@ module Aws::Bedrock
         )
       end)
 
+      api.add_operation(:list_projects, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListProjects"
+        o.http_method = "GET"
+        o.http_request_uri = "/projects"
+        o.input = Shapes::ShapeRef.new(shape: ListProjectsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListProjectsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_prompt_routers, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPromptRouters"
         o.http_method = "GET"
@@ -5138,6 +5712,25 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:list_trusted_access_programs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTrustedAccessPrograms"
+        o.http_method = "GET"
+        o.http_request_uri = "/trusted-access-programs"
+        o.input = Shapes::ShapeRef.new(shape: ListTrustedAccessProgramsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTrustedAccessProgramsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:put_account_data_retention, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutAccountDataRetention"
         o.http_method = "PUT"
@@ -5146,6 +5739,19 @@ module Aws::Bedrock
         o.output = Shapes::ShapeRef.new(shape: PutAccountDataRetentionResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:put_account_data_retention_storage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAccountDataRetentionStorage"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/data_retention/storage/{modelProvider}"
+        o.input = Shapes::ShapeRef.new(shape: PutAccountDataRetentionStorageRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAccountDataRetentionStorageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
@@ -5176,12 +5782,81 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:put_organization_data_retention_storage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutOrganizationDataRetentionStorage"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/data_retention/organization-storage/{modelProvider}"
+        o.input = Shapes::ShapeRef.new(shape: PutOrganizationDataRetentionStorageRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutOrganizationDataRetentionStorageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:put_project_data_retention_storage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutProjectDataRetentionStorage"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/projects/{projectIdentifier}/data_retention/storage/{modelProvider}"
+        o.input = Shapes::ShapeRef.new(shape: PutProjectDataRetentionStorageRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutProjectDataRetentionStorageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutResourcePolicy"
         o.http_method = "POST"
         o.http_request_uri = "/resource-policy"
         o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:put_trusted_access_program_account_enrollment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutTrustedAccessProgramAccountEnrollment"
+        o.http_method = "PUT"
+        o.http_request_uri = "/trusted-access-programs/{programIdentifier}/account-enrollment"
+        o.input = Shapes::ShapeRef.new(shape: PutTrustedAccessProgramAccountEnrollmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutTrustedAccessProgramAccountEnrollmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:put_trusted_access_program_organization_enrollment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutTrustedAccessProgramOrganizationEnrollment"
+        o.http_method = "PUT"
+        o.http_request_uri = "/trusted-access-programs/{programIdentifier}/organization-enrollment"
+        o.input = Shapes::ShapeRef.new(shape: PutTrustedAccessProgramOrganizationEnrollmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutTrustedAccessProgramOrganizationEnrollmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:put_trusted_access_program_project_enrollment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutTrustedAccessProgramProjectEnrollment"
+        o.http_method = "PUT"
+        o.http_request_uri = "/trusted-access-programs/{programIdentifier}/project-enrollment/{projectIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: PutTrustedAccessProgramProjectEnrollmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutTrustedAccessProgramProjectEnrollmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -5242,6 +5917,45 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:start_trusted_access_program_account_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartTrustedAccessProgramAccountApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/trusted-access-programs/{programIdentifier}/account-application"
+        o.input = Shapes::ShapeRef.new(shape: StartTrustedAccessProgramAccountApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartTrustedAccessProgramAccountApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:start_trusted_access_program_organization_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartTrustedAccessProgramOrganizationApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/trusted-access-programs/{programIdentifier}/organization-application"
+        o.input = Shapes::ShapeRef.new(shape: StartTrustedAccessProgramOrganizationApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartTrustedAccessProgramOrganizationApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:start_trusted_access_program_project_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartTrustedAccessProgramProjectApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/trusted-access-programs/{programIdentifier}/project-application/{projectIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: StartTrustedAccessProgramProjectApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartTrustedAccessProgramProjectApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
@@ -5412,6 +6126,20 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateProject"
+        o.http_method = "POST"
+        o.http_request_uri = "/projects/{projectIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateProjectRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 

@@ -563,7 +563,7 @@ module Aws::ElementalInference
     #             },
     #           },
     #           subtitling: {
-    #             language: "eng", # required, accepts eng, eng-au, eng-gb, eng-us, fra, ita, deu, spa, por
+    #             language: "eng", # required, accepts eng, eng-au, eng-gb, eng-us, fra, ita, deu, spa, por, ara
     #             aspect_ratio: {
     #               width: 1, # required
     #               height: 1, # required
@@ -651,8 +651,21 @@ module Aws::ElementalInference
     #
     # @option params [required, String] :language
     #   The language of the dictionary entries. Specify the language using an
-    #   ISO 639-2/T three-letter code. Supported values: eng, fra, ita, deu,
-    #   spa, por.
+    #   ISO 639-2/T three-letter code. Supported values:
+    #
+    #   * eng – English
+    #
+    #   * fra – French
+    #
+    #   * ita – Italian
+    #
+    #   * deu – German
+    #
+    #   * spa – Spanish
+    #
+    #   * por – Portuguese
+    #
+    #   * ara – Arabic
     #
     # @option params [String] :entries
     #   The dictionary entries payload. Contains the custom words and phrases
@@ -675,7 +688,7 @@ module Aws::ElementalInference
     #
     #   resp = client.create_dictionary({
     #     name: "ResourceName", # required
-    #     language: "eng", # required, accepts eng, fra, ita, deu, spa, por
+    #     language: "eng", # required, accepts eng, fra, ita, deu, spa, por, ara
     #     entries: "DictionaryEntriesPayload",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -687,7 +700,7 @@ module Aws::ElementalInference
     #   resp.name #=> String
     #   resp.arn #=> String
     #   resp.id #=> String
-    #   resp.language #=> String, one of "eng", "fra", "ita", "deu", "spa", "por"
+    #   resp.language #=> String, one of "eng", "fra", "ita", "deu", "spa", "por", "ara"
     #   resp.status #=> String, one of "CREATING", "AVAILABLE", "REFERENCED", "DELETING", "DELETED"
     #   resp.references #=> Array
     #   resp.references[0] #=> String
@@ -767,7 +780,7 @@ module Aws::ElementalInference
     #             },
     #           },
     #           subtitling: {
-    #             language: "eng", # required, accepts eng, eng-au, eng-gb, eng-us, fra, ita, deu, spa, por
+    #             language: "eng", # required, accepts eng, eng-au, eng-gb, eng-us, fra, ita, deu, spa, por, ara
     #             aspect_ratio: {
     #               width: 1, # required
     #               height: 1, # required
@@ -847,7 +860,7 @@ module Aws::ElementalInference
     #   resp.outputs[0].output_config.cropping.template_groups[0].template_uris[0] #=> String
     #   resp.outputs[0].output_config.clipping.callback_metadata #=> String
     #   resp.outputs[0].output_config.clipping.data_source_configuration.fixture_id #=> String
-    #   resp.outputs[0].output_config.subtitling.language #=> String, one of "eng", "eng-au", "eng-gb", "eng-us", "fra", "ita", "deu", "spa", "por"
+    #   resp.outputs[0].output_config.subtitling.language #=> String, one of "eng", "eng-au", "eng-gb", "eng-us", "fra", "ita", "deu", "spa", "por", "ara"
     #   resp.outputs[0].output_config.subtitling.aspect_ratio.width #=> Integer
     #   resp.outputs[0].output_config.subtitling.aspect_ratio.height #=> Integer
     #   resp.outputs[0].output_config.subtitling.dictionary #=> String
@@ -1696,7 +1709,7 @@ module Aws::ElementalInference
     #   resp.name #=> String
     #   resp.arn #=> String
     #   resp.id #=> String
-    #   resp.language #=> String, one of "eng", "fra", "ita", "deu", "spa", "por"
+    #   resp.language #=> String, one of "eng", "fra", "ita", "deu", "spa", "por", "ara"
     #   resp.status #=> String, one of "CREATING", "AVAILABLE", "REFERENCED", "DELETING", "DELETED"
     #   resp.references #=> Array
     #   resp.references[0] #=> String
@@ -1750,7 +1763,7 @@ module Aws::ElementalInference
     #   resp.outputs[0].output_config.cropping.template_groups[0].template_uris[0] #=> String
     #   resp.outputs[0].output_config.clipping.callback_metadata #=> String
     #   resp.outputs[0].output_config.clipping.data_source_configuration.fixture_id #=> String
-    #   resp.outputs[0].output_config.subtitling.language #=> String, one of "eng", "eng-au", "eng-gb", "eng-us", "fra", "ita", "deu", "spa", "por"
+    #   resp.outputs[0].output_config.subtitling.language #=> String, one of "eng", "eng-au", "eng-gb", "eng-us", "fra", "ita", "deu", "spa", "por", "ara"
     #   resp.outputs[0].output_config.subtitling.aspect_ratio.width #=> Integer
     #   resp.outputs[0].output_config.subtitling.aspect_ratio.height #=> Integer
     #   resp.outputs[0].output_config.subtitling.dictionary #=> String
@@ -2020,7 +2033,7 @@ module Aws::ElementalInference
     #   resp.dictionaries[0].arn #=> String
     #   resp.dictionaries[0].id #=> String
     #   resp.dictionaries[0].name #=> String
-    #   resp.dictionaries[0].language #=> String, one of "eng", "fra", "ita", "deu", "spa", "por"
+    #   resp.dictionaries[0].language #=> String, one of "eng", "fra", "ita", "deu", "spa", "por", "ara"
     #   resp.dictionaries[0].status #=> String, one of "CREATING", "AVAILABLE", "REFERENCED", "DELETING", "DELETED"
     #   resp.next_token #=> String
     #
@@ -2539,7 +2552,7 @@ module Aws::ElementalInference
     #   resp = client.update_dictionary({
     #     id: "DictionaryId", # required
     #     name: "ResourceName",
-    #     language: "eng", # accepts eng, fra, ita, deu, spa, por
+    #     language: "eng", # accepts eng, fra, ita, deu, spa, por, ara
     #     entries: "DictionaryEntriesPayload",
     #   })
     #
@@ -2548,7 +2561,7 @@ module Aws::ElementalInference
     #   resp.name #=> String
     #   resp.arn #=> String
     #   resp.id #=> String
-    #   resp.language #=> String, one of "eng", "fra", "ita", "deu", "spa", "por"
+    #   resp.language #=> String, one of "eng", "fra", "ita", "deu", "spa", "por", "ara"
     #   resp.status #=> String, one of "CREATING", "AVAILABLE", "REFERENCED", "DELETING", "DELETED"
     #   resp.references #=> Array
     #   resp.references[0] #=> String
@@ -2630,7 +2643,7 @@ module Aws::ElementalInference
     #             },
     #           },
     #           subtitling: {
-    #             language: "eng", # required, accepts eng, eng-au, eng-gb, eng-us, fra, ita, deu, spa, por
+    #             language: "eng", # required, accepts eng, eng-au, eng-gb, eng-us, fra, ita, deu, spa, por, ara
     #             aspect_ratio: {
     #               width: 1, # required
     #               height: 1, # required
@@ -2708,7 +2721,7 @@ module Aws::ElementalInference
     #   resp.outputs[0].output_config.cropping.template_groups[0].template_uris[0] #=> String
     #   resp.outputs[0].output_config.clipping.callback_metadata #=> String
     #   resp.outputs[0].output_config.clipping.data_source_configuration.fixture_id #=> String
-    #   resp.outputs[0].output_config.subtitling.language #=> String, one of "eng", "eng-au", "eng-gb", "eng-us", "fra", "ita", "deu", "spa", "por"
+    #   resp.outputs[0].output_config.subtitling.language #=> String, one of "eng", "eng-au", "eng-gb", "eng-us", "fra", "ita", "deu", "spa", "por", "ara"
     #   resp.outputs[0].output_config.subtitling.aspect_ratio.width #=> Integer
     #   resp.outputs[0].output_config.subtitling.aspect_ratio.height #=> Integer
     #   resp.outputs[0].output_config.subtitling.dictionary #=> String
@@ -3006,7 +3019,7 @@ module Aws::ElementalInference
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elementalinference'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

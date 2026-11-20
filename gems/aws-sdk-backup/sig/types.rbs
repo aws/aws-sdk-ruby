@@ -769,6 +769,7 @@ module Aws::Backup
     class DescribeRegionSettingsOutput
       attr_accessor resource_type_opt_in_preference: ::Hash[::String, bool]
       attr_accessor resource_type_management_preference: ::Hash[::String, bool]
+      attr_accessor resource_type_opt_in_incremental: ::Hash[::String, bool]
       SENSITIVE: []
     end
 
@@ -2345,6 +2346,7 @@ module Aws::Backup
     class UpdateRegionSettingsInput
       attr_accessor resource_type_opt_in_preference: ::Hash[::String, bool]
       attr_accessor resource_type_management_preference: ::Hash[::String, bool]
+      attr_accessor resource_type_opt_in_incremental: ::Hash[::String, bool]
       SENSITIVE: []
     end
 

@@ -581,6 +581,20 @@ module Aws::NetworkFirewall
     #   Required. The Availability Zones where you want to create firewall
     #   endpoints. You must specify at least one Availability Zone.
     #
+    # @option params [String] :firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource type
+    #   in the ARN. If you specify only the firewall name, Network Firewall
+    #   uses this value to identify the firewall. If you don't specify a
+    #   type, the default is `FIREWALL`.
+    #
     # @return [Types::AssociateAvailabilityZonesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssociateAvailabilityZonesResponse#firewall_arn #firewall_arn} => String
@@ -599,6 +613,7 @@ module Aws::NetworkFirewall
     #         availability_zone: "AvailabilityZoneMappingString", # required
     #       },
     #     ],
+    #     firewall_type: "FIREWALL", # accepts FIREWALL, IGW_FIREWALL
     #   })
     #
     # @example Response structure
@@ -658,6 +673,20 @@ module Aws::NetworkFirewall
     # @option params [required, String] :firewall_policy_arn
     #   The Amazon Resource Name (ARN) of the firewall policy.
     #
+    # @option params [String] :firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource type
+    #   in the ARN. If you specify only the firewall name, Network Firewall
+    #   uses this value to identify the firewall. If you don't specify a
+    #   type, the default is `FIREWALL`.
+    #
     # @return [Types::AssociateFirewallPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssociateFirewallPolicyResponse#firewall_arn #firewall_arn} => String
@@ -672,6 +701,7 @@ module Aws::NetworkFirewall
     #     firewall_arn: "ResourceArn",
     #     firewall_name: "ResourceName",
     #     firewall_policy_arn: "ResourceArn", # required
+    #     firewall_type: "FIREWALL", # accepts FIREWALL, IGW_FIREWALL
     #   })
     #
     # @example Response structure
@@ -1023,6 +1053,18 @@ module Aws::NetworkFirewall
     #
     #   Default value: `FALSE`
     #
+    # @option params [Types::IgwFirewallConfiguration] :igw_firewall_configuration
+    #   Settings that make this firewall an internet gateway firewall. An
+    #   internet gateway firewall inspects all traffic between a VPC and its
+    #   internet gateway, without changes to your subnets or route tables.
+    #   Amazon Web Services Network Security Manager creates and manages
+    #   internet gateway firewalls on your behalf, so you don't include this
+    #   setting when you create a standard Network Firewall firewall.
+    #
+    #   When this setting is present, `FirewallName` must equal the `VpcId`,
+    #   `AvailabilityZoneMappings` is required and must use Availability Zone
+    #   IDs, and you can't specify `SubnetMappings` or a transit gateway.
+    #
     # @option params [Array<Types::NatGatewayCreateMapping>] :nat_gateway_create_mappings
     #   The NAT gateways that Network Firewall creates for a proxy mode
     #   firewall, one for each Availability Zone. When you specify this, you
@@ -1116,6 +1158,9 @@ module Aws::NetworkFirewall
     #       },
     #     ],
     #     availability_zone_change_protection: false,
+    #     igw_firewall_configuration: {
+    #       enforcement_mode: "POLICY_CONTROLLED", # required, accepts POLICY_CONTROLLED
+    #     },
     #     nat_gateway_create_mappings: [
     #       {
     #         subnet_id: "CollectionMember_String", # required
@@ -1172,6 +1217,7 @@ module Aws::NetworkFirewall
     #   resp.firewall.availability_zone_mappings #=> Array
     #   resp.firewall.availability_zone_mappings[0].availability_zone #=> String
     #   resp.firewall.availability_zone_change_protection #=> Boolean
+    #   resp.firewall.igw_firewall_configuration.enforcement_mode #=> String, one of "POLICY_CONTROLLED"
     #   resp.firewall.nat_gateway_create_mappings #=> Array
     #   resp.firewall.nat_gateway_create_mappings[0].subnet_id #=> String
     #   resp.firewall.nat_gateway_create_mappings[0].allocation_ids #=> Array
@@ -1190,17 +1236,21 @@ module Aws::NetworkFirewall
     #   resp.firewall.context_store_id #=> String
     #   resp.firewall.context_store_owner_account_id #=> String
     #   resp.firewall.transparent_filtering_nat_scope #=> String, one of "NAT_ALL", "NAT_NONE"
-    #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
+    #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED", "STANDBY"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.subnet_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.endpoint_id #=> String
-    #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY", "STANDBY"
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status_message #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.dns_name #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED", "NOT_SUBSCRIBED", "DEPRECATED"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].update_token #=> String
+    #   resp.firewall_status.sync_states["AvailabilityZone"].address_translations.public_i_pv_6_addresses #=> Array
+    #   resp.firewall_status.sync_states["AvailabilityZone"].address_translations.public_i_pv_6_addresses[0] #=> String
+    #   resp.firewall_status.sync_states["AvailabilityZone"].address_translations.public_i_pv_4_addresses #=> Array
+    #   resp.firewall_status.sync_states["AvailabilityZone"].address_translations.public_i_pv_4_addresses[0] #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments #=> Array
     #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments[0].nat_gateway_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments[0].status #=> String, one of "CREATING", "READY", "UPDATING", "FAILED", "DELETING"
@@ -2292,11 +2342,11 @@ module Aws::NetworkFirewall
     #   resp.vpc_endpoint_association.tags #=> Array
     #   resp.vpc_endpoint_association.tags[0].key #=> String
     #   resp.vpc_endpoint_association.tags[0].value #=> String
-    #   resp.vpc_endpoint_association_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
+    #   resp.vpc_endpoint_association_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED", "STANDBY"
     #   resp.vpc_endpoint_association_status.association_sync_state #=> Hash
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.subnet_id #=> String
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.endpoint_id #=> String
-    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY", "STANDBY"
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status_message #=> String
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.dns_name #=> String
     #
@@ -2383,6 +2433,20 @@ module Aws::NetworkFirewall
     #
     #   You must specify the ARN or the name, and you can specify both.
     #
+    # @option params [String] :firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource type
+    #   in the ARN. If you specify only the firewall name, Network Firewall
+    #   uses this value to identify the firewall. If you don't specify a
+    #   type, the default is `FIREWALL`.
+    #
     # @option params [Boolean] :delete_associated_nat_gateways
     #   Specifies whether to delete the NAT gateways that Network Firewall
     #   created for a proxy mode firewall when you delete the firewall. You
@@ -2408,6 +2472,7 @@ module Aws::NetworkFirewall
     #   resp = client.delete_firewall({
     #     firewall_name: "ResourceName",
     #     firewall_arn: "ResourceArn",
+    #     firewall_type: "FIREWALL", # accepts FIREWALL, IGW_FIREWALL
     #     delete_associated_nat_gateways: false,
     #   })
     #
@@ -2438,6 +2503,7 @@ module Aws::NetworkFirewall
     #   resp.firewall.availability_zone_mappings #=> Array
     #   resp.firewall.availability_zone_mappings[0].availability_zone #=> String
     #   resp.firewall.availability_zone_change_protection #=> Boolean
+    #   resp.firewall.igw_firewall_configuration.enforcement_mode #=> String, one of "POLICY_CONTROLLED"
     #   resp.firewall.nat_gateway_create_mappings #=> Array
     #   resp.firewall.nat_gateway_create_mappings[0].subnet_id #=> String
     #   resp.firewall.nat_gateway_create_mappings[0].allocation_ids #=> Array
@@ -2456,17 +2522,21 @@ module Aws::NetworkFirewall
     #   resp.firewall.context_store_id #=> String
     #   resp.firewall.context_store_owner_account_id #=> String
     #   resp.firewall.transparent_filtering_nat_scope #=> String, one of "NAT_ALL", "NAT_NONE"
-    #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
+    #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED", "STANDBY"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.subnet_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.endpoint_id #=> String
-    #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY", "STANDBY"
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status_message #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.dns_name #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED", "NOT_SUBSCRIBED", "DEPRECATED"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].update_token #=> String
+    #   resp.firewall_status.sync_states["AvailabilityZone"].address_translations.public_i_pv_6_addresses #=> Array
+    #   resp.firewall_status.sync_states["AvailabilityZone"].address_translations.public_i_pv_6_addresses[0] #=> String
+    #   resp.firewall_status.sync_states["AvailabilityZone"].address_translations.public_i_pv_4_addresses #=> Array
+    #   resp.firewall_status.sync_states["AvailabilityZone"].address_translations.public_i_pv_4_addresses[0] #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments #=> Array
     #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments[0].nat_gateway_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments[0].status #=> String, one of "CREATING", "READY", "UPDATING", "FAILED", "DELETING"
@@ -2888,11 +2958,11 @@ module Aws::NetworkFirewall
     #   resp.vpc_endpoint_association.tags #=> Array
     #   resp.vpc_endpoint_association.tags[0].key #=> String
     #   resp.vpc_endpoint_association.tags[0].value #=> String
-    #   resp.vpc_endpoint_association_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
+    #   resp.vpc_endpoint_association_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED", "STANDBY"
     #   resp.vpc_endpoint_association_status.association_sync_state #=> Hash
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.subnet_id #=> String
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.endpoint_id #=> String
-    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY", "STANDBY"
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status_message #=> String
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.dns_name #=> String
     #
@@ -2978,6 +3048,20 @@ module Aws::NetworkFirewall
     #
     #   You must specify the ARN or the name, and you can specify both.
     #
+    # @option params [String] :firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource type
+    #   in the ARN. If you specify only the firewall name, Network Firewall
+    #   uses this value to identify the firewall. If you don't specify a
+    #   type, the default is `FIREWALL`.
+    #
     # @return [Types::DescribeFirewallResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeFirewallResponse#update_token #update_token} => String
@@ -2989,6 +3073,7 @@ module Aws::NetworkFirewall
     #   resp = client.describe_firewall({
     #     firewall_name: "ResourceName",
     #     firewall_arn: "ResourceArn",
+    #     firewall_type: "FIREWALL", # accepts FIREWALL, IGW_FIREWALL
     #   })
     #
     # @example Response structure
@@ -3019,6 +3104,7 @@ module Aws::NetworkFirewall
     #   resp.firewall.availability_zone_mappings #=> Array
     #   resp.firewall.availability_zone_mappings[0].availability_zone #=> String
     #   resp.firewall.availability_zone_change_protection #=> Boolean
+    #   resp.firewall.igw_firewall_configuration.enforcement_mode #=> String, one of "POLICY_CONTROLLED"
     #   resp.firewall.nat_gateway_create_mappings #=> Array
     #   resp.firewall.nat_gateway_create_mappings[0].subnet_id #=> String
     #   resp.firewall.nat_gateway_create_mappings[0].allocation_ids #=> Array
@@ -3037,17 +3123,21 @@ module Aws::NetworkFirewall
     #   resp.firewall.context_store_id #=> String
     #   resp.firewall.context_store_owner_account_id #=> String
     #   resp.firewall.transparent_filtering_nat_scope #=> String, one of "NAT_ALL", "NAT_NONE"
-    #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
+    #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED", "STANDBY"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.subnet_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.endpoint_id #=> String
-    #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY", "STANDBY"
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status_message #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.dns_name #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED", "NOT_SUBSCRIBED", "DEPRECATED"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].update_token #=> String
+    #   resp.firewall_status.sync_states["AvailabilityZone"].address_translations.public_i_pv_6_addresses #=> Array
+    #   resp.firewall_status.sync_states["AvailabilityZone"].address_translations.public_i_pv_6_addresses[0] #=> String
+    #   resp.firewall_status.sync_states["AvailabilityZone"].address_translations.public_i_pv_4_addresses #=> Array
+    #   resp.firewall_status.sync_states["AvailabilityZone"].address_translations.public_i_pv_4_addresses[0] #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments #=> Array
     #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments[0].nat_gateway_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments[0].status #=> String, one of "CREATING", "READY", "UPDATING", "FAILED", "DELETING"
@@ -3098,7 +3188,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_arn #=> String
     #   resp.firewall_policy_arn #=> String
     #   resp.description #=> String
-    #   resp.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
+    #   resp.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED", "STANDBY"
     #   resp.supported_availability_zones #=> Hash
     #   resp.supported_availability_zones["AvailabilityZone"].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
     #   resp.transit_gateway_attachment_id #=> String
@@ -3445,6 +3535,20 @@ module Aws::NetworkFirewall
     #
     #   You must specify the ARN or the name, and you can specify both.
     #
+    # @option params [String] :firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource type
+    #   in the ARN. If you specify only the firewall name, Network Firewall
+    #   uses this value to identify the firewall. If you don't specify a
+    #   type, the default is `FIREWALL`.
+    #
     # @return [Types::DescribeLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeLoggingConfigurationResponse#firewall_arn #firewall_arn} => String
@@ -3456,6 +3560,7 @@ module Aws::NetworkFirewall
     #   resp = client.describe_logging_configuration({
     #     firewall_arn: "ResourceArn",
     #     firewall_name: "ResourceName",
+    #     firewall_type: "FIREWALL", # accepts FIREWALL, IGW_FIREWALL
     #   })
     #
     # @example Response structure
@@ -4032,11 +4137,11 @@ module Aws::NetworkFirewall
     #   resp.vpc_endpoint_association.tags #=> Array
     #   resp.vpc_endpoint_association.tags[0].key #=> String
     #   resp.vpc_endpoint_association.tags[0].value #=> String
-    #   resp.vpc_endpoint_association_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
+    #   resp.vpc_endpoint_association_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED", "STANDBY"
     #   resp.vpc_endpoint_association_status.association_sync_state #=> Hash
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.subnet_id #=> String
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.endpoint_id #=> String
-    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY", "STANDBY"
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status_message #=> String
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.dns_name #=> String
     #
@@ -4097,6 +4202,20 @@ module Aws::NetworkFirewall
     #   Required. The Availability Zones to remove from the firewall's
     #   configuration.
     #
+    # @option params [String] :firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource type
+    #   in the ARN. If you specify only the firewall name, Network Firewall
+    #   uses this value to identify the firewall. If you don't specify a
+    #   type, the default is `FIREWALL`.
+    #
     # @return [Types::DisassociateAvailabilityZonesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DisassociateAvailabilityZonesResponse#firewall_arn #firewall_arn} => String
@@ -4115,6 +4234,7 @@ module Aws::NetworkFirewall
     #         availability_zone: "AvailabilityZoneMappingString", # required
     #       },
     #     ],
+    #     firewall_type: "FIREWALL", # accepts FIREWALL, IGW_FIREWALL
     #   })
     #
     # @example Response structure
@@ -4573,6 +4693,19 @@ module Aws::NetworkFirewall
     #   Network Firewall provides a `NextToken` value that you can use in a
     #   subsequent call to get the next batch of objects.
     #
+    # @option params [String] :firewall_type
+    #   Specifies the firewall type to filter the results by. You can specify
+    #   one of the following values:
+    #
+    #   * `IGW_FIREWALL` - Returns only internet gateway firewalls, which
+    #     Amazon Web Services Network Security Manager creates and manages for
+    #     your VPCs.
+    #
+    #   * `FIREWALL` - Returns only standard Network Firewall firewalls.
+    #
+    #   If you don't specify a type, the default is to return firewalls of
+    #   both types.
+    #
     # @return [Types::ListFirewallsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListFirewallsResponse#next_token #next_token} => String
@@ -4586,6 +4719,7 @@ module Aws::NetworkFirewall
     #     next_token: "PaginationToken",
     #     vpc_ids: ["VpcId"],
     #     max_results: 1,
+    #     firewall_type: "FIREWALL", # accepts FIREWALL, IGW_FIREWALL
     #   })
     #
     # @example Response structure
@@ -5794,6 +5928,20 @@ module Aws::NetworkFirewall
     #   a new token. Reapply your changes as needed, then try the operation
     #   again using the new token.
     #
+    # @option params [String] :firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource type
+    #   in the ARN. If you specify only the firewall name, Network Firewall
+    #   uses this value to identify the firewall. If you don't specify a
+    #   type, the default is `FIREWALL`.
+    #
     # @return [Types::UpdateFirewallAnalysisSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFirewallAnalysisSettingsResponse#enabled_analysis_types #enabled_analysis_types} => Array&lt;String&gt;
@@ -5808,6 +5956,7 @@ module Aws::NetworkFirewall
     #     firewall_arn: "ResourceArn",
     #     firewall_name: "ResourceName",
     #     update_token: "UpdateToken",
+    #     firewall_type: "FIREWALL", # accepts FIREWALL, IGW_FIREWALL
     #   })
     #
     # @example Response structure
@@ -5869,6 +6018,20 @@ module Aws::NetworkFirewall
     #   firewall that is in use. When you create a firewall, the operation
     #   initializes this flag to `TRUE`.
     #
+    # @option params [String] :firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource type
+    #   in the ARN. If you specify only the firewall name, Network Firewall
+    #   uses this value to identify the firewall. If you don't specify a
+    #   type, the default is `FIREWALL`.
+    #
     # @return [Types::UpdateFirewallDeleteProtectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFirewallDeleteProtectionResponse#firewall_arn #firewall_arn} => String
@@ -5883,6 +6046,7 @@ module Aws::NetworkFirewall
     #     firewall_arn: "ResourceArn",
     #     firewall_name: "ResourceName",
     #     delete_protection: false, # required
+    #     firewall_type: "FIREWALL", # accepts FIREWALL, IGW_FIREWALL
     #   })
     #
     # @example Response structure
@@ -5939,6 +6103,20 @@ module Aws::NetworkFirewall
     #   The new description for the firewall. If you omit this setting,
     #   Network Firewall removes the description for the firewall.
     #
+    # @option params [String] :firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource type
+    #   in the ARN. If you specify only the firewall name, Network Firewall
+    #   uses this value to identify the firewall. If you don't specify a
+    #   type, the default is `FIREWALL`.
+    #
     # @return [Types::UpdateFirewallDescriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFirewallDescriptionResponse#firewall_arn #firewall_arn} => String
@@ -5953,6 +6131,7 @@ module Aws::NetworkFirewall
     #     firewall_arn: "ResourceArn",
     #     firewall_name: "ResourceName",
     #     description: "Description",
+    #     firewall_type: "FIREWALL", # accepts FIREWALL, IGW_FIREWALL
     #   })
     #
     # @example Response structure
@@ -6015,6 +6194,20 @@ module Aws::NetworkFirewall
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html
     #
+    # @option params [String] :firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource type
+    #   in the ARN. If you specify only the firewall name, Network Firewall
+    #   uses this value to identify the firewall. If you don't specify a
+    #   type, the default is `FIREWALL`.
+    #
     # @return [Types::UpdateFirewallEncryptionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFirewallEncryptionConfigurationResponse#firewall_arn #firewall_arn} => String
@@ -6032,6 +6225,7 @@ module Aws::NetworkFirewall
     #       key_id: "KeyId",
     #       type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
     #     },
+    #     firewall_type: "FIREWALL", # accepts FIREWALL, IGW_FIREWALL
     #   })
     #
     # @example Response structure
@@ -6265,6 +6459,20 @@ module Aws::NetworkFirewall
     #   is in use. When you create a firewall, the operation initializes this
     #   setting to `TRUE`.
     #
+    # @option params [String] :firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource type
+    #   in the ARN. If you specify only the firewall name, Network Firewall
+    #   uses this value to identify the firewall. If you don't specify a
+    #   type, the default is `FIREWALL`.
+    #
     # @return [Types::UpdateFirewallPolicyChangeProtectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFirewallPolicyChangeProtectionResponse#update_token #update_token} => String
@@ -6279,6 +6487,7 @@ module Aws::NetworkFirewall
     #     firewall_arn: "ResourceArn",
     #     firewall_name: "ResourceName",
     #     firewall_policy_change_protection: false, # required
+    #     firewall_type: "FIREWALL", # accepts FIREWALL, IGW_FIREWALL
     #   })
     #
     # @example Response structure
@@ -6572,6 +6781,20 @@ module Aws::NetworkFirewall
     #
     #   You must specify the ARN or the name, and you can specify both.
     #
+    # @option params [String] :firewall_type
+    #   The type of firewall that the request targets. Network Firewall
+    #   supports the following firewall types:
+    #
+    #   * `IGW_FIREWALL` - An internet gateway firewall, which Amazon Web
+    #     Services Network Security Manager creates and manages for a VPC.
+    #
+    #   * `FIREWALL` - A standard Network Firewall firewall.
+    #
+    #   If you specify the firewall ARN, the type must match the resource type
+    #   in the ARN. If you specify only the firewall name, Network Firewall
+    #   uses this value to identify the firewall. If you don't specify a
+    #   type, the default is `FIREWALL`.
+    #
     # @option params [Types::LoggingConfiguration] :logging_configuration
     #   Defines how Network Firewall performs logging for a firewall. If you
     #   omit this setting, Network Firewall disables logging for the firewall.
@@ -6601,6 +6824,7 @@ module Aws::NetworkFirewall
     #   resp = client.update_logging_configuration({
     #     firewall_arn: "ResourceArn",
     #     firewall_name: "ResourceName",
+    #     firewall_type: "FIREWALL", # accepts FIREWALL, IGW_FIREWALL
     #     logging_configuration: {
     #       log_destination_configs: [ # required
     #         {
@@ -7366,7 +7590,7 @@ module Aws::NetworkFirewall
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.112.0'
+      context[:gem_version] = '1.113.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

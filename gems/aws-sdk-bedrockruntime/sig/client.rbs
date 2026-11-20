@@ -146,6 +146,7 @@ module Aws
                         guardrail_version: ::String?,
                         trace: ("enabled" | "disabled" | "enabled_full")?
                       },
+                      ?project_identifier: ::String,
                       ?additional_model_request_fields: {
                       },
                       ?prompt_variables: Hash[::String, {
@@ -189,6 +190,7 @@ module Aws
                                trace: ("enabled" | "disabled" | "enabled_full")?,
                                stream_processing_mode: ("sync" | "async")?
                              },
+                             ?project_identifier: ::String,
                              ?additional_model_request_fields: {
                              },
                              ?prompt_variables: Hash[::String, {
@@ -311,7 +313,8 @@ module Aws
                           ?guardrail_version: ::String,
                           ?performance_config_latency: ("standard" | "optimized"),
                           ?service_tier: ("priority" | "default" | "flex" | "reserved"),
-                          ?request_metadata: ::String
+                          ?request_metadata: ::String,
+                          ?project_identifier: ::String
                         ) -> _InvokeModelResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeModelResponseSuccess
 
@@ -333,7 +336,8 @@ module Aws
                                                ?guardrail_version: ::String,
                                                ?performance_config_latency: ("standard" | "optimized"),
                                                ?service_tier: ("priority" | "default" | "flex" | "reserved"),
-                                               ?request_metadata: ::String
+                                               ?request_metadata: ::String,
+                                               ?project_identifier: ::String
                                              ) ?{ (*untyped) -> void } -> _InvokeModelWithResponseStreamResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeModelWithResponseStreamResponseSuccess
 

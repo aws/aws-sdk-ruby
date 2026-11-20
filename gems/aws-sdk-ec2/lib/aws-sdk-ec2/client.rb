@@ -8182,6 +8182,7 @@ module Aws::EC2
     #   resp.subnet.private_dns_name_options_on_launch.enable_resource_name_dns_aaaa_record #=> Boolean
     #   resp.subnet.block_public_access_states.internet_gateway_block_mode #=> String, one of "off", "block-bidirectional", "block-ingress"
     #   resp.subnet.type #=> String
+    #   resp.subnet.network_firewall_connectivity_type #=> String, one of "flexible", "outbound-only", "bidirectional", "exclude", "az-unsupported"
     #   resp.subnet.subnet_id #=> String
     #   resp.subnet.state #=> String, one of "pending", "available", "unavailable", "failed", "failed-insufficient-capacity"
     #   resp.subnet.vpc_id #=> String
@@ -8280,6 +8281,10 @@ module Aws::EC2
     #   resp.vpc.tags[0].key #=> String
     #   resp.vpc.tags[0].value #=> String
     #   resp.vpc.block_public_access_states.internet_gateway_block_mode #=> String, one of "off", "block-bidirectional", "block-ingress"
+    #   resp.vpc.network_firewall_associations #=> Array
+    #   resp.vpc.network_firewall_associations[0].firewall_arn #=> String
+    #   resp.vpc.network_firewall_associations[0].firewall_onboarding_status #=> String, one of "pending", "active", "disabling"
+    #   resp.vpc.network_firewall_associations[0].firewall_mode #=> String, one of "monitor", "enforce"
     #   resp.vpc.vpc_id #=> String
     #   resp.vpc.state #=> String, one of "pending", "available", "deleting"
     #   resp.vpc.cidr_block #=> String
@@ -15945,6 +15950,8 @@ module Aws::EC2
     #   resp.route_table.routes[0].core_network_arn #=> String
     #   resp.route_table.routes[0].odb_network_arn #=> String
     #   resp.route_table.routes[0].ip_address #=> String
+    #   resp.route_table.routes[0].igw_firewall.firewall_arn #=> String
+    #   resp.route_table.routes[0].igw_firewall.status #=> String, one of "pending", "active", "disabling"
     #   resp.route_table.tags #=> Array
     #   resp.route_table.tags[0].key #=> String
     #   resp.route_table.tags[0].value #=> String
@@ -17036,6 +17043,7 @@ module Aws::EC2
     #   resp.subnet.private_dns_name_options_on_launch.enable_resource_name_dns_aaaa_record #=> Boolean
     #   resp.subnet.block_public_access_states.internet_gateway_block_mode #=> String, one of "off", "block-bidirectional", "block-ingress"
     #   resp.subnet.type #=> String
+    #   resp.subnet.network_firewall_connectivity_type #=> String, one of "flexible", "outbound-only", "bidirectional", "exclude", "az-unsupported"
     #   resp.subnet.subnet_id #=> String
     #   resp.subnet.state #=> String, one of "pending", "available", "unavailable", "failed", "failed-insufficient-capacity"
     #   resp.subnet.vpc_id #=> String
@@ -20054,6 +20062,10 @@ module Aws::EC2
     #   resp.vpc.tags[0].key #=> String
     #   resp.vpc.tags[0].value #=> String
     #   resp.vpc.block_public_access_states.internet_gateway_block_mode #=> String, one of "off", "block-bidirectional", "block-ingress"
+    #   resp.vpc.network_firewall_associations #=> Array
+    #   resp.vpc.network_firewall_associations[0].firewall_arn #=> String
+    #   resp.vpc.network_firewall_associations[0].firewall_onboarding_status #=> String, one of "pending", "active", "disabling"
+    #   resp.vpc.network_firewall_associations[0].firewall_mode #=> String, one of "monitor", "enforce"
     #   resp.vpc.vpc_id #=> String
     #   resp.vpc.state #=> String, one of "pending", "available", "deleting"
     #   resp.vpc.cidr_block #=> String
@@ -27298,7 +27310,7 @@ module Aws::EC2
     #   resp.addresses[0].customer_owned_ipv_4_pool #=> String
     #   resp.addresses[0].carrier_ip #=> String
     #   resp.addresses[0].subnet_id #=> String
-    #   resp.addresses[0].service_managed #=> String, one of "alb", "nlb", "rnat", "rds"
+    #   resp.addresses[0].service_managed #=> String, one of "alb", "nlb", "rnat", "rds", "lambda-network-connector", "igw-firewall"
     #   resp.addresses[0].instance_id #=> String
     #   resp.addresses[0].public_ip #=> String
     #
@@ -43036,6 +43048,8 @@ module Aws::EC2
     #   resp.route_tables[0].routes[0].core_network_arn #=> String
     #   resp.route_tables[0].routes[0].odb_network_arn #=> String
     #   resp.route_tables[0].routes[0].ip_address #=> String
+    #   resp.route_tables[0].routes[0].igw_firewall.firewall_arn #=> String
+    #   resp.route_tables[0].routes[0].igw_firewall.status #=> String, one of "pending", "active", "disabling"
     #   resp.route_tables[0].tags #=> Array
     #   resp.route_tables[0].tags[0].key #=> String
     #   resp.route_tables[0].tags[0].value #=> String
@@ -46458,6 +46472,7 @@ module Aws::EC2
     #   resp.subnets[0].private_dns_name_options_on_launch.enable_resource_name_dns_aaaa_record #=> Boolean
     #   resp.subnets[0].block_public_access_states.internet_gateway_block_mode #=> String, one of "off", "block-bidirectional", "block-ingress"
     #   resp.subnets[0].type #=> String
+    #   resp.subnets[0].network_firewall_connectivity_type #=> String, one of "flexible", "outbound-only", "bidirectional", "exclude", "az-unsupported"
     #   resp.subnets[0].subnet_id #=> String
     #   resp.subnets[0].state #=> String, one of "pending", "available", "unavailable", "failed", "failed-insufficient-capacity"
     #   resp.subnets[0].vpc_id #=> String
@@ -50761,6 +50776,10 @@ module Aws::EC2
     #   resp.vpcs[0].tags[0].key #=> String
     #   resp.vpcs[0].tags[0].value #=> String
     #   resp.vpcs[0].block_public_access_states.internet_gateway_block_mode #=> String, one of "off", "block-bidirectional", "block-ingress"
+    #   resp.vpcs[0].network_firewall_associations #=> Array
+    #   resp.vpcs[0].network_firewall_associations[0].firewall_arn #=> String
+    #   resp.vpcs[0].network_firewall_associations[0].firewall_onboarding_status #=> String, one of "pending", "active", "disabling"
+    #   resp.vpcs[0].network_firewall_associations[0].firewall_mode #=> String, one of "monitor", "enforce"
     #   resp.vpcs[0].vpc_id #=> String
     #   resp.vpcs[0].state #=> String, one of "pending", "available", "deleting"
     #   resp.vpcs[0].cidr_block #=> String
@@ -56797,12 +56816,12 @@ module Aws::EC2
     #
     #   resp = client.get_default_credit_specification({
     #     dry_run: false,
-    #     instance_family: "t2", # required, accepts t2, t3, t3a, t4g, t8i
+    #     instance_family: "t2", # required, accepts t2, t3, t3a, t4g, t8i, t9g
     #   })
     #
     # @example Response structure
     #
-    #   resp.instance_family_credit_specification.instance_family #=> String, one of "t2", "t3", "t3a", "t4g", "t8i"
+    #   resp.instance_family_credit_specification.instance_family #=> String, one of "t2", "t3", "t3a", "t4g", "t8i", "t9g"
     #   resp.instance_family_credit_specification.cpu_credits #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetDefaultCreditSpecification AWS API Documentation
@@ -58148,7 +58167,15 @@ module Aws::EC2
     #
     #   * Elastic IP addresses
     #
-    #   ^
+    #   * Application Load Balancers
+    #
+    #   * Amazon RDS
+    #
+    #   * NAT gateways in regional availability mode
+    #
+    #   * Lambda Network Connector
+    #
+    #   * Automated Internet Firewall
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call.
@@ -58173,7 +58200,7 @@ module Aws::EC2
     #       },
     #     ],
     #     locale: "String",
-    #     resource_type: "alb", # accepts alb, eip, rds, rnat
+    #     resource_type: "alb", # accepts alb, eip, rds, rnat, lambda-network-connector, igw-firewall
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -58183,7 +58210,7 @@ module Aws::EC2
     #   resp.ipam_policy_documents #=> Array
     #   resp.ipam_policy_documents[0].ipam_policy_id #=> String
     #   resp.ipam_policy_documents[0].locale #=> String
-    #   resp.ipam_policy_documents[0].resource_type #=> String, one of "alb", "eip", "rds", "rnat"
+    #   resp.ipam_policy_documents[0].resource_type #=> String, one of "alb", "eip", "rds", "rnat", "lambda-network-connector", "igw-firewall"
     #   resp.ipam_policy_documents[0].allocation_rules #=> Array
     #   resp.ipam_policy_documents[0].allocation_rules[0].source_ipam_pool_id #=> String
     #   resp.next_token #=> String
@@ -59048,7 +59075,7 @@ module Aws::EC2
     #   resp.ipam_routing_policy_registrations[0].max_length #=> Integer
     #   resp.ipam_routing_policy_registrations[0].description #=> String
     #   resp.ipam_routing_policy_registrations[0].latest_delta_id #=> String
-    #   resp.ipam_routing_policy_registrations[0].state #=> String, one of "pending-activate", "activate-failed", "create-in-progress", "create-complete", "update-in-progress", "update-complete", "delete-in-progress", "delete-complete"
+    #   resp.ipam_routing_policy_registrations[0].state #=> String, one of "pending-activate", "activate-failed", "create-in-progress", "create-complete", "update-in-progress", "update-complete", "delete-in-progress", "delete-complete", "disable-complete"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetIpamRoutingPolicyRegistrations AWS API Documentation
@@ -63942,13 +63969,13 @@ module Aws::EC2
     #
     #   resp = client.modify_default_credit_specification({
     #     dry_run: false,
-    #     instance_family: "t2", # required, accepts t2, t3, t3a, t4g, t8i
+    #     instance_family: "t2", # required, accepts t2, t3, t3a, t4g, t8i, t9g
     #     cpu_credits: "String", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.instance_family_credit_specification.instance_family #=> String, one of "t2", "t3", "t3a", "t4g", "t8i"
+    #   resp.instance_family_credit_specification.instance_family #=> String, one of "t2", "t3", "t3a", "t4g", "t8i", "t9g"
     #   resp.instance_family_credit_specification.cpu_credits #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyDefaultCreditSpecification AWS API Documentation
@@ -66026,7 +66053,15 @@ module Aws::EC2
     #
     #   * Elastic IP addresses
     #
-    #   ^
+    #   * Application Load Balancers
+    #
+    #   * Amazon RDS
+    #
+    #   * NAT gateways in regional availability mode
+    #
+    #   * Lambda Network Connector
+    #
+    #   * Automated Internet Firewall
     #
     # @option params [Array<Types::IpamPolicyAllocationRuleRequest>] :allocation_rules
     #   The new allocation rules to apply to the IPAM policy.
@@ -66046,7 +66081,7 @@ module Aws::EC2
     #     dry_run: false,
     #     ipam_policy_id: "IpamPolicyId", # required
     #     locale: "String", # required
-    #     resource_type: "alb", # required, accepts alb, eip, rds, rnat
+    #     resource_type: "alb", # required, accepts alb, eip, rds, rnat, lambda-network-connector, igw-firewall
     #     allocation_rules: [
     #       {
     #         source_ipam_pool_id: "IpamPoolId",
@@ -66058,7 +66093,7 @@ module Aws::EC2
     #
     #   resp.ipam_policy_document.ipam_policy_id #=> String
     #   resp.ipam_policy_document.locale #=> String
-    #   resp.ipam_policy_document.resource_type #=> String, one of "alb", "eip", "rds", "rnat"
+    #   resp.ipam_policy_document.resource_type #=> String, one of "alb", "eip", "rds", "rnat", "lambda-network-connector", "igw-firewall"
     #   resp.ipam_policy_document.allocation_rules #=> Array
     #   resp.ipam_policy_document.allocation_rules[0].source_ipam_pool_id #=> String
     #
@@ -80502,7 +80537,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.673.0'
+      context[:gem_version] = '1.674.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
