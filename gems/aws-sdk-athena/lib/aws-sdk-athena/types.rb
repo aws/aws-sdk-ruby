@@ -425,7 +425,7 @@ module Aws::Athena
     #   <p>Enables CloudWatch logging.</p>
     #   @return [Boolean]
     # @!attribute log_group
-    #   <p>The name of the log group in Amazon CloudWatch Logs where you want to publish
+    #   <p>The name of the log group in Amazon CloudWatch Logs where you want to publish 
     #               your logs.</p>
     #   @return [String]
     # @!attribute log_stream_name_prefix
@@ -1988,7 +1988,7 @@ module Aws::Athena
     #   <p>The notebook version.</p>
     #   @return [String]
     # @!attribute monitoring_configuration
-    #   <p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets,
+    #   <p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets, 
     #               Amazon CloudWatch log groups etc.</p>
     #   @return [Types::MonitoringConfiguration]
     # @!attribute session_configuration
@@ -2896,7 +2896,7 @@ module Aws::Athena
     end
 
     # <p>
-    #             The configuration for storing results in Athena owned storage, which includes whether this feature is enabled; whether encryption configuration, if any, is used for encrypting query results.
+    #             The configuration for storing results in Athena owned storage, which includes whether this feature is enabled; whether encryption configuration, if any, is used for encrypting query results. 
     #         </p>
     # @!attribute enabled
     #   <p>If set to true, allows you to store query results in Athena owned storage. If set to
@@ -2979,7 +2979,7 @@ module Aws::Athena
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets,
+    # <p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets, 
     #             Amazon CloudWatch log groups etc.</p>
     # @!attribute cloud_watch_logging_configuration
     #   <p>Configuration settings for delivering logs to Amazon CloudWatch log groups.
@@ -4095,7 +4095,7 @@ module Aws::Athena
     #               workgroups and Identity Center enabled workgroups.</p>
     #   @return [String]
     # @!attribute monitoring_configuration
-    #   <p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets,
+    #   <p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets, 
     #               Amazon CloudWatch log groups etc.</p>
     #   @return [Types::MonitoringConfiguration]
     # @!attribute notebook_version
@@ -4848,7 +4848,7 @@ module Aws::Athena
     #                   IAM Identity Center enabled workgroups.</p>
     #   @return [String]
     # @!attribute monitoring_configuration
-    #   <p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets,
+    #   <p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets, 
     #               Amazon CloudWatch log groups etc.</p>
     #   @return [Types::MonitoringConfiguration]
     # @!attribute engine_configuration
@@ -4974,7 +4974,7 @@ module Aws::Athena
     #               results.</p>
     #   @return [Types::QueryResultsS3AccessGrantsConfiguration]
     # @!attribute monitoring_configuration
-    #   <p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets,
+    #   <p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets, 
     #               Amazon CloudWatch log groups etc.</p>
     #   @return [Types::MonitoringConfiguration]
     # @!attribute engine_configuration

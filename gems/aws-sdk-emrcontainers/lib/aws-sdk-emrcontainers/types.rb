@@ -1317,7 +1317,7 @@ module Aws::EMRcontainers
     #   <p>The token for the next set of virtual clusters to return. </p>
     #   @return [String]
     # @!attribute eks_access_entry_integrated
-    #   <p>Optional Boolean that specifies whether the operation should return the
+    #   <p>Optional Boolean that specifies whether the operation should return the 
     #            virtual clusters that have the access entry integration enabled or disabled. If not specified,
     #         the operation returns all applicable virtual clusters.</p>
     #   @return [Boolean]

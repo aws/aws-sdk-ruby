@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::Connect
     @identifier = :connect
 
     add_plugin(::Aws::Connect::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::Connect
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::Connect
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -415,7 +435,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :language_code
-    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see
+    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see 
     #   <a href="https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html">What is Amazon Transcribe?</a>
     #            </p>
     # @option params [String] :vocabulary_id
@@ -2922,8 +2942,8 @@ module Aws::Connect
     #    configurations on features, such as Contact Lens for Connect Customer. </p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-instances.html">Create an Connect Customer instance</a> in the
     #      <i>Connect Customer Administrator Guide</i>.</p>
-    #          <p>Connect Customer enforces a limit on the total number of instances that you can create or delete in 30 days.
-    # If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances.
+    #          <p>Connect Customer enforces a limit on the total number of instances that you can create or delete in 30 days. 
+    # If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. 
     # You must wait 30 days before you can restart creating and deleting instances in your account.</p>
     # @param [Hash, Types::CreateInstanceRequest] params
     # @option params [String] :client_token
@@ -3353,8 +3373,8 @@ module Aws::Connect
     # @option params [Array<String>] :purposes
     #   <p>Values that enable you to categorize your predefined attributes. You can use them in custom UI elements across the Connect Customer admin website.</p>
     # @option params [Types::InputPredefinedAttributeConfiguration] :attribute_configuration
-    #   <p>Custom metadata that is associated to predefined attributes to control behavior
-    #   in upstream services, such as controlling
+    #   <p>Custom metadata that is associated to predefined attributes to control behavior 
+    #   in upstream services, such as controlling 
     #   how a predefined attribute should be displayed in the Connect Customer admin website.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3391,7 +3411,7 @@ module Aws::Connect
     # @option params [String] :description
     #   <p>The description of the prompt.</p>
     # @option params [String] :s3_uri
-    #   <p>The URI for the S3 bucket where the prompt is stored. You can provide S3 pre-signed URLs returned by the
+    #   <p>The URI for the S3 bucket where the prompt is stored. You can provide S3 pre-signed URLs returned by the 
     #   <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html">GetPromptFile</a>
     #    API instead of providing S3 URIs.</p>
     # @option params [Hash<String, String>] :tags
@@ -3992,7 +4012,7 @@ module Aws::Connect
     # @option params [Types::TaskTemplateDefaults] :defaults
     #   <p>The default values for fields when a task is created by referencing this template.</p>
     # @option params [String] :status
-    #   <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it.
+    #   <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it. 
     #   Tasks can only be created from <code>ACTIVE</code> templates.
     #   If a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created. </p>
     # @option params [Array<Types::TaskTemplateField>] :fields
@@ -4136,8 +4156,8 @@ module Aws::Connect
 
     # <p>Creates a traffic distribution group given an Connect Customer instance that has been replicated.</p>
     #          <note>
-    #             <p>The <code>SignInConfig</code> distribution is available only on a
-    # default <code>TrafficDistributionGroup</code> (see the <code>IsDefault</code> parameter in the
+    #             <p>The <code>SignInConfig</code> distribution is available only on a 
+    # default <code>TrafficDistributionGroup</code> (see the <code>IsDefault</code> parameter in the 
     # <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html">TrafficDistributionGroup</a>
     #  data type). If you call
     #     <code>UpdateTrafficDistribution</code> with a modified <code>SignInConfig</code> and a non-default <code>TrafficDistributionGroup</code>,
@@ -4559,7 +4579,7 @@ module Aws::Connect
     # @option params [String] :vocabulary_name
     #   <p>A unique name of the custom vocabulary.</p>
     # @option params [String] :language_code
-    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see
+    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see 
     #   <a href="https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html">What is Amazon Transcribe?</a>
     #            </p>
     # @option params [String] :content
@@ -5222,8 +5242,8 @@ module Aws::Connect
     # <p>This API is in preview release for Connect Customer and is subject to change.</p>
     #          <p>Deletes the Connect Customer instance. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/delete-connect-instance.html">Delete your Connect Customer instance</a> in the
     #      <i>Connect Customer Administrator Guide</i>.</p>
-    #          <p>Connect Customer enforces a limit on the total number of instances that you can create or delete in 30 days.
-    # If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances.
+    #          <p>Connect Customer enforces a limit on the total number of instances that you can create or delete in 30 days. 
+    # If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. 
     # You must wait 30 days before you can restart creating and deleting instances in your account.</p>
     # @param [Hash, Types::DeleteInstanceRequest] params
     # @option params [String] :instance_id
@@ -5915,7 +5935,7 @@ module Aws::Connect
       request.send_request(options)
     end
 
-    # <p>This API is in preview release for Connect Customer and is subject to change. To
+    # <p>This API is in preview release for Connect Customer and is subject to change. To 
     # request access to this API, contact Amazon Web Services Support.</p>
     #          <p>Describes the target authentication profile.</p>
     # @param [Hash, Types::DescribeAuthenticationProfileRequest] params
@@ -9782,7 +9802,7 @@ module Aws::Connect
     #         <code>AGENTS_ONLINE</code> metric.</p>
     #               </li>
     #               <li>
-    #                  <p>If you group by <code>SUBTYPE</code> or <code>VALIDATION_TEST_TYPE</code> as secondary grouping then you must include <code>QUEUE</code> as
+    #                  <p>If you group by <code>SUBTYPE</code> or <code>VALIDATION_TEST_TYPE</code> as secondary grouping then you must include <code>QUEUE</code> as 
     #        primary grouping and use Queue as filter</p>
     #               </li>
     #               <li>
@@ -9908,7 +9928,7 @@ module Aws::Connect
     #               </dd>
     #            </dl>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #            <p>The token expires after 5 minutes from the time it is created. Subsequent requests that use
     #      the token must use the same request parameters as the request that generated the token.</p>
@@ -10027,7 +10047,7 @@ module Aws::Connect
     #      be passed from queues, routing profiles, agents, and user hierarchy groups. </p>
     #            <p>Currently tagging is only supported on the resources that are passed in the filter.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -10559,7 +10579,7 @@ module Aws::Connect
     #               </dd>
     #            </dl>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -12379,7 +12399,7 @@ module Aws::Connect
     #               </dd>
     #            </dl>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -12752,7 +12772,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -12795,7 +12815,7 @@ module Aws::Connect
     # @option params [String] :data_set_id
     #   <p>The identifier of the dataset to get the association status.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -12833,7 +12853,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -12868,7 +12888,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -12901,7 +12921,7 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page. </p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -12944,7 +12964,7 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -12979,7 +12999,7 @@ module Aws::Connect
       request.send_request(options)
     end
 
-    # <p>This API is in preview release for Connect Customer and is subject to change. To
+    # <p>This API is in preview release for Connect Customer and is subject to change. To 
     # request access to this API, contact Amazon Web Services Support.</p>
     #          <p>Provides summary information about the authentication profiles in a specified Connect Customer
     #    instance.</p>
@@ -12989,7 +13009,7 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -13028,7 +13048,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -13075,7 +13095,7 @@ module Aws::Connect
     # @option params [String] :hours_of_operation_id
     #   <p>The identifier of the parent hours of operation.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
@@ -13115,7 +13135,7 @@ module Aws::Connect
     # @option params [String] :contact_id
     #   <p>The identifier of the contact in this instance of Connect Customer. </p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #            <important>
     #               <p>This is not expected to be set because the value returned in the previous response is always null.</p>
@@ -13180,7 +13200,7 @@ module Aws::Connect
     # @option params [String] :contact_flow_id
     #   <p>The identifier of the flow.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -13223,7 +13243,7 @@ module Aws::Connect
     # @option params [String] :contact_flow_module_id
     #   <p>The identifier of the flow module.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -13264,7 +13284,7 @@ module Aws::Connect
     # @option params [String] :contact_flow_module_id
     #   <p>The identifier of the flow module.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -13300,7 +13320,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -13341,7 +13361,7 @@ module Aws::Connect
     # @option params [String] :contact_flow_id
     #   <p>The identifier of the flow.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
@@ -13385,7 +13405,7 @@ module Aws::Connect
     # @option params [Array<String>] :contact_flow_types
     #   <p>The type of flow.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
@@ -13431,7 +13451,7 @@ module Aws::Connect
     # @option params [Array<String>] :reference_types
     #   <p>The type of reference.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #            <important>
     #               <p>This is not expected to be set, because the value returned in the previous response is always null.</p>
@@ -13746,13 +13766,13 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :language_code
-    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see
+    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see 
     #   <a href="https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html">What is Amazon Transcribe?</a>
     #            </p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -13831,7 +13851,7 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -13872,7 +13892,7 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -13914,7 +13934,7 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -13995,7 +14015,7 @@ module Aws::Connect
     # @option params [String] :resource_type
     #   <p>A valid resource type.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -14100,7 +14120,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
@@ -14138,7 +14158,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -14175,7 +14195,7 @@ module Aws::Connect
     # @option params [String] :resource_type
     #   <p>A valid resource type.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -14233,7 +14253,7 @@ module Aws::Connect
     #    API was invoked.</p>
     # @param [Hash, Types::ListInstancesRequest] params
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -14276,7 +14296,7 @@ module Aws::Connect
     # @option params [String] :integration_type
     #   <p>The integration type.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -14322,7 +14342,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -14353,7 +14373,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page. If no value is specified, the default is 10. </p>
@@ -14391,7 +14411,7 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -14499,7 +14519,7 @@ module Aws::Connect
     # @option params [Array<String>] :phone_number_country_codes
     #   <p>The ISO country code.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
@@ -14561,7 +14581,7 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Array<String>] :phone_number_country_codes
     #   <p>The ISO country code.</p>
@@ -14718,7 +14738,7 @@ module Aws::Connect
     # @option params [String] :queue_id
     #   <p>The identifier for the queue.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -14758,7 +14778,7 @@ module Aws::Connect
     # @option params [String] :queue_id
     #   <p>The identifier for the queue.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
@@ -14806,7 +14826,7 @@ module Aws::Connect
     # @option params [Array<String>] :queue_types
     #   <p>The type of queue.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
@@ -14845,7 +14865,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance. Both Instance ID and Instance ARN are supported input formats. </p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
@@ -14896,7 +14916,7 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [String] :output_type
     #   <p>The Contact Lens output type to be returned.</p>
@@ -15071,7 +15091,7 @@ module Aws::Connect
     # @option params [String] :routing_profile_id
     #   <p>The identifier of the routing profile.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -15112,7 +15132,7 @@ module Aws::Connect
     # @option params [String] :routing_profile_id
     #   <p>The identifier of the routing profile.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
@@ -15154,7 +15174,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
@@ -15197,7 +15217,7 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -15243,7 +15263,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -15280,7 +15300,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -15319,7 +15339,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -15401,7 +15421,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -15436,7 +15456,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
@@ -15499,7 +15519,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #            <important>
     #               <p>It is not expected that you set this because the value returned in the previous response is always null.</p>
@@ -15510,7 +15530,7 @@ module Aws::Connect
     #               <p>It is not expected that you set this.</p>
     #            </important>
     # @option params [String] :status
-    #   <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it.
+    #   <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it. 
     #   Tasks can only be created from <code>ACTIVE</code> templates.
     #   If a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created.</p>
     # @option params [String] :name
@@ -15558,7 +15578,7 @@ module Aws::Connect
     # @option params [String] :status
     #   <p>Filter execution records by status.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -15607,7 +15627,7 @@ module Aws::Connect
     # @option params [String] :status
     #   <p>Filter executions by status.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -15652,7 +15672,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Amazon Connect instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -15694,7 +15714,7 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -15725,7 +15745,7 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
@@ -15765,7 +15785,7 @@ module Aws::Connect
     # @option params [String] :integration_association_id
     #   <p>The identifier for the integration association.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -15802,7 +15822,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
@@ -15925,7 +15945,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
@@ -16498,7 +16518,7 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -16559,7 +16579,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -17345,7 +17365,7 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Types::EmailAddressSearchCriteria] :search_criteria
     #   <p>The search criteria to be used to return email addresses.</p>
@@ -17456,7 +17476,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -17683,7 +17703,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -17789,7 +17809,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -18112,7 +18132,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -18197,7 +18217,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -18299,7 +18319,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -18493,7 +18513,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -18612,7 +18632,7 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Types::RulesSearchCriteria] :search_criteria
     #   <p>The search criteria to be used to return rules.</p>
@@ -18764,7 +18784,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -18856,7 +18876,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -19092,7 +19112,7 @@ module Aws::Connect
     # @option params [String] :instance_id
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -19394,14 +19414,14 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [String] :state
     #   <p>The current state of the custom vocabulary.</p>
     # @option params [String] :name_starts_with
     #   <p>The starting pattern of the name of the vocabulary.</p>
     # @option params [String] :language_code
-    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see
+    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see 
     #   <a href="https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html">What is Amazon Transcribe?</a>
     #            </p>
     # @example Request syntax with placeholder values
@@ -21902,7 +21922,7 @@ module Aws::Connect
       request.send_request(options)
     end
 
-    # <p>This API is in preview release for Connect Customer and is subject to change. To
+    # <p>This API is in preview release for Connect Customer and is subject to change. To 
     # request access to this API, contact Amazon Web Services Support.</p>
     #          <p>Updates the selected authentication profile.</p>
     # @param [Hash, Types::UpdateAuthenticationProfileRequest] params
@@ -23530,7 +23550,7 @@ module Aws::Connect
     #                <p>Agent auto-disconnect timeout</p>
     #             </li>
     #          </ul>
-    #          <p>For more information about how chat timeouts work, see
+    #          <p>For more information about how chat timeouts work, see 
     #    <a href="https://docs.aws.amazon.com/connect/latest/adminguide/setup-chat-timeouts.html">Set up chat timeouts for human participants</a>. </p>
     # @param [Hash, Types::UpdateParticipantRoleConfigRequest] params
     # @option params [String] :instance_id
@@ -23677,8 +23697,8 @@ module Aws::Connect
     # @option params [Array<String>] :purposes
     #   <p>Values that enable you to categorize your predefined attributes. You can use them in custom UI elements across the Connect Customer admin website.</p>
     # @option params [Types::InputPredefinedAttributeConfiguration] :attribute_configuration
-    #   <p>Custom metadata that is associated to predefined attributes to control behavior
-    #   in upstream services, such as controlling
+    #   <p>Custom metadata that is associated to predefined attributes to control behavior 
+    #   in upstream services, such as controlling 
     #   how a predefined attribute should be displayed in the Connect Customer admin website.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -23715,7 +23735,7 @@ module Aws::Connect
     # @option params [String] :description
     #   <p>A description of the prompt.</p>
     # @option params [String] :s3_uri
-    #   <p>The URI for the S3 bucket where the prompt is stored. You can provide S3 pre-signed URLs returned by the
+    #   <p>The URI for the S3 bucket where the prompt is stored. You can provide S3 pre-signed URLs returned by the 
     #   <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html">GetPromptFile</a>
     #    API instead of providing S3 URIs.</p>
     # @example Request syntax with placeholder values
@@ -24427,7 +24447,7 @@ module Aws::Connect
     # @option params [Types::TaskTemplateDefaults] :defaults
     #   <p>The default values for fields when a task is created by referencing this template.</p>
     # @option params [String] :status
-    #   <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it.
+    #   <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it. 
     #   Tasks can only be created from <code>ACTIVE</code> templates.
     #   If a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created.</p>
     #            <p>Although this parameter is marked as optional, the service requires it when calling <code>UpdateTaskTemplate</code>.</p>
@@ -24615,8 +24635,8 @@ module Aws::Connect
     #     agents available to receive the calls.</p>
     #          </important>
     #          <note>
-    #             <p>The <code>SignInConfig</code> distribution is available only on a
-    # default <code>TrafficDistributionGroup</code> (see the <code>IsDefault</code> parameter in the
+    #             <p>The <code>SignInConfig</code> distribution is available only on a 
+    # default <code>TrafficDistributionGroup</code> (see the <code>IsDefault</code> parameter in the 
     # <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html">TrafficDistributionGroup</a>
     #  data type). If you call
     #     <code>UpdateTrafficDistribution</code> with a modified <code>SignInConfig</code> and a non-default <code>TrafficDistributionGroup</code>,
@@ -25381,7 +25401,8 @@ module Aws::Connect
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

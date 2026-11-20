@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::Rekognition
     @identifier = :rekognition
 
     add_plugin(::Aws::Rekognition::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::Rekognition
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::Rekognition
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -584,7 +604,7 @@ module Aws::Rekognition
     #          <p>Copies a version of an Amazon Rekognition Custom Labels model from a source project to a destination project. The source and
     #          destination projects can be in different AWS accounts but must be in the same AWS Region.
     #          You can't copy a model to another AWS service.
-    #
+    #         
     #       </p>
     #          <p>To copy a model version to a different AWS account, you need to create a resource-based policy known as a
     #          <i>project policy</i>. You attach the project policy to the
@@ -748,19 +768,19 @@ module Aws::Rekognition
     #          </note>
     #          <p>Creates a new Amazon Rekognition Custom Labels dataset. You can create a dataset by using
     #    an Amazon Sagemaker format manifest file or by copying an existing Amazon Rekognition Custom Labels dataset.</p>
-    #          <p>To create a training dataset for a project, specify <code>TRAIN</code> for the value of
+    #          <p>To create a training dataset for a project, specify <code>TRAIN</code> for the value of 
     #       <code>DatasetType</code>. To create the test dataset for a project,
     #       specify <code>TEST</code> for the value of <code>DatasetType</code>.
     #     </p>
     #          <p>The response from <code>CreateDataset</code> is the Amazon Resource Name (ARN) for the dataset.
-    #    Creating a dataset takes a while to complete. Use <a>DescribeDataset</a> to check the
+    #    Creating a dataset takes a while to complete. Use <a>DescribeDataset</a> to check the 
     #    current status. The dataset created successfully if the value of <code>Status</code> is
     #    <code>CREATE_COMPLETE</code>. </p>
     #          <p>To check if any non-terminal errors occurred, call <a>ListDatasetEntries</a>
     # and check for the presence of <code>errors</code> lists in the JSON Lines.</p>
-    #          <p>Dataset creation fails if a terminal error occurs (<code>Status</code> = <code>CREATE_FAILED</code>).
+    #          <p>Dataset creation fails if a terminal error occurs (<code>Status</code> = <code>CREATE_FAILED</code>). 
     #       Currently, you can't access the terminal error information.
-    #
+    #       
     #    </p>
     #          <p>For more information, see Creating dataset in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.</p>
     #          <p>This operation requires permissions to perform the <code>rekognition:CreateDataset</code> action.
@@ -771,11 +791,11 @@ module Aws::Rekognition
     #   The source files for the dataset. You can specify the ARN of an existing dataset or specify the Amazon S3 bucket location
     #   of an Amazon Sagemaker format manifest file. If you don't specify <code>datasetSource</code>, an empty dataset is created.
     #     To add labeled images to the dataset,  You can use the console or call <a>UpdateDatasetEntries</a>.
-    #
+    #     
     #   </p>
     # @option params [String] :dataset_type
     #   <p>
-    #   The type of the dataset. Specify <code>TRAIN</code> to create a training dataset. Specify <code>TEST</code>
+    #   The type of the dataset. Specify <code>TRAIN</code> to create a training dataset. Specify <code>TEST</code> 
     #      to create a test dataset.
     #   </p>
     # @option params [String] :project_arn
@@ -845,11 +865,11 @@ module Aws::Rekognition
     #       when <code>GetFaceLivenessSessionResults</code> is called. This number is between 0 and 4. By
     #       default, it is set to 0. The limit is best effort and based on the duration of the
     #       selfie-video. </p>
-    #          <p>You can use the <code>ChallengePreferences</code> option in the <code>Settings</code> parameter to choose between the
-    #       'FaceMovementAndLightChallenge' or FaceMovementChallenge' settings. See the
-    #       <a href="https://docs.aws.amazon.com/rekognition/latest/dg/face-liveness-shared-responsibility-model.html">Shared Responsibility</a>
-    #       page for details on guidance for which setting to choose between these two settings depending on
-    #       your use case and preferences. This parameter is optional and if no parameter is provided, then
+    #          <p>You can use the <code>ChallengePreferences</code> option in the <code>Settings</code> parameter to choose between the 
+    #       'FaceMovementAndLightChallenge' or FaceMovementChallenge' settings. See the 
+    #       <a href="https://docs.aws.amazon.com/rekognition/latest/dg/face-liveness-shared-responsibility-model.html">Shared Responsibility</a> 
+    #       page for details on guidance for which setting to choose between these two settings depending on 
+    #       your use case and preferences. This parameter is optional and if no parameter is provided, then 
     #       the 'FaceMovementAndLightChallenge' settings is applied by default.</p>
     # @param [Hash, Types::CreateFaceLivenessSessionRequest] params
     # @option params [String] :kms_key_id
@@ -1141,7 +1161,7 @@ module Aws::Rekognition
     # @option params [Types::StreamProcessorInput] :input
     #   <p>Kinesis video stream stream that provides the source streaming video. If you are using the AWS CLI, the parameter name is <code>StreamProcessorInput</code>. This is required for both face search and label detection stream processors.</p>
     # @option params [Types::StreamProcessorOutput] :output
-    #   <p>Kinesis data stream stream or Amazon S3 bucket location to which Amazon Rekognition Video puts the analysis results. If you are using the AWS CLI, the parameter name is <code>StreamProcessorOutput</code>.
+    #   <p>Kinesis data stream stream or Amazon S3 bucket location to which Amazon Rekognition Video puts the analysis results. If you are using the AWS CLI, the parameter name is <code>StreamProcessorOutput</code>. 
     #               This must be a <a>S3Destination</a> of an Amazon S3 bucket that you own for a label detection stream processor or a Kinesis data stream ARN for a face search stream processor.</p>
     # @option params [String] :name
     #   <p>An identifier you assign to the stream processor. You can use <code>Name</code> to
@@ -1151,8 +1171,8 @@ module Aws::Rekognition
     # @option params [Types::StreamProcessorSettings] :settings
     #   <p>Input parameters used in a streaming video analyzed by a stream processor. You can use <code>FaceSearch</code> to recognize faces in a streaming video, or you can use <code>ConnectedHome</code> to detect labels.</p>
     # @option params [String] :role_arn
-    #   <p>The Amazon Resource Number (ARN) of the IAM role that allows access to the stream processor.
-    #               The IAM role provides Rekognition read permissions for a Kinesis stream.
+    #   <p>The Amazon Resource Number (ARN) of the IAM role that allows access to the stream processor. 
+    #               The IAM role provides Rekognition read permissions for a Kinesis stream. 
     #               It also provides write permissions to an Amazon S3 bucket and Amazon Simple Notification Service topic for a label detection stream processor. This is required for both face search and label detection stream processors.</p>
     # @option params [Hash<String, String>] :tags
     #   <p> A set of tags (key-value pairs) that you want to attach to the stream processor. </p>
@@ -1165,8 +1185,8 @@ module Aws::Rekognition
     # @option params [String] :kms_key_id
     #   <p>
     #               The identifier for your AWS Key Management Service key (AWS KMS key). This is an optional parameter for label detection stream processors and should not be used to create a face search stream processor.
-    #               You can supply the Amazon Resource Name (ARN) of your KMS key, the ID of your KMS key, an alias for your KMS key, or an alias ARN.
-    #               The key is used to encrypt results and data published to your Amazon S3 bucket, which includes  image frames and hero images. Your source images are unaffected.
+    #               You can supply the Amazon Resource Name (ARN) of your KMS key, the ID of your KMS key, an alias for your KMS key, or an alias ARN. 
+    #               The key is used to encrypt results and data published to your Amazon S3 bucket, which includes  image frames and hero images. Your source images are unaffected. 
     #           </p>
     #            <p>
     #               </p>
@@ -1331,11 +1351,11 @@ module Aws::Rekognition
     #             <p>This operation applies only to Amazon Rekognition Custom Labels.</p>
     #          </note>
     #          <p>Deletes an existing Amazon Rekognition Custom Labels dataset.
-    #    Deleting a dataset might take while. Use <a>DescribeDataset</a> to check the
+    #    Deleting a dataset might take while. Use <a>DescribeDataset</a> to check the 
     #    current status. The dataset is still deleting if the value of <code>Status</code> is
     #    <code>DELETE_IN_PROGRESS</code>. If you try to access the dataset after it is deleted, you get
     #    a <code>ResourceNotFoundException</code> exception.
-    #
+    # 
     # </p>
     #          <p>You can't delete a dataset while it is creating (<code>Status</code> =  <code>CREATE_IN_PROGRESS</code>)
     #       or if the dataset is updating (<code>Status</code> =  <code>UPDATE_IN_PROGRESS</code>).</p>
@@ -1343,7 +1363,7 @@ module Aws::Rekognition
     # @param [Hash, Types::DeleteDatasetRequest] params
     # @option params [String] :dataset_arn
     #   <p>
-    #   The ARN of the Amazon Rekognition Custom Labels dataset that you want to delete.
+    #   The ARN of the Amazon Rekognition Custom Labels dataset that you want to delete. 
     #   </p>
     # @example To delete an Amazon Rekognition Custom Labels dataset
     #   # Deletes an Amazon Rekognition Custom Labels dataset.
@@ -1611,7 +1631,7 @@ module Aws::Rekognition
     # <p>Describes the specified collection. You can use <code>DescribeCollection</code> to get
     #          information, such as the number of faces indexed into a collection and the version of the
     #          model used by the collection for face detection.</p>
-    #          <p>For more information, see Describing a Collection in the
+    #          <p>For more information, see Describing a Collection in the 
     #      Amazon Rekognition Developer Guide.</p>
     # @param [Hash, Types::DescribeCollectionRequest] params
     # @option params [String] :collection_id
@@ -1642,7 +1662,7 @@ module Aws::Rekognition
     #          </note>
     #          <p>
     # Describes an Amazon Rekognition Custom Labels dataset. You can get information such as the current status of a dataset and
-    # statistics about the images and labels in a dataset.
+    # statistics about the images and labels in a dataset.  
     # </p>
     #          <p>This operation requires permissions to perform the <code>rekognition:DescribeDataset</code> action.</p>
     # @param [Hash, Types::DescribeDatasetRequest] params
@@ -1696,10 +1716,10 @@ module Aws::Rekognition
     #                  <code>arn:aws:rekognition:us-east-1:123456789012:project/getting-started/version/<i>my-model.2020-01-21T09.10.15</i>/1234567890123</code>.</p>
     # @option params [String] :next_token
     #   <p>If the previous response was incomplete (because there is more
-    #              results to retrieve), Amazon Rekognition returns a pagination token in the response.
+    #              results to retrieve), Amazon Rekognition returns a pagination token in the response. 
     #              You can use this pagination token to retrieve the next set of results. </p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return per paginated call.
+    #   <p>The maximum number of results to return per paginated call. 
     #             The largest value you can specify is 100. If you specify a value greater than 100, a ValidationException
     #             error occurs. The default value is 100. </p>
     # @example Request syntax with placeholder values
@@ -1854,17 +1874,17 @@ module Aws::Rekognition
     # @param [Hash, Types::DescribeProjectsRequest] params
     # @option params [String] :next_token
     #   <p>If the previous response was incomplete (because there is more
-    #            results to retrieve), Rekognition returns a pagination token in the response. You can use this pagination
+    #            results to retrieve), Rekognition returns a pagination token in the response. You can use this pagination 
     #            token to retrieve the next set of results. </p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return per paginated call. The largest value you can specify is 100.
+    #   <p>The maximum number of results to return per paginated call. The largest value you can specify is 100. 
     #            If you specify a value greater than 100, a ValidationException
     #            error occurs. The default value is 100. </p>
     # @option params [Array<String>] :project_names
-    #   <p>A list of the projects that you want Rekognition to describe. If you don't specify a value,
+    #   <p>A list of the projects that you want Rekognition to describe. If you don't specify a value, 
     #         the response includes descriptions for all the projects in your AWS account.</p>
     # @option params [Array<String>] :features
-    #   <p>Specifies the type of customization to filter projects by. If no value is specified,
+    #   <p>Specifies the type of customization to filter projects by. If no value is specified, 
     #            CUSTOM_LABELS is used as a default.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1996,23 +2016,23 @@ module Aws::Rekognition
     #          <p>You pass the input image as base64-encoded image bytes or as a reference to an image in
     #          an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing
     #          image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p>
-    #          <p> For each object that the model version detects on an image, the API returns a
+    #          <p> For each object that the model version detects on an image, the API returns a 
     #          (<code>CustomLabel</code>) object in an array (<code>CustomLabels</code>).
     #          Each <code>CustomLabel</code> object provides the label name (<code>Name</code>), the level
-    #          of confidence that the image contains the object (<code>Confidence</code>), and
+    #          of confidence that the image contains the object (<code>Confidence</code>), and 
     #          object location information, if it exists,  for the label on the image (<code>Geometry</code>). </p>
     #          <p>To filter labels that are returned, specify a value for <code>MinConfidence</code>.
     #          <code>DetectCustomLabelsLabels</code> only returns labels with a confidence that's higher than
     #          the specified value.
-    #
+    # 
     #          The value of <code>MinConfidence</code> maps to the assumed threshold values
     #          created during training. For more information, see <i>Assumed threshold</i>
-    #          in the Amazon Rekognition Custom Labels Developer Guide.
+    #          in the Amazon Rekognition Custom Labels Developer Guide. 
     #          Amazon Rekognition Custom Labels metrics expresses an assumed threshold as a floating point value between 0-1. The range of
     #          <code>MinConfidence</code> normalizes the threshold value to a percentage value (0-100). Confidence
-    #          responses from <code>DetectCustomLabels</code> are also returned as a percentage.
-    #          You can use <code>MinConfidence</code> to change the precision and recall or your model.
-    #          For more information, see
+    #          responses from <code>DetectCustomLabels</code> are also returned as a percentage. 
+    #          You can use <code>MinConfidence</code> to change the precision and recall or your model. 
+    #          For more information, see 
     #          <i>Analyzing an image</i> in the Amazon Rekognition Custom Labels Developer Guide. </p>
     #          <p>If you don't specify a value for <code>MinConfidence</code>,  <code>DetectCustomLabels</code>
     #       returns labels based on the assumed threshold of each label.</p>
@@ -2020,7 +2040,7 @@ module Aws::Rekognition
     #          data.</p>
     #          <p>This operation requires permissions to perform the
     #          <code>rekognition:DetectCustomLabels</code> action. </p>
-    #          <p>For more information, see
+    #          <p>For more information, see 
     #       <i>Analyzing an image</i> in the Amazon Rekognition Custom Labels Developer Guide. </p>
     # @param [Hash, Types::DetectCustomLabelsRequest] params
     # @option params [String] :project_version_arn
@@ -2049,14 +2069,14 @@ module Aws::Rekognition
     #         access the S3 object. For more information, see How Amazon Rekognition works with IAM in the
     #         Amazon Rekognition Developer Guide. </p>
     # @option params [Integer] :max_results
-    #   <p>Maximum number of results you want the service to return in the response.
-    #            The service returns the specified number of highest confidence labels ranked from highest confidence
+    #   <p>Maximum number of results you want the service to return in the response. 
+    #            The service returns the specified number of highest confidence labels ranked from highest confidence 
     #         to lowest.</p>
     # @option params [Float] :min_confidence
-    #   <p>Specifies the minimum confidence level for the labels to return.
+    #   <p>Specifies the minimum confidence level for the labels to return. 
     #            <code>DetectCustomLabels</code> doesn't return any labels with a confidence value that's lower than
     #            this specified value. If you specify a
-    #         value of 0, <code>DetectCustomLabels</code> returns all labels, regardless of the assumed
+    #         value of 0, <code>DetectCustomLabels</code> returns all labels, regardless of the assumed 
     #            threshold applied to each label.
     #         If you don't specify a value for <code>MinConfidence</code>,  <code>DetectCustomLabels</code>
     #            returns labels based on the assumed threshold of each label.</p>
@@ -2676,7 +2696,7 @@ module Aws::Rekognition
     #   <p>Sets up the configuration for human evaluation, including the FlowDefinition the image
     #         will be sent to.</p>
     # @option params [String] :project_version
-    #   <p>Identifier for the custom adapter. Expects the ProjectVersionArn as a value.
+    #   <p>Identifier for the custom adapter. Expects the ProjectVersionArn as a value. 
     #            Use the CreateProject or CreateProjectVersion APIs to create a custom adapter.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2731,7 +2751,7 @@ module Aws::Rekognition
       request.send_request(options)
     end
 
-    # <p>Detects Personal Protective Equipment (PPE) worn by people detected in an image. Amazon Rekognition can detect the
+    # <p>Detects Personal Protective Equipment (PPE) worn by people detected in an image. Amazon Rekognition can detect the 
     #          following types of PPE.</p>
     #          <ul>
     #             <li>
@@ -2751,7 +2771,7 @@ module Aws::Rekognition
     #          <p>For each person detected in the image the API returns an array of body parts (face, head, left-hand, right-hand).
     #          For each body part, an array of detected items of PPE is returned, including an indicator of whether or not the PPE
     #          covers the body part. The API returns the confidence it has in each detection
-    #          (person, PPE, body part and body part coverage). It also returns a bounding box (<a>BoundingBox</a>) for each detected
+    #          (person, PPE, body part and body part coverage). It also returns a bounding box (<a>BoundingBox</a>) for each detected 
     #          person and each detected item of PPE. </p>
     #          <p>You can optionally request a summary of detected PPE items with the <code>SummarizationAttributes</code> input parameter.
     #          The summary provides the following information. </p>
@@ -2770,7 +2790,7 @@ module Aws::Rekognition
     #          <p>This operation requires permissions to perform the <code>rekognition:DetectProtectiveEquipment</code> action. </p>
     # @param [Hash, Types::DetectProtectiveEquipmentRequest] params
     # @option params [Types::Image] :image
-    #   <p>The image in which you want to detect PPE on detected persons. The image can be passed as image bytes or you can
+    #   <p>The image in which you want to detect PPE on detected persons. The image can be passed as image bytes or you can 
     #            reference an image stored in an Amazon S3 bucket. </p>
     # @option params [Types::ProtectiveEquipmentSummarizationAttributes] :summarization_attributes
     #   <p>An array of PPE types that you want to summarize.</p>
@@ -3034,11 +3054,11 @@ module Aws::Rekognition
     #          <code>DistributeDatasetEntries</code> moves 20% of the training dataset images to the test dataset.
     #          An entry is a JSON Line that describes an image.
     #       </p>
-    #          <p>You supply the Amazon Resource Names (ARN) of a project's training dataset and test dataset.
-    #          The training dataset must contain the images that you want to split. The test dataset
+    #          <p>You supply the Amazon Resource Names (ARN) of a project's training dataset and test dataset. 
+    #          The training dataset must contain the images that you want to split. The test dataset 
     #       must be empty. The datasets must belong to the same project. To create training and test datasets for a project, call <a>CreateDataset</a>.</p>
     #          <p>Distributing a dataset takes a while to complete. To check the status call <code>DescribeDataset</code>. The operation
-    #          is complete when the <code>Status</code> field for the training dataset and the test dataset is <code>UPDATE_COMPLETE</code>.
+    #          is complete when the <code>Status</code> field for the training dataset and the test dataset is <code>UPDATE_COMPLETE</code>. 
     #          If the dataset split fails, the value of <code>Status</code> is <code>UPDATE_FAILED</code>.</p>
     #          <p>This operation requires permissions to perform the <code>rekognition:DistributeDatasetEntries</code> action.</p>
     # @param [Hash, Types::DistributeDatasetEntriesRequest] params
@@ -3157,7 +3177,7 @@ module Aws::Rekognition
     #   <p>Job identifier for the required celebrity recognition analysis. You can get the job identifer from
     #         a call to <code>StartCelebrityRecognition</code>.</p>
     # @option params [Integer] :max_results
-    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000.
+    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000. 
     #         If you specify a value greater than 1000, a maximum of 1000 results is returned.
     #         The default value is 1000.</p>
     # @option params [String] :next_token
@@ -3334,7 +3354,7 @@ module Aws::Rekognition
     #   <p>The identifier for the inappropriate, unwanted, or offensive content moderation job. Use <code>JobId</code> to identify the job in
     #          a subsequent call to <code>GetContentModeration</code>.</p>
     # @option params [Integer] :max_results
-    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000.
+    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000. 
     #       If you specify a value greater than 1000, a maximum of 1000 results is returned.
     #       The default value is 1000.</p>
     # @option params [String] :next_token
@@ -3435,7 +3455,7 @@ module Aws::Rekognition
     # @option params [String] :job_id
     #   <p>Unique identifier for the face detection job. The <code>JobId</code> is returned from <code>StartFaceDetection</code>.</p>
     # @option params [Integer] :max_results
-    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000.
+    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000. 
     #          If you specify a value greater than 1000, a maximum of 1000 results is returned.
     #          The default value is 1000.</p>
     # @option params [String] :next_token
@@ -3658,8 +3678,8 @@ module Aws::Rekognition
     #     for the matched person, and the time the person was matched in the video.</p>
     #          <note>
     #             <p>
-    #                <code>GetFaceSearch</code> only returns the default
-    #         facial attributes (<code>BoundingBox</code>, <code>Confidence</code>,
+    #                <code>GetFaceSearch</code> only returns the default  
+    #         facial attributes (<code>BoundingBox</code>, <code>Confidence</code>, 
     #         <code>Landmarks</code>, <code>Pose</code>, and <code>Quality</code>). The other facial attributes listed
     #         in the <code>Face</code> object of the following response syntax are not returned. For more information,
     #         see FaceDetail in the Amazon Rekognition Developer Guide. </p>
@@ -3672,7 +3692,7 @@ module Aws::Rekognition
     # @option params [String] :job_id
     #   <p>The job identifer for the search request. You get the job identifier from an initial call to <code>StartFaceSearch</code>.</p>
     # @option params [Integer] :max_results
-    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000.
+    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000. 
     #         If you specify a value greater than 1000, a maximum of 1000 results is returned.
     #         The default value is 1000.</p>
     # @option params [String] :next_token
@@ -3870,8 +3890,8 @@ module Aws::Rekognition
     #                <p>Categories - The label categories that the detected label belongs to.</p>
     #             </li>
     #             <li>
-    #                <p>BoundingBox — Bounding boxes are described for all instances of detected common object labels,
-    #         returned in an array of Instance objects. An Instance object contains a BoundingBox object, describing
+    #                <p>BoundingBox — Bounding boxes are described for all instances of detected common object labels, 
+    #         returned in an array of Instance objects. An Instance object contains a BoundingBox object, describing 
     #         the location of the label on the input image. It also includes the confidence for the accuracy of the detected bounding box.</p>
     #             </li>
     #             <li>
@@ -3903,7 +3923,7 @@ module Aws::Rekognition
     #   <p>Job identifier for the label detection operation for which you want results returned. You get the job identifer from
     #         an initial call to <code>StartlabelDetection</code>.</p>
     # @option params [Integer] :max_results
-    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000.
+    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000. 
     #          If you specify a value greater than 1000, a maximum of 1000 results is returned.
     #          The default value is 1000.</p>
     # @option params [String] :next_token
@@ -4019,7 +4039,7 @@ module Aws::Rekognition
     #                <b>This change does not impact the availability of other Amazon Rekognition features.</b>
     #             </p>
     #          </important>
-    #          <p>Retrieves the results for a given media analysis job.
+    #          <p>Retrieves the results for a given media analysis job. 
     #         Takes a <code>JobId</code> returned by StartMediaAnalysisJob.</p>
     # @param [Hash, Types::GetMediaAnalysisJobRequest] params
     # @option params [String] :job_id
@@ -4095,17 +4115,17 @@ module Aws::Rekognition
     #          <p>The person path tracking operation is started by a call to <code>StartPersonTracking</code>
     #      which returns a job identifier (<code>JobId</code>). When the operation finishes, Amazon Rekognition Video publishes a completion status to
     #      the Amazon Simple Notification Service topic registered in the initial call to <code>StartPersonTracking</code>.</p>
-    #          <p>To get the results of the person path tracking operation, first check
+    #          <p>To get the results of the person path tracking operation, first check 
     #        that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>.
     #      If so, call  <a>GetPersonTracking</a> and pass the job identifier
     #      (<code>JobId</code>) from the initial call to <code>StartPersonTracking</code>.</p>
     #          <p>
-    #             <code>GetPersonTracking</code> returns an array, <code>Persons</code>, of tracked persons and the time(s) their
+    #             <code>GetPersonTracking</code> returns an array, <code>Persons</code>, of tracked persons and the time(s) their 
     #        paths were tracked in the video. </p>
     #          <note>
     #             <p>
-    #                <code>GetPersonTracking</code> only returns the default
-    #        facial attributes (<code>BoundingBox</code>, <code>Confidence</code>,
+    #                <code>GetPersonTracking</code> only returns the default  
+    #        facial attributes (<code>BoundingBox</code>, <code>Confidence</code>, 
     #        <code>Landmarks</code>, <code>Pose</code>, and <code>Quality</code>). The other facial attributes listed
     #        in the <code>Face</code> object of the following response syntax are not returned. </p>
     #             <p>For more information, see FaceDetail in the Amazon Rekognition Developer Guide.</p>
@@ -4121,7 +4141,7 @@ module Aws::Rekognition
     #   <p>The identifier for a job that tracks persons in a video. You get the <code>JobId</code> from a call to <code>StartPersonTracking</code>.
     #           </p>
     # @option params [Integer] :max_results
-    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000.
+    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000. 
     #         If you specify a value greater than 1000, a maximum of 1000 results is returned.
     #         The default value is 1000.</p>
     # @option params [String] :next_token
@@ -4263,35 +4283,35 @@ module Aws::Rekognition
     end
 
     # <p>Gets the segment detection results of a Amazon Rekognition Video analysis started by <a>StartSegmentDetection</a>.</p>
-    #          <p>Segment detection with Amazon Rekognition Video is an asynchronous operation. You start segment detection by
+    #          <p>Segment detection with Amazon Rekognition Video is an asynchronous operation. You start segment detection by 
     #       calling <a>StartSegmentDetection</a> which returns a job identifier (<code>JobId</code>).
     #       When the segment detection operation finishes, Amazon Rekognition publishes a completion status to the Amazon Simple Notification Service
     #       topic registered in the initial call to <code>StartSegmentDetection</code>. To get the results
-    #       of the segment detection operation, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>.
+    #       of the segment detection operation, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. 
     #       if so, call <code>GetSegmentDetection</code> and pass the job identifier (<code>JobId</code>) from the initial call
     #       of <code>StartSegmentDetection</code>.</p>
     #          <p>
     #             <code>GetSegmentDetection</code> returns detected segments in an array (<code>Segments</code>)
-    #       of <a>SegmentDetection</a> objects. <code>Segments</code> is sorted by the segment types
-    #       specified in the <code>SegmentTypes</code> input parameter of <code>StartSegmentDetection</code>.
-    #     Each element of the array includes the detected segment, the precentage confidence in the acuracy
+    #       of <a>SegmentDetection</a> objects. <code>Segments</code> is sorted by the segment types 
+    #       specified in the <code>SegmentTypes</code> input parameter of <code>StartSegmentDetection</code>. 
+    #     Each element of the array includes the detected segment, the precentage confidence in the acuracy 
     #       of the detected segment, the type of the segment, and the frame in which the segment was detected.</p>
-    #          <p>Use <code>SelectedSegmentTypes</code> to find out the type of segment detection requested in the
+    #          <p>Use <code>SelectedSegmentTypes</code> to find out the type of segment detection requested in the 
     #     call to <code>StartSegmentDetection</code>.</p>
-    #          <p>Use the <code>MaxResults</code> parameter to limit the number of segment detections returned. If there are more results than
+    #          <p>Use the <code>MaxResults</code> parameter to limit the number of segment detections returned. If there are more results than 
     #       specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains
     #       a pagination token for getting the next set of results. To get the next page of results, call <code>GetSegmentDetection</code>
-    #       and populate the <code>NextToken</code> request parameter with the token value returned from the previous
+    #       and populate the <code>NextToken</code> request parameter with the token value returned from the previous 
     #       call to <code>GetSegmentDetection</code>.</p>
     #          <p>For more information, see Detecting video segments in stored video in the Amazon Rekognition Developer Guide.</p>
     # @param [Hash, Types::GetSegmentDetectionRequest] params
     # @option params [String] :job_id
-    #   <p>Job identifier for the text detection operation for which you want results returned.
+    #   <p>Job identifier for the text detection operation for which you want results returned. 
     #         You get the job identifer from an initial call to <code>StartSegmentDetection</code>.</p>
     # @option params [Integer] :max_results
     #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000.</p>
     # @option params [String] :next_token
-    #   <p>If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent
+    #   <p>If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent 
     #         request to retrieve the next set of text.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -4371,32 +4391,32 @@ module Aws::Rekognition
     end
 
     # <p>Gets the text detection results of a Amazon Rekognition Video analysis started by <a>StartTextDetection</a>.</p>
-    #          <p>Text detection with Amazon Rekognition Video is an asynchronous operation. You start text detection by
+    #          <p>Text detection with Amazon Rekognition Video is an asynchronous operation. You start text detection by 
     #      calling <a>StartTextDetection</a> which returns a job identifier (<code>JobId</code>)
     #      When the text detection operation finishes, Amazon Rekognition publishes a completion status to the Amazon Simple Notification Service
     #      topic registered in the initial call to <code>StartTextDetection</code>. To get the results
-    #      of the text detection operation, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>.
+    #      of the text detection operation, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. 
     #      if so, call <code>GetTextDetection</code> and pass the job identifier (<code>JobId</code>) from the initial call
     #      of <code>StartLabelDetection</code>.</p>
     #          <p>
-    #             <code>GetTextDetection</code> returns an array of detected text (<code>TextDetections</code>) sorted by
+    #             <code>GetTextDetection</code> returns an array of detected text (<code>TextDetections</code>) sorted by 
     #        the time the text was detected, up to 100 words per frame of video.</p>
-    #          <p>Each element of the array includes the detected text, the precentage confidence in the acuracy
+    #          <p>Each element of the array includes the detected text, the precentage confidence in the acuracy 
     #        of the detected text, the time the text was detected, bounding box information for where the text
     #        was located, and unique identifiers for words and their lines.</p>
-    #          <p>Use MaxResults parameter to limit the number of text detections returned. If there are more results than
+    #          <p>Use MaxResults parameter to limit the number of text detections returned. If there are more results than 
     #      specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains
     #      a pagination token for getting the next set of results. To get the next page of results, call <code>GetTextDetection</code>
-    #      and populate the <code>NextToken</code> request parameter with the token value returned from the previous
+    #      and populate the <code>NextToken</code> request parameter with the token value returned from the previous 
     #      call to <code>GetTextDetection</code>.</p>
     # @param [Hash, Types::GetTextDetectionRequest] params
     # @option params [String] :job_id
-    #   <p>Job identifier for the text detection operation for which you want results returned.
+    #   <p>Job identifier for the text detection operation for which you want results returned. 
     #           You get the job identifer from an initial call to <code>StartTextDetection</code>.</p>
     # @option params [Integer] :max_results
     #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000.</p>
     # @option params [String] :next_token
-    #   <p>If the previous response was incomplete (because there are more labels to retrieve), Amazon Rekognition Video returns
+    #   <p>If the previous response was incomplete (because there are more labels to retrieve), Amazon Rekognition Video returns 
     #         a pagination token in the response. You can use this pagination token to retrieve the next set of text.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -4598,7 +4618,7 @@ module Aws::Rekognition
     #         Filtered faces aren't indexed. If you specify <code>AUTO</code>, Amazon Rekognition chooses the quality
     #         bar. If you specify <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>, filtering
     #         removes all faces that don’t meet the chosen quality bar. The default value is
-    #           <code>AUTO</code>.
+    #           <code>AUTO</code>. 
     #         The quality bar is based on a variety of common use cases. Low-quality detections can occur
     #         for a number of reasons. Some examples are an object that's misidentified as a face, a face
     #         that's too blurry, or a face with a pose that's too extreme to use. If you specify
@@ -4997,10 +5017,10 @@ module Aws::Rekognition
     #          <p>
     # Lists the entries (images) within a dataset. An entry is a
     # JSON Line that contains the information for a single image, including
-    # the image location, assigned labels, and object location bounding boxes. For
+    # the image location, assigned labels, and object location bounding boxes. For 
     # more information, see <a href="https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-manifest-files.html">Creating a manifest file</a>.</p>
     #          <p>JSON Lines in the response include information about non-terminal
-    #    errors found in the dataset.
+    #    errors found in the dataset. 
     #    Non terminal errors are reported in <code>errors</code> lists within each JSON Line. The
     #    same information is reported in the training and testing validation result manifests that
     #    Amazon Rekognition Custom Labels creates during model training.
@@ -5011,16 +5031,16 @@ module Aws::Rekognition
     # @param [Hash, Types::ListDatasetEntriesRequest] params
     # @option params [String] :dataset_arn
     #   <p>
-    #   The Amazon Resource Name (ARN) for the dataset that you want to use.
+    #   The Amazon Resource Name (ARN) for the dataset that you want to use. 
     #   </p>
     # @option params [Array<String>] :contains_labels
-    #   <p>Specifies a label filter for the response. The response includes an entry only if one or more of the labels in <code>ContainsLabels</code> exist in the entry.
+    #   <p>Specifies a label filter for the response. The response includes an entry only if one or more of the labels in <code>ContainsLabels</code> exist in the entry.       
     #         </p>
     # @option params [Boolean] :labeled
     #   <p>
-    #      Specify <code>true</code> to get only the JSON Lines where the image is labeled.
+    #      Specify <code>true</code> to get only the JSON Lines where the image is labeled. 
     #      Specify <code>false</code> to get only the JSON Lines where the image isn't labeled. If you
-    #      don't specify <code>Labeled</code>, <code>ListDatasetEntries</code> returns JSON Lines for labeled and unlabeled
+    #      don't specify <code>Labeled</code>, <code>ListDatasetEntries</code> returns JSON Lines for labeled and unlabeled 
     #      images.
     #   </p>
     # @option params [String] :source_ref_contains
@@ -5032,10 +5052,10 @@ module Aws::Rekognition
     #         </p>
     # @option params [String] :next_token
     #   <p>If the previous response was incomplete (because there is more
-    #         results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination
+    #         results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination 
     #         token to retrieve the next set of results. </p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return per paginated call. The largest value you can specify is 100.
+    #   <p>The maximum number of results to return per paginated call. The largest value you can specify is 100. 
     #         If you specify a value greater than 100, a ValidationException
     #         error occurs. The default value is 100. </p>
     # @example To list the entries in an Amazon Rekognition Custom Labels dataset
@@ -5087,7 +5107,7 @@ module Aws::Rekognition
     # <note>
     #             <p>This operation applies only to Amazon Rekognition Custom Labels.</p>
     #          </note>
-    #          <p>Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to describe images. For more information, see
+    #          <p>Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to describe images. For more information, see 
     #    <a href="https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-labeling-images.html">Labeling images</a>.
     # </p>
     #          <p>
@@ -5100,10 +5120,10 @@ module Aws::Rekognition
     #   </p>
     # @option params [String] :next_token
     #   <p>If the previous response was incomplete (because there is more
-    #         results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination
+    #         results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination 
     #         token to retrieve the next set of results. </p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return per paginated call. The largest value you can specify is 100.
+    #   <p>The maximum number of results to return per paginated call. The largest value you can specify is 100. 
     #         If you specify a value greater than 100, a ValidationException
     #         error occurs. The default value is 100. </p>
     # @example To list the entries in an Amazon Rekognition Custom Labels dataset
@@ -5286,7 +5306,7 @@ module Aws::Rekognition
     # @option params [String] :next_token
     #   <p>Pagination token, if the previous response was incomplete.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return per paginated call. The largest value user can specify is 100.
+    #   <p>The maximum number of results to return per paginated call. The largest value user can specify is 100. 
     #           If user specifies a value greater than 100, an <code>InvalidParameterException</code> error occurs. The default value is 100.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -5552,9 +5572,9 @@ module Aws::Rekognition
     #            policy.</p>
     # @option params [String] :policy_document
     #   <p>A resource policy to add to the model. The policy is a JSON structure that contains
-    #            one or more statements that define the policy.
+    #            one or more statements that define the policy. 
     #            The policy must follow the IAM syntax. For
-    #            more information about the contents of a JSON policy document, see
+    #            more information about the contents of a JSON policy document, see 
     #            <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html">IAM JSON policy reference</a>. </p>
     # @example PutProjectPolicy
     #   # This operation attaches a project policy to a Amazon Rekognition Custom Labels project in a trusting AWS account.
@@ -6526,7 +6546,7 @@ module Aws::Rekognition
     #        To get the results of the face detection operation, first check that the status value published to the Amazon SNS
     #        topic is <code>SUCCEEDED</code>. If so, call  <a>GetFaceDetection</a> and pass the job identifier
     #       (<code>JobId</code>) from the initial call to <code>StartFaceDetection</code>.</p>
-    #          <p>For more information, see Detecting faces in a stored video in the
+    #          <p>For more information, see Detecting faces in a stored video in the 
     #      Amazon Rekognition Developer Guide.</p>
     # @param [Hash, Types::StartFaceDetectionRequest] params
     # @option params [Types::Video] :video
@@ -6687,7 +6707,7 @@ module Aws::Rekognition
     # @option params [Array<String>] :features
     #   <p>The features to return after video analysis. You can specify that GENERAL_LABELS are returned.</p>
     # @option params [Types::LabelDetectionSettings] :settings
-    #   <p>The settings for a StartLabelDetection request.Contains the specified parameters for the label detection request of an asynchronous label analysis operation.
+    #   <p>The settings for a StartLabelDetection request.Contains the specified parameters for the label detection request of an asynchronous label analysis operation. 
     #         Settings can include filters for GENERAL_LABELS.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -6752,8 +6772,8 @@ module Aws::Rekognition
     # @option params [Types::MediaAnalysisOutputConfig] :output_config
     #   <p>The Amazon S3 bucket location to store the results.</p>
     # @option params [String] :kms_key_id
-    #   <p>The identifier of customer managed AWS KMS key (name or ARN). The key
-    #           is used to encrypt images copied into the service. The key is also used
+    #   <p>The identifier of customer managed AWS KMS key (name or ARN). The key 
+    #           is used to encrypt images copied into the service. The key is also used 
     #           to encrypt results and manifest files written to the output Amazon S3 bucket.</p>
     # @example StartMediaAnalysisJob
     #   # Initiates a new media analysis job.
@@ -6882,13 +6902,13 @@ module Aws::Rekognition
     #          </note>
     #          <p>Starts the running of the version of a model. Starting a model takes a while to
     #          complete. To check the current state of the model, use <a>DescribeProjectVersions</a>. </p>
-    #          <p>Once the model is running, you can detect custom labels in new images by calling
+    #          <p>Once the model is running, you can detect custom labels in new images by calling 
     #          <a>DetectCustomLabels</a>.</p>
     #          <note>
     #             <p>You are charged for the amount of time that the model is running. To stop a running
     #       model, call <a>StopProjectVersion</a>.</p>
     #          </note>
-    #          <p>This operation requires permissions to perform the
+    #          <p>This operation requires permissions to perform the 
     #          <code>rekognition:StartProjectVersion</code> action.</p>
     # @param [Hash, Types::StartProjectVersionRequest] params
     # @option params [String] :project_version_arn
@@ -6935,17 +6955,17 @@ module Aws::Rekognition
     end
 
     # <p>Starts asynchronous detection of segment detection in a stored video.</p>
-    #          <p>Amazon Rekognition Video can detect segments in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name and
-    #       the filename of the video. <code>StartSegmentDetection</code> returns a job identifier (<code>JobId</code>) which you use to get
+    #          <p>Amazon Rekognition Video can detect segments in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name and 
+    #       the filename of the video. <code>StartSegmentDetection</code> returns a job identifier (<code>JobId</code>) which you use to get 
     #       the results of the operation. When segment detection is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic
     #       that you specify in <code>NotificationChannel</code>.</p>
-    #          <p>You can use the <code>Filters</code> (<a>StartSegmentDetectionFilters</a>)
-    #       input parameter to specify the minimum detection confidence returned in the response.
+    #          <p>You can use the <code>Filters</code> (<a>StartSegmentDetectionFilters</a>) 
+    #       input parameter to specify the minimum detection confidence returned in the response. 
     #       Within <code>Filters</code>, use <code>ShotFilter</code> (<a>StartShotDetectionFilter</a>)
     #       to filter detected shots. Use  <code>TechnicalCueFilter</code> (<a>StartTechnicalCueDetectionFilter</a>)
     #       to filter technical cues. </p>
-    #          <p>To get the results of the segment detection operation, first check that the status value published to the Amazon SNS
-    #       topic is <code>SUCCEEDED</code>. if so, call <a>GetSegmentDetection</a> and pass the job identifier (<code>JobId</code>)
+    #          <p>To get the results of the segment detection operation, first check that the status value published to the Amazon SNS 
+    #       topic is <code>SUCCEEDED</code>. if so, call <a>GetSegmentDetection</a> and pass the job identifier (<code>JobId</code>) 
     #       from the initial call to <code>StartSegmentDetection</code>. </p>
     #          <p>For more information, see Detecting video segments in stored video in the Amazon Rekognition Developer Guide.</p>
     # @param [Hash, Types::StartSegmentDetectionRequest] params
@@ -7024,15 +7044,15 @@ module Aws::Rekognition
     #   <p>The name of the stream processor to start processing.</p>
     # @option params [Types::StreamProcessingStartSelector] :start_selector
     #   <p>
-    #               Specifies the starting point in the Kinesis stream to start processing.
+    #               Specifies the starting point in the Kinesis stream to start processing. 
     #               You can use the producer timestamp or the fragment number. If you use the producer timestamp, you must put the time in milliseconds.
-    #               For more information about fragment numbers, see <a href="https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_reader_Fragment.html">Fragment</a>.
+    #               For more information about fragment numbers, see <a href="https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_reader_Fragment.html">Fragment</a>. 
     #           </p>
     #            <p>This is a required parameter for label detection stream processors and should not be used to start a face search stream processor.</p>
     # @option params [Types::StreamProcessingStopSelector] :stop_selector
     #   <p>
-    #               Specifies when to stop processing the stream. You can specify a
-    #               maximum amount of time to process the video.
+    #               Specifies when to stop processing the stream. You can specify a 
+    #               maximum amount of time to process the video. 
     #           </p>
     #            <p>This is a required parameter for label detection stream processors and should not be used to start a face search stream processor.</p>
     # @example Request syntax with placeholder values
@@ -7062,12 +7082,12 @@ module Aws::Rekognition
     end
 
     # <p>Starts asynchronous detection of text in a stored video.</p>
-    #          <p>Amazon Rekognition Video can detect text in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name and
-    #        the filename of the video. <code>StartTextDetection</code> returns a job identifier (<code>JobId</code>) which you use to get
+    #          <p>Amazon Rekognition Video can detect text in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name and 
+    #        the filename of the video. <code>StartTextDetection</code> returns a job identifier (<code>JobId</code>) which you use to get 
     #        the results of the operation. When text detection is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic
     #        that you specify in <code>NotificationChannel</code>.</p>
-    #          <p>To get the results of the text detection operation, first check that the status value published to the Amazon SNS
-    #        topic is <code>SUCCEEDED</code>. if so, call <a>GetTextDetection</a> and pass the job identifier (<code>JobId</code>)
+    #          <p>To get the results of the text detection operation, first check that the status value published to the Amazon SNS 
+    #        topic is <code>SUCCEEDED</code>. if so, call <a>GetTextDetection</a> and pass the job identifier (<code>JobId</code>) 
     #        from the initial call to <code>StartTextDetection</code>. </p>
     # @param [Hash, Types::StartTextDetectionRequest] params
     # @option params [Types::Video] :video
@@ -7075,7 +7095,7 @@ module Aws::Rekognition
     #               specify a video for analysis. The supported file formats are .mp4, .mov and .avi.</p>
     # @option params [String] :client_request_token
     #   <p>Idempotent token used to identify the start request. If you use the same token with multiple <code>StartTextDetection</code>
-    #         requests, the same <code>JobId</code> is returned. Use <code>ClientRequestToken</code> to prevent the same job
+    #         requests, the same <code>JobId</code> is returned. Use <code>ClientRequestToken</code> to prevent the same job 
     #           from being accidentaly started more than once.</p>
     # @option params [Types::NotificationChannel] :notification_channel
     #   <p>The Amazon Simple Notification Service topic to which Amazon Rekognition publishes the completion status of a video analysis operation. For more information, see
@@ -7263,23 +7283,23 @@ module Aws::Rekognition
     #          </note>
     #          <p>Adds or updates one or more entries (images) in a dataset. An entry is a JSON Line which contains the
     #       information for a single image,  including
-    #       the image location, assigned labels, and object location bounding boxes.  For more information,
+    #       the image location, assigned labels, and object location bounding boxes.  For more information, 
     #       see Image-Level labels in manifest files and Object localization in manifest files in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.
     #      </p>
     #          <p>If the <code>source-ref</code> field in the JSON line references an existing image, the existing image in the dataset
-    #       is updated.
+    #       is updated. 
     #       If <code>source-ref</code> field doesn't reference an existing image, the image is added as a new image to the dataset. </p>
-    #          <p>You specify the changes that you want to make in the <code>Changes</code> input parameter.
+    #          <p>You specify the changes that you want to make in the <code>Changes</code> input parameter. 
     #     There isn't a limit to the number JSON Lines that you can change, but the size of <code>Changes</code> must be less
     # than 5MB.</p>
     #          <p>
     #             <code>UpdateDatasetEntries</code> returns immediatly, but the dataset update might take a while to complete.
-    #       Use <a>DescribeDataset</a> to check the
+    #       Use <a>DescribeDataset</a> to check the 
     #       current status. The dataset updated successfully if the value of <code>Status</code> is
     #       <code>UPDATE_COMPLETE</code>. </p>
     #          <p>To check if any non-terminal errors occured, call <a>ListDatasetEntries</a>
     #       and check for the presence of <code>errors</code> lists in the JSON Lines.</p>
-    #          <p>Dataset update fails if a terminal error occurs (<code>Status</code> = <code>UPDATE_FAILED</code>).
+    #          <p>Dataset update fails if a terminal error occurs (<code>Status</code> = <code>UPDATE_FAILED</code>). 
     #       Currently, you can't access the terminal error information from the Amazon Rekognition Custom Labels SDK.
     #    </p>
     #          <p>This operation requires permissions to perform the <code>rekognition:UpdateDatasetEntries</code> action.</p>
@@ -7290,7 +7310,7 @@ module Aws::Rekognition
     #   </p>
     # @option params [Types::DatasetChanges] :changes
     #   <p>
-    #      The changes that you want to make to the dataset.
+    #      The changes that you want to make to the dataset. 
     #   </p>
     # @example To-add dataset entries to an Amazon Rekognition Custom Labels dataset
     #   # Adds dataset entries to an Amazon Rekognition Custom Labels dataset.
@@ -7446,7 +7466,8 @@ module Aws::Rekognition
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

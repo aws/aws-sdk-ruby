@@ -3329,7 +3329,7 @@ module Aws::OpenSearch
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08:</b> TLS
+    #                     <b>Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08:</b> TLS 
     #                   security policy that supports TLS version 1.3 with FIPS</p>
     #               </li>
     #            </ul>

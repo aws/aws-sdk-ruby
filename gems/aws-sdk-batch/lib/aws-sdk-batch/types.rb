@@ -617,7 +617,7 @@ module Aws::Batch
     #       a single instance.</p>
     #   @return [String]
     # @!attribute minv_cpus
-    #   <p>The minimum number of vCPUs that a compute environment should maintain (even if the compute
+    #   <p>The minimum number of vCPUs that a compute environment should maintain (even if the compute 
     #      environment is <code>DISABLED</code>).</p>
     #            <note>
     #               <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>
@@ -633,7 +633,7 @@ module Aws::Batch
     #            </note>
     #   @return [Integer]
     # @!attribute desiredv_cpus
-    #   <p>The desired number of vCPUS in the compute environment. Batch modifies this value between
+    #   <p>The desired number of vCPUS in the compute environment. Batch modifies this value between 
     #      the minimum and maximum values based on job queue demand.</p>
     #            <note>
     #               <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>
@@ -874,7 +874,7 @@ module Aws::Batch
     #    more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html">Updating compute environments</a> in the
     #     <i>Batch User Guide</i>.</p>
     # @!attribute minv_cpus
-    #   <p>The minimum number of vCPUs that an environment should maintain (even if the compute environment
+    #   <p>The minimum number of vCPUs that an environment should maintain (even if the compute environment 
     #      is <code>DISABLED</code>).</p>
     #            <note>
     #               <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>
@@ -890,7 +890,7 @@ module Aws::Batch
     #            </note>
     #   @return [Integer]
     # @!attribute desiredv_cpus
-    #   <p>The desired number of vCPUS in the compute environment. Batch modifies this value between
+    #   <p>The desired number of vCPUS in the compute environment. Batch modifies this value between 
     #      the minimum and maximum values based on job queue demand.</p>
     #            <note>
     #               <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>
@@ -1265,9 +1265,9 @@ module Aws::Batch
 
     # <p>An object that represents a scaling policy for a compute environment.</p>
     # @!attribute min_scale_down_delay_minutes
-    #   <p>The minimum time (in minutes) that Batch keeps instances running in the compute environment
-    #      after their jobs complete. For each instance, the delay period begins when the last job finishes.
-    #      If no new jobs are placed on the instance during this delay, Batch terminates the instance once
+    #   <p>The minimum time (in minutes) that Batch keeps instances running in the compute environment 
+    #      after their jobs complete. For each instance, the delay period begins when the last job finishes. 
+    #      If no new jobs are placed on the instance during this delay, Batch terminates the instance once 
     #      the delay expires.</p>
     #            <p>Valid Range: Minimum value of 20. Maximum value of 10080. Use 0 to unset and disable the scale down delay.</p>
     #            <note>
@@ -1338,7 +1338,7 @@ module Aws::Batch
     #   <p>The amount of the consumable resource that is currently in use.</p>
     #   @return [Integer]
     # @!attribute resource_type
-    #   <p>Indicates whether the resource is available to be re-used after a job completes. Can be
+    #   <p>Indicates whether the resource is available to be re-used after a job completes. Can be 
     #               one of: </p>
     #            <ul>
     #               <li>
@@ -1646,7 +1646,7 @@ module Aws::Batch
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Container properties are used for Amazon ECS based job definitions. These properties to describe the
+    # <p>Container properties are used for Amazon ECS based job definitions. These properties to describe the 
     #    container that's launched as part of a job.</p>
     # @!attribute image
     #   <p>Required. The image used to start a container. This string is passed directly to the
@@ -2036,7 +2036,7 @@ module Aws::Batch
     #   <p>The total amount of the consumable resource that is available. Must be non-negative.</p>
     #   @return [Integer]
     # @!attribute resource_type
-    #   <p>Indicates whether the resource is available to be re-used after a job completes. Can be
+    #   <p>Indicates whether the resource is available to be re-used after a job completes. Can be 
     #               one of: </p>
     #            <ul>
     #               <li>
@@ -2526,7 +2526,7 @@ module Aws::Batch
     #   <p>The amount of the consumable resource that is currently available to use.</p>
     #   @return [Integer]
     # @!attribute resource_type
-    #   <p>Indicates whether the resource is available to be re-used after a job completes. Can be
+    #   <p>Indicates whether the resource is available to be re-used after a job completes. Can be 
     #               one of: </p>
     #            <ul>
     #               <li>
@@ -3080,7 +3080,7 @@ module Aws::Batch
     #                     <dt>ECS_AL2023</dt>
     #                     <dd>
     #                        <p>
-    #                           <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon Linux 2023</a>: Default
+    #                           <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon Linux 2023</a>: Default 
     #            for all non-GPU instance families.</p>
     #                        <note>
     #                           <p>Amazon Linux 2023 does not support <code>A1</code> instances.</p>
@@ -3164,8 +3164,8 @@ module Aws::Batch
     #            <p>The field only appears after the compute environment has begun scaling instances using the <code>imageType</code>. The field is not present when an image is specified in
     #               <code>ComputeResources.imageId</code> (deprecated), the default launch template, or
     #               <code>Ec2Configuration.imageIdOverride</code>. The field is also not present when the compute environment has a launch template override.
-    #
-    #
+    #               
+    #               
     #               For more information on image selection, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/ami-selection-order.html">AMI selection order</a>.</p>
     #            <note>
     #               <p>This field is read-only and only appears in the <a href="https://docs.aws.amazon.com/batch/latest/APIReference/API_DescribeComputeEnvironments.html">DescribeComputeEnvironments</a> response.</p>
@@ -4125,18 +4125,18 @@ module Aws::Batch
     #      unique for a given object.</p>
     #   @return [Hash<String, String>]
     # @!attribute annotations
-    #   <p>Key-value pairs used to attach arbitrary, non-identifying metadata to Kubernetes objects.
-    #           Valid annotation keys have two segments: an optional prefix and a name, separated by a
+    #   <p>Key-value pairs used to attach arbitrary, non-identifying metadata to Kubernetes objects. 
+    #           Valid annotation keys have two segments: an optional prefix and a name, separated by a 
     #           slash (/). </p>
     #            <ul>
     #               <li>
-    #                  <p>The prefix is optional and must be 253 characters or less. If specified, the prefix
-    #                   must be a DNS subdomain− a series of DNS labels separated by dots (.), and it must
+    #                  <p>The prefix is optional and must be 253 characters or less. If specified, the prefix 
+    #                   must be a DNS subdomain− a series of DNS labels separated by dots (.), and it must 
     #                   end with a slash (/).</p>
     #               </li>
     #               <li>
-    #                  <p>The name segment is required and must be 63 characters or less. It can include alphanumeric
-    #                   characters ([a-z0-9A-Z]), dashes (-), underscores (_), and dots (.), but must begin and end
+    #                  <p>The name segment is required and must be 63 characters or less. It can include alphanumeric 
+    #                   characters ([a-z0-9A-Z]), dashes (-), underscores (_), and dots (.), but must begin and end 
     #                   with an alphanumeric character.</p>
     #               </li>
     #            </ul>
@@ -4146,9 +4146,9 @@ module Aws::Batch
     #            <p>Annotations can be added or modified at any time. Each resource can have multiple annotations. </p>
     #   @return [Hash<String, String>]
     # @!attribute namespace
-    #   <p>The namespace of the Amazon EKS cluster. In Kubernetes, namespaces provide a mechanism for isolating
-    #         groups of resources within a single cluster. Names of resources need to be unique within a namespace,
-    #         but not across namespaces. Batch places Batch Job pods in this namespace. If this field is provided,
+    #   <p>The namespace of the Amazon EKS cluster. In Kubernetes, namespaces provide a mechanism for isolating 
+    #         groups of resources within a single cluster. Names of resources need to be unique within a namespace, 
+    #         but not across namespaces. Batch places Batch Job pods in this namespace. If this field is provided, 
     #         the value can't be empty or null. It must meet the following requirements:</p>
     #            <ul>
     #               <li>
@@ -4168,10 +4168,10 @@ module Aws::Batch
     #               </li>
     #            </ul>
     #            <p>
-    #      For more information, see
-    #      <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Namespaces</a> in the <i>Kubernetes documentation</i>. This namespace can be
-    #      different from the <code>kubernetesNamespace</code> set in the compute environment's
-    #      <code>EksConfiguration</code>, but must have identical role-based access control (RBAC) roles as
+    #      For more information, see 
+    #      <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Namespaces</a> in the <i>Kubernetes documentation</i>. This namespace can be 
+    #      different from the <code>kubernetesNamespace</code> set in the compute environment's 
+    #      <code>EksConfiguration</code>, but must have identical role-based access control (RBAC) roles as 
     #      the compute environment's <code>kubernetesNamespace</code>. For multi-node parallel jobs,
     #      the same value must be provided across all the node ranges.</p>
     #   @return [String]
@@ -4186,11 +4186,11 @@ module Aws::Batch
     end
 
     # <p>A <code>persistentVolumeClaim</code> volume is used to mount a <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">PersistentVolume</a>
-    #          into a Pod. PersistentVolumeClaims are a way for users to "claim" durable storage without knowing
+    #          into a Pod. PersistentVolumeClaims are a way for users to "claim" durable storage without knowing 
     #          the details of the particular cloud environment. See the information about <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">PersistentVolumes</a>
     #          in the <i>Kubernetes documentation</i>.</p>
     # @!attribute claim_name
-    #   <p>The name of the <code>persistentVolumeClaim</code> bounded to a <code>persistentVolume</code>.
+    #   <p>The name of the <code>persistentVolumeClaim</code> bounded to a <code>persistentVolume</code>. 
     #            For more information, see <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims">
     #            Persistent Volume Claims</a> in the <i>Kubernetes documentation</i>.</p>
     #   @return [String]
@@ -4462,7 +4462,7 @@ module Aws::Batch
     #       <i>Kubernetes documentation</i>.</p>
     #   @return [Types::EksSecret]
     # @!attribute persistent_volume_claim
-    #   <p>Specifies the configuration of a Kubernetes <code>persistentVolumeClaim</code> bounded to a
+    #   <p>Specifies the configuration of a Kubernetes <code>persistentVolumeClaim</code> bounded to a 
     #           <code>persistentVolume</code>. For more information, see <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims">
     #           Persistent Volume Claims</a> in the <i>Kubernetes documentation</i>.</p>
     #   @return [Types::EksPersistentVolumeClaim]
@@ -4500,7 +4500,7 @@ module Aws::Batch
     # @!attribute on_status_reason
     #   <p>Contains a glob pattern to match against the <code>StatusReason</code> returned for a job.
     #      The pattern can contain up to 512 characters. It can contain letters, numbers, periods (.),
-    #      colons (:), and white spaces (including spaces or tabs). It can optionally end with an asterisk (*)
+    #      colons (:), and white spaces (including spaces or tabs). It can optionally end with an asterisk (*) 
     #      so that only the start of the string needs to be an exact match.</p>
     #   @return [String]
     # @!attribute on_reason
@@ -4570,11 +4570,11 @@ module Aws::Batch
 
     # <p>The fair-share scheduling policy details.</p>
     # @!attribute share_decay_seconds
-    #   <p>The amount of time (in seconds) to use to calculate a fair-share percentage for each
+    #   <p>The amount of time (in seconds) to use to calculate a fair-share percentage for each 
     #      share identifier in use. A value of zero (0) indicates the default minimum time window (600 seconds).
     #      The maximum supported value is 604800 (1 week).</p>
-    #            <p>The decay allows for more recently run jobs to have more weight than jobs that ran earlier.
-    #      Consider adjusting this number if you have jobs that (on average) run longer than ten minutes,
+    #            <p>The decay allows for more recently run jobs to have more weight than jobs that ran earlier. 
+    #      Consider adjusting this number if you have jobs that (on average) run longer than ten minutes, 
     #      or a large difference in job count or job run times between share identifiers, and the allocation
     #      of resources doesn't meet your needs.</p>
     #   @return [Integer]
@@ -4597,7 +4597,7 @@ module Aws::Batch
     #            <p>The minimum value is 0 and the maximum value is 99.</p>
     #   @return [Integer]
     # @!attribute share_distribution
-    #   <p>An array of <code>SharedIdentifier</code> objects that contain the weights for the
+    #   <p>An array of <code>SharedIdentifier</code> objects that contain the weights for the 
     #      share identifiers for the fair-share policy. Share identifiers that aren't included have a
     #      default weight of <code>1.0</code>.</p>
     #   @return [Array<Types::ShareAttributes>]
@@ -5312,24 +5312,24 @@ module Aws::Batch
     #      job queue.</p>
     #   @return [String]
     # @!attribute priority
-    #   <p>The priority of the job queue. Job queue priority determines the order
-    #      that job queues are evaluated when multiple queues dispatch jobs within a
+    #   <p>The priority of the job queue. Job queue priority determines the order 
+    #      that job queues are evaluated when multiple queues dispatch jobs within a 
     #      shared compute environment. A higher value for <code>priority</code> indicates
     #      a higher priority. Queues are evaluated in cycles, in descending order by
-    #      priority. For example, a job queue with a priority value of <code>10</code> is
-    #      evaluated before a queue with a priority value of <code>1</code>. All of the
+    #      priority. For example, a job queue with a priority value of <code>10</code> is 
+    #      evaluated before a queue with a priority value of <code>1</code>. All of the 
     #      compute environments must be either Amazon EC2 (<code>EC2</code> or <code>SPOT</code>)
-    #      or Fargate (<code>FARGATE</code> or <code>FARGATE_SPOT</code>). Amazon EC2 and
+    #      or Fargate (<code>FARGATE</code> or <code>FARGATE_SPOT</code>). Amazon EC2 and 
     #      Fargate compute environments can't be mixed.</p>
     #            <note>
-    #               <p>Job queue priority doesn't guarantee that a particular job executes before
-    #       a job in a lower priority queue. Jobs added to higher priority queues during the
-    #       queue evaluation cycle might not be evaluated until the next cycle. A job is
-    #       dispatched from a queue only if resources are available when the queue is evaluated.
-    #       If there are insufficient resources available at that time, the cycle proceeds to the
-    #       next queue. This means that jobs added to higher priority queues might have to wait
-    #       for jobs in multiple lower priority queues to complete before they are dispatched.
-    #       You can use job dependencies to control the order for jobs from queues with different
+    #               <p>Job queue priority doesn't guarantee that a particular job executes before 
+    #       a job in a lower priority queue. Jobs added to higher priority queues during the 
+    #       queue evaluation cycle might not be evaluated until the next cycle. A job is 
+    #       dispatched from a queue only if resources are available when the queue is evaluated. 
+    #       If there are insufficient resources available at that time, the cycle proceeds to the 
+    #       next queue. This means that jobs added to higher priority queues might have to wait 
+    #       for jobs in multiple lower priority queues to complete before they are dispatched. 
+    #       You can use job dependencies to control the order for jobs from queues with different 
     #       priorities. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/job_dependencies.html">Job Dependencies</a>
     #       in the <i>Batch User Guide</i>.</p>
     #            </note>
@@ -5383,7 +5383,7 @@ module Aws::Batch
     #   @return [Integer]
     # @!attribute action
     #   <p>The action to take when a job is at the head of the job queue in the specified state for the specified period of
-    #      time. For job queues connected to a <code>ECS</code>, <code>FARGATE</code> or <code>EKS</code> compute environment, the only supported value is <code>CANCEL</code>, which will cancel the job.
+    #      time. For job queues connected to a <code>ECS</code>, <code>FARGATE</code> or <code>EKS</code> compute environment, the only supported value is <code>CANCEL</code>, which will cancel the job. 
     #      For job queues connected to a <code>SAGEMAKER_TRAINING</code> service environment, the only supported value is <code>TERMINATE</code>, which will terminate the job.</p>
     #   @return [String]
     class JobStateTimeLimitAction < Struct.new(
@@ -5569,7 +5569,7 @@ module Aws::Batch
     #   <p>The name of the launch template.</p>
     #   @return [String]
     # @!attribute version
-    #   <p>The version number of the launch template,
+    #   <p>The version number of the launch template, 
     #      <code>$Default</code>, or <code>$Latest</code>.</p>
     #            <p>If the value is <code>$Default</code>, the default version of the launch template is used. If the value is <code>$Latest</code>, the latest version of the launch template is used. </p>
     #            <important>
@@ -5638,7 +5638,7 @@ module Aws::Batch
     #               <b>Note:</b> If you specify the <code>launchTemplateName</code> you can't specify the <code>launchTemplateId</code> as well.</p>
     #   @return [String]
     # @!attribute version
-    #   <p>The version number of the launch template,
+    #   <p>The version number of the launch template, 
     #      <code>$Default</code>, or <code>$Latest</code>.</p>
     #            <p>If the value is <code>$Default</code>, the default version of the launch template is used. If the value is <code>$Latest</code>, the latest version of the launch template is used. </p>
     #            <important>
@@ -5804,14 +5804,14 @@ module Aws::Batch
     end
 
     # @!attribute filters
-    #   <p>The filters to apply to the consumable resource list query. If used, only those consumable
+    #   <p>The filters to apply to the consumable resource list query. If used, only those consumable 
     #               resources that match the filter are listed. Filter names and values can be:</p>
     #            <ul>
     #               <li>
     #                  <p>name: <code>CONSUMABLE_RESOURCE_NAME </code>
     #                  </p>
-    #                  <p>values: case-insensitive matches for the consumable resource name. If a filter
-    #                       value ends with an asterisk (*), it matches any consumable resource name that begins
+    #                  <p>values: case-insensitive matches for the consumable resource name. If a filter 
+    #                       value ends with an asterisk (*), it matches any consumable resource name that begins 
     #                       with the string before the '*'.</p>
     #               </li>
     #            </ul>
@@ -5827,10 +5827,10 @@ module Aws::Batch
     #               a <code>nextToken</code> value if applicable.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The <code>nextToken</code> value returned from a previous paginated
-    #               <code>ListConsumableResources</code> request where <code>maxResults</code> was used and the
-    #               results exceeded the value of that parameter. Pagination continues from the end of the previous
-    #               results that returned the <code>nextToken</code> value. This value is <code>null</code> when
+    #   <p>The <code>nextToken</code> value returned from a previous paginated 
+    #               <code>ListConsumableResources</code> request where <code>maxResults</code> was used and the 
+    #               results exceeded the value of that parameter. Pagination continues from the end of the previous 
+    #               results that returned the <code>nextToken</code> value. This value is <code>null</code> when 
     #               there are no more results to return.</p>
     #            <note>
     #               <p>Treat this token as an opaque identifier that's only used to
@@ -5851,9 +5851,9 @@ module Aws::Batch
     #   <p>A list of consumable resources that match the request.</p>
     #   @return [Array<Types::ConsumableResourceSummary>]
     # @!attribute next_token
-    #   <p>The <code>nextToken</code> value to include in a future <code>ListConsumableResources</code>
-    #               request. When the results of a <code>ListConsumableResources</code> request exceed <code>maxResults</code>,
-    #               this value can be used to retrieve the next page of results. This value is <code>null</code>
+    #   <p>The <code>nextToken</code> value to include in a future <code>ListConsumableResources</code> 
+    #               request. When the results of a <code>ListConsumableResources</code> request exceed <code>maxResults</code>, 
+    #               this value can be used to retrieve the next page of results. This value is <code>null</code> 
     #               when there are no more results to return.</p>
     #   @return [String]
     class ListConsumableResourcesResponse < Struct.new(
@@ -5869,7 +5869,7 @@ module Aws::Batch
     #   <p>The name or ARN of the consumable resource.</p>
     #   @return [String]
     # @!attribute filters
-    #   <p>The filters to apply to the job list query. If used, only those jobs requiring the specified
+    #   <p>The filters to apply to the job list query. If used, only those jobs requiring the specified 
     #               consumable resource (<code>consumableResource</code>) and that match the value of the filters
     #               are listed. The filter names and values can be:</p>
     #            <ul>
@@ -5882,8 +5882,8 @@ module Aws::Batch
     #               <li>
     #                  <p>name: <code>JOB_NAME </code>
     #                  </p>
-    #                  <p>The values are case-insensitive matches for the job name. If a filter value ends
-    #                       with an asterisk (*), it matches any job name that begins with the string before
+    #                  <p>The values are case-insensitive matches for the job name. If a filter value ends 
+    #                       with an asterisk (*), it matches any job name that begins with the string before 
     #                       the '*'.</p>
     #               </li>
     #            </ul>
@@ -5895,14 +5895,14 @@ module Aws::Batch
     #               element. The remaining results of the initial request can be seen by sending another
     #               <code>ListJobsByConsumableResource</code> request with the returned <code>nextToken</code> value.
     #               This value can be between 1 and 100. If this parameter isn't
-    #               used, then <code>ListJobsByConsumableResource</code> returns up to 100 results
+    #               used, then <code>ListJobsByConsumableResource</code> returns up to 100 results 
     #               and a <code>nextToken</code> value if applicable.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The <code>nextToken</code> value returned from a previous paginated
-    #               <code>ListJobsByConsumableResource</code> request where <code>maxResults</code> was used and the
-    #               results exceeded the value of that parameter. Pagination continues from the end of the previous
-    #               results that returned the <code>nextToken</code> value. This value is <code>null</code> when
+    #   <p>The <code>nextToken</code> value returned from a previous paginated 
+    #               <code>ListJobsByConsumableResource</code> request where <code>maxResults</code> was used and the 
+    #               results exceeded the value of that parameter. Pagination continues from the end of the previous 
+    #               results that returned the <code>nextToken</code> value. This value is <code>null</code> when 
     #               there are no more results to return.</p>
     #            <note>
     #               <p>Treat this token as an opaque identifier that's only used to
@@ -5924,9 +5924,9 @@ module Aws::Batch
     #   <p>The list of jobs that require the specified consumable resources.</p>
     #   @return [Array<Types::ListJobsByConsumableResourceSummary>]
     # @!attribute next_token
-    #   <p>The <code>nextToken</code> value to include in a future <code>ListJobsByConsumableResource</code>
-    #               request. When the results of a <code>ListJobsByConsumableResource</code> request exceed
-    #               <code>maxResults</code>, this value can be used to retrieve the next page of results. This
+    #   <p>The <code>nextToken</code> value to include in a future <code>ListJobsByConsumableResource</code> 
+    #               request. When the results of a <code>ListJobsByConsumableResource</code> request exceed 
+    #               <code>maxResults</code>, this value can be used to retrieve the next page of results. This 
     #               value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class ListJobsByConsumableResourceResponse < Struct.new(
@@ -6001,7 +6001,7 @@ module Aws::Batch
     #   <p>A short, human-readable string to provide more details for the current status of the job.</p>
     #   @return [String]
     # @!attribute started_at
-    #   <p>The Unix timestamp for when the job was started. More specifically, it's when the job transitioned
+    #   <p>The Unix timestamp for when the job was started. More specifically, it's when the job transitioned 
     #               from the <code>STARTING</code> state to the <code>RUNNING</code> state.</p>
     #   @return [Integer]
     # @!attribute created_at
@@ -6979,8 +6979,8 @@ module Aws::Batch
     # @!attribute borrow_limit
     #   <p>The maximum percentage of additional capacity that the quota share can borrow from other shares. <code>borrowLimit</code> can only be applied to quota shares with a strategy of <code>LEND_AND_BORROW</code>.
     #           This value is expressed as a percentage of the quota share's configured <a href="https://docs.aws.amazon.com/batch/latest/APIReference/API_QuotaShareCapacityLimit.html">CapacityLimits</a>.</p>
-    #            <p>The <code>borrowLimit</code> is applied uniformly across all capacity units.
-    #           For example, if the <code>borrowLimit</code> is 200, the quota
+    #            <p>The <code>borrowLimit</code> is applied uniformly across all capacity units. 
+    #           For example, if the <code>borrowLimit</code> is 200, the quota 
     #           share can borrow up to 200% of its configured <code>maxCapacity</code> for each capacity unit. The default <code>borrowLimit</code> is -1, which indicates unlimited borrowing.</p>
     #   @return [Integer]
     class QuotaShareResourceSharingConfiguration < Struct.new(
@@ -7396,15 +7396,15 @@ module Aws::Batch
     #        <code>readonlyRootFilesystem</code>, and <code>efsVolumeConfiguration</code>.</p>
     #            </note>
     #            <note>
-    #               <p>The Batch Scheduler checks the compute environments that are attached to the job queue before
-    #       registering a task definition with Fargate. In this scenario, the job queue is where the job is
-    #       submitted. If the job requires a Windows container and the first compute environment is <code>LINUX</code>,
-    #       the compute environment is skipped and the next compute environment is checked until a Windows-based
+    #               <p>The Batch Scheduler checks the compute environments that are attached to the job queue before 
+    #       registering a task definition with Fargate. In this scenario, the job queue is where the job is 
+    #       submitted. If the job requires a Windows container and the first compute environment is <code>LINUX</code>, 
+    #       the compute environment is skipped and the next compute environment is checked until a Windows-based 
     #       compute environment is found.</p>
     #            </note>
     #            <note>
-    #               <p>Fargate Spot is not supported on Windows-based containers on Fargate.
-    #       A job queue will be blocked if a Windows job is submitted to a job
+    #               <p>Fargate Spot is not supported on Windows-based containers on Fargate. 
+    #       A job queue will be blocked if a Windows job is submitted to a job 
     #       queue with only Fargate Spot compute environments. However, you can attach both <code>FARGATE</code> and
     #        <code>FARGATE_SPOT</code> compute environments to the same job queue.</p>
     #            </note>
@@ -7892,9 +7892,9 @@ module Aws::Batch
     #         (*).</p>
     #   @return [String]
     # @!attribute scheduling_priority_override
-    #   <p>The scheduling priority for the job. This only affects jobs in job queues with a
+    #   <p>The scheduling priority for the job. This only affects jobs in job queues with a 
     #         fair-share policy. Jobs with a higher scheduling priority are scheduled before jobs with a lower
-    #         scheduling priority. This overrides any scheduling priority in the job definition and works only
+    #         scheduling priority. This overrides any scheduling priority in the job definition and works only 
     #         within a single share identifier.</p>
     #            <p>The minimum supported value is 0 and the maximum supported value is 9999.</p>
     #   @return [Integer]
@@ -9151,11 +9151,11 @@ module Aws::Batch
     # @!attribute quantity
     #   <p>The change in the total quantity of the consumable resource. The <code>operation</code>
     #               parameter determines whether the value specified here will be the new total quantity, or
-    #               the amount by which the total quantity will be increased or reduced. Must be a non-negative
+    #               the amount by which the total quantity will be increased or reduced. Must be a non-negative 
     #               value.</p>
     #   @return [Integer]
     # @!attribute client_token
-    #   <p>If this parameter is specified and two update requests with identical payloads and
+    #   <p>If this parameter is specified and two update requests with identical payloads and 
     #             <code>clientToken</code>s are received, these requests are considered the same request. Both requests will succeed, but the update will only happen once. A <code>clientToken</code> is valid for 8 hours.</p>
     #   @return [String]
     class UpdateConsumableResourceRequest < Struct.new(
@@ -9317,9 +9317,9 @@ module Aws::Batch
     #   <p>Specifies the job timeout (in minutes) when the compute environment infrastructure is
     #      updated. The default value is 30. The maximum value is 7200.</p>
     #            <note>
-    #               <p>Increasing <code>jobExecutionTimeoutMinutes</code> during infrastructure updates delays
-    #       the replacement of instances with new instances that include updates such as security patches,
-    #       but provides more time for jobs to execute. Consider the security implications of this tradeoff
+    #               <p>Increasing <code>jobExecutionTimeoutMinutes</code> during infrastructure updates delays 
+    #       the replacement of instances with new instances that include updates such as security patches, 
+    #       but provides more time for jobs to execute. Consider the security implications of this tradeoff 
     #       when setting timeout values.</p>
     #            </note>
     #   @return [Integer]

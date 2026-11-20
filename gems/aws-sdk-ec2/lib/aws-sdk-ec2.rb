@@ -20,23 +20,23 @@ Aws.const_set('EC2', Module.new) unless Aws.const_defined?('EC2')
 #          </p>
 #          <ul>
 #             <li>
-#                <p>To learn about using the Query API, see
+#                <p>To learn about using the Query API, see 
 #                 <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-low-level-api.html">Using the API for Amazon EC2</a>.</p>
 #             </li>
 #             <li>
-#                <p>To learn about the permissions required to call an Amazon EC2 API action, see
+#                <p>To learn about the permissions required to call an Amazon EC2 API action, see 
 #                 <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonec2.html">Actions, resources, and condition keys for Amazon EC2</a>.</p>
 #             </li>
 #             <li>
-#                <p>To get the list of API actions by service and resource, see
+#                <p>To get the list of API actions by service and resource, see 
 #                 <a href="https://docs.aws.amazon.com/ec2/latest/devguide/OperationList-query.html">Actions by service</a>.</p>
 #             </li>
 #             <li>
-#                <p>To get the alphabetical list of API actions, see
+#                <p>To get the alphabetical list of API actions, see 
 #                 .</p>
 #             </li>
 #             <li>
-#                <p>To get descriptions of the API error codes, see
+#                <p>To get descriptions of the API error codes, see 
 #                 <a href="https://docs.aws.amazon.com/ec2/latest/devguide/errors-overview.html">Error codes for the Amazon EC2 API</a>.</p>
 #             </li>
 #          </ul>

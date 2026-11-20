@@ -554,7 +554,7 @@ module Aws::MemoryDB
     end
 
     # <p>The requested node offering does not exist.
-    #
+    #          
     #       </p>
     class ReservedNodesOfferingNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context

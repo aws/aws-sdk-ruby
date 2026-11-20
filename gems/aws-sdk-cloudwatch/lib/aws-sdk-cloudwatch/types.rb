@@ -2711,7 +2711,7 @@ module Aws::CloudWatch
 
     # <p> Contains the information that's required to enable a managed Contributor Insights
     #             rule for an Amazon Web Services resource.
-    #
+    #             
     #         </p>
     # @!attribute template_name
     #   <p> The template name for the managed Contributor Insights rule, as returned by
@@ -2743,7 +2743,7 @@ module Aws::CloudWatch
     end
 
     # <p> Contains information about managed Contributor Insights rules, as returned by
-    #                 <code>ListManagedInsightRules</code>.
+    #                 <code>ListManagedInsightRules</code>. 
     #         </p>
     # @!attribute template_name
     #   <p> The template name for the managed rule. Used to enable managed rules using

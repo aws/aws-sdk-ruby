@@ -50,7 +50,7 @@ module Aws::S3
     extend Smithy::Client::DynamicErrors
 
     # <p>
-    #       You might receive this error for several reasons. For details, see the description of this API
+    #       You might receive this error for several reasons. For details, see the description of this API 
     #       operation.</p>
     class AccessDenied < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -166,7 +166,7 @@ module Aws::S3
       end
     end
 
-    # <p>A parameter or header in your request isn't valid. For details, see the description of this API
+    # <p>A parameter or header in your request isn't valid. For details, see the description of this API 
     #       operation.</p>
     class InvalidRequest < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context

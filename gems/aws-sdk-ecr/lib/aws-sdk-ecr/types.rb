@@ -1082,7 +1082,7 @@ module Aws::ECR
     #   @return [String]
     # @!attribute image_status
     #   <p>The image status with which to filter your <a>DescribeImages</a> results.
-    #           Valid values are <code>ACTIVE</code>, <code>ARCHIVED</code>, and <code>ACTIVATING</code>.
+    #           Valid values are <code>ACTIVE</code>, <code>ARCHIVED</code>, and <code>ACTIVATING</code>. 
     #           If not specified, only images with <code>ACTIVE</code> status are returned.</p>
     #   @return [String]
     class DescribeImagesFilter < Struct.new(

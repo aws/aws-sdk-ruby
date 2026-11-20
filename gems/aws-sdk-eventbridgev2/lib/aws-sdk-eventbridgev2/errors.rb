@@ -78,7 +78,7 @@ module Aws::EventBridgeV2
     # A client-supplied precondition (e.g. ExpectedRevisionId on a resource-policy
     # write) did not match the current state of the resource. Retrying the same
     # request will fail again; re-read the resource and re-evaluate before retrying.
-    #
+    # 
     # A conditional request is not retry-safe on its own. If an earlier attempt
     # committed but its response never reached the caller, retrying fails with this
     # error, which is indistinguishable from another writer having won. Compare the
@@ -169,7 +169,7 @@ module Aws::EventBridgeV2
     end
 
     # The policy document is larger than the account's resource policy size quota, or
-    # larger than the service maximum.
+    # larger than the service maximum. 
     class PolicyLengthExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EventBridgeV2::Types::PolicyLengthExceededException] data

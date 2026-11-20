@@ -750,8 +750,8 @@ module Aws::CodeCommit
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Cannot create the branch with the specified name because the commit conflicts with an existing branch with the same name.
-    #
+    # <p>Cannot create the branch with the specified name because the commit conflicts with an existing branch with the same name. 
+    # 
     #             Branch names must be unique.</p>
     # @!attribute message
     #   <p>Any message associated with the exception.</p>
@@ -1059,13 +1059,13 @@ module Aws::CodeCommit
     #   <p>The commit message associated with the specified commit.</p>
     #   @return [String]
     # @!attribute author
-    #   <p>Information about the author of the specified commit. Information includes
-    #               the date in timestamp format with GMT offset, the name of the author, and the email address for the author, as configured
+    #   <p>Information about the author of the specified commit. Information includes 
+    #               the date in timestamp format with GMT offset, the name of the author, and the email address for the author, as configured 
     #               in Git.</p>
     #   @return [Types::UserInfo]
     # @!attribute committer
-    #   <p>Information about the person who committed the specified commit, also known as the committer. Information includes
-    #           the date in timestamp format with GMT offset, the name of the committer, and the email address for the committer, as configured
+    #   <p>Information about the person who committed the specified commit, also known as the committer. Information includes 
+    #           the date in timestamp format with GMT offset, the name of the committer, and the email address for the committer, as configured 
     #           in Git.</p>
     #            <p>For more information
     #               about the difference between an author and a committer in Git, see <a href="http://git-scm.com/book/ch2-3.html">Viewing the Commit History</a> in Pro Git
@@ -1593,8 +1593,8 @@ module Aws::CodeCommit
     #   @return [Hash<String, String>]
     # @!attribute kms_key_id
     #   <p>The ID of the encryption key. You can view the ID of an encryption key in the KMS console, or use the KMS APIs to
-    #               programmatically retrieve a key ID. For more information about acceptable values for kmsKeyID, see
-    #               <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId">KeyId</a> in the Decrypt API description in
+    #               programmatically retrieve a key ID. For more information about acceptable values for kmsKeyID, see 
+    #               <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId">KeyId</a> in the Decrypt API description in 
     #               the <i>Key Management Service API Reference</i>.</p>
     #            <p>If no key is specified, the default <code>aws/codecommit</code> Amazon Web Services managed key is used.</p>
     #   @return [String]
@@ -2022,7 +2022,7 @@ module Aws::CodeCommit
     #               results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>A non-zero, non-negative integer used to limit the number of returned results.
+    #   <p>A non-zero, non-negative integer used to limit the number of returned results. 
     #               The default is 100 events, which is also the maximum number of events that can be returned in a result.</p>
     #   @return [Integer]
     class DescribePullRequestEventsInput < Struct.new(
@@ -2134,11 +2134,11 @@ module Aws::CodeCommit
 
     # <p>Returns information about a set of differences for a commit specifier.</p>
     # @!attribute before_blob
-    #   <p>Information about a <code>beforeBlob</code> data type object, including the ID,
+    #   <p>Information about a <code>beforeBlob</code> data type object, including the ID, 
     #               the file mode permission code, and the path.</p>
     #   @return [Types::BlobMetadata]
     # @!attribute after_blob
-    #   <p>Information about an <code>afterBlob</code> data type object, including the ID,
+    #   <p>Information about an <code>afterBlob</code> data type object, including the ID, 
     #               the file mode permission code, and the path.</p>
     #   @return [Types::BlobMetadata]
     # @!attribute change_type
@@ -2154,7 +2154,7 @@ module Aws::CodeCommit
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A file cannot be added to the repository because the specified path name has the same name as a file that already exists in this repository.
+    # <p>A file cannot be added to the repository because the specified path name has the same name as a file that already exists in this repository. 
     #         Either provide a different name for the file, or specify a different path for the file.</p>
     # @!attribute message
     #   <p>Any message associated with the exception.</p>
@@ -2297,7 +2297,7 @@ module Aws::CodeCommit
     end
 
     # @!attribute evaluation
-    #   <p>The result of the evaluation, including the names of the rules whose conditions have been met (if any), the names of the rules whose conditions have
+    #   <p>The result of the evaluation, including the names of the rules whose conditions have been met (if any), the names of the rules whose conditions have 
     #           not been met (if any), whether the pull request is in the approved state, and whether the pull request approval rule has been set aside by an override. </p>
     #   @return [Types::Evaluation]
     class EvaluatePullRequestApprovalRulesOutput < Struct.new(
@@ -2555,7 +2555,7 @@ module Aws::CodeCommit
     #   <p>The blob ID of the object that represents the content of the file in this version.</p>
     #   @return [String]
     # @!attribute path
-    #   <p>The name and path of the file at which this blob is indexed which contains the data for this version of the file. This value will
+    #   <p>The name and path of the file at which this blob is indexed which contains the data for this version of the file. This value will 
     #           vary between file versions if a file is renamed or if its path changes.</p>
     #   @return [String]
     # @!attribute revision_children
@@ -2592,7 +2592,7 @@ module Aws::CodeCommit
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The commit cannot be created because at least one of the overall changes in the commit results in a
+    # <p>The commit cannot be created because at least one of the overall changes in the commit results in a 
     #             folder whose contents exceed the limit of 6 MB. Either reduce the number and size of your changes,
     #         or split the changes across multiple folders.</p>
     # @!attribute message
@@ -2895,15 +2895,15 @@ module Aws::CodeCommit
     #   <p>The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.</p>
     #   @return [String]
     # @!attribute repository_name
-    #   <p>The name of the repository that contains the pull request. Requirement is conditional: <code>repositoryName</code> must be specified when
+    #   <p>The name of the repository that contains the pull request. Requirement is conditional: <code>repositoryName</code> must be specified when 
     #               <code>beforeCommitId</code> and <code>afterCommitId</code> are included.</p>
     #   @return [String]
     # @!attribute before_commit_id
-    #   <p>The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was created. Requirement is conditional:
+    #   <p>The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was created. Requirement is conditional: 
     #               <code>beforeCommitId</code> must be specified when <code>repositoryName</code> is included.</p>
     #   @return [String]
     # @!attribute after_commit_id
-    #   <p>The full commit ID of the commit in the source branch that was the tip of the branch at the time the comment was made. Requirement is conditional:
+    #   <p>The full commit ID of the commit in the source branch that was the tip of the branch at the time the comment was made. Requirement is conditional: 
     #               <code>afterCommitId</code> must be specified when <code>repositoryName</code> is included.</p>
     #   @return [String]
     # @!attribute next_token
@@ -3557,7 +3557,7 @@ module Aws::CodeCommit
     end
 
     # <p>The description for the approval rule template is not valid because it exceeds the
-    #             maximum characters allowed for a description. For more information about limits in CodeCommit,
+    #             maximum characters allowed for a description. For more information about limits in CodeCommit, 
     #             see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">Quotas</a> in the <i>CodeCommit User Guide</i>.</p>
     # @!attribute message
     #   <p>Any message associated with the exception.</p>
@@ -3887,7 +3887,7 @@ module Aws::CodeCommit
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The parent commit ID is not valid. The commit ID cannot be empty, and must match the head commit ID for the branch of the repository where you
+    # <p>The parent commit ID is not valid. The commit ID cannot be empty, and must match the head commit ID for the branch of the repository where you 
     #         want to add or update a file.</p>
     # @!attribute message
     #   <p>Any message associated with the exception.</p>
@@ -4137,7 +4137,7 @@ module Aws::CodeCommit
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The value for the resource ARN is not valid. For more information about resources in CodeCommit, see
+    # <p>The value for the resource ARN is not valid. For more information about resources in CodeCommit, see 
     #             <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats">CodeCommit Resources and Operations</a>
     #             in the CodeCommit User Guide.</p>
     # @!attribute message
@@ -4259,7 +4259,7 @@ module Aws::CodeCommit
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The targets for the pull request is not valid or not in a valid format. Targets are a list of target objects. Each target object must contain the full values for
+    # <p>The targets for the pull request is not valid or not in a valid format. Targets are a list of target objects. Each target object must contain the full values for 
     #             the repository name, source branch, and destination branch for a pull request.</p>
     # @!attribute message
     #   <p>Any message associated with the exception.</p>
@@ -4450,7 +4450,7 @@ module Aws::CodeCommit
     #   <p>The name of the repository for which you want to list pull requests.</p>
     #   @return [String]
     # @!attribute author_arn
-    #   <p>Optional. The Amazon Resource Name (ARN) of the user who created the pull request. If used, this filters the results
+    #   <p>Optional. The Amazon Resource Name (ARN) of the user who created the pull request. If used, this filters the results 
     #           to pull requests created by that user.</p>
     #   @return [String]
     # @!attribute pull_request_status
@@ -4527,7 +4527,7 @@ module Aws::CodeCommit
 
     # <p>Represents the input of a list repositories operation.</p>
     # @!attribute next_token
-    #   <p>An enumeration token that allows the operation to batch the results of the operation.
+    #   <p>An enumeration token that allows the operation to batch the results of the operation. 
     #               Batch sizes are 1,000 for list repository operations. When the client sends the token back to CodeCommit,
     #               another page of 1,000 records is retrieved.</p>
     #   @return [String]
@@ -4552,8 +4552,8 @@ module Aws::CodeCommit
     #   <p>Lists the repositories called by the list repositories operation.</p>
     #   @return [Array<Types::RepositoryNameIdPair>]
     # @!attribute next_token
-    #   <p>An enumeration token that allows the operation to batch the results of the operation.
-    #               Batch sizes are 1,000 for list repository operations. When the client sends the token back to CodeCommit,
+    #   <p>An enumeration token that allows the operation to batch the results of the operation. 
+    #               Batch sizes are 1,000 for list repository operations. When the client sends the token back to CodeCommit, 
     #               another page of 1,000 records is retrieved.</p>
     #   @return [String]
     class ListRepositoriesOutput < Struct.new(
@@ -4666,7 +4666,7 @@ module Aws::CodeCommit
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The number of specified files to change as part of this commit exceeds the maximum number of files
+    # <p>The number of specified files to change as part of this commit exceeds the maximum number of files 
     #         that can be changed in a single commit. Consider using a Git client for these changes.</p>
     # @!attribute message
     #   <p>Any message associated with the exception.</p>
@@ -4703,7 +4703,7 @@ module Aws::CodeCommit
       include ::Smithy::Schema::Structure
     end
 
-    # <p>You cannot create the pull request because the repository has too many open pull requests.
+    # <p>You cannot create the pull request because the repository has too many open pull requests. 
     #             The maximum number of open pull requests for a repository is 1,000. Close one or more open pull requests, and then try again.</p>
     # @!attribute message
     #   <p>Any message associated with the exception.</p>
@@ -4740,7 +4740,7 @@ module Aws::CodeCommit
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The maximum number of approval rule templates for a repository has been exceeded. You cannot associate more than 25
+    # <p>The maximum number of approval rule templates for a repository has been exceeded. You cannot associate more than 25 
     #         approval rule templates with a repository.</p>
     # @!attribute message
     #   <p>Any message associated with the exception.</p>
@@ -5068,7 +5068,7 @@ module Aws::CodeCommit
     #   <p>The name of the repository where the pull request was created.</p>
     #   @return [String]
     # @!attribute source_commit_id
-    #   <p>The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an
+    #   <p>The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an 
     #           exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.</p>
     #   @return [String]
     class MergePullRequestByFastForwardInput < Struct.new(
@@ -5099,7 +5099,7 @@ module Aws::CodeCommit
     #   <p>The name of the repository where the pull request was created.</p>
     #   @return [String]
     # @!attribute source_commit_id
-    #   <p>The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an
+    #   <p>The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an 
     #               exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.</p>
     #   @return [String]
     # @!attribute conflict_detail_level
@@ -5168,7 +5168,7 @@ module Aws::CodeCommit
     #   <p>The name of the repository where the pull request was created.</p>
     #   @return [String]
     # @!attribute source_commit_id
-    #   <p>The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an
+    #   <p>The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an 
     #               exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.</p>
     #   @return [String]
     # @!attribute conflict_detail_level
@@ -5372,7 +5372,7 @@ module Aws::CodeCommit
     #               To get the revision ID, use GetPullRequest.</p>
     #   @return [String]
     # @!attribute override_status
-    #   <p>Whether you want to set aside approval rule requirements for the pull request (OVERRIDE) or revoke a previous override and apply
+    #   <p>Whether you want to set aside approval rule requirements for the pull request (OVERRIDE) or revoke a previous override and apply 
     #           approval rule requirements (REVOKE). REVOKE status is not stored.</p>
     #   @return [String]
     class OverridePullRequestApprovalRulesInput < Struct.new(
@@ -5422,7 +5422,7 @@ module Aws::CodeCommit
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A parent commit ID is required. To view the full commit ID of a branch in a repository, use <a>GetBranch</a> or a Git command
+    # <p>A parent commit ID is required. To view the full commit ID of a branch in a repository, use <a>GetBranch</a> or a Git command 
     #         (for example, git pull or git log).</p>
     # @!attribute message
     #   <p>Any message associated with the exception.</p>
@@ -5578,7 +5578,7 @@ module Aws::CodeCommit
     #   <p>The system-generated ID of the pull request. </p>
     #   @return [String]
     # @!attribute before_commit_id
-    #   <p>The full commit ID of the commit in the source branch used to create the pull request,
+    #   <p>The full commit ID of the commit in the source branch used to create the pull request, 
     #               or in the case of an updated pull request, the full commit ID of the commit used to update the pull request.</p>
     #   @return [String]
     # @!attribute after_commit_id
@@ -5613,7 +5613,7 @@ module Aws::CodeCommit
     end
 
     # @!attribute in_reply_to
-    #   <p>The system-generated ID of the comment to which you want to reply. To get this ID, use <a>GetCommentsForComparedCommit</a>
+    #   <p>The system-generated ID of the comment to which you want to reply. To get this ID, use <a>GetCommentsForComparedCommit</a> 
     #           or <a>GetCommentsForPullRequest</a>.</p>
     #   @return [String]
     # @!attribute client_request_token
@@ -5726,7 +5726,7 @@ module Aws::CodeCommit
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The approval cannot be applied because the user approving the pull request matches the user who created the pull request. You cannot approve a pull
+    # <p>The approval cannot be applied because the user approving the pull request matches the user who created the pull request. You cannot approve a pull 
     #         request that you created.</p>
     # @!attribute message
     #   <p>Any message associated with the exception.</p>
@@ -5977,7 +5977,7 @@ module Aws::CodeCommit
     #   <p>The content of the file, if a source file is not specified.</p>
     #   @return [String]
     # @!attribute source_file
-    #   <p>The name and full path of the file that contains the changes you want to make as part of the commit,
+    #   <p>The name and full path of the file that contains the changes you want to make as part of the commit, 
     #           if you are not providing the file content directly.</p>
     #   @return [Types::SourceFileSpecifier]
     class PutFileEntry < Struct.new(
@@ -6025,7 +6025,7 @@ module Aws::CodeCommit
     #               here.</p>
     #   @return [String]
     # @!attribute parent_commit_id
-    #   <p>The full commit ID of the head commit in the branch where you want to add or update the file. If this is an empty repository,
+    #   <p>The full commit ID of the head commit in the branch where you want to add or update the file. If this is an empty repository, 
     #               no commit ID is required. If this is not an empty repository, a commit ID is required. </p>
     #            <p>The commit ID must match the ID of the head commit at the time of the operation.
     #               Otherwise, an error occurs, and the file is not added or updated.</p>
@@ -6395,7 +6395,7 @@ module Aws::CodeCommit
 
     # <p>Information about a trigger for a repository. </p>
     #          <note>
-    #             <p>If you want to receive notifications about repository events, consider using notifications instead of
+    #             <p>If you want to receive notifications about repository events, consider using notifications instead of 
     #             triggers.  For more information, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-repository-email.html">Configuring
     #             notifications for repository events</a>.</p>
     #          </note>
@@ -6419,8 +6419,8 @@ module Aws::CodeCommit
     #   @return [Array<String>]
     # @!attribute events
     #   <p>The repository events that cause the trigger to run actions in another service, such
-    #               as sending a notification through Amazon SNS.
-    #
+    #               as sending a notification through Amazon SNS. 
+    #               
     #           </p>
     #            <note>
     #               <p>The valid value "all" cannot be used with any other values.</p>
@@ -6516,7 +6516,7 @@ module Aws::CodeCommit
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A valid Amazon Resource Name (ARN) for an CodeCommit resource is required. For a list of valid resources in CodeCommit, see
+    # <p>A valid Amazon Resource Name (ARN) for an CodeCommit resource is required. For a list of valid resources in CodeCommit, see 
     #             <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats">CodeCommit Resources and Operations</a>
     #             in the CodeCommit User Guide.</p>
     # @!attribute message
@@ -6828,7 +6828,7 @@ module Aws::CodeCommit
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The tip of the source branch in the destination repository does not match the tip of the source branch specified in your request.
+    # <p>The tip of the source branch in the destination repository does not match the tip of the source branch specified in your request. 
     #             The pull request might have been updated. Make sure that you have the latest changes.</p>
     # @!attribute message
     #   <p>Any message associated with the exception.</p>
@@ -6841,7 +6841,7 @@ module Aws::CodeCommit
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The divergence between the tips of the provided commit specifiers is too great to determine whether there might be
+    # <p>The divergence between the tips of the provided commit specifiers is too great to determine whether there might be 
     #             any merge conflicts. Locally compare the specifiers using <code>git diff</code> or a diff tool.</p>
     # @!attribute message
     #   <p>Any message associated with the exception.</p>
@@ -6979,7 +6979,7 @@ module Aws::CodeCommit
     end
 
     # @!attribute comment_id
-    #   <p>The system-generated ID of the comment you want to update. To get this ID, use <a>GetCommentsForComparedCommit</a>
+    #   <p>The system-generated ID of the comment you want to update. To get this ID, use <a>GetCommentsForComparedCommit</a> 
     #               or <a>GetCommentsForPullRequest</a>.</p>
     #   @return [String]
     # @!attribute content
@@ -7217,8 +7217,8 @@ module Aws::CodeCommit
     #   @return [String]
     # @!attribute kms_key_id
     #   <p>The ID of the encryption key. You can view the ID of an encryption key in the KMS console, or use the KMS APIs to
-    #               programmatically retrieve a key ID. For more information about acceptable values for keyID, see
-    #               <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId">KeyId</a> in the Decrypt API description in
+    #               programmatically retrieve a key ID. For more information about acceptable values for keyID, see 
+    #               <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId">KeyId</a> in the Decrypt API description in 
     #           the <i>Key Management Service API Reference</i>.</p>
     #   @return [String]
     class UpdateRepositoryEncryptionKeyInput < Struct.new(

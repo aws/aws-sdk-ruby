@@ -1190,7 +1190,7 @@ module Aws::Route53
     #   					check, Route 53 creates the health check.</p>
     #               </li>
     #            </ul>
-    #            <p> Route 53 does not store the <code>CallerReference</code> for a deleted health check indefinitely.
+    #            <p> Route 53 does not store the <code>CallerReference</code> for a deleted health check indefinitely. 
     #   			The <code>CallerReference</code> for a deleted health check will be deleted after a number of days.</p>
     #   @return [String]
     # @!attribute health_check_config
@@ -2243,10 +2243,10 @@ module Aws::Route53
     #   <p>
     #   			Specifies an Amazon Web Services Local Zone Group.
     #   		</p>
-    #            <p>A local Zone Group is usually the Local Zone code without the ending character. For example,
+    #            <p>A local Zone Group is usually the Local Zone code without the ending character. For example, 
     #   			if the Local Zone is <code>us-east-1-bue-1a</code> the Local Zone Group is <code>us-east-1-bue-1</code>.</p>
     #            <p>You can identify the Local Zones Group for a specific Local Zone by using the <a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-availability-zones.html">describe-availability-zones</a> CLI command:</p>
-    #            <p>This command returns: <code>"GroupName": "us-west-2-den-1"</code>, specifying that the Local Zone <code>us-west-2-den-1a</code>
+    #            <p>This command returns: <code>"GroupName": "us-west-2-den-1"</code>, specifying that the Local Zone <code>us-west-2-den-1a</code> 
     #   			belongs to the Local Zone Group <code>us-west-2-den-1</code>.</p>
     #   @return [String]
     # @!attribute coordinates
@@ -2256,15 +2256,15 @@ module Aws::Route53
     #   <p>
     #   			The bias increases or decreases the size of the geographic region from which Route 53 routes traffic to a resource.
     #   		</p>
-    #            <p>To use <code>Bias</code> to change the size of the geographic region, specify the
+    #            <p>To use <code>Bias</code> to change the size of the geographic region, specify the 
     #   			applicable value for the bias:</p>
     #            <ul>
     #               <li>
-    #                  <p>To expand the size of the geographic region from which Route 53 routes traffic to a resource, specify a
+    #                  <p>To expand the size of the geographic region from which Route 53 routes traffic to a resource, specify a 
     #   				positive integer from 1 to 99 for the bias. Route 53 shrinks the size of adjacent regions. </p>
     #               </li>
     #               <li>
-    #                  <p>To shrink the size of the geographic region from which Route 53 routes traffic to a resource, specify a
+    #                  <p>To shrink the size of the geographic region from which Route 53 routes traffic to a resource, specify a 
     #   				negative bias of -1 to -99. Route 53 expands the size of adjacent regions. </p>
     #               </li>
     #            </ul>
@@ -3692,8 +3692,8 @@ module Aws::Route53
     # 					resource policy to grant permissions for the KMS key.</p>
     #             </li>
     #             <li>
-    #                <p>The Key management service (KMS) key you specified is marked as
-    # 				disabled for the log group associated with query log. Update or provide
+    #                <p>The Key management service (KMS) key you specified is marked as 
+    # 				disabled for the log group associated with query log. Update or provide 
     # 				a resource policy to grant permissions for the KMS key.</p>
     #             </li>
     #          </ul>
@@ -7030,7 +7030,7 @@ module Aws::Route53
     #   			to the domain that you specify in <code>FullyQualifiedDomainName</code> at the interval
     #   			you specify in <code>RequestInterval</code>. Using an IPv4 address that is returned by
     #   			DNS, Route 53 then checks the health of the endpoint.</p>
-    #            <p>If you don't specify a value for <code>IPAddress</code>, you can’t update the health check to remove the <code>FullyQualifiedDomainName</code>; if you don’t specify a value for <code>IPAddress</code> on creation, a
+    #            <p>If you don't specify a value for <code>IPAddress</code>, you can’t update the health check to remove the <code>FullyQualifiedDomainName</code>; if you don’t specify a value for <code>IPAddress</code> on creation, a 
     #   			<code>FullyQualifiedDomainName</code> is required.</p>
     #            <note>
     #               <p>If you don't specify a value for <code>IPAddress</code>, Route 53 uses only IPv4

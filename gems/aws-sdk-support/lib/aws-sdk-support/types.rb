@@ -531,23 +531,23 @@ module Aws::Support
     #          <ul>
     #             <li>
     #                <p>
-    #                   <b>datesWithoutSupport</b> -
-    #                     A JSON-formatted list containing date and time ranges for periods
+    #                   <b>datesWithoutSupport</b> - 
+    #                     A JSON-formatted list containing date and time ranges for periods 
     #                     without support in UTC time. Date and time format is RFC 3339 : 'yyyy-MM-dd'T'HH:mm:ss.SSSZZ'.
     #                     </p>
     #             </li>
     #             <li>
     #                <p>
-    #                   <b>supportedHours</b> -
-    #                     A JSON-formatted list containing time ranges when support are available.
+    #                   <b>supportedHours</b> - 
+    #                     A JSON-formatted list containing time ranges when support are available. 
     #                     Time format is RFC 3339 : 'HH:mm:ss.SSS'.
     #                     </p>
     #             </li>
     #             <li>
     #                <p>
-    #                   <b>type</b> -
+    #                   <b>type</b> - 
     #                    A string value indicating the communication type that the aforementioned rules apply to. At the moment
-    #                    the type value can assume one of 3 values at the moment <code>chat</code>, <code>web</code> and
+    #                    the type value can assume one of 3 values at the moment <code>chat</code>, <code>web</code> and 
     #                    <code>call</code>.
     #                     </p>
     #             </li>
@@ -1024,7 +1024,7 @@ module Aws::Support
     #   @return [String]
     # @!attribute communication_types
     #   <p>
-    #           A JSON-formatted array that contains the available communication type options, along with the available support
+    #           A JSON-formatted array that contains the available communication type options, along with the available support 
     #           timeframes for the given inputs.
     #           </p>
     #   @return [Array<Types::CommunicationTypeOptions>]

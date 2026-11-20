@@ -937,7 +937,7 @@ module Aws::EMR
     #   <p>The persistent application user interface identifier.</p>
     #   @return [String]
     # @!attribute runtime_role_enabled_cluster
-    #   <p>Represents if the EMR on EC2 cluster that the persisent application user interface is created for is a runtime role
+    #   <p>Represents if the EMR on EC2 cluster that the persisent application user interface is created for is a runtime role 
     #            enabled cluster or not.</p>
     #   @return [Boolean]
     class CreatePersistentAppUIOutput < Struct.new(
@@ -1497,7 +1497,7 @@ module Aws::EMR
     #            instance.</p>
     #   @return [Array<Types::EbsBlockDeviceConfig>]
     # @!attribute ebs_optimized
-    #   <p>Indicates whether an Amazon EBS volume is EBS-optimized. The default is false. You should explicitly set this value to true to enable the Amazon EBS-optimized setting
+    #   <p>Indicates whether an Amazon EBS volume is EBS-optimized. The default is false. You should explicitly set this value to true to enable the Amazon EBS-optimized setting 
     #            for an EC2 instance.</p>
     #   @return [Boolean]
     class EbsConfiguration < Struct.new(
@@ -1817,7 +1817,7 @@ module Aws::EMR
     #   <p>Determines if the user interface presigned URL is for a dry run.</p>
     #   @return [Boolean]
     # @!attribute execution_role_arn
-    #   <p>The execution role ARN associated with the cluster's application user interface
+    #   <p>The execution role ARN associated with the cluster's application user interface 
     #            presigned URL.</p>
     #   @return [String]
     class GetOnClusterAppUIPresignedURLInput < Struct.new(
@@ -2926,7 +2926,7 @@ module Aws::EMR
     #   <p>The custom AMI ID to use for the instance type.</p>
     #   @return [String]
     # @!attribute priority
-    #   <p>The priority at which Amazon EMR launches the Amazon EC2 instances with this instance type.
+    #   <p>The priority at which Amazon EMR launches the Amazon EC2 instances with this instance type. 
     #            Priority starts at 0, which is the highest priority. Amazon EMR considers the highest priority first.</p>
     #   @return [Float]
     class InstanceTypeConfig < Struct.new(
@@ -2985,7 +2985,7 @@ module Aws::EMR
     #   <p>The custom AMI ID to use for the instance type.</p>
     #   @return [String]
     # @!attribute priority
-    #   <p>The priority at which Amazon EMR launches the Amazon EC2 instances with this instance type.
+    #   <p>The priority at which Amazon EMR launches the Amazon EC2 instances with this instance type. 
     #            Priority starts at 0, which is the highest priority. Amazon EMR considers the highest priority first.</p>
     #   @return [Float]
     class InstanceTypeSpecification < Struct.new(
@@ -3974,7 +3974,7 @@ module Aws::EMR
     #            configuration.</p>
     #   @return [Types::ComputeLimits]
     # @!attribute utilization_performance_index
-    #   <p>An integer value that represents an advanced scaling strategy. Setting a higher value optimizes for performance. Setting a lower value optimizes for resource conservation. Setting the value
+    #   <p>An integer value that represents an advanced scaling strategy. Setting a higher value optimizes for performance. Setting a lower value optimizes for resource conservation. Setting the value 
     #            to 50 balances performance and resource conservation. Possible values are 1, 25, 50, 75, and 100.</p>
     #   @return [Integer]
     # @!attribute scaling_strategy
@@ -4503,13 +4503,13 @@ module Aws::EMR
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Holds persistent application user interface information. Applications installed on the Amazon EMR cluster publish user interfaces as
+    # <p>Holds persistent application user interface information. Applications installed on the Amazon EMR cluster publish user interfaces as 
     #          web sites to monitor cluster activity.</p>
     # @!attribute persistent_app_ui_id
     #   <p>The identifier for the persistent application user interface object.</p>
     #   @return [String]
     # @!attribute persistent_app_ui_type_list
-    #   <p>The type list for the persistent application user interface object. Valid values
+    #   <p>The type list for the persistent application user interface object. Valid values 
     #            include SHS, YTS, or TEZ.</p>
     #   @return [Array<String>]
     # @!attribute persistent_app_ui_status
@@ -5179,9 +5179,9 @@ module Aws::EMR
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The Amazon S3 configuration for monitoring log publishing. You can configure your step to send log information
-    #          to Amazon S3. When it's specified, it takes precedence over the cluster's logging configuration. If you don't specify this
-    #          configuration entirely, or omit individual fields, EMR falls back to cluster-level
+    # <p>The Amazon S3 configuration for monitoring log publishing. You can configure your step to send log information 
+    #          to Amazon S3. When it's specified, it takes precedence over the cluster's logging configuration. If you don't specify this 
+    #          configuration entirely, or omit individual fields, EMR falls back to cluster-level 
     #          logging behavior.</p>
     # @!attribute log_uri
     #   <p>The Amazon S3 destination URI for log publishing.</p>
@@ -5563,8 +5563,8 @@ module Aws::EMR
     end
 
     # @!attribute job_flow_ids
-    #   <p>A list of strings that uniquely identify the clusters to protect. This identifier is returned by
-    #            <a href="https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html">RunJobFlow</a> and can also
+    #   <p>A list of strings that uniquely identify the clusters to protect. This identifier is returned by 
+    #            <a href="https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html">RunJobFlow</a> and can also 
     #            be obtained from <a href="https://docs.aws.amazon.com/emr/latest/APIReference/API_DescribeJobFlows.html">DescribeJobFlows</a>.</p>
     #   @return [Array<String>]
     # @!attribute keep_job_flow_alive_when_no_steps
@@ -5598,8 +5598,8 @@ module Aws::EMR
     end
 
     # @!attribute job_flow_ids
-    #   <p>The list of strings that uniquely identify the clusters for which to turn on
-    #            unhealthy node replacement. You can get these identifiers by running the
+    #   <p>The list of strings that uniquely identify the clusters for which to turn on 
+    #            unhealthy node replacement. You can get these identifiers by running the 
     #            <a>RunJobFlow</a> or the <a>DescribeJobFlows</a> operations.</p>
     #   @return [Array<String>]
     # @!attribute unhealthy_node_replacement
@@ -5753,8 +5753,8 @@ module Aws::EMR
     #            </note>
     #   @return [Integer]
     # @!attribute allocation_strategy
-    #   <p>Specifies one of the following strategies to launch Spot Instance fleets:
-    #            <code>capacity-optimized</code>, <code>price-capacity-optimized</code>, <code>lowest-price</code>, or
+    #   <p>Specifies one of the following strategies to launch Spot Instance fleets: 
+    #            <code>capacity-optimized</code>, <code>price-capacity-optimized</code>, <code>lowest-price</code>, or  
     #            <code>diversified</code>, and <code>capacity-optimized-prioritized</code>. For more information on the provisioning strategies, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-allocation-strategy.html">Allocation strategies for Spot Instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
     #            <note>
     #               <p>When you launch a Spot Instance fleet with the old console, it automatically launches with the <code>capacity-optimized</code> strategy. You can't change the allocation strategy from the old console.</p>
@@ -6104,8 +6104,8 @@ module Aws::EMR
 
     # <p>Object that holds configuration properties for logging.</p>
     # @!attribute s3_monitoring_configuration
-    #   <p>The Amazon S3 configuration for monitoring log publishing. You can configure your step to send log information
-    #            to Amazon S3. When it's specified, it takes precedence over the cluster's logging configuration. If you don't specify this
+    #   <p>The Amazon S3 configuration for monitoring log publishing. You can configure your step to send log information 
+    #            to Amazon S3. When it's specified, it takes precedence over the cluster's logging configuration. If you don't specify this 
     #            configuration entirely, or omit individual fields, EMR falls back to cluster-level logging behavior.
     #         </p>
     #   @return [Types::S3MonitoringConfiguration]
@@ -6181,7 +6181,7 @@ module Aws::EMR
     #   <p>The Amazon S3 destination URI for log publishing.</p>
     #   @return [String]
     # @!attribute encryption_key_arn
-    #   <p>The KMS key ARN to encrypt the logs published to the given Amazon S3
+    #   <p>The KMS key ARN to encrypt the logs published to the given Amazon S3 
     #            destination.</p>
     #   @return [String]
     class StepSummary < Struct.new(
@@ -6335,7 +6335,7 @@ module Aws::EMR
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Details for an Amazon EMR Studio, including ID, Name, VPC, and Description. To fetch additional details such as subnets, IAM roles,
+    # <p>Details for an Amazon EMR Studio, including ID, Name, VPC, and Description. To fetch additional details such as subnets, IAM roles, 
     #          security groups, and tags for the Studio, use the <a>DescribeStudio</a> API.</p>
     # @!attribute studio_id
     #   <p>The ID of the Amazon EMR Studio.</p>

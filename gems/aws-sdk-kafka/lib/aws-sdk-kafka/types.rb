@@ -1182,7 +1182,7 @@ module Aws::Kafka
     #   <p>The name of the configuration.</p>
     #   @return [String]
     # @!attribute server_properties
-    #   <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded.
+    #   <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. 
     #                  When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
     #   @return [String]
     class CreateConfigurationRequest < Struct.new(
@@ -1846,7 +1846,7 @@ module Aws::Kafka
     #   <p>The revision number.</p>
     #   @return [Integer]
     # @!attribute server_properties
-    #   <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded.
+    #   <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. 
     #                  When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
     #   @return [String]
     class DescribeConfigurationRevisionResponse < Struct.new(
@@ -1945,7 +1945,7 @@ module Aws::Kafka
     #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class DescribeTopicPartitionsRequest < Struct.new(
@@ -1963,7 +1963,7 @@ module Aws::Kafka
     #   <p>The list of partition information for the topic.</p>
     #   @return [Array<Types::TopicPartitionInfo>]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of a DescribeTopicPartitions operation is truncated, the call returns NextToken in the response.
+    #   <p>The paginated results marker. When the result of a DescribeTopicPartitions operation is truncated, the call returns NextToken in the response. 
     #                  To get another batch of configurations, provide this token in your next request.</p>
     #   @return [String]
     class DescribeTopicPartitionsResponse < Struct.new(
@@ -2805,7 +2805,7 @@ module Aws::Kafka
     #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListClientVpcConnectionsRequest < Struct.new(
@@ -2822,7 +2822,7 @@ module Aws::Kafka
     #   <p>List of client VPC connections.</p>
     #   @return [Array<Types::ClientVpcConnection>]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of a ListClientVpcConnections operation is truncated, the call returns NextToken in the response.
+    #   <p>The paginated results marker. When the result of a ListClientVpcConnections operation is truncated, the call returns NextToken in the response. 
     #                  To get another batch of configurations, provide this token in your next request.</p>
     #   @return [String]
     class ListClientVpcConnectionsResponse < Struct.new(
@@ -2841,7 +2841,7 @@ module Aws::Kafka
     #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListClusterOperationsRequest < Struct.new(
@@ -2910,7 +2910,7 @@ module Aws::Kafka
     #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListClustersRequest < Struct.new(
@@ -2927,7 +2927,7 @@ module Aws::Kafka
     #   <p>Information on each of the MSK clusters in the response.</p>
     #   @return [Array<Types::ClusterInfo>]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response.
+    #   <p>The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. 
     #                  To get another batch of clusters, provide this token in your next request.</p>
     #   @return [String]
     class ListClustersResponse < Struct.new(
@@ -2949,7 +2949,7 @@ module Aws::Kafka
     #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListClustersV2Request < Struct.new(
@@ -2967,7 +2967,7 @@ module Aws::Kafka
     #   <p>Information on each of the MSK clusters in the response.</p>
     #   @return [Array<Types::Cluster>]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response.
+    #   <p>The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. 
     #                  To get another batch of clusters, provide this token in your next request.</p>
     #   @return [String]
     class ListClustersV2Response < Struct.new(
@@ -2986,7 +2986,7 @@ module Aws::Kafka
     #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListConfigurationRevisionsRequest < Struct.new(
@@ -3018,7 +3018,7 @@ module Aws::Kafka
     #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListConfigurationsRequest < Struct.new(
@@ -3034,7 +3034,7 @@ module Aws::Kafka
     #   <p>An array of MSK configurations.</p>
     #   @return [Array<Types::Configuration>]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of a ListConfigurations operation is truncated, the call returns NextToken in the response.
+    #   <p>The paginated results marker. When the result of a ListConfigurations operation is truncated, the call returns NextToken in the response. 
     #                  To get another batch of configurations, provide this token in your next request.</p>
     #   @return [String]
     class ListConfigurationsResponse < Struct.new(
@@ -3081,7 +3081,7 @@ module Aws::Kafka
     #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListNodesRequest < Struct.new(
@@ -3095,7 +3095,7 @@ module Aws::Kafka
     end
 
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of a ListNodes operation is truncated, the call returns NextToken in the response.
+    #   <p>The paginated results marker. When the result of a ListNodes operation is truncated, the call returns NextToken in the response. 
     #                  To get another batch of nodes, provide this token in your next request.</p>
     #   @return [String]
     # @!attribute node_info_list
@@ -3207,7 +3207,7 @@ module Aws::Kafka
     #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     # @!attribute topic_name_filter
@@ -3228,7 +3228,7 @@ module Aws::Kafka
     #   <p>List containing topics info.</p>
     #   @return [Array<Types::TopicInfo>]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of a ListTopics operation is truncated, the call returns NextToken in the response.
+    #   <p>The paginated results marker. When the result of a ListTopics operation is truncated, the call returns NextToken in the response. 
     #                  To get another batch of configurations, provide this token in your next request.</p>
     #   @return [String]
     class ListTopicsResponse < Struct.new(
@@ -3244,7 +3244,7 @@ module Aws::Kafka
     #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListVpcConnectionsRequest < Struct.new(
@@ -3260,7 +3260,7 @@ module Aws::Kafka
     #   <p>List of VPC connections.</p>
     #   @return [Array<Types::VpcConnection>]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of a ListClientVpcConnections operation is truncated, the call returns NextToken in the response.
+    #   <p>The paginated results marker. When the result of a ListClientVpcConnections operation is truncated, the call returns NextToken in the response. 
     #                  To get another batch of configurations, provide this token in your next request.</p>
     #   @return [String]
     class ListVpcConnectionsResponse < Struct.new(
@@ -4819,7 +4819,7 @@ module Aws::Kafka
     #   <p>The description of the configuration revision.</p>
     #   @return [String]
     # @!attribute server_properties
-    #   <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded.
+    #   <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. 
     #                  When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
     #   @return [String]
     class UpdateConfigurationRequest < Struct.new(

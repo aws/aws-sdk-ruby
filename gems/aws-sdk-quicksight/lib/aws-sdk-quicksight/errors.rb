@@ -453,13 +453,13 @@ module Aws::QuickSight
     end
 
     # <p>This error indicates that you are calling an embedding operation in Amazon Quick Sight
-    # 			without the required pricing plan on your Amazon Web Services account. Before you can use embedding
-    # 			for anonymous users, a Quick Suite administrator needs to add capacity pricing to Quick Sight. You
+    # 			without the required pricing plan on your Amazon Web Services account. Before you can use embedding 
+    # 			for anonymous users, a Quick Suite administrator needs to add capacity pricing to Quick Sight. You 
     # 		    can do this on the <b>Manage Quick Suite</b> page. </p>
-    #          <p>After capacity pricing is added, you can use the
+    #          <p>After capacity pricing is added, you can use the 
     #             <code>
     #                <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GetDashboardEmbedUrl.html">GetDashboardEmbedUrl</a>
-    #             </code> API operation with the
+    #             </code> API operation with the 
     #             <code>--identity-type ANONYMOUS</code> option.</p>
     class UnsupportedPricingPlanException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context

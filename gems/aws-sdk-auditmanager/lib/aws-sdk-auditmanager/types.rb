@@ -3220,9 +3220,9 @@ module Aws::AuditManager
     #   <p>The maximum number of results on a page or for an API request call. </p>
     #   @return [Integer]
     # @!attribute control_catalog_id
-    #   <p>A filter that narrows the list of controls to a specific resource from the Amazon Web Services
+    #   <p>A filter that narrows the list of controls to a specific resource from the Amazon Web Services 
     #            Control Catalog. </p>
-    #            <p>To use this parameter, specify the ARN of the Control Catalog resource. You can specify either
+    #            <p>To use this parameter, specify the ARN of the Control Catalog resource. You can specify either 
     #            a control domain, a control objective, or a common control. For information about how to find the ARNs
     #            for these resources, see <a href="https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListDomains.html">
     #                  <code>ListDomains</code>
@@ -3232,13 +3232,13 @@ module Aws::AuditManager
     #                  <code>ListCommonControls</code>
     #               </a>.</p>
     #            <note>
-    #               <p>You can only filter by one Control Catalog resource at a time.
-    #               Specifying multiple resource ARNs isn’t currently supported. If you want to filter by more
-    #               than one ARN, we recommend that you run the <code>ListControls</code> operation separately
+    #               <p>You can only filter by one Control Catalog resource at a time. 
+    #               Specifying multiple resource ARNs isn’t currently supported. If you want to filter by more 
+    #               than one ARN, we recommend that you run the <code>ListControls</code> operation separately 
     #               for each ARN. </p>
     #            </note>
     #            <p>Alternatively, specify <code>UNCATEGORIZED</code> to list controls that aren't
-    #            mapped to a Control Catalog resource. For example, this operation might return a list of
+    #            mapped to a Control Catalog resource. For example, this operation might return a list of 
     #            custom controls that don't belong to any control domain or control objective.</p>
     #   @return [String]
     class ListControlsRequest < Struct.new(

@@ -346,7 +346,7 @@ module Aws::MarketplaceCatalog
     #   <p>Alternative field that accepts a JSON value instead of a string for
     #                   <code>ChangeType</code> details. You can use either <code>Details</code> or
     #                   <code>DetailsDocument</code>, but not both.</p>
-    #            <p>To download the "DetailsDocument" shapes, see the <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python">Python</a>
+    #            <p>To download the "DetailsDocument" shapes, see the <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python">Python</a> 
     #               and <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main">Java</a> shapes on GitHub.</p>
     #   @return [JSON]
     # @!attribute change_name
@@ -428,7 +428,7 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     # @!attribute details_document
     #   <p>The JSON value of the details specific to the change type of the requested change.</p>
-    #            <p>To download the "DetailsDocument" shapes, see the <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python">Python</a>
+    #            <p>To download the "DetailsDocument" shapes, see the <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python">Python</a> 
     #               and <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main">Java</a> shapes on GitHub.</p>
     #   @return [JSON]
     # @!attribute error_detail_list
@@ -981,7 +981,7 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     # @!attribute details_document
     #   <p>The JSON value of the details specific to the entity.</p>
-    #            <p>To download "DetailsDocument" shapes, see the <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python">Python</a>
+    #            <p>To download "DetailsDocument" shapes, see the <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python">Python</a> 
     #               and <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main">Java</a> shapes on GitHub.</p>
     #   @return [JSON]
     class DescribeEntityResponse < Struct.new(
@@ -1150,7 +1150,7 @@ module Aws::MarketplaceCatalog
     #   <p>A filter for Resale Authorizations.</p>
     #   @return [Types::ResaleAuthorizationFilters]
     # @!attribute machine_learning_product_filters
-    #   <p>The filters that you can use with the ListEntities operation to filter machine learning products.
+    #   <p>The filters that you can use with the ListEntities operation to filter machine learning products. 
     #               You can filter by <code>EntityId</code>, <code>astModifiedDate</code>, <code>ProductTitle</code>, and <code>Visibility</code>.</p>
     #   @return [Types::MachineLearningProductFilters]
     # @!attribute offer_set_filters
@@ -1621,7 +1621,7 @@ module Aws::MarketplaceCatalog
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The filters that you can use with the ListEntities operation to filter machine learning products.
+    # <p>The filters that you can use with the ListEntities operation to filter machine learning products. 
     #             You can filter by <code>EntityId</code>, <code>astModifiedDate</code>, <code>ProductTitle</code>, and <code>Visibility</code>.</p>
     # @!attribute entity_id
     #   <p>Filter machine learning products by their entity IDs.</p>

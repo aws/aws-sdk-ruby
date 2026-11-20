@@ -34,9 +34,9 @@ module Aws::TranscribeStreaming
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>One or more arguments to the <code>StartStreamTranscription</code>,
-    #       <code>StartMedicalStreamTranscription</code>, or <code>StartCallAnalyticsStreamTranscription</code>
-    #       operation was not valid. For example, <code>MediaEncoding</code> or <code>LanguageCode</code>
+    # <p>One or more arguments to the <code>StartStreamTranscription</code>, 
+    #       <code>StartMedicalStreamTranscription</code>, or <code>StartCallAnalyticsStreamTranscription</code> 
+    #       operation was not valid. For example, <code>MediaEncoding</code> or <code>LanguageCode</code> 
     #       used unsupported values. Check the specified parameters and try your request again.</p>
     class BadRequestException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -63,7 +63,7 @@ module Aws::TranscribeStreaming
       end
     end
 
-    # <p>A problem occurred while processing the audio. Amazon Transcribe terminated
+    # <p>A problem occurred while processing the audio. Amazon Transcribe terminated 
     #       processing.</p>
     class InternalFailureException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context

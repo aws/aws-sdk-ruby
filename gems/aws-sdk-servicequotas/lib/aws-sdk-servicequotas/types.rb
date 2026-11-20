@@ -62,11 +62,11 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute service_code
-    #   <p>Specifies the service identifier. To find the service code value
+    #   <p>Specifies the service identifier. To find the service code value 
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     #   @return [String]
     # @!attribute quota_code
-    #   <p>Specifies the quota identifier. To find the quota code for a specific
+    #   <p>Specifies the quota identifier. To find the quota code for a specific 
     #                quota, use the <a>ListServiceQuotas</a> operation, and look for the
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     #   @return [String]
@@ -155,11 +155,11 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute service_code
-    #   <p>Specifies the service identifier. To find the service code value
+    #   <p>Specifies the service identifier. To find the service code value 
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     #   @return [String]
     # @!attribute quota_code
-    #   <p>Specifies the quota identifier. To find the quota code for a specific
+    #   <p>Specifies the quota identifier. To find the quota code for a specific 
     #                quota, use the <a>ListServiceQuotas</a> operation, and look for the
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     #   @return [String]
@@ -242,15 +242,15 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute report_id
-    #   <p>The unique identifier for the quota utilization report. This identifier is returned by
+    #   <p>The unique identifier for the quota utilization report. This identifier is returned by 
     #               the <code>StartQuotaUtilizationReport</code> operation.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>A token that indicates the next page of results to retrieve. This token is returned in
+    #   <p>A token that indicates the next page of results to retrieve. This token is returned in 
     #               the response when there are more results available. Omit this parameter for the first request.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of results to return per page. The default value is 1,000 and the
+    #   <p>The maximum number of results to return per page. The default value is 1,000 and the 
     #               maximum allowed value is 1,000.</p>
     #   @return [Integer]
     class GetQuotaUtilizationReportRequest < Struct.new(
@@ -271,22 +271,22 @@ module Aws::ServiceQuotas
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>PENDING</code> - The report generation is in progress. Retry this operation
+    #                     <code>PENDING</code> - The report generation is in progress. Retry this operation 
     #                       after a few seconds.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>IN_PROGRESS</code> - The report is being processed. Continue polling until
+    #                     <code>IN_PROGRESS</code> - The report is being processed. Continue polling until 
     #                       the status changes to <code>COMPLETED</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>COMPLETED</code> - The report is ready and quota utilization data is available
+    #                     <code>COMPLETED</code> - The report is ready and quota utilization data is available 
     #                       in the response.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>FAILED</code> - The report generation failed. Check the <code>ErrorCode</code>
+    #                     <code>FAILED</code> - The report generation failed. Check the <code>ErrorCode</code> 
     #                       and <code>ErrorMessage</code> fields for details.</p>
     #               </li>
     #            </ul>
@@ -298,22 +298,22 @@ module Aws::ServiceQuotas
     #   <p>The total number of quotas included in the report across all pages.</p>
     #   @return [Integer]
     # @!attribute quotas
-    #   <p>A list of quota utilization records, sorted by utilization percentage in descending order.
-    #               Each record includes the quota code, service code, service name, quota name, namespace,
-    #               utilization percentage, default value, applied value, and whether the quota is adjustable.
+    #   <p>A list of quota utilization records, sorted by utilization percentage in descending order. 
+    #               Each record includes the quota code, service code, service name, quota name, namespace, 
+    #               utilization percentage, default value, applied value, and whether the quota is adjustable. 
     #               Up to 1,000 records are returned per page.</p>
     #   @return [Array<Types::QuotaUtilizationInfo>]
     # @!attribute next_token
-    #   <p>A token that indicates more results are available. Include this token in the next request
-    #               to retrieve the next page of results. If this field is not present, you have retrieved all
+    #   <p>A token that indicates more results are available. Include this token in the next request 
+    #               to retrieve the next page of results. If this field is not present, you have retrieved all 
     #               available results.</p>
     #   @return [String]
     # @!attribute error_code
-    #   <p>An error code indicating the reason for failure when the report status is <code>FAILED</code>.
+    #   <p>An error code indicating the reason for failure when the report status is <code>FAILED</code>. 
     #               This field is only present when the status is <code>FAILED</code>.</p>
     #   @return [String]
     # @!attribute error_message
-    #   <p>A detailed error message describing the failure when the report status is <code>FAILED</code>.
+    #   <p>A detailed error message describing the failure when the report status is <code>FAILED</code>. 
     #               This field is only present when the status is <code>FAILED</code>.</p>
     #   @return [String]
     class GetQuotaUtilizationReportResponse < Struct.new(
@@ -354,11 +354,11 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute service_code
-    #   <p>Specifies the service identifier. To find the service code value
+    #   <p>Specifies the service identifier. To find the service code value 
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     #   @return [String]
     # @!attribute quota_code
-    #   <p>Specifies the quota identifier. To find the quota code for a specific
+    #   <p>Specifies the quota identifier. To find the quota code for a specific 
     #                quota, use the <a>ListServiceQuotas</a> operation, and look for the
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     #   @return [String]
@@ -387,11 +387,11 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute service_code
-    #   <p>Specifies the service identifier. To find the service code value
+    #   <p>Specifies the service identifier. To find the service code value 
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     #   @return [String]
     # @!attribute quota_code
-    #   <p>Specifies the quota identifier. To find the quota code for a specific
+    #   <p>Specifies the quota identifier. To find the quota code for a specific 
     #                quota, use the <a>ListServiceQuotas</a> operation, and look for the
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     #   @return [String]
@@ -453,26 +453,26 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute service_code
-    #   <p>Specifies the service identifier. To find the service code value
+    #   <p>Specifies the service identifier. To find the service code value 
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>Specifies a value for receiving additional results after you
-    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code>
-    #       response indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>Specifies a value for receiving additional results after you 
+    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> 
+    #       response indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Specifies the maximum number of results that you want included on each
-    #       page of the response. If you do not include this parameter, it defaults to a value appropriate
-    #       to the operation. If additional items exist beyond those included in the current response, the
-    #       <code>NextToken</code> response element is present and has a value (is not null). Include that
-    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get
+    #   <p>Specifies the maximum number of results that you want included on each 
+    #       page of the response. If you do not include this parameter, it defaults to a value appropriate 
+    #       to the operation. If additional items exist beyond those included in the current response, the 
+    #       <code>NextToken</code> response element is present and has a value (is not null). Include that 
+    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get 
     #       the next part of the results.</p>
     #            <note>
-    #               <p>An API operation can return fewer results than the maximum even when there are
-    #       more results available. You should check <code>NextToken</code> after every operation to ensure
+    #               <p>An API operation can return fewer results than the maximum even when there are 
+    #       more results available. You should check <code>NextToken</code> after every operation to ensure 
     #       that you receive all of the results.</p>
     #            </note>
     #   @return [Integer]
@@ -487,9 +487,9 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     # @!attribute quotas
@@ -505,11 +505,11 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute service_code
-    #   <p>Specifies the service identifier. To find the service code value
+    #   <p>Specifies the service identifier. To find the service code value 
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     #   @return [String]
     # @!attribute quota_code
-    #   <p>Specifies the quota identifier. To find the quota code for a specific
+    #   <p>Specifies the quota identifier. To find the quota code for a specific 
     #                quota, use the <a>ListServiceQuotas</a> operation, and look for the
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     #   @return [String]
@@ -518,22 +518,22 @@ module Aws::ServiceQuotas
     #               status.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>Specifies a value for receiving additional results after you
-    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code>
-    #       response indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>Specifies a value for receiving additional results after you 
+    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> 
+    #       response indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Specifies the maximum number of results that you want included on each
-    #       page of the response. If you do not include this parameter, it defaults to a value appropriate
-    #       to the operation. If additional items exist beyond those included in the current response, the
-    #       <code>NextToken</code> response element is present and has a value (is not null). Include that
-    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get
+    #   <p>Specifies the maximum number of results that you want included on each 
+    #       page of the response. If you do not include this parameter, it defaults to a value appropriate 
+    #       to the operation. If additional items exist beyond those included in the current response, the 
+    #       <code>NextToken</code> response element is present and has a value (is not null). Include that 
+    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get 
     #       the next part of the results.</p>
     #            <note>
-    #               <p>An API operation can return fewer results than the maximum even when there are
-    #       more results available. You should check <code>NextToken</code> after every operation to ensure
+    #               <p>An API operation can return fewer results than the maximum even when there are 
+    #       more results available. You should check <code>NextToken</code> after every operation to ensure 
     #       that you receive all of the results.</p>
     #            </note>
     #   @return [Integer]
@@ -554,9 +554,9 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     # @!attribute requested_quotas
@@ -572,7 +572,7 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute service_code
-    #   <p>Specifies the service identifier. To find the service code value
+    #   <p>Specifies the service identifier. To find the service code value 
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     #   @return [String]
     # @!attribute status
@@ -580,22 +580,22 @@ module Aws::ServiceQuotas
     #               status.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>Specifies a value for receiving additional results after you
-    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code>
-    #       response indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>Specifies a value for receiving additional results after you 
+    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> 
+    #       response indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Specifies the maximum number of results that you want included on each
-    #       page of the response. If you do not include this parameter, it defaults to a value appropriate
-    #       to the operation. If additional items exist beyond those included in the current response, the
-    #       <code>NextToken</code> response element is present and has a value (is not null). Include that
-    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get
+    #   <p>Specifies the maximum number of results that you want included on each 
+    #       page of the response. If you do not include this parameter, it defaults to a value appropriate 
+    #       to the operation. If additional items exist beyond those included in the current response, the 
+    #       <code>NextToken</code> response element is present and has a value (is not null). Include that 
+    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get 
     #       the next part of the results.</p>
     #            <note>
-    #               <p>An API operation can return fewer results than the maximum even when there are
-    #       more results available. You should check <code>NextToken</code> after every operation to ensure
+    #               <p>An API operation can return fewer results than the maximum even when there are 
+    #       more results available. You should check <code>NextToken</code> after every operation to ensure 
     #       that you receive all of the results.</p>
     #            </note>
     #   @return [Integer]
@@ -615,9 +615,9 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     # @!attribute requested_quotas
@@ -633,29 +633,29 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute service_code
-    #   <p>Specifies the service identifier. To find the service code value
+    #   <p>Specifies the service identifier. To find the service code value 
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     #   @return [String]
     # @!attribute aws_region
     #   <p>Specifies the Amazon Web Services Region for which you made the request.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>Specifies a value for receiving additional results after you
-    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code>
-    #       response indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>Specifies a value for receiving additional results after you 
+    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> 
+    #       response indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Specifies the maximum number of results that you want included on each
-    #       page of the response. If you do not include this parameter, it defaults to a value appropriate
-    #       to the operation. If additional items exist beyond those included in the current response, the
-    #       <code>NextToken</code> response element is present and has a value (is not null). Include that
-    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get
+    #   <p>Specifies the maximum number of results that you want included on each 
+    #       page of the response. If you do not include this parameter, it defaults to a value appropriate 
+    #       to the operation. If additional items exist beyond those included in the current response, the 
+    #       <code>NextToken</code> response element is present and has a value (is not null). Include that 
+    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get 
     #       the next part of the results.</p>
     #            <note>
-    #               <p>An API operation can return fewer results than the maximum even when there are
-    #       more results available. You should check <code>NextToken</code> after every operation to ensure
+    #               <p>An API operation can return fewer results than the maximum even when there are 
+    #       more results available. You should check <code>NextToken</code> after every operation to ensure 
     #       that you receive all of the results.</p>
     #            </note>
     #   @return [Integer]
@@ -674,9 +674,9 @@ module Aws::ServiceQuotas
     #   <p>Information about the quota increase requests.</p>
     #   @return [Array<Types::ServiceQuotaIncreaseRequestInTemplate>]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListServiceQuotaIncreaseRequestsInTemplateResponse < Struct.new(
@@ -689,31 +689,31 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute service_code
-    #   <p>Specifies the service identifier. To find the service code value
+    #   <p>Specifies the service identifier. To find the service code value 
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>Specifies a value for receiving additional results after you
-    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code>
-    #       response indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>Specifies a value for receiving additional results after you 
+    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> 
+    #       response indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Specifies the maximum number of results that you want included on each
-    #       page of the response. If you do not include this parameter, it defaults to a value appropriate
-    #       to the operation. If additional items exist beyond those included in the current response, the
-    #       <code>NextToken</code> response element is present and has a value (is not null). Include that
-    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get
+    #   <p>Specifies the maximum number of results that you want included on each 
+    #       page of the response. If you do not include this parameter, it defaults to a value appropriate 
+    #       to the operation. If additional items exist beyond those included in the current response, the 
+    #       <code>NextToken</code> response element is present and has a value (is not null). Include that 
+    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get 
     #       the next part of the results.</p>
     #            <note>
-    #               <p>An API operation can return fewer results than the maximum even when there are
-    #       more results available. You should check <code>NextToken</code> after every operation to ensure
+    #               <p>An API operation can return fewer results than the maximum even when there are 
+    #       more results available. You should check <code>NextToken</code> after every operation to ensure 
     #       that you receive all of the results.</p>
     #            </note>
     #   @return [Integer]
     # @!attribute quota_code
-    #   <p>Specifies the quota identifier. To find the quota code for a specific
+    #   <p>Specifies the quota identifier. To find the quota code for a specific 
     #                quota, use the <a>ListServiceQuotas</a> operation, and look for the
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     #   @return [String]
@@ -733,9 +733,9 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     # @!attribute quotas
@@ -751,22 +751,22 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute next_token
-    #   <p>Specifies a value for receiving additional results after you
-    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code>
-    #       response indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>Specifies a value for receiving additional results after you 
+    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> 
+    #       response indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Specifies the maximum number of results that you want included on each
-    #       page of the response. If you do not include this parameter, it defaults to a value appropriate
-    #       to the operation. If additional items exist beyond those included in the current response, the
-    #       <code>NextToken</code> response element is present and has a value (is not null). Include that
-    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get
+    #   <p>Specifies the maximum number of results that you want included on each 
+    #       page of the response. If you do not include this parameter, it defaults to a value appropriate 
+    #       to the operation. If additional items exist beyond those included in the current response, the 
+    #       <code>NextToken</code> response element is present and has a value (is not null). Include that 
+    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get 
     #       the next part of the results.</p>
     #            <note>
-    #               <p>An API operation can return fewer results than the maximum even when there are
-    #       more results available. You should check <code>NextToken</code> after every operation to ensure
+    #               <p>An API operation can return fewer results than the maximum even when there are 
+    #       more results available. You should check <code>NextToken</code> after every operation to ensure 
     #       that you receive all of the results.</p>
     #            </note>
     #   @return [Integer]
@@ -780,9 +780,9 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     # @!attribute services
@@ -881,12 +881,12 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute quota_code
-    #   <p>Specifies the quota identifier. To find the quota code for a specific
+    #   <p>Specifies the quota identifier. To find the quota code for a specific 
     #                quota, use the <a>ListServiceQuotas</a> operation, and look for the
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     #   @return [String]
     # @!attribute service_code
-    #   <p>Specifies the service identifier. To find the service code value
+    #   <p>Specifies the service identifier. To find the service code value 
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     #   @return [String]
     # @!attribute aws_region
@@ -1000,7 +1000,7 @@ module Aws::ServiceQuotas
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about a quota's utilization, including the quota code, service information,
+    # <p>Information about a quota's utilization, including the quota code, service information, 
     #             current usage, and applied limits.</p>
     # @!attribute quota_code
     #   <p>The quota identifier.</p>
@@ -1015,14 +1015,14 @@ module Aws::ServiceQuotas
     #   <p>The namespace of the metric used to track quota usage.</p>
     #   @return [String]
     # @!attribute utilization
-    #   <p>The utilization percentage of the quota, calculated as (current usage / applied value) × 100.
+    #   <p>The utilization percentage of the quota, calculated as (current usage / applied value) × 100. 
     #               Values range from 0.0 to 100.0 or higher if usage exceeds the quota limit.</p>
     #   @return [Float]
     # @!attribute default_value
     #   <p>The default value of the quota.</p>
     #   @return [Float]
     # @!attribute applied_value
-    #   <p>The applied value of the quota, which may be higher than the default value if a quota
+    #   <p>The applied value of the quota, which may be higher than the default value if a quota 
     #               increase has been requested and approved.</p>
     #   @return [Float]
     # @!attribute service_name
@@ -1053,11 +1053,11 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute service_code
-    #   <p>Specifies the service identifier. To find the service code value
+    #   <p>Specifies the service identifier. To find the service code value 
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     #   @return [String]
     # @!attribute quota_code
-    #   <p>Specifies the quota identifier. To find the quota code for a specific
+    #   <p>Specifies the quota identifier. To find the quota code for a specific 
     #                quota, use the <a>ListServiceQuotas</a> operation, and look for the
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     #   @return [String]
@@ -1069,9 +1069,9 @@ module Aws::ServiceQuotas
     #   @return [String]
     # @!attribute support_case_allowed
     #   <p>Specifies if an Amazon Web Services Support case can be opened for the quota increase request. This parameter is optional. </p>
-    #            <p>By default, this flag is set to <code>True</code> and Amazon Web Services may create a support case for some quota increase requests.
-    #               You can set this flag to <code>False</code>
-    #              if you do not want a support case created when you request a quota increase. If you set the flag to <code>False</code>,
+    #            <p>By default, this flag is set to <code>True</code> and Amazon Web Services may create a support case for some quota increase requests. 
+    #               You can set this flag to <code>False</code> 
+    #              if you do not want a support case created when you request a quota increase. If you set the flag to <code>False</code>, 
     #               Amazon Web Services does not open a support case and updates the request status to <code>Not approved</code>. </p>
     #   @return [Boolean]
     class RequestServiceQuotaIncreaseRequest < Struct.new(
@@ -1106,7 +1106,7 @@ module Aws::ServiceQuotas
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>AutomaticManagement</code> - The request was automatically created by
+    #                     <code>AutomaticManagement</code> - The request was automatically created by 
     #                       Service Quotas Automatic Management when quota utilization approached the limit.</p>
     #               </li>
     #            </ul>
@@ -1116,14 +1116,14 @@ module Aws::ServiceQuotas
     #   <p>The case ID.</p>
     #   @return [String]
     # @!attribute service_code
-    #   <p>Specifies the service identifier. To find the service code value
+    #   <p>Specifies the service identifier. To find the service code value 
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     #   @return [String]
     # @!attribute service_name
     #   <p>Specifies the service name.</p>
     #   @return [String]
     # @!attribute quota_code
-    #   <p>Specifies the quota identifier. To find the quota code for a specific
+    #   <p>Specifies the quota identifier. To find the quota code for a specific 
     #                quota, use the <a>ListServiceQuotas</a> operation, and look for the
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     #   @return [String]
@@ -1249,7 +1249,7 @@ module Aws::ServiceQuotas
 
     # <p>Information about an Amazon Web Services service.</p>
     # @!attribute service_code
-    #   <p>Specifies the service identifier. To find the service code value
+    #   <p>Specifies the service identifier. To find the service code value 
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     #   @return [String]
     # @!attribute service_name
@@ -1266,7 +1266,7 @@ module Aws::ServiceQuotas
 
     # <p>Information about a quota.</p>
     # @!attribute service_code
-    #   <p>Specifies the service identifier. To find the service code value
+    #   <p>Specifies the service identifier. To find the service code value 
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     #   @return [String]
     # @!attribute service_name
@@ -1276,7 +1276,7 @@ module Aws::ServiceQuotas
     #   <p>The Amazon Resource Name (ARN) of the quota.</p>
     #   @return [String]
     # @!attribute quota_code
-    #   <p>Specifies the quota identifier. To find the quota code for a specific
+    #   <p>Specifies the quota identifier. To find the quota code for a specific 
     #                quota, use the <a>ListServiceQuotas</a> operation, and look for the
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     #   @return [String]
@@ -1343,14 +1343,14 @@ module Aws::ServiceQuotas
 
     # <p>Information about a quota increase request.</p>
     # @!attribute service_code
-    #   <p>Specifies the service identifier. To find the service code value
+    #   <p>Specifies the service identifier. To find the service code value 
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     #   @return [String]
     # @!attribute service_name
     #   <p>Specifies the service name.</p>
     #   @return [String]
     # @!attribute quota_code
-    #   <p>Specifies the quota identifier. To find the quota code for a specific
+    #   <p>Specifies the quota identifier. To find the quota code for a specific 
     #                quota, use the <a>ListServiceQuotas</a> operation, and look for the
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     #   @return [String]
@@ -1442,16 +1442,16 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute report_id
-    #   <p>A unique identifier for the quota utilization report. Use this identifier with the
+    #   <p>A unique identifier for the quota utilization report. Use this identifier with the 
     #               <code>GetQuotaUtilizationReport</code> operation to retrieve the report results.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The current status of the report generation. The status will be <code>PENDING</code>
+    #   <p>The current status of the report generation. The status will be <code>PENDING</code> 
     #               when the report is first initiated.</p>
     #   @return [String]
     # @!attribute message
-    #   <p>An optional message providing additional information about the report generation status.
-    #               This field may contain details about the report initiation or indicate if an existing recent
+    #   <p>An optional message providing additional information about the report generation status. 
+    #               This field may contain details about the report initiation or indicate if an existing recent 
     #               report is being reused.</p>
     #   @return [String]
     class StartQuotaUtilizationReportResponse < Struct.new(

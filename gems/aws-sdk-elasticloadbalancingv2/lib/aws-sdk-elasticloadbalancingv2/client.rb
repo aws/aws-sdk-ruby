@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::ElasticLoadBalancingV2
     @identifier = :elasticloadbalancingv2
 
     add_plugin(::Aws::ElasticLoadBalancingV2::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::ElasticLoadBalancingV2
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::ElasticLoadBalancingV2
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -214,7 +234,7 @@ module Aws::ElasticLoadBalancingV2
     #          <p>If the certificate in already in the certificate list, the call is successful but the
     #       certificate is not added again.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/https-listener-certificates.html">SSL
-    #         certificates</a> in the <i>Application Load Balancers Guide</i> or <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/tls-listener-certificates.html">Server
+    #         certificates</a> in the <i>Application Load Balancers Guide</i> or <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/tls-listener-certificates.html">Server 
     #         certificates</a> in the <i>Network Load Balancers Guide</i>.</p>
     # @param [Hash, Types::AddListenerCertificatesInput] params
     # @option params [String] :listener_arn
@@ -744,7 +764,7 @@ module Aws::ElasticLoadBalancingV2
     #            <p>[Application Load Balancers on Outposts] You must specify one Outpost subnet.</p>
     #            <p>[Application Load Balancers on Local Zones] You can specify subnets from one or more Local
     #         Zones.</p>
-    #            <p>[Network Load Balancers and Gateway Load Balancers] You can specify subnets from one or more
+    #            <p>[Network Load Balancers and Gateway Load Balancers] You can specify subnets from one or more 
     #         Availability Zones.</p>
     # @option params [Array<Types::SubnetMapping>] :subnet_mappings
     #   <p>The IDs of the subnets. You can specify only one subnet per Availability Zone. You
@@ -781,17 +801,17 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The type of load balancer. The default is <code>application</code>.</p>
     # @option params [String] :ip_address_type
     #   <p>The IP address type. Internal load balancers must use <code>ipv4</code>.</p>
-    #            <p>[Application Load Balancers] The possible values are <code>ipv4</code> (IPv4 addresses),
-    #         <code>dualstack</code> (IPv4 and IPv6 addresses), and <code>dualstack-without-public-ipv4</code>
+    #            <p>[Application Load Balancers] The possible values are <code>ipv4</code> (IPv4 addresses), 
+    #         <code>dualstack</code> (IPv4 and IPv6 addresses), and <code>dualstack-without-public-ipv4</code> 
     #         (public IPv6 addresses and private IPv4 and IPv6 addresses).</p>
-    #            <p>[Network Load Balancers and Gateway Load Balancers] The possible values are <code>ipv4</code>
+    #            <p>[Network Load Balancers and Gateway Load Balancers] The possible values are <code>ipv4</code> 
     #         (IPv4 addresses) and <code>dualstack</code> (IPv4 and IPv6 addresses).</p>
     # @option params [String] :customer_owned_ipv4_pool
     #   <p>[Application Load Balancers on Outposts] The ID of the customer-owned address pool (CoIP
     #         pool).</p>
     # @option params [String] :enable_prefix_for_ipv6_source_nat
-    #   <p>[Network Load Balancers with UDP listeners] Indicates whether to use an IPv6 prefix
-    #         from each subnet for source NAT. The IP address type must be <code>dualstack</code>.
+    #   <p>[Network Load Balancers with UDP listeners] Indicates whether to use an IPv6 prefix 
+    #         from each subnet for source NAT. The IP address type must be <code>dualstack</code>. 
     #         The default value is <code>off</code>.</p>
     # @option params [Types::IpamPools] :ipam_pools
     #   <p>[Application Load Balancers] The IPAM pools to use with the load balancer.</p>
@@ -982,7 +1002,7 @@ module Aws::ElasticLoadBalancingV2
     # @option params [Array<Types::Tag>] :tags
     #   <p>The tags to assign to the rule.</p>
     # @option params [Array<Types::RuleTransform>] :transforms
-    #   <p>The transforms to apply to requests that match this rule. You can add one host header rewrite transform
+    #   <p>The transforms to apply to requests that match this rule. You can add one host header rewrite transform 
     #         and one URL rewrite transform.</p>
     # @example To create a rule
     #   # This example creates a rule that forwards requests to the specified target group if the URL contains the specified pattern (for example, /img/*).
@@ -1430,29 +1450,29 @@ module Aws::ElasticLoadBalancingV2
     #         /package.service/method. The default is /Amazon Web Services.ALB/healthcheck.</p>
     # @option params [Integer] :health_check_interval_seconds
     #   <p>The approximate amount of time, in seconds, between health checks of an individual target. The range is 5-300.
-    #         If the target group protocol is TCP, TLS, UDP, TCP_UDP, QUIC, TCP_QUIC, HTTP or HTTPS, the default is 30 seconds.
-    #         If the target group protocol is GENEVE, the default is 10 seconds.
+    #         If the target group protocol is TCP, TLS, UDP, TCP_UDP, QUIC, TCP_QUIC, HTTP or HTTPS, the default is 30 seconds. 
+    #         If the target group protocol is GENEVE, the default is 10 seconds. 
     #         If the target type is <code>lambda</code>, the default is 35 seconds.</p>
     # @option params [Integer] :health_check_timeout_seconds
-    #   <p>The amount of time, in seconds, during which no response from a target means a failed
-    #         health check. The range is 2–120 seconds. For target groups with a protocol of HTTP, the
-    #         default is 6 seconds. For target groups with a protocol of TCP, TLS or HTTPS, the default
-    #         is 10 seconds. For target groups with a protocol of GENEVE, the default is 5 seconds. If
+    #   <p>The amount of time, in seconds, during which no response from a target means a failed 
+    #         health check. The range is 2–120 seconds. For target groups with a protocol of HTTP, the 
+    #         default is 6 seconds. For target groups with a protocol of TCP, TLS or HTTPS, the default 
+    #         is 10 seconds. For target groups with a protocol of GENEVE, the default is 5 seconds. If 
     #         the target type is <code>lambda</code>, the default is 30 seconds.</p>
     # @option params [Integer] :healthy_threshold_count
-    #   <p>The number of consecutive health check successes required before considering a target healthy. The range is
-    #         2-10. If the target group protocol is TCP, TCP_UDP, UDP, TLS, HTTP or HTTPS, the default is 5. For target groups
-    #         with a protocol of GENEVE, the default is 5. If the target type
+    #   <p>The number of consecutive health check successes required before considering a target healthy. The range is 
+    #         2-10. If the target group protocol is TCP, TCP_UDP, UDP, TLS, HTTP or HTTPS, the default is 5. For target groups 
+    #         with a protocol of GENEVE, the default is 5. If the target type 
     #         is <code>lambda</code>, the default is 5.</p>
     # @option params [Integer] :unhealthy_threshold_count
-    #   <p>The number of consecutive health check failures required before considering a target unhealthy. The range is
-    #         2-10. If the target group protocol is TCP, TCP_UDP, UDP, TLS, QUIC, TCP_QUIC, HTTP or HTTPS, the default is 2. For target groups
-    #         with a protocol of GENEVE, the default is 2. If the target type
+    #   <p>The number of consecutive health check failures required before considering a target unhealthy. The range is 
+    #         2-10. If the target group protocol is TCP, TCP_UDP, UDP, TLS, QUIC, TCP_QUIC, HTTP or HTTPS, the default is 2. For target groups 
+    #         with a protocol of GENEVE, the default is 2. If the target type 
     #         is <code>lambda</code>, the default is 5.</p>
     # @option params [Types::Matcher] :matcher
-    #   <p>[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful
-    #         response from a target. For target groups with a protocol of TCP, TCP_UDP, UDP, QUIC, TCP_QUIC, or TLS the range
-    #         is 200-599. For target groups with a protocol of HTTP or HTTPS, the range is 200-499. For target
+    #   <p>[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful 
+    #         response from a target. For target groups with a protocol of TCP, TCP_UDP, UDP, QUIC, TCP_QUIC, or TLS the range 
+    #         is 200-599. For target groups with a protocol of HTTP or HTTPS, the range is 200-499. For target 
     #         groups with a protocol of GENEVE, the range is 200-399.</p>
     # @option params [String] :target_type
     #   <p>The type of target that you must specify when registering targets with this target group.
@@ -1810,8 +1830,8 @@ module Aws::ElasticLoadBalancingV2
 
     # <p>Deregisters the specified targets from the specified target group. After the targets are
     #       deregistered, they no longer receive traffic from the load balancer.</p>
-    #          <p>The load balancer stops sending requests to targets that are deregistering, but uses
-    #       connection draining to ensure that in-flight traffic completes on the existing connections.
+    #          <p>The load balancer stops sending requests to targets that are deregistering, but uses 
+    #       connection draining to ensure that in-flight traffic completes on the existing connections. 
     #       This deregistration delay is configured by default but can be updated for each target group.</p>
     #          <p>For more information, see the following:</p>
     #          <ul>
@@ -3289,7 +3309,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # <p>Retrieves the ca certificate bundle.</p>
-    #          <p>This action returns a pre-signed S3 URI which is
+    #          <p>This action returns a pre-signed S3 URI which is 
     #       active for ten minutes.</p>
     # @param [Hash, Types::GetTrustStoreCaCertificatesBundleInput] params
     # @option params [String] :trust_store_arn
@@ -3312,7 +3332,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # <p>Retrieves the specified revocation file.</p>
-    #          <p>This action returns a pre-signed S3 URI which is
+    #          <p>This action returns a pre-signed S3 URI which is 
     #       active for ten minutes.</p>
     # @param [Hash, Types::GetTrustStoreRevocationContentInput] params
     # @option params [String] :trust_store_arn
@@ -3338,7 +3358,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # <p>Modifies the capacity reservation of the specified load balancer.</p>
-    #          <p>When modifying capacity reservation, you must include at least one <code>MinimumLoadBalancerCapacity</code>
+    #          <p>When modifying capacity reservation, you must include at least one <code>MinimumLoadBalancerCapacity</code> 
     #       or <code>ResetCapacityReservation</code>.</p>
     # @param [Hash, Types::ModifyCapacityReservationInput] params
     # @option params [String] :load_balancer_arn
@@ -3946,10 +3966,10 @@ module Aws::ElasticLoadBalancingV2
     # @option params [Array<Types::Action>] :actions
     #   <p>The actions.</p>
     # @option params [Array<Types::RuleTransform>] :transforms
-    #   <p>The transforms to apply to requests that match this rule. You can add one host header rewrite transform
+    #   <p>The transforms to apply to requests that match this rule. You can add one host header rewrite transform 
     #         and one URL rewrite transform. If you specify <code>Transforms</code>, you can't specify <code>ResetTransforms</code>.</p>
     # @option params [Boolean] :reset_transforms
-    #   <p>Indicates whether to remove all transforms from the rule. If you specify <code>ResetTransforms</code>,
+    #   <p>Indicates whether to remove all transforms from the rule. If you specify <code>ResetTransforms</code>, 
     #         you can't specify <code>Transforms</code>.</p>
     # @example To modify a rule
     #   # This example modifies the condition for the specified rule.
@@ -4341,9 +4361,9 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The number of consecutive health check failures required before considering the target
     #         unhealthy.</p>
     # @option params [Types::Matcher] :matcher
-    #   <p>[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful
-    #         response from a target. For target groups with a protocol of TCP, TCP_UDP, UDP or TLS the range
-    #         is 200-599. For target groups with a protocol of HTTP or HTTPS, the range is 200-499. For target
+    #   <p>[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful 
+    #         response from a target. For target groups with a protocol of TCP, TCP_UDP, UDP or TLS the range 
+    #         is 200-599. For target groups with a protocol of HTTP or HTTPS, the range is 200-499. For target 
     #         groups with a protocol of GENEVE, the range is 200-399.</p>
     # @example To modify the health check configuration for a target group
     #   # This example changes the configuration of the health checks used to evaluate the health of the targets for the specified target group.
@@ -4549,7 +4569,7 @@ module Aws::ElasticLoadBalancingV2
     #          <ul>
     #             <li>
     #                <p>
-    #                   <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-register-targets.html">Register
+    #                   <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-register-targets.html">Register 
     #           targets for your Application Load Balancer</a>
     #                </p>
     #             </li>
@@ -4727,14 +4747,14 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The Amazon Resource Name (ARN) of the load balancer.</p>
     # @option params [String] :ip_address_type
     #   <p>The IP address type. Internal load balancers must use <code>ipv4</code>.</p>
-    #            <p>[Application Load Balancers] The possible values are <code>ipv4</code> (IPv4 addresses),
-    #         <code>dualstack</code> (IPv4 and IPv6 addresses), and <code>dualstack-without-public-ipv4</code>
+    #            <p>[Application Load Balancers] The possible values are <code>ipv4</code> (IPv4 addresses), 
+    #         <code>dualstack</code> (IPv4 and IPv6 addresses), and <code>dualstack-without-public-ipv4</code> 
     #         (public IPv6 addresses and private IPv4 and IPv6 addresses).</p>
-    #            <p>Application Load Balancer authentication supports IPv4 addresses only when
-    #         connecting to an Identity Provider (IdP) or Amazon Cognito endpoint. Without a public
-    #         IPv4 address the load balancer can't complete the authentication process, resulting
+    #            <p>Application Load Balancer authentication supports IPv4 addresses only when 
+    #         connecting to an Identity Provider (IdP) or Amazon Cognito endpoint. Without a public 
+    #         IPv4 address the load balancer can't complete the authentication process, resulting 
     #         in HTTP 500 errors.</p>
-    #            <p>[Network Load Balancers and Gateway Load Balancers] The possible values are <code>ipv4</code>
+    #            <p>[Network Load Balancers and Gateway Load Balancers] The possible values are <code>ipv4</code> 
     #         (IPv4 addresses) and <code>dualstack</code> (IPv4 and IPv6 addresses).</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -4963,8 +4983,8 @@ module Aws::ElasticLoadBalancingV2
     # @option params [Array<String>] :security_groups
     #   <p>The IDs of the security groups.</p>
     # @option params [String] :enforce_security_group_inbound_rules_on_private_link_traffic
-    #   <p>Indicates whether to evaluate inbound security group rules for traffic sent to a
-    #         Network Load Balancer through Amazon Web Services PrivateLink. Applies only if the load balancer
+    #   <p>Indicates whether to evaluate inbound security group rules for traffic sent to a 
+    #         Network Load Balancer through Amazon Web Services PrivateLink. Applies only if the load balancer 
     #         has an associated security group. The default is <code>on</code>.</p>
     # @example To associate a security group with a load balancer
     #   # This example associates the specified security group with the specified load balancer.
@@ -5003,7 +5023,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # <p>Enables the Availability Zones for the specified public subnets for the specified
-    #       Application Load Balancer, Network Load Balancer or Gateway Load Balancer. The specified subnets
+    #       Application Load Balancer, Network Load Balancer or Gateway Load Balancer. The specified subnets 
     #       replace the previously enabled subnets.</p>
     # @param [Hash, Types::SetSubnetsInput] params
     # @option params [String] :load_balancer_arn
@@ -5018,7 +5038,7 @@ module Aws::ElasticLoadBalancingV2
     #         Zones.</p>
     #            <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones.</p>
     #            <p>[Gateway Load Balancers] You can specify subnets from one or more Availability Zones.
-    #         You must include all subnets that were enabled previously, with their existing configurations,
+    #         You must include all subnets that were enabled previously, with their existing configurations, 
     #         plus any additional subnets.</p>
     # @option params [Array<Types::SubnetMapping>] :subnet_mappings
     #   <p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You
@@ -5037,13 +5057,13 @@ module Aws::ElasticLoadBalancingV2
     #         Zones.</p>
     # @option params [String] :ip_address_type
     #   <p>The IP address type.</p>
-    #            <p>[Application Load Balancers] The possible values are <code>ipv4</code> (IPv4 addresses),
-    #         <code>dualstack</code> (IPv4 and IPv6 addresses), and <code>dualstack-without-public-ipv4</code>
+    #            <p>[Application Load Balancers] The possible values are <code>ipv4</code> (IPv4 addresses), 
+    #         <code>dualstack</code> (IPv4 and IPv6 addresses), and <code>dualstack-without-public-ipv4</code> 
     #         (public IPv6 addresses and private IPv4 and IPv6 addresses).</p>
-    #            <p>[Network Load Balancers and Gateway Load Balancers] The possible values are <code>ipv4</code>
+    #            <p>[Network Load Balancers and Gateway Load Balancers] The possible values are <code>ipv4</code> 
     #         (IPv4 addresses) and <code>dualstack</code> (IPv4 and IPv6 addresses).</p>
     # @option params [String] :enable_prefix_for_ipv6_source_nat
-    #   <p>[Network Load Balancers with UDP listeners] Indicates whether to use an IPv6 prefix
+    #   <p>[Network Load Balancers with UDP listeners] Indicates whether to use an IPv6 prefix 
     #         from each subnet for source NAT. The IP address type must be <code>dualstack</code>.
     #         The default value is <code>off</code>.</p>
     # @example To enable Availability Zones for a load balancer
@@ -5167,7 +5187,8 @@ module Aws::ElasticLoadBalancingV2
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

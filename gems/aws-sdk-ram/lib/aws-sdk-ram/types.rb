@@ -13,12 +13,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     #   @return [String]
@@ -37,7 +37,7 @@ module Aws::RAM
     # @!attribute client_token
     #   <p>The idempotency identifier associated with this request. If you
     #                want to repeat the same operation in an idempotent manner then you must include this
-    #                value in the <code>clientToken</code> request parameter of that later call. All other
+    #                value in the <code>clientToken</code> request parameter of that later call. All other 
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class AcceptResourceShareInvitationResponse < Struct.new(
@@ -55,7 +55,7 @@ module Aws::RAM
     #   @return [String]
     # @!attribute permission_arn
     #   <p>Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of the RAM permission to associate with the resource share.
-    #               To find the ARN for a permission, use either the <a>ListPermissions</a> operation or go to the <a href="https://console.aws.amazon.com/ram/home#Permissions:">Permissions library</a> page in the RAM console and
+    #               To find the ARN for a permission, use either the <a>ListPermissions</a> operation or go to the <a href="https://console.aws.amazon.com/ram/home#Permissions:">Permissions library</a> page in the RAM console and 
     #                then choose the name of the permission. The ARN is displayed on the detail page.</p>
     #   @return [String]
     # @!attribute replace
@@ -74,12 +74,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     #   @return [String]
@@ -108,13 +108,13 @@ module Aws::RAM
     end
 
     # @!attribute return_value
-    #   <p>A return value of <code>true</code> indicates that the request succeeded.
+    #   <p>A return value of <code>true</code> indicates that the request succeeded. 
     #                A value of <code>false</code> indicates that the request failed.</p>
     #   @return [Boolean]
     # @!attribute client_token
     #   <p>The idempotency identifier associated with this request. If you
     #                want to repeat the same operation in an idempotent manner then you must include this
-    #                value in the <code>clientToken</code> request parameter of that later call. All other
+    #                value in the <code>clientToken</code> request parameter of that later call. All other 
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class AssociateResourceSharePermissionResponse < Struct.new(
@@ -171,7 +171,7 @@ module Aws::RAM
     #               </li>
     #            </ul>
     #            <note>
-    #               <p>Not all resource types can be shared with IAM roles and users.
+    #               <p>Not all resource types can be shared with IAM roles and users. 
     #                For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User
     #                       Guide</i>.</p>
     #            </note>
@@ -180,12 +180,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     #   @return [String]
@@ -210,7 +210,7 @@ module Aws::RAM
     # @!attribute client_token
     #   <p>The idempotency identifier associated with this request. If you
     #                want to repeat the same operation in an idempotent manner then you must include this
-    #                value in the <code>clientToken</code> request parameter of that later call. All other
+    #                value in the <code>clientToken</code> request parameter of that later call. All other 
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class AssociateResourceShareResponse < Struct.new(
@@ -242,12 +242,12 @@ module Aws::RAM
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>ATTACHABLE</code> – This permission or version can be associated
+    #                     <code>ATTACHABLE</code> – This permission or version can be associated 
     #                   with resource shares.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>UNATTACHABLE</code> – This permission or version can't
+    #                     <code>UNATTACHABLE</code> – This permission or version can't 
     #                   currently be associated with resource shares.</p>
     #               </li>
     #               <li>
@@ -268,8 +268,8 @@ module Aws::RAM
     #               <li>
     #                  <p>
     #                     <b>STANDARD</b> – A resource share that supports all
-    #                       functionality. These resource shares are visible to all principals you share the resource share with.
-    #                       You can modify these resource shares in RAM using the console or APIs. This resource share might
+    #                       functionality. These resource shares are visible to all principals you share the resource share with. 
+    #                       You can modify these resource shares in RAM using the console or APIs. This resource share might 
     #                       have been created by RAM, or it might have been <b>CREATED_FROM_POLICY</b> and then promoted.</p>
     #               </li>
     #               <li>
@@ -277,9 +277,9 @@ module Aws::RAM
     #                     <b>CREATED_FROM_POLICY</b> – The customer
     #                       manually shared a resource by attaching a resource-based policy. That policy did
     #                       not match any existing managed permissions, so RAM created this customer managed permission automatically on the
-    #                       customer's behalf based on the attached policy document. This type of resource share
-    #                       is visible only to the Amazon Web Services account that created it. You can't modify it in
-    #                       RAM unless you promote it. For more information,
+    #                       customer's behalf based on the attached policy document. This type of resource share 
+    #                       is visible only to the Amazon Web Services account that created it. You can't modify it in 
+    #                       RAM unless you promote it. For more information, 
     #                       see <a>PromoteResourceShareCreatedFromPolicy</a>.</p>
     #               </li>
     #               <li>
@@ -362,7 +362,7 @@ module Aws::RAM
     #               </code>
     #               and is case sensitive. For example, to specify an Amazon EC2 Subnet, you can use the
     #               string <code>ec2:Subnet</code>. To see the list of valid values for this parameter,
-    #               query the <a>ListResourceTypes</a> operation. This value must match the display name of the resource
+    #               query the <a>ListResourceTypes</a> operation. This value must match the display name of the resource 
     #               (available in <code>ListResourceTypes</code>).</p>
     #   @return [String]
     # @!attribute policy_template
@@ -384,31 +384,31 @@ module Aws::RAM
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>Condition</b>: (optional) specifies conditional
-    #                       parameters that must evaluate to true when a user attempts an action for that
-    #                       action to be allowed. For more information about the Condition element, see
+    #                     <b>Condition</b>: (optional) specifies conditional 
+    #                       parameters that must evaluate to true when a user attempts an action for that 
+    #                       action to be allowed. For more information about the Condition element, see 
     #                       <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html">IAM
     #                           policies: Condition element</a> in the <i>Identity and Access Management User
     #                       Guide</i>.</p>
     #               </li>
     #            </ul>
     #            <p>This template can't include either the <code>Resource</code> or
-    #               <code>Principal</code> elements. Those are both filled in by RAM when it instantiates
-    #               the resource-based policy on each resource shared using this managed permission. The
-    #               <code>Resource</code> comes from the ARN of the specific resource that you are sharing.
-    #               The <code>Principal</code> comes from the list of identities added to the resource
+    #               <code>Principal</code> elements. Those are both filled in by RAM when it instantiates 
+    #               the resource-based policy on each resource shared using this managed permission. The 
+    #               <code>Resource</code> comes from the ARN of the specific resource that you are sharing. 
+    #               The <code>Principal</code> comes from the list of identities added to the resource 
     #               share.</p>
     #   @return [String]
     # @!attribute client_token
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     #   @return [String]
@@ -434,7 +434,7 @@ module Aws::RAM
     # @!attribute client_token
     #   <p>The idempotency identifier associated with this request. If you
     #                want to repeat the same operation in an idempotent manner then you must include this
-    #                value in the <code>clientToken</code> request parameter of that later call. All other
+    #                value in the <code>clientToken</code> request parameter of that later call. All other 
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class CreatePermissionResponse < Struct.new(
@@ -468,31 +468,31 @@ module Aws::RAM
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>Condition</b>: (optional) specifies conditional
-    #                       parameters that must evaluate to true when a user attempts an action for that
-    #                       action to be allowed. For more information about the Condition element, see
+    #                     <b>Condition</b>: (optional) specifies conditional 
+    #                       parameters that must evaluate to true when a user attempts an action for that 
+    #                       action to be allowed. For more information about the Condition element, see 
     #                       <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html">IAM
     #                           policies: Condition element</a> in the <i>Identity and Access Management User
     #                       Guide</i>.</p>
     #               </li>
     #            </ul>
     #            <p>This template can't include either the <code>Resource</code> or
-    #               <code>Principal</code> elements. Those are both filled in by RAM when it instantiates
-    #               the resource-based policy on each resource shared using this managed permission. The
-    #               <code>Resource</code> comes from the ARN of the specific resource that you are sharing.
-    #               The <code>Principal</code> comes from the list of identities added to the resource
+    #               <code>Principal</code> elements. Those are both filled in by RAM when it instantiates 
+    #               the resource-based policy on each resource shared using this managed permission. The 
+    #               <code>Resource</code> comes from the ARN of the specific resource that you are sharing. 
+    #               The <code>Principal</code> comes from the list of identities added to the resource 
     #               share.</p>
     #   @return [String]
     # @!attribute client_token
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     #   @return [String]
@@ -512,7 +512,7 @@ module Aws::RAM
     # @!attribute client_token
     #   <p>The idempotency identifier associated with this request. If you
     #                want to repeat the same operation in an idempotent manner then you must include this
-    #                value in the <code>clientToken</code> request parameter of that later call. All other
+    #                value in the <code>clientToken</code> request parameter of that later call. All other 
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class CreatePermissionVersionResponse < Struct.new(
@@ -565,7 +565,7 @@ module Aws::RAM
     #               </li>
     #            </ul>
     #            <note>
-    #               <p>Not all resource types can be shared with IAM roles and users.
+    #               <p>Not all resource types can be shared with IAM roles and users. 
     #                For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User
     #                       Guide</i>.</p>
     #            </note>
@@ -585,12 +585,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     #   @return [String]
@@ -628,7 +628,7 @@ module Aws::RAM
     # @!attribute client_token
     #   <p>The idempotency identifier associated with this request. If you
     #                want to repeat the same operation in an idempotent manner then you must include this
-    #                value in the <code>clientToken</code> request parameter of that later call. All other
+    #                value in the <code>clientToken</code> request parameter of that later call. All other 
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class CreateResourceShareResponse < Struct.new(
@@ -647,12 +647,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     #   @return [String]
@@ -671,7 +671,7 @@ module Aws::RAM
     # @!attribute client_token
     #   <p>The idempotency identifier associated with this request. If you
     #                want to repeat the same operation in an idempotent manner then you must include this
-    #                value in the <code>clientToken</code> request parameter of that later call. All other
+    #                value in the <code>clientToken</code> request parameter of that later call. All other 
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     # @!attribute permission_status
@@ -705,12 +705,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     #   @return [String]
@@ -730,7 +730,7 @@ module Aws::RAM
     # @!attribute client_token
     #   <p>The idempotency identifier associated with this request. If you
     #                want to repeat the same operation in an idempotent manner then you must include this
-    #                value in the <code>clientToken</code> request parameter of that later call. All other
+    #                value in the <code>clientToken</code> request parameter of that later call. All other 
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     # @!attribute permission_status
@@ -754,12 +754,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     #   @return [String]
@@ -773,13 +773,13 @@ module Aws::RAM
     end
 
     # @!attribute return_value
-    #   <p>A return value of <code>true</code> indicates that the request succeeded.
+    #   <p>A return value of <code>true</code> indicates that the request succeeded. 
     #                A value of <code>false</code> indicates that the request failed.</p>
     #   @return [Boolean]
     # @!attribute client_token
     #   <p>The idempotency identifier associated with this request. If you
     #                want to repeat the same operation in an idempotent manner then you must include this
-    #                value in the <code>clientToken</code> request parameter of that later call. All other
+    #                value in the <code>clientToken</code> request parameter of that later call. All other 
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class DeleteResourceShareResponse < Struct.new(
@@ -802,12 +802,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     #   @return [String]
@@ -822,13 +822,13 @@ module Aws::RAM
     end
 
     # @!attribute return_value
-    #   <p>A return value of <code>true</code> indicates that the request succeeded.
+    #   <p>A return value of <code>true</code> indicates that the request succeeded. 
     #                A value of <code>false</code> indicates that the request failed.</p>
     #   @return [Boolean]
     # @!attribute client_token
     #   <p>The idempotency identifier associated with this request. If you
     #                want to repeat the same operation in an idempotent manner then you must include this
-    #                value in the <code>clientToken</code> request parameter of that later call. All other
+    #                value in the <code>clientToken</code> request parameter of that later call. All other 
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class DisassociateResourceSharePermissionResponse < Struct.new(
@@ -884,7 +884,7 @@ module Aws::RAM
     #               </li>
     #            </ul>
     #            <note>
-    #               <p>Not all resource types can be shared with IAM roles and users.
+    #               <p>Not all resource types can be shared with IAM roles and users. 
     #                For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User
     #                       Guide</i>.</p>
     #            </note>
@@ -893,12 +893,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     #   @return [String]
@@ -924,7 +924,7 @@ module Aws::RAM
     # @!attribute client_token
     #   <p>The idempotency identifier associated with this request. If you
     #                want to repeat the same operation in an idempotent manner then you must include this
-    #                value in the <code>clientToken</code> request parameter of that later call. All other
+    #                value in the <code>clientToken</code> request parameter of that later call. All other 
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class DisassociateResourceShareResponse < Struct.new(
@@ -944,7 +944,7 @@ module Aws::RAM
     end
 
     # @!attribute return_value
-    #   <p>A return value of <code>true</code> indicates that the request succeeded.
+    #   <p>A return value of <code>true</code> indicates that the request succeeded. 
     #                A value of <code>false</code> indicates that the request failed.</p>
     #   @return [Boolean]
     class EnableSharingWithAwsOrganizationResponse < Struct.new(
@@ -957,7 +957,7 @@ module Aws::RAM
 
     # @!attribute permission_arn
     #   <p>Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of the permission whose contents you want to retrieve.
-    #               To find the ARN for a permission, use either the <a>ListPermissions</a> operation or go to the <a href="https://console.aws.amazon.com/ram/home#Permissions:">Permissions library</a> page in the RAM console and
+    #               To find the ARN for a permission, use either the <a>ListPermissions</a> operation or go to the <a href="https://console.aws.amazon.com/ram/home#Permissions:">Permissions library</a> page in the RAM console and 
     #                then choose the name of the permission. The ARN is displayed on the detail page.</p>
     #   @return [String]
     # @!attribute permission_version
@@ -992,20 +992,20 @@ module Aws::RAM
     #   <p>Specifies the principal.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     #   @return [Integer]
@@ -1024,10 +1024,10 @@ module Aws::RAM
     #   <p>An array of resource policy documents in JSON format.</p>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>If present, this value indicates that more output is available than
-    #                is included in the current response. Use this value in the <code>NextToken</code>
-    #                request parameter in a subsequent call to the operation to get the next part of the
-    #                output. You should repeat this until the <code>NextToken</code> response element comes
+    #   <p>If present, this value indicates that more output is available than 
+    #                is included in the current response. Use this value in the <code>NextToken</code> 
+    #                request parameter in a subsequent call to the operation to get the next part of the 
+    #                output. You should repeat this until the <code>NextToken</code> response element comes 
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class GetResourcePoliciesResponse < Struct.new(
@@ -1075,20 +1075,20 @@ module Aws::RAM
     #   <p>Specifies that you want to retrieve only associations that have this status.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     #   @return [Integer]
@@ -1110,10 +1110,10 @@ module Aws::RAM
     #   <p>An array of objects that contain the details about the associations.</p>
     #   @return [Array<Types::ResourceShareAssociation>]
     # @!attribute next_token
-    #   <p>If present, this value indicates that more output is available than
-    #                is included in the current response. Use this value in the <code>NextToken</code>
-    #                request parameter in a subsequent call to the operation to get the next part of the
-    #                output. You should repeat this until the <code>NextToken</code> response element comes
+    #   <p>If present, this value indicates that more output is available than 
+    #                is included in the current response. Use this value in the <code>NextToken</code> 
+    #                request parameter in a subsequent call to the operation to get the next part of the 
+    #                output. You should repeat this until the <code>NextToken</code> response element comes 
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class GetResourceShareAssociationsResponse < Struct.new(
@@ -1134,20 +1134,20 @@ module Aws::RAM
     #            </p>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     #   @return [Integer]
@@ -1166,10 +1166,10 @@ module Aws::RAM
     #   <p>An array of objects that contain the details about the invitations.</p>
     #   @return [Array<Types::ResourceShareInvitation>]
     # @!attribute next_token
-    #   <p>If present, this value indicates that more output is available than
-    #                is included in the current response. Use this value in the <code>NextToken</code>
-    #                request parameter in a subsequent call to the operation to get the next part of the
-    #                output. You should repeat this until the <code>NextToken</code> response element comes
+    #   <p>If present, this value indicates that more output is available than 
+    #                is included in the current response. Use this value in the <code>NextToken</code> 
+    #                request parameter in a subsequent call to the operation to get the next part of the 
+    #                output. You should repeat this until the <code>NextToken</code> response element comes 
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class GetResourceShareInvitationsResponse < Struct.new(
@@ -1217,20 +1217,20 @@ module Aws::RAM
     #               specified tag keys and values.</p>
     #   @return [Array<Types::TagFilter>]
     # @!attribute next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     #   @return [Integer]
@@ -1262,10 +1262,10 @@ module Aws::RAM
     #   <p>An array of objects that contain the information about the resource shares.</p>
     #   @return [Array<Types::ResourceShare>]
     # @!attribute next_token
-    #   <p>If present, this value indicates that more output is available than
-    #                is included in the current response. Use this value in the <code>NextToken</code>
-    #                request parameter in a subsequent call to the operation to get the next part of the
-    #                output. You should repeat this until the <code>NextToken</code> response element comes
+    #   <p>If present, this value indicates that more output is available than 
+    #                is included in the current response. Use this value in the <code>NextToken</code> 
+    #                request parameter in a subsequent call to the operation to get the next part of the 
+    #                output. You should repeat this until the <code>NextToken</code> response element comes 
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class GetResourceSharesResponse < Struct.new(
@@ -1375,40 +1375,40 @@ module Aws::RAM
     #   <p>Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of the invitation. You can use <a>GetResourceShareInvitations</a> to find the ARN of the invitation.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     #   @return [Integer]
     # @!attribute resource_region_scope
-    #   <p>Specifies that you want the results to include only
+    #   <p>Specifies that you want the results to include only 
     #               resources that have the specified scope.</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>ALL</code> – the results include both global and
+    #                     <code>ALL</code> – the results include both global and 
     #                       regional resources or resource types.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>GLOBAL</code> – the results include only global
+    #                     <code>GLOBAL</code> – the results include only global 
     #                       resources or resource types.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>REGIONAL</code> – the results include only regional
+    #                     <code>REGIONAL</code> – the results include only regional 
     #                       resources or resource types.</p>
     #               </li>
     #            </ul>
@@ -1430,10 +1430,10 @@ module Aws::RAM
     #               specified resource share.</p>
     #   @return [Array<Types::Resource>]
     # @!attribute next_token
-    #   <p>If present, this value indicates that more output is available than
-    #                is included in the current response. Use this value in the <code>NextToken</code>
-    #                request parameter in a subsequent call to the operation to get the next part of the
-    #                output. You should repeat this until the <code>NextToken</code> response element comes
+    #   <p>If present, this value indicates that more output is available than 
+    #                is included in the current response. Use this value in the <code>NextToken</code> 
+    #                request parameter in a subsequent call to the operation to get the next part of the 
+    #                output. You should repeat this until the <code>NextToken</code> response element comes 
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListPendingInvitationResourcesResponse < Struct.new(
@@ -1473,20 +1473,20 @@ module Aws::RAM
     #               any version of the specified managed permission.</p>
     #   @return [Boolean]
     # @!attribute next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     #   @return [Integer]
@@ -1509,10 +1509,10 @@ module Aws::RAM
     #   <p>A structure with information about this customer managed permission.</p>
     #   @return [Array<Types::AssociatedPermission>]
     # @!attribute next_token
-    #   <p>If present, this value indicates that more output is available than
-    #                is included in the current response. Use this value in the <code>NextToken</code>
-    #                request parameter in a subsequent call to the operation to get the next part of the
-    #                output. You should repeat this until the <code>NextToken</code> response element comes
+    #   <p>If present, this value indicates that more output is available than 
+    #                is included in the current response. Use this value in the <code>NextToken</code> 
+    #                request parameter in a subsequent call to the operation to get the next part of the 
+    #                output. You should repeat this until the <code>NextToken</code> response element comes 
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListPermissionAssociationsResponse < Struct.new(
@@ -1530,20 +1530,20 @@ module Aws::RAM
     #               version to attach.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     #   @return [Integer]
@@ -1561,10 +1561,10 @@ module Aws::RAM
     #   <p>An array of objects that contain details for each of the available versions.</p>
     #   @return [Array<Types::ResourceSharePermissionSummary>]
     # @!attribute next_token
-    #   <p>If present, this value indicates that more output is available than
-    #                is included in the current response. Use this value in the <code>NextToken</code>
-    #                request parameter in a subsequent call to the operation to get the next part of the
-    #                output. You should repeat this until the <code>NextToken</code> response element comes
+    #   <p>If present, this value indicates that more output is available than 
+    #                is included in the current response. Use this value in the <code>NextToken</code> 
+    #                request parameter in a subsequent call to the operation to get the next part of the 
+    #                output. You should repeat this until the <code>NextToken</code> response element comes 
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListPermissionVersionsResponse < Struct.new(
@@ -1584,20 +1584,20 @@ module Aws::RAM
     #               operation to get the specific string required.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     #   @return [Integer]
@@ -1634,10 +1634,10 @@ module Aws::RAM
     #   <p>An array of objects with information about the permissions.</p>
     #   @return [Array<Types::ResourceSharePermissionSummary>]
     # @!attribute next_token
-    #   <p>If present, this value indicates that more output is available than
-    #                is included in the current response. Use this value in the <code>NextToken</code>
-    #                request parameter in a subsequent call to the operation to get the next part of the
-    #                output. You should repeat this until the <code>NextToken</code> response element comes
+    #   <p>If present, this value indicates that more output is available than 
+    #                is included in the current response. Use this value in the <code>NextToken</code> 
+    #                request parameter in a subsequent call to the operation to get the next part of the 
+    #                output. You should repeat this until the <code>NextToken</code> response element comes 
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListPermissionsResponse < Struct.new(
@@ -1707,7 +1707,7 @@ module Aws::RAM
     #               </li>
     #            </ul>
     #            <note>
-    #               <p>Not all resource types can be shared with IAM roles and users.
+    #               <p>Not all resource types can be shared with IAM roles and users. 
     #                For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User
     #                       Guide</i>.</p>
     #            </note>
@@ -1723,20 +1723,20 @@ module Aws::RAM
     #               resource shares specified by a list the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.</p>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     #   @return [Integer]
@@ -1758,10 +1758,10 @@ module Aws::RAM
     #   <p>An array of objects that contain the details about the principals.</p>
     #   @return [Array<Types::Principal>]
     # @!attribute next_token
-    #   <p>If present, this value indicates that more output is available than
-    #                is included in the current response. Use this value in the <code>NextToken</code>
-    #                request parameter in a subsequent call to the operation to get the next part of the
-    #                output. You should repeat this until the <code>NextToken</code> response element comes
+    #   <p>If present, this value indicates that more output is available than 
+    #                is included in the current response. Use this value in the <code>NextToken</code> 
+    #                request parameter in a subsequent call to the operation to get the next part of the 
+    #                output. You should repeat this until the <code>NextToken</code> response element comes 
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListPrincipalsResponse < Struct.new(
@@ -1782,20 +1782,20 @@ module Aws::RAM
     #               matches this value.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     #   @return [Integer]
@@ -1814,10 +1814,10 @@ module Aws::RAM
     #   <p>An array of data structures that provide details of the matching work IDs.</p>
     #   @return [Array<Types::ReplacePermissionAssociationsWork>]
     # @!attribute next_token
-    #   <p>If present, this value indicates that more output is available than
-    #                is included in the current response. Use this value in the <code>NextToken</code>
-    #                request parameter in a subsequent call to the operation to get the next part of the
-    #                output. You should repeat this until the <code>NextToken</code> response element comes
+    #   <p>If present, this value indicates that more output is available than 
+    #                is included in the current response. Use this value in the <code>NextToken</code> 
+    #                request parameter in a subsequent call to the operation to get the next part of the 
+    #                output. You should repeat this until the <code>NextToken</code> response element comes 
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListReplacePermissionAssociationsWorkResponse < Struct.new(
@@ -1834,20 +1834,20 @@ module Aws::RAM
     #               permissions.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     #   @return [Integer]
@@ -1865,10 +1865,10 @@ module Aws::RAM
     #   <p>An array of objects that describe the permissions associated with the resource share.</p>
     #   @return [Array<Types::ResourceSharePermissionSummary>]
     # @!attribute next_token
-    #   <p>If present, this value indicates that more output is available than
-    #                is included in the current response. Use this value in the <code>NextToken</code>
-    #                request parameter in a subsequent call to the operation to get the next part of the
-    #                output. You should repeat this until the <code>NextToken</code> response element comes
+    #   <p>If present, this value indicates that more output is available than 
+    #                is included in the current response. Use this value in the <code>NextToken</code> 
+    #                request parameter in a subsequent call to the operation to get the next part of the 
+    #                output. You should repeat this until the <code>NextToken</code> response element comes 
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListResourceSharePermissionsResponse < Struct.new(
@@ -1881,40 +1881,40 @@ module Aws::RAM
     end
 
     # @!attribute next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     #   @return [Integer]
     # @!attribute resource_region_scope
-    #   <p>Specifies that you want the results to include only
+    #   <p>Specifies that you want the results to include only 
     #               resources that have the specified scope.</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>ALL</code> – the results include both global and
+    #                     <code>ALL</code> – the results include both global and 
     #                       regional resources or resource types.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>GLOBAL</code> – the results include only global
+    #                     <code>GLOBAL</code> – the results include only global 
     #                       resources or resource types.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>REGIONAL</code> – the results include only regional
+    #                     <code>REGIONAL</code> – the results include only regional 
     #                       resources or resource types.</p>
     #               </li>
     #            </ul>
@@ -1935,10 +1935,10 @@ module Aws::RAM
     #               shared using RAM.</p>
     #   @return [Array<Types::ServiceNameAndResourceType>]
     # @!attribute next_token
-    #   <p>If present, this value indicates that more output is available than
-    #                is included in the current response. Use this value in the <code>NextToken</code>
-    #                request parameter in a subsequent call to the operation to get the next part of the
-    #                output. You should repeat this until the <code>NextToken</code> response element comes
+    #   <p>If present, this value indicates that more output is available than 
+    #                is included in the current response. Use this value in the <code>NextToken</code> 
+    #                request parameter in a subsequent call to the operation to get the next part of the 
+    #                output. You should repeat this until the <code>NextToken</code> response element comes 
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListResourceTypesResponse < Struct.new(
@@ -1987,40 +1987,40 @@ module Aws::RAM
     #               specified <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.</p>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     #   @return [Integer]
     # @!attribute resource_region_scope
-    #   <p>Specifies that you want the results to include only
+    #   <p>Specifies that you want the results to include only 
     #               resources that have the specified scope.</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>ALL</code> – the results include both global and
+    #                     <code>ALL</code> – the results include both global and 
     #                       regional resources or resource types.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>GLOBAL</code> – the results include only global
+    #                     <code>GLOBAL</code> – the results include only global 
     #                       resources or resource types.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>REGIONAL</code> – the results include only regional
+    #                     <code>REGIONAL</code> – the results include only regional 
     #                       resources or resource types.</p>
     #               </li>
     #            </ul>
@@ -2045,10 +2045,10 @@ module Aws::RAM
     #   <p>An array of objects that contain information about the resources.</p>
     #   @return [Array<Types::Resource>]
     # @!attribute next_token
-    #   <p>If present, this value indicates that more output is available than
-    #                is included in the current response. Use this value in the <code>NextToken</code>
-    #                request parameter in a subsequent call to the operation to get the next part of the
-    #                output. You should repeat this until the <code>NextToken</code> response element comes
+    #   <p>If present, this value indicates that more output is available than 
+    #                is included in the current response. Use this value in the <code>NextToken</code> 
+    #                request parameter in a subsequent call to the operation to get the next part of the 
+    #                output. You should repeat this until the <code>NextToken</code> response element comes 
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListResourcesResponse < Struct.new(
@@ -2242,12 +2242,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     #   @return [String]
@@ -2267,7 +2267,7 @@ module Aws::RAM
     # @!attribute client_token
     #   <p>The idempotency identifier associated with this request. If you
     #                want to repeat the same operation in an idempotent manner then you must include this
-    #                value in the <code>clientToken</code> request parameter of that later call. All other
+    #                value in the <code>clientToken</code> request parameter of that later call. All other 
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class PromotePermissionCreatedFromPolicyResponse < Struct.new(
@@ -2291,7 +2291,7 @@ module Aws::RAM
     end
 
     # @!attribute return_value
-    #   <p>A return value of <code>true</code> indicates that the request succeeded.
+    #   <p>A return value of <code>true</code> indicates that the request succeeded. 
     #                A value of <code>false</code> indicates that the request failed.</p>
     #   @return [Boolean]
     class PromoteResourceShareCreatedFromPolicyResponse < Struct.new(
@@ -2309,12 +2309,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     #   @return [String]
@@ -2333,7 +2333,7 @@ module Aws::RAM
     # @!attribute client_token
     #   <p>The idempotency identifier associated with this request. If you
     #                want to repeat the same operation in an idempotent manner then you must include this
-    #                value in the <code>clientToken</code> request parameter of that later call. All other
+    #                value in the <code>clientToken</code> request parameter of that later call. All other 
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class RejectResourceShareInvitationResponse < Struct.new(
@@ -2363,12 +2363,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     #   @return [String]
@@ -2391,7 +2391,7 @@ module Aws::RAM
     # @!attribute client_token
     #   <p>The idempotency identifier associated with this request. If you
     #                want to repeat the same operation in an idempotent manner then you must include this
-    #                value in the <code>clientToken</code> request parameter of that later call. All other
+    #                value in the <code>clientToken</code> request parameter of that later call. All other 
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class ReplacePermissionAssociationsResponse < Struct.new(
@@ -2592,8 +2592,8 @@ module Aws::RAM
     #               <li>
     #                  <p>
     #                     <b>STANDARD</b> – A resource share that supports all
-    #                       functionality. These resource shares are visible to all principals you share the resource share with.
-    #                       You can modify these resource shares in RAM using the console or APIs. This resource share might
+    #                       functionality. These resource shares are visible to all principals you share the resource share with. 
+    #                       You can modify these resource shares in RAM using the console or APIs. This resource share might 
     #                       have been created by RAM, or it might have been <b>CREATED_FROM_POLICY</b> and then promoted.</p>
     #               </li>
     #               <li>
@@ -2601,9 +2601,9 @@ module Aws::RAM
     #                     <b>CREATED_FROM_POLICY</b> – The customer
     #                       manually shared a resource by attaching a resource-based policy. That policy did
     #                       not match any existing managed permissions, so RAM created this customer managed permission automatically on the
-    #                       customer's behalf based on the attached policy document. This type of resource share
-    #                       is visible only to the Amazon Web Services account that created it. You can't modify it in
-    #                       RAM unless you promote it. For more information,
+    #                       customer's behalf based on the attached policy document. This type of resource share 
+    #                       is visible only to the Amazon Web Services account that created it. You can't modify it in 
+    #                       RAM unless you promote it. For more information, 
     #                       see <a>PromoteResourceShareCreatedFromPolicy</a>.</p>
     #               </li>
     #               <li>
@@ -2880,8 +2880,8 @@ module Aws::RAM
     #               <li>
     #                  <p>
     #                     <b>STANDARD</b> – A resource share that supports all
-    #                       functionality. These resource shares are visible to all principals you share the resource share with.
-    #                       You can modify these resource shares in RAM using the console or APIs. This resource share might
+    #                       functionality. These resource shares are visible to all principals you share the resource share with. 
+    #                       You can modify these resource shares in RAM using the console or APIs. This resource share might 
     #                       have been created by RAM, or it might have been <b>CREATED_FROM_POLICY</b> and then promoted.</p>
     #               </li>
     #               <li>
@@ -2889,9 +2889,9 @@ module Aws::RAM
     #                     <b>CREATED_FROM_POLICY</b> – The customer
     #                       manually shared a resource by attaching a resource-based policy. That policy did
     #                       not match any existing managed permissions, so RAM created this customer managed permission automatically on the
-    #                       customer's behalf based on the attached policy document. This type of resource share
-    #                       is visible only to the Amazon Web Services account that created it. You can't modify it in
-    #                       RAM unless you promote it. For more information,
+    #                       customer's behalf based on the attached policy document. This type of resource share 
+    #                       is visible only to the Amazon Web Services account that created it. You can't modify it in 
+    #                       RAM unless you promote it. For more information, 
     #                       see <a>PromoteResourceShareCreatedFromPolicy</a>.</p>
     #               </li>
     #               <li>
@@ -2910,12 +2910,12 @@ module Aws::RAM
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>ATTACHABLE</code> – This permission or version can be associated
+    #                     <code>ATTACHABLE</code> – This permission or version can be associated 
     #                   with resource shares.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>UNATTACHABLE</code> – This permission or version can't
+    #                     <code>UNATTACHABLE</code> – This permission or version can't 
     #                   currently be associated with resource shares.</p>
     #               </li>
     #               <li>
@@ -3008,8 +3008,8 @@ module Aws::RAM
     #               <li>
     #                  <p>
     #                     <b>STANDARD</b> – A resource share that supports all
-    #                       functionality. These resource shares are visible to all principals you share the resource share with.
-    #                       You can modify these resource shares in RAM using the console or APIs. This resource share might
+    #                       functionality. These resource shares are visible to all principals you share the resource share with. 
+    #                       You can modify these resource shares in RAM using the console or APIs. This resource share might 
     #                       have been created by RAM, or it might have been <b>CREATED_FROM_POLICY</b> and then promoted.</p>
     #               </li>
     #               <li>
@@ -3017,9 +3017,9 @@ module Aws::RAM
     #                     <b>CREATED_FROM_POLICY</b> – The customer
     #                       manually shared a resource by attaching a resource-based policy. That policy did
     #                       not match any existing managed permissions, so RAM created this customer managed permission automatically on the
-    #                       customer's behalf based on the attached policy document. This type of resource share
-    #                       is visible only to the Amazon Web Services account that created it. You can't modify it in
-    #                       RAM unless you promote it. For more information,
+    #                       customer's behalf based on the attached policy document. This type of resource share 
+    #                       is visible only to the Amazon Web Services account that created it. You can't modify it in 
+    #                       RAM unless you promote it. For more information, 
     #                       see <a>PromoteResourceShareCreatedFromPolicy</a>.</p>
     #               </li>
     #               <li>
@@ -3125,12 +3125,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     #   @return [String]
@@ -3150,7 +3150,7 @@ module Aws::RAM
     # @!attribute client_token
     #   <p>The idempotency identifier associated with this request. If you
     #                want to repeat the same operation in an idempotent manner then you must include this
-    #                value in the <code>clientToken</code> request parameter of that later call. All other
+    #                value in the <code>clientToken</code> request parameter of that later call. All other 
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class SetDefaultPermissionVersionResponse < Struct.new(
@@ -3340,12 +3340,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     #   @return [String]
@@ -3366,7 +3366,7 @@ module Aws::RAM
     # @!attribute client_token
     #   <p>The idempotency identifier associated with this request. If you
     #                want to repeat the same operation in an idempotent manner then you must include this
-    #                value in the <code>clientToken</code> request parameter of that later call. All other
+    #                value in the <code>clientToken</code> request parameter of that later call. All other 
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class UpdateResourceShareResponse < Struct.new(

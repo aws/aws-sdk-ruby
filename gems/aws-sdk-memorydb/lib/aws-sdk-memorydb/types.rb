@@ -7,7 +7,7 @@ module Aws::MemoryDB
   module Types
 
     # <p>An Access Control List. You can authenticate users with Access Contol Lists.
-    #
+    #          
     #          ACLs enable you to control cluster access by grouping users. These Access control lists are designed as a way to organize access to clusters.</p>
     # @!attribute name
     #   <p>The name of the Access Control List</p>
@@ -265,9 +265,9 @@ module Aws::MemoryDB
     #   @return [String]
     # @!attribute snapshot_window
     #   <p>The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your shard.
-    #
+    #            
     #            Example: 05:00-09:00
-    #
+    #            
     #            If you do not specify this parameter, MemoryDB automatically chooses an appropriate time range.</p>
     #   @return [String]
     # @!attribute acl_name
@@ -277,7 +277,7 @@ module Aws::MemoryDB
     #   <p>When set to true, the cluster will automatically receive minor engine version upgrades after launch.</p>
     #   @return [Boolean]
     # @!attribute data_tiering
-    #   <p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type.
+    #   <p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type. 
     #               This parameter must be set when using r6gd nodes. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html">Data tiering</a>.</p>
     #   @return [String]
     # @!attribute network_type
@@ -460,11 +460,11 @@ module Aws::MemoryDB
     #   @return [String]
     # @!attribute target_bucket
     #   <p>The Amazon S3 bucket to which the snapshot is exported. This parameter is used only when exporting a snapshot for external access.
-    #
-    #          When using this parameter to export a snapshot, be sure MemoryDB has the needed permissions to this S3 bucket. For more information, see
-    #
-    #          <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/snapshots-exporting.html">Step 2: Grant MemoryDB Access to Your Amazon S3 Bucket</a>.
-    #
+    #          
+    #          When using this parameter to export a snapshot, be sure MemoryDB has the needed permissions to this S3 bucket. For more information, see 
+    #          
+    #          <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/snapshots-exporting.html">Step 2: Grant MemoryDB Access to Your Amazon S3 Bucket</a>. 
+    #          
     #        </p>
     #   @return [String]
     # @!attribute kms_key_id
@@ -641,7 +641,7 @@ module Aws::MemoryDB
     #   <p>When set to true, the cluster will automatically receive minor engine version upgrades after launch.</p>
     #   @return [Boolean]
     # @!attribute data_tiering
-    #   <p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type.
+    #   <p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type. 
     #               This parameter must be set when using r6gd nodes. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html">Data tiering</a>.</p>
     #   @return [Boolean]
     # @!attribute network_type
@@ -1183,12 +1183,12 @@ module Aws::MemoryDB
     #   @return [String]
     # @!attribute start_time
     #   <p>The beginning of the time interval to retrieve events for, specified in ISO 8601 format.
-    #
+    #            
     #            Example: 2017-03-30T07:03:49.555Z</p>
     #   @return [Time]
     # @!attribute end_time
     #   <p>The end of the time interval for which to retrieve events, specified in ISO 8601 format.
-    #
+    #            
     #            Example: 2017-03-30T07:03:49.555Z</p>
     #   @return [Time]
     # @!attribute duration
@@ -1417,7 +1417,7 @@ module Aws::MemoryDB
     #   <p>Duration filter value, specified in years or seconds. Use this parameter to show only reservations for a given duration.</p>
     #   @return [String]
     # @!attribute offering_type
-    #   <p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.
+    #   <p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type. 
     #            Valid values: "All Upfront"|"Partial Upfront"| "No Upfront"</p>
     #   @return [String]
     # @!attribute max_results
@@ -1467,7 +1467,7 @@ module Aws::MemoryDB
     #   <p>The duration filter value, specified in years or seconds. Use this parameter to show only reservations for this duration.</p>
     #   @return [String]
     # @!attribute offering_type
-    #   <p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.
+    #   <p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type. 
     #            Valid values: "All Upfront"|"Partial Upfront"| "No Upfront"</p>
     #   @return [String]
     # @!attribute max_results
@@ -1721,7 +1721,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Represents a single occurrence of something interesting within the system. Some examples of events are creating a cluster or adding or removing a
+    # <p>Represents a single occurrence of something interesting within the system. Some examples of events are creating a cluster or adding or removing a 
     #          node.</p>
     # @!attribute source_name
     #   <p>The name for the source of the event. For example, if the event occurred at the cluster level, the identifier would be the name of the cluster.</p>
@@ -2582,7 +2582,7 @@ module Aws::MemoryDB
     end
 
     # <p>The requested node offering does not exist.
-    #
+    #          
     #       </p>
     # @!attribute message
     #   @return [String]
@@ -2874,7 +2874,7 @@ module Aws::MemoryDB
     #   <p>The configuration of the cluster from which the snapshot was taken</p>
     #   @return [Types::ClusterConfiguration]
     # @!attribute data_tiering
-    #   <p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type.
+    #   <p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type. 
     #               This parameter must be set when using r6gd nodes. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html">Data tiering</a>.</p>
     #   @return [String]
     class Snapshot < Struct.new(
@@ -3062,8 +3062,8 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A tag that can be added to an MemoryDB resource. Tags are composed of a Key/Value pair. You can use tags to categorize and track all your MemoryDB resources.
-    #          When you add or remove tags on clusters, those actions will be replicated to all nodes in the cluster. A tag with a null Value is permitted. For more information, see
+    # <p>A tag that can be added to an MemoryDB resource. Tags are composed of a Key/Value pair. You can use tags to categorize and track all your MemoryDB resources. 
+    #          When you add or remove tags on clusters, those actions will be replicated to all nodes in the cluster. A tag with a null Value is permitted. For more information, see 
     #          <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging-resources.html">Tagging your MemoryDB resources</a>
     #          </p>
     # @!attribute key
@@ -3494,7 +3494,7 @@ module Aws::MemoryDB
     #   @return [Types::Authentication]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the user.
-    #
+    #            
     #         </p>
     #   @return [String]
     class User < Struct.new(

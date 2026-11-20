@@ -1808,7 +1808,7 @@ module Aws::DirectConnect
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>up</code>: The BGP peer is established. This state does not indicate the
+    #                     <code>up</code>: The BGP peer is established. This state does not indicate the 
     #           state of the routing function. Ensure that you are receiving routes over the BGP session.</p>
     #               </li>
     #               <li>
@@ -1913,9 +1913,9 @@ module Aws::DirectConnect
 
     # @!attribute agreement_name
     #   <p>
-    #
+    #   
     #         The name of the customer agreement.
-    #
+    #   
     #       </p>
     #   @return [String]
     class ConfirmCustomerAgreementRequest < Struct.new(
@@ -4216,7 +4216,7 @@ module Aws::DirectConnect
     #   <p>The ID of the connection.</p>
     #   @return [String]
     # @!attribute provider_name
-    #   <p>The name of the APN partner or service provider who establishes connectivity on your behalf. If you specify this parameter,
+    #   <p>The name of the APN partner or service provider who establishes connectivity on your behalf. If you specify this parameter, 
     #         the LOA-CFA lists the provider name alongside your company name as the requester of the cross connect.</p>
     #   @return [String]
     # @!attribute loa_content_type
@@ -4665,7 +4665,7 @@ module Aws::DirectConnect
     #   <p>The ID of a connection, LAG, or interconnect.</p>
     #   @return [String]
     # @!attribute provider_name
-    #   <p>The name of the service provider who establishes connectivity on your behalf. If you specify this parameter, the
+    #   <p>The name of the service provider who establishes connectivity on your behalf. If you specify this parameter, the 
     #         LOA-CFA lists the provider name alongside your company name as the requester of the cross connect.</p>
     #   @return [String]
     # @!attribute loa_content_type
@@ -6746,7 +6746,7 @@ module Aws::DirectConnect
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about a route filter prefix that a customer can advertise through Border Gateway Protocol (BGP)
+    # <p>Information about a route filter prefix that a customer can advertise through Border Gateway Protocol (BGP) 
     #         over a public virtual interface.</p>
     # @!attribute cidr
     #   <p>The CIDR block for the advertised route. Separate multiple routes using commas. An IPv6 CIDR must use /64 or shorter.</p>

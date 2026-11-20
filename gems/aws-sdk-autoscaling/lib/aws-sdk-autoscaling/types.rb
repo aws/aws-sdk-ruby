@@ -491,8 +491,8 @@ module Aws::AutoScaling
     #   @return [Types::LaunchTemplateSpecification]
     # @!attribute image_id
     #   <p>
-    #               The ID of the Amazon Machine Image (AMI) associated with the instance. This field shows the
-    #               current AMI ID of the instance's root volume. It may differ from the original AMI used when
+    #               The ID of the Amazon Machine Image (AMI) associated with the instance. This field shows the 
+    #               current AMI ID of the instance's root volume. It may differ from the original AMI used when 
     #               the instance was first launched.
     #           </p>
     #            <p>
@@ -583,10 +583,10 @@ module Aws::AutoScaling
     #   @return [Boolean]
     # @!attribute impaired_zone_health_check_behavior
     #   <p>
-    #               Specifies the health check behavior for the impaired Availability Zone in an active zonal shift. If you select <code>Replace unhealthy</code>, instances that appear unhealthy will be replaced in all Availability Zones.
-    #               If you select <code>Ignore unhealthy</code>, instances will not be replaced in the Availability Zone with the active zonal shift. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html">Auto Scaling group zonal shift</a>
+    #               Specifies the health check behavior for the impaired Availability Zone in an active zonal shift. If you select <code>Replace unhealthy</code>, instances that appear unhealthy will be replaced in all Availability Zones. 
+    #               If you select <code>Ignore unhealthy</code>, instances will not be replaced in the Availability Zone with the active zonal shift. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html">Auto Scaling group zonal shift</a> 
     #               in the <i>Amazon EC2 Auto Scaling User Guide</i>.
-    #
+    #               
     #           </p>
     #   @return [String]
     class AvailabilityZoneImpairmentPolicy < Struct.new(
@@ -731,9 +731,9 @@ module Aws::AutoScaling
     #   <p>The name of the Auto Scaling group.</p>
     #   @return [String]
     # @!attribute wait_for_transitioning_instances
-    #   <p>When cancelling an instance refresh, this indicates whether to wait for in-flight launches
+    #   <p>When cancelling an instance refresh, this indicates whether to wait for in-flight launches 
     #               and terminations to complete. The default is true.</p>
-    #            <p>When set to false, Amazon EC2 Auto Scaling cancels the instance refresh
+    #            <p>When set to false, Amazon EC2 Auto Scaling cancels the instance refresh 
     #               without waiting for any pending launches or terminations to complete.</p>
     #   @return [Boolean]
     class CancelInstanceRefreshInput < Struct.new(
@@ -816,7 +816,7 @@ module Aws::AutoScaling
     end
 
     # <p>
-    #             The target for the Capacity Reservation. Specify Capacity Reservations IDs or Capacity Reservation resource group ARNs.
+    #             The target for the Capacity Reservation. Specify Capacity Reservations IDs or Capacity Reservation resource group ARNs. 
     #         </p>
     # @!attribute capacity_reservation_ids
     #   <p>
@@ -1155,7 +1155,7 @@ module Aws::AutoScaling
     #   @return [Boolean]
     # @!attribute capacity_reservation_specification
     #   <p>
-    #           The capacity reservation specification for the Auto Scaling group.
+    #           The capacity reservation specification for the Auto Scaling group. 
     #       </p>
     #   @return [Types::CapacityReservationSpecification]
     # @!attribute instance_lifecycle_policy
@@ -3242,13 +3242,13 @@ module Aws::AutoScaling
     #               joined with an <code>OR</code>, and the request returns all results that match any of
     #               the specified values.</p>
     #            <p>
-    #               <b>DescribeAutoScalingGroups example:</b> Specify "tag:environment"
-    #               for the filter name and "production,development" for the filter values to find Auto Scaling groups with
+    #               <b>DescribeAutoScalingGroups example:</b> Specify "tag:environment" 
+    #               for the filter name and "production,development" for the filter values to find Auto Scaling groups with 
     #               the tag "environment=production" or "environment=development".
     #           </p>
     #            <p>
-    #               <b>DescribeScalingActivities example:</b> Specify "Status" for the
-    #               filter name and "Successful,Failed" for the filter values to find scaling activities with a
+    #               <b>DescribeScalingActivities example:</b> Specify "Status" for the 
+    #               filter name and "Successful,Failed" for the filter values to find scaling activities with a 
     #               status of either "Successful" or "Failed".
     #           </p>
     #   @return [Array<String>]
@@ -3369,8 +3369,8 @@ module Aws::AutoScaling
     #   @return [Types::LaunchTemplateSpecification]
     # @!attribute image_id
     #   <p>
-    #               The ID of the Amazon Machine Image (AMI) used for the instance's current root volume.
-    #               This value reflects the most recent AMI applied to the instance, including updates made
+    #               The ID of the Amazon Machine Image (AMI) used for the instance's current root volume. 
+    #               This value reflects the most recent AMI applied to the instance, including updates made 
     #               through root volume replacement operations.
     #           </p>
     #            <p>
@@ -3479,7 +3479,7 @@ module Aws::AutoScaling
     #         </p>
     # @!attribute retention_triggers
     #   <p>
-    #               Specifies the conditions that trigger instance retention behavior. These triggers determine when instances
+    #               Specifies the conditions that trigger instance retention behavior. These triggers determine when instances 
     #               should move to a <code>Retained</code> state instead of automatic termination. This allows you to maintain
     #               control over instance management when lifecycles transition and operations fail.
     #           </p>
@@ -3671,7 +3671,7 @@ module Aws::AutoScaling
     #   @return [Types::RollbackDetails]
     # @!attribute strategy
     #   <p>
-    #               The strategy to use for the instance refresh. This determines how instances in the Auto Scaling group are
+    #               The strategy to use for the instance refresh. This determines how instances in the Auto Scaling group are 
     #               updated. Default is Rolling.
     #           </p>
     #            <ul>
@@ -4154,7 +4154,7 @@ module Aws::AutoScaling
     #               <dd>
     #                  <p>Uses price to determine which instance types are the highest priority,
     #                           launching the lowest priced instance types within an Availability Zone
-    #                           first. This is the default value for Auto Scaling groups that specify
+    #                           first. This is the default value for Auto Scaling groups that specify 
     #                           <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_InstanceRequirements.html">InstanceRequirements</a>. </p>
     #               </dd>
     #               <dt>prioritized</dt>
@@ -4485,12 +4485,12 @@ module Aws::AutoScaling
     #   @return [Integer]
     # @!attribute client_token
     #   <p>
-    #               A unique, case-sensitive identifier to ensure idempotency of the request.
+    #               A unique, case-sensitive identifier to ensure idempotency of the request. 
     #           </p>
     #   @return [String]
     # @!attribute availability_zones
     #   <p>
-    #               The Availability Zones for the instance launch. Must match or be included in the Auto Scaling group's Availability Zone configuration. Either <code>AvailabilityZones</code> or <code>SubnetIds</code> must be specified for groups with multiple Availability Zone configurations.
+    #               The Availability Zones for the instance launch. Must match or be included in the Auto Scaling group's Availability Zone configuration. Either <code>AvailabilityZones</code> or <code>SubnetIds</code> must be specified for groups with multiple Availability Zone configurations. 
     #           </p>
     #   @return [Array<String>]
     # @!attribute availability_zone_ids
@@ -4643,8 +4643,8 @@ module Aws::AutoScaling
     #   @return [Types::InstanceRequirements]
     # @!attribute image_id
     #   <p>
-    #               The ID of the Amazon Machine Image (AMI) to use for instances launched with this override. When
-    #               using Instance Refresh with <code>ReplaceRootVolume</code> strategy, this specifies the AMI for root volume
+    #               The ID of the Amazon Machine Image (AMI) to use for instances launched with this override. When 
+    #               using Instance Refresh with <code>ReplaceRootVolume</code> strategy, this specifies the AMI for root volume 
     #               replacement operations.
     #           </p>
     #            <p>
@@ -5382,7 +5382,7 @@ module Aws::AutoScaling
     #           </p>
     #            <note>
     #               <p>Make sure that you specify the correct value for the instance family. The instance family is everything before the period (.) in the instance type name. For example, in the instance <code>c6i.large</code>, the
-    #               instance family is <code>c6i</code>, not <code>c6</code>. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-type-names.html">Amazon EC2 instance type naming conventions</a> in
+    #               instance family is <code>c6i</code>, not <code>c6</code>. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-type-names.html">Amazon EC2 instance type naming conventions</a> in 
     #               <i>Amazon EC2 Instance Types</i>.</p>
     #            </note>
     #            <p>The following instance types are <i>not supported</i> for performance protection.</p>
@@ -6820,7 +6820,7 @@ module Aws::AutoScaling
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes information used for one or more scheduled scaling action updates in a
+    # <p>Describes information used for one or more scheduled scaling action updates in a 
     #             <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_BatchPutScheduledUpdateGroupAction.html">BatchPutScheduledUpdateGroupAction</a>
     #             operation.</p>
     # @!attribute scheduled_action_name
@@ -7741,7 +7741,7 @@ module Aws::AutoScaling
     #   @return [Boolean]
     # @!attribute capacity_reservation_specification
     #   <p>
-    #               The capacity reservation specification for the Auto Scaling group.
+    #               The capacity reservation specification for the Auto Scaling group. 
     #           </p>
     #   @return [Types::CapacityReservationSpecification]
     # @!attribute instance_lifecycle_policy

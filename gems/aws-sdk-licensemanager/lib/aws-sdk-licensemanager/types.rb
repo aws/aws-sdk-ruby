@@ -567,7 +567,7 @@ module Aws::LicenseManager
     #            blocks the launch of new instances.</p>
     #   @return [Boolean]
     # @!attribute license_rules
-    #   <p>License rules. The syntax is #name=value (for example, #allowedTenancy=EC2-DedicatedHost). The available rules
+    #   <p>License rules. The syntax is #name=value (for example, #allowedTenancy=EC2-DedicatedHost). The available rules 
     #            vary by dimension, as follows.</p>
     #            <ul>
     #               <li>
@@ -579,28 +579,28 @@ module Aws::LicenseManager
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>Instances</code> dimension: <code>allowedTenancy</code> |
+    #                     <code>Instances</code> dimension: <code>allowedTenancy</code> | 
     #                  <code>maximumVcpus</code> | <code>minimumVcpus</code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>Sockets</code> dimension: <code>allowedTenancy</code> |
+    #                     <code>Sockets</code> dimension: <code>allowedTenancy</code> | 
     #                  <code>licenseAffinityToHost</code> |
     #                  <code>maximumSockets</code> | <code>minimumSockets</code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>vCPUs</code> dimension: <code>allowedTenancy</code> |
-    #                  <code>honorVcpuOptimization</code> |
+    #                     <code>vCPUs</code> dimension: <code>allowedTenancy</code> | 
+    #                  <code>honorVcpuOptimization</code> | 
     #                  <code>maximumVcpus</code> | <code>minimumVcpus</code>
     #                  </p>
     #               </li>
     #            </ul>
-    #            <p>The unit for <code>licenseAffinityToHost</code> is days and the range is 1 to 180. The possible
-    #            values for <code>allowedTenancy</code> are <code>EC2-Default</code>, <code>EC2-DedicatedHost</code>, and
-    #            <code>EC2-DedicatedInstance</code>. The possible values for <code>honorVcpuOptimization</code> are
+    #            <p>The unit for <code>licenseAffinityToHost</code> is days and the range is 1 to 180. The possible 
+    #            values for <code>allowedTenancy</code> are <code>EC2-Default</code>, <code>EC2-DedicatedHost</code>, and 
+    #            <code>EC2-DedicatedInstance</code>. The possible values for <code>honorVcpuOptimization</code> are 
     #            <code>True</code> and <code>False</code>.</p>
     #   @return [Array<String>]
     # @!attribute tags
@@ -647,8 +647,8 @@ module Aws::LicenseManager
     #   <p>Amazon Resource Name (ARN) of the resource you are converting the license type for.</p>
     #   @return [String]
     # @!attribute source_license_context
-    #   <p>Information that identifies the license type you are converting from.
-    #
+    #   <p>Information that identifies the license type you are converting from. 
+    #   
     #            For the structure of the source license, see <a href="https://docs.aws.amazon.com/license-manager/latest/userguide/conversion-procedures.html#conversion-cli">Convert a license type using the CLI </a> in the <i>License Manager User Guide</i>.</p>
     #   @return [Types::LicenseConversionContext]
     # @!attribute destination_license_context
@@ -891,7 +891,7 @@ module Aws::LicenseManager
     #             JWT token.</p>
     #   @return [String]
     # @!attribute role_arns
-    #   <p>Amazon Resource Name (ARN) of the IAM roles to embed in the token.
+    #   <p>Amazon Resource Name (ARN) of the IAM roles to embed in the token. 
     #            License Manager does not check whether the roles are in use.</p>
     #   @return [Array<String>]
     # @!attribute expiration_in_days
@@ -1629,7 +1629,7 @@ module Aws::LicenseManager
     #   <p>Indicates whether cross-account discovery is enabled.</p>
     #   @return [Boolean]
     # @!attribute license_manager_resource_share_arn
-    #   <p>Amazon Resource Name (ARN) of the resource share. The License Manager management account
+    #   <p>Amazon Resource Name (ARN) of the resource share. The License Manager management account 
     #            provides member accounts with access to this share.</p>
     #   @return [String]
     # @!attribute cross_region_discovery_home_region
@@ -1849,7 +1849,7 @@ module Aws::LicenseManager
     #   <p>Issuer name.</p>
     #   @return [String]
     # @!attribute sign_key
-    #   <p>Asymmetric KMS key from Key Management Service. The KMS key must have a key usage of sign and verify,
+    #   <p>Asymmetric KMS key from Key Management Service. The KMS key must have a key usage of sign and verify, 
     #            and support the RSASSA-PSS SHA-256 signing algorithm.</p>
     #   @return [String]
     class Issuer < Struct.new(
@@ -1866,7 +1866,7 @@ module Aws::LicenseManager
     #   <p>Issuer name.</p>
     #   @return [String]
     # @!attribute sign_key
-    #   <p>Asymmetric KMS key from Key Management Service. The KMS key must have a key usage of sign and verify,
+    #   <p>Asymmetric KMS key from Key Management Service. The KMS key must have a key usage of sign and verify, 
     #            and support the RSASSA-PSS SHA-256 signing algorithm.</p>
     #   @return [String]
     # @!attribute key_fingerprint
@@ -2060,7 +2060,7 @@ module Aws::LicenseManager
 
     # <p>A license configuration is an abstraction of a customer license agreement that can be
     #          consumed and enforced by License Manager. Components include specifications for the license
-    #          type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy,
+    #          type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, 
     #          Dedicated Instance, Dedicated Host, or all of these), host affinity (how long a VM
     #          must be associated with a host), and the number of licenses purchased and used.</p>
     # @!attribute license_configuration_id
@@ -3177,16 +3177,16 @@ module Aws::LicenseManager
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>application_name</code> - The name of the application.
+    #                     <code>application_name</code> - The name of the application. 
     #                  Logical operators are <code>EQUALS</code> | <code>BEGINS_WITH</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>license_included</code> - The type of license included.
+    #                     <code>license_included</code> - The type of license included. 
     #                  Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.
-    #                  Possible values are <code>sql-server-enterprise</code> |
-    #                  <code>sql-server-standard</code> |
-    #                  <code>sql-server-web</code> |
+    #                  Possible values are <code>sql-server-enterprise</code> | 
+    #                  <code>sql-server-standard</code> | 
+    #                  <code>sql-server-web</code> |  
     #                  <code>windows-server-datacenter</code>.</p>
     #               </li>
     #               <li>
@@ -3196,12 +3196,12 @@ module Aws::LicenseManager
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>resource_id</code> - The ID of the resource.
+    #                     <code>resource_id</code> - The ID of the resource. 
     #                  Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>tag:<key></code> - The key/value combination of a tag assigned
+    #                     <code>tag:<key></code> - The key/value combination of a tag assigned 
     #                  to the resource. Logical operators are <code>EQUALS</code> (single account) or
     #                  <code>EQUALS</code> | <code>NOT_EQUALS</code> (cross account).</p>
     #               </li>
@@ -3318,7 +3318,7 @@ module Aws::LicenseManager
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>resourceType</code> - The resource type (<code>EC2_INSTANCE</code> |
+    #                     <code>resourceType</code> - The resource type (<code>EC2_INSTANCE</code> | 
     #               	<code>EC2_HOST</code> | <code>EC2_AMI</code> | <code>SYSTEMS_MANAGER_MANAGED_INSTANCE</code>).</p>
     #               </li>
     #               <li>
@@ -3636,7 +3636,7 @@ module Aws::LicenseManager
     # @!attribute product_information_filter_list
     #   <p>A Product information filter consists of a <code>ProductInformationFilterComparator</code> which is a logical operator, a <code>ProductInformationFilterName</code> which specifies the type of filter being declared, and a <code>ProductInformationFilterValue</code> that specifies the value to filter on. </p>
     #            <p>Accepted values for <code>ProductInformationFilterName</code> are listed here along with descriptions and valid options for <code>ProductInformationFilterComparator</code>. </p>
-    #            <p>The following filters and are supported when the resource type
+    #            <p>The following filters and are supported when the resource type 
     #            is <code>SSM_MANAGED</code>:</p>
     #            <ul>
     #               <li>
@@ -3678,9 +3678,9 @@ module Aws::LicenseManager
     #                  <p>
     #                     <code>License Included</code> - The type of license included.
     #                  Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
-    #                  Possible values are: <code>sql-server-enterprise</code> |
-    #                  <code>sql-server-standard</code> |
-    #                  <code>sql-server-web</code> |
+    #                  Possible values are: <code>sql-server-enterprise</code> | 
+    #                  <code>sql-server-standard</code> | 
+    #                  <code>sql-server-web</code> |  
     #                  <code>windows-server-datacenter</code>.</p>
     #               </li>
     #            </ul>
@@ -3691,17 +3691,17 @@ module Aws::LicenseManager
     #                  <p>
     #                     <code>Engine Edition</code> - The edition of the database engine.
     #                  Logical operator is <code>EQUALS</code>.
-    #                  Possible values are: <code>oracle-ee</code> | <code>oracle-se</code> | <code>oracle-se1</code> | <code>oracle-se2</code>
+    #                  Possible values are: <code>oracle-ee</code> | <code>oracle-se</code> | <code>oracle-se1</code> | <code>oracle-se2</code> 
     #               	| <code>db2-se</code> | <code>db2-ae</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>License Pack</code> - The license pack.
     #                  Logical operator is <code>EQUALS</code>.
-    #                  Possible values are: <code>data guard</code> |
-    #                  <code>diagnostic pack sqlt</code> |
-    #                  <code>tuning pack sqlt</code> |
-    #                  <code>ols</code> |
+    #                  Possible values are: <code>data guard</code> | 
+    #                  <code>diagnostic pack sqlt</code> | 
+    #                  <code>tuning pack sqlt</code> | 
+    #                  <code>ols</code> | 
     #                  <code>olap</code>.</p>
     #               </li>
     #            </ul>
@@ -3865,7 +3865,7 @@ module Aws::LicenseManager
 
     # <p>Details about how frequently reports are generated.</p>
     # @!attribute value
-    #   <p>Number of times within the frequency period that a report is generated.
+    #   <p>Number of times within the frequency period that a report is generated.  
     #            The only supported value is <code>1</code>.</p>
     #   @return [Integer]
     # @!attribute period

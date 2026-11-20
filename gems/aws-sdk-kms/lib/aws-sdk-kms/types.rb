@@ -1271,8 +1271,8 @@ module Aws::KMS
     #                        <p>It must have a network load balancer (NLB) connected to at least two subnets, each in a different Availability Zone.</p>
     #                     </li>
     #                     <li>
-    #                        <p>The <code>Allow principals</code> list must include
-    #   	         the KMS service principal for the Region, <code>cks.kms.<region>.amazonaws.com</code>,
+    #                        <p>The <code>Allow principals</code> list must include 
+    #   	         the KMS service principal for the Region, <code>cks.kms.<region>.amazonaws.com</code>,  
     #   	         such as <code>cks.kms.us-east-1.amazonaws.com</code>.</p>
     #                     </li>
     #                     <li>
@@ -1339,7 +1339,7 @@ module Aws::KMS
     # @!attribute encryption_context
     #   <p>Specifies the encryption context to use when decrypting the data.
     #         An encryption context is valid only for <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations">cryptographic operations</a> with a symmetric encryption KMS key. The standard asymmetric encryption algorithms and HMAC algorithms that KMS uses do not support an encryption context.</p>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -1408,11 +1408,11 @@ module Aws::KMS
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Boolean]
     # @!attribute dry_run_modifiers
-    #   <p>Specifies the modifiers to apply to the dry run operation. <code>DryRunModifiers</code> is an optional parameter that only applies when <code>DryRun</code> is
+    #   <p>Specifies the modifiers to apply to the dry run operation. <code>DryRunModifiers</code> is an optional parameter that only applies when <code>DryRun</code> is 
     #           set to <code>true</code>.</p>
-    #            <p>When set to <code>IGNORE_CIPHERTEXT</code>, KMS performs only authorization validation without ciphertext validation. This allows you to test permissions
+    #            <p>When set to <code>IGNORE_CIPHERTEXT</code>, KMS performs only authorization validation without ciphertext validation. This allows you to test permissions 
     #           without requiring a valid ciphertext blob.</p>
-    #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your
+    #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your 
     #           permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Array<String>]
     class DecryptRequest < Struct.new(
@@ -1988,7 +1988,7 @@ module Aws::KMS
     #            <important>
     #               <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>
     #            </important>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -2061,7 +2061,7 @@ module Aws::KMS
     #            <important>
     #               <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>
     #            </important>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -2186,7 +2186,7 @@ module Aws::KMS
     #            <important>
     #               <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>
     #            </important>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -2301,7 +2301,7 @@ module Aws::KMS
     #            <important>
     #               <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>
     #            </important>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -2425,7 +2425,7 @@ module Aws::KMS
     #            <important>
     #               <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>
     #            </important>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -4343,7 +4343,7 @@ module Aws::KMS
     # @!attribute source_encryption_context
     #   <p>Specifies the encryption context to use to decrypt the ciphertext. Enter the same
     #         encryption context that was used to encrypt the ciphertext.</p>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -4417,7 +4417,7 @@ module Aws::KMS
     #            <p>A destination encryption context is valid only when the destination KMS key is a symmetric
     #         encryption KMS key. The standard ciphertext format for asymmetric KMS keys does not include
     #         fields for metadata.</p>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -4449,11 +4449,11 @@ module Aws::KMS
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Boolean]
     # @!attribute dry_run_modifiers
-    #   <p>Specifies the modifiers to apply to the dry run operation. <code>DryRunModifiers</code> is an optional parameter that only applies when <code>DryRun</code> is
+    #   <p>Specifies the modifiers to apply to the dry run operation. <code>DryRunModifiers</code> is an optional parameter that only applies when <code>DryRun</code> is 
     #           set to <code>true</code>.</p>
-    #            <p>When set to <code>IGNORE_CIPHERTEXT</code>, KMS performs only authorization validation without ciphertext validation. This allows you to test permissions
+    #            <p>When set to <code>IGNORE_CIPHERTEXT</code>, KMS performs only authorization validation without ciphertext validation. This allows you to test permissions 
     #           without requiring a valid ciphertext blob.</p>
-    #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your
+    #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your 
     #           permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Array<String>]
     class ReEncryptRequest < Struct.new(

@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::WorkSpaces
     @identifier = :workspaces
 
     add_plugin(::Aws::WorkSpaces::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::WorkSpaces
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::WorkSpaces
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -640,7 +660,7 @@ module Aws::WorkSpaces
     end
 
     # <p>Creates a new updated WorkSpace image based on the specified source image. The new
-    #          updated WorkSpace image has the latest drivers and other updates required by the
+    #          updated WorkSpace image has the latest drivers and other updates required by the 
     #          Amazon WorkSpaces components.</p>
     #          <p>To determine which WorkSpace images need to be updated with the latest Amazon WorkSpaces
     #          requirements, use <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html">
@@ -700,7 +720,7 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Creates the specified WorkSpace bundle. For more information about creating WorkSpace bundles, see
+    # <p>Creates the specified WorkSpace bundle. For more information about creating WorkSpace bundles, see 
     #          <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/create-custom-bundle.html">
     #             Create a Custom WorkSpaces Image and Bundle</a>.</p>
     # @param [Hash, Types::CreateWorkspaceBundleRequest] params
@@ -719,7 +739,7 @@ module Aws::WorkSpaces
     # @option params [Array<Types::Tag>] :tags
     #   <p>The tags associated with the bundle.</p>
     #            <note>
-    #               <p>To add tags at the same time when you're creating the bundle, you must create an IAM policy that
+    #               <p>To add tags at the same time when you're creating the bundle, you must create an IAM policy that 
     #               grants your IAM user permissions to use <code>workspaces:CreateTags</code>. </p>
     #            </note>
     # @example Request syntax with placeholder values
@@ -784,8 +804,8 @@ module Aws::WorkSpaces
     # @option params [String] :workspace_id
     #   <p>The identifier of the source WorkSpace</p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>The tags that you want to add to the new WorkSpace image.
-    #            To add tags when you're creating the image, you must create an IAM policy that grants
+    #   <p>The tags that you want to add to the new WorkSpace image. 
+    #            To add tags when you're creating the image, you must create an IAM policy that grants 
     #            your IAM user permission to use <code>workspaces:CreateTags</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -841,7 +861,7 @@ module Aws::WorkSpaces
     #                </li>
     #                <li>
     #                   <p>Review your running mode to ensure you are using one that is optimal for your needs and budget.
-    #                   For more information on switching running modes, see
+    #                   For more information on switching running modes, see 
     #                   <a href="http://aws.amazon.com/workspaces-family/workspaces/faqs/#:~:text=Can%20I%20switch%20between%20hourly%20and%20monthly%20billing%20on%20WorkSpaces%20Personal%3F">
     #                      Can I switch between hourly and monthly billing?</a>
     #                   </p>
@@ -1247,7 +1267,7 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Deletes the specified WorkSpace bundle. For more information about deleting WorkSpace bundles, see
+    # <p>Deletes the specified WorkSpace bundle. For more information about deleting WorkSpace bundles, see 
     #          <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/delete_bundle.html">
     #             Delete a Custom WorkSpaces Bundle or Image</a>.</p>
     # @param [Hash, Types::DeleteWorkspaceBundleRequest] params
@@ -1294,7 +1314,7 @@ module Aws::WorkSpaces
     # @option params [String] :workspace_id
     #   <p>The identifier of the WorkSpace.</p>
     # @option params [Boolean] :force
-    #   <p>Indicates whether the force flag is applied for the specified WorkSpace. When the force flag is enabled,
+    #   <p>Indicates whether the force flag is applied for the specified WorkSpace. When the force flag is enabled, 
     #            it allows previously failed deployments to be retried.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1977,7 +1997,7 @@ module Aws::WorkSpaces
     #   <p>The identifiers of the bundles. You cannot combine this parameter with any other filter.</p>
     # @option params [String] :owner
     #   <p>The owner of the bundles. You cannot combine this parameter with any other filter.</p>
-    #            <p>To describe the bundles provided by Amazon Web Services, specify <code>AMAZON</code>.
+    #            <p>To describe the bundles provided by Amazon Web Services, specify <code>AMAZON</code>. 
     #            To describe the bundles that belong to your account, don't specify a value.</p>
     # @option params [String] :next_token
     #   <p>The token for the next set of results. (You received this token from a previous call.)</p>
@@ -2440,7 +2460,7 @@ module Aws::WorkSpaces
     #   <p>The maximum size of each page of results. The default value is 20 and the maximum value
     #            is 50.</p>
     # @option params [String] :next_token
-    #   <p>If you received a <code>NextToken</code> from a previous call that was paginated,
+    #   <p>If you received a <code>NextToken</code> from a previous call that was paginated, 
     #            provide this token to receive the next set of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2493,7 +2513,7 @@ module Aws::WorkSpaces
     # @option params [Integer] :limit
     #   <p>The maximum number of items to return.</p>
     # @option params [String] :next_token
-    #   <p>If you received a <code>NextToken</code> from a previous call that was paginated,
+    #   <p>If you received a <code>NextToken</code> from a previous call that was paginated, 
     #            provide this token to receive the next set of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2902,9 +2922,9 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Imports the specified Windows 10 or 11 Bring Your Own License (BYOL)
-    #          image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is
-    #          in your Amazon Web Services account, and you must own the image. For more information about
+    # <p>Imports the specified Windows 10 or 11 Bring Your Own License (BYOL) 
+    #          image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is 
+    #          in your Amazon Web Services account, and you must own the image. For more information about 
     #          creating BYOL images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html"> Bring Your Own Windows
     #             Desktop Licenses</a>.</p>
     # @param [Hash, Types::ImportWorkspaceImageRequest] params
@@ -2912,12 +2932,12 @@ module Aws::WorkSpaces
     #   <p>The identifier of the EC2 image.</p>
     # @option params [String] :ingestion_process
     #   <p>The ingestion process to be used when importing the image, depending on which protocol
-    #            you want to use for your BYOL Workspace image, either PCoIP, WSP, or
-    #            bring your own protocol (BYOP). To use DCV, specify a value that ends in
-    #            <code>_WSP</code>. To use PCoIP, specify a value that does not end in <code>_WSP</code>.
+    #            you want to use for your BYOL Workspace image, either PCoIP, WSP, or 
+    #            bring your own protocol (BYOP). To use DCV, specify a value that ends in 
+    #            <code>_WSP</code>. To use PCoIP, specify a value that does not end in <code>_WSP</code>. 
     #            To use BYOP, specify a value that ends in <code>_BYOP</code>.</p>
-    #            <p>For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify
-    #            <code>BYOL_REGULAR</code>, <code>BYOL_REGULAR_WSP</code>, or <code>BYOL_REGULAR_BYOP</code>,
+    #            <p>For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify 
+    #            <code>BYOL_REGULAR</code>, <code>BYOL_REGULAR_WSP</code>, or <code>BYOL_REGULAR_BYOP</code>, 
     #            depending on the protocol.</p>
     #            <note>
     #               <p>The <code>BYOL_REGULAR_BYOP</code> and <code>BYOL_GRAPHICS_G4DN_BYOP</code> values
@@ -3193,8 +3213,8 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Modifies multiple properties related to SAML 2.0 authentication, including the enablement status,
-    #          user access URL, and relay state parameter name that are used for configuring federation with an
+    # <p>Modifies multiple properties related to SAML 2.0 authentication, including the enablement status, 
+    #          user access URL, and relay state parameter name that are used for configuring federation with an 
     #          SAML 2.0 identity provider.</p>
     # @param [Hash, Types::ModifySamlPropertiesRequest] params
     # @option params [String] :resource_id
@@ -3453,7 +3473,7 @@ module Aws::WorkSpaces
 
     # <p>Reboots the specified WorkSpaces.</p>
     #          <p>You cannot reboot a WorkSpace unless its state is <code>AVAILABLE</code>,
-    #          <code>UNHEALTHY</code>, or <code>REBOOTING</code>. Reboot a WorkSpace in the <code>REBOOTING</code>
+    #          <code>UNHEALTHY</code>, or <code>REBOOTING</code>. Reboot a WorkSpace in the <code>REBOOTING</code> 
     #          state only if your WorkSpace has been stuck in the <code>REBOOTING</code> state for over 20 minutes.</p>
     #          <p>This operation is asynchronous and returns before the WorkSpaces have rebooted.</p>
     # @param [Hash, Types::RebootWorkspacesRequest] params
@@ -3724,7 +3744,7 @@ module Aws::WorkSpaces
     #  </p>
     #          </note>
     #          <p>Starts the specified pool.</p>
-    #          <p>You cannot start a pool unless it has a running mode of
+    #          <p>You cannot start a pool unless it has a running mode of 
     #          <code>AutoStop</code> and a state of <code>STOPPED</code>.</p>
     # @param [Hash, Types::StartWorkspacesPoolRequest] params
     # @option params [String] :pool_id
@@ -3785,7 +3805,7 @@ module Aws::WorkSpaces
     #  </p>
     #          </note>
     #          <p>Stops the specified pool.</p>
-    #          <p>You cannot stop a WorkSpace pool unless it has a running mode of <code>AutoStop</code>
+    #          <p>You cannot stop a WorkSpace pool unless it has a running mode of <code>AutoStop</code> 
     #          and a state of <code>AVAILABLE</code>, <code>IMPAIRED</code>, <code>UNHEALTHY</code>, or <code>ERROR</code>.</p>
     # @param [Hash, Types::StopWorkspacesPoolRequest] params
     # @option params [String] :pool_id
@@ -4013,12 +4033,12 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Updates a WorkSpace bundle with a new image. For more information about updating WorkSpace bundles, see
+    # <p>Updates a WorkSpace bundle with a new image. For more information about updating WorkSpace bundles, see 
     #          <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/update-custom-bundle.html">
     #             Update a Custom WorkSpaces Bundle</a>.</p>
     #          <important>
-    #             <p>Existing WorkSpaces aren't automatically updated when you update the bundle that they're
-    #             based on. To update existing WorkSpaces that are based on a bundle that you've updated, you
+    #             <p>Existing WorkSpaces aren't automatically updated when you update the bundle that they're 
+    #             based on. To update existing WorkSpaces that are based on a bundle that you've updated, you 
     #             must either rebuild the WorkSpaces or delete and recreate them.</p>
     #          </important>
     # @param [Hash, Types::UpdateWorkspaceBundleRequest] params
@@ -4234,7 +4254,8 @@ module Aws::WorkSpaces
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.
