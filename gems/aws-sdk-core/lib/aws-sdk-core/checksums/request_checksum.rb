@@ -7,8 +7,8 @@ module Aws
   module Core
     module Checksums
       # Applies a modeled or supplied checksum to a serialized request.
+      # @api private
       class RequestChecksum
-        # Bound memory use while avoiding excessive reads for large bodies.
         CHUNK_SIZE = 1 * 1024 * 1024
         CONTROL_HEADERS = %w[
           x-amz-checksum-type
@@ -23,35 +23,26 @@ module Aws
 
         def apply
           supplied_header = supplied_checksum_header
-          return apply_supplied_checksum(supplied_header) if supplied_header
-          return unless applicable?
+          return apply_supplied_checksum if supplied_header
+          return unless calculation_enabled?
 
           apply_calculated_checksum
         end
 
         private
 
-        def apply_supplied_checksum(header)
+        def apply_supplied_checksum
           remove_algorithm_header
-          @context[:http_checksum][:request_algorithm] = {
-            algorithm: header.delete_prefix('x-amz-checksum-').upcase,
-            in: 'header',
-            name: header,
-            supplied: true
-          }
+          @context[:http_checksum][:request_checksum_applied] = true
           nil
         end
 
         def apply_calculated_checksum
           algorithm = selected_algorithm
-          header_name = "x-amz-checksum-#{algorithm.downcase}"
+          header_name = Checksums.header_name(algorithm)
           location = request_location
           remove_flexible_checksum_headers
-          @context[:http_checksum][:request_algorithm] = {
-            algorithm: algorithm,
-            in: location,
-            name: header_name
-          }
+          @context[:http_checksum][:request_checksum_applied] = true
           if location == 'trailer'
             apply_trailer_checksum(algorithm, header_name)
           else
@@ -61,18 +52,16 @@ module Aws
         end
 
         def request_location
-          return 'header' unless streaming_request?
-          return 'header' unless @context.operation.traits.key?('aws.auth#unsignedPayload')
+          return 'header' unless Extension.http_checksum_trailer_eligible?(@context.operation)
           return 'header' if trailer_fallback?
 
           'trailer'
         end
 
-        def streaming_request?
-          !SCHEMA_EXTENSION.streaming_member(@context.operation.input).nil?
-        end
-
         def trailer_fallback?
+          # Match V3's conservative fallback for known JRuby OpenSSL network
+          # issues when streaming unsigned payload trailers.
+          # TODO: Verify whether current JRuby versions still require this.
           return true if defined?(JRUBY_VERSION)
           return true if request.endpoint.scheme == 'http'
 
@@ -82,8 +71,7 @@ module Aws
         def apply_trailer_checksum(algorithm, header_name)
           body = request.body
           unless body.respond_to?(:size)
-            raise Aws::Core::Errors::ChecksumError,
-                  'Could not determine length of the body'
+            raise Aws::Core::Errors::ChecksumError, 'Could not determine length of the body'
           end
 
           apply_trailer_headers(body.size, header_name)
@@ -127,7 +115,7 @@ module Aws
           @context.params.delete(@checksum[:request_algorithm_member])
         end
 
-        def applicable?
+        def calculation_enabled?
           return true if @checksum[:request_checksum_required]
           return false unless (member = @checksum[:request_algorithm_member])
 

@@ -63,6 +63,32 @@ module Aws
           request_validation_mode_member: :checksum_mode,
           response_algorithms: %w[CRC32 SHA256]
         )
+
+        validation_algorithms =
+          described_class.http_checksum_validation_algorithms(
+            operation,
+            %w[CRC32 SHA1 SHA256 SHA512]
+          )
+        expect(validation_algorithms).to eq(%w[CRC32 SHA256])
+        expect(
+          described_class.http_checksum_validation_algorithms(
+            operation,
+            %w[CRC32 SHA1 SHA256 SHA512]
+          )
+        ).to be(validation_algorithms)
+      end
+
+      it 'resolves and caches checksum trailer eligibility' do
+        input = Smithy::Schema::Shapes::StructureShape.new(name: 'Input')
+        operation = Smithy::Schema::Shapes::OperationShape.new(
+          input: input,
+          traits: { 'aws.auth#unsignedPayload' => {} }
+        )
+        expect(SCHEMA_EXTENSION)
+          .to receive(:streaming_member).with(input).once.and_return(Object.new)
+
+        expect(described_class.http_checksum_trailer_eligible?(operation)).to be(true)
+        expect(described_class.http_checksum_trailer_eligible?(operation)).to be(true)
       end
 
       it 'returns nil when an operation has no HTTP checksum trait' do

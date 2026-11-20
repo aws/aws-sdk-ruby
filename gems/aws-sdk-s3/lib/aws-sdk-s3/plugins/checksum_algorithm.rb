@@ -6,31 +6,21 @@ module Aws
       # S3-specific flexible checksum behavior.
       # @api private
       class ChecksumAlgorithm < Smithy::Client::Plugin
-        # The Flexible Checksums SEP requires skipping whole multipart object
-        # checksums because their part-count suffix cannot be validated against
-        # the returned object bytes.
+        SKIP_MULTIPART_CHECKSUM_VALIDATION =
+          ->(checksum) { /-\d+$/.match?(checksum) }
+        private_constant :SKIP_MULTIPART_CHECKSUM_VALIDATION
+
+        # S3 GetObject responses for multipart objects can contain a composite
+        # checksum with a part-count suffix that cannot be validated against
+        # the returned object bytes. Smithy does not model this S3-specific
+        # behavior.
+        # @api private
         class SkipWholeMultipartGetChecksumsHandler < Smithy::Client::Handler
           def call(context)
             context[:http_checksum] ||= {}
-            context[:http_checksum][:skip_on_suffix] = true
+            context[:http_checksum][:skip_response_validation] =
+              SKIP_MULTIPART_CHECKSUM_VALIDATION
             @handler.call(context)
-          end
-        end
-
-        # V3 compatibility for S3-compatible custom endpoints that do not
-        # support STREAMING-UNSIGNED-PAYLOAD-TRAILER.
-        # See https://github.com/aws/aws-sdk-ruby/issues/3338.
-        class SkipTrailerChecksumsHandler < Smithy::Client::Handler
-          def call(context)
-            context[:skip_trailer_checksums] = true if custom_endpoint?(context.config)
-            @handler.call(context)
-          end
-
-          private
-
-          def custom_endpoint?(config)
-            !config.endpoint.nil? ||
-              !config.endpoint_provider.instance_of?(Aws::S3::EndpointProvider)
           end
         end
 
@@ -39,12 +29,6 @@ module Aws
             SkipWholeMultipartGetChecksumsHandler,
             step: :initialize,
             operations: [:get_object]
-          )
-          handlers.add(
-            SkipTrailerChecksumsHandler,
-            step: :build,
-            priority: 16,
-            operations: %i[put_object upload_part]
           )
         end
       end
