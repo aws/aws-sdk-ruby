@@ -359,7 +359,7 @@ module Aws::Neptune
 
     # @!attribute source_db_cluster_snapshot_identifier
     #   <p>The identifier of the DB cluster snapshot to copy. This parameter is not
-    #         case-sensitive. If the source DB cluster snapshot is in a different region or
+    #         case-sensitive. If the source DB cluster snapshot is in a different region or 
     #         owned by another account, specify the snapshot ARN.</p>
     #            <p>Constraints:</p>
     #            <ul>
@@ -1167,12 +1167,12 @@ module Aws::Neptune
     #   @return [String]
     # @!attribute publicly_accessible
     #   <p>Indicates whether the DB instance is publicly accessible.</p>
-    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private
-    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within
-    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is
-    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned
+    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private 
+    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within 
+    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is 
+    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned 
     #         to the DB cluster doesn't permit it.</p>
-    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a
+    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a 
     #         private IP address.</p>
     #   @return [Boolean]
     # @!attribute tags
@@ -2597,12 +2597,12 @@ module Aws::Neptune
     #   @return [String]
     # @!attribute publicly_accessible
     #   <p>Indicates whether the DB instance is publicly accessible.</p>
-    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private
-    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within
-    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is
-    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned
+    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private 
+    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within 
+    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is 
+    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned 
     #         to the DB cluster doesn't permit it.</p>
-    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a
+    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a 
     #         private IP address.</p>
     #   @return [Boolean]
     # @!attribute status_infos
@@ -4713,7 +4713,7 @@ module Aws::Neptune
 
     # @!attribute global_cluster_identifier
     #   <p>Identifier of the Neptune global database that should be failed over.
-    #         The identifier is the unique key assigned by the user when the Neptune
+    #         The identifier is the unique key assigned by the user when the Neptune 
     #         global database was created. In other words, it's the name of the global
     #         database that you want to fail over.</p>
     #            <p>Constraints: Must match the identifier of an existing Neptune global
@@ -5887,12 +5887,12 @@ module Aws::Neptune
     #   @return [Integer]
     # @!attribute publicly_accessible
     #   <p>Indicates whether the DB instance is publicly accessible.</p>
-    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private
-    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within
-    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is
-    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned
+    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private 
+    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within 
+    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is 
+    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned 
     #         to the DB cluster doesn't permit it.</p>
-    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a
+    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a 
     #         private IP address.</p>
     #   @return [Boolean]
     # @!attribute monitoring_role_arn
@@ -6087,7 +6087,7 @@ module Aws::Neptune
     # @!attribute event_categories
     #   <p> A list of event categories for a SourceType that you want to subscribe to. You can see a
     #         list of the categories for a given SourceType
-    #
+    #         
     #         by using the <b>DescribeEventCategories</b> action.</p>
     #   @return [Array<String>]
     # @!attribute enabled

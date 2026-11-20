@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::Textract
     @identifier = :textract
 
     add_plugin(::Aws::Textract::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::Textract
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::Textract
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -729,8 +749,8 @@ module Aws::Textract
     # @option params [String] :adapter_name
     #   <p>The name to be assigned to the adapter being created.</p>
     # @option params [String] :client_request_token
-    #   <p>Idempotent token is used to recognize the request. If the same token is used with multiple
-    #            CreateAdapter requests, the same session is returned.
+    #   <p>Idempotent token is used to recognize the request. If the same token is used with multiple 
+    #            CreateAdapter requests, the same session is returned. 
     #            This token is employed to avoid unintentionally creating the same session multiple times.</p>
     # @option params [String] :description
     #   <p>The description to be assigned to the adapter being created.</p>
@@ -766,16 +786,16 @@ module Aws::Textract
       request.send_request(options)
     end
 
-    # <p>Creates  a new version of an adapter. Operates on a provided AdapterId and a specified
-    #          dataset provided via the DatasetConfig argument. Requires that you
-    #          specify an Amazon S3 bucket with the OutputConfig argument. You can provide an optional KMSKeyId,
+    # <p>Creates  a new version of an adapter. Operates on a provided AdapterId and a specified 
+    #          dataset provided via the DatasetConfig argument. Requires that you 
+    #          specify an Amazon S3 bucket with the OutputConfig argument. You can provide an optional KMSKeyId, 
     #          an optional ClientRequestToken, and optional tags.</p>
     # @param [Hash, Types::CreateAdapterVersionRequest] params
     # @option params [String] :adapter_id
     #   <p>A string containing a unique ID for the adapter that will receive a new version.</p>
     # @option params [String] :client_request_token
-    #   <p>Idempotent token is used to recognize the request. If the same token is used with multiple
-    #            CreateAdapterVersion requests, the same session is returned.
+    #   <p>Idempotent token is used to recognize the request. If the same token is used with multiple 
+    #            CreateAdapterVersion requests, the same session is returned. 
     #            This token is employed to avoid unintentionally creating the same session multiple times.</p>
     # @option params [Types::AdapterVersionDatasetConfig] :dataset_config
     #   <p>Specifies a dataset used to train a new adapter version. Takes a ManifestS3Object as the
@@ -793,8 +813,8 @@ module Aws::Textract
     #            you can download your results. Additionally, you can set the <code>KMSKeyID</code>
     #            parameter to a customer master key (CMK) to encrypt your output. Without this parameter set
     #            Amazon Textract will encrypt server-side using the AWS managed CMK for Amazon S3.</p>
-    #            <p>Decryption of Customer Content is necessary for processing of the documents by Amazon Textract. If your account
-    #            is opted out under an AI services opt out policy then all unencrypted Customer Content is immediately and permanently deleted after
+    #            <p>Decryption of Customer Content is necessary for processing of the documents by Amazon Textract. If your account 
+    #            is opted out under an AI services opt out policy then all unencrypted Customer Content is immediately and permanently deleted after 
     #            the Customer Content has been processed by the service. No copy of of the output is retained by Amazon Textract. For information about how to opt out, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html"> Managing AI services opt-out policy. </a>
     #            </p>
     #            <p>For more information on data privacy,
@@ -855,7 +875,7 @@ module Aws::Textract
       request.send_request(options)
     end
 
-    # <p>Deletes an Amazon Textract adapter version. Requires that you specify both an AdapterId and a
+    # <p>Deletes an Amazon Textract adapter version. Requires that you specify both an AdapterId and a 
     #          AdapterVersion. Deletes the adapter version specified by the AdapterId and the AdapterVersion.</p>
     # @param [Hash, Types::DeleteAdapterVersionRequest] params
     # @option params [String] :adapter_id
@@ -886,13 +906,13 @@ module Aws::Textract
     #          is the parent of LINE <code>Block</code> objects that represent the lines of detected text on a page. A LINE <code>Block</code> object is
     #          a parent for each word that makes up the line. Words are represented by <code>Block</code> objects of type WORD.</p>
     #          <p>
-    #             <code>DetectDocumentText</code> is a synchronous operation. To analyze documents
+    #             <code>DetectDocumentText</code> is a synchronous operation. To analyze documents 
     #          asynchronously, use <a>StartDocumentTextDetection</a>.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html">Document Text Detection</a>.</p>
     # @param [Hash, Types::DetectDocumentTextRequest] params
     # @option params [Types::Document] :document
     #   <p>The input document as base64-encoded bytes or an Amazon S3 object. If you use the AWS CLI
-    #            to call Amazon Textract operations, you can't pass image bytes. The document must be an image
+    #            to call Amazon Textract operations, you can't pass image bytes. The document must be an image 
     #         in JPEG or PNG format.</p>
     #            <p>If you're using an AWS SDK to call Amazon Textract, you might not need to base64-encode
     #            image bytes that are passed using the <code>Bytes</code> field. </p>
@@ -995,8 +1015,8 @@ module Aws::Textract
       request.send_request(options)
     end
 
-    # <p>Gets configuration information for the specified adapter version, including:
-    #          AdapterId, AdapterVersion, FeatureTypes, Status, StatusMessage, DatasetConfig,
+    # <p>Gets configuration information for the specified adapter version, including: 
+    #          AdapterId, AdapterVersion, FeatureTypes, Status, StatusMessage, DatasetConfig, 
     #          KMSKeyId, OutputConfig, Tags and EvaluationMetrics.</p>
     # @param [Hash, Types::GetAdapterVersionRequest] params
     # @option params [String] :adapter_id
@@ -1203,7 +1223,7 @@ module Aws::Textract
       request.send_request(options)
     end
 
-    # <p>Gets the results for an Amazon Textract asynchronous operation that detects text in a document.
+    # <p>Gets the results for an Amazon Textract asynchronous operation that detects text in a document. 
     #      Amazon Textract can detect lines of text and the words that make up a line of text.</p>
     #          <p>You start asynchronous text detection by calling <a>StartDocumentTextDetection</a>, which returns a job identifier
     #             (<code>JobId</code>). When the text detection operation finishes, Amazon Textract publishes a
@@ -1993,10 +2013,10 @@ module Aws::Textract
     # @option params [String] :adapter_id
     #   <p>A string containing a unique ID for the adapter to match for when listing adapter versions.</p>
     # @option params [Time] :after_creation_time
-    #   <p>Specifies the lower bound for the ListAdapterVersions operation.
+    #   <p>Specifies the lower bound for the ListAdapterVersions operation. 
     #            Ensures ListAdapterVersions returns only adapter versions created after the specified creation time.</p>
     # @option params [Time] :before_creation_time
-    #   <p>Specifies the upper bound for the ListAdapterVersions operation.
+    #   <p>Specifies the upper bound for the ListAdapterVersions operation. 
     #            Ensures ListAdapterVersions returns only adapter versions created after the specified creation time.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return when listing adapter versions.</p>
@@ -2036,10 +2056,10 @@ module Aws::Textract
     # <p>Lists all adapters that match the specified filtration criteria.</p>
     # @param [Hash, Types::ListAdaptersRequest] params
     # @option params [Time] :after_creation_time
-    #   <p>Specifies the lower bound for the ListAdapters operation.
+    #   <p>Specifies the lower bound for the ListAdapters operation. 
     #            Ensures ListAdapters returns only adapters created after the specified creation time.</p>
     # @option params [Time] :before_creation_time
-    #   <p>Specifies the upper bound for the ListAdapters operation.
+    #   <p>Specifies the upper bound for the ListAdapters operation. 
     #            Ensures ListAdapters returns only adapters created before the specified creation time.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return when listing adapters.</p>
@@ -2141,10 +2161,10 @@ module Aws::Textract
     #   <p>Sets if the output will go to a customer defined bucket. By default, Amazon Textract will save
     #            the results internally to be accessed by the GetDocumentAnalysis operation.</p>
     # @option params [String] :kms_key_id
-    #   <p>The KMS key used to encrypt the inference results. This can be
-    #            in either Key ID or Key Alias format. When a KMS key is provided, the
-    #            KMS key will be used for server-side encryption of the objects in the
-    #            customer bucket. When this parameter is not enabled, the result will
+    #   <p>The KMS key used to encrypt the inference results. This can be 
+    #            in either Key ID or Key Alias format. When a KMS key is provided, the 
+    #            KMS key will be used for server-side encryption of the objects in the 
+    #            customer bucket. When this parameter is not enabled, the result will 
     #            be encrypted server side,using SSE-S3.</p>
     # @option params [Types::QueriesConfig] :queries_config
     #   <p></p>
@@ -2241,10 +2261,10 @@ module Aws::Textract
     #   <p>Sets if the output will go to a customer defined bucket. By default Amazon Textract will
     #            save the results internally to be accessed with the GetDocumentTextDetection operation.</p>
     # @option params [String] :kms_key_id
-    #   <p>The KMS key used to encrypt the inference results. This can be
-    #            in either Key ID or Key Alias format. When a KMS key is provided, the
-    #            KMS key will be used for server-side encryption of the objects in the
-    #            customer bucket. When this parameter is not enabled, the result will
+    #   <p>The KMS key used to encrypt the inference results. This can be 
+    #            in either Key ID or Key Alias format. When a KMS key is provided, the 
+    #            KMS key will be used for server-side encryption of the objects in the 
+    #            customer bucket. When this parameter is not enabled, the result will 
     #            be encrypted server side,using SSE-S3.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2299,8 +2319,8 @@ module Aws::Textract
     # @option params [Types::DocumentLocation] :document_location
     #   <p>The location of the document to be processed.</p>
     # @option params [String] :client_request_token
-    #   <p>The idempotent token that's used to identify the start request. If you use the same token with multiple <code>StartDocumentTextDetection</code> requests, the same <code>JobId</code> is returned.
-    #      Use <code>ClientRequestToken</code> to prevent the same job from being accidentally started more than once.
+    #   <p>The idempotent token that's used to identify the start request. If you use the same token with multiple <code>StartDocumentTextDetection</code> requests, the same <code>JobId</code> is returned. 
+    #      Use <code>ClientRequestToken</code> to prevent the same job from being accidentally started more than once. 
     #      For more information, see <a href="https://docs.aws.amazon.com/textract/latest/dg/api-async.html">Calling Amazon Textract Asynchronous Operations</a>
     #            </p>
     # @option params [String] :job_tag
@@ -2316,10 +2336,10 @@ module Aws::Textract
     #      save the results internally to be accessed by the <code>GetExpenseAnalysis</code>
     #      operation.</p>
     # @option params [String] :kms_key_id
-    #   <p>The KMS key used to encrypt the inference results. This can be
-    #      in either Key ID or Key Alias format. When a KMS key is provided, the
-    #      KMS key will be used for server-side encryption of the objects in the
-    #      customer bucket. When this parameter is not enabled, the result will
+    #   <p>The KMS key used to encrypt the inference results. This can be 
+    #      in either Key ID or Key Alias format. When a KMS key is provided, the 
+    #      KMS key will be used for server-side encryption of the objects in the 
+    #      customer bucket. When this parameter is not enabled, the result will 
     #      be encrypted server side,using SSE-S3.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2416,8 +2436,8 @@ module Aws::Textract
     #            you can download your results. Additionally, you can set the <code>KMSKeyID</code>
     #            parameter to a customer master key (CMK) to encrypt your output. Without this parameter set
     #            Amazon Textract will encrypt server-side using the AWS managed CMK for Amazon S3.</p>
-    #            <p>Decryption of Customer Content is necessary for processing of the documents by Amazon Textract. If your account
-    #            is opted out under an AI services opt out policy then all unencrypted Customer Content is immediately and permanently deleted after
+    #            <p>Decryption of Customer Content is necessary for processing of the documents by Amazon Textract. If your account 
+    #            is opted out under an AI services opt out policy then all unencrypted Customer Content is immediately and permanently deleted after 
     #            the Customer Content has been processed by the service. No copy of of the output is retained by Amazon Textract. For information about how to opt out, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html"> Managing AI services opt-out policy. </a>
     #            </p>
     #            <p>For more information on data privacy,
@@ -2595,7 +2615,8 @@ module Aws::Textract
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

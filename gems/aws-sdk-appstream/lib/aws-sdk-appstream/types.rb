@@ -449,7 +449,7 @@ module Aws::AppStream
     #   <p>The path prefix for the S3 bucket where users’ persistent application settings are stored.</p>
     #   @return [String]
     # @!attribute s3_bucket_name
-    #   <p>The S3 bucket where users’ persistent application settings are stored. When persistent application settings are enabled for the first time for an account in an AWS Region, an S3 bucket is created. The bucket is unique to the AWS account and the Region.
+    #   <p>The S3 bucket where users’ persistent application settings are stored. When persistent application settings are enabled for the first time for an account in an AWS Region, an S3 bucket is created. The bucket is unique to the AWS account and the Region. 
     #           </p>
     #   @return [String]
     class ApplicationSettingsResponse < Struct.new(
@@ -960,7 +960,7 @@ module Aws::AppStream
     #   <p>The name of the app block builder.</p>
     #   @return [String]
     # @!attribute validity
-    #   <p>The time that the streaming URL will be valid, in seconds.
+    #   <p>The time that the streaming URL will be valid, in seconds. 
     #               Specify a value between 1 and 604800 seconds. The default is 3600 seconds.</p>
     #   @return [Integer]
     class CreateAppBlockBuilderStreamingURLRequest < Struct.new(
@@ -1922,7 +1922,7 @@ module Aws::AppStream
     #   <p>The name of the image builder.</p>
     #   @return [String]
     # @!attribute validity
-    #   <p>The time that the streaming URL will be valid, in seconds.
+    #   <p>The time that the streaming URL will be valid, in seconds. 
     #               Specify a value between 1 and 604800 seconds. The default is 3600 seconds.</p>
     #   @return [Integer]
     class CreateImageBuilderStreamingURLRequest < Struct.new(
@@ -2245,7 +2245,7 @@ module Aws::AppStream
     #            <p>If you enabled on-instance session scripts and Amazon S3 logging for your session script
     #               configuration, WorkSpaces Applications created an S3 bucket to store the script output. The bucket is
     #               unique to your account and Region. When you enable usage reporting in this case, WorkSpaces Applications
-    #               uses the same bucket to store your usage reports. If you haven't already enabled on-instance session scripts,
+    #               uses the same bucket to store your usage reports. If you haven't already enabled on-instance session scripts, 
     #               when you enable usage reports, WorkSpaces Applications creates a new S3 bucket.</p>
     #   @return [String]
     # @!attribute schedule
@@ -3015,7 +3015,7 @@ module Aws::AppStream
     #   @return [Integer]
     # @!attribute authentication_type
     #   <p>The authentication method. Specify <code>API</code> for a user
-    #               authenticated using a streaming URL or <code>SAML</code> for a SAML federated user.
+    #               authenticated using a streaming URL or <code>SAML</code> for a SAML federated user. 
     #               The default is to authenticate users using a streaming URL.</p>
     #   @return [String]
     # @!attribute instance_id
@@ -4164,7 +4164,7 @@ module Aws::AppStream
     #   <p>The time the image was created.</p>
     #   @return [Time]
     # @!attribute public_base_image_released_date
-    #   <p>The release date of the public base image.
+    #   <p>The release date of the public base image. 
     #               For private images, this date is the release date of the base image from which the image was created.</p>
     #   @return [Time]
     # @!attribute appstream_agent_version
@@ -4960,8 +4960,8 @@ module Aws::AppStream
 
     # <p>Describes the credentials for the service account used by the fleet or image builder to connect to the directory.</p>
     # @!attribute account_name
-    #   <p>The user name of the account. This account must have the following privileges: create computer objects,
-    #               join computers to the domain, and change/reset the password on descendant computer objects for the
+    #   <p>The user name of the account. This account must have the following privileges: create computer objects, 
+    #               join computers to the domain, and change/reset the password on descendant computer objects for the 
     #               organizational units specified.</p>
     #   @return [String]
     # @!attribute account_password
@@ -6230,7 +6230,7 @@ module Aws::AppStream
     #            <p>If you enabled on-instance session scripts and Amazon S3 logging for your session script
     #               configuration, WorkSpaces Applications created an S3 bucket to store the script output. The bucket is
     #               unique to your account and Region. When you enable usage reporting in this case, WorkSpaces Applications
-    #               uses the same bucket to store your usage reports. If you haven't already enabled on-instance session scripts,
+    #               uses the same bucket to store your usage reports. If you haven't already enabled on-instance session scripts, 
     #               when you enable usage reports, WorkSpaces Applications creates a new S3 bucket.</p>
     #   @return [String]
     # @!attribute schedule

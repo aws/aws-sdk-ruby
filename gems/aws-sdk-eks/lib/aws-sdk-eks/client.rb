@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::EKS
     @identifier = :eks
 
     add_plugin(::Aws::EKS::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::EKS
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::EKS
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -554,7 +574,7 @@ module Aws::EKS
     #               IAM principal type. For nodes (<code>EC2</code> (for EKS Auto Mode),
     #                   <code>EC2_LINUX</code>, <code>EC2_WINDOWS</code>, <code>FARGATE_LINUX</code>, and
     #                   <code>HYBRID_LINUX</code>), the only valid ARN is IAM roles.
-    #
+    #               
     #               You can't use the STS session principal type with access entries because this is a
     #               temporary principal for each session and not a permanent identity that can be assigned
     #               permissions.</p>
@@ -1083,7 +1103,7 @@ module Aws::EKS
     # @option params [String] :name
     #   <p>The unique name to give to your cluster. The name can contain only alphanumeric characters (case-sensitive),
     #   hyphens, and underscores. It must start with an alphanumeric character and can't be longer than
-    #   100 characters. The name must be unique within the Amazon Web Services Region and Amazon Web Services account that you're
+    #   100 characters. The name must be unique within the Amazon Web Services Region and Amazon Web Services account that you're 
     #   creating the cluster in.</p>
     # @option params [String] :version
     #   <p>The desired Kubernetes version for your cluster. If you don't specify a value here, the
@@ -1173,8 +1193,8 @@ module Aws::EKS
     #               Auto Mode cluster. If the block storage capability is enabled, EKS Auto Mode will create
     #               and delete EBS volumes in your Amazon Web Services account.</p>
     # @option params [Boolean] :deletion_protection
-    #   <p>Indicates whether to enable deletion protection for the cluster. When enabled, the cluster
-    #               cannot be deleted unless deletion protection is first disabled. This helps prevent
+    #   <p>Indicates whether to enable deletion protection for the cluster. When enabled, the cluster 
+    #               cannot be deleted unless deletion protection is first disabled. This helps prevent 
     #               accidental cluster deletion. Default value is <code>false</code>.</p>
     # @option params [Types::ControlPlaneScalingConfig] :control_plane_scaling_config
     #   <p>The control plane scaling tier configuration. For more information, see EKS Provisioned Control Plane in the Amazon EKS User Guide.</p>
@@ -1713,7 +1733,7 @@ module Aws::EKS
     # @option params [Integer] :disk_size
     #   <p>The root device disk size (in GiB) for your node group instances. The default disk
     #               size is 20 GiB for Linux and Bottlerocket. The default disk size is 50 GiB for Windows.
-    #               If you specify <code>launchTemplate</code>, then don't specify  <code>diskSize</code>, or the node group
+    #               If you specify <code>launchTemplate</code>, then don't specify  <code>diskSize</code>, or the node group 
     #               deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     # @option params [Array<String>] :subnets
     #   <p>The subnets to use for the Auto Scaling group that is created for your node group.
@@ -1742,7 +1762,7 @@ module Aws::EKS
     #               <code>ConfigMap</code>. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     # @option params [Types::RemoteAccessConfig] :remote_access
     #   <p>The remote access configuration to use with your node group. For Linux, the protocol
-    #               is SSH. For Windows, the protocol is RDP. If you specify <code>launchTemplate</code>, then don't specify
+    #               is SSH. For Windows, the protocol is RDP. If you specify <code>launchTemplate</code>, then don't specify 
     #                   <code>remoteAccess</code>, or the node group  deployment will fail.
     #               For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     # @option params [String] :node_role
@@ -1757,7 +1777,7 @@ module Aws::EKS
     #               </i>.
     #               If you specify <code>launchTemplate</code>, then don't specify  <code>
     #                  <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html">IamInstanceProfile</a>
-    #               </code> in your launch template, or the node group
+    #               </code> in your launch template, or the node group 
     #               deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     # @option params [Hash<String, String>] :labels
     #   <p>The Kubernetes <code>labels</code> to apply to the nodes in the node group when they are
@@ -1790,7 +1810,7 @@ module Aws::EKS
     # @option params [String] :version
     #   <p>The Kubernetes version to use for your managed nodes. By default, the Kubernetes version of the
     #               cluster is used, and this is the only accepted specified value. If you specify <code>launchTemplate</code>,
-    #               and your launch template uses a custom AMI, then don't specify  <code>version</code>, or the node group
+    #               and your launch template uses a custom AMI, then don't specify  <code>version</code>, or the node group 
     #               deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     # @option params [String] :release_version
     #   <p>The AMI version of the Amazon EKS optimized AMI to use with your node group. By default,
@@ -1800,7 +1820,7 @@ module Aws::EKS
     #               groups support the November 2022 and later releases of the Windows AMIs. For information
     #               about Windows versions, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html">Amazon EKS
     #                   optimized Windows AMI versions</a> in the <i>Amazon EKS User Guide</i>.</p>
-    #            <p>If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify
+    #            <p>If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify 
     #                   <code>releaseVersion</code>, or the node group  deployment will fail.
     #               For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     # @option params [Types::WarmPoolConfig] :warm_pool_config
@@ -5710,9 +5730,9 @@ module Aws::EKS
     #   <p>The configuration in the cluster for EKS Hybrid Nodes. You can add, change, or remove this
     #               configuration after the cluster is created.</p>
     # @option params [Boolean] :deletion_protection
-    #   <p>Specifies whether to enable or disable deletion protection for the cluster. When
-    #               enabled (<code>true</code>), the cluster cannot be deleted until deletion protection is
-    #               explicitly disabled. When disabled (<code>false</code>), the cluster can be deleted
+    #   <p>Specifies whether to enable or disable deletion protection for the cluster. When 
+    #               enabled (<code>true</code>), the cluster cannot be deleted until deletion protection is 
+    #               explicitly disabled. When disabled (<code>false</code>), the cluster can be deleted 
     #               normally.</p>
     # @option params [Types::ControlPlaneScalingConfig] :control_plane_scaling_config
     #   <p>The control plane scaling tier configuration. For more information, see EKS Provisioned Control Plane in the Amazon EKS User Guide.</p>
@@ -6135,7 +6155,7 @@ module Aws::EKS
     #               <i>Amazon EKS User Guide</i>. Amazon EKS managed node groups support the November 2022 and later releases
     #               of the Windows AMIs. For information about Windows versions, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html">Amazon EKS
     #                   optimized Windows AMI versions</a> in the <i>Amazon EKS User Guide</i>.</p>
-    #            <p>If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify
+    #            <p>If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify 
     #                   <code>releaseVersion</code>, or the node group  update will fail.
     #               For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     # @option params [Types::LaunchTemplateSpecification] :launch_template
@@ -6368,7 +6388,8 @@ module Aws::EKS
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

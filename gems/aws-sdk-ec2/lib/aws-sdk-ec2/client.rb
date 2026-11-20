@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -45,7 +46,6 @@ module Aws::EC2
     @identifier = :ec2
 
     add_plugin(::Aws::EC2::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -65,6 +65,8 @@ module Aws::EC2
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -143,23 +145,41 @@ module Aws::EC2
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -222,8 +242,8 @@ module Aws::EC2
     #               <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.
     #       For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -364,8 +384,8 @@ module Aws::EC2
     # @option params [Array<String>] :subnet_ids
     #   <p>The IDs of the subnets to associate with the transit gateway multicast domain.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -405,8 +425,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_attachment_id
     #   <p>The ID of the transit gateway attachment.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -464,8 +484,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_attachment_id
     #   <p>The ID of the attachment.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -508,8 +528,8 @@ module Aws::EC2
     # <p>Accepts connection requests to your VPC endpoint service.</p>
     # @param [Hash, Types::AcceptVpcEndpointConnectionsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :service_id
     #   <p>The ID of the VPC endpoint service.</p>
@@ -550,8 +570,8 @@ module Aws::EC2
     #       connection in the Region of the accepter VPC.</p>
     # @param [Hash, Types::AcceptVpcPeeringConnectionRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :vpc_peering_connection_id
     #   <p>The ID of the VPC peering connection. You must specify this parameter in the
@@ -629,25 +649,25 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Advertises an IPv4 or IPv6 address range that is provisioned for use with your Amazon Web Services resources through
+    # <p>Advertises an IPv4 or IPv6 address range that is provisioned for use with your Amazon Web Services resources through 
     #          bring your own IP addresses (BYOIP).</p>
-    #          <p>You can perform this operation at most once every 10 seconds, even if you specify different
+    #          <p>You can perform this operation at most once every 10 seconds, even if you specify different 
     #          address ranges each time.</p>
     #          <p>We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise
     #           it from Amazon Web Services. To minimize down time, you can configure your Amazon Web Services resources to use an address from a
-    #          BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current
+    #          BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current 
     #          location and start advertising it through Amazon Web Services.</p>
     #          <p>It can take a few minutes before traffic to the specified addresses starts routing to Amazon Web Services
     #          because of BGP propagation delays.</p>
     # @param [Hash, Types::AdvertiseByoipCidrRequest] params
     # @option params [String] :cidr
-    #   <p>The address range, in CIDR notation. This must be the exact range that you provisioned.
+    #   <p>The address range, in CIDR notation. This must be the exact range that you provisioned. 
     #            You can't advertise only a portion of the provisioned range.</p>
     # @option params [String] :asn
     #   <p>The public 2-byte or 4-byte ASN that you want to advertise.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :network_border_group
     #   <p>If you have <a href="https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html">Local Zones</a> enabled, you can choose a network border group for Local Zones when you provision and advertise a BYOIPv4 CIDR. Choose the network border group carefully as the EIP and the Amazon Web Services resource it is associated with must reside in the same network border group.</p>
@@ -703,8 +723,8 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Allocates an Elastic IP address to your Amazon Web Services account. After you allocate the Elastic IP address you can associate
-    #          it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address
+    # <p>Allocates an Elastic IP address to your Amazon Web Services account. After you allocate the Elastic IP address you can associate  
+    #          it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address 
     #          pool and can be allocated to a different Amazon Web Services account.</p>
     #          <p>You can allocate an Elastic IP address from one of the following address pools:</p>
     #          <ul>
@@ -712,7 +732,7 @@ module Aws::EC2
     #                <p>Amazon's pool of IPv4 addresses</p>
     #             </li>
     #             <li>
-    #                <p>Public IPv4 address range that you own and bring to your Amazon Web Services account using
+    #                <p>Public IPv4 address range that you own and bring to your Amazon Web Services account using 
     #            <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">Bring Your Own IP Addresses (BYOIP)</a>
     #                </p>
     #             </li>
@@ -729,7 +749,7 @@ module Aws::EC2
     #          <p>If you release an Elastic IP address, you might be able to recover it. You cannot recover
     #       an Elastic IP address that you released after it is allocated to another Amazon Web Services account. To attempt to recover an Elastic IP address that you released, specify
     #       it in this operation.</p>
-    #          <p>You can allocate a carrier IP address which is a public IP address from a telecommunication carrier,
+    #          <p>You can allocate a carrier IP address which is a public IP address from a telecommunication carrier, 
     #        to a network interface which resides in a subnet in a Wavelength Zone (for example an EC2 instance).</p>
     # @param [Hash, Types::AllocateAddressRequest] params
     # @option params [String] :domain
@@ -744,16 +764,16 @@ module Aws::EC2
     #         advertises IP addresses. Use this parameter to limit the IP address to this location. IP
     #         addresses cannot move between network border groups.</p>
     # @option params [String] :customer_owned_ipv4_pool
-    #   <p>The ID of a customer-owned address pool. Use this parameter to let Amazon EC2
-    #           select an address from the address pool. Alternatively, specify a specific
+    #   <p>The ID of a customer-owned address pool. Use this parameter to let Amazon EC2 
+    #           select an address from the address pool. Alternatively, specify a specific 
     #           address from the address pool.</p>
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to assign to the Elastic IP address.</p>
     # @option params [String] :ipam_pool_id
     #   <p>The ID of an IPAM pool which has an Amazon-provided or BYOIP public IPv4 CIDR provisioned to it. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-eip-pool.html">Allocate sequential Elastic IP addresses from an IPAM pool</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To allocate an Elastic IP address
     #   # This example allocates an Elastic IP address.
@@ -830,7 +850,7 @@ module Aws::EC2
     #            </p>
     # @option params [String] :outpost_arn
     #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which to allocate
-    #               the Dedicated Host. If you specify <b>OutpostArn</b>, you can
+    #               the Dedicated Host. If you specify <b>OutpostArn</b>, you can 
     #               optionally specify <b>AssetIds</b>.</p>
     #            <p>If you are allocating the Dedicated Host in a Region, omit this parameter.</p>
     # @option params [String] :host_maintenance
@@ -838,20 +858,20 @@ module Aws::EC2
     #               more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-maintenance.html">Host
     #                   maintenance</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @option params [Array<String>] :asset_ids
-    #   <p>The IDs of the Outpost hardware assets on which to allocate the Dedicated Hosts. Targeting
-    #               specific hardware assets on an Outpost can help to minimize latency between your workloads.
-    #               This parameter is supported only if you specify <b>OutpostArn</b>.
+    #   <p>The IDs of the Outpost hardware assets on which to allocate the Dedicated Hosts. Targeting 
+    #               specific hardware assets on an Outpost can help to minimize latency between your workloads. 
+    #               This parameter is supported only if you specify <b>OutpostArn</b>. 
     #               If you are allocating the Dedicated Hosts in a Region, omit this parameter.</p>
     #            <ul>
     #               <li>
-    #                  <p>If you specify this parameter, you can omit <b>Quantity</b>.
-    #                       In this case, Amazon EC2 allocates a Dedicated Host on each specified hardware
+    #                  <p>If you specify this parameter, you can omit <b>Quantity</b>. 
+    #                       In this case, Amazon EC2 allocates a Dedicated Host on each specified hardware 
     #                       asset.</p>
     #               </li>
     #               <li>
-    #                  <p>If you specify both <b>AssetIds</b> and
-    #                       <b>Quantity</b>, then the value for
-    #                       <b>Quantity</b> must be equal to the number of asset IDs
+    #                  <p>If you specify both <b>AssetIds</b> and 
+    #                       <b>Quantity</b>, then the value for 
+    #                       <b>Quantity</b> must be equal to the number of asset IDs 
     #                       specified.</p>
     #               </li>
     #            </ul>
@@ -876,11 +896,11 @@ module Aws::EC2
     #               instance family, omit this parameter and specify <b>InstanceFamily</b> instead. You cannot specify <b>InstanceType</b> and <b>InstanceFamily</b> in the
     #               same request.</p>
     # @option params [Integer] :quantity
-    #   <p>The number of Dedicated Hosts to allocate to your account with these parameters. If you are
-    #               allocating the Dedicated Hosts on an Outpost, and you specify <b>AssetIds</b>,
-    #               you can omit this parameter. In this case, Amazon EC2 allocates a Dedicated Host on each
-    #               specified hardware asset. If you specify both <b>AssetIds</b> and
-    #               <b>Quantity</b>, then the value that you specify for
+    #   <p>The number of Dedicated Hosts to allocate to your account with these parameters. If you are 
+    #               allocating the Dedicated Hosts on an Outpost, and you specify <b>AssetIds</b>, 
+    #               you can omit this parameter. In this case, Amazon EC2 allocates a Dedicated Host on each 
+    #               specified hardware asset. If you specify both <b>AssetIds</b> and 
+    #               <b>Quantity</b>, then the value that you specify for 
     #               <b>Quantity</b> must be equal to the number of asset IDs specified.</p>
     # @option params [String] :availability_zone
     #   <p>The Availability Zone in which to allocate the Dedicated Host.</p>
@@ -932,8 +952,8 @@ module Aws::EC2
     #          </note>
     # @param [Hash, Types::AllocateIpamPoolCidrRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_pool_id
     #   <p>The ID of the IPAM pool from which you would like to allocate a CIDR.</p>
@@ -1023,7 +1043,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Applies a security group to the association between the target network and the Client VPN endpoint. This action replaces the existing
+    # <p>Applies a security group to the association between the target network and the Client VPN endpoint. This action replaces the existing 
     # 			security groups with the specified security groups.</p>
     # @param [Hash, Types::ApplySecurityGroupsToClientVpnTargetNetworkRequest] params
     # @option params [String] :client_vpn_endpoint_id
@@ -1031,7 +1051,7 @@ module Aws::EC2
     # @option params [String] :vpc_id
     #   <p>The ID of the VPC in which the associated target network is located.</p>
     # @option params [Array<String>] :security_group_ids
-    #   <p>The IDs of the security groups to apply to the associated target network. Up to 5 security groups can
+    #   <p>The IDs of the security groups to apply to the associated target network. Up to 5 security groups can 
     #   			be applied to an associated target network.</p>
     # @option params [Boolean] :dry_run
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
@@ -1198,7 +1218,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Assigns private IPv4 addresses to a private NAT gateway. For more information, see
+    # <p>Assigns private IPv4 addresses to a private NAT gateway. For more information, see 
     #             <a href="https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html">Work with NAT gateways</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::AssignPrivateNatGatewayAddressRequest] params
     # @option params [String] :nat_gateway_id
@@ -1208,8 +1228,8 @@ module Aws::EC2
     # @option params [Integer] :private_ip_address_count
     #   <p>The number of private IP addresses to assign to the NAT gateway. You can't specify this parameter when also specifying private IP addresses.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1272,8 +1292,8 @@ module Aws::EC2
     # @option params [String] :public_ip
     #   <p>Deprecated.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :network_interface_id
     #   <p>The ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID.</p>
@@ -1360,8 +1380,8 @@ module Aws::EC2
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If you retry a request with the same token, the service ignores the request but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To associate an application status check with tags
     #   # This example associates an application status check with instances matching the specified tag.
@@ -1466,7 +1486,7 @@ module Aws::EC2
     # @option params [String] :subnet_id
     #   <p>The ID of the subnet to associate with the Client VPN endpoint. Required for VPC-based endpoints. For Transit Gateway-based endpoints, use <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code> instead.</p>
     # @option params [String] :client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. 
     #   For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
@@ -1506,13 +1526,13 @@ module Aws::EC2
     #           in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::AssociateDhcpOptionsRequest] params
     # @option params [String] :dhcp_options_id
-    #   <p>The ID of the DHCP options set, or <code>default</code> to associate
+    #   <p>The ID of the DHCP options set, or <code>default</code> to associate 
     #           no DHCP options with the VPC.</p>
     # @option params [String] :vpc_id
     #   <p>The ID of the VPC.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To associate a DHCP options set with a VPC
     #   # This example associates the specified DHCP options set with the specified VPC.
@@ -1551,24 +1571,24 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Associates an Identity and Access Management (IAM) role with an Certificate Manager (ACM) certificate.
-    # 			This enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more
-    # 			information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html">Certificate Manager for Nitro Enclaves</a> in the <i>Amazon Web Services Nitro Enclaves
+    # <p>Associates an Identity and Access Management (IAM) role with an Certificate Manager (ACM) certificate. 
+    # 			This enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more 
+    # 			information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html">Certificate Manager for Nitro Enclaves</a> in the <i>Amazon Web Services Nitro Enclaves 
     # 					User Guide</i>.</p>
-    #          <p>When the IAM role is associated with the ACM certificate, the certificate, certificate chain, and encrypted
-    # 			private key are placed in an Amazon S3 location that only the associated IAM role can access. The private key of the certificate
+    #          <p>When the IAM role is associated with the ACM certificate, the certificate, certificate chain, and encrypted 
+    # 			private key are placed in an Amazon S3 location that only the associated IAM role can access. The private key of the certificate 
     # 			is encrypted with an Amazon Web Services managed key that has an attached attestation-based key policy.</p>
-    #          <p>To enable the IAM role to access the Amazon S3 object, you must grant it permission to call <code>s3:GetObject</code>
+    #          <p>To enable the IAM role to access the Amazon S3 object, you must grant it permission to call <code>s3:GetObject</code> 
     # 			on the Amazon S3 bucket returned by the command. To enable the IAM role to access the KMS key,
-    # 			you must grant it permission to call <code>kms:Decrypt</code> on the KMS key returned by the command.
+    # 			you must grant it permission to call <code>kms:Decrypt</code> on the KMS key returned by the command. 
     # 			For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy">
-    # 				Grant the role permission to access the certificate and encryption key</a> in the
+    # 				Grant the role permission to access the certificate and encryption key</a> in the 
     # 			<i>Amazon Web Services Nitro Enclaves User Guide</i>.</p>
     # @param [Hash, Types::AssociateEnclaveCertificateIamRoleRequest] params
     # @option params [String] :certificate_arn
     #   <p>The ARN of the ACM certificate with which to associate the IAM role.</p>
     # @option params [String] :role_arn
-    #   <p>The ARN of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM
+    #   <p>The ARN of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM 
     #   			certificate.</p>
     # @option params [Boolean] :dry_run
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
@@ -1658,8 +1678,8 @@ module Aws::EC2
     #             events</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::AssociateInstanceEventWindowRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :instance_event_window_id
     #   <p>The ID of the event window.</p>
@@ -1722,14 +1742,14 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Associates your Autonomous System Number (ASN) with a BYOIP CIDR that you own in the same Amazon Web Services Region.
+    # <p>Associates your Autonomous System Number (ASN) with a BYOIP CIDR that you own in the same Amazon Web Services Region. 
     #             For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html">Tutorial: Bring your ASN to IPAM</a> in the <i>Amazon VPC IPAM guide</i>.</p>
-    #          <p>After the association succeeds, the ASN is eligible for
+    #          <p>After the association succeeds, the ASN is eligible for 
     #             advertisement. You can view the association with <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeByoipCidrs.html">DescribeByoipCidrs</a>. You can advertise the CIDR with <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AdvertiseByoipCidr.html">AdvertiseByoipCidr</a>.</p>
     # @param [Hash, Types::AssociateIpamByoasnRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :asn
     #   <p>A public 2-byte or 4-byte ASN.</p>
@@ -1762,8 +1782,8 @@ module Aws::EC2
     # <p>Associates an IPAM resource discovery with an Amazon VPC IPAM. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.</p>
     # @param [Hash, Types::AssociateIpamResourceDiscoveryRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_id
     #   <p>An IPAM ID.</p>
@@ -1821,16 +1841,16 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Associates Elastic IP addresses (EIPs) and private IPv4 addresses with a public NAT gateway. For more information,
+    # <p>Associates Elastic IP addresses (EIPs) and private IPv4 addresses with a public NAT gateway. For more information, 
     #             see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html">Work with NAT gateways</a> in the <i>Amazon VPC User Guide</i>.</p>
-    #          <p>By default, you can associate up to 2 Elastic IP addresses per public NAT gateway. You can increase the limit by requesting a quota adjustment.
+    #          <p>By default, you can associate up to 2 Elastic IP addresses per public NAT gateway. You can increase the limit by requesting a quota adjustment. 
     #             For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-eips">Elastic IP address quotas</a> in the <i>Amazon VPC User Guide</i>.</p>
     #          <important>
-    #             <p>When you associate an EIP or secondary EIPs with a public NAT gateway, the network border group of the EIPs
-    #             must match the network border group of the Availability Zone (AZ) that the public NAT gateway is in. If it's not the same,
+    #             <p>When you associate an EIP or secondary EIPs with a public NAT gateway, the network border group of the EIPs 
+    #             must match the network border group of the Availability Zone (AZ) that the public NAT gateway is in. If it's not the same, 
     #             the EIP will fail to associate. You can see the network border group for the subnet's AZ by viewing the details of the subnet.
-    #             Similarly, you can view the network border group of an EIP by viewing the details of the EIP address. For more information
-    #             about network border groups and EIPs, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithEIPs.html">Allocate an Elastic IP address</a> in the <i>Amazon VPC User Guide</i>.
+    #             Similarly, you can view the network border group of an EIP by viewing the details of the EIP address. For more information 
+    #             about network border groups and EIPs, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithEIPs.html">Allocate an Elastic IP address</a> in the <i>Amazon VPC User Guide</i>. 
     #         </p>
     #          </important>
     # @param [Hash, Types::AssociateNatGatewayAddressRequest] params
@@ -1841,8 +1861,8 @@ module Aws::EC2
     # @option params [Array<String>] :private_ip_addresses
     #   <p>The private IPv4 addresses that you want to assign to the NAT gateway.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :availability_zone
     #   <p>For regional NAT gateways only: The Availability Zone where you want to associate an Elastic IP address (EIP). The regional NAT gateway uses a separate EIP in each AZ to handle outbound NAT traffic from that AZ.</p>
@@ -1895,8 +1915,8 @@ module Aws::EC2
     # @option params [String] :vpc_id
     #   <p>The ID of the VPC to associate with the route server.</p>
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1934,8 +1954,8 @@ module Aws::EC2
     # @option params [String] :public_ipv4_pool
     #   <p>The ID of a public IPv4 pool. A public IPv4 pool is a pool of IPv4 addresses that you've brought to Amazon Web Services with BYOIP.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :subnet_id
     #   <p>The ID of the subnet.</p>
@@ -2004,8 +2024,8 @@ module Aws::EC2
     # @option params [String] :vpc_id
     #   <p>A VPC ID.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2068,7 +2088,7 @@ module Aws::EC2
     end
 
     # <p>Associates the specified subnets and transit gateway attachments with the specified transit gateway multicast domain.</p>
-    #          <p>The transit gateway attachment must be in the available state before you can add a resource. Use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTransitGatewayAttachments.html">DescribeTransitGatewayAttachments</a>
+    #          <p>The transit gateway attachment must be in the available state before you can add a resource. Use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTransitGatewayAttachments.html">DescribeTransitGatewayAttachments</a> 
     #             to see the state of the attachment.</p>
     # @param [Hash, Types::AssociateTransitGatewayMulticastDomainRequest] params
     # @option params [String] :transit_gateway_multicast_domain_id
@@ -2078,8 +2098,8 @@ module Aws::EC2
     # @option params [Array<String>] :subnet_ids
     #   <p>The IDs of the subnets to associate with the transit gateway multicast domain.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2120,8 +2140,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_attachment_id
     #   <p>The ID of the transit gateway attachment to associate with the policy table.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2148,7 +2168,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Associates the specified attachment with the specified transit gateway route table. You can
+    # <p>Associates the specified attachment with the specified transit gateway route table. You can 
     #         associate only one route table with an attachment.</p>
     # @param [Hash, Types::AssociateTransitGatewayRouteTableRequest] params
     # @option params [String] :transit_gateway_route_table_id
@@ -2156,8 +2176,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_attachment_id
     #   <p>The ID of the attachment.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2186,8 +2206,8 @@ module Aws::EC2
 
     # <p>Associates a branch network interface with a trunk network interface.</p>
     #          <p>Before you create the association, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html">CreateNetworkInterface</a> command and set the interface type
-    #             to <code>trunk</code>. You must also create a network interface for
-    #             each branch network interface that you want to associate with the trunk
+    #             to <code>trunk</code>. You must also create a network interface for 
+    #             each branch network interface that you want to associate with the trunk 
     #             network interface.</p>
     # @param [Hash, Types::AssociateTrunkInterfaceRequest] params
     # @option params [String] :branch_interface_id
@@ -2203,8 +2223,8 @@ module Aws::EC2
     #               request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring
     #                   idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2248,7 +2268,7 @@ module Aws::EC2
     #          <p>You must specify one of the following in the request: an IPv4 CIDR block, an IPv6
     #             pool, or an Amazon-provided IPv6 CIDR block.</p>
     #          <p>For more information about associating CIDR blocks with your VPC and applicable
-    #             restrictions, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html">IP addressing for your VPCs and subnets</a>
+    #             restrictions, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html">IP addressing for your VPCs and subnets</a> 
     #             in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::AssociateVpcCidrBlockRequest] params
     # @option params [String] :cidr_block
@@ -2335,8 +2355,8 @@ module Aws::EC2
     #          <p>Linking your instance to a VPC is sometimes referred to as <i>attaching</i> your instance.</p>
     # @param [Hash, Types::AttachClassicLinkVpcRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :instance_id
     #   <p>The ID of the EC2-Classic instance.</p>
@@ -2380,8 +2400,8 @@ module Aws::EC2
     #         ( ), periods (.), slashes (/), dashes (-), single quotes ('), at-signs (@), or
     #         underscores(_)</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2402,13 +2422,13 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Attaches an internet gateway or a virtual private gateway to a VPC, enabling connectivity
-    # 		        between the internet and the VPC. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html">Internet gateways</a> in the
+    # <p>Attaches an internet gateway or a virtual private gateway to a VPC, enabling connectivity 
+    # 		        between the internet and the VPC. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html">Internet gateways</a> in the 
     # 		        <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::AttachInternetGatewayRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :internet_gateway_id
     #   <p>The ID of the internet gateway.</p>
@@ -2515,8 +2535,8 @@ module Aws::EC2
     #   <p>A unique, case-sensitive token that you provide to ensure idempotency of your
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2605,17 +2625,17 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Attaches an Amazon EBS volume to a <code>running</code> or <code>stopped</code>
+    # <p>Attaches an Amazon EBS volume to a <code>running</code> or <code>stopped</code> 
     #       instance, and exposes it to the instance with the specified device name.</p>
     #          <note>
-    #             <p>The maximum number of Amazon EBS volumes that you can attach to an instance depends on the
-    #         instance type. If you exceed the volume attachment limit for an instance type, the attachment
-    #         request fails with the <code>AttachmentLimitExceeded</code> error. For more information,
-    #         see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html">Instance
+    #             <p>The maximum number of Amazon EBS volumes that you can attach to an instance depends on the 
+    #         instance type. If you exceed the volume attachment limit for an instance type, the attachment 
+    #         request fails with the <code>AttachmentLimitExceeded</code> error. For more information, 
+    #         see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html">Instance 
     #           volume limits</a>.</p>
     #          </note>
-    #          <p>After you attach an EBS volume, you must make it available for use. For more information,
-    #       see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-using-volumes.html">Make an
+    #          <p>After you attach an EBS volume, you must make it available for use. For more information, 
+    #       see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-using-volumes.html">Make an 
     #         EBS volume available for use</a>.</p>
     #          <p>If a volume has an Amazon Web Services Marketplace product code:</p>
     #          <ul>
@@ -2647,8 +2667,8 @@ module Aws::EC2
     # @option params [Integer] :ebs_card_index
     #   <p>The index of the EBS card. Some instance types support multiple EBS cards. The default EBS card index is 0.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To attach a volume to an instance
     #   # This example attaches a volume (``vol-1234567890abcdef0``) to an instance (``i-01474ef662b89480``) as ``/dev/sdf``.
@@ -2732,8 +2752,8 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Adds an ingress authorization rule to a Client VPN endpoint. Ingress authorization rules act as
-    # 			firewall rules that grant access to networks. You must configure ingress authorization rules to
+    # <p>Adds an ingress authorization rule to a Client VPN endpoint. Ingress authorization rules act as 
+    # 			firewall rules that grant access to networks. You must configure ingress authorization rules to 
     # 			enable clients to access resources in Amazon Web Services or on-premises networks.</p>
     # @param [Hash, Types::AuthorizeClientVpnIngressRequest] params
     # @option params [String] :client_vpn_endpoint_id
@@ -2749,7 +2769,7 @@ module Aws::EC2
     # @option params [String] :description
     #   <p>A brief description of the authorization rule.</p>
     # @option params [String] :client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. 
     #   For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
@@ -2780,24 +2800,24 @@ module Aws::EC2
     end
 
     # <p>Adds the specified outbound (egress) rules to a security group.</p>
-    #          <p>An outbound rule permits instances to send traffic to the specified IPv4 or IPv6
-    #        address ranges, the IP address ranges specified by a prefix list, or the instances
+    #          <p>An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 
+    #        address ranges, the IP address ranges specified by a prefix list, or the instances 
     #        that are associated with a source security group. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html">Security group rules</a>.</p>
-    #          <p>You must specify exactly one of the following destinations: an IPv4 or IPv6 address range,
-    #        a prefix list, or a security group. You must specify a protocol for each rule (for example, TCP).
-    #        If the protocol is TCP or UDP, you must also specify a port or port range. If the protocol is
+    #          <p>You must specify exactly one of the following destinations: an IPv4 or IPv6 address range, 
+    #        a prefix list, or a security group. You must specify a protocol for each rule (for example, TCP). 
+    #        If the protocol is TCP or UDP, you must also specify a port or port range. If the protocol is 
     #        ICMP or ICMPv6, you must also specify the ICMP type and code.</p>
-    #          <p>Rule changes are propagated to instances associated with the security group as quickly
+    #          <p>Rule changes are propagated to instances associated with the security group as quickly 
     #          as possible. However, a small delay might occur.</p>
-    #          <p>For examples of rules that you can add to security groups for specific access scenarios,
+    #          <p>For examples of rules that you can add to security groups for specific access scenarios, 
     #          see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html">Security group rules for different use cases</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #          <p>For information about security group quotas, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html">Amazon VPC quotas</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::AuthorizeSecurityGroupEgressRequest] params
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags applied to the security group rule.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :group_id
     #   <p>The ID of the security group.</p>
@@ -2958,16 +2978,16 @@ module Aws::EC2
     end
 
     # <p>Adds the specified inbound (ingress) rules to a security group.</p>
-    #          <p>An inbound rule permits instances to receive traffic from the specified IPv4 or IPv6
-    #        address range, the IP address ranges that are specified by a prefix list, or the instances
+    #          <p>An inbound rule permits instances to receive traffic from the specified IPv4 or IPv6 
+    #        address range, the IP address ranges that are specified by a prefix list, or the instances 
     #        that are associated with a destination security group. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html">Security group rules</a>.</p>
     #          <p>You must specify exactly one of the following sources: an IPv4 or IPv6 address range,
-    #        a prefix list, or a security group. You must specify a protocol for each rule (for example, TCP).
-    #        If the protocol is TCP or UDP, you must also specify a port or port range. If the protocol is
+    #        a prefix list, or a security group. You must specify a protocol for each rule (for example, TCP). 
+    #        If the protocol is TCP or UDP, you must also specify a port or port range. If the protocol is 
     #        ICMP or ICMPv6, you must also specify the ICMP/ICMPv6 type and code.</p>
-    #          <p>Rule changes are propagated to instances associated with the security group as quickly
+    #          <p>Rule changes are propagated to instances associated with the security group as quickly 
     #        as possible. However, a small delay might occur.</p>
-    #          <p>For examples of rules that you can add to security groups for specific access scenarios,
+    #          <p>For examples of rules that you can add to security groups for specific access scenarios, 
     #        see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html">Security group rules for different use cases</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #          <p>For more information about security group quotas, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html">Amazon VPC quotas</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::AuthorizeSecurityGroupIngressRequest] params
@@ -2975,10 +2995,10 @@ module Aws::EC2
     #   <p>The IPv4 address range, in CIDR format.</p>
     #            <note>
     #               <p>
-    #                  Amazon Web Services <a href="https://en.wikipedia.org/wiki/Canonicalization">canonicalizes</a> IPv4 and IPv6 CIDRs. For example, if you specify 100.68.0.18/18 for the CIDR block,
-    #                 Amazon Web Services canonicalizes the CIDR block to 100.68.0.0/18. Any subsequent DescribeSecurityGroups and DescribeSecurityGroupRules calls will
-    #                 return the canonicalized form of the CIDR block. Additionally, if you attempt to add another rule with the
-    #                 non-canonical form of the CIDR (such as 100.68.0.18/18) and there is already a rule for the canonicalized
+    #                  Amazon Web Services <a href="https://en.wikipedia.org/wiki/Canonicalization">canonicalizes</a> IPv4 and IPv6 CIDRs. For example, if you specify 100.68.0.18/18 for the CIDR block, 
+    #                 Amazon Web Services canonicalizes the CIDR block to 100.68.0.0/18. Any subsequent DescribeSecurityGroups and DescribeSecurityGroupRules calls will 
+    #                 return the canonicalized form of the CIDR block. Additionally, if you attempt to add another rule with the 
+    #                 non-canonical form of the CIDR (such as 100.68.0.18/18) and there is already a rule for the canonicalized 
     #                 form of the CIDR block (such as 100.68.0.0/18), the API throws an duplicate rule error.</p>
     #            </note>
     #            <p>To specify an IPv6 address range, use IP permissions instead.</p>
@@ -2999,7 +3019,7 @@ module Aws::EC2
     #   <p>The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>) or number
     #         (see <a href="http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml">Protocol Numbers</a>). To specify all protocols, use <code>-1</code>.</p>
     #            <p>To specify <code>icmpv6</code>, use IP permissions instead.</p>
-    #            <p>If you specify a protocol other than one of the supported values, traffic is allowed
+    #            <p>If you specify a protocol other than one of the supported values, traffic is allowed 
     #            on all ports, regardless of any ports that you specify.</p>
     #            <p>To specify multiple rules and descriptions for the rules, use IP permissions instead.</p>
     # @option params [String] :source_security_group_name
@@ -3007,20 +3027,20 @@ module Aws::EC2
     #            <p>The rule grants full ICMP, UDP, and TCP access. To create a rule with a specific protocol
     #                and port range, specify a set of IP permissions instead.</p>
     # @option params [String] :source_security_group_owner_id
-    #   <p>The Amazon Web Services account ID for the source security group, if the source security group is
+    #   <p>The Amazon Web Services account ID for the source security group, if the source security group is 
     #            in a different account.</p>
-    #            <p>The rule grants full ICMP, UDP, and TCP access. To create a rule with a specific protocol
+    #            <p>The rule grants full ICMP, UDP, and TCP access. To create a rule with a specific protocol 
     #            and port range, use IP permissions instead.</p>
     # @option params [Integer] :to_port
     #   <p>If the protocol is TCP or UDP, this is the end of the port range.
-    #              If the protocol is ICMP, this is the ICMP code or -1 (all ICMP codes).
+    #              If the protocol is ICMP, this is the ICMP code or -1 (all ICMP codes). 
     #              If the start port is -1 (all ICMP types), then the end port must be -1 (all ICMP codes).</p>
     #            <p>To specify multiple rules and descriptions for the rules, use IP permissions instead.</p>
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags applied to the security group rule.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To add a rule that allows inbound HTTP traffic from another security group
     #   # This example enables inbound traffic on TCP port 80 from the specified security group. The group must be in the same VPC or a peer VPC. Incoming traffic is allowed based on the private IP addresses of instances that are associated with the specified security group.
@@ -3245,8 +3265,8 @@ module Aws::EC2
     #         new bucket that Amazon EC2 creates on your behalf. If you specify a bucket that belongs to someone
     #         else, Amazon EC2 returns an error.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3304,8 +3324,8 @@ module Aws::EC2
     # @option params [String] :bundle_id
     #   <p>The ID of the bundle task.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3483,8 +3503,8 @@ module Aws::EC2
     #    in the process of transferring the final disk image, the command fails and returns an exception.</p>
     # @param [Hash, Types::CancelConversionRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :conversion_task_id
     #   <p>The ID of the conversion task.</p>
@@ -3515,8 +3535,8 @@ module Aws::EC2
     #                 <i>Amazon Web Services Organizations User Guide</i>.</p>
     # @param [Hash, Types::CancelDeclarativePoliciesReportRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :report_id
     #   <p>The ID of the report.</p>
@@ -3567,8 +3587,8 @@ module Aws::EC2
     # @option params [String] :image_id
     #   <p>The ID of the AMI that was shared with your Amazon Web Services account.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3593,8 +3613,8 @@ module Aws::EC2
     # @option params [String] :cancel_reason
     #   <p>The reason for canceling the task.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :import_task_id
     #   <p>The ID of the import image or import snapshot task to be canceled.</p>
@@ -3684,12 +3704,12 @@ module Aws::EC2
     #             <p>
     #                <b>Terminating an instance is permanent and irreversible.</b>
     #             </p>
-    #             <p>After you terminate an instance, you can no longer connect to it, and it can't be recovered.
-    #           All attached Amazon EBS volumes that are configured to be deleted on termination are also permanently
-    #           deleted and can't be recovered. All data stored on instance store volumes is permanently lost.
+    #             <p>After you terminate an instance, you can no longer connect to it, and it can't be recovered. 
+    #           All attached Amazon EBS volumes that are configured to be deleted on termination are also permanently 
+    #           deleted and can't be recovered. All data stored on instance store volumes is permanently lost. 
     #           For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-ec2-instance-termination-works.html">
     #              How instance termination works</a>.</p>
-    #             <p>Before you terminate an instance, ensure that you have backed up all data that you need to
+    #             <p>Before you terminate an instance, ensure that you have backed up all data that you need to 
     #              retain after the termination to persistent storage.</p>
     #          </important>
     #          <p class="title">
@@ -3703,14 +3723,14 @@ module Aws::EC2
     #          </ul>
     # @param [Hash, Types::CancelSpotFleetRequestsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :spot_fleet_request_ids
     #   <p>The IDs of the Spot Fleet requests.</p>
     #            <p>Constraint: You can specify up to 100 IDs in a single request.</p>
     # @option params [Boolean] :terminate_instances
-    #   <p>Indicates whether to terminate the associated instances when the Spot Fleet request is canceled.
+    #   <p>Indicates whether to terminate the associated instances when the Spot Fleet request is canceled. 
     #           The default is to terminate the instances.</p>
     #            <p>To let the instances continue to run after the Spot Fleet request is canceled, specify
     #             <code>no-terminate-instances</code>.</p>
@@ -3851,8 +3871,8 @@ module Aws::EC2
     # @option params [String] :product_code
     #   <p>The product code. This must be a product code that you own.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To confirm the product instance
     #   # This example determines whether the specified product code is associated with the specified instance.
@@ -3889,8 +3909,8 @@ module Aws::EC2
     # <p>Copies the specified Amazon FPGA Image (AFI) to the current Region.</p>
     # @param [Hash, Types::CopyFpgaImageRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :source_fpga_image_id
     #   <p>The ID of the source AFI.</p>
@@ -3901,7 +3921,7 @@ module Aws::EC2
     # @option params [String] :source_region
     #   <p>The Region that contains the source AFI.</p>
     # @option params [String] :client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. 
     #         	For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -4105,7 +4125,7 @@ module Aws::EC2
     #         Each snapshot associated with the AMI will be completed within the specified completion
     #         duration, with copy throughput automatically adjusted for each snapshot based on its size to
     #         meet the timing target.</p>
-    #            <p>If you do not specify a value, the AMI copy operation is completed on a best-effort
+    #            <p>If you do not specify a value, the AMI copy operation is completed on a best-effort 
     #         basis.</p>
     #            <note>
     #               <p>This parameter is not supported when copying an AMI to or from a Local Zone, or to an
@@ -4124,8 +4144,8 @@ module Aws::EC2
     #           <code>DestinationAvailabilityZoneId</code>, or <code>DestinationOutpostArn</code> can be
     #         specified.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To copy an AMI to another region
     #   # This example copies the specified AMI from the us-east-1 region to the current region.
@@ -4182,32 +4202,32 @@ module Aws::EC2
     end
 
     # <p>Creates an exact copy of an Amazon EBS snapshot.</p>
-    #          <p>The location of the source snapshot determines whether you can copy it or not,
+    #          <p>The location of the source snapshot determines whether you can copy it or not, 
     #       and the allowed destinations for the snapshot copy.</p>
     #          <ul>
     #             <li>
-    #                <p>If the source snapshot is in a Region, you can copy it within that Region,
-    #           to another Region, to an Outpost associated with that Region, or to a Local
+    #                <p>If the source snapshot is in a Region, you can copy it within that Region, 
+    #           to another Region, to an Outpost associated with that Region, or to a Local 
     #           Zone in that Region.</p>
     #             </li>
     #             <li>
-    #                <p>If the source snapshot is in a Local Zone, you can copy it within that Local Zone,
-    #           to another Local Zone in the same zone group, or to the parent Region of the Local
+    #                <p>If the source snapshot is in a Local Zone, you can copy it within that Local Zone, 
+    #           to another Local Zone in the same zone group, or to the parent Region of the Local 
     #           Zone.</p>
     #             </li>
     #             <li>
     #                <p>If the source snapshot is on an Outpost, you can't copy it.</p>
     #             </li>
     #          </ul>
-    #          <p>When copying snapshots to a Region, the encryption outcome for the snapshot copy depends on the
-    #       Amazon EBS encryption by default setting for the destination Region, the encryption status of the source
+    #          <p>When copying snapshots to a Region, the encryption outcome for the snapshot copy depends on the 
+    #       Amazon EBS encryption by default setting for the destination Region, the encryption status of the source 
     #       snapshot, and the encryption parameters you specify in the request. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-copy-snapshot.html#creating-encrypted-snapshots">
     #         Encryption and snapshot copying</a>.</p>
-    #          <p>Snapshots copied to an Outpost must be encrypted. Unencrypted snapshots are not supported
+    #          <p>Snapshots copied to an Outpost must be encrypted. Unencrypted snapshots are not supported 
     #       on Outposts. For more information, <a href="https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#considerations">
     #         Amazon EBS local snapshots on Outposts</a>.</p>
     #          <note>
-    #             <p>Snapshots copies have an arbitrary source volume ID. Do not use this volume ID for
+    #             <p>Snapshots copies have an arbitrary source volume ID. Do not use this volume ID for 
     #         any purpose.</p>
     #          </note>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-copy-snapshot.html">Copy an Amazon EBS snapshot</a> in the
@@ -4221,14 +4241,14 @@ module Aws::EC2
     #               <p>Only supported when copying a snapshot to an Outpost.</p>
     #            </note>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-snapshots">
-    #     		Copy snapshots from an Amazon Web Services Region to an Outpost</a> in the
+    #     		Copy snapshots from an Amazon Web Services Region to an Outpost</a> in the 
     #         <i>Amazon EBS User Guide</i>.</p>
     # @option params [String] :destination_region
     # @option params [Boolean] :encrypted
-    #   <p>To encrypt a copy of an unencrypted snapshot if encryption by default is not enabled,
-    #         enable encryption using this parameter. Otherwise, omit this parameter. Copies of encrypted
-    #         snapshots are encrypted, even if you omit this parameter and encryption by default is not
-    #         enabled. You cannot set this parameter to false. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html">Amazon EBS encryption</a> in the
+    #   <p>To encrypt a copy of an unencrypted snapshot if encryption by default is not enabled, 
+    #         enable encryption using this parameter. Otherwise, omit this parameter. Copies of encrypted 
+    #         snapshots are encrypted, even if you omit this parameter and encryption by default is not 
+    #         enabled. You cannot set this parameter to false. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html">Amazon EBS encryption</a> in the 
     #         <i>Amazon EBS User Guide</i>.</p>
     # @option params [String] :kms_key_id
     #   <p>The identifier of the KMS key to use for Amazon EBS encryption.
@@ -4249,7 +4269,7 @@ module Aws::EC2
     #                  <p>Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.</p>
     #               </li>
     #            </ul>
-    #            <p>Amazon Web Services authenticates the KMS key asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid,
+    #            <p>Amazon Web Services authenticates the KMS key asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, 
     #         the action can appear to complete, but eventually fails.</p>
     # @option params [String] :presigned_url
     # @option params [String] :source_region
@@ -4262,21 +4282,21 @@ module Aws::EC2
     #   <note>
     #               <p>Not supported when copying snapshots to or from Local Zones or Outposts.</p>
     #            </note>
-    #            <p>Specify a completion duration, in 15 minute increments, to initiate a time-based snapshot
-    #         copy. Time-based snapshot copy operations complete within the specified duration. For more
+    #            <p>Specify a completion duration, in 15 minute increments, to initiate a time-based snapshot 
+    #         copy. Time-based snapshot copy operations complete within the specified duration. For more 
     #         information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/time-based-copies.html">
     #           Time-based copies</a>.</p>
-    #            <p>If you do not specify a value, the snapshot copy operation is completed on a
+    #            <p>If you do not specify a value, the snapshot copy operation is completed on a 
     #         best-effort basis.</p>
     # @option params [String] :destination_availability_zone
-    #   <p>The Local Zone, for example, <code>cn-north-1-pkx-1a</code> to which to copy the
+    #   <p>The Local Zone, for example, <code>cn-north-1-pkx-1a</code> to which to copy the 
     #         snapshot.</p>
     #            <note>
     #               <p>Only supported when copying a snapshot to a Local Zone.</p>
     #            </note>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To copy a snapshot
     #   # This example copies a snapshot with the snapshot ID of ``snap-066877671789bd71b`` from the ``us-west-2`` region to the ``us-east-1`` region and adds a short description to identify the snapshot.
@@ -4336,16 +4356,16 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Creates a crash-consistent, point-in-time copy of an existing Amazon EBS volume within the same
-    #       Availability Zone. The volume copy can be attached to an Amazon EC2 instance once it reaches the
+    # <p>Creates a crash-consistent, point-in-time copy of an existing Amazon EBS volume within the same 
+    #       Availability Zone. The volume copy can be attached to an Amazon EC2 instance once it reaches the 
     #       <code>available</code> state. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-copying-volume.html">Copy an Amazon EBS volume</a>.</p>
     # @param [Hash, Types::CopyVolumesRequest] params
     # @option params [String] :source_volume_id
     #   <p>The ID of the source EBS volume to copy.</p>
     # @option params [Integer] :iops
-    #   <p>The number of I/O operations per second (IOPS) to provision for the volume copy.
-    #         Required for <code>io1</code> and <code>io2</code> volumes. Optional for <code>gp3</code>
-    #         volumes. Omit for all other volume types. Full provisioned IOPS performance can be
+    #   <p>The number of I/O operations per second (IOPS) to provision for the volume copy. 
+    #         Required for <code>io1</code> and <code>io2</code> volumes. Optional for <code>gp3</code> 
+    #         volumes. Omit for all other volume types. Full provisioned IOPS performance can be 
     #         achieved only once the volume copy is fully initialized. </p>
     #            <p>Valid ranges:</p>
     #            <ul>
@@ -4362,12 +4382,12 @@ module Aws::EC2
     #            <note>
     #               <p>
     #                  <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html">
-    #   Instances built on the Nitro System</a> can support up to 256,000 IOPS. Other instances can support up to 32,000
+    #   Instances built on the Nitro System</a> can support up to 256,000 IOPS. Other instances can support up to 32,000 
     #   IOPS.</p>
     #            </note>
     # @option params [Integer] :size
-    #   <p>The size of the volume copy, in GiBs. The size must be equal to or greater than the
-    #         size of the source volume. If not specified, the size defaults to the size of the source
+    #   <p>The size of the volume copy, in GiBs. The size must be equal to or greater than the 
+    #         size of the source volume. If not specified, the size defaults to the size of the source 
     #         volume.</p>
     #            <p>Maximum supported sizes:</p>
     #            <ul>
@@ -4391,42 +4411,42 @@ module Aws::EC2
     #               </li>
     #            </ul>
     # @option params [String] :volume_type
-    #   <p>The volume type for the volume copy. If not specified, the volume type defaults to
+    #   <p>The volume type for the volume copy. If not specified, the volume type defaults to 
     #         <code>gp2</code>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply to the volume copy during creation.</p>
     # @option params [Boolean] :multi_attach_enabled
-    #   <p>Indicates whether to enable Amazon EBS Multi-Attach for the volume copy. If you enable
-    #         Multi-Attach, you can attach the volume to up to 16 Nitro instances in the same
-    #         Availability Zone simultaneously. Supported with <code>io1</code> and <code>io2</code> volumes only. For more
+    #   <p>Indicates whether to enable Amazon EBS Multi-Attach for the volume copy. If you enable 
+    #         Multi-Attach, you can attach the volume to up to 16 Nitro instances in the same 
+    #         Availability Zone simultaneously. Supported with <code>io1</code> and <code>io2</code> volumes only. For more 
     #         information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html">
     #           Amazon EBS Multi-Attach</a>.</p>
     # @option params [Integer] :throughput
-    #   <p>The throughput to provision for the volume copy, in MiB/s. Supported for <code>gp3</code>
-    #         volumes only. Omit for all other volume types. Full provisioned throughput performance can be
+    #   <p>The throughput to provision for the volume copy, in MiB/s. Supported for <code>gp3</code> 
+    #         volumes only. Omit for all other volume types. Full provisioned throughput performance can be 
     #         achieved only once the volume copy is fully initialized.</p>
     #            <p>Valid Range: <code>125 - 2000</code> MiB/s</p>
     #            <p></p>
     # @option params [String] :client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the 
     #         request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">
     #           Ensure Idempotency</a>.</p>
     # @option params [Boolean] :encrypted
-    #   <p>Indicates whether to encrypt the volume copy. If the source volume is encrypted, the
-    #         service always encrypts the copy regardless of this value. Set to <code>true</code> to
-    #         encrypt a copy of an unencrypted source volume during the copy operation. If you set
-    #         <code>Encrypted</code> to <code>true</code> but do not specify <code>KmsKeyId</code>, the
+    #   <p>Indicates whether to encrypt the volume copy. If the source volume is encrypted, the 
+    #         service always encrypts the copy regardless of this value. Set to <code>true</code> to 
+    #         encrypt a copy of an unencrypted source volume during the copy operation. If you set 
+    #         <code>Encrypted</code> to <code>true</code> but do not specify <code>KmsKeyId</code>, the 
     #         service uses the default KMS key for EBS encryption in your account.</p>
     # @option params [String] :kms_key_id
-    #   <p>The identifier of the KMS key to use for encryption of the volume copy. Specify a
-    #         symmetric encryption KMS key. You can specify a KMS key using the key ID, key ARN, alias
-    #         name, or alias ARN. If you set <code>Encrypted</code> to <code>true</code> but do not
-    #         specify this parameter, the service uses the default KMS key for EBS encryption in your
-    #         account. For cross-account volume copies, this must be a KMS key in the calling
+    #   <p>The identifier of the KMS key to use for encryption of the volume copy. Specify a 
+    #         symmetric encryption KMS key. You can specify a KMS key using the key ID, key ARN, alias 
+    #         name, or alias ARN. If you set <code>Encrypted</code> to <code>true</code> but do not 
+    #         specify this parameter, the service uses the default KMS key for EBS encryption in your 
+    #         account. For cross-account volume copies, this must be a KMS key in the calling 
     #         account.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -4570,8 +4590,8 @@ module Aws::EC2
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If you retry a request with the same token, the service ignores the request but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To create an application status check
     #   # This example creates an application status check that monitors HTTP health on port 80.
@@ -4699,7 +4719,7 @@ module Aws::EC2
     end
 
     # <p>
-    # Creates a new data export configuration for EC2 Capacity Manager. This allows you to automatically export capacity usage data to an S3 bucket on a scheduled basis.
+    # Creates a new data export configuration for EC2 Capacity Manager. This allows you to automatically export capacity usage data to an S3 bucket on a scheduled basis. 
     # The exported data includes metrics for On-Demand, Spot, and Capacity Reservations usage across your organization.
     # </p>
     # @param [Hash, Types::CreateCapacityManagerDataExportRequest] params
@@ -4713,7 +4733,7 @@ module Aws::EC2
     #   </p>
     # @option params [String] :schedule
     #   <p>
-    #   The frequency at which data exports are generated.
+    #   The frequency at which data exports are generated. 
     #   </p>
     # @option params [String] :output_format
     #   <p>
@@ -4725,7 +4745,7 @@ module Aws::EC2
     #   </p>
     # @option params [Boolean] :dry_run
     #   <p>
-    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. 
     #   If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.
     #   </p>
     # @option params [Array<Types::TagSpecification>] :tag_specifications
@@ -5541,8 +5561,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to associate with the carrier gateway.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
@@ -5589,14 +5609,14 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Creates a Client VPN endpoint. A Client VPN endpoint is the resource you create and configure to
-    # 			enable and manage client VPN sessions. It is the destination endpoint at which all client VPN sessions
+    # <p>Creates a Client VPN endpoint. A Client VPN endpoint is the resource you create and configure to 
+    # 			enable and manage client VPN sessions. It is the destination endpoint at which all client VPN sessions 
     # 			are terminated.</p>
     # @param [Hash, Types::CreateClientVpnEndpointRequest] params
     # @option params [String] :client_cidr_block
     #   <p>The IPv4 address range, in CIDR notation, from which to assign client IP addresses. The address range cannot overlap with the local CIDR of the VPC in which the associated subnet is located, or the routes that you add manually. The address range cannot be changed after the Client VPN endpoint has been created. Client CIDR range must have a size of at least /22 and must not be greater than /12.</p>
     # @option params [String] :server_certificate_arn
-    #   <p>The ARN of the server certificate. For more information, see
+    #   <p>The ARN of the server certificate. For more information, see 
     #   			the <a href="https://docs.aws.amazon.com/acm/latest/userguide/">Certificate Manager User Guide</a>.</p>
     # @option params [Array<Types::ClientVpnAuthenticationRequest>] :authentication_options
     #   <p>Information about the authentication method to be used to authenticate clients.</p>
@@ -5636,12 +5656,12 @@ module Aws::EC2
     # @option params [Boolean] :split_tunnel
     #   <p>Indicates whether split-tunnel is enabled on the Client VPN endpoint.</p>
     #            <p>By default, split-tunnel on a VPN endpoint is disabled.</p>
-    #            <p>For information about split-tunnel VPN endpoints, see <a href="https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html">Split-tunnel Client VPN endpoint</a> in the
+    #            <p>For information about split-tunnel VPN endpoints, see <a href="https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html">Split-tunnel Client VPN endpoint</a> in the 
     #   			<i>Client VPN Administrator Guide</i>.</p>
     # @option params [Boolean] :dry_run
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. 
     #   For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply to the Client VPN endpoint during creation.</p>
@@ -5667,10 +5687,10 @@ module Aws::EC2
     # @option params [Types::ClientRouteEnforcementOptions] :client_route_enforcement_options
     #   <p>Client route enforcement is a feature of the Client VPN service that helps enforce administrator defined routes on devices connected through the VPN. T
     #   		his feature helps improve your security posture by ensuring that network traffic originating from a connected client is not inadvertently sent outside the VPN tunnel.</p>
-    #            <p>Client route enforcement works by monitoring the route table of a connected device for routing policy changes to the VPN connection. If the feature detects any VPN routing policy modifications, it will automatically force an update to the route table,
+    #            <p>Client route enforcement works by monitoring the route table of a connected device for routing policy changes to the VPN connection. If the feature detects any VPN routing policy modifications, it will automatically force an update to the route table, 
     #   			reverting it back to the expected route configurations.</p>
     # @option params [Boolean] :disconnect_on_session_timeout
-    #   <p>Indicates whether the client VPN session is disconnected after the maximum timeout specified in <code>SessionTimeoutHours</code> is reached. If <code>true</code>, users are prompted to reconnect client VPN. If <code>false</code>, client VPN attempts to reconnect automatically.
+    #   <p>Indicates whether the client VPN session is disconnected after the maximum timeout specified in <code>SessionTimeoutHours</code> is reached. If <code>true</code>, users are prompted to reconnect client VPN. If <code>false</code>, client VPN attempts to reconnect automatically. 
     #                      The default value is <code>true</code>.</p>
     # @option params [String] :endpoint_ip_address_type
     #   <p>The IP address type for the Client VPN endpoint. Valid values are <code>ipv4</code>
@@ -5778,7 +5798,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Adds a route to a network to a Client VPN endpoint. Each Client VPN endpoint has a route table that describes the
+    # <p>Adds a route to a network to a Client VPN endpoint. Each Client VPN endpoint has a route table that describes the 
     # 			available destination network routes. Each route in the route table specifies the path for traﬃc to speciﬁc resources or networks.</p>
     # @param [Hash, Types::CreateClientVpnRouteRequest] params
     # @option params [String] :client_vpn_endpoint_id
@@ -5808,7 +5828,7 @@ module Aws::EC2
     # @option params [String] :description
     #   <p>A brief description of the route.</p>
     # @option params [String] :client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. 
     #   For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
@@ -5850,8 +5870,8 @@ module Aws::EC2
     #            The ID of the address pool.
     #         </p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -5887,8 +5907,8 @@ module Aws::EC2
     #         The tags to assign to the CoIP address pool.
     #         </p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -5937,8 +5957,8 @@ module Aws::EC2
     #             address translation (NAT).</p>
     #          <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device's
     #             BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network.
-    #             If you don't have an ASN already, you can use a private ASN. For more information, see
-    #             <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/cgw-options.html">Customer gateway
+    #             If you don't have an ASN already, you can use a private ASN. For more information, see 
+    #             <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/cgw-options.html">Customer gateway 
     #                 options for your Site-to-Site VPN connection</a> in the <i>Amazon Web Services Site-to-Site VPN User Guide</i>.</p>
     #          <p>To create more than one customer gateway with the same VPN type, IP address, and
     #             BGP ASN, specify a unique device name for each customer gateway. An identical request
@@ -6057,8 +6077,8 @@ module Aws::EC2
     #            <p>Either <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code> must be specified,
     #               but not both.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Boolean] :ipv6_native
     #   <p>Indicates whether to create an IPv6 only subnet. If you already have a default subnet
@@ -6135,15 +6155,15 @@ module Aws::EC2
 
     # <p>Creates a default VPC with a size <code>/16</code> IPv4 CIDR block and a default subnet
     # 			in each Availability Zone. For more information about the components of a default VPC,
-    # 			see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html">Default VPCs</a>
-    # 		    in the <i>Amazon VPC User Guide</i>. You cannot specify the components of the
+    # 			see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html">Default VPCs</a> 
+    # 		    in the <i>Amazon VPC User Guide</i>. You cannot specify the components of the 
     # 		    default VPC yourself.</p>
     #          <p>If you deleted your previous default VPC, you can create a default VPC. You cannot have
     # 			more than one default VPC per Region.</p>
     # @param [Hash, Types::CreateDefaultVpcRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -6250,7 +6270,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Delegates ownership of the Amazon EBS root volume for an Apple silicon
+    # <p>Delegates ownership of the Amazon EBS root volume for an Apple silicon 
     #          Mac instance to an administrative user.</p>
     # @param [Hash, Types::CreateDelegateMacVolumeOwnershipTaskRequest] params
     # @option params [String] :client_token
@@ -6269,14 +6289,14 @@ module Aws::EC2
     #                  <ul>
     #                     <li>
     #                        <p>
-    #                           <b>Username</b> - Only the default administrative user
-    #                        (<code>aws-managed-user</code>) is supported and it is used by default. You can't
+    #                           <b>Username</b> - Only the default administrative user 
+    #                        (<code>aws-managed-user</code>) is supported and it is used by default. You can't 
     #                        specify a different administrative user.</p>
     #                     </li>
     #                     <li>
     #                        <p>
-    #                           <b>Password</b> - If you did not change the default
-    #                        password for <code>aws-managed-user</code>, specify the default password, which is
+    #                           <b>Password</b> - If you did not change the default 
+    #                        password for <code>aws-managed-user</code>, specify the default password, which is 
     #                        <i>blank</i>. Otherwise, specify your password.</p>
     #                     </li>
     #                  </ul>
@@ -6288,13 +6308,13 @@ module Aws::EC2
     #                  <ul>
     #                     <li>
     #                        <p>
-    #                           <b>Username</b> - If you did not change the default
-    #                        administrative user, specify <code>ec2-user</code>. Otherwise, specify the username
+    #                           <b>Username</b> - If you did not change the default 
+    #                        administrative user, specify <code>ec2-user</code>. Otherwise, specify the username 
     #                        for your administrative user.</p>
     #                     </li>
     #                     <li>
     #                        <p>
-    #                           <b>Password</b> - Specify the password for the
+    #                           <b>Password</b> - Specify the password for the 
     #                        administrative user.</p>
     #                     </li>
     #                  </ul>
@@ -6364,16 +6384,16 @@ module Aws::EC2
     end
 
     # <p>Creates a custom set of DHCP options. After you create a DHCP option set, you associate
-    # 	       it with a VPC. After you associate a DHCP option set with a VPC, all existing and newly
+    # 	       it with a VPC. After you associate a DHCP option set with a VPC, all existing and newly 
     # 	       launched instances in the VPC use this set of DHCP options.</p>
-    #          <p>The following are the individual DHCP options you can specify. For more information, see
-    #            <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html">DHCP option sets</a>
+    #          <p>The following are the individual DHCP options you can specify. For more information, see 
+    #            <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html">DHCP option sets</a> 
     #            in the <i>Amazon VPC User Guide</i>.</p>
     #          <ul>
     #             <li>
     #                <p>
-    #                   <code>domain-name</code> - If you're using AmazonProvidedDNS in <code>us-east-1</code>,
-    #                    specify <code>ec2.internal</code>. If you're using AmazonProvidedDNS in any other Region,
+    #                   <code>domain-name</code> - If you're using AmazonProvidedDNS in <code>us-east-1</code>, 
+    #                    specify <code>ec2.internal</code>. If you're using AmazonProvidedDNS in any other Region, 
     #                    specify <code>region.compute.internal</code>. Otherwise, specify a custom domain name.
     #                    This value is used to complete unqualified DNS hostnames.</p>
     #                <p>Some Linux operating systems accept multiple domain names separated by spaces.
@@ -6385,8 +6405,8 @@ module Aws::EC2
     #             <li>
     #                <p>
     #                   <code>domain-name-servers</code> - The IP addresses of up to four DNS servers,
-    #                    or AmazonProvidedDNS. To specify multiple domain name servers in a single parameter,
-    #                    separate the IP addresses using commas. To have your instances receive custom DNS
+    #                    or AmazonProvidedDNS. To specify multiple domain name servers in a single parameter, 
+    #                    separate the IP addresses using commas. To have your instances receive custom DNS 
     #                    hostnames as specified in <code>domain-name</code>, you must specify a custom DNS
     #                    server.</p>
     #             </li>
@@ -6403,13 +6423,13 @@ module Aws::EC2
     #             <li>
     #                <p>
     #                   <code>netbios-node-type</code> - The NetBIOS node type (1, 2, 4, or 8). We recommend that
-    #                    you specify 2. Broadcast and multicast are not supported. For more information about
+    #                    you specify 2. Broadcast and multicast are not supported. For more information about 
     #                    NetBIOS node types, see <a href="https://www.ietf.org/rfc/rfc2132.txt">RFC 2132</a>.</p>
     #             </li>
     #             <li>
     #                <p>
-    #                   <code>ipv6-address-preferred-lease-time</code> - A value (in seconds, minutes, hours, or years) for how frequently a running instance with an IPv6 assigned to it goes through DHCPv6 lease renewal.
-    #                    Acceptable values are between 140 and 2147483647 seconds (approximately 68 years). If no value is entered, the default lease time is 140 seconds. If you use long-term addressing for EC2 instances, you can increase the lease time and avoid frequent
+    #                   <code>ipv6-address-preferred-lease-time</code> - A value (in seconds, minutes, hours, or years) for how frequently a running instance with an IPv6 assigned to it goes through DHCPv6 lease renewal. 
+    #                    Acceptable values are between 140 and 2147483647 seconds (approximately 68 years). If no value is entered, the default lease time is 140 seconds. If you use long-term addressing for EC2 instances, you can increase the lease time and avoid frequent 
     #                    lease renewal requests. Lease renewal typically occurs when half of the lease time has elapsed.</p>
     #             </li>
     #          </ul>
@@ -6419,8 +6439,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to assign to the DHCP option.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To create a DHCP options set
     #   # This example creates a DHCP options set.
@@ -6518,8 +6538,8 @@ module Aws::EC2
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
     #   			request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :vpc_id
     #   <p>The ID of the VPC for which to create the egress-only internet gateway.</p>
@@ -6577,8 +6597,8 @@ module Aws::EC2
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html">EC2 Fleet</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::CreateFleetRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
@@ -6641,9 +6661,9 @@ module Aws::EC2
     #            fleets of type <code>maintain</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#ec2-fleet-health-checks">EC2 Fleet
     #               health checks</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   <p>The key-value pair for tagging the EC2 Fleet request on creation. For more information, see
+    #   <p>The key-value pair for tagging the EC2 Fleet request on creation. For more information, see 
     #            <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources">Tag your resources</a>.</p>
-    #            <p>If the fleet type is <code>instant</code>, specify a resource type of <code>fleet</code>
+    #            <p>If the fleet type is <code>instant</code>, specify a resource type of <code>fleet</code> 
     #            to tag the fleet, <code>instance</code> to tag the instances at launch,
     #            <code>volume</code> to tag the volumes at launch, or <code>network-interface</code> to
     #            tag the network interfaces at launch.</p>
@@ -7075,20 +7095,20 @@ module Aws::EC2
 
     # <p>Creates one or more flow logs to capture information about IP traffic for a specific network interface,
     #             subnet, or VPC. </p>
-    #          <p>Flow log data for a monitored network interface is recorded as flow log records, which are log events
-    #             consisting of fields that describe the traffic flow. For more information, see
-    #             <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html">Flow log records</a>
+    #          <p>Flow log data for a monitored network interface is recorded as flow log records, which are log events 
+    #             consisting of fields that describe the traffic flow. For more information, see 
+    #             <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html">Flow log records</a> 
     #             in the <i>Amazon VPC User Guide</i>.</p>
-    #          <p>When publishing to CloudWatch Logs, flow log records are published to a log group, and each network
-    #             interface has a unique log stream in the log group. When publishing to Amazon S3, flow log records for all
-    #             of the monitored network interfaces are published to a single log file object that is stored in the specified
+    #          <p>When publishing to CloudWatch Logs, flow log records are published to a log group, and each network 
+    #             interface has a unique log stream in the log group. When publishing to Amazon S3, flow log records for all 
+    #             of the monitored network interfaces are published to a single log file object that is stored in the specified 
     #             bucket.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html">VPC Flow Logs</a>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html">VPC Flow Logs</a> 
     #             in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::CreateFlowLogsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
@@ -7143,14 +7163,14 @@ module Aws::EC2
     #   <p>The fields to include in the flow log record. List the fields in the order in which
     #               they should appear. If you omit this parameter, the flow log is created using the
     #               default format. If you specify this parameter, you must include at least one
-    #               field. For more information about the available fields, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html">Flow log records</a>
+    #               field. For more information about the available fields, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html">Flow log records</a> 
     #               in the <i>Amazon VPC User Guide</i> or <a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-flow-logs.html#flow-log-records">Transit Gateway Flow Log
     #                       records</a> in the <i>Amazon Web Services Transit Gateway Guide</i>.</p>
     #            <p>Specify the fields using the <code>${field-id}</code> format, separated by spaces.</p>
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply to the flow logs.</p>
     # @option params [Integer] :max_aggregation_interval
-    #   <p>The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record.
+    #   <p>The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record. 
     #               The possible values are 60 seconds (1 minute) or 600 seconds (10 minutes).
     #               This parameter must be 60 seconds for transit gateway resource types.</p>
     #            <p>When a network interface is attached to a <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html">Nitro-based
@@ -7222,15 +7242,15 @@ module Aws::EC2
     end
 
     # <p>Creates an Amazon FPGA Image (AFI) from the specified design checkpoint (DCP).</p>
-    #          <p>The create operation is asynchronous. To verify that the AFI was successfully
+    #          <p>The create operation is asynchronous. To verify that the AFI was successfully 
     #          created and is ready for use, check the output logs.</p>
-    #          <p>An AFI contains the FPGA bitstream that is ready to download to an FPGA.
+    #          <p>An AFI contains the FPGA bitstream that is ready to download to an FPGA. 
     #          You can securely deploy an AFI on multiple FPGA-accelerated instances.
     #          For more information, see the <a href="https://github.com/aws/aws-fpga/">Amazon Web Services FPGA Hardware Development Kit</a>.</p>
     # @param [Hash, Types::CreateFpgaImageRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Types::StorageLocation] :input_storage_location
     #   <p>The location of the encrypted design checkpoint in Amazon S3. The input must be a tarball.</p>
@@ -7241,7 +7261,7 @@ module Aws::EC2
     # @option params [String] :name
     #   <p>A name for the AFI.</p>
     # @option params [String] :client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. 
     #         	For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring Idempotency</a>.</p>
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply to the FPGA image during creation.</p>
@@ -7353,12 +7373,12 @@ module Aws::EC2
     #         <code>InvalidParameterValue</code> error.</p>
     #            <p>Default: <code>regional</code> (for instances in Local Zones only)</p>
     # @option params [String] :boot_mode_override
-    #   <p>The boot mode of the new image, which overrides the default boot mode. By default,
-    #         if you do not specify this parameter, the new image inherits
+    #   <p>The boot mode of the new image, which overrides the default boot mode. By default, 
+    #         if you do not specify this parameter, the new image inherits 
     #         the <code>boot-mode</code> from the source instance.</p>
     #            <p>A value of <code>uefi</code> indicates that the image only supports UEFI boot mode. You can
     #         specify this parameter only if the <code>current-instance-boot-mode</code> of the source instance is
-    #           <code>uefi</code>. To find the <code>boot-mode</code> or <code>current-instance-boot-mode</code> of
+    #           <code>uefi</code>. To find the <code>boot-mode</code> or <code>current-instance-boot-mode</code> of 
     #           an instance, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html">DescribeInstances</a>.</p>
     #            <note>
     #               <p>The operating system contained in the AMI must be configured to support the specified
@@ -7367,8 +7387,8 @@ module Aws::EC2
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html">Instance launch behavior with Amazon EC2 boot modes</a> in
     #         the <i>Amazon EC2 User Guide</i>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :instance_id
     #   <p>The ID of the instance.</p>
@@ -7484,8 +7504,8 @@ module Aws::EC2
     # @option params [String] :image_id
     #   <p>The ID of the image to report on.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::ImageUsageResourceTypeRequest>] :resource_types
     #   <p>The resource types to include in the report.</p>
@@ -7548,13 +7568,13 @@ module Aws::EC2
     #                 <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::CreateInstanceConnectEndpointRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #               and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #               and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #               Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :subnet_id
     #   <p>The ID of the subnet in which to create the EC2 Instance Connect Endpoint.</p>
     # @option params [Array<String>] :security_group_ids
-    #   <p>One or more security groups to associate with the endpoint. If you don't specify a security group,
+    #   <p>One or more security groups to associate with the endpoint. If you don't specify a security group, 
     #               the default security group for your VPC will be associated with the endpoint.</p>
     # @option params [Boolean] :preserve_client_ip
     #   <p>Indicates whether the client IP address is preserved as the source. The following are the possible values.</p>
@@ -7696,8 +7716,8 @@ module Aws::EC2
     #             events</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::CreateInstanceEventWindowRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :name
     #   <p>The name of the event window.</p>
@@ -7878,14 +7898,14 @@ module Aws::EC2
 
     # <p>Creates an internet gateway for use with a VPC. After creating the internet gateway,
     # 			you attach it to a VPC using <a>AttachInternetGateway</a>.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html">Internet gateways</a> in the
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html">Internet gateways</a> in the 
     #            <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::CreateInternetGatewayRequest] params
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to assign to the internet gateway.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To create an Internet gateway
     #   # This example creates an Internet gateway.
@@ -8016,8 +8036,8 @@ module Aws::EC2
     #       </p>
     # @param [Hash, Types::CreateIpamRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :description
     #   <p>A description for the IPAM.</p>
@@ -8118,8 +8138,8 @@ module Aws::EC2
     # </p>
     # @param [Hash, Types::CreateIpamExternalResourceVerificationTokenRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_id
     #   <p>The ID of the IPAM that will create the token.</p>
@@ -8264,8 +8284,8 @@ module Aws::EC2
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/define-public-ipv4-allocation-strategy-with-ipam-policies.html">Define public IPv4 allocation strategy with IPAM policies</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
     # @param [Hash, Types::CreateIpamPolicyRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to assign to the IPAM policy.</p>
@@ -8322,8 +8342,8 @@ module Aws::EC2
     #       </p>
     # @param [Hash, Types::CreateIpamPoolRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_scope_id
     #   <p>The ID of the scope in which you would like to create the IPAM pool.</p>
@@ -8345,24 +8365,24 @@ module Aws::EC2
     # @option params [String] :address_family
     #   <p>The IP protocol assigned to this IPAM pool. You must choose either IPv4 or IPv6 protocol for a pool.</p>
     # @option params [Boolean] :auto_import
-    #   <p>If selected, IPAM will continuously look for resources within the CIDR range of this pool
+    #   <p>If selected, IPAM will continuously look for resources within the CIDR range of this pool 
     #            and automatically import them as allocations into your IPAM. The CIDRs that will be allocated for
-    #            these resources must not already be allocated to other resources in order for the import to succeed. IPAM will import
-    #            a CIDR regardless of its compliance with the pool's allocation rules, so a resource might be imported and subsequently
-    #            marked as noncompliant. If IPAM discovers multiple CIDRs that overlap, IPAM will import the largest CIDR only. If IPAM
+    #            these resources must not already be allocated to other resources in order for the import to succeed. IPAM will import 
+    #            a CIDR regardless of its compliance with the pool's allocation rules, so a resource might be imported and subsequently 
+    #            marked as noncompliant. If IPAM discovers multiple CIDRs that overlap, IPAM will import the largest CIDR only. If IPAM 
     #            discovers multiple CIDRs with matching CIDRs, IPAM will randomly import one of them only.
     #         </p>
     #            <p>A locale must be set on the pool for this feature to work.</p>
     # @option params [Boolean] :publicly_advertisable
     #   <p>Determines if the pool is publicly advertisable. The request can only contain <code>PubliclyAdvertisable</code> if <code>AddressFamily</code> is <code>ipv6</code> and <code>PublicIpSource</code> is <code>byoip</code>.</p>
     # @option params [Integer] :allocation_min_netmask_length
-    #   <p>The minimum netmask length required for CIDR allocations in this IPAM pool to be compliant. The minimum netmask length must be
+    #   <p>The minimum netmask length required for CIDR allocations in this IPAM pool to be compliant. The minimum netmask length must be 
     #            less than the maximum netmask length. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are  0 - 128.</p>
     # @option params [Integer] :allocation_max_netmask_length
-    #   <p>The maximum netmask length possible for CIDR allocations in this IPAM pool to be compliant. The maximum netmask length must be
+    #   <p>The maximum netmask length possible for CIDR allocations in this IPAM pool to be compliant. The maximum netmask length must be 
     #            greater than the minimum netmask length. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are  0 - 128.</p>
     # @option params [Integer] :allocation_default_netmask_length
-    #   <p>The default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here,
+    #   <p>The default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, 
     #            new allocations will default to 10.0.0.0/16.</p>
     # @option params [Array<Types::RequestIpamResourceTag>] :allocation_resource_tags
     #   <p>Tags that are required for resources that use CIDRs from this IPAM pool. Resources that do not have these tags will not be allowed to allocate space from the pool. If the resources have their tags changed after they have allocated space or if the allocation tagging requirements are changed on the pool, the resource may be marked as noncompliant.</p>
@@ -8374,7 +8394,7 @@ module Aws::EC2
     # @option params [String] :aws_service
     #   <p>Limits which service in Amazon Web Services that the pool can be used in. "ec2", for example, allows users to use space for Elastic IP addresses and VPCs.</p>
     # @option params [String] :public_ip_source
-    #   <p>The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is <code>byoip</code>. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/intro-create-ipv6-pools.html">Create IPv6 pools</a> in the <i>Amazon VPC IPAM User Guide</i>.
+    #   <p>The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is <code>byoip</code>. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/intro-create-ipv6-pools.html">Create IPv6 pools</a> in the <i>Amazon VPC IPAM User Guide</i>. 
     #            By default, you can add only one Amazon-provided IPv6 CIDR block to a top-level IPv6 pool if PublicIpSource is <code>amazon</code>. For information on increasing the default limit, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html"> Quotas for your IPAM</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
     # @option params [Types::IpamPoolSourceResourceRequest] :source_resource
     #   <p>The resource used to provision CIDRs to a resource planning pool.</p>
@@ -8476,8 +8496,8 @@ module Aws::EC2
     #          <p>For more information about IPAM prefix list resolver, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/automate-prefix-list-updates.html">Automate prefix list updates with IPAM</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
     # @param [Hash, Types::CreateIpamPrefixListResolverRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_id
     #   <p>The ID of the IPAM that will serve as the source of the IP address database for CIDR selection. The IPAM must be in the Advanced tier to use this feature.</p>
@@ -8568,8 +8588,8 @@ module Aws::EC2
     #          <p>For more information about IPAM prefix list resolver, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/automate-prefix-list-updates.html">Automate prefix list updates with IPAM</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
     # @param [Hash, Types::CreateIpamPrefixListResolverTargetRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_prefix_list_resolver_id
     #   <p>The ID of the IPAM prefix list resolver that will manage the synchronization of CIDRs to the target prefix list.</p>
@@ -8642,8 +8662,8 @@ module Aws::EC2
     # <p>Creates an IPAM resource discovery. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.</p>
     # @param [Hash, Types::CreateIpamResourceDiscoveryRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :description
     #   <p>A description for the IPAM resource discovery.</p>
@@ -8766,8 +8786,8 @@ module Aws::EC2
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/add-scope-ipam.html">Add a scope</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
     # @param [Hash, Types::CreateIpamScopeRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_id
     #   <p>The ID of the IPAM for which you're creating this scope.</p>
@@ -8863,8 +8883,8 @@ module Aws::EC2
     #            <p>Default: <code>pem</code>
     #            </p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To create a key pair
     #   # This example creates a key pair named my-key-pair.
@@ -9983,7 +10003,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Creates a static route for the specified local gateway route table. You must specify one of the
+    # <p>Creates a static route for the specified local gateway route table. You must specify one of the 
     #          following targets: </p>
     #          <ul>
     #             <li>
@@ -9999,21 +10019,21 @@ module Aws::EC2
     #          </ul>
     # @param [Hash, Types::CreateLocalGatewayRouteRequest] params
     # @option params [String] :destination_cidr_block
-    #   <p>The CIDR range used for destination matches. Routing decisions are based on
+    #   <p>The CIDR range used for destination matches. Routing decisions are based on 
     #           the most specific match.</p>
     # @option params [String] :local_gateway_route_table_id
     #   <p>The ID of the local gateway route table.</p>
     # @option params [String] :local_gateway_virtual_interface_group_id
     #   <p>The ID of the virtual interface group.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :network_interface_id
     #   <p>The ID of the network interface.</p>
     # @option params [String] :destination_prefix_list_id
     #   <p>
-    #            The ID of the prefix list. Use a prefix list in place of <code>DestinationCidrBlock</code>. You
+    #            The ID of the prefix list. Use a prefix list in place of <code>DestinationCidrBlock</code>. You 
     #            cannot use <code>DestinationPrefixListId</code> and <code>DestinationCidrBlock</code> in the same request.
     #         </p>
     # @example Request syntax with placeholder values
@@ -10051,12 +10071,12 @@ module Aws::EC2
     end
 
     # <p>
-    #       Creates a local gateway route table.
+    #       Creates a local gateway route table. 
     #       </p>
     # @param [Hash, Types::CreateLocalGatewayRouteTableRequest] params
     # @option params [String] :local_gateway_id
     #   <p>
-    #         The ID of the local gateway.
+    #         The ID of the local gateway. 
     #         </p>
     # @option params [String] :mode
     #   <p>
@@ -10067,8 +10087,8 @@ module Aws::EC2
     #         The tags assigned to the local gateway route table.
     #         </p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -10119,7 +10139,7 @@ module Aws::EC2
     end
 
     # <p>
-    #       Creates a local gateway route table virtual interface group association.
+    #       Creates a local gateway route table virtual interface group association. 
     #       </p>
     # @param [Hash, Types::CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest] params
     # @option params [String] :local_gateway_route_table_id
@@ -10135,8 +10155,8 @@ module Aws::EC2
     #         The tags assigned to the local gateway route table virtual interface group association.
     #         </p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -10191,8 +10211,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to assign to the local gateway route table VPC association.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -10256,8 +10276,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply to a resource when the local gateway virtual interface is being created. </p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Integer] :peer_bgp_asn_extended
     #   <p>The extended 32-bit ASN of the BGP peer for use with larger ASN values.</p>
@@ -10328,8 +10348,8 @@ module Aws::EC2
     #   <p>The tags to apply to the local gateway virtual interface group when the resource is
     #            being created.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -10377,22 +10397,22 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Creates a System Integrity Protection (SIP) modification task to configure the SIP settings
-    #          for an x86 Mac instance or Apple silicon Mac instance. For more information, see
+    # <p>Creates a System Integrity Protection (SIP) modification task to configure the SIP settings 
+    #          for an x86 Mac instance or Apple silicon Mac instance. For more information, see 
     #          <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mac-sip-settings.html#mac-sip-configure">
     #             Configure SIP for Amazon EC2 instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
-    #          <p>When you configure the SIP settings for your instance, you can either enable
-    #          or disable all SIP settings, or you can specify a custom SIP configuration that
+    #          <p>When you configure the SIP settings for your instance, you can either enable 
+    #          or disable all SIP settings, or you can specify a custom SIP configuration that 
     #          selectively enables or disables specific SIP settings.</p>
     #          <note>
     #             <p>If you implement a custom configuration, <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mac-sip-settings.html#mac-sip-check-settings">
-    #                connect to the instance and verify the settings</a> to ensure that your
+    #                connect to the instance and verify the settings</a> to ensure that your 
     #             requirements are properly implemented and functioning as intended.</p>
-    #             <p>SIP configurations might change with macOS updates. We recommend that you
-    #             review custom SIP settings after any macOS version upgrade to ensure
+    #             <p>SIP configurations might change with macOS updates. We recommend that you 
+    #             review custom SIP settings after any macOS version upgrade to ensure 
     #             continued compatibility and proper functionality of your security configurations.</p>
     #          </note>
-    #          <p>To enable or disable all SIP settings, use the <b>MacSystemIntegrityProtectionStatus</b>
+    #          <p>To enable or disable all SIP settings, use the <b>MacSystemIntegrityProtectionStatus</b> 
     #          parameter only. For example, to enable all SIP settings, specify the following:</p>
     #          <ul>
     #             <li>
@@ -10401,13 +10421,13 @@ module Aws::EC2
     #                </p>
     #             </li>
     #          </ul>
-    #          <p>To specify a custom configuration that selectively enables or disables specific SIP
-    #          settings, use the <b>MacSystemIntegrityProtectionStatus</b>
-    #          parameter to enable or disable all SIP settings, and then use the
-    #          <b>MacSystemIntegrityProtectionConfiguration</b> parameter
-    #          to specify exceptions. In this case, the exceptions you specify for <b>MacSystemIntegrityProtectionConfiguration</b> override the value
-    #          you specify for <b>MacSystemIntegrityProtectionStatus</b>.
-    #          For example, to enable all SIP settings, except <code>NvramProtections</code>,
+    #          <p>To specify a custom configuration that selectively enables or disables specific SIP 
+    #          settings, use the <b>MacSystemIntegrityProtectionStatus</b> 
+    #          parameter to enable or disable all SIP settings, and then use the 
+    #          <b>MacSystemIntegrityProtectionConfiguration</b> parameter 
+    #          to specify exceptions. In this case, the exceptions you specify for <b>MacSystemIntegrityProtectionConfiguration</b> override the value 
+    #          you specify for <b>MacSystemIntegrityProtectionStatus</b>. 
+    #          For example, to enable all SIP settings, except <code>NvramProtections</code>, 
     #          specify the following:</p>
     #          <ul>
     #             <li>
@@ -10430,7 +10450,7 @@ module Aws::EC2
     #   <p>The ID of the Amazon EC2 Mac instance.</p>
     # @option params [String] :mac_credentials
     #   <p>
-    #               <b>[Apple silicon Mac instances only]</b> Specifies the
+    #               <b>[Apple silicon Mac instances only]</b> Specifies the 
     #            following credentials:</p>
     #            <ul>
     #               <li>
@@ -10440,14 +10460,14 @@ module Aws::EC2
     #                  <ul>
     #                     <li>
     #                        <p>
-    #                           <b>Username</b> - Only the default administrative
-    #                        user (<code>aws-managed-user</code>) is supported and it is used by default. You
+    #                           <b>Username</b> - Only the default administrative 
+    #                        user (<code>aws-managed-user</code>) is supported and it is used by default. You 
     #                        can't specify a different administrative user.</p>
     #                     </li>
     #                     <li>
     #                        <p>
-    #                           <b>Password</b> - If you did not change the default
-    #                        password for <code>aws-managed-user</code>, specify the default password, which
+    #                           <b>Password</b> - If you did not change the default 
+    #                        password for <code>aws-managed-user</code>, specify the default password, which 
     #                        is <i>blank</i>. Otherwise, specify your password.</p>
     #                     </li>
     #                  </ul>
@@ -10459,13 +10479,13 @@ module Aws::EC2
     #                  <ul>
     #                     <li>
     #                        <p>
-    #                           <b>Username</b> - If you did not change the default
-    #                        administrative user, specify <code>ec2-user</code>. Otherwise, specify the username
+    #                           <b>Username</b> - If you did not change the default 
+    #                        administrative user, specify <code>ec2-user</code>. Otherwise, specify the username 
     #                        for your administrative user.</p>
     #                     </li>
     #                     <li>
     #                        <p>
-    #                           <b>Password</b> - Specify the password for the
+    #                           <b>Password</b> - Specify the password for the 
     #                        administrative user.</p>
     #                     </li>
     #                  </ul>
@@ -10480,11 +10500,11 @@ module Aws::EC2
     #   }</code>
     #            </p>
     # @option params [Types::MacSystemIntegrityProtectionConfigurationRequest] :mac_system_integrity_protection_configuration
-    #   <p>Specifies the overrides to selectively enable or disable individual SIP settings.
-    #            The individual settings you specify here override the overall SIP status you specify
+    #   <p>Specifies the overrides to selectively enable or disable individual SIP settings. 
+    #            The individual settings you specify here override the overall SIP status you specify 
     #            for <b>MacSystemIntegrityProtectionStatus</b>.</p>
     # @option params [String] :mac_system_integrity_protection_status
-    #   <p>Specifies the overall SIP status for the instance. To enable all SIP settings, specify
+    #   <p>Specifies the overall SIP status for the instance. To enable all SIP settings, specify 
     #            <code>enabled</code>. To disable all SIP settings, specify <code>disabled</code>.</p>
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>Specifies tags to apply to the SIP modification task.</p>
@@ -10551,12 +10571,12 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Creates a managed prefix list. You can specify entries for the prefix list.
+    # <p>Creates a managed prefix list. You can specify entries for the prefix list. 
     #             Each entry consists of a CIDR block and an optional description.</p>
     # @param [Hash, Types::CreateManagedPrefixListRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :prefix_list_name
     #   <p>A name for the prefix list.</p>
@@ -10643,13 +10663,13 @@ module Aws::EC2
     #             private IPv4 addresses, and communicating between overlapping networks.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html">NAT gateways</a> in the <i>Amazon VPC User Guide</i>.</p>
     #          <important>
-    #             <p>When you create a public NAT gateway and assign it an EIP or secondary EIPs,
-    #           the network border group of the EIPs must match the network border group of the Availability Zone (AZ)
-    #           that the public NAT gateway is in. If it's not the same, the NAT gateway will fail to launch.
-    #           You can see the network border group for the subnet's AZ by viewing the details of the subnet.
-    #           Similarly, you can view the network border group of an EIP by viewing the details of the EIP address.
-    #           For more information about network border groups and EIPs, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithEIPs.html">Allocate an Elastic IP address</a>
-    #           in the <i>Amazon VPC User Guide</i>.
+    #             <p>When you create a public NAT gateway and assign it an EIP or secondary EIPs, 
+    #           the network border group of the EIPs must match the network border group of the Availability Zone (AZ) 
+    #           that the public NAT gateway is in. If it's not the same, the NAT gateway will fail to launch. 
+    #           You can see the network border group for the subnet's AZ by viewing the details of the subnet. 
+    #           Similarly, you can view the network border group of an EIP by viewing the details of the EIP address. 
+    #           For more information about network border groups and EIPs, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithEIPs.html">Allocate an Elastic IP address</a> 
+    #           in the <i>Amazon VPC User Guide</i>. 
     #       </p>
     #          </important>
     # @param [Hash, Types::CreateNatGatewayRequest] params
@@ -10658,7 +10678,7 @@ module Aws::EC2
     #            <p>A zonal NAT gateway is a NAT Gateway that provides redundancy and scalability within a single availability zone. A regional NAT gateway is a single NAT Gateway that works across multiple availability zones (AZs) in your VPC, providing redundancy, scalability and availability across all the AZs in a Region.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html">Regional NAT gateways for automatic multi-AZ expansion</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @option params [String] :allocation_id
-    #   <p>[Public NAT gateways only] The allocation ID of an Elastic IP address to associate
+    #   <p>[Public NAT gateways only] The allocation ID of an Elastic IP address to associate 
     #             with the NAT gateway. You cannot specify an Elastic IP address with a private NAT gateway.
     #             If the Elastic IP address is associated with another resource, you must first disassociate it.</p>
     # @option params [String] :client_token
@@ -10666,8 +10686,8 @@ module Aws::EC2
     #   			request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #            <p>Constraint: Maximum 64 ASCII characters.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :subnet_id
     #   <p>The ID of the subnet in which to create the NAT gateway.</p>
@@ -10680,19 +10700,19 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to assign to the NAT gateway.</p>
     # @option params [String] :connectivity_type
-    #   <p>Indicates whether the NAT gateway supports public or private connectivity.
+    #   <p>Indicates whether the NAT gateway supports public or private connectivity. 
     #             The default is public connectivity.</p>
     # @option params [String] :private_ip_address
     #   <p>The private IPv4 address to assign to the NAT gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.</p>
     # @option params [Array<String>] :secondary_allocation_ids
-    #   <p>Secondary EIP allocation IDs. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html">Create a NAT gateway</a>
+    #   <p>Secondary EIP allocation IDs. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html">Create a NAT gateway</a> 
     #               in the <i>Amazon VPC User Guide</i>.</p>
     # @option params [Array<String>] :secondary_private_ip_addresses
-    #   <p>Secondary private IPv4 addresses. For more information about secondary addresses, see
+    #   <p>Secondary private IPv4 addresses. For more information about secondary addresses, see 
     #               <a href="https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html">Create a NAT gateway</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @option params [Integer] :secondary_private_ip_address_count
-    #   <p>[Private NAT gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT gateway.
-    #               For more information about secondary addresses, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html">Create a NAT gateway</a>
+    #   <p>[Private NAT gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT gateway. 
+    #               For more information about secondary addresses, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html">Create a NAT gateway</a> 
     #               in the <i>Amazon VPC User Guide</i>.</p>
     # @example To create a NAT gateway
     #   # This example creates a NAT gateway in subnet subnet-1a2b3c4d and associates an Elastic IP address with the allocation ID eipalloc-37fc1a52 with the NAT gateway.
@@ -10825,8 +10845,8 @@ module Aws::EC2
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
     #               request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :vpc_id
     #   <p>The ID of the VPC.</p>
@@ -10932,19 +10952,19 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Creates an entry (a rule) in a network ACL with the specified rule number. Each network ACL has a set of numbered ingress rules
-    # 		        and a separate set of numbered egress rules. When determining whether a packet should be allowed in or out of a subnet associated
-    # 		        with the ACL, we process the entries in the ACL according to the rule numbers, in ascending order. Each network ACL has a set of
+    # <p>Creates an entry (a rule) in a network ACL with the specified rule number. Each network ACL has a set of numbered ingress rules 
+    # 		        and a separate set of numbered egress rules. When determining whether a packet should be allowed in or out of a subnet associated 
+    # 		        with the ACL, we process the entries in the ACL according to the rule numbers, in ascending order. Each network ACL has a set of 
     # 		        ingress rules and a separate set of egress rules.</p>
-    #          <p>We recommend that you leave room between the rule numbers (for example, 100, 110, 120, ...), and not number them one right after the
+    #          <p>We recommend that you leave room between the rule numbers (for example, 100, 110, 120, ...), and not number them one right after the 
     # 		        other (for example, 101, 102, 103, ...). This makes it easier to add a rule between existing ones without having to renumber the rules.</p>
     #          <p>After you add an entry, you can't modify it; you must either replace it, or create an entry and delete the old one.</p>
-    #          <p>For more information about network ACLs, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html">Network ACLs</a>
+    #          <p>For more information about network ACLs, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html">Network ACLs</a> 
     #            in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::CreateNetworkAclEntryRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :network_acl_id
     #   <p>The ID of the network ACL.</p>
@@ -10953,10 +10973,10 @@ module Aws::EC2
     #            <p>Constraints: Positive integer from 1 to 32766. The range 32767 to 65535 is reserved for internal use.</p>
     # @option params [String] :protocol
     #   <p>The protocol number. A value of "-1" means all protocols. If you specify "-1" or a
-    #     			protocol number other than "6" (TCP), "17" (UDP), or "1" (ICMP), traffic on all ports is
-    #   			allowed, regardless of any ports or ICMP types or codes that you specify. If you specify
-    #   			protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and
-    #   			codes allowed, regardless of any that you specify. If you specify protocol "58" (ICMPv6)
+    #     			protocol number other than "6" (TCP), "17" (UDP), or "1" (ICMP), traffic on all ports is 
+    #   			allowed, regardless of any ports or ICMP types or codes that you specify. If you specify 
+    #   			protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and 
+    #   			codes allowed, regardless of any that you specify. If you specify protocol "58" (ICMPv6) 
     #   			and specify an IPv6 CIDR block, you must specify an ICMP type and code.</p>
     # @option params [String] :rule_action
     #   <p>Indicates whether to allow or deny the traffic that matches the rule.</p>
@@ -10969,7 +10989,7 @@ module Aws::EC2
     #   <p>The IPv6 network range to allow or deny, in CIDR notation (for example
     #                   <code>2001:db8:1234:1a00::/64</code>).</p>
     # @option params [Types::IcmpTypeCode] :icmp_type_code
-    #   <p>ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying protocol
+    #   <p>ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying protocol 
     #   		        1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR block.</p>
     # @option params [Types::PortRange] :port_range
     #   <p>TCP or UDP protocols: The range of ports the rule applies to.
@@ -11023,8 +11043,8 @@ module Aws::EC2
     end
 
     # <p>Creates a Network Access Scope.</p>
-    #          <p>Amazon Web Services Network Access Analyzer enables cloud networking and cloud operations teams
-    #          to verify that their networks on Amazon Web Services conform to their network security and governance
+    #          <p>Amazon Web Services Network Access Analyzer enables cloud networking and cloud operations teams 
+    #          to verify that their networks on Amazon Web Services conform to their network security and governance 
     #          objectives. For more information, see the <a href="https://docs.aws.amazon.com/vpc/latest/network-access-analyzer/">Amazon Web Services Network Access Analyzer Guide</a>.</p>
     # @param [Hash, Types::CreateNetworkInsightsAccessScopeRequest] params
     # @option params [Array<Types::AccessScopePathRequest>] :match_paths
@@ -11032,13 +11052,13 @@ module Aws::EC2
     # @option params [Array<Types::AccessScopePathRequest>] :exclude_paths
     #   <p>The paths to exclude.</p>
     # @option params [String] :client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information,
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, 
     #      see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -11253,7 +11273,7 @@ module Aws::EC2
 
     # <p>Creates a path to analyze for reachability.</p>
     #          <p>Reachability Analyzer enables you to analyze and debug network reachability between
-    #           two resources in your virtual private cloud (VPC). For more information, see the
+    #           two resources in your virtual private cloud (VPC). For more information, see the 
     #           <a href="https://docs.aws.amazon.com/vpc/latest/reachability/">Reachability Analyzer Guide</a>.</p>
     # @param [Hash, Types::CreateNetworkInsightsPathRequest] params
     # @option params [String] :source_ip
@@ -11271,11 +11291,11 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to add to the path.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information,
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, 
     #      see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
     # @option params [Types::PathRequestFilter] :filter_at_source
     #   <p>Scopes the analysis to network paths that match specific filters at the source. If you specify
@@ -11745,8 +11765,8 @@ module Aws::EC2
     #   <p>The ID of a parent placement group. Valid only when <b>Strategy</b>
     #               is set to <code>cluster</code>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :group_name
     #   <p>A name for the placement group. Must be unique within the scope of your account for
@@ -11825,8 +11845,8 @@ module Aws::EC2
     # <p>Creates a public IPv4 address pool. A public IPv4 pool is an EC2 IP address pool required for the public IPv4 CIDRs that you own and bring to Amazon Web Services to manage with IPAM. IPv6 addresses you bring to Amazon Web Services, however, use IPAM pools only. To monitor the status of pool creation, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribePublicIpv4Pools.html">DescribePublicIpv4Pools</a>.</p>
     # @param [Hash, Types::CreatePublicIpv4PoolRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.
@@ -11862,57 +11882,57 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Replaces the EBS-backed root volume for a <code>running</code> instance with a new
-    #       volume that is restored to the original root volume's launch state, that is restored to a
-    #       specific snapshot taken from the original root volume, that is restored from an AMI
-    #       that has the same key characteristics as that of the instance, or that is replaced by
+    # <p>Replaces the EBS-backed root volume for a <code>running</code> instance with a new 
+    #       volume that is restored to the original root volume's launch state, that is restored to a 
+    #       specific snapshot taken from the original root volume, that is restored from an AMI 
+    #       that has the same key characteristics as that of the instance, or that is replaced by 
     #       a specified volume.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/replace-root.html">Replace a root volume</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::CreateReplaceRootVolumeTaskRequest] params
     # @option params [String] :instance_id
     #   <p>The ID of the instance for which to replace the root volume.</p>
     # @option params [String] :snapshot_id
-    #   <p>The ID of the snapshot from which to restore the replacement root volume. The
-    #         specified snapshot must be a snapshot that you previously created from the original
+    #   <p>The ID of the snapshot from which to restore the replacement root volume. The 
+    #         specified snapshot must be a snapshot that you previously created from the original 
     #         root volume.</p>
-    #            <p>If you want to restore the replacement root volume to the initial launch state,
-    #         if you want to restore the replacement root volume from an AMI, or if you want to
+    #            <p>If you want to restore the replacement root volume to the initial launch state, 
+    #         if you want to restore the replacement root volume from an AMI, or if you want to 
     #         replace the root volume with a specified volume, omit this parameter.</p>
     # @option params [String] :client_token
-    #   <p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request.
-    #         If you do not specify a client token, a randomly generated token is used for the request
+    #   <p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. 
+    #         If you do not specify a client token, a randomly generated token is used for the request 
     #         to ensure idempotency. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply to the root volume replacement task.</p>
     # @option params [String] :image_id
-    #   <p>The ID of the AMI to use to restore the root volume. The specified AMI must have the
-    #         same product code, billing information, architecture type, and virtualization type as
+    #   <p>The ID of the AMI to use to restore the root volume. The specified AMI must have the 
+    #         same product code, billing information, architecture type, and virtualization type as 
     #         that of the instance.</p>
-    #            <p>If you want to restore the replacement volume from a specific snapshot, if you want
-    #         to restore it to its launch state, or if you want to replace the root volume with a
+    #            <p>If you want to restore the replacement volume from a specific snapshot, if you want 
+    #         to restore it to its launch state, or if you want to replace the root volume with a 
     #         specified volume, omit this parameter.</p>
     # @option params [Boolean] :delete_replaced_root_volume
-    #   <p>Indicates whether to automatically delete the original root volume after the root volume
-    #         replacement task completes. To delete the original root volume, specify <code>true</code>.
-    #         If you choose to keep the original root volume after the replacement task completes, you must
+    #   <p>Indicates whether to automatically delete the original root volume after the root volume 
+    #         replacement task completes. To delete the original root volume, specify <code>true</code>. 
+    #         If you choose to keep the original root volume after the replacement task completes, you must 
     #         manually delete it when you no longer need it.</p>
     # @option params [Integer] :volume_initialization_rate
-    #   <p>Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate), in MiB/s, at which to download
-    #         the snapshot blocks from Amazon S3 to the replacement root volume. This is also known as
-    #         <i>volume initialization</i>. Specifying a volume initialization rate ensures that
+    #   <p>Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate), in MiB/s, at which to download 
+    #         the snapshot blocks from Amazon S3 to the replacement root volume. This is also known as 
+    #         <i>volume initialization</i>. Specifying a volume initialization rate ensures that 
     #         the volume is initialized at a predictable and consistent rate after creation.</p>
     #            <p>Omit this parameter if:</p>
     #            <ul>
     #               <li>
-    #                  <p>You want to create the volume using fast snapshot restore. You must specify a snapshot
-    #             that is enabled for fast snapshot restore. In this case, the volume is fully initialized at
+    #                  <p>You want to create the volume using fast snapshot restore. You must specify a snapshot 
+    #             that is enabled for fast snapshot restore. In this case, the volume is fully initialized at 
     #             creation.</p>
     #                  <note>
-    #                     <p>If you specify a snapshot that is enabled for fast snapshot restore and a volume initialization rate,
+    #                     <p>If you specify a snapshot that is enabled for fast snapshot restore and a volume initialization rate, 
     #               the volume will be initialized at the specified rate instead of fast snapshot restore.</p>
     #                  </note>
     #               </li>
@@ -11924,11 +11944,11 @@ module Aws::EC2
     #         Initialize Amazon EBS volumes</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #            <p>Valid range: 100 - 300 MiB/s</p>
     # @option params [String] :volume_id
-    #   <p>The ID of the volume to use as the replacement root volume. The specified volume must
+    #   <p>The ID of the volume to use as the replacement root volume. The specified volume must 
     #         be in the same Availability Zone as the instance, must be in the <code>available</code>
     #         state, and must not be attached to an instance. If the original root volume is encrypted,
     #         the specified volume must also be encrypted.</p>
-    #            <p>If you want to restore the replacement root volume from a specific snapshot, an AMI,
+    #            <p>If you want to restore the replacement root volume from a specific snapshot, an AMI, 
     #         or to its launch state, omit this parameter.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -12099,8 +12119,8 @@ module Aws::EC2
     #               </li>
     #            </ul>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -12134,7 +12154,7 @@ module Aws::EC2
     end
 
     # <p>Creates a route in a route table within a VPC.</p>
-    #          <p>You must specify either a destination CIDR block or a prefix list ID. You must also specify
+    #          <p>You must specify either a destination CIDR block or a prefix list ID. You must also specify  
     #          exactly one of the resources from the parameter list.</p>
     #          <p>When determining how to route traffic, we use the route with the most specific match.
     #             For example, traffic is destined for the IPv4 address <code>192.0.2.3</code>, and the
@@ -12171,8 +12191,8 @@ module Aws::EC2
     # @option params [String] :odb_network_arn
     #   <p>The Amazon Resource Name (ARN) of the ODB network.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :route_table_id
     #   <p>The ID of the route table for the route.</p>
@@ -12238,7 +12258,7 @@ module Aws::EC2
     end
 
     # <p>Creates a new route server to manage dynamic routing in a VPC.</p>
-    #          <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature,
+    #          <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature, 
     # VPC Route Server dynamically updates VPC and internet gateway route tables with your preferred IPv4 or IPv6 routes to achieve routing fault tolerance for those workloads. This enables you to automatically reroute traffic within a VPC, which increases the manageability of VPC routing and interoperability with third-party workloads.</p>
     #          <p>Route server supports the follow route table types:</p>
     #          <ul>
@@ -12260,8 +12280,8 @@ module Aws::EC2
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :persist_routes
     #   <p>Indicates whether routes should be persisted after all BGP sessions are terminated.</p>
@@ -12330,8 +12350,8 @@ module Aws::EC2
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply to the route server endpoint during creation.</p>
@@ -12403,8 +12423,8 @@ module Aws::EC2
     # @option params [Types::RouteServerBgpOptionsRequest] :bgp_options
     #   <p>The BGP options for the peer, including ASN (Autonomous System Number) and BFD (Bidrectional Forwarding Detection) settings.</p>
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply to the route server peer during creation.</p>
@@ -12479,8 +12499,8 @@ module Aws::EC2
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
     #               request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :vpc_id
     #   <p>The ID of the VPC.</p>
@@ -12838,17 +12858,17 @@ module Aws::EC2
     # <p>Creates a security group.</p>
     #          <p>A security group acts as a virtual firewall for your instance to control inbound and outbound traffic.
     #          For more information, see
-    # 				<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html">Amazon EC2 security groups</a> in
-    # 				the <i>Amazon EC2 User Guide</i> and
+    # 				<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html">Amazon EC2 security groups</a> in 
+    # 				the <i>Amazon EC2 User Guide</i> and 
     # 				<a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html">Security groups for your VPC</a> in the
     # 				<i>Amazon VPC User Guide</i>.</p>
-    #          <p>When you create a security group, you specify a friendly name of your choice.
+    #          <p>When you create a security group, you specify a friendly name of your choice. 
     #          You can't have two security groups for the same VPC with the same name.</p>
-    #          <p>You have a default security group for use in your VPC. If you don't specify a security group
-    #          when you launch an instance, the instance is launched into the appropriate default security group.
-    #          A default security group includes a default rule that grants instances unrestricted network access
+    #          <p>You have a default security group for use in your VPC. If you don't specify a security group 
+    #          when you launch an instance, the instance is launched into the appropriate default security group. 
+    #          A default security group includes a default rule that grants instances unrestricted network access 
     #          to each other.</p>
-    #          <p>You can add or remove rules from your security groups using
+    #          <p>You can add or remove rules from your security groups using 
     # 					<a>AuthorizeSecurityGroupIngress</a>,
     # 					<a>AuthorizeSecurityGroupEgress</a>,
     # 					<a>RevokeSecurityGroupIngress</a>, and
@@ -12868,8 +12888,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to assign to the security group.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To create a security group for a VPC
     #   # This example creates a security group for the specified VPC.
@@ -12928,7 +12948,7 @@ module Aws::EC2
     #          <p>The location of the source EBS volume determines where you can create the snapshot.</p>
     #          <ul>
     #             <li>
-    #                <p>If the source volume is in a Region, you must create the snapshot in the same
+    #                <p>If the source volume is in a Region, you must create the snapshot in the same 
     #           Region as the volume.</p>
     #             </li>
     #             <li>
@@ -12936,7 +12956,7 @@ module Aws::EC2
     #           Zone or in its parent Amazon Web Services Region.</p>
     #             </li>
     #             <li>
-    #                <p>If the source volume is on an Outpost, you can create the snapshot on the same
+    #                <p>If the source volume is on an Outpost, you can create the snapshot on the same 
     #           Outpost or in its parent Amazon Web Services Region.</p>
     #             </li>
     #          </ul>
@@ -12950,7 +12970,7 @@ module Aws::EC2
     #       should unmount the volume from within the instance, issue the snapshot command, and then
     #       remount the volume to ensure a consistent and complete snapshot. You may remount and use your
     #       volume while the snapshot status is <code>pending</code>.</p>
-    #          <p>When you create a snapshot for an EBS volume that serves as a root device, we recommend
+    #          <p>When you create a snapshot for an EBS volume that serves as a root device, we recommend 
     #       that you stop the instance before taking the snapshot.</p>
     #          <p>Snapshots that are taken from encrypted volumes are automatically encrypted. Volumes that
     #       are created from encrypted snapshots are also automatically encrypted. Your encrypted volumes
@@ -12961,12 +12981,12 @@ module Aws::EC2
     #   <p>A description for the snapshot.</p>
     # @option params [String] :outpost_arn
     #   <note>
-    #               <p>Only supported for volumes on Outposts. If the source volume is not on an Outpost,
+    #               <p>Only supported for volumes on Outposts. If the source volume is not on an Outpost, 
     #           omit this parameter.</p>
     #            </note>
     #            <ul>
     #               <li>
-    #                  <p>To create the snapshot on the same Outpost as the source volume, specify the
+    #                  <p>To create the snapshot on the same Outpost as the source volume, specify the 
     #             ARN of that Outpost. The snapshot must be created on the same Outpost as the volume.</p>
     #               </li>
     #               <li>
@@ -12980,24 +13000,24 @@ module Aws::EC2
     #   <p>The tags to apply to the snapshot during creation.</p>
     # @option params [String] :location
     #   <note>
-    #               <p>Only supported for volumes in Local Zones. If the source volume is not in a Local Zone,
+    #               <p>Only supported for volumes in Local Zones. If the source volume is not in a Local Zone, 
     #           omit this parameter.</p>
     #            </note>
     #            <ul>
     #               <li>
-    #                  <p>To create a local snapshot in the same Local Zone as the source volume, specify
+    #                  <p>To create a local snapshot in the same Local Zone as the source volume, specify 
     #             <code>local</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>To create a regional snapshot in the parent Region of the Local Zone, specify
+    #                  <p>To create a regional snapshot in the parent Region of the Local Zone, specify 
     #             <code>regional</code> or omit this parameter.</p>
     #               </li>
     #            </ul>
     #            <p>Default value: <code>regional</code>
     #            </p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To create a snapshot
     #   # This example creates a snapshot of the volume with a volume ID of ``vol-1234567890abcdef0`` and a short description to identify the snapshot.
@@ -13079,14 +13099,14 @@ module Aws::EC2
     end
 
     # <p>Creates crash-consistent snapshots of multiple EBS volumes attached to an Amazon EC2 instance.
-    #     Volumes are chosen by specifying an instance. Each volume attached to the specified instance
-    #     will produce one snapshot that is crash-consistent across the instance. You can include all of
-    #     the volumes currently attached to the instance, or you can exclude the root volume or specific
+    #     Volumes are chosen by specifying an instance. Each volume attached to the specified instance 
+    #     will produce one snapshot that is crash-consistent across the instance. You can include all of 
+    #     the volumes currently attached to the instance, or you can exclude the root volume or specific 
     #     data (non-root) volumes from the multi-volume snapshot set.</p>
     #          <p>The location of the source instance determines where you can create the snapshots.</p>
     #          <ul>
     #             <li>
-    #                <p>If the source instance is in a Region, you must create the snapshots in the same
+    #                <p>If the source instance is in a Region, you must create the snapshots in the same 
     #           Region as the instance.</p>
     #             </li>
     #             <li>
@@ -13094,7 +13114,7 @@ module Aws::EC2
     #           Local Zone or in its parent Amazon Web Services Region.</p>
     #             </li>
     #             <li>
-    #                <p>If the source instance is on an Outpost, you can create the snapshots on the same
+    #                <p>If the source instance is on an Outpost, you can create the snapshots on the same 
     #           Outpost or in its parent Amazon Web Services Region.</p>
     #             </li>
     #          </ul>
@@ -13105,12 +13125,12 @@ module Aws::EC2
     #   <p>The instance to specify which volumes should be included in the snapshots.</p>
     # @option params [String] :outpost_arn
     #   <note>
-    #               <p>Only supported for instances on Outposts. If the source instance is not on an Outpost,
+    #               <p>Only supported for instances on Outposts. If the source instance is not on an Outpost, 
     #           omit this parameter.</p>
     #            </note>
     #            <ul>
     #               <li>
-    #                  <p>To create the snapshots on the same Outpost as the source instance, specify the
+    #                  <p>To create the snapshots on the same Outpost as the source instance, specify the 
     #             ARN of that Outpost. The snapshots must be created on the same Outpost as the instance.</p>
     #               </li>
     #               <li>
@@ -13122,23 +13142,23 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>Tags to apply to every snapshot specified by the instance.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :copy_tags_from_source
     #   <p>Copies the tags from the specified volume to corresponding snapshot.</p>
     # @option params [String] :location
     #   <note>
-    #               <p>Only supported for instances in Local Zones. If the source instance is not in a Local Zone,
+    #               <p>Only supported for instances in Local Zones. If the source instance is not in a Local Zone, 
     #           omit this parameter.</p>
     #            </note>
     #            <ul>
     #               <li>
-    #                  <p>To create local snapshots in the same Local Zone as the source instance, specify
+    #                  <p>To create local snapshots in the same Local Zone as the source instance, specify 
     #             <code>local</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>To create regional snapshots in the parent Region of the Local Zone, specify
+    #                  <p>To create regional snapshots in the parent Region of the Local Zone, specify 
     #             <code>regional</code> or omit this parameter.</p>
     #               </li>
     #            </ul>
@@ -13204,7 +13224,7 @@ module Aws::EC2
 
     # <p>Creates a data feed for Spot Instances, enabling you to view Spot Instance usage logs.
     #             You can create one data feed per Amazon Web Services account. For more information, see
-    #             <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html">Spot Instance data feed</a>
+    #             <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html">Spot Instance data feed</a> 
     #             in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::CreateSpotDatafeedSubscriptionRequest] params
     # @option params [Boolean] :dry_run
@@ -13214,7 +13234,7 @@ module Aws::EC2
     #               <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :bucket
     #   <p>The name of the Amazon S3 bucket in which to store the Spot Instance data feed. For
-    #               more information about bucket names, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">Bucket naming rules</a>
+    #               more information about bucket names, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">Bucket naming rules</a> 
     #               in the <i>Amazon S3 User Guide</i>.</p>
     # @option params [String] :prefix
     #   <p>The prefix for the data feed file names.</p>
@@ -13278,8 +13298,8 @@ module Aws::EC2
     # @option params [Array<Types::S3ObjectTag>] :s3_object_tags
     #   <p>The tags to apply to the AMI object that will be stored in the Amazon S3 bucket. </p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -13312,8 +13332,8 @@ module Aws::EC2
     #             an IPv4 CIDR block and an IPv6 CIDR block.</p>
     #          <p>A subnet CIDR block must not overlap the CIDR block of an existing subnet in the VPC.
     #             After you create a subnet, you can't change its CIDR block.</p>
-    #          <p>The allowed size for an IPv4 subnet is between a /28 netmask (16 IP addresses) and
-    #             a /16 netmask (65,536 IP addresses). Amazon Web Services reserves both the first four and
+    #          <p>The allowed size for an IPv4 subnet is between a /28 netmask (16 IP addresses) and  
+    #             a /16 netmask (65,536 IP addresses). Amazon Web Services reserves both the first four and 
     #             the last IPv4 address in each subnet's CIDR block. They're not available for your use.</p>
     #          <p>If you've associated an IPv6 CIDR block with your VPC, you can associate an IPv6 CIDR
     #             block with a subnet when you create it. </p>
@@ -13328,18 +13348,18 @@ module Aws::EC2
     #   <p>The tags to assign to the subnet.</p>
     # @option params [String] :availability_zone
     #   <p>The Availability Zone or Local Zone for the subnet.</p>
-    #            <p>Default: Amazon Web Services selects one for you. If you create more than one subnet in your VPC, we
+    #            <p>Default: Amazon Web Services selects one for you. If you create more than one subnet in your VPC, we 
     #             do not necessarily select a different zone for each subnet.</p>
     #            <p>To create a subnet in a Local Zone, set this value to the Local Zone ID, for example
-    #             <code>us-west-2-lax-1a</code>. For information about the Regions that support Local Zones,
+    #             <code>us-west-2-lax-1a</code>. For information about the Regions that support Local Zones, 
     #              see <a href="https://docs.aws.amazon.com/local-zones/latest/ug/available-local-zones.html">Available Local Zones</a>.</p>
     #            <p>To create a subnet in an Outpost, set this value to the Availability Zone for the
     #              Outpost and specify the Outpost ARN.</p>
     # @option params [String] :availability_zone_id
     #   <p>The AZ ID or the Local Zone ID of the subnet.</p>
     # @option params [String] :cidr_block
-    #   <p>The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>.
-    #              We modify the specified CIDR block to its canonical form; for example, if you specify
+    #   <p>The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. 
+    #              We modify the specified CIDR block to its canonical form; for example, if you specify 
     #              <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.</p>
     #            <p>This parameter is not supported for an IPv6 only subnet.</p>
     # @option params [String] :ipv6_cidr_block
@@ -13361,8 +13381,8 @@ module Aws::EC2
     # @option params [Integer] :ipv6_netmask_length
     #   <p>An IPv6 netmask length for the subnet.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To create a subnet
     #   # This example creates a subnet in the specified VPC with the specified CIDR block. We recommend that you let us select an Availability Zone for you.
@@ -13468,8 +13488,8 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Creates a subnet CIDR reservation. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/subnet-cidr-reservation.html">Subnet CIDR reservations</a>
-    #             in the <i>Amazon VPC User Guide</i> and <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-prefixes.html">Manage prefixes
+    # <p>Creates a subnet CIDR reservation. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/subnet-cidr-reservation.html">Subnet CIDR reservations</a> 
+    #             in the <i>Amazon VPC User Guide</i> and <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-prefixes.html">Manage prefixes 
     #                 for your network interfaces</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::CreateSubnetCidrReservationRequest] params
     # @option params [String] :subnet_id
@@ -13477,12 +13497,12 @@ module Aws::EC2
     # @option params [String] :cidr
     #   <p>The IPv4 or IPV6 CIDR range to reserve.</p>
     # @option params [String] :reservation_type
-    #   <p>The type of reservation. The reservation type determines how the reserved IP addresses are
+    #   <p>The type of reservation. The reservation type determines how the reserved IP addresses are 
     #               assigned to resources.</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>prefix</code> - Amazon Web Services assigns the reserved IP addresses to
+    #                     <code>prefix</code> - Amazon Web Services assigns the reserved IP addresses to 
     #                       network interfaces.</p>
     #               </li>
     #               <li>
@@ -13493,8 +13513,8 @@ module Aws::EC2
     # @option params [String] :description
     #   <p>The description to assign to the subnet CIDR reservation.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to assign to the subnet CIDR reservation.</p>
@@ -13554,8 +13574,8 @@ module Aws::EC2
     #             Elastic Compute Cloud User Guide</i>.</p>
     # @param [Hash, Types::CreateTagsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :resources
     #   <p>The IDs of the resources, separated by spaces.</p>
@@ -13604,8 +13624,8 @@ module Aws::EC2
 
     # <p>Creates a Traffic Mirror filter.</p>
     #          <p>A Traffic Mirror filter is a set of rules that defines the traffic to mirror.</p>
-    #          <p>By default, no traffic is mirrored. To mirror traffic, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilterRule.htm">CreateTrafficMirrorFilterRule</a>
-    #          to add Traffic Mirror rules to the filter. The rules you add define what traffic gets mirrored.
+    #          <p>By default, no traffic is mirrored. To mirror traffic, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilterRule.htm">CreateTrafficMirrorFilterRule</a> 
+    #          to add Traffic Mirror rules to the filter. The rules you add define what traffic gets mirrored. 
     #          You can also use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyTrafficMirrorFilterNetworkServices.html">ModifyTrafficMirrorFilterNetworkServices</a> to mirror supported network services.</p>
     # @param [Hash, Types::CreateTrafficMirrorFilterRequest] params
     # @option params [String] :description
@@ -13613,8 +13633,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to assign to a Traffic Mirror filter.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
@@ -13740,8 +13760,8 @@ module Aws::EC2
     # @option params [String] :description
     #   <p>The description of the Traffic Mirror rule.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
@@ -13852,8 +13872,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to assign to a Traffic Mirror session.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
@@ -13926,8 +13946,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to assign to the Traffic Mirror target.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
@@ -13986,13 +14006,13 @@ module Aws::EC2
     #           After the transit gateway enters the <code>available</code> state, you can attach your VPCs and VPN
     #           connections to the transit gateway.</p>
     #          <p>To attach your VPCs, use <a>CreateTransitGatewayVpcAttachment</a>.</p>
-    #          <p>To attach a VPN connection, use <a>CreateCustomerGateway</a> to create a customer
+    #          <p>To attach a VPN connection, use <a>CreateCustomerGateway</a> to create a customer 
     #          gateway and specify the ID of the customer gateway and the ID of the transit gateway in a call to
     #          <a>CreateVpnConnection</a>.</p>
     #          <p>When you create a transit gateway, we create a default transit gateway route table and use it as the default association route table
     #          and the default propagation route table. You can use <a>CreateTransitGatewayRouteTable</a> to create
-    #          additional transit gateway route tables. If you disable automatic route propagation, we do not create a default transit gateway route table.
-    #          You can use <a>EnableTransitGatewayRouteTablePropagation</a> to propagate routes from a resource
+    #          additional transit gateway route tables. If you disable automatic route propagation, we do not create a default transit gateway route table. 
+    #          You can use <a>EnableTransitGatewayRouteTablePropagation</a> to propagate routes from a resource 
     #          attachment to a transit gateway route table. If you disable automatic associations, you can use <a>AssociateTransitGatewayRouteTable</a> to associate a resource attachment with a transit gateway route table.</p>
     # @param [Hash, Types::CreateTransitGatewayRequest] params
     # @option params [String] :description
@@ -14002,8 +14022,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply to the transit gateway.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -14085,8 +14105,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply to the Connect attachment.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -14160,8 +14180,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply to the Connect peer.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -14233,8 +14253,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to assign to the metering policy.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -14305,8 +14325,8 @@ module Aws::EC2
     # @option params [String] :metered_account
     #   <p>The Amazon Web Services account ID to which the metered traffic should be attributed.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -14364,8 +14384,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags for the transit gateway multicast domain.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -14420,9 +14440,9 @@ module Aws::EC2
     end
 
     # <p>Requests a transit gateway peering attachment between the specified transit gateway
-    #             (requester) and a peer transit gateway (accepter). The peer transit gateway can be in
+    #             (requester) and a peer transit gateway (accepter). The peer transit gateway can be in 
     #             your account or a different Amazon Web Services account.</p>
-    #          <p>After you create the peering attachment, the owner of the accepter transit gateway
+    #          <p>After you create the peering attachment, the owner of the accepter transit gateway 
     #             must accept the attachment request.</p>
     # @param [Hash, Types::CreateTransitGatewayPeeringAttachmentRequest] params
     # @option params [String] :transit_gateway_id
@@ -14438,8 +14458,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply to the transit gateway peering attachment.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -14513,8 +14533,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags specification for the transit gateway policy table created during the request.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -14567,8 +14587,8 @@ module Aws::EC2
     # @option params [String] :target_route_table_id
     #   <p>The ID of the transit gateway route table to use for traffic matching this rule.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -14627,8 +14647,8 @@ module Aws::EC2
     # @option params [Boolean] :blackhole
     #   <p>Indicates whether to drop traffic that matches this route.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -14674,8 +14694,8 @@ module Aws::EC2
     # @option params [Boolean] :blackhole
     #   <p>Indicates whether to drop traffic that matches this route.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -14718,8 +14738,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply to the transit gateway route table.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -14772,8 +14792,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags specifications applied to the transit gateway route table announcement.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -14832,7 +14852,7 @@ module Aws::EC2
     # @option params [String] :vpc_id
     #   <p>The ID of the VPC.</p>
     # @option params [Array<String>] :subnet_ids
-    #   <p>The IDs of one or more subnets. You can specify only one subnet per Availability Zone.
+    #   <p>The IDs of one or more subnets. You can specify only one subnet per Availability Zone. 
     #            You must specify at least one subnet, but we recommend that you specify two subnets for better availability.
     #            The transit gateway uses one IP address from each specified subnet.</p>
     # @option params [Types::CreateTransitGatewayVpcAttachmentRequestOptions] :options
@@ -14840,8 +14860,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply to the VPC attachment.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -14935,8 +14955,8 @@ module Aws::EC2
     #   <p>A unique, case-sensitive token that you provide to ensure idempotency of your
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Types::VerifiedAccessSseSpecificationRequest] :sse_specification
     #   <p>The options for server side encryption.</p>
@@ -15118,8 +15138,8 @@ module Aws::EC2
     #   <p>A unique, case-sensitive token that you provide to ensure idempotency of your
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Types::VerifiedAccessSseSpecificationRequest] :sse_specification
     #   <p>The options for server side encryption.</p>
@@ -15189,8 +15209,8 @@ module Aws::EC2
     #   <p>A unique, case-sensitive token that you provide to ensure idempotency of your
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Boolean] :fips_enabled
     #   <p>Enable or disable support for Federal Information Processing Standards (FIPS) on the instance.</p>
@@ -15282,8 +15302,8 @@ module Aws::EC2
     #   <p>A unique, case-sensitive token that you provide to ensure idempotency of your
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Types::VerifiedAccessSseSpecificationRequest] :sse_specification
     #   <p>The options for server side encryption.</p>
@@ -15394,8 +15414,8 @@ module Aws::EC2
     # <p>Creates an EBS volume that can be attached to an instance in the same Availability Zone.</p>
     #          <p>You can create a new empty volume or restore a volume from an EBS snapshot.
     #       Any Amazon Web Services Marketplace product codes from the snapshot are propagated to the volume.</p>
-    #          <p>You can create encrypted volumes. Encrypted volumes must be attached to instances that
-    #       support Amazon EBS encryption. Volumes that are created from encrypted snapshots are also automatically
+    #          <p>You can create encrypted volumes. Encrypted volumes must be attached to instances that 
+    #       support Amazon EBS encryption. Volumes that are created from encrypted snapshots are also automatically 
     #       encrypted. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html">Amazon EBS encryption</a>
     #       in the <i>Amazon EBS User Guide</i>.</p>
     #          <p>You can tag your volumes during creation. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tag your Amazon EC2
@@ -15412,17 +15432,17 @@ module Aws::EC2
     #            <p>Either <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code> must be specified,
     #         but not both.</p>
     # @option params [Boolean] :encrypted
-    #   <p>Indicates whether the volume should be encrypted.
-    #         The effect of setting the encryption state to <code>true</code> depends on
-    #   the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled.
+    #   <p>Indicates whether the volume should be encrypted. 
+    #         The effect of setting the encryption state to <code>true</code> depends on 
+    #   the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. 
     #         For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/work-with-ebs-encr.html#encryption-by-default">Encryption by default</a>
     #         in the <i>Amazon EBS User Guide</i>.</p>
-    #            <p>Encrypted Amazon EBS volumes must be attached to instances that support Amazon EBS encryption.
+    #            <p>Encrypted Amazon EBS volumes must be attached to instances that support Amazon EBS encryption. 
     #         For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances">Supported
     #           instance types</a>.</p>
     # @option params [Integer] :iops
-    #   <p>The number of I/O operations per second (IOPS) to provision for the volume.
-    #         Required for <code>io1</code> and <code>io2</code> volumes. Optional for <code>gp3</code>
+    #   <p>The number of I/O operations per second (IOPS) to provision for the volume. 
+    #         Required for <code>io1</code> and <code>io2</code> volumes. Optional for <code>gp3</code> 
     #         volumes. Omit for all other volume types. </p>
     #            <p>Valid ranges:</p>
     #            <ul>
@@ -15439,7 +15459,7 @@ module Aws::EC2
     #            <note>
     #               <p>
     #                  <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html">
-    #   Instances built on the Nitro System</a> can support up to 256,000 IOPS. Other instances can support up to 32,000
+    #   Instances built on the Nitro System</a> can support up to 256,000 IOPS. Other instances can support up to 32,000 
     #   IOPS.</p>
     #            </note>
     # @option params [String] :kms_key_id
@@ -15461,16 +15481,16 @@ module Aws::EC2
     #                  <p>Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.</p>
     #               </li>
     #            </ul>
-    #            <p>Amazon Web Services authenticates the KMS key asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid,
+    #            <p>Amazon Web Services authenticates the KMS key asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, 
     #         the action can appear to complete, but eventually fails.</p>
     # @option params [String] :outpost_arn
     #   <p>The Amazon Resource Name (ARN) of the Outpost on which to create the volume.</p>
-    #            <p>If you intend to use a volume with an instance running on an outpost, then you must
-    #            create the volume on the same outpost as the instance. You can't use a volume created
+    #            <p>If you intend to use a volume with an instance running on an outpost, then you must 
+    #            create the volume on the same outpost as the instance. You can't use a volume created 
     #            in an Amazon Web Services Region with an instance on an Amazon Web Services outpost, or the other way around.</p>
     # @option params [Integer] :size
     #   <p>The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size.
-    #         If you specify a snapshot, the default is the snapshot size, and you can specify a volume size
+    #         If you specify a snapshot, the default is the snapshot size, and you can specify a volume size 
     #         that is equal to or larger than the snapshot size.</p>
     #            <p>Valid sizes:</p>
     #            <ul>
@@ -15529,33 +15549,33 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply to the volume during creation.</p>
     # @option params [Boolean] :multi_attach_enabled
-    #   <p>Indicates whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the
-    #         volume to up to 16 <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html">Instances built on the Nitro System</a> in the same Availability Zone. This parameter is
-    #       	supported with <code>io1</code> and <code>io2</code> volumes only. For more information,
+    #   <p>Indicates whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the 
+    #         volume to up to 16 <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html">Instances built on the Nitro System</a> in the same Availability Zone. This parameter is 
+    #       	supported with <code>io1</code> and <code>io2</code> volumes only. For more information, 
     #       	see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html">
     #       		Amazon EBS Multi-Attach</a> in the <i>Amazon EBS User Guide</i>.</p>
     # @option params [Integer] :throughput
-    #   <p>The throughput to provision for the volume, in MiB/s. Supported for <code>gp3</code>
+    #   <p>The throughput to provision for the volume, in MiB/s. Supported for <code>gp3</code> 
     #         volumes only. Omit for all other volume types.</p>
     #            <p>Valid Range: <code>125 - 2000</code> MiB/s</p>
     # @option params [String] :client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency
-    #         of the request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensure
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency 
+    #         of the request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensure 
     #           Idempotency</a>.</p>
     # @option params [Integer] :volume_initialization_rate
-    #   <p>Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate), in MiB/s, at which to download
-    #         the snapshot blocks from Amazon S3 to the volume. This is also known as <i>volume
-    #           initialization</i>. Specifying a volume initialization rate ensures that the volume is
+    #   <p>Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate), in MiB/s, at which to download 
+    #         the snapshot blocks from Amazon S3 to the volume. This is also known as <i>volume 
+    #           initialization</i>. Specifying a volume initialization rate ensures that the volume is 
     #         initialized at a predictable and consistent rate after creation.</p>
-    #            <p>This parameter is supported only for volumes created from snapshots. Omit this parameter
+    #            <p>This parameter is supported only for volumes created from snapshots. Omit this parameter 
     #         if:</p>
     #            <ul>
     #               <li>
-    #                  <p>You want to create the volume using fast snapshot restore. You must specify a snapshot
-    #             that is enabled for fast snapshot restore. In this case, the volume is fully initialized at
+    #                  <p>You want to create the volume using fast snapshot restore. You must specify a snapshot 
+    #             that is enabled for fast snapshot restore. In this case, the volume is fully initialized at 
     #             creation.</p>
     #                  <note>
-    #                     <p>If you specify a snapshot that is enabled for fast snapshot restore and a volume initialization rate,
+    #                     <p>If you specify a snapshot that is enabled for fast snapshot restore and a volume initialization rate, 
     #               the volume will be initialized at the specified rate instead of fast snapshot restore.</p>
     #                  </note>
     #               </li>
@@ -15569,8 +15589,8 @@ module Aws::EC2
     # @option params [Types::OperatorRequest] :operator
     #   <p>Reserved for internal use.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To create a new Provisioned IOPS (SSD) volume from a snapshot
     #   # This example creates a new Provisioned IOPS (SSD) volume with 1000 provisioned IOPS from a snapshot in the Availability Zone ``us-east-1a``.
@@ -15729,7 +15749,7 @@ module Aws::EC2
     #            <p>To let Amazon choose the IPv6 CIDR block for you, omit this parameter.</p>
     # @option params [String] :ipv4_ipam_pool_id
     #   <p>The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html">What is IPAM?</a> in the <i>Amazon VPC IPAM User Guide</i>.
-    #
+    #            
     #         </p>
     # @option params [Integer] :ipv4_netmask_length
     #   <p>The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html">What is IPAM?</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
@@ -15746,8 +15766,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to assign to the VPC.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :instance_tenancy
     #   <p>The tenancy options for instances launched into the VPC. For <code>default</code>, instances
@@ -15919,8 +15939,8 @@ module Aws::EC2
     # <p>Create a VPC Block Public Access (BPA) exclusion. A VPC BPA exclusion is a mode that can be applied to a single VPC or subnet that exempts it from the account’s BPA mode and will allow bidirectional or egress-only access. You can create BPA exclusions for VPCs and subnets even when BPA is not enabled on the account to ensure that there is no traffic disruption to the exclusions when VPC BPA is turned on. To learn more about VPC BPA, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html">Block public access to VPCs and subnets</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::CreateVpcBlockPublicAccessExclusionRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :subnet_id
     #   <p>A subnet ID.</p>
@@ -15992,8 +16012,8 @@ module Aws::EC2
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html">Enforce VPC encryption in transit</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::CreateVpcEncryptionControlRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :vpc_id
     #   <p>The ID of the VPC for which to create the encryption control configuration.</p>
@@ -16080,8 +16100,8 @@ module Aws::EC2
     #             Amazon Web Services account. For more information, see the <a href="https://docs.aws.amazon.com/vpc/latest/privatelink/">Amazon Web Services PrivateLink User Guide</a>.</p>
     # @param [Hash, Types::CreateVpcEndpointRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :vpc_endpoint_type
     #   <p>The type of endpoint.</p>
@@ -16284,8 +16304,8 @@ module Aws::EC2
     #          <p>You can create a connection notification for interface endpoints only.</p>
     # @param [Hash, Types::CreateVpcEndpointConnectionNotificationRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :service_id
     #   <p>The ID of the endpoint service.</p>
@@ -16338,22 +16358,22 @@ module Aws::EC2
     #          <p>Before you create an endpoint service, you must create one of the following for your service:</p>
     #          <ul>
     #             <li>
-    #                <p>A <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/">Network Load Balancer</a>.
+    #                <p>A <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/">Network Load Balancer</a>. 
     #                     Service consumers connect to your service using an interface endpoint.</p>
     #             </li>
     #             <li>
-    #                <p>A <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/">Gateway Load Balancer</a>.
+    #                <p>A <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/">Gateway Load Balancer</a>. 
     #                     Service consumers connect to your service using a Gateway Load Balancer endpoint.</p>
     #             </li>
     #          </ul>
     #          <p>If you set the private DNS name, you must prove that you own the private DNS domain
     #             name.</p>
-    #          <p>For more information, see the <a href="https://docs.aws.amazon.com/vpc/latest/privatelink/">Amazon Web Services PrivateLink
+    #          <p>For more information, see the <a href="https://docs.aws.amazon.com/vpc/latest/privatelink/">Amazon Web Services PrivateLink 
     # 	        Guide</a>.</p>
     # @param [Hash, Types::CreateVpcEndpointServiceConfigurationRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Boolean] :acceptance_required
     #   <p>Indicates whether requests from service consumers to create an endpoint to your service must
@@ -16450,10 +16470,10 @@ module Aws::EC2
 
     # <p>Requests a VPC peering connection between two VPCs: a requester VPC that you own and
     # 		  an accepter VPC with which to create the connection. The accepter VPC can belong to
-    # 		  another Amazon Web Services account and can be in a different Region to the requester VPC.
+    # 		  another Amazon Web Services account and can be in a different Region to the requester VPC. 
     #           The requester VPC and accepter VPC cannot have overlapping CIDR blocks.</p>
     #          <note>
-    #             <p>Limitations and rules apply to a VPC peering connection. For more information, see
+    #             <p>Limitations and rules apply to a VPC peering connection. For more information, see 
     #           the <a href="https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-basics.html#vpc-peering-limitations">VPC peering limitations</a> in the <i>VPC Peering Guide</i>.</p>
     #          </note>
     #          <p>The owner of the accepter VPC must accept the peering request to activate the peering
@@ -16469,8 +16489,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to assign to the peering connection.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :vpc_id
     #   <p>The ID of the requester VPC. You must specify this parameter in the
@@ -16577,8 +16597,8 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply to the VPN concentrator during creation.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -16993,8 +17013,8 @@ module Aws::EC2
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If you retry a request with the same token, the service ignores the request but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To delete an application status check
     #   # This example deletes the specified application status check.
@@ -17087,7 +17107,7 @@ module Aws::EC2
     #   </p>
     # @option params [Boolean] :dry_run
     #   <p>
-    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. 
     #   If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.
     #   </p>
     # @example Request syntax with placeholder values
@@ -17111,15 +17131,15 @@ module Aws::EC2
     # <p>Deletes a carrier gateway.</p>
     #          <important>
     #             <p>If you do not delete the route that contains the carrier gateway as the
-    #                 Target, the route is a blackhole route. For information about how to delete a route, see
+    #                 Target, the route is a blackhole route. For information about how to delete a route, see 
     #                 <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteRoute.html">DeleteRoute</a>.</p>
     #          </important>
     # @param [Hash, Types::DeleteCarrierGatewayRequest] params
     # @option params [String] :carrier_gateway_id
     #   <p>The ID of the carrier gateway.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -17150,7 +17170,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Deletes the specified Client VPN endpoint. You must disassociate all target networks before you
+    # <p>Deletes the specified Client VPN endpoint. You must disassociate all target networks before you 
     # 			can delete a Client VPN endpoint.</p>
     # @param [Hash, Types::DeleteClientVpnEndpointRequest] params
     # @option params [String] :client_vpn_endpoint_id
@@ -17202,9 +17222,9 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Deletes a route from a Client VPN endpoint. You can only delete routes that you manually added using
-    # 			the <b>CreateClientVpnRoute</b> action. You cannot delete routes that were
-    # 			automatically added when associating a subnet. To remove routes that have been automatically added,
+    # <p>Deletes a route from a Client VPN endpoint. You can only delete routes that you manually added using 
+    # 			the <b>CreateClientVpnRoute</b> action. You cannot delete routes that were 
+    # 			automatically added when associating a subnet. To remove routes that have been automatically added, 
     # 			disassociate the target subnet from the Client VPN endpoint.</p>
     # @param [Hash, Types::DeleteClientVpnRouteRequest] params
     # @option params [String] :client_vpn_endpoint_id
@@ -17246,11 +17266,11 @@ module Aws::EC2
     #   <p> A customer-owned IP address range that you want to delete. </p>
     # @option params [String] :coip_pool_id
     #   <p>
-    #           The ID of the customer-owned address pool.
+    #           The ID of the customer-owned address pool. 
     #         </p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -17280,8 +17300,8 @@ module Aws::EC2
     # @option params [String] :coip_pool_id
     #   <p>The ID of the CoIP pool that you want to delete. </p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -17352,8 +17372,8 @@ module Aws::EC2
     # @option params [String] :dhcp_options_id
     #   <p>The ID of the DHCP options set.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To delete a DHCP options set
     #   # This example deletes the specified DHCP options set.
@@ -17383,8 +17403,8 @@ module Aws::EC2
     # <p>Deletes an egress-only internet gateway.</p>
     # @param [Hash, Types::DeleteEgressOnlyInternetGatewayRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :egress_only_internet_gateway_id
     #   <p>The ID of the egress-only internet gateway.</p>
@@ -17422,12 +17442,12 @@ module Aws::EC2
     #             <p>
     #                <b>Terminating an instance is permanent and irreversible.</b>
     #             </p>
-    #             <p>After you terminate an instance, you can no longer connect to it, and it can't be recovered.
-    #             All attached Amazon EBS volumes that are configured to be deleted on termination are also permanently
-    #             deleted and can't be recovered. All data stored on instance store volumes is permanently lost.
+    #             <p>After you terminate an instance, you can no longer connect to it, and it can't be recovered. 
+    #             All attached Amazon EBS volumes that are configured to be deleted on termination are also permanently 
+    #             deleted and can't be recovered. All data stored on instance store volumes is permanently lost. 
     #             For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-ec2-instance-termination-works.html">
     #                How instance termination works</a>.</p>
-    #             <p>Before you terminate an instance, ensure that you have backed up all data that you need to
+    #             <p>Before you terminate an instance, ensure that you have backed up all data that you need to 
     #             retain after the termination to persistent storage.</p>
     #          </important>
     #          <p class="title">
@@ -17455,8 +17475,8 @@ module Aws::EC2
     #             in the fleet</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::DeleteFleetsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :fleet_ids
     #   <p>The IDs of the EC2 Fleets.</p>
@@ -17507,8 +17527,8 @@ module Aws::EC2
     # <p>Deletes one or more flow logs.</p>
     # @param [Hash, Types::DeleteFlowLogsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :flow_log_ids
     #   <p>One or more flow log IDs.</p>
@@ -17542,8 +17562,8 @@ module Aws::EC2
     # <p>Deletes the specified Amazon FPGA Image (AFI).</p>
     # @param [Hash, Types::DeleteFpgaImageRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :fpga_image_id
     #   <p>The ID of the AFI.</p>
@@ -17572,8 +17592,8 @@ module Aws::EC2
     # @option params [String] :report_id
     #   <p>The ID of the report to delete.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -17596,8 +17616,8 @@ module Aws::EC2
     # <p>Deletes the specified EC2 Instance Connect Endpoint.</p>
     # @param [Hash, Types::DeleteInstanceConnectEndpointRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #               and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #               and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #               Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :instance_connect_endpoint_id
     #   <p>The ID of the EC2 Instance Connect Endpoint to delete.</p>
@@ -17657,8 +17677,8 @@ module Aws::EC2
     #             events</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::DeleteInstanceEventWindowRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Boolean] :force_delete
     #   <p>Specify <code>true</code> to force delete the event window. Use the force delete
@@ -17691,8 +17711,8 @@ module Aws::EC2
     # 			VPC before you can delete it.</p>
     # @param [Hash, Types::DeleteInternetGatewayRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :internet_gateway_id
     #   <p>The ID of the internet gateway.</p>
@@ -17726,8 +17746,8 @@ module Aws::EC2
     #       </p>
     # @param [Hash, Types::DeleteIpamRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_id
     #   <p>The ID of the IPAM to delete.</p>
@@ -17806,8 +17826,8 @@ module Aws::EC2
     # </p>
     # @param [Hash, Types::DeleteIpamExternalResourceVerificationTokenRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_external_resource_verification_token_id
     #   <p>The token ID.</p>
@@ -17892,8 +17912,8 @@ module Aws::EC2
     #          <p>An IPAM policy is a set of rules that define how public IPv4 addresses from IPAM pools are allocated to Amazon Web Services resources. Each rule maps an Amazon Web Services service to IPAM pools that the service will use to get IP addresses. A single policy can have multiple rules and be applied to multiple Amazon Web Services Regions. If the IPAM pool run out of addresses then the services fallback to Amazon-provided IP addresses. A policy can be applied to an individual Amazon Web Services account or an entity within Amazon Web Services Organizations.</p>
     # @param [Hash, Types::DeleteIpamPolicyRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_policy_id
     #   <p>The ID of the IPAM policy to delete.</p>
@@ -17931,16 +17951,16 @@ module Aws::EC2
 
     # <p>Delete an IPAM pool.</p>
     #          <note>
-    #             <p>You cannot delete an IPAM pool if there are allocations in it or CIDRs provisioned to it. To release
-    #          allocations, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseIpamPoolAllocation.html">ReleaseIpamPoolAllocation</a>. To deprovision pool
+    #             <p>You cannot delete an IPAM pool if there are allocations in it or CIDRs provisioned to it. To release 
+    #          allocations, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseIpamPoolAllocation.html">ReleaseIpamPoolAllocation</a>. To deprovision pool 
     #          CIDRs, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeprovisionIpamPoolCidr.html">DeprovisionIpamPoolCidr</a>.</p>
     #          </note>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/delete-pool-ipam.html">Delete a pool</a> in the <i>Amazon VPC IPAM User Guide</i>.
     #       </p>
     # @param [Hash, Types::DeleteIpamPoolRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_pool_id
     #   <p>The ID of the pool to delete.</p>
@@ -18012,8 +18032,8 @@ module Aws::EC2
     # <p>Deletes an IPAM prefix list resolver. Before deleting a resolver, you must first delete all resolver targets associated with it.</p>
     # @param [Hash, Types::DeleteIpamPrefixListResolverRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_prefix_list_resolver_id
     #   <p>The ID of the IPAM prefix list resolver to delete.</p>
@@ -18056,8 +18076,8 @@ module Aws::EC2
     #          <p>For more information about IPAM prefix list resolver, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/automate-prefix-list-updates.html">Automate prefix list updates with IPAM</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
     # @param [Hash, Types::DeleteIpamPrefixListResolverTargetRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_prefix_list_resolver_target_id
     #   <p>The ID of the IPAM prefix list resolver target to delete.</p>
@@ -18100,8 +18120,8 @@ module Aws::EC2
     # <p>Deletes an IPAM resource discovery. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.</p>
     # @param [Hash, Types::DeleteIpamResourceDiscoveryRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_resource_discovery_id
     #   <p>The IPAM resource discovery ID.</p>
@@ -18190,8 +18210,8 @@ module Aws::EC2
     #       </p>
     # @param [Hash, Types::DeleteIpamScopeRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_scope_id
     #   <p>The ID of the scope to delete.</p>
@@ -18241,8 +18261,8 @@ module Aws::EC2
     # @option params [String] :key_pair_id
     #   <p>The ID of the key pair.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To delete a key pair
     #   # This example deletes the specified key pair.
@@ -18436,12 +18456,12 @@ module Aws::EC2
     # @option params [String] :local_gateway_route_table_id
     #   <p>The ID of the local gateway route table.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :destination_prefix_list_id
     #   <p>
-    #            Use a prefix list in place of <code>DestinationCidrBlock</code>. You cannot use
+    #            Use a prefix list in place of <code>DestinationCidrBlock</code>. You cannot use 
     #            <code>DestinationPrefixListId</code> and <code>DestinationCidrBlock</code> in the same request.
     #         </p>
     # @example Request syntax with placeholder values
@@ -18485,8 +18505,8 @@ module Aws::EC2
     #         The ID of the local gateway route table.
     #         </p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -18533,8 +18553,8 @@ module Aws::EC2
     #            The ID of the local gateway route table virtual interface group association.
     #         </p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -18573,8 +18593,8 @@ module Aws::EC2
     # @option params [String] :local_gateway_route_table_vpc_association_id
     #   <p>The ID of the association.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -18613,8 +18633,8 @@ module Aws::EC2
     # @option params [String] :local_gateway_virtual_interface_id
     #   <p>The ID of the local virtual interface to delete.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -18659,8 +18679,8 @@ module Aws::EC2
     # @option params [String] :local_gateway_virtual_interface_group_id
     #   <p>The ID of the local gateway virtual interface group to delete.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -18698,8 +18718,8 @@ module Aws::EC2
     # <p>Deletes the specified managed prefix list. You must first remove all references to the prefix list in your resources.</p>
     # @param [Hash, Types::DeleteManagedPrefixListRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :prefix_list_id
     #   <p>The ID of the prefix list.</p>
@@ -18739,13 +18759,13 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Deletes the specified NAT gateway. Deleting a public NAT gateway disassociates its Elastic IP address,
-    #           but does not release the address from your account. Deleting a NAT gateway does not delete any NAT gateway
+    # <p>Deletes the specified NAT gateway. Deleting a public NAT gateway disassociates its Elastic IP address, 
+    #           but does not release the address from your account. Deleting a NAT gateway does not delete any NAT gateway 
     #           routes in your route tables.</p>
     # @param [Hash, Types::DeleteNatGatewayRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :nat_gateway_id
     #   <p>The ID of the NAT gateway.</p>
@@ -18781,8 +18801,8 @@ module Aws::EC2
     # <p>Deletes the specified network ACL. You can't delete the ACL if it's associated with any subnets. You can't delete the default network ACL.</p>
     # @param [Hash, Types::DeleteNetworkAclRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :network_acl_id
     #   <p>The ID of the network ACL.</p>
@@ -18814,8 +18834,8 @@ module Aws::EC2
     # <p>Deletes the specified ingress or egress entry (rule) from the specified network ACL.</p>
     # @param [Hash, Types::DeleteNetworkAclEntryRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :network_acl_id
     #   <p>The ID of the network ACL.</p>
@@ -18855,8 +18875,8 @@ module Aws::EC2
     # <p>Deletes the specified Network Access Scope.</p>
     # @param [Hash, Types::DeleteNetworkInsightsAccessScopeRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :network_insights_access_scope_id
     #   <p>The ID of the Network Access Scope.</p>
@@ -18883,8 +18903,8 @@ module Aws::EC2
     # @option params [String] :network_insights_access_scope_analysis_id
     #   <p>The ID of the Network Access Scope analysis.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -18907,8 +18927,8 @@ module Aws::EC2
     # <p>Deletes the specified network insights analysis.</p>
     # @param [Hash, Types::DeleteNetworkInsightsAnalysisRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :network_insights_analysis_id
     #   <p>The ID of the network insights analysis.</p>
@@ -18933,8 +18953,8 @@ module Aws::EC2
     # <p>Deletes the specified path.</p>
     # @param [Hash, Types::DeleteNetworkInsightsPathRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :network_insights_path_id
     #   <p>The ID of the path.</p>
@@ -19032,8 +19052,8 @@ module Aws::EC2
     #                 <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">Placement groups</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::DeletePlacementGroupRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :group_name
     #   <p>The name of the placement group.</p>
@@ -19065,8 +19085,8 @@ module Aws::EC2
     # <p>Delete a public IPv4 pool. A public IPv4 pool is an EC2 IP address pool required for the public IPv4 CIDRs that you own and bring to Amazon Web Services to manage with IPAM. IPv6 addresses you bring to Amazon Web Services, however, use IPAM pools only.</p>
     # @param [Hash, Types::DeletePublicIpv4PoolRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :pool_id
     #   <p>The ID of the public IPv4 pool you want to delete.</p>
@@ -19136,8 +19156,8 @@ module Aws::EC2
     # @option params [String] :destination_prefix_list_id
     #   <p>The ID of the prefix list for the route.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :route_table_id
     #   <p>The ID of the route table.</p>
@@ -19175,7 +19195,7 @@ module Aws::EC2
     end
 
     # <p>Deletes the specified route server.</p>
-    #          <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature,
+    #          <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature, 
     # VPC Route Server dynamically updates VPC and internet gateway route tables with your preferred IPv4 or IPv6 routes to achieve routing fault tolerance for those workloads. This enables you to automatically reroute traffic within a VPC, which increases the manageability of VPC routing and interoperability with third-party workloads.</p>
     #          <p>Route server supports the follow route table types:</p>
     #          <ul>
@@ -19195,8 +19215,8 @@ module Aws::EC2
     # @option params [String] :route_server_id
     #   <p>The ID of the route server to delete.</p>
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -19236,8 +19256,8 @@ module Aws::EC2
     # @option params [String] :route_server_endpoint_id
     #   <p>The ID of the route server endpoint to delete.</p>
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -19289,8 +19309,8 @@ module Aws::EC2
     # @option params [String] :route_server_peer_id
     #   <p>The ID of the route server peer to delete.</p>
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -19340,8 +19360,8 @@ module Aws::EC2
     # <p>Deletes the specified route table. You must disassociate the route table from any subnets before you can delete it. You can't delete the main route table.</p>
     # @param [Hash, Types::DeleteRouteTableRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :route_table_id
     #   <p>The ID of the route table.</p>
@@ -19550,8 +19570,8 @@ module Aws::EC2
     #               security group name or the security group ID. For security groups in a nondefault VPC,
     #               you must specify the security group ID.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To delete a security group
     #   # This example deletes the specified security group.
@@ -19596,8 +19616,8 @@ module Aws::EC2
     # @option params [String] :snapshot_id
     #   <p>The ID of the EBS snapshot.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To delete a snapshot
     #   # This example deletes a snapshot with the snapshot ID of ``snap-1234567890abcdef0``. If the command succeeds, no output is returned.
@@ -19658,8 +19678,8 @@ module Aws::EC2
     # @option params [String] :subnet_id
     #   <p>The ID of the subnet.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To delete a subnet
     #   # This example deletes the specified subnet.
@@ -19691,8 +19711,8 @@ module Aws::EC2
     # @option params [String] :subnet_cidr_reservation_id
     #   <p>The ID of the subnet CIDR reservation.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -19732,8 +19752,8 @@ module Aws::EC2
     #             Guide</i>.</p>
     # @param [Hash, Types::DeleteTagsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :resources
     #   <p>The IDs of the resources, separated by spaces.</p>
@@ -19792,8 +19812,8 @@ module Aws::EC2
     # @option params [String] :traffic_mirror_filter_id
     #   <p>The ID of the Traffic Mirror filter.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -19818,8 +19838,8 @@ module Aws::EC2
     # @option params [String] :traffic_mirror_filter_rule_id
     #   <p>The ID of the Traffic Mirror rule.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -19844,8 +19864,8 @@ module Aws::EC2
     # @option params [String] :traffic_mirror_session_id
     #   <p>The ID of the Traffic Mirror session.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -19871,8 +19891,8 @@ module Aws::EC2
     # @option params [String] :traffic_mirror_target_id
     #   <p>The ID of the Traffic Mirror target.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -19897,8 +19917,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_id
     #   <p>The ID of the transit gateway.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -19985,8 +20005,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_attachment_id
     #   <p>The ID of the Connect attachment.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -20026,8 +20046,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_connect_peer_id
     #   <p>The ID of the Connect peer.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -20078,8 +20098,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_metering_policy_id
     #   <p>The ID of the transit gateway metering policy to delete.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -20118,8 +20138,8 @@ module Aws::EC2
     # @option params [Integer] :policy_rule_number
     #   <p>The rule number of the metering policy entry to delete.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -20162,8 +20182,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_multicast_domain_id
     #   <p>The ID of the transit gateway multicast domain.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -20206,8 +20226,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_attachment_id
     #   <p>The ID of the transit gateway peering attachment.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -20262,8 +20282,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_policy_table_id
     #   <p>The transit gateway policy table to delete.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -20301,8 +20321,8 @@ module Aws::EC2
     # @option params [String] :policy_rule_number
     #   <p>The rule number of the policy table entry to delete.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -20345,8 +20365,8 @@ module Aws::EC2
     # @option params [String] :prefix_list_id
     #   <p>The ID of the prefix list.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -20385,8 +20405,8 @@ module Aws::EC2
     # @option params [String] :destination_cidr_block
     #   <p>The CIDR range for the route. This must match the CIDR for the route exactly.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -20426,8 +20446,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_route_table_id
     #   <p>The ID of the transit gateway route table.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -20465,8 +20485,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_route_table_announcement_id
     #   <p>The transit gateway route table ID that's being deleted. </p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -20508,8 +20528,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_attachment_id
     #   <p>The ID of the attachment.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -20557,8 +20577,8 @@ module Aws::EC2
     #   <p>A unique, case-sensitive token that you provide to ensure idempotency of your
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -20659,8 +20679,8 @@ module Aws::EC2
     #   <p>A unique, case-sensitive token that you provide to ensure idempotency of your
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -20705,8 +20725,8 @@ module Aws::EC2
     # @option params [String] :verified_access_instance_id
     #   <p>The ID of the Verified Access instance.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive token that you provide to ensure idempotency of your
@@ -20760,8 +20780,8 @@ module Aws::EC2
     # @option params [String] :verified_access_trust_provider_id
     #   <p>The ID of the Verified Access trust provider.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive token that you provide to ensure idempotency of your
@@ -20835,8 +20855,8 @@ module Aws::EC2
     # @option params [String] :volume_id
     #   <p>The ID of the volume.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To delete a volume
     #   # This example deletes an available volume with the volume ID of ``vol-049df61146c4d7901``. If the command succeeds, no output is returned.
@@ -20863,19 +20883,19 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Deletes the specified VPC. You must detach or delete all gateways and resources that are associated
-    # 		  with the VPC before you can delete it. For example, you must terminate all instances running in the VPC,
-    # 		  delete all security groups associated with the VPC (except the default one), delete all route tables
-    # 		  associated with the VPC (except the default one), and so on. When you delete the VPC, it deletes the
+    # <p>Deletes the specified VPC. You must detach or delete all gateways and resources that are associated 
+    # 		  with the VPC before you can delete it. For example, you must terminate all instances running in the VPC, 
+    # 		  delete all security groups associated with the VPC (except the default one), delete all route tables 
+    # 		  associated with the VPC (except the default one), and so on. When you delete the VPC, it deletes the 
     # 		  default security group, network ACL, and route table for the VPC.</p>
-    #          <p>If you created a flow log for the VPC that you are deleting, note that flow logs for deleted
+    #          <p>If you created a flow log for the VPC that you are deleting, note that flow logs for deleted 
     #           VPCs are eventually automatically removed.</p>
     # @param [Hash, Types::DeleteVpcRequest] params
     # @option params [String] :vpc_id
     #   <p>The ID of the VPC.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To delete a VPC
     #   # This example deletes the specified VPC.
@@ -20905,8 +20925,8 @@ module Aws::EC2
     # <p>Delete a VPC Block Public Access (BPA) exclusion. A VPC BPA exclusion is a mode that can be applied to a single VPC or subnet that exempts it from the account’s BPA mode and will allow bidirectional or egress-only access. You can create BPA exclusions for VPCs and subnets even when BPA is not enabled on the account to ensure that there is no traffic disruption to the exclusions when VPC BPA is turned on. To learn more about VPC BPA, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html">Block public access to VPCs and subnets</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::DeleteVpcBlockPublicAccessExclusionRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :exclusion_id
     #   <p>The ID of the exclusion.</p>
@@ -20947,8 +20967,8 @@ module Aws::EC2
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html">Enforce VPC encryption in transit</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::DeleteVpcEncryptionControlRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :vpc_encryption_control_id
     #   <p>The ID of the VPC Encryption Control resource to delete.</p>
@@ -21019,8 +21039,8 @@ module Aws::EC2
     # <p>Deletes the specified VPC endpoint connection notifications.</p>
     # @param [Hash, Types::DeleteVpcEndpointConnectionNotificationsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :connection_notification_ids
     #   <p>The IDs of the notifications.</p>
@@ -21056,8 +21076,8 @@ module Aws::EC2
     #             the service.</p>
     # @param [Hash, Types::DeleteVpcEndpointServiceConfigurationsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :service_ids
     #   <p>The IDs of the services.</p>
@@ -21089,13 +21109,13 @@ module Aws::EC2
 
     # <p>Deletes the specified VPC endpoints.</p>
     #          <p>When you delete a gateway endpoint, we delete the endpoint routes in the route tables for the endpoint.</p>
-    #          <p>When you delete a Gateway Load Balancer endpoint, we delete its endpoint network interfaces.
+    #          <p>When you delete a Gateway Load Balancer endpoint, we delete its endpoint network interfaces. 
     #           You can only delete Gateway Load Balancer endpoints when the routes that are associated with the endpoint are deleted.</p>
     #          <p>When you delete an interface endpoint, we delete its endpoint network interfaces.</p>
     # @param [Hash, Types::DeleteVpcEndpointsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :vpc_endpoint_ids
     #   <p>The IDs of the VPC endpoints.</p>
@@ -21132,8 +21152,8 @@ module Aws::EC2
     #           connection that's in the <code>failed</code> or <code>rejected</code> state.</p>
     # @param [Hash, Types::DeleteVpcPeeringConnectionRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :vpc_peering_connection_id
     #   <p>The ID of the VPC peering connection.</p>
@@ -21160,8 +21180,8 @@ module Aws::EC2
     # @option params [String] :vpn_concentrator_id
     #   <p>The ID of the VPN concentrator to delete.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -21271,15 +21291,15 @@ module Aws::EC2
 
     # <p>Releases the specified address range that you provisioned for use with your Amazon Web Services resources
     #          through bring your own IP addresses (BYOIP) and deletes the corresponding address pool.</p>
-    #          <p>Before you can release an address range, you must stop advertising it and you must not
+    #          <p>Before you can release an address range, you must stop advertising it and you must not 
     #           have any IP addresses allocated from its address range.</p>
     # @param [Hash, Types::DeprovisionByoipCidrRequest] params
     # @option params [String] :cidr
-    #   <p>The address range, in CIDR notation. The prefix must be the same prefix
+    #   <p>The address range, in CIDR notation. The prefix must be the same prefix 
     #            that you specified when you provisioned the address range.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -21320,8 +21340,8 @@ module Aws::EC2
     #             For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html">Tutorial: Bring your ASN to IPAM</a> in the <i>Amazon VPC IPAM guide</i>.</p>
     # @param [Hash, Types::DeprovisionIpamByoasnRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_id
     #   <p>The IPAM ID.</p>
@@ -21354,8 +21374,8 @@ module Aws::EC2
     # <p>Deprovision a CIDR provisioned from an IPAM pool. If you deprovision a CIDR from a pool that has a source pool, the CIDR is recycled back into the source pool. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/depro-pool-cidr-ipam.html">Deprovision pool CIDRs</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
     # @param [Hash, Types::DeprovisionIpamPoolCidrRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_pool_id
     #   <p>The ID of the pool that has the CIDR you want to deprovision.</p>
@@ -21392,8 +21412,8 @@ module Aws::EC2
     # <p>Deprovision a CIDR from a public IPv4 pool.</p>
     # @param [Hash, Types::DeprovisionPublicIpv4PoolCidrRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :pool_id
     #   <p>The ID of the pool that you want to deprovision the CIDR from.</p>
@@ -21458,8 +21478,8 @@ module Aws::EC2
     #            </note>
     #            <p>Default: The snapshots are not deleted.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -21490,8 +21510,8 @@ module Aws::EC2
     #          included in scheduled event notifications for resources in the Region.</p>
     # @param [Hash, Types::DeregisterInstanceEventNotificationAttributesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Types::DeregisterInstanceTagAttributeRequest] :instance_tag_attribute
     #   <p>Information about the tag keys to deregister.</p>
@@ -21528,8 +21548,8 @@ module Aws::EC2
     # @option params [Array<String>] :network_interface_ids
     #   <p>The IDs of the group members' network interfaces.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -21564,8 +21584,8 @@ module Aws::EC2
     # @option params [Array<String>] :network_interface_ids
     #   <p>The IDs of the group sources' network interfaces.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -21629,8 +21649,8 @@ module Aws::EC2
     #          </note>
     # @param [Hash, Types::DescribeAccountAttributesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #              and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #              and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #              Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :attribute_names
     #   <p>The account attribute names.</p>
@@ -21751,8 +21771,8 @@ module Aws::EC2
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html">Enforce VPC encryption in transit</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::DescribeAccountVpcEncryptionControlRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -21804,8 +21824,8 @@ module Aws::EC2
     # @option params [Integer] :max_results
     #   <p>The maximum number of address transfers to return in one page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -21843,8 +21863,8 @@ module Aws::EC2
     #   <p>One or more Elastic IP addresses.</p>
     #            <p>Default: Describes all your Elastic IP addresses.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters. Filter names and values are case-sensitive.</p>
@@ -21979,8 +21999,8 @@ module Aws::EC2
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -22034,8 +22054,8 @@ module Aws::EC2
     #         <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p>
     # @param [Hash, Types::DescribeAggregateIdFormatRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -22095,8 +22115,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To describe application status for instances
     #   # This example describes the application status for the specified instance.
@@ -22264,8 +22284,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To describe application status check associations
     #   # This example describes instance ID associations for the specified application status check.
@@ -22363,8 +22383,8 @@ module Aws::EC2
     # @option params [Boolean] :include_all
     #   <p>Specifies whether to include recently deleted application status checks that remain available during the deletion grace period. If you omit this parameter or set it to <code>false</code>, the response includes only active checks.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To describe application status checks
     #   # This example describes the specified application status checks.
@@ -22500,7 +22520,7 @@ module Aws::EC2
     # <p>Describes the Availability Zones, Local Zones, and Wavelength Zones that are available to
     #       you.</p>
     #          <p>For more information about Availability Zones, Local Zones, and Wavelength Zones, see
-    #         <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html">Regions and zones</a>
+    #         <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html">Regions and zones</a> 
     #       in the <i>Amazon EC2 User Guide</i>.</p>
     #          <note>
     #             <p>The order of the elements in the response, including those within nested
@@ -22517,8 +22537,8 @@ module Aws::EC2
     #         opt-in status.</p>
     #            <p>If you do not use this parameter, the results include only the zones for the Regions where you have chosen the option to opt in.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -22579,7 +22599,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>zone-type</code> - The type of zone (<code>availability-zone</code> |
+    #                     <code>zone-type</code> - The type of zone (<code>availability-zone</code> | 
     #             <code>local-zone</code> | <code>wavelength-zone</code>).</p>
     #               </li>
     #            </ul>
@@ -22686,8 +22706,8 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -22739,8 +22759,8 @@ module Aws::EC2
     #   <p>The bundle task IDs.</p>
     #            <p>Default: Describes all your bundle tasks.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -22840,8 +22860,8 @@ module Aws::EC2
     #           through through bring your own IP addresses (BYOIP).</p>
     # @param [Hash, Types::DescribeByoipCidrsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return with a single call.
@@ -22896,7 +22916,7 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters</p>
@@ -22990,7 +23010,7 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -23030,7 +23050,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Describes Capacity Block offerings available for purchase in the Amazon Web Services Region that you're currently using. With Capacity Blocks, you can
+    # <p>Describes Capacity Block offerings available for purchase in the Amazon Web Services Region that you're currently using. With Capacity Blocks, you can 
     # 			purchase a specific GPU instance type or EC2 UltraServer for a period of time.</p>
     #          <p>To search for an available Capacity Block offering, you specify a reservation duration
     # 			and instance count.</p>
@@ -23052,7 +23072,7 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [String] :ultraserver_type
     #   <p>The EC2 UltraServer type of the Capacity Block offerings.</p>
@@ -23116,7 +23136,7 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters. </p>
@@ -23178,7 +23198,7 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p> One or more filters. </p>
@@ -23215,9 +23235,9 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>state</code> - The state of the Capacity Block (<code>active</code> |
-    #   					<code>expired</code> | <code>unavailable</code> | <code>cancelled</code> |
-    #   					<code>failed</code> | <code>scheduled</code> | <code>payment-pending</code> |
+    #                     <code>state</code> - The state of the Capacity Block (<code>active</code> | 
+    #   					<code>expired</code> | <code>unavailable</code> | <code>cancelled</code> | 
+    #   					<code>failed</code> | <code>scheduled</code> | <code>payment-pending</code> | 
     #   					<code>payment-failed</code>).</p>
     #               </li>
     #               <li>
@@ -23290,7 +23310,7 @@ module Aws::EC2
     #   </p>
     # @option params [Boolean] :dry_run
     #   <p>
-    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. 
     #   If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.
     #   </p>
     # @option params [Array<Types::Filter>] :filters
@@ -23368,7 +23388,7 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters.</p>
@@ -23444,7 +23464,7 @@ module Aws::EC2
     # @option params [Array<String>] :capacity_reservation_cancellation_quote_ids
     #   <p>The IDs of the cancellation quotes to describe.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next page of results.</p>
@@ -23512,7 +23532,7 @@ module Aws::EC2
     # @option params [Array<String>] :capacity_reservation_modification_quote_ids
     #   <p>The IDs of the date change quotes to describe.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next page of results.</p>
@@ -23581,7 +23601,7 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters.</p>
@@ -23697,8 +23717,8 @@ module Aws::EC2
     #          <p></p>
     # @param [Hash, Types::DescribeCapacityReservationTopologyRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
@@ -23779,7 +23799,7 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters.</p>
@@ -24064,8 +24084,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -24115,8 +24135,8 @@ module Aws::EC2
     # 			use this request to return information about other instances.</p>
     # @param [Hash, Types::DescribeClassicLinkInstancesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :instance_ids
     #   <p>The instance IDs. Must be instances linked to a VPC through ClassicLink.</p>
@@ -24262,7 +24282,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Describes active client connections and connections that have been terminated within the last 60
+    # <p>Describes active client connections and connections that have been terminated within the last 60 
     # 			minutes for the specified Client VPN endpoint.</p>
     # @param [Hash, Types::DescribeClientVpnConnectionsRequest] params
     # @option params [String] :client_vpn_endpoint_id
@@ -24633,8 +24653,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -24681,8 +24701,8 @@ module Aws::EC2
     #          <p>For information about the import manifest referenced by this API action, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html">VM Import Manifest</a>.</p>
     # @param [Hash, Types::DescribeConversionTasksRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :conversion_task_ids
     #   <p>The conversion task IDs.</p>
@@ -24882,8 +24902,8 @@ module Aws::EC2
     #                 <i>Amazon Web Services Organizations User Guide</i>.</p>
     # @param [Hash, Types::DescribeDeclarativePoliciesReportsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
@@ -24930,7 +24950,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Describes your DHCP option sets. The default is to describe all your DHCP option sets.
+    # <p>Describes your DHCP option sets. The default is to describe all your DHCP option sets. 
     # 		        Alternatively, you can specify specific DHCP option set IDs or filter the results to
     # 		        include only the DHCP option sets that match specific criteria.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html">DHCP option sets</a> in the
@@ -24945,8 +24965,8 @@ module Aws::EC2
     #   	To get the next page of items, make another request with the token returned in the output.
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -25055,13 +25075,13 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Describes your egress-only internet gateways. The default is to describe all your egress-only internet gateways.
+    # <p>Describes your egress-only internet gateways. The default is to describe all your egress-only internet gateways. 
     #             Alternatively, you can specify specific egress-only internet gateway IDs or filter the results to
     #             include only the egress-only internet gateways that match specific criteria.</p>
     # @param [Hash, Types::DescribeEgressOnlyInternetGatewaysRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :egress_only_internet_gateway_ids
     #   <p>The IDs of the egress-only internet gateways.</p>
@@ -25135,8 +25155,8 @@ module Aws::EC2
     # @option params [Array<String>] :elastic_gpu_ids
     #   <p>The Elastic Graphics accelerator IDs.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #               and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #               and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #               Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -25221,8 +25241,8 @@ module Aws::EC2
     # <p>Describes the specified export image tasks or all of your export image tasks.</p>
     # @param [Hash, Types::DescribeExportImageTasksRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>Filter tasks using the <code>task-state</code> filter and one of the following values: <code>active</code>,
@@ -25358,8 +25378,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -25429,24 +25449,24 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>state</code>: The state of fast snapshot restores for the snapshot
-    #            (<code>enabling</code> |
-    #             <code>optimizing</code> |
-    #             <code>enabled</code> |
-    #             <code>disabling</code> |
+    #                     <code>state</code>: The state of fast snapshot restores for the snapshot 
+    #            (<code>enabling</code> | 
+    #             <code>optimizing</code> | 
+    #             <code>enabled</code> | 
+    #             <code>disabling</code> | 
     #             <code>disabled</code>).</p>
     #               </li>
     #            </ul>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return for this request.
-    #   	To get the next page of items, make another request with the token returned in the output.
+    #   	To get the next page of items, make another request with the token returned in the output. 
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request.
     #     Pagination continues from the end of the items returned by the previous request.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -25497,8 +25517,8 @@ module Aws::EC2
     #             <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::DescribeFleetHistoryRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :event_type
     #   <p>The type of events to describe. By default, all events are described.</p>
@@ -25559,8 +25579,8 @@ module Aws::EC2
     #             EC2 Fleet</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::DescribeFleetInstancesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return for this request.
@@ -25622,8 +25642,8 @@ module Aws::EC2
     #             EC2 Fleet</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::DescribeFleetsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return for this request.
@@ -26079,12 +26099,12 @@ module Aws::EC2
     end
 
     # <p>Describes one or more flow logs.</p>
-    #          <p>To view the published flow log records, you must view the log destination. For example,
+    #          <p>To view the published flow log records, you must view the log destination. For example, 
     #             the CloudWatch Logs log group, the Amazon S3 bucket, or the Kinesis Data Firehose delivery stream.</p>
     # @param [Hash, Types::DescribeFlowLogsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filter
     #   <p>One or more filters.</p>
@@ -26200,8 +26220,8 @@ module Aws::EC2
     # <p>Describes the specified attribute of the specified Amazon FPGA Image (AFI).</p>
     # @param [Hash, Types::DescribeFpgaImageAttributeRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :fpga_image_id
     #   <p>The ID of the AFI.</p>
@@ -26247,14 +26267,14 @@ module Aws::EC2
     # 			permissions.</p>
     # @param [Hash, Types::DescribeFpgaImagesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :fpga_image_ids
     #   <p>The AFI IDs.</p>
     # @option params [Array<String>] :owners
-    #   <p>Filters the AFI by owner. Specify an Amazon Web Services account ID, <code>self</code>
-    #   			(owner is the sender of the request), or an Amazon Web Services owner alias (valid values are
+    #   <p>Filters the AFI by owner. Specify an Amazon Web Services account ID, <code>self</code> 
+    #   			(owner is the sender of the request), or an Amazon Web Services owner alias (valid values are 
     #   			<code>amazon</code> | <code>aws-marketplace</code>).</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -26686,7 +26706,7 @@ module Aws::EC2
     #            </ul>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return for this request. To get the next page of
-    #               items, make another request with the token returned in the output. For more information,
+    #               items, make another request with the token returned in the output. For more information, 
     #               see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request.
@@ -26887,8 +26907,8 @@ module Aws::EC2
     # @option params [String] :image_id
     #   <p>The ID of the AMI.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To describe the launch permissions for an AMI
     #   # This example describes the launch permissions for the specified AMI.
@@ -27018,8 +27038,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Integer] :max_results
     #   <p>
@@ -27099,8 +27119,8 @@ module Aws::EC2
     #               </li>
     #            </ul>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return for this request.
@@ -27181,8 +27201,8 @@ module Aws::EC2
     #               </li>
     #            </ul>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return for this request.
@@ -27316,8 +27336,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -27738,8 +27758,8 @@ module Aws::EC2
     # <p>Displays details about an import virtual machine or import snapshot tasks that are already created.</p>
     # @param [Hash, Types::DescribeImportImageTasksRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>Filter tasks using the <code>task-state</code> filter and one of the following values: <code>active</code>,
@@ -27825,8 +27845,8 @@ module Aws::EC2
     # <p>Describes your import snapshot tasks.</p>
     # @param [Hash, Types::DescribeImportSnapshotTasksRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -27897,8 +27917,8 @@ module Aws::EC2
     #         </p>
     # @param [Hash, Types::DescribeInstanceAttributeRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :instance_id
     #   <p>The ID of the instance.</p>
@@ -28044,8 +28064,8 @@ module Aws::EC2
     # <p>Describes the specified EC2 Instance Connect Endpoints or all EC2 Instance Connect Endpoints.</p>
     # @param [Hash, Types::DescribeInstanceConnectEndpointsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #               and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #               and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #               Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return for this request.
@@ -28062,7 +28082,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>state</code> - The state of the EC2 Instance Connect Endpoint (<code>create-in-progress</code> | <code>create-complete</code> | <code>create-failed</code> |
+    #                     <code>state</code> - The state of the EC2 Instance Connect Endpoint (<code>create-in-progress</code> | <code>create-complete</code> | <code>create-failed</code> | 
     #                       <code>delete-in-progress</code> | <code>delete-complete</code> | <code>delete-failed</code>).</p>
     #               </li>
     #               <li>
@@ -28081,7 +28101,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>tag-value</code> - The value of a tag assigned to the resource. Use this filter to find all resources
+    #                     <code>tag-value</code> - The value of a tag assigned to the resource. Use this filter to find all resources 
     #                       that have a tag with a specific value, regardless of tag key.</p>
     #               </li>
     #               <li>
@@ -28176,8 +28196,8 @@ module Aws::EC2
     #                 performance instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::DescribeInstanceCreditSpecificationsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -28235,8 +28255,8 @@ module Aws::EC2
     #          for resources in the current Region.</p>
     # @param [Hash, Types::DescribeInstanceEventNotificationAttributesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -28269,8 +28289,8 @@ module Aws::EC2
     #             events</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::DescribeInstanceEventWindowsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :instance_event_window_ids
     #   <p>The IDs of the event windows.</p>
@@ -28491,8 +28511,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -28565,21 +28585,21 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Describes the historical SQL Server High Availability states for Amazon EC2
+    # <p>Describes the historical SQL Server High Availability states for Amazon EC2 
     #       instances that are enabled for Amazon EC2 High Availability for SQL Server monitoring.</p>
     # @param [Hash, Types::DescribeInstanceSqlHaHistoryStatesRequest] params
     # @option params [Array<String>] :instance_ids
-    #   <p>The IDs of the SQL Server High Availability instances to describe. If omitted, the API returns
+    #   <p>The IDs of the SQL Server High Availability instances to describe. If omitted, the API returns 
     #         historical states for all SQL Server High Availability instances.</p>
     # @option params [Time] :start_time
-    #   <p>The start data and time of the period for which to get the historical
+    #   <p>The start data and time of the period for which to get the historical 
     #         SQL Server High Availability states. If omitted, the API returns all available historical states.</p>
     #            <p>Timezone: UTC</p>
     #            <p>Format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>
     #            </p>
     # @option params [Time] :end_time
-    #   <p>The end data and time of the period for which to get historical SQL Server High Availability
-    #         states. If omitted, the API returns historical states up to the current
+    #   <p>The end data and time of the period for which to get historical SQL Server High Availability 
+    #         states. If omitted, the API returns historical states up to the current 
     #         date and time.</p>
     #            <p>Timezone: UTC</p>
     #            <p>Format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>
@@ -28587,17 +28607,17 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return for the request in a
-    #       single page. The remaining results can be seen by sending another request with the
+    #   <p>The maximum number of results to return for the request in a 
+    #       single page. The remaining results can be seen by sending another request with the 
     #       returned <code>nextToken</code> value.</p>
     # @option params [Array<Types::Filter>] :filters
-    #   <p>One or more filters to apply to the results. Supported filters
+    #   <p>One or more filters to apply to the results. Supported filters 
     #       include:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>tag:<key></code> - The tag key and value pair assigned to the
-    #     instance. For example, to find all instances tagged with <code>Owner:TeamA</code>, specify
+    #                     <code>tag:<key></code> - The tag key and value pair assigned to the 
+    #     instance. For example, to find all instances tagged with <code>Owner:TeamA</code>, specify 
     #     <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>
     #               </li>
     #               <li>
@@ -28606,19 +28626,19 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>haStatus</code> - The SQL Server High Availability status of the SQL Server High Availability instance (<code>processing</code> |
+    #                     <code>haStatus</code> - The SQL Server High Availability status of the SQL Server High Availability instance (<code>processing</code> | 
     #         <code>active</code> | <code>standby</code> | <code>invalid</code>).</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>sqlServerLicenseUsage</code> - The license type for the SQL Server license
+    #                     <code>sqlServerLicenseUsage</code> - The license type for the SQL Server license 
     #         (<code>full</code> | <code>waived</code>).</p>
     #               </li>
     #            </ul>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action,
-    #       without actually making the request, and provides an error response. If you have the
-    #       required permissions, the error response is <code>DryRunOperation</code>. Otherwise,
+    #   <p>Checks whether you have the required permissions for the action, 
+    #       without actually making the request, and provides an error response. If you have the 
+    #       required permissions, the error response is <code>DryRunOperation</code>. Otherwise, 
     #       it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -28664,26 +28684,26 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Describes the SQL Server High Availability states for Amazon EC2 instances that are
+    # <p>Describes the SQL Server High Availability states for Amazon EC2 instances that are 
     #       enabled for Amazon EC2 High Availability for SQL Server monitoring.</p>
     # @param [Hash, Types::DescribeInstanceSqlHaStatesRequest] params
     # @option params [Array<String>] :instance_ids
-    #   <p>The IDs of the SQL Server High Availability instances to describe. If omitted, the API returns
+    #   <p>The IDs of the SQL Server High Availability instances to describe. If omitted, the API returns 
     #         SQL Server High Availability states for all SQL Server High Availability instances.</p>
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return for the request in a
-    #       single page. The remaining results can be seen by sending another request with the
+    #   <p>The maximum number of results to return for the request in a 
+    #       single page. The remaining results can be seen by sending another request with the 
     #       returned <code>nextToken</code> value.</p>
     # @option params [Array<Types::Filter>] :filters
-    #   <p>One or more filters to apply to the results. Supported filters
+    #   <p>One or more filters to apply to the results. Supported filters 
     #       include:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>tag:<key></code> - The tag key and value pair assigned to the
-    #     instance. For example, to find all instances tagged with <code>Owner:TeamA</code>, specify
+    #                     <code>tag:<key></code> - The tag key and value pair assigned to the 
+    #     instance. For example, to find all instances tagged with <code>Owner:TeamA</code>, specify 
     #     <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>
     #               </li>
     #               <li>
@@ -28692,19 +28712,19 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>haStatus</code> - The SQL Server High Availability status of the SQL Server High Availability instance (<code>processing</code> |
+    #                     <code>haStatus</code> - The SQL Server High Availability status of the SQL Server High Availability instance (<code>processing</code> | 
     #         <code>active</code> | <code>standby</code> | <code>invalid</code>).</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>sqlServerLicenseUsage</code> - The license type for the SQL Server license
+    #                     <code>sqlServerLicenseUsage</code> - The license type for the SQL Server license 
     #         (<code>full</code> | <code>waived</code>).</p>
     #               </li>
     #            </ul>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action,
-    #       without actually making the request, and provides an error response. If you have the
-    #       required permissions, the error response is <code>DryRunOperation</code>. Otherwise,
+    #   <p>Checks whether you have the required permissions for the action, 
+    #       without actually making the request, and provides an error response. If you have the 
+    #       required permissions, the error response is <code>DryRunOperation</code>. Otherwise, 
     #       it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -28811,8 +28831,8 @@ module Aws::EC2
     #               to <code>true</code>, the output includes resources that are managed by Amazon Web Services services,
     #               even if managed resource visibility is set to hidden.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -28909,8 +28929,8 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>attached-ebs-status.status</code> - The status of the attached EBS volume
-    #                       for the instance (<code>ok</code> | <code>impaired</code> | <code>initializing</code> |
+    #                     <code>attached-ebs-status.status</code> - The status of the attached EBS volume 
+    #                       for the instance (<code>ok</code> | <code>impaired</code> | <code>initializing</code> | 
     #                       <code>insufficient-data</code> | <code>not-applicable</code>).</p>
     #               </li>
     #               <li>
@@ -29076,8 +29096,8 @@ module Aws::EC2
     #             the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::DescribeInstanceTopologyRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
@@ -29282,12 +29302,12 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>ebs-info.attachment-limit-type</code> - The type of Amazon EBS volume attachment limit
+    #                     <code>ebs-info.attachment-limit-type</code> - The type of Amazon EBS volume attachment limit 
     #        (<code>shared</code> | <code>dedicated</code>).</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>ebs-info.maximum-ebs-attachments</code> - The maximum number of Amazon EBS volumes that
+    #                     <code>ebs-info.maximum-ebs-attachments</code> - The maximum number of Amazon EBS volumes that 
     #        can be attached to the instance type.</p>
     #               </li>
     #               <li>
@@ -29812,8 +29832,8 @@ module Aws::EC2
     #               to <code>true</code>, the output includes resources that are managed by Amazon Web Services services,
     #               even if managed resource visibility is set to hidden.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -30195,7 +30215,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>network-interface.deny-all-igw-traffic</code> - A Boolean that indicates whether
+    #                     <code>network-interface.deny-all-igw-traffic</code> - A Boolean that indicates whether 
     #                   a network interface with an IPv6 address is unreachable from the public internet.</p>
     #               </li>
     #               <li>
@@ -30326,8 +30346,8 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>network-performance-options.bandwidth-weighting</code> - Where the performance boost
-    #           			is applied, if applicable. Valid values: <code>default</code>, <code>vpc-1</code>,
+    #                     <code>network-performance-options.bandwidth-weighting</code> - Where the performance boost 
+    #           			is applied, if applicable. Valid values: <code>default</code>, <code>vpc-1</code>, 
     #           			<code>ebs-1</code>.</p>
     #               </li>
     #               <li>
@@ -30900,7 +30920,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Describes your internet gateways. The default is to describe all your internet gateways.
+    # <p>Describes your internet gateways. The default is to describe all your internet gateways. 
     #             Alternatively, you can specify specific internet gateway IDs or filter the results to
     #             include only the internet gateways that match specific criteria.</p>
     # @param [Hash, Types::DescribeInternetGatewaysRequest] params
@@ -30911,8 +30931,8 @@ module Aws::EC2
     #   	To get the next page of items, make another request with the token returned in the output.
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :internet_gateway_ids
     #   <p>The IDs of the internet gateways.</p>
@@ -31024,8 +31044,8 @@ module Aws::EC2
     # <p>Describes your Autonomous System Numbers (ASNs), their provisioning statuses, and the BYOIP CIDRs with which they are associated. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html">Tutorial: Bring your ASN to IPAM</a> in the <i>Amazon VPC IPAM guide</i>.</p>
     # @param [Hash, Types::DescribeIpamByoasnRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return with a single call.
@@ -31064,8 +31084,8 @@ module Aws::EC2
     # </p>
     # @param [Hash, Types::DescribeIpamExternalResourceVerificationTokensRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters for the request. For more information about filtering, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html">Filtering CLI output</a>.</p>
@@ -31232,8 +31252,8 @@ module Aws::EC2
     #          <p>An IPAM policy is a set of rules that define how public IPv4 addresses from IPAM pools are allocated to Amazon Web Services resources. Each rule maps an Amazon Web Services service to IPAM pools that the service will use to get IP addresses. A single policy can have multiple rules and be applied to multiple Amazon Web Services Regions. If the IPAM pool run out of addresses then the services fallback to Amazon-provided IP addresses. A policy can be applied to an individual Amazon Web Services account or an entity within Amazon Web Services Organizations.</p>
     # @param [Hash, Types::DescribeIpamPoliciesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters for the IPAM policy description.</p>
@@ -31293,8 +31313,8 @@ module Aws::EC2
     #          </note>
     # @param [Hash, Types::DescribeIpamPoolAllocationsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :ipam_pool_allocation_ids
     #   <p>The IDs of the IPAM pool allocations you want to describe.</p>
@@ -31350,8 +31370,8 @@ module Aws::EC2
     # <p>Get information about your IPAM pools.</p>
     # @param [Hash, Types::DescribeIpamPoolsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters for the request. For more information about filtering, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html">Filtering CLI output</a>.</p>
@@ -31433,8 +31453,8 @@ module Aws::EC2
     # <p>Describes one or more IPAM prefix list resolver Targets. Use this operation to view the configuration and status of resolver targets.</p>
     # @param [Hash, Types::DescribeIpamPrefixListResolverTargetsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters to limit the results.</p>
@@ -31497,8 +31517,8 @@ module Aws::EC2
     # <p>Describes one or more IPAM prefix list resolvers. Use this operation to view the configuration, status, and properties of your resolvers.</p>
     # @param [Hash, Types::DescribeIpamPrefixListResolversRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters to limit the results.</p>
@@ -31557,8 +31577,8 @@ module Aws::EC2
     # <p>Describes IPAM resource discoveries. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.</p>
     # @param [Hash, Types::DescribeIpamResourceDiscoveriesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :ipam_resource_discovery_ids
     #   <p>The IPAM resource discovery IDs.</p>
@@ -31624,8 +31644,8 @@ module Aws::EC2
     # <p>Describes resource discovery association with an Amazon VPC IPAM. An associated resource discovery is a resource discovery that has been associated with an IPAM..</p>
     # @param [Hash, Types::DescribeIpamResourceDiscoveryAssociationsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :ipam_resource_discovery_association_ids
     #   <p>The resource discovery association IDs.</p>
@@ -31684,8 +31704,8 @@ module Aws::EC2
     # <p>Get information about your IPAM scopes.</p>
     # @param [Hash, Types::DescribeIpamScopesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters for the request. For more information about filtering, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html">Filtering CLI output</a>.</p>
@@ -31750,8 +31770,8 @@ module Aws::EC2
     #       </p>
     # @param [Hash, Types::DescribeIpamsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters for the request. For more information about filtering, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html">Filtering CLI output</a>.</p>
@@ -31828,8 +31848,8 @@ module Aws::EC2
     #   <p>The maximum number of results to return with a single call.
     #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters.</p>
@@ -31888,7 +31908,7 @@ module Aws::EC2
     end
 
     # <p>Describes the specified key pairs or all of your key pairs.</p>
-    #          <p>For more information about key pairs, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon EC2 key pairs</a>
+    #          <p>For more information about key pairs, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon EC2 key pairs</a> 
     # 				in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::DescribeKeyPairsRequest] params
     # @option params [Array<String>] :key_names
@@ -31901,8 +31921,8 @@ module Aws::EC2
     #            <p>Default: <code>false</code>
     #            </p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -32612,7 +32632,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>local-gateway-route-table-arn</code> - The Amazon Resource Name (ARN) of the local
+    #                     <code>local-gateway-route-table-arn</code> - The Amazon Resource Name (ARN) of the local 
     #                  gateway route table for the virtual interface group.</p>
     #               </li>
     #               <li>
@@ -32629,7 +32649,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>owner-id</code> - The ID of the Amazon Web Services account that owns the local gateway virtual
+    #                     <code>owner-id</code> - The ID of the Amazon Web Services account that owns the local gateway virtual 
     #                  interface group association.</p>
     #               </li>
     #               <li>
@@ -32643,8 +32663,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -32702,7 +32722,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>local-gateway-route-table-arn</code> - The Amazon Resource Name (ARN) of the local
+    #                     <code>local-gateway-route-table-arn</code> - The Amazon Resource Name (ARN) of the local 
     #                  gateway route table for the association.</p>
     #               </li>
     #               <li>
@@ -32733,8 +32753,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -32793,7 +32813,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>local-gateway-route-table-arn</code> - The Amazon Resource Name (ARN) of the
+    #                     <code>local-gateway-route-table-arn</code> - The Amazon Resource Name (ARN) of the 
     #                  local gateway route table.</p>
     #               </li>
     #               <li>
@@ -32819,8 +32839,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -32899,8 +32919,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -32959,7 +32979,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>local-bgp-asn</code> - The Border Gateway Protocol (BGP) Autonomous System Number (ASN)
+    #                     <code>local-bgp-asn</code> - The Border Gateway Protocol (BGP) Autonomous System Number (ASN) 
     #                  of the local gateway.</p>
     #               </li>
     #               <li>
@@ -32993,8 +33013,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -33045,7 +33065,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Describes one or more local gateways. By default, all local gateways are described.
+    # <p>Describes one or more local gateways. By default, all local gateways are described. 
     #         Alternatively, you can filter the results.</p>
     # @param [Hash, Types::DescribeLocalGatewaysRequest] params
     # @option params [Array<String>] :local_gateway_ids
@@ -33076,8 +33096,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -33126,13 +33146,13 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>lock-state</code> - The state of the snapshot lock (<code>compliance-cooloff</code> |
+    #                     <code>lock-state</code> - The state of the snapshot lock (<code>compliance-cooloff</code> | 
     #             <code>governance</code> | <code>compliance</code> | <code>expired</code>).</p>
     #               </li>
     #            </ul>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return for this request.
-    #   	To get the next page of items, make another request with the token returned in the output.
+    #   	To get the next page of items, make another request with the token returned in the output. 
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request.
@@ -33140,8 +33160,8 @@ module Aws::EC2
     # @option params [Array<String>] :snapshot_ids
     #   <p>The IDs of the snapshots for which to view the lock status.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -33236,8 +33256,8 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Describes a System Integrity Protection (SIP) modification task or volume ownership delegation
-    #          task for an Amazon EC2 Mac instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mac-sip-settings.html#mac-sip-configure">Configure
+    # <p>Describes a System Integrity Protection (SIP) modification task or volume ownership delegation 
+    #          task for an Amazon EC2 Mac instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mac-sip-settings.html#mac-sip-configure">Configure 
     #             SIP for Amazon EC2 instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::DescribeMacModificationTasksRequest] params
     # @option params [Boolean] :dry_run
@@ -33251,12 +33271,12 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>task-state</code> - The state of the task (<code>successful</code> | <code>failed</code> |
+    #                     <code>task-state</code> - The state of the task (<code>successful</code> | <code>failed</code> | 
     #                  <code>in-progress</code> | <code>pending</code>).</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>mac-system-integrity-protection-configuration.sip-status</code> - The overall SIP
+    #                     <code>mac-system-integrity-protection-configuration.sip-status</code> - The overall SIP 
     #                  state requested in the task (<code>enabled</code> | <code>disabled</code>).</p>
     #               </li>
     #               <li>
@@ -33328,8 +33348,8 @@ module Aws::EC2
     # <p>Describes your managed prefix lists and any Amazon Web Services-managed prefix lists.</p>
     # @param [Hash, Types::DescribeManagedPrefixListsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters.</p>
@@ -33404,12 +33424,12 @@ module Aws::EC2
     # <note>
     #             <p>This action is deprecated.</p>
     #          </note>
-    #          <p>Describes your Elastic IP addresses that are being moved from or being restored to the EC2-Classic platform.
+    #          <p>Describes your Elastic IP addresses that are being moved from or being restored to the EC2-Classic platform. 
     #       This request does not return information about any other Elastic IP addresses in your account.</p>
     # @param [Hash, Types::DescribeMovingAddressesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :public_ips
     #   <p>One or more Elastic IP addresses.</p>
@@ -33476,13 +33496,13 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Describes your NAT gateways. The default is to describe all your NAT gateways.
+    # <p>Describes your NAT gateways. The default is to describe all your NAT gateways. 
     #           Alternatively, you can specify specific NAT gateway IDs or filter the results to
     #           include only the NAT gateways that match specific criteria.</p>
     # @param [Hash, Types::DescribeNatGatewaysRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filter
     #   <p>The filters.</p>
@@ -33637,7 +33657,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Describes your network ACLs. The default is to describe all your network ACLs.
+    # <p>Describes your network ACLs. The default is to describe all your network ACLs. 
     #            Alternatively, you can specify specific network ACL IDs or filter the results to
     #            include only the network ACLs that match specific criteria.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html">Network ACLs</a> in the
@@ -33650,8 +33670,8 @@ module Aws::EC2
     #   	To get the next page of items, make another request with the token returned in the output.
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :network_acl_ids
     #   <p>The IDs of the network ACLs.</p>
@@ -33708,7 +33728,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>entry.egress</code> - A Boolean that indicates the type of rule. Specify <code>true</code>
+    #                     <code>entry.egress</code> - A Boolean that indicates the type of rule. Specify <code>true</code> 
     #   		                for egress rules, or <code>false</code> for ingress rules.</p>
     #               </li>
     #               <li>
@@ -33863,8 +33883,8 @@ module Aws::EC2
     #   <p>The maximum number of results to return with a single call.
     #      To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
@@ -33927,8 +33947,8 @@ module Aws::EC2
     #   <p>The maximum number of results to return with a single call.
     #      To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
@@ -33996,8 +34016,8 @@ module Aws::EC2
     #   <p>The maximum number of results to return with a single call.
     #      To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
@@ -35348,8 +35368,8 @@ module Aws::EC2
     #   <p>The maximum number of results to return with a single call.
     #      To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
@@ -35867,7 +35887,7 @@ module Aws::EC2
     #               </li>
     #            </ul>
     # @example To describe a network interface
-    #
+    #   
     #   params = {
     #     network_interface_ids: [
     #       "eni-e5aa89a3"
@@ -36131,8 +36151,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -36190,8 +36210,8 @@ module Aws::EC2
     # @option params [Array<String>] :group_ids
     #   <p>The IDs of the placement groups.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :group_names
     #   <p>The names of the placement groups.</p>
@@ -36298,8 +36318,8 @@ module Aws::EC2
     #             name and prefix list ID of the service and the IP address range for the service.</p>
     # @param [Hash, Types::DescribePrefixListsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters.</p>
@@ -36373,8 +36393,8 @@ module Aws::EC2
     #           <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>. </p>
     # @param [Hash, Types::DescribePrincipalIdFormatRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :resources
     #   <p>The type of resource: <code>bundle</code> |
@@ -36500,7 +36520,7 @@ module Aws::EC2
 
     # <p>Describes the Regions that are enabled for your account, or all Regions.</p>
     #          <p>For a list of the Regions supported by Amazon EC2, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-endpoints.html">Amazon EC2 service endpoints</a>.</p>
-    #          <p>For information about enabling and disabling Regions for your account, see <a href="https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html">Specify which Amazon Web Services Regions
+    #          <p>For information about enabling and disabling Regions for your account, see <a href="https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html">Specify which Amazon Web Services Regions 
     #       your account can use</a> in the <i>Amazon Web Services Account Management Reference Guide</i>.</p>
     #          <note>
     #             <p>The order of the elements in the response, including those within nested structures,
@@ -36512,8 +36532,8 @@ module Aws::EC2
     # @option params [Boolean] :all_regions
     #   <p>Indicates whether to display all Regions, including Regions that are disabled for your account.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -36524,7 +36544,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>opt-in-status</code> - The opt-in status of the Region (<code>opt-in-not-required</code> | <code>opted-in</code> |
+    #                     <code>opt-in-status</code> - The opt-in status of the Region (<code>opt-in-not-required</code> | <code>opted-in</code> | 
     #                    <code>not-opted-in</code>).</p>
     #               </li>
     #               <li>
@@ -36622,7 +36642,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Describes a root volume replacement task. For more information, see
+    # <p>Describes a root volume replacement task. For more information, see 
     #       <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/replace-root.html">Replace a root volume</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::DescribeReplaceRootVolumeTasksRequest] params
     # @option params [Array<String>] :replace_root_volume_task_ids
@@ -36637,14 +36657,14 @@ module Aws::EC2
     #            </ul>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return for this request.
-    #   	To get the next page of items, make another request with the token returned in the output.
+    #   	To get the next page of items, make another request with the token returned in the output. 
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request.
     #     Pagination continues from the end of the items returned by the previous request.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -37288,8 +37308,8 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters to apply to the describe request.</p>
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -37359,8 +37379,8 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters to apply to the describe request.</p>
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -37419,7 +37439,7 @@ module Aws::EC2
     end
 
     # <p>Describes one or more route servers.</p>
-    #          <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature,
+    #          <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature, 
     # VPC Route Server dynamically updates VPC and internet gateway route tables with your preferred IPv4 or IPv6 routes to achieve routing fault tolerance for those workloads. This enables you to automatically reroute traffic within a VPC, which increases the manageability of VPC routing and interoperability with third-party workloads.</p>
     #          <p>Route server supports the follow route table types:</p>
     #          <ul>
@@ -37445,8 +37465,8 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters to apply to the describe request.</p>
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -37491,7 +37511,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Describes your route tables. The default is to describe all your route tables.
+    # <p>Describes your route tables. The default is to describe all your route tables. 
     #            Alternatively, you can specify specific route table IDs or filter the results to
     #            include only the route tables that match specific criteria.</p>
     #          <p>Each subnet in your VPC must be associated with a route table. If a subnet is not explicitly associated with any route table, it is implicitly associated with the main route table. This command does not return the subnet ID for implicit associations.</p>
@@ -37505,8 +37525,8 @@ module Aws::EC2
     #   	To get the next page of items, make another request with the token returned in the output.
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :route_table_ids
     #   <p>The IDs of the route tables.</p>
@@ -37558,7 +37578,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>route.destination-prefix-list-id</code> - The ID (prefix) of the Amazon Web Services
+    #                     <code>route.destination-prefix-list-id</code> - The ID (prefix) of the Amazon Web Services 
     #   				      service specified in a route in the table.</p>
     #               </li>
     #               <li>
@@ -37584,7 +37604,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>route.origin</code> - Describes how the route was created.
+    #                     <code>route.origin</code> - Describes how the route was created. 
     #                           <code>CreateRouteTable</code> indicates that the route was automatically
     #                       created when the route table was created; <code>CreateRoute</code> indicates
     #                       that the route was manually added to the route table;
@@ -37740,8 +37760,8 @@ module Aws::EC2
     #          to purchase Scheduled Instances with that schedule.</p>
     # @param [Hash, Types::DescribeScheduledInstanceAvailabilityRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -37762,7 +37782,7 @@ module Aws::EC2
     # @option params [Types::SlotDateTimeRangeRequest] :first_slot_start_time_range
     #   <p>The time period for the first schedule to start.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in a single call.
+    #   <p>The maximum number of results to return in a single call. 
     #            This value can be between 5 and 300. The default value is 300.
     #            To retrieve the remaining results, make another call with the returned
     #            <code>NextToken</code> value.</p>
@@ -37839,8 +37859,8 @@ module Aws::EC2
     # <p>Describes the specified Scheduled Instances or all your Scheduled Instances.</p>
     # @param [Hash, Types::DescribeScheduledInstancesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -37859,7 +37879,7 @@ module Aws::EC2
     #               </li>
     #            </ul>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in a single call.
+    #   <p>The maximum number of results to return in a single call. 
     #            This value can be between 5 and 300. The default value is 100.
     #            To retrieve the remaining results, make another call with the returned
     #            <code>NextToken</code> value.</p>
@@ -38543,8 +38563,8 @@ module Aws::EC2
     # <p>Describes the VPCs on the other side of a VPC peering or Transit Gateway connection that are referencing the security groups you've specified in this request.</p>
     # @param [Hash, Types::DescribeSecurityGroupReferencesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :group_id
     #   <p>The IDs of the security groups in your account.</p>
@@ -38614,14 +38634,14 @@ module Aws::EC2
     # @option params [Array<String>] :security_group_rule_ids
     #   <p>The IDs of the security group rules.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request.
     #               Pagination continues from the end of the items returned by the previous request.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of
+    #   <p>The maximum number of items to return for this request. To get the next page of 
     #               items, make another request with the token returned in the output. This value
     #               can be between 5 and 1000. If this parameter is not specified, then all items are
     #               returned. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
@@ -38713,8 +38733,8 @@ module Aws::EC2
     #   	To get the next page of items, make another request with the token returned in the output.
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -38765,12 +38785,12 @@ module Aws::EC2
     #               Pagination continues from the end of the items returned by the previous request.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return for this request. To get the next page of items,
-    #               make another request with the token returned in the output. This value can be between 5 and 1000.
-    #               If this parameter is not specified, then all items are returned. For more information, see
+    #               make another request with the token returned in the output. This value can be between 5 and 1000. 
+    #               If this parameter is not specified, then all items are returned. For more information, see 
     #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters. If using multiple filters for rules, the results include security groups for which any combination of rules - not necessarily a single rule - match all filters.</p>
@@ -39081,8 +39101,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -39140,8 +39160,8 @@ module Aws::EC2
     # @option params [String] :snapshot_id
     #   <p>The ID of the EBS snapshot.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To describe snapshot attributes
     #   # This example describes the ``createVolumePermission`` attribute on a snapshot with the snapshot ID of ``snap-066877671789bd71b``.
@@ -39204,20 +39224,20 @@ module Aws::EC2
     #               <li>
     #                  <p>
     #                     <code>last-tiering-operation</code> - The state of the last archive or restore action. (<code>archival-in-progress</code> | <code>archival-completed</code> |
-    #             <code>archival-failed</code> | <code>permanent-restore-in-progress</code> | <code>permanent-restore-completed</code> | <code>permanent-restore-failed</code> |
+    #             <code>archival-failed</code> | <code>permanent-restore-in-progress</code> | <code>permanent-restore-completed</code> | <code>permanent-restore-failed</code> | 
     #   		<code>temporary-restore-in-progress</code> | <code>temporary-restore-completed</code> | <code>temporary-restore-failed</code>)</p>
     #               </li>
     #            </ul>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request.
     #     Pagination continues from the end of the items returned by the previous request.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return for this request.
-    #   	To get the next page of items, make another request with the token returned in the output.
+    #   	To get the next page of items, make another request with the token returned in the output. 
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -39290,7 +39310,7 @@ module Aws::EC2
     #             </li>
     #          </ul>
     #          <p>The list of snapshots returned can be filtered by specifying snapshot IDs, snapshot
-    #       owners, or Amazon Web Services accounts with create volume permissions. If no options are specified,
+    #       owners, or Amazon Web Services accounts with create volume permissions. If no options are specified, 
     #       Amazon EC2 returns all snapshots for which you have create volume permissions.</p>
     #          <p>If you specify one or more snapshot IDs, only snapshots that have the specified IDs are
     #       returned. If you specify an invalid snapshot ID, an error is returned. If you specify a
@@ -39314,7 +39334,7 @@ module Aws::EC2
     # @param [Hash, Types::DescribeSnapshotsRequest] params
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return for this request.
-    #   	To get the next page of items, make another request with the token returned in the output.
+    #   	To get the next page of items, make another request with the token returned in the output. 
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request.
@@ -39328,8 +39348,8 @@ module Aws::EC2
     #   <p>The snapshot IDs.</p>
     #            <p>Default: Describes the snapshots for which you have create volume permissions.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -39345,14 +39365,14 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>owner-alias</code> - The owner alias, from an Amazon-maintained list
-    #             (<code>amazon</code>).
+    #                     <code>owner-alias</code> - The owner alias, from an Amazon-maintained list  
+    #             (<code>amazon</code>). 
     #             This is not the user-configured Amazon Web Services account alias set using the IAM console.
     #             We recommend that you use the related parameter instead of this filter.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>owner-id</code> - The Amazon Web Services account ID of the owner. We recommend that
+    #                     <code>owner-id</code> - The Amazon Web Services account ID of the owner. We recommend that 
     #             you use the related parameter instead of this filter.</p>
     #               </li>
     #               <li>
@@ -40249,7 +40269,7 @@ module Aws::EC2
     #               <li>
     #                  <p>
     #                     <code>launch.block-device-mapping.volume-type</code> - The type of EBS volume:
-    #                       <code>gp2</code> or <code>gp3</code> for General Purpose SSD, <code>io1</code>
+    #                       <code>gp2</code> or <code>gp3</code> for General Purpose SSD, <code>io1</code> 
     #                       or <code>io2</code> for Provisioned IOPS SSD, <code>st1</code> for Throughput
     #                       Optimized HDD, <code>sc1</code> for Cold HDD, or <code>standard</code> for
     #                       Magnetic.</p>
@@ -40775,12 +40795,12 @@ module Aws::EC2
     #             security group VPC association has been disassociated.</p>
     # @param [Hash, Types::DescribeStaleSecurityGroupsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return for this request. To get the next page of items,
-    #             make another request with the token returned in the output. For more information,
+    #             make another request with the token returned in the output. For more information, 
     #             see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
@@ -40871,8 +40891,8 @@ module Aws::EC2
     #   <p>The AMI IDs for which to show progress. Up to 20 AMI IDs can be included in a
     #         request.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -40937,7 +40957,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Describes your subnets. The default is to describe all your subnets.
+    # <p>Describes your subnets. The default is to describe all your subnets. 
     #           Alternatively, you can specify specific subnet IDs or filter the results to
     #           include only the subnets that match specific criteria.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html">Subnets</a> in the
@@ -41088,8 +41108,8 @@ module Aws::EC2
     #   	To get the next page of items, make another request with the token returned in the output.
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To describe the subnets for a VPC
     #   # This example describes the subnets for the specified VPC.
@@ -41209,8 +41229,8 @@ module Aws::EC2
     #          </note>
     # @param [Hash, Types::DescribeTagsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -41225,7 +41245,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>resource-type</code> - The resource type. For a list of possible values, see
+    #                     <code>resource-type</code> - The resource type. For a list of possible values, see 
     #                  <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TagSpecification.html">TagSpecification</a>.</p>
     #               </li>
     #               <li>
@@ -41240,7 +41260,7 @@ module Aws::EC2
     #               </li>
     #            </ul>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return for this request. This value can be between 5 and 1000.
+    #   <p>The maximum number of items to return for this request. This value can be between 5 and 1000. 
     #            To get the next page of items, make another request with the token returned in the output.
     #            For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [String] :next_token
@@ -41317,8 +41337,8 @@ module Aws::EC2
     # @option params [String] :traffic_mirror_filter_id
     #   <p>Traffic filter ID.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>Traffic mirror filters.</p>
@@ -41424,8 +41444,8 @@ module Aws::EC2
     # @option params [Array<String>] :traffic_mirror_filter_ids
     #   <p>The ID of the Traffic Mirror filter.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters. The possible values are:</p>
@@ -41542,8 +41562,8 @@ module Aws::EC2
     # @option params [Array<String>] :traffic_mirror_session_ids
     #   <p>The ID of the Traffic Mirror session.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters. The possible values are:</p>
@@ -41640,8 +41660,8 @@ module Aws::EC2
     # @option params [Array<String>] :traffic_mirror_target_ids
     #   <p>The ID of the Traffic Mirror targets.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters. The possible values are:</p>
@@ -41769,8 +41789,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -41849,8 +41869,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -41947,8 +41967,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -42006,8 +42026,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -42076,8 +42096,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -42169,8 +42189,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -42243,8 +42263,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -42298,8 +42318,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -42384,8 +42404,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -42460,8 +42480,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -42538,12 +42558,12 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>options.default-route-table-association</code> - Indicates whether resource attachments are automatically
+    #                     <code>options.default-route-table-association</code> - Indicates whether resource attachments are automatically 
     #                  associated with the default association route table (<code>enable</code> | <code>disable</code>).</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>options.default-route-table-propagation</code> - Indicates whether resource attachments automatically propagate
+    #                     <code>options.default-route-table-propagation</code> - Indicates whether resource attachments automatically propagate 
     #                  routes to the default propagation route table (<code>enable</code> | <code>disable</code>).</p>
     #               </li>
     #               <li>
@@ -42580,8 +42600,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -42647,8 +42667,8 @@ module Aws::EC2
     # @option params [Array<String>] :association_ids
     #   <p>The IDs of the associations.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters.</p>
@@ -42725,8 +42745,8 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters. Filter names and values are case-sensitive.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -42845,8 +42865,8 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters. Filter names and values are case-sensitive.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -42909,8 +42929,8 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters. Filter names and values are case-sensitive.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -42985,8 +43005,8 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters. Filter names and values are case-sensitive.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -43054,8 +43074,8 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters. Filter names and values are case-sensitive.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -43136,8 +43156,8 @@ module Aws::EC2
     # @option params [String] :volume_id
     #   <p>The ID of the volume.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To describe a volume attribute
     #   # This example describes the ``autoEnableIo`` attribute of the volume with the ID ``vol-049df61146c4d7901``.
@@ -43210,8 +43230,8 @@ module Aws::EC2
     #       event. For example, if the status of the volume is <code>impaired</code> and the volume event
     #       shows <code>potential-data-inconsistency</code>, then the action shows
     #         <code>enable-volume-io</code>. This means that you may want to enable the I/O operations for
-    #       the volume and then check the volume for data consistency. For more information, see
-    #       <a href="https://docs.aws.amazon.com/ebs/latest/userguide/work_volumes_impaired.html">Work with an
+    #       the volume and then check the volume for data consistency. For more information, see 
+    #       <a href="https://docs.aws.amazon.com/ebs/latest/userguide/work_volumes_impaired.html">Work with an 
     #         impaired EBS volume</a>.</p>
     #          <p>Volume status is based on the volume status checks, and does not reflect the volume state.
     #       Therefore, volume status does not indicate volumes in the <code>error</code> state (for
@@ -43224,7 +43244,7 @@ module Aws::EC2
     # @param [Hash, Types::DescribeVolumeStatusRequest] params
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return for this request.
-    #   	To get the next page of items, make another request with the token returned in the output.
+    #   	To get the next page of items, make another request with the token returned in the output. 
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request.
@@ -43235,8 +43255,8 @@ module Aws::EC2
     # @option params [Boolean] :include_managed_resources
     #   <p>Indicates whether to include managed resources in the output. If this parameter is set to <code>true</code>, the output includes resources that are managed by Amazon Web Services services, even if managed resource visibility is set to hidden.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -43452,8 +43472,8 @@ module Aws::EC2
     # @option params [Boolean] :include_managed_resources
     #   <p>Indicates whether to include managed resources in the output. If this parameter is set to <code>true</code>, the output includes resources that are managed by Amazon Web Services services, even if managed resource visibility is set to hidden.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -43504,8 +43524,8 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>fast-restored</code> - Indicates whether the volume was created from a
-    #             snapshot that is enabled for fast snapshot restore (<code>true</code> |
+    #                     <code>fast-restored</code> - Indicates whether the volume was created from a 
+    #             snapshot that is enabled for fast snapshot restore (<code>true</code> | 
     #             <code>false</code>).</p>
     #               </li>
     #               <li>
@@ -43552,7 +43572,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>volume-type</code> - The Amazon EBS volume type (<code>gp2</code> | <code>gp3</code> | <code>io1</code> | <code>io2</code> |
+    #                     <code>volume-type</code> - The Amazon EBS volume type (<code>gp2</code> | <code>gp3</code> | <code>io1</code> | <code>io2</code> | 
     #             <code>st1</code> | <code>sc1</code>| <code>standard</code>)</p>
     #               </li>
     #            </ul>
@@ -43561,7 +43581,7 @@ module Aws::EC2
     #     Pagination continues from the end of the items returned by the previous request.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return for this request.
-    #   	To get the next page of items, make another request with the token returned in the output.
+    #   	To get the next page of items, make another request with the token returned in the output. 
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @example To describe all volumes
     #   # This example describes all of your volumes in the default region.
@@ -43717,8 +43737,8 @@ module Aws::EC2
     #       Monitor the progress of volume modifications</a> in the <i>Amazon EBS User Guide</i>.</p>
     # @param [Hash, Types::DescribeVolumesModificationsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :volume_ids
     #   <p>The IDs of the volumes.</p>
@@ -43727,7 +43747,7 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>modification-state</code> - The current modification state (modifying |
+    #                     <code>modification-state</code> - The current modification state (modifying | 
     #             optimizing | completed | failed).</p>
     #               </li>
     #               <li>
@@ -43740,7 +43760,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>original-volume-type</code> - The original volume type of the volume (standard |
+    #                     <code>original-volume-type</code> - The original volume type of the volume (standard | 
     #             io1 | io2 | gp2 | sc1 | st1).</p>
     #               </li>
     #               <li>
@@ -43761,7 +43781,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>target-volume-type</code> - The target volume type of the volume (standard |
+    #                     <code>target-volume-type</code> - The target volume type of the volume (standard | 
     #             io1 | io2 | gp2 | sc1 | st1).</p>
     #               </li>
     #               <li>
@@ -43840,8 +43860,8 @@ module Aws::EC2
     # @option params [String] :vpc_id
     #   <p>The ID of the VPC.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To describe the enableDnsSupport attribute
     #   # This example describes the enableDnsSupport attribute. This attribute indicates whether DNS resolution is enabled for the VPC. If this attribute is true, the Amazon DNS server resolves DNS hostnames for your instances to their corresponding IP addresses; otherwise, it does not.
@@ -43904,8 +43924,8 @@ module Aws::EC2
     # <p>Describe VPC Block Public Access (BPA) exclusions. A VPC BPA exclusion is a mode that can be applied to a single VPC or subnet that exempts it from the account’s BPA mode and will allow bidirectional or egress-only access. You can create BPA exclusions for VPCs and subnets even when BPA is not enabled on the account to ensure that there is no traffic disruption to the exclusions when VPC BPA is turned on. To learn more about VPC BPA, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html">Block public access to VPCs and subnets</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::DescribeVpcBlockPublicAccessExclusionsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>Filters for the request:</p>
@@ -43992,8 +44012,8 @@ module Aws::EC2
     # <p>Describe VPC Block Public Access (BPA) options. VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that you own in a Region from reaching or being reached from the internet through internet gateways and egress-only internet gateways. To learn more about VPC BPA, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html">Block public access to VPCs and subnets</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::DescribeVpcBlockPublicAccessOptionsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -44027,8 +44047,8 @@ module Aws::EC2
     #          <p>Describes the ClassicLink status of the specified VPCs.</p>
     # @param [Hash, Types::DescribeVpcClassicLinkRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :vpc_ids
     #   <p>The VPCs for which you want to describe the ClassicLink status.</p>
@@ -44131,8 +44151,8 @@ module Aws::EC2
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html">Enforce VPC encryption in transit</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::DescribeVpcEncryptionControlsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters to apply to the request.</p>
@@ -44226,8 +44246,8 @@ module Aws::EC2
     #          associated with the VPC endpoint.</p>
     # @param [Hash, Types::DescribeVpcEndpointAssociationsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :vpc_endpoint_ids
     #   <p>The IDs of the VPC endpoints.</p>
@@ -44327,8 +44347,8 @@ module Aws::EC2
     #             services.</p>
     # @param [Hash, Types::DescribeVpcEndpointConnectionNotificationsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :connection_notification_id
     #   <p>The ID of the notification.</p>
@@ -44411,8 +44431,8 @@ module Aws::EC2
     #             endpoints that are pending your acceptance.</p>
     # @param [Hash, Types::DescribeVpcEndpointConnectionsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filters.</p>
@@ -44427,7 +44447,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>vpc-endpoint-owner</code> - The ID of the Amazon Web Services account ID
+    #                     <code>vpc-endpoint-owner</code> - The ID of the Amazon Web Services account ID 
     #   		            that owns the endpoint.</p>
     #               </li>
     #               <li>
@@ -44515,8 +44535,8 @@ module Aws::EC2
     # <p>Describes the VPC endpoint service configurations in your account (your services).</p>
     # @param [Hash, Types::DescribeVpcEndpointServiceConfigurationsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :service_ids
     #   <p>The IDs of the endpoint services.</p>
@@ -44629,8 +44649,8 @@ module Aws::EC2
     #             endpoint service. Principal ARNs with path components aren't supported.</p>
     # @param [Hash, Types::DescribeVpcEndpointServicePermissionsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :service_id
     #   <p>The ID of the service.</p>
@@ -44706,8 +44726,8 @@ module Aws::EC2
     #             <code>us-east-1a</code>.</p>
     # @param [Hash, Types::DescribeVpcEndpointServicesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :service_names
     #   <p>The service names.</p>
@@ -44716,7 +44736,7 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>owner</code> - The ID or alias of the Amazon Web Services account that owns
+    #                     <code>owner</code> - The ID or alias of the Amazon Web Services account that owns 
     #                       the service.</p>
     #               </li>
     #               <li>
@@ -44814,13 +44834,13 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Describes your VPC endpoints. The default is to describe all your VPC endpoints.
+    # <p>Describes your VPC endpoints. The default is to describe all your VPC endpoints. 
     #             Alternatively, you can specify specific VPC endpoint IDs or filter the results to
     #             include only the VPC endpoints that match specific criteria.</p>
     # @param [Hash, Types::DescribeVpcEndpointsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :vpc_endpoint_ids
     #   <p>The IDs of the VPC endpoints.</p>
@@ -44865,7 +44885,7 @@ module Aws::EC2
     #               <li>
     #                  <p>
     #                     <code>vpc-endpoint-type</code> - The type of VPC endpoint (<code>Interface</code> |
-    #                       <code>Gateway</code> | <code>GatewayLoadBalancer</code> | <code>Resource</code> |
+    #                       <code>Gateway</code> | <code>GatewayLoadBalancer</code> | <code>Resource</code> | 
     #                       <code>ServiceNetwork</code> | <code>Tunnel</code>).</p>
     #               </li>
     #            </ul>
@@ -44968,7 +44988,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Describes your VPC peering connections. The default is to describe all your VPC peering connections.
+    # <p>Describes your VPC peering connections. The default is to describe all your VPC peering connections. 
     #           Alternatively, you can specify specific VPC peering connection IDs or filter the results to
     #           include only the VPC peering connections that match specific criteria.</p>
     # @param [Hash, Types::DescribeVpcPeeringConnectionsRequest] params
@@ -44979,8 +44999,8 @@ module Aws::EC2
     #   	To get the next page of items, make another request with the token returned in the output.
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :vpc_peering_connection_ids
     #   <p>The IDs of the VPC peering connections.</p>
@@ -45132,7 +45152,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Describes your VPCs. The default is to describe all your VPCs.
+    # <p>Describes your VPCs. The default is to describe all your VPCs. 
     #           Alternatively, you can specify specific VPC IDs or filter the results to
     #           include only the VPCs that match specific criteria.</p>
     # @param [Hash, Types::DescribeVpcsRequest] params
@@ -45219,8 +45239,8 @@ module Aws::EC2
     #   	To get the next page of items, make another request with the token returned in the output.
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To describe a VPC
     #   # This example describes the specified VPC.
@@ -45379,8 +45399,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -45743,13 +45763,13 @@ module Aws::EC2
     # <note>
     #             <p>This action is deprecated.</p>
     #          </note>
-    #          <p>Unlinks (detaches) a linked EC2-Classic instance from a VPC. After the instance has been unlinked,
-    # 		    the VPC security groups are no longer associated with it. An instance is automatically unlinked from
+    #          <p>Unlinks (detaches) a linked EC2-Classic instance from a VPC. After the instance has been unlinked, 
+    # 		    the VPC security groups are no longer associated with it. An instance is automatically unlinked from 
     # 		    a VPC when it's stopped.</p>
     # @param [Hash, Types::DetachClassicLinkVpcRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :instance_id
     #   <p>The ID of the instance to unlink from the VPC.</p>
@@ -45786,8 +45806,8 @@ module Aws::EC2
     #   <p>The watermark key to remove, in <code>accountId:watermarkName</code> format (for example,
     #           <code>123456789012:approvedAmi</code>).</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -45813,8 +45833,8 @@ module Aws::EC2
     # 			public IPv4 addresses.</p>
     # @param [Hash, Types::DetachInternetGatewayRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :internet_gateway_id
     #   <p>The ID of the internet gateway.</p>
@@ -45915,8 +45935,8 @@ module Aws::EC2
     #   <p>A unique, case-sensitive token that you provide to ensure idempotency of your
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -46014,8 +46034,8 @@ module Aws::EC2
     #       first.</p>
     #          <p>When a volume with an Amazon Web Services Marketplace product code is detached from an instance, the
     #       product code is no longer associated with the instance.</p>
-    #          <p>You can't detach or force detach volumes that are attached to Amazon Web Services-managed resources.
-    #       Attempting to do this results in the <code>UnsupportedOperationException</code>
+    #          <p>You can't detach or force detach volumes that are attached to Amazon Web Services-managed resources. 
+    #       Attempting to do this results in the <code>UnsupportedOperationException</code> 
     #       exception.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-detaching-volume.html">Detach an Amazon EBS volume</a> in the
     #         <i>Amazon EBS User Guide</i>.</p>
@@ -46034,8 +46054,8 @@ module Aws::EC2
     # @option params [String] :volume_id
     #   <p>The ID of the volume.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To detach a volume from an instance
     #   # This example detaches the volume (``vol-049df61146c4d7901``) from the instance it is attached to.
@@ -46119,8 +46139,8 @@ module Aws::EC2
     # @option params [String] :allocation_id
     #   <p>The allocation ID of an Elastic IP address.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -46161,8 +46181,8 @@ module Aws::EC2
     #       <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::DisableAllowedImagesSettingsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -46188,8 +46208,8 @@ module Aws::EC2
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If you retry a request with the same token, the service ignores the request but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To disable application status check suppression
     #   # This example disables application status check suppression for the specified instance, resuming normal status reporting.
@@ -46254,8 +46274,8 @@ module Aws::EC2
     # @option params [String] :statistic
     #   <p>The statistic used for the disabled subscription. </p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -46279,13 +46299,13 @@ module Aws::EC2
     end
 
     # <p>
-    # Disables EC2 Capacity Manager for your account. This stops data ingestion and removes access to capacity analytics and optimization recommendations.
+    # Disables EC2 Capacity Manager for your account. This stops data ingestion and removes access to capacity analytics and optimization recommendations. 
     # Previously collected data is retained but no new data will be processed.
     # </p>
     # @param [Hash, Types::DisableCapacityManagerRequest] params
     # @option params [Boolean] :dry_run
     #   <p>
-    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. 
     #   If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.
     #   </p>
     # @option params [String] :client_token
@@ -46312,7 +46332,7 @@ module Aws::EC2
     end
 
     # <p>Disables EBS encryption by default for your account in the current Region.</p>
-    #          <p>After you disable encryption by default, you can still create encrypted volumes by
+    #          <p>After you disable encryption by default, you can still create encrypted volumes by 
     #       enabling encryption when you create each volume.</p>
     #          <p>Disabling encryption by default does not change the encryption status of your
     #       existing volumes.</p>
@@ -46320,8 +46340,8 @@ module Aws::EC2
     #       <i>Amazon EBS User Guide</i>.</p>
     # @param [Hash, Types::DisableEbsEncryptionByDefaultRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -46356,8 +46376,8 @@ module Aws::EC2
     #         parameter overrides any errors that are encountered while cleaning up resources in your
     #         account.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -46403,8 +46423,8 @@ module Aws::EC2
     # @option params [Array<String>] :source_snapshot_ids
     #   <p>The IDs of one or more snapshots. For example, <code>snap-1234567890abcdef0</code>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -46471,8 +46491,8 @@ module Aws::EC2
     # @option params [String] :image_id
     #   <p>The ID of the AMI.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -46500,8 +46520,8 @@ module Aws::EC2
     #       public access to your AMIs</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::DisableImageBlockPublicAccessRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -46527,8 +46547,8 @@ module Aws::EC2
     # @option params [String] :image_id
     #   <p>The ID of the AMI.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -46559,8 +46579,8 @@ module Aws::EC2
     # @option params [String] :image_id
     #   <p>The ID of the AMI.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -46580,17 +46600,17 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Disable Amazon EC2 instances running in an SQL Server High Availability cluster from SQL Server High Availability
-    #       instance standby detection monitoring. Once disabled, Amazon Web Services no longer monitors the
-    #       metadata for the instances to determine whether they are active or standby nodes in the
+    # <p>Disable Amazon EC2 instances running in an SQL Server High Availability cluster from SQL Server High Availability 
+    #       instance standby detection monitoring. Once disabled, Amazon Web Services no longer monitors the 
+    #       metadata for the instances to determine whether they are active or standby nodes in the 
     #       SQL Server High Availability cluster.</p>
     # @param [Hash, Types::DisableInstanceSqlHaStandbyDetectionsRequest] params
     # @option params [Array<String>] :instance_ids
     #   <p>The IDs of the instances to disable from SQL Server High Availability standby detection monitoring.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action,
-    #       without actually making the request, and provides an error response. If you have the
-    #       required permissions, the error response is <code>DryRunOperation</code>. Otherwise,
+    #   <p>Checks whether you have the required permissions for the action, 
+    #       without actually making the request, and provides an error response. If you have the 
+    #       required permissions, the error response is <code>DryRunOperation</code>. Otherwise, 
     #       it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -46629,8 +46649,8 @@ module Aws::EC2
     #       </p>
     # @param [Hash, Types::DisableIpamOrganizationAdminAccountRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :delegated_admin_account_id
     #   <p>The Organizations member account ID that you want to disable as IPAM account.</p>
@@ -46656,8 +46676,8 @@ module Aws::EC2
     #          <p>An IPAM policy is a set of rules that define how public IPv4 addresses from IPAM pools are allocated to Amazon Web Services resources. Each rule maps an Amazon Web Services service to IPAM pools that the service will use to get IP addresses. A single policy can have multiple rules and be applied to multiple Amazon Web Services Regions. If the IPAM pool run out of addresses then the services fallback to Amazon-provided IP addresses. A policy can be applied to an individual Amazon Web Services account or an entity within Amazon Web Services Organizations.</p>
     # @param [Hash, Types::DisableIpamPolicyRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_policy_id
     #   <p>The ID of the IPAM policy to disable.</p>
@@ -46685,7 +46705,7 @@ module Aws::EC2
 
     # <p>Disables route propagation from a route server to a specified route table.</p>
     #          <p>When enabled, route server propagation installs the routes in the FIB on the route table you've specified. Route server supports IPv4 and IPv6 route propagation.</p>
-    #          <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature,
+    #          <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature, 
     # VPC Route Server dynamically updates VPC and internet gateway route tables with your preferred IPv4 or IPv6 routes to achieve routing fault tolerance for those workloads. This enables you to automatically reroute traffic within a VPC, which increases the manageability of VPC routing and interoperability with third-party workloads.</p>
     #          <p>Route server supports the follow route table types:</p>
     #          <ul>
@@ -46707,8 +46727,8 @@ module Aws::EC2
     # @option params [String] :route_table_id
     #   <p>The ID of the route table for which to disable route server propagation.</p>
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -46757,16 +46777,16 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Disables the <i>block public access for snapshots</i> setting at
-    #       the account level for the specified Amazon Web Services Region. After you disable block public
+    # <p>Disables the <i>block public access for snapshots</i> setting at 
+    #       the account level for the specified Amazon Web Services Region. After you disable block public 
     #       access for snapshots in a Region, users can publicly share snapshots in that Region.</p>
     #          <important>
-    #             <p>Enabling block public access for snapshots in <i>block-all-sharing</i>
-    #         mode does not change the permissions for snapshots that are already publicly shared.
-    #         Instead, it prevents these snapshots from be publicly visible and publicly accessible.
-    #         Therefore, the attributes for these snapshots still indicate that they are publicly
+    #             <p>Enabling block public access for snapshots in <i>block-all-sharing</i> 
+    #         mode does not change the permissions for snapshots that are already publicly shared. 
+    #         Instead, it prevents these snapshots from be publicly visible and publicly accessible. 
+    #         Therefore, the attributes for these snapshots still indicate that they are publicly 
     #         shared, even though they are not publicly available.</p>
-    #             <p>If you disable block public access , these snapshots will become publicly available
+    #             <p>If you disable block public access , these snapshots will become publicly available 
     #         again.</p>
     #          </important>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/block-public-access-snapshots.html">
@@ -46774,8 +46794,8 @@ module Aws::EC2
     #          <p></p>
     # @param [Hash, Types::DisableSnapshotBlockPublicAccessRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -46802,8 +46822,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_attachment_id
     #   <p>The ID of the attachment.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :transit_gateway_route_table_announcement_id
     #   <p>The ID of the route table announcement.</p>
@@ -46880,8 +46900,8 @@ module Aws::EC2
     #             linked to it.</p>
     # @param [Hash, Types::DisableVpcClassicLinkRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :vpc_id
     #   <p>The ID of the VPC.</p>
@@ -46950,8 +46970,8 @@ module Aws::EC2
     # @option params [String] :public_ip
     #   <p>Deprecated.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To disassociate an Elastic IP address
     #   # This example disassociates an Elastic IP address from an instance.
@@ -47001,8 +47021,8 @@ module Aws::EC2
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If you retry a request with the same token, the service ignores the request but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To disassociate an application status check from tags
     #   # This example disassociates an application status check from instances matching the specified tag.
@@ -47099,7 +47119,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Disassociates a target network from the specified Client VPN endpoint. When you disassociate the
+    # <p>Disassociates a target network from the specified Client VPN endpoint. When you disassociate the 
     # 			last target network from a Client VPN, the following happens:</p>
     #          <ul>
     #             <li>
@@ -47146,10 +47166,10 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Disassociates an IAM role from an Certificate Manager (ACM) certificate. Disassociating an IAM role
-    # 			from an ACM certificate removes the Amazon S3 object that contains the certificate, certificate chain, and
+    # <p>Disassociates an IAM role from an Certificate Manager (ACM) certificate. Disassociating an IAM role 
+    # 			from an ACM certificate removes the Amazon S3 object that contains the certificate, certificate chain, and 
     # 			encrypted private key from the Amazon S3 bucket. It also revokes the IAM role's permission to use the
-    # 			KMS key used to encrypt the private key. This effectively revokes the role's permission
+    # 			KMS key used to encrypt the private key. This effectively revokes the role's permission 
     # 			to use the certificate.</p>
     # @param [Hash, Types::DisassociateEnclaveCertificateIamRoleRequest] params
     # @option params [String] :certificate_arn
@@ -47233,8 +47253,8 @@ module Aws::EC2
     #             events</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::DisassociateInstanceEventWindowRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :instance_event_window_id
     #   <p>The ID of the event window.</p>
@@ -47297,12 +47317,12 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Remove the association between your Autonomous System Number (ASN) and your BYOIP CIDR. You may want to use this action to disassociate an ASN from a CIDR or if you want to swap ASNs.
+    # <p>Remove the association between your Autonomous System Number (ASN) and your BYOIP CIDR. You may want to use this action to disassociate an ASN from a CIDR or if you want to swap ASNs. 
     #             For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html">Tutorial: Bring your ASN to IPAM</a> in the <i>Amazon VPC IPAM guide</i>.</p>
     # @param [Hash, Types::DisassociateIpamByoasnRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :asn
     #   <p>A public 2-byte or 4-byte ASN.</p>
@@ -47335,8 +47355,8 @@ module Aws::EC2
     # <p>Disassociates a resource discovery from an Amazon VPC IPAM. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.</p>
     # @param [Hash, Types::DisassociateIpamResourceDiscoveryRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_resource_discovery_association_id
     #   <p>A resource discovery association ID.</p>
@@ -47375,13 +47395,13 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Disassociates secondary Elastic IP addresses (EIPs) from a public NAT gateway.
+    # <p>Disassociates secondary Elastic IP addresses (EIPs) from a public NAT gateway. 
     #             You cannot disassociate your primary EIP. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html#nat-gateway-edit-secondary">Edit secondary IP address associations</a> in the <i>Amazon VPC User Guide</i>.</p>
     #          <p>While disassociating is in progress, you cannot associate/disassociate additional EIPs while the connections are being drained. You are, however, allowed to delete the NAT gateway.</p>
     #          <p>An EIP is released only at the end of MaxDrainDurationSeconds. It stays
     #             associated and supports the existing connections but does not support any new connections
     #             (new connections are distributed across the remaining associated EIPs). As the existing
-    #             connections drain out, the EIPs (and the corresponding private IP addresses mapped to them)
+    #             connections drain out, the EIPs (and the corresponding private IP addresses mapped to them) 
     #             are released.</p>
     # @param [Hash, Types::DisassociateNatGatewayAddressRequest] params
     # @option params [String] :nat_gateway_id
@@ -47391,8 +47411,8 @@ module Aws::EC2
     # @option params [Integer] :max_drain_duration_seconds
     #   <p>The maximum amount of time to wait (in seconds) before forcibly releasing the IP addresses if connections are still in progress. Default value is 350 seconds.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -47437,8 +47457,8 @@ module Aws::EC2
     # @option params [String] :vpc_id
     #   <p>The ID of the VPC to disassociate from the route server.</p>
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -47470,8 +47490,8 @@ module Aws::EC2
     # 				tables</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::DisassociateRouteTableRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :association_id
     #   <p>The association ID representing the current association between the route table and subnet or gateway.</p>
@@ -47501,7 +47521,7 @@ module Aws::EC2
     end
 
     # <p>Disassociates a security group from a VPC. You cannot disassociate the security group if any Elastic network interfaces in the associated VPC are still associated with the security group.
-    #
+    #             
     #             Note that the disassociation is asynchronous and you can check the status of the request with <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroupVpcAssociations.html">DescribeSecurityGroupVpcAssociations</a>.</p>
     # @param [Hash, Types::DisassociateSecurityGroupVpcRequest] params
     # @option params [String] :group_id
@@ -47509,8 +47529,8 @@ module Aws::EC2
     # @option params [String] :vpc_id
     #   <p>A VPC ID.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -47571,8 +47591,8 @@ module Aws::EC2
     # @option params [Array<String>] :subnet_ids
     #   <p>The IDs of the subnets;</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -47613,8 +47633,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_attachment_id
     #   <p>The ID of the transit gateway attachment to disassociate from the policy table.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -47648,8 +47668,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_attachment_id
     #   <p>The ID of the attachment.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -47685,8 +47705,8 @@ module Aws::EC2
     #               request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring
     #                   idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -47761,8 +47781,8 @@ module Aws::EC2
     # @option params [String] :transfer_account_id
     #   <p>The ID of the account that you want to transfer the Elastic IP address to.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -47825,8 +47845,8 @@ module Aws::EC2
     #         settings. Specify <code>audit-mode</code> so that you can check which AMIs will be allowed or
     #         not allowed by the image criteria.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -47866,8 +47886,8 @@ module Aws::EC2
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If you retry a request with the same token, the service ignores the request but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To enable application status check suppression
     #   # This example suppresses application status check reporting for the specified instance for one hour.
@@ -47935,8 +47955,8 @@ module Aws::EC2
     # @option params [String] :statistic
     #   <p>The statistic used for the enabled subscription.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -47960,7 +47980,7 @@ module Aws::EC2
     end
 
     # <p>
-    # Enables EC2 Capacity Manager for your account. This starts data ingestion for your EC2 capacity usage across On-Demand, Spot, and Capacity Reservations.
+    # Enables EC2 Capacity Manager for your account. This starts data ingestion for your EC2 capacity usage across On-Demand, Spot, and Capacity Reservations. 
     # Initial data processing may take several hours to complete.
     # </p>
     # @param [Hash, Types::EnableCapacityManagerRequest] params
@@ -47970,12 +47990,12 @@ module Aws::EC2
     #   </p>
     # @option params [Boolean] :dry_run
     #   <p>
-    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. 
     #   If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.
     #   </p>
     # @option params [String] :client_token
     #   <p>
-    #   Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. 
     #   </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -48002,15 +48022,15 @@ module Aws::EC2
     #     	always encrypted, either using the default KMS key or the KMS key that you specified
     #       when you created each volume. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html">Amazon EBS encryption</a> in the
     #       <i>Amazon EBS User Guide</i>.</p>
-    #          <p>Enabling encryption by default has no effect on the encryption status of your
+    #          <p>Enabling encryption by default has no effect on the encryption status of your 
     #       existing volumes.</p>
     #          <p>After you enable encryption by default, you can no longer launch instances
     #       using instance types that do not support encryption. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances">Supported
     #         instance types</a>.</p>
     # @param [Hash, Types::EnableEbsEncryptionByDefaultRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -48058,8 +48078,8 @@ module Aws::EC2
     #         pre-provisioned snapshots for Windows fast launch. Value must be <code>6</code> or
     #         greater.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -48118,8 +48138,8 @@ module Aws::EC2
     #   <p>The IDs of one or more snapshots. For example, <code>snap-1234567890abcdef0</code>. You can specify
     #         a snapshot that was shared with you from another Amazon Web Services account.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -48183,8 +48203,8 @@ module Aws::EC2
     # @option params [String] :image_id
     #   <p>The ID of the AMI.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -48219,8 +48239,8 @@ module Aws::EC2
     #         account level in the specified Region. This will block any attempt to publicly share your AMIs
     #         in the specified Region.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -48254,8 +48274,8 @@ module Aws::EC2
     #         years from now, except for public AMIs, where the upper limit is 2 years from the creation
     #         date.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -48288,8 +48308,8 @@ module Aws::EC2
     #   <p>If <code>true</code>, enforces deregistration protection for 24 hours after deregistration
     #         protection is disabled.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -48310,28 +48330,28 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Enable Amazon EC2 instances running in an SQL Server High Availability cluster for SQL Server High Availability
-    #       instance standby detection monitoring. Once enabled, Amazon Web Services monitors the metadata for
-    #       the instances to determine whether they are active or standby nodes in the SQL Server High Availability cluster.
-    #       If the instances are determined to be standby failover nodes, Amazon Web Services
+    # <p>Enable Amazon EC2 instances running in an SQL Server High Availability cluster for SQL Server High Availability 
+    #       instance standby detection monitoring. Once enabled, Amazon Web Services monitors the metadata for 
+    #       the instances to determine whether they are active or standby nodes in the SQL Server High Availability cluster. 
+    #       If the instances are determined to be standby failover nodes, Amazon Web Services 
     #       automatically applies SQL Server licensing fee waiver for those instances.</p>
-    #          <p>To register an instance, it must be running a Windows SQL Server license-included
-    #       AMI and have the Amazon Web Services Systems Manager agent installed and running. Only Windows Server 2019 and later
-    #       and SQL Server (Standard and Enterprise editions) 2017 and later are supported. For more
+    #          <p>To register an instance, it must be running a Windows SQL Server license-included 
+    #       AMI and have the Amazon Web Services Systems Manager agent installed and running. Only Windows Server 2019 and later 
+    #       and SQL Server (Standard and Enterprise editions) 2017 and later are supported. For more 
     #       information, see <a href="https://docs.aws.amazon.com/sql-server-ec2/latest/userguide/prerequisites-and-requirements.html">
     #         Prerequisites for using SQL Server High Availability instance standby detection</a>.</p>
     # @param [Hash, Types::EnableInstanceSqlHaStandbyDetectionsRequest] params
     # @option params [Array<String>] :instance_ids
     #   <p>The IDs of the instances to enable for SQL Server High Availability standby detection monitoring.</p>
     # @option params [String] :sql_server_credentials
-    #   <p>The ARN of the Secrets Manager secret containing the SQL Server access credentials. The specified
-    #         secret must contain valid SQL Server credentials for the specified instances. If not specified,
-    #         deafult local user credentials will be used by the Amazon Web Services Systems Manager agent. To enable
+    #   <p>The ARN of the Secrets Manager secret containing the SQL Server access credentials. The specified 
+    #         secret must contain valid SQL Server credentials for the specified instances. If not specified, 
+    #         deafult local user credentials will be used by the Amazon Web Services Systems Manager agent. To enable 
     #         instances with different credentials, you must make separate requests.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action,
-    #       without actually making the request, and provides an error response. If you have the
-    #       required permissions, the error response is <code>DryRunOperation</code>. Otherwise,
+    #   <p>Checks whether you have the required permissions for the action, 
+    #       without actually making the request, and provides an error response. If you have the 
+    #       required permissions, the error response is <code>DryRunOperation</code>. Otherwise, 
     #       it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -48431,8 +48451,8 @@ module Aws::EC2
     #       </p>
     # @param [Hash, Types::EnableIpamOrganizationAdminAccountRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :delegated_admin_account_id
     #   <p>The Organizations member account ID that you want to enable as the IPAM account.</p>
@@ -48459,8 +48479,8 @@ module Aws::EC2
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/define-public-ipv4-allocation-strategy-with-ipam-policies.html">Define public IPv4 allocation strategy with IPAM policies</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
     # @param [Hash, Types::EnableIpamPolicyRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_policy_id
     #   <p>The ID of the IPAM policy to enable.</p>
@@ -48488,13 +48508,13 @@ module Aws::EC2
 
     # <p>Establishes a trust relationship between Reachability Analyzer and Organizations.
     #          This operation must be performed by the management account for the organization.</p>
-    #          <p>After you establish a trust relationship, a user in the management account or
-    #          a delegated administrator account can run a cross-account analysis using resources
+    #          <p>After you establish a trust relationship, a user in the management account or 
+    #          a delegated administrator account can run a cross-account analysis using resources 
     #          from the member accounts.</p>
     # @param [Hash, Types::EnableReachabilityAnalyzerOrganizationSharingRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -48522,8 +48542,8 @@ module Aws::EC2
     # @option params [String] :route_table_id
     #   <p>The ID of the route table to which route server will propagate routes.</p>
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -48571,48 +48591,48 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Enables or modifies the <i>block public access for snapshots</i>
-    #       setting at the account level for the specified Amazon Web Services Region. After you enable block
-    #       public access for snapshots in a Region, users can no longer request public sharing
-    #       for snapshots in that Region. Snapshots that are already publicly shared are either
-    #       treated as private or they remain publicly shared, depending on the
+    # <p>Enables or modifies the <i>block public access for snapshots</i> 
+    #       setting at the account level for the specified Amazon Web Services Region. After you enable block 
+    #       public access for snapshots in a Region, users can no longer request public sharing 
+    #       for snapshots in that Region. Snapshots that are already publicly shared are either 
+    #       treated as private or they remain publicly shared, depending on the 
     #       <b>State</b> that you specify.</p>
     #          <important>
-    #             <p>Enabling block public access for snapshots in <i>block all sharing</i>
-    #         mode does not change the permissions for snapshots that are already publicly shared.
-    #         Instead, it prevents these snapshots from be publicly visible and publicly accessible.
-    #         Therefore, the attributes for these snapshots still indicate that they are publicly
+    #             <p>Enabling block public access for snapshots in <i>block all sharing</i> 
+    #         mode does not change the permissions for snapshots that are already publicly shared. 
+    #         Instead, it prevents these snapshots from be publicly visible and publicly accessible. 
+    #         Therefore, the attributes for these snapshots still indicate that they are publicly 
     #         shared, even though they are not publicly available.</p>
-    #             <p>If you later disable block public access or change the mode to <i>block new
+    #             <p>If you later disable block public access or change the mode to <i>block new 
     #         sharing</i>, these snapshots will become publicly available again.</p>
     #          </important>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/block-public-access-snapshots.html">
     #       Block public access for snapshots</a> in the <i>Amazon EBS User Guide</i>.</p>
     # @param [Hash, Types::EnableSnapshotBlockPublicAccessRequest] params
     # @option params [String] :state
-    #   <p>The mode in which to enable block public access for snapshots for the Region.
+    #   <p>The mode in which to enable block public access for snapshots for the Region. 
     #         Specify one of the following values:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>block-all-sharing</code> - Prevents all public sharing of snapshots in
-    #             the Region. Users in the account will no longer be able to request new public
-    #             sharing. Additionally, snapshots that are already publicly shared are treated as
+    #                     <code>block-all-sharing</code> - Prevents all public sharing of snapshots in 
+    #             the Region. Users in the account will no longer be able to request new public 
+    #             sharing. Additionally, snapshots that are already publicly shared are treated as 
     #             private and they are no longer publicly available.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>block-new-sharing</code>  - Prevents only new public sharing of snapshots
-    #             in the Region. Users in the account will no longer be able to request new public
-    #             sharing. However, snapshots that are already publicly shared, remain publicly
+    #                     <code>block-new-sharing</code>  - Prevents only new public sharing of snapshots 
+    #             in the Region. Users in the account will no longer be able to request new public 
+    #             sharing. However, snapshots that are already publicly shared, remain publicly 
     #             available.</p>
     #               </li>
     #            </ul>
     #            <p>
     #               <code>unblocked</code> is not a valid value for <b>EnableSnapshotBlockPublicAccess</b>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -48640,8 +48660,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_attachment_id
     #   <p>The ID of the attachment.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :transit_gateway_route_table_announcement_id
     #   <p>The ID of the transit gateway route table announcement.</p>
@@ -48718,8 +48738,8 @@ module Aws::EC2
     #       the volume was potentially inconsistent.</p>
     # @param [Hash, Types::EnableVolumeIORequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :volume_id
     #   <p>The ID of the volume.</p>
@@ -48759,8 +48779,8 @@ module Aws::EC2
     # 			ranges.</p>
     # @param [Hash, Types::EnableVpcClassicLinkRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :vpc_id
     #   <p>The ID of the VPC.</p>
@@ -48839,8 +48859,8 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Downloads the contents of the Client VPN endpoint configuration file for the specified Client VPN endpoint. The Client VPN endpoint configuration
-    # 			file includes the Client VPN endpoint and certificate information clients need to establish a connection
+    # <p>Downloads the contents of the Client VPN endpoint configuration file for the specified Client VPN endpoint. The Client VPN endpoint configuration 
+    # 			file includes the Client VPN endpoint and certificate information clients need to establish a connection 
     # 			with the Client VPN endpoint.</p>
     # @param [Hash, Types::ExportClientVpnClientConfigurationRequest] params
     # @option params [String] :client_vpn_endpoint_id
@@ -48876,8 +48896,8 @@ module Aws::EC2
     # @option params [String] :disk_image_format
     #   <p>The disk image format.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :image_id
     #   <p>The ID of the image.</p>
@@ -48994,8 +49014,8 @@ module Aws::EC2
     # @option params [String] :s3_bucket
     #   <p>The name of the S3 bucket.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -49027,8 +49047,8 @@ module Aws::EC2
     # @option params [String] :verified_access_instance_id
     #   <p>The ID of the Verified Access instance.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -49122,8 +49142,8 @@ module Aws::EC2
     #       <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::GetAllowedImagesSettingsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -49164,13 +49184,13 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Returns the IAM roles that are associated with the specified ACM (ACM) certificate.
-    # 			It also returns the name of the Amazon S3 bucket and the Amazon S3 object key where the certificate,
-    # 			certificate chain, and encrypted private key bundle are stored, and the ARN of the KMS key
+    # <p>Returns the IAM roles that are associated with the specified ACM (ACM) certificate. 
+    # 			It also returns the name of the Amazon S3 bucket and the Amazon S3 object key where the certificate, 
+    # 			certificate chain, and encrypted private key bundle are stored, and the ARN of the KMS key 
     # 			that's used to encrypt the private key.</p>
     # @param [Hash, Types::GetAssociatedEnclaveCertificateIamRolesRequest] params
     # @option params [String] :certificate_arn
-    #   <p>The ARN of the ACM certificate for which to view the associated IAM roles, encryption keys, and Amazon
+    #   <p>The ARN of the ACM certificate for which to view the associated IAM roles, encryption keys, and Amazon 
     #   			S3 object information.</p>
     # @option params [Boolean] :dry_run
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
@@ -49209,8 +49229,8 @@ module Aws::EC2
     #   <p>The maximum number of results to return with a single call.
     #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -49253,8 +49273,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -49311,7 +49331,7 @@ module Aws::EC2
     # @param [Hash, Types::GetCapacityManagerAttributesRequest] params
     # @option params [Boolean] :dry_run
     #   <p>
-    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. 
     #   If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.
     #   </p>
     # @example Request syntax with placeholder values
@@ -49338,7 +49358,7 @@ module Aws::EC2
     end
 
     # <p>
-    # Retrieves capacity usage metrics for your EC2 resources. Returns time-series data for metrics like unused capacity, utilization rates, and costs
+    # Retrieves capacity usage metrics for your EC2 resources. Returns time-series data for metrics like unused capacity, utilization rates, and costs 
     # across On-Demand, Spot, and Capacity Reservations. Data can be grouped and filtered by various dimensions such as region, account, and instance family.
     # </p>
     # @param [Hash, Types::GetCapacityManagerMetricDataRequest] params
@@ -49356,7 +49376,7 @@ module Aws::EC2
     #   </p>
     # @option params [Integer] :period
     #   <p>
-    #   The granularity, in seconds, of the returned data points.
+    #   The granularity, in seconds, of the returned data points. 
     #   </p>
     # @option params [Array<String>] :group_by
     #   <p>
@@ -49376,7 +49396,7 @@ module Aws::EC2
     #   </p>
     # @option params [Boolean] :dry_run
     #   <p>
-    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have
+    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have 
     #   the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.
     #   </p>
     # @example Request syntax with placeholder values
@@ -49450,7 +49470,7 @@ module Aws::EC2
     end
 
     # <p>
-    # Retrieves the available dimension values for capacity metrics within a specified time range. This is useful for discovering what accounts,
+    # Retrieves the available dimension values for capacity metrics within a specified time range. This is useful for discovering what accounts, 
     # regions, instance families, and other dimensions have data available for filtering and grouping.
     # </p>
     # @param [Hash, Types::GetCapacityManagerMetricDimensionsRequest] params
@@ -49464,15 +49484,15 @@ module Aws::EC2
     #   </p>
     # @option params [Time] :start_time
     #   <p>
-    #   The start time for the dimension query, in ISO 8601 format. Only dimensions with data in this time range will be returned.
+    #   The start time for the dimension query, in ISO 8601 format. Only dimensions with data in this time range will be returned. 
     #   </p>
     # @option params [Time] :end_time
     #   <p>
-    #   The end time for the dimension query, in ISO 8601 format. Only dimensions with data in this time range will be returned.
+    #   The end time for the dimension query, in ISO 8601 format. Only dimensions with data in this time range will be returned. 
     #   </p>
     # @option params [Array<String>] :metric_names
     #   <p>
-    #   The metric names to use as an additional filter when retrieving dimensions. Only dimensions that have data for these
+    #   The metric names to use as an additional filter when retrieving dimensions. Only dimensions that have data for these 
     #   metrics will be returned. Required parameter with maximum size of 1 for v1.
     #   </p>
     # @option params [Integer] :max_results
@@ -49485,7 +49505,7 @@ module Aws::EC2
     #   </p>
     # @option params [Boolean] :dry_run
     #   <p>
-    #   Checks whether you have the required permissions for the action, without actually making the request, and provides
+    #   Checks whether you have the required permissions for the action, without actually making the request, and provides 
     #   an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.
     #   </p>
     # @example Request syntax with placeholder values
@@ -49602,7 +49622,7 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [Boolean] :dry_run
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
@@ -49708,8 +49728,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -49760,8 +49780,8 @@ module Aws::EC2
     #   <p>When enabled, retrieves the latest console output for the instance.</p>
     #            <p>Default: disabled (<code>false</code>)</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To get the console output
     #   # This example gets the console output for the specified instance.
@@ -49803,8 +49823,8 @@ module Aws::EC2
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/troubleshoot-unreachable-instance.html#instance-console-console-output">Instance console output</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::GetConsoleScreenshotRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :instance_id
     #   <p>The ID of the instance.</p>
@@ -49842,8 +49862,8 @@ module Aws::EC2
     #                 <i>Amazon Web Services Organizations User Guide</i>.</p>
     # @param [Hash, Types::GetDeclarativePoliciesReportSummaryRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :report_id
     #   <p>The ID of the report.</p>
@@ -49893,8 +49913,8 @@ module Aws::EC2
     #                 performance instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::GetDefaultCreditSpecificationRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :instance_family
     #   <p>The instance family.</p>
@@ -49924,8 +49944,8 @@ module Aws::EC2
     #       in the <i>Amazon EBS User Guide</i>.</p>
     # @param [Hash, Types::GetEbsDefaultKmsKeyIdRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -49950,8 +49970,8 @@ module Aws::EC2
     #       in the <i>Amazon EBS User Guide</i>.</p>
     # @param [Hash, Types::GetEbsEncryptionByDefaultRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -49975,8 +49995,8 @@ module Aws::EC2
     #          <p>An IPAM policy is a set of rules that define how public IPv4 addresses from IPAM pools are allocated to Amazon Web Services resources. Each rule maps an Amazon Web Services service to IPAM pools that the service will use to get IP addresses. A single policy can have multiple rules and be applied to multiple Amazon Web Services Regions. If the IPAM pool run out of addresses then the services fallback to Amazon-provided IP addresses. A policy can be applied to an individual Amazon Web Services account or an entity within Amazon Web Services Organizations.</p>
     # @param [Hash, Types::GetEnabledIpamPolicyRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -49997,8 +50017,8 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Generates a CloudFormation template that streamlines and automates the integration of VPC flow logs
-    #             with Amazon Athena. This make it easier for you to query and gain insights from VPC flow logs data.
+    # <p>Generates a CloudFormation template that streamlines and automates the integration of VPC flow logs 
+    #             with Amazon Athena. This make it easier for you to query and gain insights from VPC flow logs data. 
     #             Based on the information that you provide, we configure resources in the template to do the following:</p>
     #          <ul>
     #             <li>
@@ -50022,8 +50042,8 @@ module Aws::EC2
     #          </note>
     # @param [Hash, Types::GetFlowLogsIntegrationTemplateRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :flow_log_id
     #   <p>The ID of the flow log.</p>
@@ -50069,7 +50089,7 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [Boolean] :dry_run
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
@@ -50148,8 +50168,8 @@ module Aws::EC2
     # @option params [String] :image_id
     #   <p>The ID of the AMI whose ancestry you want to trace.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -50183,8 +50203,8 @@ module Aws::EC2
     #       public access to your AMIs</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::GetImageBlockPublicAccessStateRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -50210,8 +50230,8 @@ module Aws::EC2
     #             <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::GetInstanceMetadataDefaultsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -50238,7 +50258,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Gets the public endorsement key associated with the Nitro Trusted
+    # <p>Gets the public endorsement key associated with the Nitro Trusted 
     #             Platform Module (NitroTPM) for the specified instance.</p>
     # @param [Hash, Types::GetInstanceTpmEkPubRequest] params
     # @option params [String] :instance_id
@@ -50246,12 +50266,12 @@ module Aws::EC2
     # @option params [String] :key_type
     #   <p>The required public endorsement key type.</p>
     # @option params [String] :key_format
-    #   <p>The required public endorsement key format. Specify <code>der</code> for a DER-encoded public
-    #               key that is compatible with OpenSSL. Specify <code>tpmt</code> for a TPM 2.0 format that is
+    #   <p>The required public endorsement key format. Specify <code>der</code> for a DER-encoded public 
+    #               key that is compatible with OpenSSL. Specify <code>tpmt</code> for a TPM 2.0 format that is 
     #               compatible with tpm2-tools. The returned key is base64 encoded.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Specify this parameter to verify whether the request will succeed, without actually making the
-    #               request. If the request will succeed, the response is <code>DryRunOperation</code>. Otherwise,
+    #   <p>Specify this parameter to verify whether the request will succeed, without actually making the 
+    #               request. If the request will succeed, the response is <code>DryRunOperation</code>. Otherwise, 
     #               the response is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -50288,8 +50308,8 @@ module Aws::EC2
     #             <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
     # @param [Hash, Types::GetInstanceTypesFromInstanceRequirementsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :architecture_types
     #   <p>The processor architecture type.</p>
@@ -50410,8 +50430,8 @@ module Aws::EC2
     # @option params [String] :instance_id
     #   <p>The ID of the instance from which to retrieve the UEFI data.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -50435,11 +50455,11 @@ module Aws::EC2
     # <p>Retrieve historical information about a CIDR within an IPAM scope. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/view-history-cidr-ipam.html">View the history of IP addresses</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
     # @param [Hash, Types::GetIpamAddressHistoryRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :cidr
-    #   <p>The CIDR you want the history of. The CIDR can be an IPv4 or IPv6 IP address range.
+    #   <p>The CIDR you want the history of. The CIDR can be an IPv4 or IPv6 IP address range. 
     #            If you enter a /16 IPv4 CIDR, you will get records that match it exactly. You will not get records for any subnets within the /16 CIDR.</p>
     # @option params [String] :ipam_scope_id
     #   <p>The ID of the IPAM scope that the CIDR is in.</p>
@@ -50495,8 +50515,8 @@ module Aws::EC2
     # <p>Gets IPAM discovered accounts. A discovered account is an Amazon Web Services account that is monitored under a resource discovery. If you have integrated IPAM with Amazon Web Services Organizations, all accounts in the organization are discovered accounts. Only the IPAM account can get all discovered accounts in the organization.</p>
     # @param [Hash, Types::GetIpamDiscoveredAccountsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_resource_discovery_id
     #   <p>A resource discovery ID.</p>
@@ -50551,8 +50571,8 @@ module Aws::EC2
     # <p>Gets the public IP addresses that have been discovered by IPAM.</p>
     # @param [Hash, Types::GetIpamDiscoveredPublicAddressesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_resource_discovery_id
     #   <p>An IPAM resource discovery ID.</p>
@@ -50630,8 +50650,8 @@ module Aws::EC2
     # <p>Returns the resource CIDRs that are monitored as part of a resource discovery. A discovered resource is a resource CIDR monitored under a resource discovery. The following resources can be discovered: VPCs, Public IPv4 pools, VPC subnets, and Elastic IP addresses. </p>
     # @param [Hash, Types::GetIpamDiscoveredResourceCidrsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_resource_discovery_id
     #   <p>A resource discovery ID.</p>
@@ -50842,8 +50862,8 @@ module Aws::EC2
     #          <p>Allocation rules are optional configurations within an IPAM policy that map Amazon Web Services resource types to specific IPAM pools. If no rules are defined, the resource types default to using Amazon-provided IP addresses.</p>
     # @param [Hash, Types::GetIpamPolicyAllocationRulesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_policy_id
     #   <p>The ID of the IPAM policy for which to get allocation rules.</p>
@@ -50908,8 +50928,8 @@ module Aws::EC2
     #          <p>A target can be an individual Amazon Web Services account or an entity within an Amazon Web Services Organization to which an IPAM policy can be applied.</p>
     # @param [Hash, Types::GetIpamPolicyOrganizationTargetsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return in a single call.</p>
@@ -50956,8 +50976,8 @@ module Aws::EC2
     #          </note>
     # @param [Hash, Types::GetIpamPoolAllocationsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_pool_id
     #   <p>The ID of the IPAM pool you want to see the allocations for.</p>
@@ -51016,8 +51036,8 @@ module Aws::EC2
     # <p>Get the CIDRs provisioned to an IPAM pool.</p>
     # @param [Hash, Types::GetIpamPoolCidrsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_pool_id
     #   <p>The ID of the IPAM pool you want the CIDR for.</p>
@@ -51068,8 +51088,8 @@ module Aws::EC2
     # <p>Retrieves the CIDR selection rules for an IPAM prefix list resolver. Use this operation to view the business logic that determines which CIDRs are selected for synchronization with prefix lists.</p>
     # @param [Hash, Types::GetIpamPrefixListResolverRulesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_prefix_list_resolver_id
     #   <p>The ID of the IPAM prefix list resolver whose rules you want to retrieve.</p>
@@ -51130,8 +51150,8 @@ module Aws::EC2
     # <p>Retrieves the CIDR entries for a specific version of an IPAM prefix list resolver. This shows the actual CIDRs that were selected and synchronized at a particular point in time.</p>
     # @param [Hash, Types::GetIpamPrefixListResolverVersionEntriesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_prefix_list_resolver_id
     #   <p>The ID of the IPAM prefix list resolver whose version entries you want to retrieve.</p>
@@ -51202,8 +51222,8 @@ module Aws::EC2
     #             <b>Version 2 CIDRs:</b> 10.1.0.0/16, 10.2.0.0/16, 10.3.0.0/16</p>
     # @param [Hash, Types::GetIpamPrefixListResolverVersionsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_prefix_list_resolver_id
     #   <p>The ID of the IPAM prefix list resolver whose versions you want to retrieve.</p>
@@ -51250,8 +51270,8 @@ module Aws::EC2
     # <p>Returns resource CIDRs managed by IPAM in a given scope. If an IPAM is associated with more than one resource discovery, the resource CIDRs across all of the resource discoveries is returned. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.</p>
     # @param [Hash, Types::GetIpamResourceCidrsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>One or more filters for the request. For more information about filtering, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html">Filtering CLI output</a>.</p>
@@ -51552,7 +51572,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :instance_id
     #   <p>The ID of the instance.</p>
-    # @example To get the launch template data for an instance
+    # @example To get the launch template data for an instance 
     #   # This example gets the launch template data for the specified instance.
     #   params = {
     #     instance_id: "0123d646e8048babc"
@@ -51898,8 +51918,8 @@ module Aws::EC2
     # <p>Gets information about the resources that are associated with the specified managed prefix list.</p>
     # @param [Hash, Types::GetManagedPrefixListAssociationsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :prefix_list_id
     #   <p>The ID of the prefix list.</p>
@@ -51937,8 +51957,8 @@ module Aws::EC2
     # <p>Gets information about the entries for a specified managed prefix list.</p>
     # @param [Hash, Types::GetManagedPrefixListEntriesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :prefix_list_id
     #   <p>The ID of the prefix list.</p>
@@ -51980,8 +52000,8 @@ module Aws::EC2
     #             indicates whether managed resources are hidden or visible by default.</p>
     # @param [Hash, Types::GetManagedResourceVisibilityRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -52012,8 +52032,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -52535,8 +52555,8 @@ module Aws::EC2
     # @option params [String] :network_insights_access_scope_id
     #   <p>The ID of the Network Access Scope.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -52659,8 +52679,8 @@ module Aws::EC2
     # @option params [String] :instance_id
     #   <p>The ID of the Windows instance.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -52764,8 +52784,8 @@ module Aws::EC2
     # @option params [String] :route_server_id
     #   <p>The ID of the route server for which to get association information.</p>
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -52793,7 +52813,7 @@ module Aws::EC2
 
     # <p>Gets information about the route propagations for the specified route server.</p>
     #          <p>When enabled, route server propagation installs the routes in the FIB on the route table you've specified. Route server supports IPv4 and IPv6 route propagation.</p>
-    #          <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature,
+    #          <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature, 
     # VPC Route Server dynamically updates VPC and internet gateway route tables with your preferred IPv4 or IPv6 routes to achieve routing fault tolerance for those workloads. This enables you to automatically reroute traffic within a VPC, which increases the manageability of VPC routing and interoperability with third-party workloads.</p>
     #          <p>Route server supports the follow route table types:</p>
     #          <ul>
@@ -52814,8 +52834,8 @@ module Aws::EC2
     # @option params [String] :route_table_id
     #   <p>The ID of the route table for which to get propagation information.</p>
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -52843,7 +52863,7 @@ module Aws::EC2
     end
 
     # <p>Gets the routing database for the specified route server. The <a href="https://en.wikipedia.org/wiki/Routing_table">Routing Information Base (RIB)</a> serves as a database that stores all the routing information and network topology data collected by a router or routing system, such as routes learned from BGP peers. The RIB is constantly updated as new routing information is received or existing routes change. This ensures that the route server always has the most current view of the network topology and can make optimal routing decisions.</p>
-    #          <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature,
+    #          <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature, 
     # VPC Route Server dynamically updates VPC and internet gateway route tables with your preferred IPv4 or IPv6 routes to achieve routing fault tolerance for those workloads. This enables you to automatically reroute traffic within a VPC, which increases the manageability of VPC routing and interoperability with third-party workloads.</p>
     #          <p>Route server supports the follow route table types:</p>
     #          <ul>
@@ -52866,8 +52886,8 @@ module Aws::EC2
     # @option params [Integer] :max_results
     #   <p>The maximum number of routing database entries to return in a single response.</p>
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>Filters to apply to the routing database query.</p>
@@ -52951,8 +52971,8 @@ module Aws::EC2
     #               </li>
     #            </ul>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -53020,14 +53040,14 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Gets the current state of <i>block public access for snapshots</i> setting
+    # <p>Gets the current state of <i>block public access for snapshots</i> setting 
     #       for the account and Region.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/block-public-access-snapshots.html">
     #       Block public access for snapshots</a> in the <i>Amazon EBS User Guide</i>.</p>
     # @param [Hash, Types::GetSnapshotBlockPublicAccessStateRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -53081,8 +53101,8 @@ module Aws::EC2
     #            <p>If you specify <code>InstanceRequirementsWithMetadata</code>, you can't specify
     #               <code>InstanceTypes</code>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return for this request.
@@ -53219,8 +53239,8 @@ module Aws::EC2
     # @option params [String] :subnet_id
     #   <p>The ID of the subnet.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
@@ -53303,8 +53323,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -53350,8 +53370,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -53435,8 +53455,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -53488,8 +53508,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -53576,8 +53596,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -53667,8 +53687,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -53738,8 +53758,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -53803,8 +53823,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -53846,8 +53866,8 @@ module Aws::EC2
     # @option params [String] :verified_access_endpoint_id
     #   <p>The ID of the Verified Access endpoint.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -53878,8 +53898,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -53913,8 +53933,8 @@ module Aws::EC2
     # @option params [String] :verified_access_group_id
     #   <p>The ID of the Verified Access group.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -53947,8 +53967,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -54149,7 +54169,7 @@ module Aws::EC2
     #     VM Import task. This ensures your operating system is licensed appropriately and your billing is
     #     optimized.</p>
     #          </important>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html">Importing a
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html">Importing a 
     #    VM as an image using VM Import/Export</a> in the <i>VM Import/Export User Guide</i>.</p>
     # @param [Hash, Types::ImportImageRequest] params
     # @option params [String] :architecture
@@ -54165,8 +54185,8 @@ module Aws::EC2
     # @option params [Array<Types::ImageDiskContainer>] :disk_containers
     #   <p>Information about the disk containers.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Boolean] :encrypted
     #   <p>Specifies whether the destination AMI of the imported image should be encrypted. The default KMS key for EBS is used
@@ -54348,8 +54368,8 @@ module Aws::EC2
     #          <p>This API action is not supported by the Command Line Interface (CLI).</p>
     # @param [Hash, Types::ImportInstanceRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :description
     #   <p>A description for the instance being imported.</p>
@@ -54469,15 +54489,15 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Imports the public key from an RSA or ED25519 key pair that you created using a third-party tool.
+    # <p>Imports the public key from an RSA or ED25519 key pair that you created using a third-party tool. 
     #         You give Amazon Web Services only the public key. The private key is never transferred between you and Amazon Web Services.</p>
     #          <p>For more information about the requirements for importing a key pair, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws">Create a key pair and import the public key to Amazon EC2</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::ImportKeyPairRequest] params
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply to the imported key pair.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :key_name
     #   <p>A unique name for the key pair.</p>
@@ -54522,7 +54542,7 @@ module Aws::EC2
     end
 
     # <p>Imports a disk into an EBS snapshot.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-import-snapshot.html">Importing a disk as a snapshot using VM Import/Export</a> in the
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-import-snapshot.html">Importing a disk as a snapshot using VM Import/Export</a> in the 
     #    <i>VM Import/Export User Guide</i>.</p>
     # @param [Hash, Types::ImportSnapshotRequest] params
     # @option params [Types::ClientData] :client_data
@@ -54534,8 +54554,8 @@ module Aws::EC2
     # @option params [Types::SnapshotDiskContainer] :disk_container
     #   <p>Information about the disk container.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Boolean] :encrypted
     #   <p>Specifies whether the destination snapshot of the imported image should be encrypted. The default KMS key for EBS is
@@ -54641,7 +54661,7 @@ module Aws::EC2
     end
 
     # <note>
-    #             <p>This API action supports only single-volume VMs. To import multi-volume VMs, use
+    #             <p>This API action supports only single-volume VMs. To import multi-volume VMs, use 
     #    <a>ImportImage</a> instead. To import a disk to a snapshot, use
     #    <a>ImportSnapshot</a> instead.</p>
     #          </note>
@@ -54654,8 +54674,8 @@ module Aws::EC2
     #            <p>Either <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code> must be specified,
     #      but not both.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :availability_zone
     #   <p>The Availability Zone for the resulting EBS volume.</p>
@@ -54761,8 +54781,8 @@ module Aws::EC2
     #            To get the next page of items, make another request with the token returned in the output.
     #   	        For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -54797,17 +54817,17 @@ module Aws::EC2
     # @param [Hash, Types::ListSnapshotsInRecycleBinRequest] params
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return for this request.
-    #   	To get the next page of items, make another request with the token returned in the output.
+    #   	To get the next page of items, make another request with the token returned in the output. 
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     # @option params [String] :next_token
     #   <p>The token returned from a previous paginated request.
     #     Pagination continues from the end of the items returned by the previous request.</p>
     # @option params [Array<String>] :snapshot_ids
-    #   <p>The IDs of the snapshots to list. Omit this parameter to list all of the
+    #   <p>The IDs of the snapshots to list. Omit this parameter to list all of the 
     #         snapshots that are in the Recycle Bin.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -54841,15 +54861,15 @@ module Aws::EC2
     # <p>Lists one or more volumes that are currently in the Recycle Bin.</p>
     # @param [Hash, Types::ListVolumesInRecycleBinRequest] params
     # @option params [Array<String>] :volume_ids
-    #   <p>The IDs of the volumes to list. Omit this parameter to list all of the
+    #   <p>The IDs of the volumes to list. Omit this parameter to list all of the 
     #         volumes that are in the Recycle Bin.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return for this request.
-    #   	To get the next page of items, make another request with the token returned in the output.
+    #   	To get the next page of items, make another request with the token returned in the output. 
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #            <p>Valid range: 5 - 500</p>
     # @option params [String] :next_token
@@ -54898,22 +54918,22 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Locks an Amazon EBS snapshot in either <i>governance</i> or <i>compliance</i>
-    #       mode to protect it against accidental or malicious deletions for a specific duration. A locked snapshot
+    # <p>Locks an Amazon EBS snapshot in either <i>governance</i> or <i>compliance</i> 
+    #       mode to protect it against accidental or malicious deletions for a specific duration. A locked snapshot 
     #       can't be deleted.</p>
-    #          <p>You can also use this action to modify the lock settings for a snapshot that is already locked. The
+    #          <p>You can also use this action to modify the lock settings for a snapshot that is already locked. The 
     #       allowed modifications depend on the lock mode and lock state:</p>
     #          <ul>
     #             <li>
-    #                <p>If the snapshot is locked in governance mode, you can modify the lock mode and the lock duration
+    #                <p>If the snapshot is locked in governance mode, you can modify the lock mode and the lock duration 
     #             or lock expiration date.</p>
     #             </li>
     #             <li>
-    #                <p>If the snapshot is locked in compliance mode and it is in the cooling-off period, you can modify
+    #                <p>If the snapshot is locked in compliance mode and it is in the cooling-off period, you can modify 
     #             the lock mode and the lock duration or lock expiration date.</p>
     #             </li>
     #             <li>
-    #                <p>If the snapshot is locked in compliance mode and the cooling-off period has lapsed, you can
+    #                <p>If the snapshot is locked in compliance mode and the cooling-off period has lapsed, you can 
     #             only increase the lock duration or extend the lock expiration date.</p>
     #             </li>
     #          </ul>
@@ -54921,15 +54941,15 @@ module Aws::EC2
     # @option params [String] :snapshot_id
     #   <p>The ID of the snapshot to lock.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :lock_mode
     #   <p>The mode in which to lock the snapshot. Specify one of the following:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>governance</code> - Locks the snapshot in governance mode. Snapshots locked in governance
+    #                     <code>governance</code> - Locks the snapshot in governance mode. Snapshots locked in governance 
     #             mode can't be deleted until one of the following conditions are met:</p>
     #                  <ul>
     #                     <li>
@@ -54939,44 +54959,44 @@ module Aws::EC2
     #                        <p>The snapshot is unlocked by a user with the appropriate permissions.</p>
     #                     </li>
     #                  </ul>
-    #                  <p>Users with the appropriate IAM permissions can unlock the snapshot, increase or decrease the lock
+    #                  <p>Users with the appropriate IAM permissions can unlock the snapshot, increase or decrease the lock 
     #             duration, and change the lock mode to <code>compliance</code> at any time.</p>
     #                  <p>If you lock a snapshot in <code>governance</code> mode, omit <b>
     #             CoolOffPeriod</b>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>compliance</code> - Locks the snapshot in compliance mode. Snapshots locked in compliance
-    #             mode can't be unlocked by any user. They can be deleted only after the lock duration expires. Users
-    #             can't decrease the lock duration or change the lock mode to <code>governance</code>. However, users
+    #                     <code>compliance</code> - Locks the snapshot in compliance mode. Snapshots locked in compliance 
+    #             mode can't be unlocked by any user. They can be deleted only after the lock duration expires. Users 
+    #             can't decrease the lock duration or change the lock mode to <code>governance</code>. However, users 
     #             with appropriate IAM permissions can increase the lock duration at any time.</p>
-    #                  <p>If you lock a snapshot in <code>compliance</code> mode, you can optionally specify
+    #                  <p>If you lock a snapshot in <code>compliance</code> mode, you can optionally specify 
     #             <b>CoolOffPeriod</b>.</p>
     #               </li>
     #            </ul>
     # @option params [Integer] :cool_off_period
-    #   <p>The cooling-off period during which you can unlock the snapshot or modify the lock settings after
-    #         locking the snapshot in compliance mode, in hours. After the cooling-off period expires, you can't
-    #         unlock or delete the snapshot, decrease the lock duration, or change the lock mode. You can increase
+    #   <p>The cooling-off period during which you can unlock the snapshot or modify the lock settings after 
+    #         locking the snapshot in compliance mode, in hours. After the cooling-off period expires, you can't 
+    #         unlock or delete the snapshot, decrease the lock duration, or change the lock mode. You can increase 
     #         the lock duration after the cooling-off period expires.</p>
-    #            <p>The cooling-off period is optional when locking a snapshot in compliance mode. If you are locking
+    #            <p>The cooling-off period is optional when locking a snapshot in compliance mode. If you are locking 
     #         the snapshot in governance mode, omit this parameter.</p>
-    #            <p>To lock the snapshot in compliance mode immediately without a cooling-off period, omit this
+    #            <p>To lock the snapshot in compliance mode immediately without a cooling-off period, omit this 
     #         parameter.</p>
-    #            <p>If you are extending the lock duration for a snapshot that is locked in compliance mode after
-    #         the cooling-off period has expired, omit this parameter. If you specify a cooling-period in a such
+    #            <p>If you are extending the lock duration for a snapshot that is locked in compliance mode after 
+    #         the cooling-off period has expired, omit this parameter. If you specify a cooling-period in a such 
     #         a request, the request fails.</p>
     #            <p>Allowed values: Min 1, max 72.</p>
     # @option params [Integer] :lock_duration
-    #   <p>The period of time for which to lock the snapshot, in days. The snapshot lock will automatically
+    #   <p>The period of time for which to lock the snapshot, in days. The snapshot lock will automatically 
     #         expire after this period lapses.</p>
-    #            <p>You must specify either this parameter or <b>ExpirationDate</b>, but
+    #            <p>You must specify either this parameter or <b>ExpirationDate</b>, but 
     #         not both.</p>
     #            <p>Allowed values: Min: 1, max 36500</p>
     # @option params [Time] :expiration_date
-    #   <p>The date and time at which the snapshot lock is to automatically expire, in the UTC time zone
+    #   <p>The date and time at which the snapshot lock is to automatically expire, in the UTC time zone 
     #         (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>).</p>
-    #            <p>You must specify either this parameter or <b>LockDuration</b>, but
+    #            <p>You must specify either this parameter or <b>LockDuration</b>, but 
     #         not both.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -55011,8 +55031,8 @@ module Aws::EC2
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html">Enforce VPC encryption in transit</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::ModifyAccountVpcEncryptionControlRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :mode
     #   <p>The encryption mode for the account encryption control configuration.</p>
@@ -55080,8 +55100,8 @@ module Aws::EC2
     # @option params [String] :domain_name
     #   <p>The domain name to modify for the IP address.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -55154,8 +55174,8 @@ module Aws::EC2
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If you retry a request with the same token, the service ignores the request but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To modify an application status check
     #   # This example modifies the port and path of an existing application status check.
@@ -55277,11 +55297,11 @@ module Aws::EC2
     #   <p>The name of the Availability Zone group, Local Zone group, or Wavelength Zone
     #         group.</p>
     # @option params [String] :opt_in_status
-    #   <p>Indicates whether to opt in to the zone group. The only valid value is <code>opted-in</code>.
+    #   <p>Indicates whether to opt in to the zone group. The only valid value is <code>opted-in</code>. 
     #         You must contact Amazon Web Services Support to opt out of a Local Zone or Wavelength Zone group.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -55502,7 +55522,7 @@ module Aws::EC2
     # @option params [String] :client_vpn_endpoint_id
     #   <p>The ID of the Client VPN endpoint to modify.</p>
     # @option params [String] :server_certificate_arn
-    #   <p>The ARN of the server certificate to be used. The server certificate must be provisioned in
+    #   <p>The ARN of the server certificate to be used. The server certificate must be provisioned in 
     #   			Certificate Manager (ACM).</p>
     # @option params [Types::ConnectionLogOptions] :connection_log_options
     #   <p>Information about the client connection logging options.</p>
@@ -55523,7 +55543,7 @@ module Aws::EC2
     #               </li>
     #            </ul>
     # @option params [Types::DnsServersOptionsModifyStructure] :dns_servers
-    #   <p>Information about the DNS servers to be used by Client VPN connections. A Client VPN endpoint can have
+    #   <p>Information about the DNS servers to be used by Client VPN connections. A Client VPN endpoint can have 
     #   			up to two DNS servers.</p>
     # @option params [Integer] :vpn_port
     #   <p>The port number to assign to the Client VPN endpoint for TCP and UDP traffic.</p>
@@ -55535,7 +55555,7 @@ module Aws::EC2
     #   <p>A brief description of the Client VPN endpoint.</p>
     # @option params [Boolean] :split_tunnel
     #   <p>Indicates whether the VPN is split-tunnel.</p>
-    #            <p>For information about split-tunnel VPN endpoints, see <a href="https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html">Split-tunnel Client VPN endpoint</a> in the
+    #            <p>For information about split-tunnel VPN endpoints, see <a href="https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html">Split-tunnel Client VPN endpoint</a> in the 
     #           	<i>Client VPN Administrator Guide</i>.</p>
     # @option params [Boolean] :dry_run
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
@@ -55559,7 +55579,7 @@ module Aws::EC2
     # @option params [Types::ClientRouteEnforcementOptions] :client_route_enforcement_options
     #   <p>Client route enforcement is a feature of the Client VPN service that helps enforce administrator defined routes on devices connected through the VPN. T
     #   		his feature helps improve your security posture by ensuring that network traffic originating from a connected client is not inadvertently sent outside the VPN tunnel.</p>
-    #            <p>Client route enforcement works by monitoring the route table of a connected device for routing policy changes to the VPN connection. If the feature detects any VPN routing policy modifications, it will automatically force an update to the route table,
+    #            <p>Client route enforcement works by monitoring the route table of a connected device for routing policy changes to the VPN connection. If the feature detects any VPN routing policy modifications, it will automatically force an update to the route table, 
     #   			reverting it back to the expected route configurations.</p>
     # @option params [Boolean] :disconnect_on_session_timeout
     #   <p>Indicates whether the client VPN session is disconnected after the maximum timeout specified in <code>sessionTimeoutHours</code> is reached. If <code>true</code>, users are prompted to reconnect client VPN. If <code>false</code>, client VPN attempts to reconnect automatically. The default value is <code>true</code>.</p>
@@ -55652,7 +55672,7 @@ module Aws::EC2
     #            </ul>
     #            <p>The default value is <code>disabled</code>.</p>
     # @option params [String] :client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. 
     #   For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
@@ -55694,8 +55714,8 @@ module Aws::EC2
     #                 performance instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::ModifyDefaultCreditSpecificationRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :instance_family
     #   <p>The instance family.</p>
@@ -55753,12 +55773,12 @@ module Aws::EC2
     #                  <p>Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.</p>
     #               </li>
     #            </ul>
-    #            <p>Amazon Web Services authenticates the KMS key asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid,
+    #            <p>Amazon Web Services authenticates the KMS key asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, 
     #         the action can appear to complete, but eventually fails.</p>
     #            <p>Amazon EBS does not support asymmetric KMS keys.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -55802,8 +55822,8 @@ module Aws::EC2
     #          target capacity to 0.</p>
     # @param [Hash, Types::ModifyFleetRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :excess_capacity_termination_policy
     #   <p>Indicates whether running instances should be terminated if the total target capacity of
@@ -55971,8 +55991,8 @@ module Aws::EC2
     # <p>Modifies the specified attribute of the specified Amazon FPGA Image (AFI).</p>
     # @param [Hash, Types::ModifyFpgaImageAttributeRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :fpga_image_id
     #   <p>The ID of the AFI.</p>
@@ -56133,7 +56153,7 @@ module Aws::EC2
     #         entire Amazon Web Services account. By default, an IAM user defaults to the same settings as the root user. If
     #         you're using this action as the root user, then these settings apply to the entire account,
     #         unless an IAM user explicitly overrides these settings for themselves. For more information,
-    #         see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html">Resource IDs</a>
+    #         see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html">Resource IDs</a> 
     #         in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
     #          <p>Resources created with longer IDs are visible to all IAM roles and users, regardless
     #         of these settings and provided that they have permission to use the relevant
@@ -56282,8 +56302,8 @@ module Aws::EC2
     #           a new AMI from the underlying snapshot.</p>
     #            </important>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To grant launch permissions
     #   # This example grants launch permissions for the specified AMI to the specified AWS account.
@@ -56394,8 +56414,8 @@ module Aws::EC2
     #                   protection for your instance</a>.</p>
     #            <p></p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :instance_id
     #   <p>The ID of the instance.</p>
@@ -56426,14 +56446,14 @@ module Aws::EC2
     #   <p>Modifies the <code>DeleteOnTermination</code> attribute for volumes that are currently
     #               attached. The volume must be owned by the caller. If no value is specified for
     #                   <code>DeleteOnTermination</code>, the default is <code>true</code> and the volume is
-    #               deleted when the instance is terminated. You can't modify the <code>DeleteOnTermination</code>
+    #               deleted when the instance is terminated. You can't modify the <code>DeleteOnTermination</code> 
     #               attribute for volumes that are attached to Amazon Web Services-managed resources.</p>
     #            <p>To add instance store volumes to an Amazon EBS-backed instance, you must add them when
     #               you launch the instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM">Update the block device mapping when launching an instance</a> in the
     #                   <i>Amazon EC2 User Guide</i>.</p>
     # @option params [Types::AttributeBooleanValue] :disable_api_termination
-    #   <p>Enable or disable termination protection for the instance. If the value is <code>true</code>,
-    #               you can't terminate the instance using the Amazon EC2 console, command line interface, or API.
+    #   <p>Enable or disable termination protection for the instance. If the value is <code>true</code>, 
+    #               you can't terminate the instance using the Amazon EC2 console, command line interface, or API. 
     #               You can't enable termination protection for Spot Instances.</p>
     # @option params [Types::AttributeValue] :instance_type
     #   <p>Changes the instance type to the specified value. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html">Instance
@@ -56605,8 +56625,8 @@ module Aws::EC2
     #             <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::ModifyInstanceConnectEndpointRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :instance_connect_endpoint_id
     #   <p>The ID of the EC2 Instance Connect Endpoint to modify.</p>
@@ -56624,7 +56644,7 @@ module Aws::EC2
     #               if it's just the default security group in the VPC. You must specify the ID of the
     #               security group, not the name.</p>
     # @option params [Boolean] :preserve_client_ip
-    #   <p>Indicates whether the client IP address is preserved as the source when you connect to a resource.
+    #   <p>Indicates whether the client IP address is preserved as the source when you connect to a resource. 
     #               The following are the possible values.</p>
     #            <ul>
     #               <li>
@@ -56657,14 +56677,14 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>By default, all vCPUs for the instance type are active when you launch an instance. When you
-    # 			configure the number of active vCPUs for the instance, it can help you save on licensing costs and
+    # <p>By default, all vCPUs for the instance type are active when you launch an instance. When you 
+    # 			configure the number of active vCPUs for the instance, it can help you save on licensing costs and 
     # 			optimize performance. The base cost of the instance remains unchanged.</p>
-    #          <p>The number of active vCPUs equals the number of threads per CPU core multiplied by the number
+    #          <p>The number of active vCPUs equals the number of threads per CPU core multiplied by the number 
     # 			of cores. The instance must be in a <code>Stopped</code> state before you make changes.</p>
     #          <note>
-    #             <p>Some instance type options do not support this capability. For more information, see
-    # 				<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html">Supported CPU
+    #             <p>Some instance type options do not support this capability. For more information, see 
+    # 				<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html">Supported CPU 
     # 					options</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #          </note>
     # @param [Hash, Types::ModifyInstanceCpuOptionsRequest] params
@@ -56678,8 +56698,8 @@ module Aws::EC2
     #   <p>Indicates whether to enable or disable nested virtualization for the instance.
     #               When nested virtualization is enabled, Virtual Secure Mode (VSM) is automatically disabled for the instance.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -56712,8 +56732,8 @@ module Aws::EC2
     #                 performance instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::ModifyInstanceCreditSpecificationRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive token that you provide to ensure idempotency of your
@@ -56761,8 +56781,8 @@ module Aws::EC2
     # <p>Modifies the start time for a scheduled Amazon EC2 instance event.</p>
     # @param [Hash, Types::ModifyInstanceEventStartTimeRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :instance_id
     #   <p>The ID of the instance with the scheduled event.</p>
@@ -56807,8 +56827,8 @@ module Aws::EC2
     #             events</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @param [Hash, Types::ModifyInstanceEventWindowRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :name
     #   <p>The name of the event window.</p>
@@ -57002,8 +57022,8 @@ module Aws::EC2
     #                   instances using instance metadata</a> in the
     #               <i>Amazon EC2 User Guide</i>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :http_tokens_enforced
     #   <p>Specifies whether to enforce the requirement of IMDSv2 on an instance at the time of
@@ -57048,17 +57068,17 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>optional</code> - IMDSv2 is optional. You can choose whether to send a
-    #                       session token in your instance metadata retrieval requests. If you retrieve
-    #                       IAM role credentials without a session token, you receive the IMDSv1 role
-    #                       credentials. If you retrieve IAM role credentials using a valid session token,
+    #                     <code>optional</code> - IMDSv2 is optional. You can choose whether to send a 
+    #                       session token in your instance metadata retrieval requests. If you retrieve 
+    #                       IAM role credentials without a session token, you receive the IMDSv1 role 
+    #                       credentials. If you retrieve IAM role credentials using a valid session token, 
     #                       you receive the IMDSv2 role credentials.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>required</code> - IMDSv2 is required. You must send a session token
-    #                       in your instance metadata retrieval requests. With this option, retrieving the
-    #                       IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are
+    #                     <code>required</code> - IMDSv2 is required. You must send a session token 
+    #                       in your instance metadata retrieval requests. With this option, retrieving the 
+    #                       IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are 
     #                       not available.</p>
     #               </li>
     #            </ul>
@@ -57094,7 +57114,7 @@ module Aws::EC2
     #               permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is
     #                   <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :http_protocol_ipv6
-    #   <p>Enables or disables the IPv6 endpoint for the instance metadata service.
+    #   <p>Enables or disables the IPv6 endpoint for the instance metadata service. 
     #               Applies only if you enabled the HTTP metadata endpoint.</p>
     # @option params [String] :instance_metadata_tags
     #   <p>Set to <code>enabled</code> to allow access to instance tags from the instance
@@ -57132,7 +57152,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Change the configuration of the network performance options for an existing
+    # <p>Change the configuration of the network performance options for an existing 
     #             instance.</p>
     # @param [Hash, Types::ModifyInstanceNetworkPerformanceRequest] params
     # @option params [String] :instance_id
@@ -57146,18 +57166,18 @@ module Aws::EC2
     #               </dd>
     #               <dt>vpc-1</dt>
     #               <dd>
-    #                  <p>This option boosts your networking baseline bandwidth and reduces your EBS
+    #                  <p>This option boosts your networking baseline bandwidth and reduces your EBS 
     #                           baseline bandwidth.</p>
     #               </dd>
     #               <dt>ebs-1</dt>
     #               <dd>
-    #                  <p>This option boosts your EBS baseline bandwidth and reduces your networking
+    #                  <p>This option boosts your EBS baseline bandwidth and reduces your networking 
     #                           baseline bandwidth.</p>
     #               </dd>
     #            </dl>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -57264,8 +57284,8 @@ module Aws::EC2
     #       </p>
     # @param [Hash, Types::ModifyIpamRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_id
     #   <p>The ID of the IPAM you want to modify.</p>
@@ -57358,8 +57378,8 @@ module Aws::EC2
     #          <p>Allocation rules are optional configurations within an IPAM policy that map Amazon Web Services resource types to specific IPAM pools. If no rules are defined, the resource types default to using Amazon-provided IP addresses.</p>
     # @param [Hash, Types::ModifyIpamPolicyAllocationRulesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_policy_id
     #   <p>The ID of the IPAM policy whose allocation rules you want to modify.</p>
@@ -57415,29 +57435,29 @@ module Aws::EC2
     #       </p>
     # @param [Hash, Types::ModifyIpamPoolRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_pool_id
     #   <p>The ID of the IPAM pool you want to modify.</p>
     # @option params [String] :description
     #   <p>The description of the IPAM pool you want to modify.</p>
     # @option params [Boolean] :auto_import
-    #   <p>If true, IPAM will continuously look for resources within the CIDR range of this pool
+    #   <p>If true, IPAM will continuously look for resources within the CIDR range of this pool 
     #            and automatically import them as allocations into your IPAM. The CIDRs that will be allocated for
-    #            these resources must not already be allocated to other resources in order for the import to succeed. IPAM will import
-    #            a CIDR regardless of its compliance with the pool's allocation rules, so a resource might be imported and subsequently
-    #            marked as noncompliant. If IPAM discovers multiple CIDRs that overlap, IPAM will import the largest CIDR only. If IPAM
+    #            these resources must not already be allocated to other resources in order for the import to succeed. IPAM will import 
+    #            a CIDR regardless of its compliance with the pool's allocation rules, so a resource might be imported and subsequently 
+    #            marked as noncompliant. If IPAM discovers multiple CIDRs that overlap, IPAM will import the largest CIDR only. If IPAM 
     #            discovers multiple CIDRs with matching CIDRs, IPAM will randomly import one of them only.
     #         </p>
     #            <p>A locale must be set on the pool for this feature to work.</p>
     # @option params [Integer] :allocation_min_netmask_length
-    #   <p>The minimum netmask length required for CIDR allocations in this IPAM pool to be compliant. Possible
-    #            netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are  0 - 128. The minimum netmask
+    #   <p>The minimum netmask length required for CIDR allocations in this IPAM pool to be compliant. Possible 
+    #            netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are  0 - 128. The minimum netmask 
     #            length must be less than the maximum netmask length.</p>
     # @option params [Integer] :allocation_max_netmask_length
-    #   <p>The maximum netmask length possible for CIDR allocations in this IPAM pool to be compliant. Possible
-    #            netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are  0 - 128.The maximum netmask
+    #   <p>The maximum netmask length possible for CIDR allocations in this IPAM pool to be compliant. Possible 
+    #            netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are  0 - 128.The maximum netmask 
     #            length must be greater than the minimum netmask length.</p>
     # @option params [Integer] :allocation_default_netmask_length
     #   <p>The default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, new allocations will default to 10.0.0.0/16.</p>
@@ -57526,8 +57546,8 @@ module Aws::EC2
     # <p>Modifies the description of an IPAM pool allocation. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/modify-alloc-ipam.html">Modify an IPAM pool allocation</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
     # @param [Hash, Types::ModifyIpamPoolAllocationRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_pool_allocation_id
     #   <p>The ID of the IPAM pool allocation you want to modify.</p>
@@ -57569,8 +57589,8 @@ module Aws::EC2
     # <p>Modifies an IPAM prefix list resolver. You can update the description and CIDR selection rules. Changes to rules will trigger re-evaluation and potential updates to associated prefix lists.</p>
     # @param [Hash, Types::ModifyIpamPrefixListResolverRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_prefix_list_resolver_id
     #   <p>The ID of the IPAM prefix list resolver to modify.</p>
@@ -57639,8 +57659,8 @@ module Aws::EC2
     # <p>Modifies an IPAM prefix list resolver target. You can update version tracking settings and the desired version of the target prefix list.</p>
     # @param [Hash, Types::ModifyIpamPrefixListResolverTargetRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_prefix_list_resolver_target_id
     #   <p>The ID of the IPAM prefix list resolver target to modify.</p>
@@ -57694,8 +57714,8 @@ module Aws::EC2
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/move-resource-ipam.html">Move resource CIDRs between scopes</a> and <a href="https://docs.aws.amazon.com/vpc/latest/ipam/change-monitoring-state-ipam.html">Change the monitoring state of resource CIDRs</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
     # @param [Hash, Types::ModifyIpamResourceCidrRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :resource_id
     #   <p>The ID of the resource you want to modify.</p>
@@ -57757,8 +57777,8 @@ module Aws::EC2
     # <p>Modifies a resource discovery. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.</p>
     # @param [Hash, Types::ModifyIpamResourceDiscoveryRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_resource_discovery_id
     #   <p>A resource discovery ID.</p>
@@ -57898,8 +57918,8 @@ module Aws::EC2
     # <p>Modify an IPAM scope.</p>
     # @param [Hash, Types::ModifyIpamScopeRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_scope_id
     #   <p>The ID of the scope you want to modify.</p>
@@ -58052,12 +58072,12 @@ module Aws::EC2
     # @option params [String] :network_interface_id
     #   <p>The ID of the network interface.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :destination_prefix_list_id
     #   <p>
-    #            The ID of the prefix list. Use a prefix list in place of <code>DestinationCidrBlock</code>. You
+    #            The ID of the prefix list. Use a prefix list in place of <code>DestinationCidrBlock</code>. You 
     #            cannot use <code>DestinationPrefixListId</code> and <code>DestinationCidrBlock</code> in the same request.
     #         </p>
     # @example Request syntax with placeholder values
@@ -58101,8 +58121,8 @@ module Aws::EC2
     #             number, the request fails.</p>
     # @param [Hash, Types::ModifyManagedPrefixListRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :prefix_list_id
     #   <p>The ID of the prefix list.</p>
@@ -58115,10 +58135,10 @@ module Aws::EC2
     # @option params [Array<Types::RemovePrefixListEntry>] :remove_entries
     #   <p>One or more entries to remove from the prefix list.</p>
     # @option params [Integer] :max_entries
-    #   <p>The maximum number of entries for the prefix list. You cannot modify the entries
+    #   <p>The maximum number of entries for the prefix list. You cannot modify the entries  
     #               of a prefix list and modify the size of a prefix list at the same time.</p>
     #            <p>If any of the resources that reference the prefix list cannot support the new
-    #               maximum size, the modify operation fails. Check the state message for the IDs of
+    #               maximum size, the modify operation fails. Check the state message for the IDs of 
     #               the first ten resources that do not support the new maximum size.</p>
     # @option params [Boolean] :ipam_prefix_list_resolver_sync_enabled
     #   <p>Indicates whether synchronization with an IPAM prefix list resolver should be enabled for this managed prefix list. When enabled, the prefix list CIDRs are automatically updated based on the associated resolver's CIDR selection rules.</p>
@@ -58179,8 +58199,8 @@ module Aws::EC2
     #             resources remain fully operational and billable.</p>
     # @param [Hash, Types::ModifyManagedResourceVisibilityRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :default_visibility
     #   <p>The default visibility setting for managed resources. Valid values:
@@ -58413,8 +58433,8 @@ module Aws::EC2
     #               </li>
     #            </ul>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -58478,7 +58498,7 @@ module Aws::EC2
     end
 
     # <p>Modifies the configuration of an existing route server.</p>
-    #          <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature,
+    #          <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature, 
     # VPC Route Server dynamically updates VPC and internet gateway route tables with your preferred IPv4 or IPv6 routes to achieve routing fault tolerance for those workloads. This enables you to automatically reroute traffic within a VPC, which increases the manageability of VPC routing and interoperability with third-party workloads.</p>
     #          <p>Route server supports the follow route table types:</p>
     #          <ul>
@@ -58516,8 +58536,8 @@ module Aws::EC2
     # @option params [Boolean] :sns_notifications_enabled
     #   <p>Specifies whether to enable SNS notifications for route server events. Enabling SNS notifications persists BGP status changes to an SNS topic provisioned by Amazon Web Services.</p>
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -58561,8 +58581,8 @@ module Aws::EC2
     # @option params [Array<Types::SecurityGroupRuleUpdate>] :security_group_rules
     #   <p>Information about the security group properties to update.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -58619,8 +58639,8 @@ module Aws::EC2
     # @option params [Array<String>] :user_ids
     #   <p>The account ID to modify for the snapshot.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To make a snapshot public
     #   # This example makes the snapshot ``snap-1234567890abcdef0`` public.
@@ -58684,10 +58704,10 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Archives an Amazon EBS snapshot. When you archive a snapshot, it is converted to a full
-    #       snapshot that includes all of the blocks of data that were written to the volume at the
-    #       time the snapshot was created, and moved from the standard tier to the archive
-    #       tier. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/snapshot-archive.html">Archive Amazon EBS snapshots</a>
+    # <p>Archives an Amazon EBS snapshot. When you archive a snapshot, it is converted to a full 
+    #       snapshot that includes all of the blocks of data that were written to the volume at the 
+    #       time the snapshot was created, and moved from the standard tier to the archive 
+    #       tier. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/snapshot-archive.html">Archive Amazon EBS snapshots</a> 
     #       in the <i>Amazon EBS User Guide</i>.</p>
     # @param [Hash, Types::ModifySnapshotTierRequest] params
     # @option params [String] :snapshot_id
@@ -58695,8 +58715,8 @@ module Aws::EC2
     # @option params [String] :storage_tier
     #   <p>The name of the storage tier. You must specify <code>archive</code>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -58917,7 +58937,7 @@ module Aws::EC2
     # @option params [Types::AttributeBooleanValue] :map_public_ip_on_launch
     #   <p>Specify <code>true</code> to indicate that network interfaces attached to instances created in the
     #               specified subnet should be assigned a public IPv4 address.</p>
-    #            <p>Amazon Web Services charges for all public IPv4 addresses, including public IPv4 addresses
+    #            <p>Amazon Web Services charges for all public IPv4 addresses, including public IPv4 addresses 
     #   associated with running instances and Elastic IP addresses. For more information, see the <i>Public IPv4 Address</i> tab on the <a href="http://aws.amazon.com/vpc/pricing/">Amazon VPC pricing page</a>.</p>
     # @option params [String] :subnet_id
     #   <p>The ID of the subnet.</p>
@@ -58929,11 +58949,11 @@ module Aws::EC2
     #   <p>The customer-owned IPv4 address pool associated with the subnet.</p>
     #            <p>You must set this value when you specify <code>true</code> for <code>MapCustomerOwnedIpOnLaunch</code>.</p>
     # @option params [Types::AttributeBooleanValue] :enable_dns64
-    #   <p>Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet
+    #   <p>Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet 
     #               should return synthetic IPv6 addresses for IPv4-only destinations.</p>
-    #            <p>You must first configure a NAT gateway in a public subnet (separate from the subnet
-    #              containing the IPv6-only workloads). For example, the subnet containing the NAT gateway
-    #              should have a <code>0.0.0.0/0</code> route pointing to the internet gateway. For more
+    #            <p>You must first configure a NAT gateway in a public subnet (separate from the subnet 
+    #              containing the IPv6-only workloads). For example, the subnet containing the NAT gateway 
+    #              should have a <code>0.0.0.0/0</code> route pointing to the internet gateway. For more 
     #              information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-nat64-dns64.html#nat-gateway-nat64-dns64-walkthrough">Configure DNS64 and NAT64</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @option params [String] :private_dns_hostname_type_on_launch
     #   <p>The type of hostname to assign to instances in the subnet at launch. For IPv4-only and dual-stack (IPv4 and IPv6) subnets, an
@@ -58945,15 +58965,15 @@ module Aws::EC2
     #   <p>Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.</p>
     # @option params [Integer] :enable_lni_at_device_index
     #   <p>
-    #               Indicates the device position for local network interfaces in this subnet. For example,
-    #               <code>1</code> indicates local network interfaces in this subnet are the secondary
+    #               Indicates the device position for local network interfaces in this subnet. For example, 
+    #               <code>1</code> indicates local network interfaces in this subnet are the secondary 
     #               network interface (eth1). A local network interface cannot be the primary network
     #               interface (eth0).
     #           </p>
     # @option params [Types::AttributeBooleanValue] :disable_lni_at_device_index
     #   <p>
-    #               Specify <code>true</code> to indicate that local network interfaces at the current
-    #               position should be disabled.
+    #               Specify <code>true</code> to indicate that local network interfaces at the current 
+    #               position should be disabled. 
     #           </p>
     # @example To change a subnet's public IP addressing behavior
     #   # This example modifies the specified subnet so that all instances launched into this subnet are assigned a public IP address.
@@ -59018,8 +59038,8 @@ module Aws::EC2
     # @option params [Array<String>] :remove_network_services
     #   <p>The network service, for example Amazon DNS, that you no longer want to mirror.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -59135,8 +59155,8 @@ module Aws::EC2
     #   <p>The properties that you want to remove from the Traffic Mirror filter rule.</p>
     #            <p>When you remove a property from a Traffic Mirror filter rule, the property is set to the default.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -59218,8 +59238,8 @@ module Aws::EC2
     #   <p>The properties that you want to remove from the Traffic Mirror session.</p>
     #            <p>When you remove a property from a Traffic Mirror session, the property is set to the default.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -59271,8 +59291,8 @@ module Aws::EC2
     # @option params [Types::ModifyTransitGatewayOptions] :options
     #   <p>The options to modify.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -59346,8 +59366,8 @@ module Aws::EC2
     # @option params [Array<String>] :remove_middlebox_attachment_ids
     #   <p>The IDs of middlebox attachments to remove from the metering policy.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -59392,8 +59412,8 @@ module Aws::EC2
     # @option params [String] :target_route_table_id
     #   <p>The ID of the transit gateway route table to use for traffic matching this rule.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -59452,8 +59472,8 @@ module Aws::EC2
     # @option params [Boolean] :blackhole
     #   <p>Indicates whether to drop traffic that matches this route.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -59498,8 +59518,8 @@ module Aws::EC2
     # @option params [Types::ModifyTransitGatewayVpcAttachmentRequestOptions] :options
     #   <p>The new VPC attachment options.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -59564,8 +59584,8 @@ module Aws::EC2
     #   <p>A unique, case-sensitive token that you provide to ensure idempotency of your
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Types::ModifyVerifiedAccessEndpointRdsOptions] :rds_options
     #   <p>The RDS options.</p>
@@ -59710,8 +59730,8 @@ module Aws::EC2
     #   <p>A unique, case-sensitive token that you provide to ensure idempotency of your
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Types::VerifiedAccessSseSpecificationRequest] :sse_specification
     #   <p>The options for server side encryption.</p>
@@ -59757,8 +59777,8 @@ module Aws::EC2
     #   <p>A unique, case-sensitive token that you provide to ensure idempotency of your
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -59812,8 +59832,8 @@ module Aws::EC2
     #   <p>A unique, case-sensitive token that you provide to ensure idempotency of your
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Types::VerifiedAccessSseSpecificationRequest] :sse_specification
     #   <p>The options for server side encryption.</p>
@@ -59854,8 +59874,8 @@ module Aws::EC2
     # @option params [String] :description
     #   <p>A description for the Verified Access instance.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive token that you provide to ensure idempotency of your
@@ -59915,8 +59935,8 @@ module Aws::EC2
     # @option params [Types::VerifiedAccessLogOptions] :access_logs
     #   <p>The configuration options for Verified Access instances.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive token that you provide to ensure idempotency of your
@@ -60002,8 +60022,8 @@ module Aws::EC2
     # @option params [String] :description
     #   <p>A description for the Verified Access trust provider.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive token that you provide to ensure idempotency of your
@@ -60102,23 +60122,23 @@ module Aws::EC2
     # <p>You can modify several parameters of an existing EBS volume, including volume size, volume
     #       type, and IOPS capacity. If your EBS volume is attached to a current-generation EC2 instance
     #       type, you might be able to apply these changes without stopping the instance or detaching the
-    #       volume from it. For more information about modifying EBS volumes, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-modify-volume.html">Amazon EBS Elastic Volumes</a>
+    #       volume from it. For more information about modifying EBS volumes, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-modify-volume.html">Amazon EBS Elastic Volumes</a> 
     #       in the <i>Amazon EBS User Guide</i>.</p>
     #          <p>When you complete a resize operation on your volume, you need to extend the volume's
     #       file-system size to take advantage of the new storage capacity. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/recognize-expanded-volume-linux.html">Extend the file system</a>.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-modifications.html">Monitor the progress of volume modifications</a> in the <i>Amazon EBS User Guide</i>.</p>
     #          <p>With previous-generation instance types, resizing an EBS volume might require detaching and
     #       reattaching the volume or stopping and restarting the instance.</p>
-    #          <p>After you initiate a volume modification, you must wait for that modification to reach the
-    #       <code>completed</code> state before you can initiate another modification for the same volume.
-    #       You can modify a volume up to four times within a rolling 24-hour period, as long as the volume
-    #       is in the <code>in-use</code> or <code>available</code> state, and all previous modifications
-    #       for that volume are <code>completed</code>. If you exceed this limit, you get an error message
+    #          <p>After you initiate a volume modification, you must wait for that modification to reach the 
+    #       <code>completed</code> state before you can initiate another modification for the same volume. 
+    #       You can modify a volume up to four times within a rolling 24-hour period, as long as the volume 
+    #       is in the <code>in-use</code> or <code>available</code> state, and all previous modifications 
+    #       for that volume are <code>completed</code>. If you exceed this limit, you get an error message 
     #       that indicates when you can perform your next modification.</p>
     # @param [Hash, Types::ModifyVolumeRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :volume_id
     #   <p>The ID of the volume.</p>
@@ -60176,22 +60196,22 @@ module Aws::EC2
     #            <note>
     #               <p>
     #                  <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html">
-    #   Instances built on the Nitro System</a> can support up to 256,000 IOPS. Other instances can support up to 32,000
+    #   Instances built on the Nitro System</a> can support up to 256,000 IOPS. Other instances can support up to 32,000 
     #   IOPS.</p>
     #            </note>
     #            <p>Default: The existing value is retained if you keep the same volume type. If you change
     #         the volume type to <code>io1</code>, <code>io2</code>, or <code>gp3</code>, the default is 3,000.</p>
     # @option params [Integer] :throughput
-    #   <p>The target throughput of the volume, in MiB/s. This parameter is valid only for <code>gp3</code> volumes.
+    #   <p>The target throughput of the volume, in MiB/s. This parameter is valid only for <code>gp3</code> volumes. 
     #         The maximum value is 2,000.</p>
     #            <p>Default: The existing value is retained if the source and target volume type is <code>gp3</code>.
     #         Otherwise, the default value is 125.</p>
     #            <p>Valid Range: Minimum value of 125. Maximum value of 2,000.</p>
     # @option params [Boolean] :multi_attach_enabled
-    #   <p>Specifies whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the
+    #   <p>Specifies whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the 
     #   	  volume to up to 16 <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html">
-    #   			Nitro-based instances</a> in the same Availability Zone. This parameter is
-    #   		supported with <code>io1</code> and <code>io2</code> volumes only. For more information, see
+    #   			Nitro-based instances</a> in the same Availability Zone. This parameter is 
+    #   		supported with <code>io1</code> and <code>io2</code> volumes only. For more information, see 
     #   	  <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html">
     #   			Amazon EBS Multi-Attach</a> in the <i>Amazon EBS User Guide</i>.</p>
     # @example Request syntax with placeholder values
@@ -60252,8 +60272,8 @@ module Aws::EC2
     # @option params [String] :volume_id
     #   <p>The ID of the volume.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To modify a volume attribute
     #   # This example sets the ``autoEnableIo`` attribute of the volume with the ID ``vol-1234567890abcdef0`` to ``true``. If the command succeeds, no output is returned.
@@ -60354,8 +60374,8 @@ module Aws::EC2
     # <p>Modify VPC Block Public Access (BPA) exclusions. A VPC BPA exclusion is a mode that can be applied to a single VPC or subnet that exempts it from the account’s BPA mode and will allow bidirectional or egress-only access. You can create BPA exclusions for VPCs and subnets even when BPA is not enabled on the account to ensure that there is no traffic disruption to the exclusions when VPC BPA is turned on.</p>
     # @param [Hash, Types::ModifyVpcBlockPublicAccessExclusionRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :exclusion_id
     #   <p>The ID of an exclusion.</p>
@@ -60408,8 +60428,8 @@ module Aws::EC2
     # <p>Modify VPC Block Public Access (BPA) options. VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that you own in a Region from reaching or being reached from the internet through internet gateways and egress-only internet gateways. To learn more about VPC BPA, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html">Block public access to VPCs and subnets</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::ModifyVpcBlockPublicAccessOptionsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :internet_gateway_block_mode
     #   <p>The mode of VPC BPA.</p>
@@ -60458,8 +60478,8 @@ module Aws::EC2
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html">Enforce VPC encryption in transit</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::ModifyVpcEncryptionControlRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :vpc_encryption_control_id
     #   <p>The ID of the VPC Encryption Control resource to modify.</p>
@@ -60555,13 +60575,13 @@ module Aws::EC2
     end
 
     # <p>Modifies attributes of a specified VPC endpoint. The attributes that you can modify
-    #             depend on the type of VPC endpoint (interface, gateway, or Gateway Load Balancer). For more information,
-    #             see the <a href="https://docs.aws.amazon.com/vpc/latest/privatelink/">Amazon Web Services PrivateLink
+    #             depend on the type of VPC endpoint (interface, gateway, or Gateway Load Balancer). For more information, 
+    #             see the <a href="https://docs.aws.amazon.com/vpc/latest/privatelink/">Amazon Web Services PrivateLink 
     #                 Guide</a>.</p>
     # @param [Hash, Types::ModifyVpcEndpointRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :vpc_endpoint_id
     #   <p>The ID of the endpoint.</p>
@@ -60576,7 +60596,7 @@ module Aws::EC2
     # @option params [Array<String>] :remove_route_table_ids
     #   <p>(Gateway endpoint) The IDs of the route tables to disassociate from the endpoint.</p>
     # @option params [Array<String>] :add_subnet_ids
-    #   <p>(Interface and Gateway Load Balancer endpoints) The IDs of the subnets in which to serve the endpoint.
+    #   <p>(Interface and Gateway Load Balancer endpoints) The IDs of the subnets in which to serve the endpoint. 
     #               For a Gateway Load Balancer endpoint, you can specify only one subnet.</p>
     # @option params [Array<String>] :remove_subnet_ids
     #   <p>(Interface endpoint) The IDs of the subnets from which to remove the endpoint.</p>
@@ -60637,8 +60657,8 @@ module Aws::EC2
     #             can change the SNS topic for the notification, or the events for which to be notified. </p>
     # @param [Hash, Types::ModifyVpcEndpointConnectionNotificationRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :connection_notification_id
     #   <p>The ID of the notification.</p>
@@ -60670,8 +60690,8 @@ module Aws::EC2
     # <p>Modifies the billing account for VPC endpoint usage/charges.</p>
     # @param [Hash, Types::ModifyVpcEndpointPayerResponsibilityRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :service_id
     #   <p>The ID of the VPC endpoint service.</p>
@@ -60713,8 +60733,8 @@ module Aws::EC2
     #             domain name.</p>
     # @param [Hash, Types::ModifyVpcEndpointServiceConfigurationRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :service_id
     #   <p>The ID of the service.</p>
@@ -60774,8 +60794,8 @@ module Aws::EC2
     # <p>Modifies the payer responsibility for your VPC endpoint service.</p>
     # @param [Hash, Types::ModifyVpcEndpointServicePayerResponsibilityRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :service_id
     #   <p>The ID of the service.</p>
@@ -60810,8 +60830,8 @@ module Aws::EC2
     # 	        attachments are automatically approved.</p>
     # @param [Hash, Types::ModifyVpcEndpointServicePermissionsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :service_id
     #   <p>The ID of the service.</p>
@@ -60865,8 +60885,8 @@ module Aws::EC2
     # @option params [Types::PeeringConnectionOptionsRequest] :accepter_peering_connection_options
     #   <p>The VPC peering connection options for the accepter VPC.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Types::PeeringConnectionOptionsRequest] :requester_peering_connection_options
     #   <p>The VPC peering connection options for the requester VPC.</p>
@@ -60923,8 +60943,8 @@ module Aws::EC2
     # @option params [String] :instance_tenancy
     #   <p>The instance tenancy attribute for the VPC. </p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -61652,8 +61672,8 @@ module Aws::EC2
     # @option params [Array<String>] :instance_ids
     #   <p>The IDs of the instances.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -61690,8 +61710,8 @@ module Aws::EC2
     #       originally allocated for use in the EC2-VPC platform to the EC2-Classic platform.</p>
     # @param [Hash, Types::MoveAddressToVpcRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :public_ip
     #   <p>The Elastic IP address.</p>
@@ -61729,8 +61749,8 @@ module Aws::EC2
     #          <p>If you already have a BYOIPv4 CIDR with Amazon Web Services, you can move the CIDR to IPAM from a public IPv4 pool. You cannot move an IPv6 CIDR to IPAM. If you are bringing a new IP address to Amazon Web Services for the first time, complete the steps in <a href="https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoip-ipam.html">Tutorial: BYOIP address CIDRs to IPAM</a>.</p>
     # @param [Hash, Types::MoveByoipCidrToIpamRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :cidr
     #   <p>The BYOIP CIDR.</p>
@@ -61980,12 +62000,12 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Provisions an IPv4 or IPv6 address range for use with your Amazon Web Services resources through bring your own IP
+    # <p>Provisions an IPv4 or IPv6 address range for use with your Amazon Web Services resources through bring your own IP 
     #          addresses (BYOIP) and creates a corresponding address pool. After the address range is
     #          provisioned, it is ready to be advertised.</p>
-    #          <p>Amazon Web Services verifies that you own the address range and are authorized to advertise it.
-    #          You must ensure that the address range is registered to you and that you created an
-    #          RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range.
+    #          <p>Amazon Web Services verifies that you own the address range and are authorized to advertise it. 
+    #          You must ensure that the address range is registered to you and that you created an 
+    #          RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. 
     #          For the Amazon Web Services GovCloud (US) Regions, authorize only ASN 8987. For the Amazon Web Services
     #          European Sovereign Cloud, authorize ASNs 16509 and 214101.
     #          For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">Bring your own IP addresses (BYOIP)</a> in the <i>Amazon EC2 User Guide</i>.</p>
@@ -61994,11 +62014,11 @@ module Aws::EC2
     #           to <code>provisioned</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/byoip-onboard.html">Onboard your address range</a>.</p>
     # @param [Hash, Types::ProvisionByoipCidrRequest] params
     # @option params [String] :cidr
-    #   <p>The public IPv4 or IPv6 address range, in CIDR notation. The most specific IPv4 prefix that you can
-    #             specify is /24. The most specific IPv6 address range that you can bring is /48 for CIDRs that are publicly advertisable and /56 for CIDRs that are not publicly advertisable. The address range cannot overlap with another address range that you've
+    #   <p>The public IPv4 or IPv6 address range, in CIDR notation. The most specific IPv4 prefix that you can 
+    #             specify is /24. The most specific IPv6 address range that you can bring is /48 for CIDRs that are publicly advertisable and /56 for CIDRs that are not publicly advertisable. The address range cannot overlap with another address range that you've 
     #            brought to this or another Region.</p>
     # @option params [Types::CidrAuthorizationContext] :cidr_authorization_context
-    #   <p>A signed document that proves that you are authorized to bring the specified IP address
+    #   <p>A signed document that proves that you are authorized to bring the specified IP address 
     #            range to Amazon using BYOIP.</p>
     # @option params [Boolean] :publicly_advertisable
     #   <p>(IPv6 only) Indicate whether the address range will be publicly advertised to the
@@ -62007,8 +62027,8 @@ module Aws::EC2
     # @option params [String] :description
     #   <p>A description for the address range and the address pool.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::TagSpecification>] :pool_tag_specifications
     #   <p>The tags to apply to the address pool.</p>
@@ -62088,8 +62108,8 @@ module Aws::EC2
     # <p>Provisions your Autonomous System Number (ASN) for use in your Amazon Web Services account. This action requires authorization context for Amazon to bring the ASN to an Amazon Web Services account. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html">Tutorial: Bring your ASN to IPAM</a> in the <i>Amazon VPC IPAM guide</i>.</p>
     # @param [Hash, Types::ProvisionIpamByoasnRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_id
     #   <p>An IPAM ID.</p>
@@ -62130,8 +62150,8 @@ module Aws::EC2
     #       </p>
     # @param [Hash, Types::ProvisionIpamPoolCidrRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_pool_id
     #   <p>The ID of the IPAM pool to which you want to assign a CIDR.</p>
@@ -62187,8 +62207,8 @@ module Aws::EC2
     #          <p>For more information about IPAM, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html">What is IPAM?</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
     # @param [Hash, Types::ProvisionPublicIpv4PoolCidrRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_pool_id
     #   <p>The ID of the IPAM pool you would like to use to allocate this CIDR.</p>
@@ -62536,11 +62556,11 @@ module Aws::EC2
     #          <p>After you purchase a Scheduled Instance, you can't cancel, modify, or resell your purchase.</p>
     # @param [Hash, Types::PurchaseScheduledInstancesRequest] params
     # @option params [String] :client_token
-    #   <p>Unique, case-sensitive identifier that ensures the idempotency of the request.
+    #   <p>Unique, case-sensitive identifier that ensures the idempotency of the request. 
     #            For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::PurchaseRequest>] :purchase_requests
     #   <p>The purchase requests.</p>
@@ -62604,8 +62624,8 @@ module Aws::EC2
     # @option params [Array<String>] :instance_ids
     #   <p>The instance IDs.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To reboot an EC2 instance
     #   # This example reboots the specified EC2 instance.
@@ -62663,7 +62683,7 @@ module Aws::EC2
     #       verify if the correct billing information was applied, check the <code>PlatformDetails</code>
     #       field on the new AMI. If the field is empty or doesn't match the expected operating system
     #       code (for example, Windows, RedHat, SUSE, or SQL), the AMI creation was unsuccessful, and you
-    #       should discard the AMI and instead create the AMI from an instance.
+    #       should discard the AMI and instead create the AMI from an instance.  
     #         For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html#how-to-create-ebs-ami">Create an AMI
     #         from an instance </a> in the <i>Amazon EC2 User Guide</i>.</p>
     #          <p>If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched
@@ -62718,8 +62738,8 @@ module Aws::EC2
     #         specify another value for <code>ResourceType</code>, the request fails.</p>
     #            <p>To tag an AMI after it has been registered, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html">CreateTags</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :name
     #   <p>A name for your AMI.</p>
@@ -62832,8 +62852,8 @@ module Aws::EC2
     #          <p>To remove tags, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeregisterInstanceEventNotificationAttributes.html">DeregisterInstanceEventNotificationAttributes</a>.</p>
     # @param [Hash, Types::RegisterInstanceEventNotificationAttributesRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Types::RegisterInstanceTagAttributeRequest] :instance_tag_attribute
     #   <p>Information about the tag keys to register.</p>
@@ -62875,8 +62895,8 @@ module Aws::EC2
     # @option params [Array<String>] :network_interface_ids
     #   <p>The group members' network interface IDs to register with the  transit gateway multicast group.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -62916,8 +62936,8 @@ module Aws::EC2
     # @option params [Array<String>] :network_interface_ids
     #   <p>The group sources' network interface IDs to register with the  transit gateway multicast group.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -63009,8 +63029,8 @@ module Aws::EC2
     # @option params [Array<String>] :subnet_ids
     #   <p>The IDs of the subnets to associate with the transit gateway multicast domain.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -63049,8 +63069,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_attachment_id
     #   <p>The ID of the transit gateway peering attachment.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -63108,8 +63128,8 @@ module Aws::EC2
     # @option params [String] :transit_gateway_attachment_id
     #   <p>The ID of the attachment.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -63152,8 +63172,8 @@ module Aws::EC2
     # <p>Rejects VPC endpoint connection requests to your VPC endpoint service.</p>
     # @param [Hash, Types::RejectVpcEndpointConnectionsRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :service_id
     #   <p>The ID of the service.</p>
@@ -63192,8 +63212,8 @@ module Aws::EC2
     # 			connection, or to delete a VPC peering connection request that you initiated, use	<a>DeleteVpcPeeringConnection</a>.</p>
     # @param [Hash, Types::RejectVpcPeeringConnectionRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :vpc_peering_connection_id
     #   <p>The ID of the VPC peering connection.</p>
@@ -63221,8 +63241,8 @@ module Aws::EC2
     # 				releasing it.</p>
     #          <p>[Nondefault VPC] You must disassociate the Elastic IP address
     # 			  before you can release it. Otherwise, Amazon EC2 returns an error (<code>InvalidIPAddress.InUse</code>).</p>
-    #          <p>After releasing an Elastic IP address, it is released to the IP address pool.
-    #         Be sure to update your DNS records and any servers or devices that communicate with the address.
+    #          <p>After releasing an Elastic IP address, it is released to the IP address pool. 
+    #         Be sure to update your DNS records and any servers or devices that communicate with the address. 
     #         If you attempt to release an Elastic IP address that you already released, you'll get an
     #        <code>AuthFailure</code> error if the address is already allocated to another Amazon Web Services account.</p>
     #          <p>After you release an Elastic IP address, you might be able to recover it.
@@ -63237,8 +63257,8 @@ module Aws::EC2
     #         IP addresses.</p>
     #            <p>If you provide an incorrect network border group, you receive an <code>InvalidAddress.NotFound</code> error.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To release an Elastic IP address
     #   # This example releases the specified Elastic IP address.
@@ -63312,8 +63332,8 @@ module Aws::EC2
     #          </note>
     # @param [Hash, Types::ReleaseIpamPoolAllocationRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :ipam_pool_id
     #   <p>The ID of the IPAM pool which contains the allocation you want to release.</p>
@@ -63402,8 +63422,8 @@ module Aws::EC2
     #   <p>The list of criteria that are evaluated to determine whether AMIs are discoverable and
     #         usable in the account in the specified Amazon Web Services Region.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -63479,8 +63499,8 @@ module Aws::EC2
     #   <p>The instance type specification to set on the AMI. Omit this parameter to remove the
     #         existing instance type specification.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -63510,8 +63530,8 @@ module Aws::EC2
     #          <p>This is an idempotent operation.</p>
     # @param [Hash, Types::ReplaceNetworkAclAssociationRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :association_id
     #   <p>The ID of the current association between the original network ACL and the subnet.</p>
@@ -63552,8 +63572,8 @@ module Aws::EC2
     # 				<i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::ReplaceNetworkAclEntryRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :network_acl_id
     #   <p>The ID of the ACL.</p>
@@ -63561,10 +63581,10 @@ module Aws::EC2
     #   <p>The rule number of the entry to replace.</p>
     # @option params [String] :protocol
     #   <p>The protocol number. A value of "-1" means all protocols. If you specify "-1" or a
-    #              protocol number other than "6" (TCP), "17" (UDP), or "1" (ICMP), traffic on all ports is
-    #              allowed, regardless of any ports or ICMP types or codes that you specify. If you specify
-    #              protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and
-    #              codes allowed, regardless of any that you specify. If you specify protocol "58" (ICMPv6)
+    #              protocol number other than "6" (TCP), "17" (UDP), or "1" (ICMP), traffic on all ports is 
+    #              allowed, regardless of any ports or ICMP types or codes that you specify. If you specify 
+    #              protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and 
+    #              codes allowed, regardless of any that you specify. If you specify protocol "58" (ICMPv6) 
     #              and specify an IPv6 CIDR block, you must specify an ICMP type and code.</p>
     # @option params [String] :rule_action
     #   <p>Indicates whether to allow or deny the traffic that matches the rule.</p>
@@ -63581,7 +63601,7 @@ module Aws::EC2
     #   <p>ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying protocol
     #   		        1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR block.</p>
     # @option params [Types::PortRange] :port_range
-    #   <p>TCP or UDP protocols: The range of ports the rule applies to.
+    #   <p>TCP or UDP protocols: The range of ports the rule applies to. 
     #   		        Required if specifying protocol 6 (TCP) or 17 (UDP).</p>
     # @example To replace a network ACL entry
     #   # This example replaces an entry for the specified network ACL. The new rule 100 allows ingress traffic from 203.0.113.12/24 on UDP port 53 (DNS) into any associated subnet.
@@ -63632,8 +63652,8 @@ module Aws::EC2
     end
 
     # <p>Replaces an existing route within a route table in a VPC.</p>
-    #          <p>You must specify either a destination CIDR block or a prefix list ID. You must also specify
-    #            exactly one of the resources from the parameter list, or reset the local route to its default
+    #          <p>You must specify either a destination CIDR block or a prefix list ID. You must also specify  
+    #            exactly one of the resources from the parameter list, or reset the local route to its default 
     #            target.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route tables</a> in the
     #                 <i>Amazon VPC User Guide</i>.</p>
@@ -63655,8 +63675,8 @@ module Aws::EC2
     # @option params [String] :odb_network_arn
     #   <p>The Amazon Resource Name (ARN) of the ODB network.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :route_table_id
     #   <p>The ID of the route table.</p>
@@ -63728,8 +63748,8 @@ module Aws::EC2
     #          <p>You can also use this operation to change which table is the main route table in the VPC. Specify the main route table's association ID and the route table ID of the new main route table.</p>
     # @param [Hash, Types::ReplaceRouteTableAssociationRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :association_id
     #   <p>The association ID.</p>
@@ -63781,8 +63801,8 @@ module Aws::EC2
     # @option params [Boolean] :blackhole
     #   <p>Indicates whether traffic matching this route is to be dropped.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -63855,8 +63875,8 @@ module Aws::EC2
     #          <p>Use of this action does not change the value returned by <a>DescribeInstanceStatus</a>.</p>
     # @param [Hash, Types::ReportInstanceStatusRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<String>] :instances
     #   <p>The instances.</p>
@@ -64468,7 +64488,7 @@ module Aws::EC2
     #               permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is
     #                   <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :spot_price
-    #   <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend
+    #   <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend 
     #               using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.</p>
     #            <important>
     #               <p>If you specify a maximum price, your instances will be interrupted more frequently than if you do not specify this parameter.</p>
@@ -64863,8 +64883,8 @@ module Aws::EC2
     # @option params [String] :attribute
     #   <p>The attribute of the IP address.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -64894,16 +64914,16 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Resets the default KMS key for EBS encryption for your account in this Region
+    # <p>Resets the default KMS key for EBS encryption for your account in this Region 
     #       to the Amazon Web Services managed KMS key for EBS.</p>
-    #          <p>After resetting the default KMS key to the Amazon Web Services managed KMS key, you can continue to encrypt by a
+    #          <p>After resetting the default KMS key to the Amazon Web Services managed KMS key, you can continue to encrypt by a 
     #       customer managed KMS key by specifying it when you create the volume. For more information, see
     #       <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html">Amazon EBS encryption</a>
     #       in the <i>Amazon EBS User Guide</i>.</p>
     # @param [Hash, Types::ResetEbsDefaultKmsKeyIdRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -64926,8 +64946,8 @@ module Aws::EC2
     # 		    You can only reset the load permission attribute.</p>
     # @param [Hash, Types::ResetFpgaImageAttributeRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :fpga_image_id
     #   <p>The ID of the AFI.</p>
@@ -64960,8 +64980,8 @@ module Aws::EC2
     # @option params [String] :image_id
     #   <p>The ID of the AMI.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To reset the launchPermission attribute
     #   # This example resets the launchPermission attribute for the specified AMI. By default, AMIs are private.
@@ -65001,8 +65021,8 @@ module Aws::EC2
     #                 <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::ResetInstanceAttributeRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :instance_id
     #   <p>The ID of the instance.</p>
@@ -65079,8 +65099,8 @@ module Aws::EC2
     # @option params [String] :snapshot_id
     #   <p>The ID of the snapshot.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To reset a snapshot attribute
     #   # This example resets the create volume permissions for snapshot ``snap-1234567890abcdef0``. If the command succeeds, no output is returned.
@@ -65115,8 +65135,8 @@ module Aws::EC2
     #          <p>Restores an Elastic IP address that was previously moved to the EC2-VPC platform back to the EC2-Classic platform. You cannot move an Elastic IP address that was originally allocated for use in EC2-VPC. The Elastic IP address must not be associated with an instance or network interface.</p>
     # @param [Hash, Types::RestoreAddressToClassicRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :public_ip
     #   <p>The Elastic IP address.</p>
@@ -65146,8 +65166,8 @@ module Aws::EC2
     # @option params [String] :image_id
     #   <p>The ID of the AMI to restore.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -65170,8 +65190,8 @@ module Aws::EC2
     # <p>Restores the entries from a previous version of a managed prefix list to a new version of the prefix list.</p>
     # @param [Hash, Types::RestoreManagedPrefixListVersionRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :prefix_list_id
     #   <p>The ID of the prefix list.</p>
@@ -65217,14 +65237,14 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Restores a snapshot from the Recycle Bin. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/recycle-bin-working-with-snaps.html#recycle-bin-restore-snaps">Restore
+    # <p>Restores a snapshot from the Recycle Bin. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/recycle-bin-working-with-snaps.html#recycle-bin-restore-snaps">Restore 
     #       snapshots from the Recycle Bin</a> in the <i>Amazon EBS User Guide</i>.</p>
     # @param [Hash, Types::RestoreSnapshotFromRecycleBinRequest] params
     # @option params [String] :snapshot_id
     #   <p>The ID of the snapshot to restore.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -65254,7 +65274,7 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Restores an archived Amazon EBS snapshot for use temporarily or permanently, or modifies the restore
+    # <p>Restores an archived Amazon EBS snapshot for use temporarily or permanently, or modifies the restore 
     #       period or restore type for a snapshot that was previously temporarily restored.</p>
     #          <p>For more information see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/working-with-snapshot-archiving.html#restore-archived-snapshot">
     #       Restore an archived snapshot</a> and <a href="https://docs.aws.amazon.com/ebs/latest/userguide/working-with-snapshot-archiving.html#modify-temp-restore-period">
@@ -65263,19 +65283,19 @@ module Aws::EC2
     # @option params [String] :snapshot_id
     #   <p>The ID of the snapshot to restore.</p>
     # @option params [Integer] :temporary_restore_days
-    #   <p>Specifies the number of days for which to temporarily restore an archived snapshot.
-    #         Required for temporary restores only. The snapshot will be automatically re-archived
+    #   <p>Specifies the number of days for which to temporarily restore an archived snapshot. 
+    #         Required for temporary restores only. The snapshot will be automatically re-archived 
     #         after this period.</p>
-    #            <p>To temporarily restore an archived snapshot, specify the number of days and omit
-    #         the <b>PermanentRestore</b> parameter or set it to
+    #            <p>To temporarily restore an archived snapshot, specify the number of days and omit 
+    #         the <b>PermanentRestore</b> parameter or set it to 
     #         <code>false</code>.</p>
     # @option params [Boolean] :permanent_restore
-    #   <p>Indicates whether to permanently restore an archived snapshot. To permanently restore
-    #         an archived snapshot, specify <code>true</code> and omit the
+    #   <p>Indicates whether to permanently restore an archived snapshot. To permanently restore 
+    #         an archived snapshot, specify <code>true</code> and omit the 
     #         <b>RestoreSnapshotTierRequest$TemporaryRestoreDays</b> parameter.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -65300,14 +65320,14 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Restores a volume from the Recycle Bin. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/recycle-bin-working-with-volumes.html#recycle-bin-restore-volumes">Restore
+    # <p>Restores a volume from the Recycle Bin. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/recycle-bin-working-with-volumes.html#recycle-bin-restore-volumes">Restore 
     #       volumes from the Recycle Bin</a> in the <i>Amazon EBS User Guide</i>.</p>
     # @param [Hash, Types::RestoreVolumeFromRecycleBinRequest] params
     # @option params [String] :volume_id
     #   <p>The ID of the volume to restore.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -65366,23 +65386,23 @@ module Aws::EC2
 
     # <p>Removes the specified outbound (egress) rules from the specified security group.</p>
     #          <p>You can specify rules using either rule IDs or security group rule properties. If you use
-    #          rule properties, the values that you specify (for example, ports) must match the existing rule's
-    #          values exactly. Each rule has a protocol, from and to ports, and destination (CIDR range,
-    #          security group, or prefix list). For the TCP and UDP protocols, you must also specify the
-    #          destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type
-    #          and code. If the security group rule has a description, you do not need to specify the description
+    #          rule properties, the values that you specify (for example, ports) must match the existing rule's 
+    #          values exactly. Each rule has a protocol, from and to ports, and destination (CIDR range, 
+    #          security group, or prefix list). For the TCP and UDP protocols, you must also specify the 
+    #          destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type 
+    #          and code. If the security group rule has a description, you do not need to specify the description 
     #          to revoke the rule.</p>
     #          <p>For a default VPC, if the values you specify do not match the existing rule's values, no error is
     #          returned, and the output describes the security group rules that were not revoked.</p>
     #          <p>Amazon Web Services recommends that you describe the security group to verify that the rules were removed.</p>
-    #          <p>Rule changes are propagated to instances within the security group as quickly as possible. However,
+    #          <p>Rule changes are propagated to instances within the security group as quickly as possible. However, 
     #          a small delay might occur.</p>
     # @param [Hash, Types::RevokeSecurityGroupEgressRequest] params
     # @option params [Array<String>] :security_group_rule_ids
     #   <p>The IDs of the security group rules.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :group_id
     #   <p>The ID of the security group.</p>
@@ -65517,11 +65537,11 @@ module Aws::EC2
 
     # <p>Removes the specified inbound (ingress) rules from a security group.</p>
     #          <p>You can specify rules using either rule IDs or security group rule properties. If you use
-    #            rule properties, the values that you specify (for example, ports) must match the existing rule's
-    #            values exactly. Each rule has a protocol, from and to ports, and source (CIDR range,
-    #            security group, or prefix list). For the TCP and UDP protocols, you must also specify the
-    #            destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type
-    #            and code. If the security group rule has a description, you do not need to specify the description
+    #            rule properties, the values that you specify (for example, ports) must match the existing rule's 
+    #            values exactly. Each rule has a protocol, from and to ports, and source (CIDR range, 
+    #            security group, or prefix list). For the TCP and UDP protocols, you must also specify the 
+    #            destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type 
+    #            and code. If the security group rule has a description, you do not need to specify the description 
     #            to revoke the rule.</p>
     #          <p>For a default VPC, if the values you specify do not match the existing rule's values,
     #             no error is returned, and the output describes the security group rules that were not
@@ -65530,7 +65550,7 @@ module Aws::EC2
     #             values, an <code>InvalidPermission.NotFound</code> client error is returned, and no
     #             rules are revoked.</p>
     #          <p>Amazon Web Services recommends that you describe the security group to verify that the rules were removed.</p>
-    #          <p>Rule changes are propagated to instances within the security group as quickly as possible.
+    #          <p>Rule changes are propagated to instances within the security group as quickly as possible. 
     #          However, a small delay might occur.</p>
     # @param [Hash, Types::RevokeSecurityGroupIngressRequest] params
     # @option params [String] :cidr_ip
@@ -65547,13 +65567,13 @@ module Aws::EC2
     # @option params [Array<Types::IpPermission>] :ip_permissions
     #   <p>The sets of IP permissions. You can't specify a source security group and a CIDR IP address range in the same set of permissions.</p>
     # @option params [String] :ip_protocol
-    #   <p>The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>) or number
-    #           (see <a href="http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml">Protocol Numbers</a>).
+    #   <p>The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>) or number 
+    #           (see <a href="http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml">Protocol Numbers</a>). 
     #           Use <code>-1</code> to specify all.</p>
     # @option params [String] :source_security_group_name
-    #   <p>[Default VPC] The name of the source security group. You can't specify this parameter
-    #            in combination with the following parameters: the CIDR IP address range, the start of the port range,
-    #            the IP protocol, and the end of the port range. The source security group must be in the same VPC.
+    #   <p>[Default VPC] The name of the source security group. You can't specify this parameter 
+    #            in combination with the following parameters: the CIDR IP address range, the start of the port range, 
+    #            the IP protocol, and the end of the port range. The source security group must be in the same VPC. 
     #            To revoke a specific rule for an IP protocol and port range, use a set of IP permissions instead.</p>
     # @option params [String] :source_security_group_owner_id
     #   <p>Not supported.</p>
@@ -65563,8 +65583,8 @@ module Aws::EC2
     # @option params [Array<String>] :security_group_rule_ids
     #   <p>The IDs of the security group rules.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -65771,10 +65791,10 @@ module Aws::EC2
     #            </important>
     # @option params [Integer] :max_count
     #   <p>The maximum number of instances to launch. If you specify a value that is more
-    #               capacity than Amazon EC2 can launch in the target Availability Zone, Amazon EC2
+    #               capacity than Amazon EC2 can launch in the target Availability Zone, Amazon EC2 
     #               launches the largest possible number of instances above the specified minimum
     #               count.</p>
-    #            <p>Constraints: Between 1 and the quota for the specified instance type for your account for this Region.
+    #            <p>Constraints: Between 1 and the quota for the specified instance type for your account for this Region. 
     #               For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-quotas.html">Amazon EC2 instance type quotas</a>.</p>
     # @option params [Integer] :min_count
     #   <p>The minimum number of instances to launch. If you specify a value that is more
@@ -65842,7 +65862,7 @@ module Aws::EC2
     #            </ul>
     #            <p>To tag a resource after it has been created, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html">CreateTags</a>.</p>
     # @option params [Types::LaunchTemplateSpecification] :launch_template
-    #   <p>The launch template. Any additional parameters that you specify for the new instance
+    #   <p>The launch template. Any additional parameters that you specify for the new instance 
     #               overwrite the corresponding parameters included in the launch template.</p>
     # @option params [Types::InstanceMarketOptionsRequest] :instance_market_options
     #   <p>The market (purchasing) option for the instances.</p>
@@ -65884,7 +65904,7 @@ module Aws::EC2
     #            <p>You can't enable Amazon Web Services Nitro Enclaves and hibernation on the same
     #               instance.</p>
     # @option params [Types::PrivateDnsNameOptionsRequest] :private_dns_name_options
-    #   <p>The options for the instance hostname.
+    #   <p>The options for the instance hostname. 
     #               The default values are inherited from the subnet.
     #               Applies only if creating a network interface, not attaching an existing one.</p>
     # @option params [Types::InstanceMaintenanceOptionsRequest] :maintenance_options
@@ -65912,8 +65932,8 @@ module Aws::EC2
     # @option params [Array<Types::InstanceSecondaryInterfaceSpecificationRequest>] :secondary_interfaces
     #   <p>The secondary interfaces to associate with the instance.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Boolean] :disable_api_termination
     #   <p>Indicates whether termination protection is enabled for the instance. The default
@@ -66525,17 +66545,17 @@ module Aws::EC2
     #          after a few minutes.</p>
     # @param [Hash, Types::RunScheduledInstancesRequest] params
     # @option params [String] :client_token
-    #   <p>Unique, case-sensitive identifier that ensures the idempotency of the request.
+    #   <p>Unique, case-sensitive identifier that ensures the idempotency of the request. 
     #            For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Integer] :instance_count
     #   <p>The number of instances.</p>
     #            <p>Default: 1</p>
     # @option params [Types::ScheduledInstancesLaunchSpecification] :launch_specification
-    #   <p>The launch specification. You must match the instance type, Availability Zone,
+    #   <p>The launch specification. You must match the instance type, Availability Zone, 
     #            network, and platform of the schedule that you purchased.</p>
     # @option params [String] :scheduled_instance_id
     #   <p>The Scheduled Instance ID.</p>
@@ -66646,8 +66666,8 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>route-search.supernet-of-match</code> - The routes with a CIDR that encompass the CIDR filter.
-    #                  For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify <code>supernet-of-match</code>
+    #                     <code>route-search.supernet-of-match</code> - The routes with a CIDR that encompass the CIDR filter. 
+    #                  For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify <code>supernet-of-match</code> 
     #                  as 10.0.1.0/30, then the result returns 10.0.1.0/29.</p>
     #               </li>
     #               <li>
@@ -66665,8 +66685,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -66759,8 +66779,8 @@ module Aws::EC2
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -66858,8 +66878,8 @@ module Aws::EC2
     #   <p>The maximum number of routes to return. If a value is not provided, the default is
     #            1000.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
@@ -66924,8 +66944,8 @@ module Aws::EC2
     # @option params [String] :instance_id
     #   <p>The ID of the instance.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -66989,8 +67009,8 @@ module Aws::EC2
     #                 <i>Amazon Web Services Organizations User Guide</i>.</p>
     # @param [Hash, Types::StartDeclarativePoliciesReportRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :s3_bucket
     #   <p>The name of the S3 bucket where the report will be saved. The bucket must be in the
@@ -67072,8 +67092,8 @@ module Aws::EC2
     # @option params [String] :additional_info
     #   <p>Reserved.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To start a stopped EC2 instance
     #   # This example starts the specified EC2 instance.
@@ -67136,13 +67156,13 @@ module Aws::EC2
     # @option params [String] :network_insights_access_scope_id
     #   <p>The ID of the Network Access Scope.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply.</p>
     # @option params [String] :client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information,
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, 
     #      see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -67203,13 +67223,13 @@ module Aws::EC2
     # @option params [Array<String>] :filter_out_arns
     #   <p>The Amazon Resource Names (ARN) of the resources that the path will ignore.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   <p>The tags to apply.</p>
     # @option params [String] :client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information,
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, 
     #      see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -68520,8 +68540,8 @@ module Aws::EC2
     #          <p>Before the service provider runs this command, they must add a record to the DNS server.</p>
     # @param [Hash, Types::StartVpcEndpointServicePrivateDnsVerificationRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :service_id
     #   <p>The ID of the endpoint service.</p>
@@ -68596,8 +68616,8 @@ module Aws::EC2
     #            <p>Default: <code>false</code>
     #            </p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [Boolean] :force
     #   <p>Forces the instance to stop. The instance will first attempt a graceful shutdown,
@@ -68675,7 +68695,7 @@ module Aws::EC2
     # @option params [String] :connection_id
     #   <p>The ID of the client connection to be terminated.</p>
     # @option params [String] :username
-    #   <p>The name of the user who initiated the connection. Use this option to terminate all active connections for
+    #   <p>The name of the user who initiated the connection. Use this option to terminate all active connections for 
     #   			the specified user. This option can only be used if the user has established up to five connections.</p>
     # @option params [Boolean] :dry_run
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
@@ -68719,12 +68739,12 @@ module Aws::EC2
     #             <p>
     #                <b>Terminating an instance is permanent and irreversible.</b>
     #             </p>
-    #             <p>After you terminate an instance, you can no longer connect to it, and it can't be recovered.
-    #                 All attached Amazon EBS volumes that are configured to be deleted on termination are also permanently
-    #                 deleted and can't be recovered. All data stored on instance store volumes is permanently lost.
+    #             <p>After you terminate an instance, you can no longer connect to it, and it can't be recovered. 
+    #                 All attached Amazon EBS volumes that are configured to be deleted on termination are also permanently 
+    #                 deleted and can't be recovered. All data stored on instance store volumes is permanently lost. 
     #                 For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-ec2-instance-termination-works.html">
     #                     How instance termination works</a>.</p>
-    #             <p>Before you terminate an instance, ensure that you have backed up all data that you need to
+    #             <p>Before you terminate an instance, ensure that you have backed up all data that you need to 
     #                 retain after the termination to persistent storage.</p>
     #          </important>
     #          <p>If you specify multiple instances and the request fails (for example, because of a
@@ -68808,8 +68828,8 @@ module Aws::EC2
     #            <p>Default: <code>false</code>
     #            </p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example To terminate an EC2 instance
     #   # This example terminates the specified EC2 instance.
@@ -68937,8 +68957,8 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Unassigns secondary private IPv4 addresses from a private NAT gateway. You cannot unassign your primary private IP. For more information,
-    #             see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html#nat-gateway-edit-secondary">Edit secondary IP address associations</a>
+    # <p>Unassigns secondary private IPv4 addresses from a private NAT gateway. You cannot unassign your primary private IP. For more information, 
+    #             see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html#nat-gateway-edit-secondary">Edit secondary IP address associations</a> 
     #             in the <i>Amazon VPC User Guide</i>.</p>
     #          <p>While unassigning is in progress, you cannot assign/unassign additional IP addresses while the connections are being drained. You are, however, allowed to delete the NAT gateway.</p>
     #          <p>A private IP address will only be released at the end of MaxDrainDurationSeconds. The
@@ -68956,8 +68976,8 @@ module Aws::EC2
     # @option params [Integer] :max_drain_duration_seconds
     #   <p>The maximum amount of time to wait (in seconds) before forcibly releasing the IP addresses if connections are still in progress. Default value is 350 seconds.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -68993,15 +69013,15 @@ module Aws::EC2
       request.send_request(options)
     end
 
-    # <p>Unlocks a snapshot that is locked in governance mode or that is locked in compliance mode
-    #       but still in the cooling-off period. You can't unlock a snapshot that is locked in compliance
+    # <p>Unlocks a snapshot that is locked in governance mode or that is locked in compliance mode 
+    #       but still in the cooling-off period. You can't unlock a snapshot that is locked in compliance 
     #       mode after the cooling-off period has expired.</p>
     # @param [Hash, Types::UnlockSnapshotRequest] params
     # @option params [String] :snapshot_id
     #   <p>The ID of the snapshot to unlock.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -69028,8 +69048,8 @@ module Aws::EC2
     # @option params [Array<String>] :instance_ids
     #   <p>The IDs of the instances.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -69106,7 +69126,7 @@ module Aws::EC2
     end
 
     # <p>
-    # Updates the Organizations access setting for EC2 Capacity Manager. This controls whether Capacity Manager can aggregate
+    # Updates the Organizations access setting for EC2 Capacity Manager. This controls whether Capacity Manager can aggregate 
     # data from all accounts in your Amazon Web Services Organization or only from the current account.
     # </p>
     # @param [Hash, Types::UpdateCapacityManagerOrganizationsAccessRequest] params
@@ -69116,7 +69136,7 @@ module Aws::EC2
     #   </p>
     # @option params [Boolean] :dry_run
     #   <p>
-    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If
+    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If 
     #   you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.
     #   </p>
     # @option params [String] :client_token
@@ -69190,12 +69210,12 @@ module Aws::EC2
 
     # <p>Updates the description of an egress (outbound) security group rule. You
     # 			can replace an existing description, or add a description to a rule that did not have one
-    # 			previously. You can remove a description for a security group rule by omitting the
+    # 			previously. You can remove a description for a security group rule by omitting the 
     # 			description parameter in the request.</p>
     # @param [Hash, Types::UpdateSecurityGroupRuleDescriptionsEgressRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :group_id
     #   <p>The ID of the security group. You must specify either the security group ID or the
@@ -69295,12 +69315,12 @@ module Aws::EC2
 
     # <p>Updates the description of an ingress (inbound) security group rule. You can replace an
     # 			existing description, or add a description to a rule that did not have one previously.
-    # 		    You can remove a description for a security group rule by omitting the description
+    # 		    You can remove a description for a security group rule by omitting the description 
     # 		    parameter in the request.</p>
     # @param [Hash, Types::UpdateSecurityGroupRuleDescriptionsIngressRequest] params
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @option params [String] :group_id
     #   <p>The ID of the security group. You must specify either the security group ID or the
@@ -69412,8 +69432,8 @@ module Aws::EC2
     #               of IDs cannot exceed the maximum number of security groups allowed per network
     #               interface.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -69434,7 +69454,7 @@ module Aws::EC2
     end
 
     # <p>Stops advertising an address range that is provisioned as an address pool.</p>
-    #          <p>You can perform this operation at most once every 10 seconds, even if you specify different
+    #          <p>You can perform this operation at most once every 10 seconds, even if you specify different 
     #          address ranges each time.</p>
     #          <p>It can take a few minutes before traffic to the specified addresses stops routing to Amazon Web Services
     #           because of BGP propagation delays.</p>
@@ -69442,8 +69462,8 @@ module Aws::EC2
     # @option params [String] :cidr
     #   <p>The address range, in CIDR notation.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -69531,7 +69551,8 @@ module Aws::EC2
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

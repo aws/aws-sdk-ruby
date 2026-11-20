@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -44,7 +45,6 @@ module Aws::DocDB
     @identifier = :docdb
 
     add_plugin(::Aws::DocDB::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -64,6 +64,8 @@ module Aws::DocDB
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -141,23 +143,41 @@ module Aws::DocDB
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -722,7 +742,7 @@ module Aws::DocDB
     #   <p>The cluster identifier of the new global cluster.</p>
     # @option params [String] :storage_type
     #   <p>The storage type to associate with the DB cluster.</p>
-    #            <p>For information on storage types for Amazon DocumentDB clusters, see
+    #            <p>For information on storage types for Amazon DocumentDB clusters, see 
     #               Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>
     #            <p>Valid values for storage type - <code>standard | iopt1</code>
     #            </p>
@@ -740,15 +760,15 @@ module Aws::DocDB
     # @option params [String] :master_user_secret_kms_key_id
     #   <p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and managed in Amazon Web Services Secrets Manager.
     #               This setting is valid only if the master user password is managed by Amazon DocumentDB in Amazon Web Services Secrets Manager for the DB cluster.</p>
-    #            <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
+    #            <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. 
     #               To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>
-    #            <p>If you don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> KMS key is used to encrypt the secret.
+    #            <p>If you don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> KMS key is used to encrypt the secret. 
     #               If the secret is in a different Amazon Web Services account, then you can't use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer managed KMS key.</p>
-    #            <p>There is a default KMS key for your Amazon Web Services account.
+    #            <p>There is a default KMS key for your Amazon Web Services account. 
     #               Your Amazon Web Services account has a different default KMS key for each Amazon Web Services Region.</p>
     # @option params [String] :network_type
     #   <p>The network type of the cluster.</p>
-    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster.
+    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster. 
     #               A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>
     #            <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>
@@ -1086,10 +1106,10 @@ module Aws::DocDB
     #               default KMS key for each Amazon Web Services region.</p>
     # @option params [String] :ca_certificate_identifier
     #   <p>The CA certificate identifier to use for the DB instance's server certificate.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html">Updating Your Amazon DocumentDB TLS
-    #               Certificates</a> and
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html">Updating Your Amazon DocumentDB TLS 
+    #               Certificates</a> and 
     #               <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html">
-    #                   Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer
+    #                   Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer 
     #                       Guide</i>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1351,10 +1371,10 @@ module Aws::DocDB
       request.send_request(options)
     end
 
-    # <p>Creates an Amazon DocumentDB global cluster that can span multiple multiple Amazon Web Services Regions.
+    # <p>Creates an Amazon DocumentDB global cluster that can span multiple multiple Amazon Web Services Regions. 
     #             The global cluster contains one primary cluster with read-write capability, and up-to 10 read-only secondary clusters. Global clusters uses storage-based fast replication across regions with latencies less than one second, using dedicated infrastructure with no impact to your workload’s performance.</p>
     #          <p></p>
-    #          <p>You can create a global cluster that is initially empty, and then add a primary and a secondary to it.
+    #          <p>You can create a global cluster that is initially empty, and then add a primary and a secondary to it. 
     #             Or you can specify an existing cluster during the create operation, and this cluster becomes the primary of the global cluster. </p>
     #          <note>
     #             <p>This action only applies to Amazon DocumentDB clusters.</p>
@@ -3164,13 +3184,13 @@ module Aws::DocDB
     end
 
     # <p>Promotes the specified secondary DB cluster to be the primary DB cluster in the global cluster when failing over a global cluster occurs.</p>
-    #          <p>Use this operation to respond to an unplanned event, such as a regional disaster in the primary region.
-    #             Failing over can result in a loss of write transaction data that wasn't replicated to the chosen secondary before the failover event occurred.
+    #          <p>Use this operation to respond to an unplanned event, such as a regional disaster in the primary region. 
+    #             Failing over can result in a loss of write transaction data that wasn't replicated to the chosen secondary before the failover event occurred. 
     #             However, the recovery process that promotes a DB instance on the chosen seconday DB cluster to be the primary writer DB instance guarantees that the data is in a transactionally consistent state.</p>
     # @param [Hash, Types::FailoverGlobalClusterMessage] params
     # @option params [String] :global_cluster_identifier
-    #   <p>The identifier of the Amazon DocumentDB global cluster to apply this operation.
-    #               The identifier is the unique key assigned by the user when the cluster is created.
+    #   <p>The identifier of the Amazon DocumentDB global cluster to apply this operation. 
+    #               The identifier is the unique key assigned by the user when the cluster is created. 
     #               In other words, it's the name of the global cluster.</p>
     #            <p>Constraints:</p>
     #            <ul>
@@ -3184,7 +3204,7 @@ module Aws::DocDB
     #            <p>Pattern: <code>[A-Za-z][0-9A-Za-z-:._]*</code>
     #            </p>
     # @option params [String] :target_db_cluster_identifier
-    #   <p>The identifier of the secondary Amazon DocumentDB cluster that you want to promote to the primary for the global cluster.
+    #   <p>The identifier of the secondary Amazon DocumentDB cluster that you want to promote to the primary for the global cluster. 
     #               Use the Amazon Resource Name (ARN) for the identifier so that Amazon DocumentDB can locate the cluster in its Amazon Web Services region.</p>
     #            <p>Constraints:</p>
     #            <ul>
@@ -3452,7 +3472,7 @@ module Aws::DocDB
     #               protects clusters from being accidentally deleted.</p>
     # @option params [String] :storage_type
     #   <p>The storage type to associate with the DB cluster.</p>
-    #            <p>For information on storage types for Amazon DocumentDB clusters, see
+    #            <p>For information on storage types for Amazon DocumentDB clusters, see 
     #               Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>
     #            <p>Valid values for storage type - <code>standard | iopt1</code>
     #            </p>
@@ -3462,36 +3482,36 @@ module Aws::DocDB
     #   <p>Contains the scaling configuration of an Amazon DocumentDB Serverless cluster.</p>
     # @option params [Boolean] :manage_master_user_password
     #   <p>Specifies whether to manage the master user password with Amazon Web Services Secrets Manager.
-    #               If the cluster doesn't manage the master user password with Amazon Web Services Secrets Manager, you can turn on this management.
+    #               If the cluster doesn't manage the master user password with Amazon Web Services Secrets Manager, you can turn on this management. 
     #               In this case, you can't specify <code>MasterUserPassword</code>.
-    #               If the cluster already manages the master user password with Amazon Web Services Secrets Manager, and you specify that the master user password is not managed with Amazon Web Services Secrets Manager, then you must specify <code>MasterUserPassword</code>.
+    #               If the cluster already manages the master user password with Amazon Web Services Secrets Manager, and you specify that the master user password is not managed with Amazon Web Services Secrets Manager, then you must specify <code>MasterUserPassword</code>. 
     #               In this case, Amazon DocumentDB deletes the secret and uses the new password for the master user specified by <code>MasterUserPassword</code>.</p>
     # @option params [String] :master_user_secret_kms_key_id
     #   <p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and managed in Amazon Web Services Secrets Manager.</p>
     #            <p>This setting is valid only if both of the following conditions are met:</p>
     #            <ul>
     #               <li>
-    #                  <p>The cluster doesn't manage the master user password in Amazon Web Services Secrets Manager.
+    #                  <p>The cluster doesn't manage the master user password in Amazon Web Services Secrets Manager. 
     #                   If the cluster already manages the master user password in Amazon Web Services Secrets Manager, you can't change the KMS key that is used to encrypt the secret.</p>
     #               </li>
     #               <li>
-    #                  <p>You are enabling <code>ManageMasterUserPassword</code> to manage the master user password in Amazon Web Services Secrets Manager.
-    #                   If you are turning on <code>ManageMasterUserPassword</code> and don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> KMS key is used to encrypt the secret.
+    #                  <p>You are enabling <code>ManageMasterUserPassword</code> to manage the master user password in Amazon Web Services Secrets Manager. 
+    #                   If you are turning on <code>ManageMasterUserPassword</code> and don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> KMS key is used to encrypt the secret. 
     #                   If the secret is in a different Amazon Web Services account, then you can't use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer managed KMS key.</p>
     #               </li>
     #            </ul>
-    #            <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
+    #            <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. 
     #               To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>
-    #            <p>There is a default KMS key for your Amazon Web Services account.
+    #            <p>There is a default KMS key for your Amazon Web Services account. 
     #               Your Amazon Web Services account has a different default KMS key for each Amazon Web Services Region.</p>
     # @option params [Boolean] :rotate_master_user_password
     #   <p>Specifies whether to rotate the secret managed by Amazon Web Services Secrets Manager for the master user password.</p>
-    #            <p>This setting is valid only if the master user password is managed by Amazon DocumentDB in Amazon Web Services Secrets Manager for the cluster.
+    #            <p>This setting is valid only if the master user password is managed by Amazon DocumentDB in Amazon Web Services Secrets Manager for the cluster. 
     #               The secret value contains the updated password.</p>
     #            <p>Constraint: You must apply the change immediately when rotating the master user password.</p>
     # @option params [String] :network_type
     #   <p>The network type of the cluster.</p>
-    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster.
+    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster. 
     #               A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>
     #            <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>
@@ -3611,7 +3631,7 @@ module Aws::DocDB
     #          <note>
     #             <p>Changes to dynamic parameters are applied immediately. Changes to static
     #                 parameters require a reboot or maintenance window
-    #
+    #                 
     #                 before the change can take effect.</p>
     #          </note>
     #          <important>
@@ -3781,17 +3801,17 @@ module Aws::DocDB
     #               Amazon Web Services account. Your Amazon Web Services account has a different
     #               default KMS key for each Amazon Web Services region.</p>
     # @option params [Boolean] :certificate_rotation_restart
-    #   <p>Specifies whether the DB instance is restarted when you rotate your
+    #   <p>Specifies whether the DB instance is restarted when you rotate your 
     #               SSL/TLS certificate.</p>
-    #            <p>By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate
+    #            <p>By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate 
     #               is not updated until the DB instance is restarted.</p>
     #            <important>
     #               <p>Set this parameter only if you are <i>not</i> using SSL/TLS to connect to the DB instance.</p>
     #            </important>
-    #            <p>If you are using SSL/TLS to connect to the DB instance, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html">Updating Your Amazon DocumentDB TLS
-    #               Certificates</a> and
+    #            <p>If you are using SSL/TLS to connect to the DB instance, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html">Updating Your Amazon DocumentDB TLS 
+    #               Certificates</a> and 
     #               <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html">
-    #                   Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer
+    #                   Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer 
     #                       Guide</i>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -4453,7 +4473,7 @@ module Aws::DocDB
     #   <p>Contains the scaling configuration of an Amazon DocumentDB Serverless cluster.</p>
     # @option params [String] :storage_type
     #   <p>The storage type to associate with the DB cluster.</p>
-    #            <p>For information on storage types for Amazon DocumentDB clusters, see
+    #            <p>For information on storage types for Amazon DocumentDB clusters, see 
     #               Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>
     #            <p>Valid values for storage type - <code>standard | iopt1</code>
     #            </p>
@@ -4461,7 +4481,7 @@ module Aws::DocDB
     #            </p>
     # @option params [String] :network_type
     #   <p>The network type of the cluster.</p>
-    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster.
+    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster. 
     #               A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>
     #            <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>
@@ -4682,7 +4702,7 @@ module Aws::DocDB
     #   <p>Contains the scaling configuration of an Amazon DocumentDB Serverless cluster.</p>
     # @option params [String] :storage_type
     #   <p>The storage type to associate with the DB cluster.</p>
-    #            <p>For information on storage types for Amazon DocumentDB clusters, see
+    #            <p>For information on storage types for Amazon DocumentDB clusters, see 
     #               Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>
     #            <p>Valid values for storage type - <code>standard | iopt1</code>
     #            </p>
@@ -4690,7 +4710,7 @@ module Aws::DocDB
     #            </p>
     # @option params [String] :network_type
     #   <p>The network type of the cluster.</p>
-    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster.
+    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster. 
     #               A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>
     #            <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>
@@ -4980,8 +5000,8 @@ module Aws::DocDB
     # <p>Switches over the specified secondary Amazon DocumentDB cluster to be the new primary Amazon DocumentDB cluster in the global database cluster.</p>
     # @param [Hash, Types::SwitchoverGlobalClusterMessage] params
     # @option params [String] :global_cluster_identifier
-    #   <p>The identifier of the Amazon DocumentDB global database cluster to switch over.
-    #           The identifier is the unique key assigned by the user when the cluster is created.
+    #   <p>The identifier of the Amazon DocumentDB global database cluster to switch over. 
+    #           The identifier is the unique key assigned by the user when the cluster is created. 
     #           In other words, it's the name of the global cluster.
     #           This parameter isn’t case-sensitive.</p>
     #            <p>Constraints:</p>
@@ -4996,7 +5016,7 @@ module Aws::DocDB
     #            <p>Pattern: <code>[A-Za-z][0-9A-Za-z-:._]*</code>
     #            </p>
     # @option params [String] :target_db_cluster_identifier
-    #   <p>The identifier of the secondary Amazon DocumentDB cluster to promote to the new primary for the global database cluster.
+    #   <p>The identifier of the secondary Amazon DocumentDB cluster to promote to the new primary for the global database cluster. 
     #               Use the Amazon Resource Name (ARN) for the identifier so that Amazon DocumentDB can locate the cluster in its Amazon Web Services region.</p>
     #            <p>Constraints:</p>
     #            <ul>
@@ -5108,7 +5128,8 @@ module Aws::DocDB
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

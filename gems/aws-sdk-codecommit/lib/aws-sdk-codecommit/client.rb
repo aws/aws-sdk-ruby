@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::CodeCommit
     @identifier = :codecommit
 
     add_plugin(::Aws::CodeCommit::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::CodeCommit
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::CodeCommit
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -535,7 +555,7 @@ module Aws::CodeCommit
     end
 
     # <p>Creates a template for approval rules that can then be associated with one or more
-    #             repositories in your Amazon Web Services account. When you associate a template with a repository,
+    #             repositories in your Amazon Web Services account. When you associate a template with a repository, 
     #             CodeCommit creates an approval rule that matches the conditions of the template for all
     #             pull requests that meet the conditions of the template. For more information, see
     #             <a>AssociateApprovalRuleTemplateWithRepository</a>.</p>
@@ -933,8 +953,8 @@ module Aws::CodeCommit
     #   <p>One or more tag key-value pairs to use when tagging this repository.</p>
     # @option params [String] :kms_key_id
     #   <p>The ID of the encryption key. You can view the ID of an encryption key in the KMS console, or use the KMS APIs to
-    #               programmatically retrieve a key ID. For more information about acceptable values for kmsKeyID, see
-    #               <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId">KeyId</a> in the Decrypt API description in
+    #               programmatically retrieve a key ID. For more information about acceptable values for kmsKeyID, see 
+    #               <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId">KeyId</a> in the Decrypt API description in 
     #               the <i>Key Management Service API Reference</i>.</p>
     #            <p>If no key is specified, the default <code>aws/codecommit</code> Amazon Web Services managed key is used.</p>
     # @example Request syntax with placeholder values
@@ -976,7 +996,7 @@ module Aws::CodeCommit
     #             merge. This API cannot be used with the fast-forward merge strategy because that
     #             strategy does not create a merge commit.</p>
     #          <note>
-    #             <p>This unreferenced merge commit
+    #             <p>This unreferenced merge commit 
     #         can only be accessed using the GetCommit API or through git commands such as git fetch. To retrieve this commit, you must specify its commit ID or otherwise reference it.</p>
     #          </note>
     # @param [Hash, Types::CreateUnreferencedMergeCommitInput] params
@@ -1202,8 +1222,8 @@ module Aws::CodeCommit
       request.send_request(options)
     end
 
-    # <p>Deletes an approval rule from a specified pull request. Approval rules can be deleted from a pull request only if the pull request is open, and if the
-    #             approval rule was created specifically for a pull request and not generated from an approval rule template associated with the repository where the
+    # <p>Deletes an approval rule from a specified pull request. Approval rules can be deleted from a pull request only if the pull request is open, and if the 
+    #             approval rule was created specifically for a pull request and not generated from an approval rule template associated with the repository where the 
     #             pull request was created. You cannot delete an approval rule from a merged or closed pull request.</p>
     # @param [Hash, Types::DeletePullRequestApprovalRuleInput] params
     # @option params [String] :pull_request_id
@@ -1377,7 +1397,7 @@ module Aws::CodeCommit
     #   <p>An enumeration token that, when provided in a request, returns the next batch of the
     #               results.</p>
     # @option params [Integer] :max_results
-    #   <p>A non-zero, non-negative integer used to limit the number of returned results.
+    #   <p>A non-zero, non-negative integer used to limit the number of returned results. 
     #               The default is 100 events, which is also the maximum number of events that can be returned in a result.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1659,7 +1679,7 @@ module Aws::CodeCommit
 
     # <p>Returns the content of a comment made on a change, file, or commit in a repository. </p>
     #          <note>
-    #             <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of
+    #             <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of 
     #         reactions from active identities, use GetCommentReactions.</p>
     #          </note>
     # @param [Hash, Types::GetCommentInput] params
@@ -1739,7 +1759,7 @@ module Aws::CodeCommit
 
     # <p>Returns information about comments made on the comparison between two commits.</p>
     #          <note>
-    #             <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of
+    #             <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of 
     #             reactions from active identities, use GetCommentReactions.</p>
     #          </note>
     # @param [Hash, Types::GetCommentsForComparedCommitInput] params
@@ -1809,20 +1829,20 @@ module Aws::CodeCommit
 
     # <p>Returns comments made on a pull request.</p>
     #          <note>
-    #             <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of
+    #             <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of 
     #             reactions from active identities, use GetCommentReactions.</p>
     #          </note>
     # @param [Hash, Types::GetCommentsForPullRequestInput] params
     # @option params [String] :pull_request_id
     #   <p>The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.</p>
     # @option params [String] :repository_name
-    #   <p>The name of the repository that contains the pull request. Requirement is conditional: <code>repositoryName</code> must be specified when
+    #   <p>The name of the repository that contains the pull request. Requirement is conditional: <code>repositoryName</code> must be specified when 
     #               <code>beforeCommitId</code> and <code>afterCommitId</code> are included.</p>
     # @option params [String] :before_commit_id
-    #   <p>The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was created. Requirement is conditional:
+    #   <p>The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was created. Requirement is conditional: 
     #               <code>beforeCommitId</code> must be specified when <code>repositoryName</code> is included.</p>
     # @option params [String] :after_commit_id
-    #   <p>The full commit ID of the commit in the source branch that was the tip of the branch at the time the comment was made. Requirement is conditional:
+    #   <p>The full commit ID of the commit in the source branch that was the tip of the branch at the time the comment was made. Requirement is conditional: 
     #               <code>afterCommitId</code> must be specified when <code>repositoryName</code> is included.</p>
     # @option params [String] :next_token
     #   <p>An enumeration token that, when provided in a request, returns the next batch of the
@@ -2358,7 +2378,7 @@ module Aws::CodeCommit
       request.send_request(options)
     end
 
-    # <p>Returns information about whether approval rules have been set aside (overridden) for a
+    # <p>Returns information about whether approval rules have been set aside (overridden) for a 
     #             pull request, and if so, the Amazon Resource Name (ARN) of the user or identity that overrode the rules and their requirements for the pull request.</p>
     # @param [Hash, Types::GetPullRequestOverrideStateInput] params
     # @option params [String] :pull_request_id
@@ -2596,13 +2616,13 @@ module Aws::CodeCommit
       request.send_request(options)
     end
 
-    # <p>Returns a list of pull requests for a specified repository. The return list can be refined by pull request
+    # <p>Returns a list of pull requests for a specified repository. The return list can be refined by pull request 
     #         status or pull request author ARN.</p>
     # @param [Hash, Types::ListPullRequestsInput] params
     # @option params [String] :repository_name
     #   <p>The name of the repository for which you want to list pull requests.</p>
     # @option params [String] :author_arn
-    #   <p>Optional. The Amazon Resource Name (ARN) of the user who created the pull request. If used, this filters the results
+    #   <p>Optional. The Amazon Resource Name (ARN) of the user who created the pull request. If used, this filters the results 
     #           to pull requests created by that user.</p>
     # @option params [String] :pull_request_status
     #   <p>Optional. The status of the pull request. If used, this refines the results to the pull requests that match the specified status.</p>
@@ -2636,7 +2656,7 @@ module Aws::CodeCommit
     # <p>Gets information about one or more repositories.</p>
     # @param [Hash, Types::ListRepositoriesInput] params
     # @option params [String] :next_token
-    #   <p>An enumeration token that allows the operation to batch the results of the operation.
+    #   <p>An enumeration token that allows the operation to batch the results of the operation. 
     #               Batch sizes are 1,000 for list repository operations. When the client sends the token back to CodeCommit,
     #               another page of 1,000 records is retrieved.</p>
     # @option params [String] :sort_by
@@ -2936,7 +2956,7 @@ module Aws::CodeCommit
     # @option params [String] :repository_name
     #   <p>The name of the repository where the pull request was created.</p>
     # @option params [String] :source_commit_id
-    #   <p>The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an
+    #   <p>The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an 
     #           exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3006,7 +3026,7 @@ module Aws::CodeCommit
     # @option params [String] :repository_name
     #   <p>The name of the repository where the pull request was created.</p>
     # @option params [String] :source_commit_id
-    #   <p>The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an
+    #   <p>The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an 
     #               exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.</p>
     # @option params [String] :conflict_detail_level
     #   <p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used,
@@ -3127,7 +3147,7 @@ module Aws::CodeCommit
     # @option params [String] :repository_name
     #   <p>The name of the repository where the pull request was created.</p>
     # @option params [String] :source_commit_id
-    #   <p>The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an
+    #   <p>The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an 
     #               exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.</p>
     # @option params [String] :conflict_detail_level
     #   <p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used,
@@ -3250,7 +3270,7 @@ module Aws::CodeCommit
     #   <p>The system-generated ID of the most recent revision of the pull request. You cannot override approval rules for anything but the most recent revision of a pull request.
     #               To get the revision ID, use GetPullRequest.</p>
     # @option params [String] :override_status
-    #   <p>Whether you want to set aside approval rule requirements for the pull request (OVERRIDE) or revoke a previous override and apply
+    #   <p>Whether you want to set aside approval rule requirements for the pull request (OVERRIDE) or revoke a previous override and apply 
     #           approval rule requirements (REVOKE). REVOKE status is not stored.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3413,7 +3433,7 @@ module Aws::CodeCommit
     # <p>Posts a comment in reply to an existing comment on a comparison between commits or a pull request.</p>
     # @param [Hash, Types::PostCommentReplyInput] params
     # @option params [String] :in_reply_to
-    #   <p>The system-generated ID of the comment to which you want to reply. To get this ID, use <a>GetCommentsForComparedCommit</a>
+    #   <p>The system-generated ID of the comment to which you want to reply. To get this ID, use <a>GetCommentsForComparedCommit</a> 
     #           or <a>GetCommentsForPullRequest</a>.</p>
     # @option params [String] :client_request_token
     #   <p>A unique, client-generated idempotency token that, when provided in a request, ensures
@@ -3497,7 +3517,7 @@ module Aws::CodeCommit
     #   <p>The file mode permissions of the blob. Valid file mode permissions are listed
     #               here.</p>
     # @option params [String] :parent_commit_id
-    #   <p>The full commit ID of the head commit in the branch where you want to add or update the file. If this is an empty repository,
+    #   <p>The full commit ID of the head commit in the branch where you want to add or update the file. If this is an empty repository, 
     #               no commit ID is required. If this is not an empty repository, a commit ID is required. </p>
     #            <p>The commit ID must match the ID of the head commit at the time of the operation.
     #               Otherwise, an error occurs, and the file is not added or updated.</p>
@@ -3767,7 +3787,7 @@ module Aws::CodeCommit
     # <p>Replaces the contents of a comment.</p>
     # @param [Hash, Types::UpdateCommentInput] params
     # @option params [String] :comment_id
-    #   <p>The system-generated ID of the comment you want to update. To get this ID, use <a>GetCommentsForComparedCommit</a>
+    #   <p>The system-generated ID of the comment you want to update. To get this ID, use <a>GetCommentsForComparedCommit</a> 
     #               or <a>GetCommentsForPullRequest</a>.</p>
     # @option params [String] :content
     #   <p>The updated content to replace the existing content of the comment.</p>
@@ -3827,7 +3847,7 @@ module Aws::CodeCommit
       request.send_request(options)
     end
 
-    # <p>Updates the structure of an approval rule created specifically for a pull request. For example, you can change the number of required approvers and
+    # <p>Updates the structure of an approval rule created specifically for a pull request. For example, you can change the number of required approvers and 
     #             the approval pool for approvers. </p>
     # @param [Hash, Types::UpdatePullRequestApprovalRuleContentInput] params
     # @option params [String] :pull_request_id
@@ -4169,8 +4189,8 @@ module Aws::CodeCommit
     #   <p>The name of the repository for which you want to update the KMS encryption key used to encrypt and decrypt the repository.</p>
     # @option params [String] :kms_key_id
     #   <p>The ID of the encryption key. You can view the ID of an encryption key in the KMS console, or use the KMS APIs to
-    #               programmatically retrieve a key ID. For more information about acceptable values for keyID, see
-    #               <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId">KeyId</a> in the Decrypt API description in
+    #               programmatically retrieve a key ID. For more information about acceptable values for keyID, see 
+    #               <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId">KeyId</a> in the Decrypt API description in 
     #           the <i>Key Management Service API Reference</i>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -4192,7 +4212,7 @@ module Aws::CodeCommit
       request.send_request(options)
     end
 
-    # <p>Renames a repository. The repository name must be unique across the calling Amazon Web Services account.
+    # <p>Renames a repository. The repository name must be unique across the calling Amazon Web Services account. 
     #             Repository names are limited to 100 alphanumeric, dash, and underscore
     #             characters, and cannot include certain characters. The suffix .git is prohibited. For
     #             more information about the limits on repository names, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">Quotas</a> in the CodeCommit
@@ -4269,7 +4289,8 @@ module Aws::CodeCommit
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

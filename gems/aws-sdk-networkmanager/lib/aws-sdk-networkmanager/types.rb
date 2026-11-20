@@ -5032,7 +5032,7 @@ module Aws::NetworkManager
 
     # <p>Describes the status of an analysis at completion.</p>
     # @!attribute result_code
-    #   <p>The result of the analysis. If the status is <code>NOT_CONNECTED</code>, check the
+    #   <p>The result of the analysis. If the status is <code>NOT_CONNECTED</code>, check the 
     #               reason code.</p>
     #   @return [String]
     # @!attribute reason_code
@@ -5211,14 +5211,14 @@ module Aws::NetworkManager
 
     # <p>Describes the action that the service insertion will take for any segments associated with it.</p>
     # @!attribute action
-    #   <p>The action the service insertion takes for traffic.
-    #               <code>send-via</code> sends east-west traffic between attachments.
-    #               <code>send-to</code> sends north-south traffic to the
-    #               security appliance, and then from that to either the Internet or to an on-premesis
+    #   <p>The action the service insertion takes for traffic. 
+    #               <code>send-via</code> sends east-west traffic between attachments. 
+    #               <code>send-to</code> sends north-south traffic to the 
+    #               security appliance, and then from that to either the Internet or to an on-premesis 
     #               location.  </p>
     #   @return [String]
     # @!attribute mode
-    #   <p>Describes the mode packets take for the <code>send-via</code> action. This is not used when the action is <code>send-to</code>. <code>dual-hop</code> packets traverse attachments in both the source to the destination core network edges. This mode requires that an inspection attachment must be present in all Regions of the service insertion-enabled segments.
+    #   <p>Describes the mode packets take for the <code>send-via</code> action. This is not used when the action is <code>send-to</code>. <code>dual-hop</code> packets traverse attachments in both the source to the destination core network edges. This mode requires that an inspection attachment must be present in all Regions of the service insertion-enabled segments. 
     #               For <code>single-hop</code>, packets traverse a single intermediate inserted attachment. You can use <code>EdgeOverride</code> to specify a specific edge to use. </p>
     #   @return [String]
     # @!attribute when_sent_to

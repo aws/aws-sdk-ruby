@@ -7,7 +7,7 @@ module Aws::Glacier
   module Types
 
     # <p>Provides options to abort a multipart upload identified by the upload ID.</p>
-    #
+    # 
     #          <p>For information about the underlying REST API, see <a href="https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html">Abort Multipart
     #             Upload</a>. For conceptual information, see <a href="https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html">Working with Archives in
     #             Amazon Glacier</a>.</p>
@@ -171,7 +171,7 @@ module Aws::Glacier
     # @!attribute checksum
     #   <p>The SHA256 tree hash of the entire archive. It is the tree hash of SHA256 tree hash
     #            of the individual parts. If the value you specify in the request does not match the SHA256
-    #            tree hash of the final assembled archive as computed by Amazon Glacier (Glacier),
+    #            tree hash of the final assembled archive as computed by Amazon Glacier (Glacier), 
     #            Glacier returns an error and the request fails.</p>
     #   @return [String]
     class CompleteMultipartUploadInput < Struct.new(
@@ -735,13 +735,13 @@ module Aws::Glacier
     #   <p>The range of bytes to retrieve from the output. For example, if you want to download
     #            the first 1,048,576 bytes, specify the range as <code>bytes=0-1048575</code>. By default, this operation
     #            downloads the entire output.</p>
-    #
+    #         
     #            <p>If the job output is large, then you can use a range to
     #            retrieve a portion of the output. This allows you to download the entire output in smaller
     #            chunks of bytes. For example, suppose you have 1 GB of job output you want to download and
     #            you decide to download 128 MB chunks of data at a time, which is a total of eight Get Job
     #            Output requests. You use the following process to download the job output:</p>
-    #
+    #        
     #            <ol>
     #               <li>
     #                  <p>Download a 128 MB chunk of output by specifying the appropriate byte range.
@@ -1409,13 +1409,13 @@ module Aws::Glacier
     #            and "JSON".</p>
     #   @return [String]
     # @!attribute type
-    #   <p>The job type. You can initiate a job to perform a select query on an archive,
-    #            retrieve an archive, or get an inventory of a vault.
+    #   <p>The job type. You can initiate a job to perform a select query on an archive, 
+    #            retrieve an archive, or get an inventory of a vault. 
     #            Valid values are "select", "archive-retrieval" and "inventory-retrieval".</p>
     #   @return [String]
     # @!attribute archive_id
     #   <p>The ID of the archive that you want to retrieve. This field is required only if
-    #               <code>Type</code> is set to <code>select</code> or <code>archive-retrieval</code>code>.
+    #               <code>Type</code> is set to <code>select</code> or <code>archive-retrieval</code>code>. 
     #            An error occurs if you specify this
     #            request parameter for an inventory retrieval job request. </p>
     #   @return [String]
@@ -1540,10 +1540,10 @@ module Aws::Glacier
     #            job.</p>
     #   @return [Array<Types::GlacierJobDescription>]
     # @!attribute marker
-    #   <p>
-    #            An opaque string used for pagination that specifies the job at which the listing of jobs should begin.
+    #   <p>	
+    #            An opaque string used for pagination that specifies the job at which the listing of jobs should begin. 
     #            You get the <code>marker</code> value from a previous List Jobs response.
-    #            You only need to include the marker if you are continuing the pagination of the results started in a
+    #            You only need to include the marker if you are continuing the pagination of the results started in a 
     #            previous List Jobs request. </p>
     #   @return [String]
     class ListJobsOutput < Struct.new(

@@ -20,7 +20,7 @@ module Aws::Organizations
 
     # @!attribute handshake_id
     #   <p>ID for the handshake that you want to accept.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-"
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-" 
     #       followed by from 8 to 32 lowercase letters or digits.</p>
     #   @return [String]
     class AcceptHandshakeRequest < Struct.new(
@@ -82,7 +82,7 @@ module Aws::Organizations
     #   @return [String]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the account.</p>
-    #            <p>For more information about ARNs in Organizations, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies">ARN
+    #            <p>For more information about ARNs in Organizations, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies">ARN 
     #       Formats Supported by Organizations</a> in the <i>Amazon Web Services Service Authorization Reference</i>.</p>
     #   @return [String]
     # @!attribute email
@@ -92,8 +92,8 @@ module Aws::Organizations
     #   @return [String]
     # @!attribute name
     #   <p>The friendly name of the account.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
-    #       that is used to validate this parameter is a string of any of the characters in the ASCII
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
+    #       that is used to validate this parameter is a string of any of the characters in the ASCII 
     #       character range.</p>
     #   @return [String]
     # @!attribute status
@@ -214,19 +214,19 @@ module Aws::Organizations
     # @!attribute policy_id
     #   <p>ID for the policy that you want to attach to the target. You can get the ID for the
     #               policy by calling the <a>ListPolicies</a> operation.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed 
     #       by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).</p>
     #   @return [String]
     # @!attribute target_id
     #   <p>ID for the root, OU, or account that you want to attach the policy to. You can get the
     #               ID by calling the <a>ListRoots</a>, <a>ListOrganizationalUnitsForParent</a>, or <a>ListAccounts</a>
     #               operations.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or
+    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or 
     #             digits.</p>
     #               </li>
     #               <li>
@@ -235,8 +235,8 @@ module Aws::Organizations
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32
-    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second
+    #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32 
+    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second 
     #             "-" dash and from 8 to 32 additional lowercase letters or digits.</p>
     #               </li>
     #            </ul>
@@ -252,7 +252,7 @@ module Aws::Organizations
 
     # @!attribute handshake_id
     #   <p>ID for the handshake that you want to cancel. You can get the ID from the <a>ListHandshakesForOrganization</a> operation.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-"
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-" 
     #       followed by from 8 to 32 lowercase letters or digits.</p>
     #   @return [String]
     class CancelHandshakeRequest < Struct.new(
@@ -277,7 +277,7 @@ module Aws::Organizations
     # <p>Contains a list of child entities, either OUs or accounts.</p>
     # @!attribute id
     #   <p>The unique identifier (ID) of this child entity.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a child ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a child ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
@@ -287,8 +287,8 @@ module Aws::Organizations
     #               <li>
     #                  <p>
     #                     <b>Organizational unit (OU)</b> - A string that begins with
-    #             "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that
-    #             contains the OU). This string is followed by a second "-" dash and from 8 to 32 additional
+    #             "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that 
+    #             contains the OU). This string is followed by a second "-" dash and from 8 to 32 additional 
     #             lowercase letters or digits.</p>
     #               </li>
     #            </ul>
@@ -491,7 +491,7 @@ module Aws::Organizations
     #                <p>MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED: To complete this operation, the
     #                     management account must have an associated account in the Amazon Web Services GovCloud
     #                     (US-West) Region. For more information, see <a href="https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html">Organizations</a>
-    #                     in the
+    #                     in the 
     #                     <i>Amazon Web Services GovCloud User Guide</i>.</p>
     #             </li>
     #             <li>
@@ -690,8 +690,8 @@ module Aws::Organizations
     #                  </p>
     #               </li>
     #            </ul>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that
-    #       is used to validate this parameter. The pattern can include uppercase
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that 
+    #       is used to validate this parameter. The pattern can include uppercase 
     #       letters, lowercase letters, digits with no spaces, and any of the following characters: =,.@-</p>
     #   @return [String]
     # @!attribute iam_user_access_to_billing
@@ -752,7 +752,7 @@ module Aws::Organizations
     #   <p>The unique identifier (ID) that references this request. You get this value from the
     #               response of the initial <a>CreateAccount</a> request to create the
     #               account.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a create account request ID string
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a create account request ID string 
     #       requires "car-" followed by from 8 to 32 lowercase letters or digits.</p>
     #   @return [String]
     # @!attribute account_name
@@ -941,8 +941,8 @@ module Aws::Organizations
     #                  </p>
     #               </li>
     #            </ul>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that
-    #       is used to validate this parameter. The pattern can include uppercase
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that 
+    #       is used to validate this parameter. The pattern can include uppercase 
     #       letters, lowercase letters, digits with no spaces, and any of the following characters: =,.@-</p>
     #   @return [String]
     # @!attribute iam_user_access_to_billing
@@ -1039,18 +1039,18 @@ module Aws::Organizations
 
     # @!attribute parent_id
     #   <p>ID for the parent root or OU that you want to create the new OU in.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or
+    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or 
     #             digits.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32
-    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second
+    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second 
     #             "-" dash and from 8 to 32 additional lowercase letters or digits.</p>
     #               </li>
     #            </ul>
@@ -1102,8 +1102,8 @@ module Aws::Organizations
     #   @return [String]
     # @!attribute name
     #   <p>The friendly name to assign to the policy.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
-    #       that is used to validate this parameter is a string of any of the characters in the ASCII
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
+    #       that is used to validate this parameter is a string of any of the characters in the ASCII 
     #       character range.</p>
     #   @return [String]
     # @!attribute type
@@ -1217,7 +1217,7 @@ module Aws::Organizations
 
     # @!attribute handshake_id
     #   <p>ID for the handshake that you want to decline. You can get the ID from the <a>ListHandshakesForAccount</a> operation.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-"
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-" 
     #       followed by from 8 to 32 lowercase letters or digits.</p>
     #   @return [String]
     class DeclineHandshakeRequest < Struct.new(
@@ -1313,9 +1313,9 @@ module Aws::Organizations
     # @!attribute organizational_unit_id
     #   <p>ID for the organizational unit that you want to delete. You can get the ID from the
     #                   <a>ListOrganizationalUnitsForParent</a> operation.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires
-    #       "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the
-    #       OU). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires 
+    #       "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the 
+    #       OU). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters 
     #       or digits.</p>
     #   @return [String]
     class DeleteOrganizationalUnitRequest < Struct.new(
@@ -1329,7 +1329,7 @@ module Aws::Organizations
     # @!attribute policy_id
     #   <p>ID for the policy that you want to delete. You can get the ID from the <a>ListPolicies</a> or <a>ListPoliciesForTarget</a>
     #               operations.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed 
     #       by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).</p>
     #   @return [String]
     class DeletePolicyRequest < Struct.new(
@@ -1397,7 +1397,7 @@ module Aws::Organizations
     #   <p>Specifies the <code>Id</code> value that uniquely identifies the
     #                   <code>CreateAccount</code> request. You can get the value from the
     #                   <code>CreateAccountStatus.Id</code> response in an earlier <a>CreateAccount</a> request, or from the <a>ListCreateAccountStatus</a> operation.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a create account request ID string
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a create account request ID string 
     #       requires "car-" followed by from 8 to 32 lowercase letters or digits.</p>
     #   @return [String]
     class DescribeCreateAccountStatusRequest < Struct.new(
@@ -1512,7 +1512,7 @@ module Aws::Organizations
 
     # @!attribute handshake_id
     #   <p>ID for the handshake that you want information about.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-"
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-" 
     #       followed by from 8 to 32 lowercase letters or digits.</p>
     #   @return [String]
     class DescribeHandshakeRequest < Struct.new(
@@ -1556,9 +1556,9 @@ module Aws::Organizations
     # @!attribute organizational_unit_id
     #   <p>ID for the organizational unit that you want details about. You can get the ID from
     #               the <a>ListOrganizationalUnitsForParent</a> operation.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires
-    #       "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the
-    #       OU). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires 
+    #       "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the 
+    #       OU). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters 
     #       or digits.</p>
     #   @return [String]
     class DescribeOrganizationalUnitRequest < Struct.new(
@@ -1583,7 +1583,7 @@ module Aws::Organizations
     # @!attribute policy_id
     #   <p>ID for the policy that you want details about. You can get the ID from the <a>ListPolicies</a> or <a>ListPoliciesForTarget</a>
     #               operations.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed 
     #       by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).</p>
     #   @return [String]
     class DescribePolicyRequest < Struct.new(
@@ -1653,19 +1653,19 @@ module Aws::Organizations
     # @!attribute policy_id
     #   <p>ID for the policy you want to detach. You can get the ID from the <a>ListPolicies</a> or <a>ListPoliciesForTarget</a>
     #               operations.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed 
     #       by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).</p>
     #   @return [String]
     # @!attribute target_id
     #   <p>ID for the root, OU, or account that you want to detach the policy from. You can get
     #               the ID from the <a>ListRoots</a>, <a>ListOrganizationalUnitsForParent</a>, or <a>ListAccounts</a>
     #               operations.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or
+    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or 
     #             digits.</p>
     #               </li>
     #               <li>
@@ -1674,8 +1674,8 @@ module Aws::Organizations
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32
-    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second
+    #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32 
+    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second 
     #             "-" dash and from 8 to 32 additional lowercase letters or digits.</p>
     #               </li>
     #            </ul>
@@ -1706,7 +1706,7 @@ module Aws::Organizations
     # @!attribute root_id
     #   <p>ID for the root in which you want to disable a policy type. You can get the ID from
     #               the <a>ListRoots</a> operation.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a root ID string requires "r-" followed by
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a root ID string requires "r-" followed by 
     #       from 4 to 32 lowercase letters or digits.</p>
     #   @return [String]
     # @!attribute policy_type
@@ -1969,7 +1969,7 @@ module Aws::Organizations
     # @!attribute root_id
     #   <p>ID for the root in which you want to enable a policy type. You can get the ID from the
     #                   <a>ListRoots</a> operation.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a root ID string requires "r-" followed by
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a root ID string requires "r-" followed by 
     #       from 4 to 32 lowercase letters or digits.</p>
     #   @return [String]
     # @!attribute policy_type
@@ -2108,12 +2108,12 @@ module Aws::Organizations
     #             lists for only 30 days after entering that state After that they are deleted.</p>
     # @!attribute id
     #   <p>ID for the handshake.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-"
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-" 
     #       followed by from 8 to 32 lowercase letters or digits.</p>
     #   @return [String]
     # @!attribute arn
     #   <p>Amazon Resource Name (ARN) for the handshake.</p>
-    #            <p>For more information about ARNs in Organizations, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies">ARN
+    #            <p>For more information about ARNs in Organizations, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies">ARN 
     #       Formats Supported by Organizations</a> in the <i>Amazon Web Services Service Authorization Reference</i>.</p>
     #   @return [String]
     # @!attribute parties
@@ -2320,7 +2320,7 @@ module Aws::Organizations
     #               type.</p>
     #            <p>If you specify <code>ParentHandshakeId</code>, you cannot also specify
     #                   <code>ActionType</code>.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-"
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-" 
     #       followed by from 8 to 32 lowercase letters or digits.</p>
     #   @return [String]
     class HandshakeFilter < Struct.new(
@@ -2346,7 +2346,7 @@ module Aws::Organizations
     # <p>Contains details for a participant in a handshake.</p>
     # @!attribute id
     #   <p>ID for the participant: Acccount ID, organization ID, or email address.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-"
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-" 
     #       followed by from 8 to 32 lowercase letters or digits.</p>
     #   @return [String]
     # @!attribute type
@@ -2744,10 +2744,10 @@ module Aws::Organizations
     end
 
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
@@ -2768,9 +2768,9 @@ module Aws::Organizations
     #               that it was enabled for integration with Organizations.</p>
     #   @return [Array<Types::EnabledServicePrincipal>]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListAWSServiceAccessForOrganizationResponse < Struct.new(
@@ -2787,10 +2787,10 @@ module Aws::Organizations
     #               accounts you want to list.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
@@ -2817,9 +2817,9 @@ module Aws::Organizations
     #            </important>
     #   @return [Array<Types::Account>]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListAccountsForParentResponse < Struct.new(
@@ -2832,10 +2832,10 @@ module Aws::Organizations
     end
 
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
@@ -2861,9 +2861,9 @@ module Aws::Organizations
     #            </important>
     #   @return [Array<Types::Account>]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListAccountsResponse < Struct.new(
@@ -2942,10 +2942,10 @@ module Aws::Organizations
     #            </ul>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
@@ -3031,9 +3031,9 @@ module Aws::Organizations
     #            </ul>
     #   @return [String]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListAccountsWithInvalidEffectivePolicyResponse < Struct.new(
@@ -3049,18 +3049,18 @@ module Aws::Organizations
     # @!attribute parent_id
     #   <p>The unique identifier (ID) for the parent root or OU whose children you want to
     #               list.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or
+    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or 
     #             digits.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32
-    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second
+    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second 
     #             "-" dash and from 8 to 32 additional lowercase letters or digits.</p>
     #               </li>
     #            </ul>
@@ -3069,10 +3069,10 @@ module Aws::Organizations
     #   <p>Filters the output to include only the specified child type.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
@@ -3093,9 +3093,9 @@ module Aws::Organizations
     #   <p>The list of children of the specified parent container.</p>
     #   @return [Array<Types::Child>]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListChildrenResponse < Struct.new(
@@ -3112,10 +3112,10 @@ module Aws::Organizations
     #               isn't present, all requests are included in the response.</p>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
@@ -3137,9 +3137,9 @@ module Aws::Organizations
     #               created.</p>
     #   @return [Array<Types::CreateAccountStatus>]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListCreateAccountStatusResponse < Struct.new(
@@ -3158,10 +3158,10 @@ module Aws::Organizations
     #               administrators for all services in your organization.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
@@ -3181,9 +3181,9 @@ module Aws::Organizations
     #   <p>The list of delegated administrators in your organization.</p>
     #   @return [Array<Types::DelegatedAdministrator>]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListDelegatedAdministratorsResponse < Struct.new(
@@ -3199,10 +3199,10 @@ module Aws::Organizations
     #   <p>The account ID number of a delegated administrator account in the organization.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
@@ -3222,9 +3222,9 @@ module Aws::Organizations
     #   <p>The services for which the account is a delegated administrator.</p>
     #   @return [Array<Types::DelegatedService>]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListDelegatedServicesForAccountResponse < Struct.new(
@@ -3307,10 +3307,10 @@ module Aws::Organizations
     #            </ul>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
@@ -3403,9 +3403,9 @@ module Aws::Organizations
     #               account.</p>
     #   @return [Time]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     # @!attribute effective_policy_validation_errors
@@ -3431,10 +3431,10 @@ module Aws::Organizations
     #               handshakes for an operation.</p>
     #   @return [Types::HandshakeFilter]
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
@@ -3454,9 +3454,9 @@ module Aws::Organizations
     #   <p>An array of <code>Handshake</code>objects. Contains details for a handshake.</p>
     #   @return [Array<Types::Handshake>]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListHandshakesForAccountResponse < Struct.new(
@@ -3473,10 +3473,10 @@ module Aws::Organizations
     #               handshakes for an operation.</p>
     #   @return [Types::HandshakeFilter]
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
@@ -3496,9 +3496,9 @@ module Aws::Organizations
     #   <p>An array of <code>Handshake</code>objects. Contains details for a handshake.</p>
     #   @return [Array<Types::Handshake>]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListHandshakesForOrganizationResponse < Struct.new(
@@ -3517,10 +3517,10 @@ module Aws::Organizations
     #   <p>ID for the transfer.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
@@ -3541,9 +3541,9 @@ module Aws::Organizations
     #   <p>A <code>ResponsibilityTransfers</code> object. Contains details for a transfer.</p>
     #   @return [Array<Types::ResponsibilityTransfer>]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListInboundResponsibilityTransfersResponse < Struct.new(
@@ -3557,27 +3557,27 @@ module Aws::Organizations
 
     # @!attribute parent_id
     #   <p>ID for the root or OU whose child OUs you want to list.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or
+    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or 
     #             digits.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32
-    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second
+    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second 
     #             "-" dash and from 8 to 32 additional lowercase letters or digits.</p>
     #               </li>
     #            </ul>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
@@ -3597,9 +3597,9 @@ module Aws::Organizations
     #   <p>A list of the OUs in the specified root or parent OU.</p>
     #   @return [Array<Types::OrganizationalUnit>]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListOrganizationalUnitsForParentResponse < Struct.new(
@@ -3615,10 +3615,10 @@ module Aws::Organizations
     #   <p>The type of responsibility. Currently, only <code>BILLING</code> is supported.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
@@ -3639,9 +3639,9 @@ module Aws::Organizations
     #               transfer.</p>
     #   @return [Array<Types::ResponsibilityTransfer>]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListOutboundResponsibilityTransfersResponse < Struct.new(
@@ -3656,7 +3656,7 @@ module Aws::Organizations
     # @!attribute child_id
     #   <p>ID for the OU or account whose parent containers you want to list. Don't specify a
     #               root.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a child ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a child ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
@@ -3666,17 +3666,17 @@ module Aws::Organizations
     #               <li>
     #                  <p>
     #                     <b>Organizational unit (OU)</b> - A string that begins with
-    #             "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that
-    #             contains the OU). This string is followed by a second "-" dash and from 8 to 32 additional
+    #             "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that 
+    #             contains the OU). This string is followed by a second "-" dash and from 8 to 32 additional 
     #             lowercase letters or digits.</p>
     #               </li>
     #            </ul>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
@@ -3696,9 +3696,9 @@ module Aws::Organizations
     #   <p>A list of parents for the specified child account or OU.</p>
     #   @return [Array<Types::Parent>]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListParentsResponse < Struct.new(
@@ -3713,12 +3713,12 @@ module Aws::Organizations
     # @!attribute target_id
     #   <p>ID for the root, organizational unit, or account whose policies you want to
     #               list.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or
+    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or 
     #             digits.</p>
     #               </li>
     #               <li>
@@ -3727,8 +3727,8 @@ module Aws::Organizations
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32
-    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second
+    #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32 
+    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second 
     #             "-" dash and from 8 to 32 additional lowercase letters or digits.</p>
     #               </li>
     #            </ul>
@@ -3810,10 +3810,10 @@ module Aws::Organizations
     #            </ul>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
@@ -3834,9 +3834,9 @@ module Aws::Organizations
     #   <p>The list of policies that match the criteria in the request.</p>
     #   @return [Array<Types::PolicySummary>]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListPoliciesForTargetResponse < Struct.new(
@@ -3925,10 +3925,10 @@ module Aws::Organizations
     #            </ul>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
@@ -3949,9 +3949,9 @@ module Aws::Organizations
     #               doesn't include the policy contents. To see the content for a policy, see <a>DescribePolicy</a>.</p>
     #   @return [Array<Types::PolicySummary>]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListPoliciesResponse < Struct.new(
@@ -3964,10 +3964,10 @@ module Aws::Organizations
     end
 
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
@@ -3986,9 +3986,9 @@ module Aws::Organizations
     #   <p>A list of roots that are defined in an organization.</p>
     #   @return [Array<Types::Root>]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListRootsResponse < Struct.new(
@@ -4028,10 +4028,10 @@ module Aws::Organizations
     #            </ul>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
@@ -4047,9 +4047,9 @@ module Aws::Organizations
     #   <p>The tags that are assigned to the resource.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListTagsForResourceResponse < Struct.new(
@@ -4063,14 +4063,14 @@ module Aws::Organizations
 
     # @!attribute policy_id
     #   <p>ID for the policy whose attachments you want to know.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed 
     #       by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     #   @return [String]
     # @!attribute max_results
@@ -4091,9 +4091,9 @@ module Aws::Organizations
     #               which the specified policy is attached.</p>
     #   @return [Array<Types::PolicyTargetSummary>]
     # @!attribute next_token
-    #   <p>If present, indicates that more output is available than is
-    #       included in the current response. Use this value in the <code>NextToken</code> request parameter
-    #       in a subsequent call to the operation to get the next part of the output. You should repeat this
+    #   <p>If present, indicates that more output is available than is 
+    #       included in the current response. Use this value in the <code>NextToken</code> request parameter 
+    #       in a subsequent call to the operation to get the next part of the output. You should repeat this 
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListTargetsForPolicyResponse < Struct.new(
@@ -4139,36 +4139,36 @@ module Aws::Organizations
     #   @return [String]
     # @!attribute source_parent_id
     #   <p>ID for the root or organizational unit that you want to move the account from.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or
+    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or 
     #             digits.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32
-    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second
+    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second 
     #             "-" dash and from 8 to 32 additional lowercase letters or digits.</p>
     #               </li>
     #            </ul>
     #   @return [String]
     # @!attribute destination_parent_id
     #   <p>ID for the root or organizational unit that you want to move the account to.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or
+    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or 
     #             digits.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32
-    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second
+    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second 
     #             "-" dash and from 8 to 32 additional lowercase letters or digits.</p>
     #               </li>
     #            </ul>
@@ -4188,12 +4188,12 @@ module Aws::Organizations
     #             with organizational units (OUs), and controlled with policies .</p>
     # @!attribute id
     #   <p>The unique identifier (ID) of an organization.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organization ID string requires "o-"
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organization ID string requires "o-" 
     #       followed by from 10 to 32 lowercase letters or digits.</p>
     #   @return [String]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of an organization.</p>
-    #            <p>For more information about ARNs in Organizations, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies">ARN
+    #            <p>For more information about ARNs in Organizations, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies">ARN 
     #       Formats Supported by Organizations</a> in the <i>Amazon Web Services Service Authorization Reference</i>.</p>
     #   @return [String]
     # @!attribute feature_set
@@ -4206,7 +4206,7 @@ module Aws::Organizations
     # @!attribute master_account_arn
     #   <p>The Amazon Resource Name (ARN) of the account that is designated as the management
     #               account for the organization.</p>
-    #            <p>For more information about ARNs in Organizations, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies">ARN
+    #            <p>For more information about ARNs in Organizations, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies">ARN 
     #       Formats Supported by Organizations</a> in the <i>Amazon Web Services Service Authorization Reference</i>.</p>
     #   @return [String]
     # @!attribute master_account_id
@@ -4258,20 +4258,20 @@ module Aws::Organizations
     # @!attribute id
     #   <p>The unique identifier (ID) associated with this OU. The ID is unique to the
     #               organization only.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires
-    #       "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the
-    #       OU). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires 
+    #       "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the 
+    #       OU). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters 
     #       or digits.</p>
     #   @return [String]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of this OU.</p>
-    #            <p>For more information about ARNs in Organizations, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies">ARN
+    #            <p>For more information about ARNs in Organizations, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies">ARN 
     #       Formats Supported by Organizations</a> in the <i>Amazon Web Services Service Authorization Reference</i>.</p>
     #   @return [String]
     # @!attribute name
     #   <p>The friendly name of this OU.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
-    #       that is used to validate this parameter is a string of any of the characters in the ASCII
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
+    #       that is used to validate this parameter is a string of any of the characters in the ASCII 
     #       character range.</p>
     #   @return [String]
     # @!attribute path
@@ -4316,18 +4316,18 @@ module Aws::Organizations
     #             contain OUs or accounts in an organization.</p>
     # @!attribute id
     #   <p>The unique identifier (ID) of the parent entity.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or
+    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or 
     #             digits.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32
-    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second
+    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second 
     #             "-" dash and from 8 to 32 additional lowercase letters or digits.</p>
     #               </li>
     #            </ul>
@@ -4423,18 +4423,18 @@ module Aws::Organizations
     #             content of a policy, see <a>DescribePolicy</a>.</p>
     # @!attribute id
     #   <p>The unique identifier (ID) of the policy.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed 
     #       by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).</p>
     #   @return [String]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the policy.</p>
-    #            <p>For more information about ARNs in Organizations, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies">ARN
+    #            <p>For more information about ARNs in Organizations, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies">ARN 
     #       Formats Supported by Organizations</a> in the <i>Amazon Web Services Service Authorization Reference</i>.</p>
     #   @return [String]
     # @!attribute name
     #   <p>The friendly name of the policy.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
-    #       that is used to validate this parameter is a string of any of the characters in the ASCII
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
+    #       that is used to validate this parameter is a string of any of the characters in the ASCII 
     #       character range.</p>
     #   @return [String]
     # @!attribute description
@@ -4469,12 +4469,12 @@ module Aws::Organizations
     # <p>Contains information about a root, OU, or account that a policy is attached to.</p>
     # @!attribute target_id
     #   <p>The unique identifier (ID) of the policy target.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or
+    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or 
     #             digits.</p>
     #               </li>
     #               <li>
@@ -4483,21 +4483,21 @@ module Aws::Organizations
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32
-    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second
+    #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32 
+    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second 
     #             "-" dash and from 8 to 32 additional lowercase letters or digits.</p>
     #               </li>
     #            </ul>
     #   @return [String]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the policy target.</p>
-    #            <p>For more information about ARNs in Organizations, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies">ARN
+    #            <p>For more information about ARNs in Organizations, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies">ARN 
     #       Formats Supported by Organizations</a> in the <i>Amazon Web Services Service Authorization Reference</i>.</p>
     #   @return [String]
     # @!attribute name
     #   <p>The friendly name of the policy target.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
-    #       that is used to validate this parameter is a string of any of the characters in the ASCII
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
+    #       that is used to validate this parameter is a string of any of the characters in the ASCII 
     #       character range.</p>
     #   @return [String]
     # @!attribute type
@@ -4763,18 +4763,18 @@ module Aws::Organizations
     # @!attribute id
     #   <p>The unique identifier (ID) for the root. The ID is unique to the organization
     #               only.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a root ID string requires "r-" followed by
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a root ID string requires "r-" followed by 
     #       from 4 to 32 lowercase letters or digits.</p>
     #   @return [String]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the root.</p>
-    #            <p>For more information about ARNs in Organizations, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies">ARN
+    #            <p>For more information about ARNs in Organizations, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies">ARN 
     #       Formats Supported by Organizations</a> in the <i>Amazon Web Services Service Authorization Reference</i>.</p>
     #   @return [String]
     # @!attribute name
     #   <p>The friendly name of the root.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
-    #       that is used to validate this parameter is a string of any of the characters in the ASCII
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
+    #       that is used to validate this parameter is a string of any of the characters in the ASCII 
     #       character range.</p>
     #   @return [String]
     # @!attribute policy_types
@@ -5034,15 +5034,15 @@ module Aws::Organizations
 
     # @!attribute organizational_unit_id
     #   <p>ID for the OU that you want to rename. You can get the ID from the <a>ListOrganizationalUnitsForParent</a> operation.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires
-    #       "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the
-    #       OU). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires 
+    #       "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the 
+    #       OU). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters 
     #       or digits.</p>
     #   @return [String]
     # @!attribute name
     #   <p>The new name that you want to assign to the OU.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
-    #       that is used to validate this parameter is a string of any of the characters in the ASCII
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
+    #       that is used to validate this parameter is a string of any of the characters in the ASCII 
     #       character range.</p>
     #   @return [String]
     class UpdateOrganizationalUnitRequest < Struct.new(
@@ -5068,13 +5068,13 @@ module Aws::Organizations
 
     # @!attribute policy_id
     #   <p>ID for the policy that you want to update.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed 
     #       by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).</p>
     #   @return [String]
     # @!attribute name
     #   <p>If provided, the new name for the policy.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
-    #       that is used to validate this parameter is a string of any of the characters in the ASCII
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
+    #       that is used to validate this parameter is a string of any of the characters in the ASCII 
     #       character range.</p>
     #   @return [String]
     # @!attribute description

@@ -220,8 +220,8 @@ module Aws::WAFV2
     #             </li>
     #             <li>
     #                <p>
-    #                   <code>Action</code> must specify <code>wafv2:CreateWebACL</code>, <code>wafv2:UpdateWebACL</code>, and
-    #              <code>wafv2:PutFirewallManagerRuleGroups</code> and may optionally specify <code>wafv2:GetRuleGroup</code>.
+    #                   <code>Action</code> must specify <code>wafv2:CreateWebACL</code>, <code>wafv2:UpdateWebACL</code>, and 
+    #              <code>wafv2:PutFirewallManagerRuleGroups</code> and may optionally specify <code>wafv2:GetRuleGroup</code>. 
     #                  WAF rejects any extra actions or wildcard actions in the policy.</p>
     #             </li>
     #             <li>
@@ -291,9 +291,9 @@ module Aws::WAFV2
       end
     end
 
-    # <p>WAF couldn’t perform the operation because your resource doesn't exist.
-    #        If you've just created a resource that you're using in this operation, you might
-    #        just need to wait a few minutes. It can take from a few seconds to a number of minutes
+    # <p>WAF couldn’t perform the operation because your resource doesn't exist. 
+    #        If you've just created a resource that you're using in this operation, you might 
+    #        just need to wait a few minutes. It can take from a few seconds to a number of minutes 
     #        for changes to propagate. </p>
     class WAFNonexistentItemException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -383,10 +383,10 @@ module Aws::WAFV2
       end
     end
 
-    # <p>WAF couldn’t retrieve a resource that you specified for this operation.
-    #        If you've just created a resource that you're using in this operation, you might
-    #        just need to wait a few minutes. It can take from a few seconds to a number of minutes
-    #        for changes to propagate. Verify the resource specifications in your request
+    # <p>WAF couldn’t retrieve a resource that you specified for this operation. 
+    #        If you've just created a resource that you're using in this operation, you might 
+    #        just need to wait a few minutes. It can take from a few seconds to a number of minutes 
+    #        for changes to propagate. Verify the resource specifications in your request 
     #        parameters and then retry the operation.</p>
     class WAFUnavailableEntityException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -400,7 +400,7 @@ module Aws::WAFV2
       end
     end
 
-    # <p>The rule that you've named doesn't aggregate solely on the IP address or solely on the forwarded IP address. This call
+    # <p>The rule that you've named doesn't aggregate solely on the IP address or solely on the forwarded IP address. This call 
     #            is only available for rate-based rules with an <code>AggregateKeyType</code> setting of <code>IP</code> or <code>FORWARDED_IP</code>.</p>
     class WAFUnsupportedAggregateKeyTypeException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context

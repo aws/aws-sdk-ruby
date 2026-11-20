@@ -693,7 +693,7 @@ module Aws::Outposts
     # @!attribute rack_physical_properties
     #   <p> Information about the physical and logistical details for the rack at this site.
     #         For more information
-    #         about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network
+    #         about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network 
     #           readiness checklist</a> in the Amazon Web Services Outposts User Guide.
     #           </p>
     #   @return [Types::RackPhysicalProperties]
@@ -2554,7 +2554,7 @@ module Aws::Outposts
 
     # <p> Information about the physical and logistical details for racks at sites.
     #       For more information
-    #       about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network
+    #       about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network 
     #         readiness checklist</a> in the Amazon Web Services Outposts User Guide.
     #         </p>
     # @!attribute power_draw_kva
@@ -2582,7 +2582,7 @@ module Aws::Outposts
     #   <p>The type of optical standard used to attach the Outpost to the network. This field is
     #         dependent on uplink speed, fiber type, and distance to the upstream device.
     #         For more information
-    #         about networking requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking">Network</a>
+    #         about networking requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking">Network</a> 
     #           in the Amazon Web Services Outposts User Guide.
     #           </p>
     #   @return [String]
@@ -3383,7 +3383,7 @@ module Aws::Outposts
     #   <p>The type of optical standard that you will use to attach the Outpost to your network. This
     #         field is dependent on uplink speed, fiber type, and distance to the upstream device.
     #         For more information
-    #         about networking requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking">Network</a>
+    #         about networking requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking">Network</a> 
     #           in the Amazon Web Services Outposts User Guide.
     #           </p>
     #            <ul>

@@ -7,11 +7,11 @@ module Aws::Signin
   module Types
 
     # Error thrown for access denied scenarios with flexible HTTP status mapping
-    #
+    # 
     # Runtime HTTP Status Code Mapping:
     # - HTTP 401 (Unauthorized): TOKEN_EXPIRED, AUTHCODE_EXPIRED
     # - HTTP 403 (Forbidden): USER_CREDENTIALS_CHANGED, INSUFFICIENT_PERMISSIONS
-    #
+    # 
     # The specific HTTP status code is determined at runtime based on the error enum value.
     # Consumers should use the error field to determine the specific access denial reason.
     # @!attribute error
@@ -32,7 +32,7 @@ module Aws::Signin
     end
 
     # AWS credentials structure containing temporary access credentials
-    #
+    # 
     # Scoped, temporary AWS credentials with a 15-minute duration.
     # @note This shape contains sensitive data and should be treated as such.
     # @!attribute access_key_id
@@ -55,9 +55,9 @@ module Aws::Signin
     end
 
     # Error thrown when request conflicts with current state
-    #
+    # 
     # HTTP Status Code: 409 Conflict
-    #
+    # 
     # Used when the request conflicts with the current state of the resource
     # @!attribute error
     #   OAuth 2.0 error code indicating conflict
@@ -77,7 +77,7 @@ module Aws::Signin
     end
 
     # Input structure for CreateOAuth2Token operation
-    #
+    # 
     # Contains flattened token operation inputs for both authorization code and refresh token flows.
     # The operation type is determined by the grant_type parameter in the request body.
     # @!attribute token_input
@@ -93,7 +93,7 @@ module Aws::Signin
     end
 
     # Request body payload for CreateOAuth2Token operation
-    #
+    # 
     # The operation type is determined by the grant_type parameter:
     # - grant_type=authorization_code: Requires code, redirect_uri, code_verifier
     # - grant_type=refresh_token: Requires refresh_token
@@ -135,7 +135,7 @@ module Aws::Signin
     end
 
     # Output structure for CreateOAuth2Token operation
-    #
+    # 
     # Contains flattened token operation outputs for both authorization code and refresh token flows.
     # The response content depends on the grant_type from the original request.
     # @!attribute token_output
@@ -151,7 +151,7 @@ module Aws::Signin
     end
 
     # Response body payload for CreateOAuth2Token operation
-    #
+    # 
     # The response content depends on the grant_type from the request:
     # - grant_type=authorization_code: Returns all fields including refresh_token and id_token
     # - grant_type=refresh_token: Returns access_token, token_type, expires_in, refresh_token (no id_token)
@@ -206,7 +206,7 @@ module Aws::Signin
     end
 
     # Output structure for CreateOAuth2TokenWithIAM operation
-    #
+    # 
     # Contains the JWT access token, token type, and expiration per RFC 6749 §5.1.
     # @!attribute access_token
     #   JWT access token containing principal identity, resource scope, and session metadata
@@ -336,9 +336,9 @@ module Aws::Signin
     end
 
     # Error thrown when an internal server error occurs
-    #
+    # 
     # HTTP Status Code: 500 Internal Server Error
-    #
+    # 
     # Used for unexpected server-side errors that prevent request processing.
     # @!attribute error
     #   OAuth 2.0 error code indicating server error
@@ -358,7 +358,7 @@ module Aws::Signin
     end
 
     # Input structure for IntrospectOAuth2TokenWithIAM operation
-    #
+    # 
     # RFC 7662 §2.1 introspection request. Contains the token to inspect and an
     # optional hint about the token's type.
     # @!attribute token
@@ -380,7 +380,7 @@ module Aws::Signin
     end
 
     # Output structure for IntrospectOAuth2TokenWithIAM operation
-    #
+    # 
     # RFC 7662 §2.2 introspection response. Only `active` is required; all other
     # claims are omitted when the token is inactive.
     # @!attribute active
@@ -618,9 +618,9 @@ module Aws::Signin
     end
 
     # Error thrown when requested resource is not found
-    #
+    # 
     # HTTP Status Code: 404 Not Found
-    #
+    # 
     # Used when the specified resource does not exist
     # @!attribute error
     #   OAuth 2.0 error code indicating resource not found
@@ -640,7 +640,7 @@ module Aws::Signin
     end
 
     # Input structure for RevokeOAuth2TokenWithIAM operation
-    #
+    # 
     # RFC 7009 §2.1 revocation request. Contains the refresh_token to revoke.
     # @!attribute token
     #   The refresh_token to revoke. Must be a refresh_token issued by AWS
@@ -655,7 +655,7 @@ module Aws::Signin
     end
 
     # Output structure for RevokeOAuth2TokenWithIAM operation
-    #
+    # 
     # RFC 7009 §2.2 revocation response. The endpoint returns 200 OK with an
     # empty body on success; there are no response fields.
     class RevokeOAuth2TokenWithIAMResponse < Struct.new(
@@ -666,9 +666,9 @@ module Aws::Signin
     end
 
     # Error thrown when service quota is exceeded
-    #
+    # 
     # HTTP Status Code: 402 Payment Required (used as quota exceeded indicator)
-    #
+    # 
     # Used when the request would cause a service quota to be exceeded
     # @!attribute error
     #   OAuth 2.0 error code indicating service quota exceeded
@@ -704,12 +704,12 @@ module Aws::Signin
     end
 
     # Error thrown when rate limit is exceeded
-    #
+    # 
     # HTTP Status Code: 429 Too Many Requests
-    #
+    # 
     # Possible OAuth2ErrorCode values:
     # - INVALID_REQUEST: Rate limiting, too many requests, abuse prevention
-    #
+    # 
     # Possible causes:
     # - Too many token requests from the same client
     # - Rate limiting based on client_id or IP address
@@ -733,9 +733,9 @@ module Aws::Signin
     end
 
     # Error thrown when request validation fails
-    #
+    # 
     # HTTP Status Code: 400 Bad Request
-    #
+    # 
     # Used for request validation errors such as malformed parameters,
     # missing required fields, or invalid parameter values.
     # @!attribute error

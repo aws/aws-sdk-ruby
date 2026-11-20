@@ -208,7 +208,7 @@ module Aws::STS
       end
     end
 
-    # <p>The requested token duration would extend the session beyond its original expiration time.
+    # <p>The requested token duration would extend the session beyond its original expiration time. 
     #             You cannot use this operation to extend the lifetime of a session beyond what was granted when the session was originally created.</p>
     class SessionDurationEscalationException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context

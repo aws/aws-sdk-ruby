@@ -542,7 +542,7 @@ module Aws::SNS
     #   @return [Array<Types::Tag>]
     # @!attribute data_protection_policy
     #   <important>
-    #               <p>Amazon SNS message data protection is no longer available to new customers.
+    #               <p>Amazon SNS message data protection is no longer available to new customers. 
     #     For more information and guidance on alternatives, see
     #   <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-message-data-protection-availability-change.html">Amazon SNS message data protection availability change</a>.</p>
     #            </important>
@@ -958,9 +958,9 @@ module Aws::SNS
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue.
+    #                     <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. 
     #       Messages that can't be delivered due to client errors (for example, when the subscribed endpoint is unreachable)
-    #       or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held
+    #       or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held 
     #       in the dead-letter queue for further analysis or reprocessing.</p>
     #               </li>
     #               <li>
@@ -986,8 +986,8 @@ module Aws::SNS
     #                        <p>Amazon SNS listed as a trusted entity</p>
     #                     </li>
     #                  </ul>
-    #                  <p>Specifying a valid ARN for this attribute is required for Firehose delivery stream subscriptions.
-    #                   For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html">Fanout
+    #                  <p>Specifying a valid ARN for this attribute is required for Firehose delivery stream subscriptions. 
+    #                   For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html">Fanout 
     #                       to Firehose delivery streams</a> in the <i>Amazon SNS Developer Guide</i>.</p>
     #               </li>
     #            </ul>
@@ -1860,15 +1860,15 @@ module Aws::SNS
     # @!attribute message_group_id
     #   <p>FIFO topics: The tag that specifies that a message belongs to a specific message group.
     #           Messages that belong to the same message group are processed in a FIFO manner
-    #            (however, messages in different message groups might be processed out of order).
-    #            To interleave multiple ordered streams within a single topic, use <code>MessageGroupId</code> values
-    #            (for example, session data for multiple users). In this scenario, multiple consumers can process the topic,
-    #            but the session data of each user is processed in a FIFO fashion.
-    #            You must associate a non-empty <code>MessageGroupId</code> with a message.
+    #            (however, messages in different message groups might be processed out of order). 
+    #            To interleave multiple ordered streams within a single topic, use <code>MessageGroupId</code> values 
+    #            (for example, session data for multiple users). In this scenario, multiple consumers can process the topic, 
+    #            but the session data of each user is processed in a FIFO fashion. 
+    #            You must associate a non-empty <code>MessageGroupId</code> with a message. 
     #             If you do not provide a <code>MessageGroupId</code>, the action fails.
     #            </p>
-    #            <p>Standard topics: The <code>MessageGroupId</code> is optional and is forwarded only to Amazon SQS
-    #           standard subscriptions to activate <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-fair-queues.html">fair queues</a>.
+    #            <p>Standard topics: The <code>MessageGroupId</code> is optional and is forwarded only to Amazon SQS 
+    #           standard subscriptions to activate <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-fair-queues.html">fair queues</a>. 
     #           The <code>MessageGroupId</code> is not used for, or sent to, any other endpoint types.</p>
     #            <p>The length of <code>MessageGroupId</code> is 128 characters.</p>
     #            <p>
@@ -1951,7 +1951,7 @@ module Aws::SNS
     #               transport protocols, include the text of the message as a String value. If you want to
     #               send different messages for each transport protocol, set the value of the
     #                   <code>MessageStructure</code> parameter to <code>json</code> and use a JSON object
-    #               for the <code>Message</code> parameter.
+    #               for the <code>Message</code> parameter. 
     #           </p>
     #            <p></p>
     #            <p>Constraints:</p>
@@ -2228,12 +2228,12 @@ module Aws::SNS
 
     # <p>A verified or pending destination phone number in the SMS sandbox.</p>
     #          <p>When you start using Amazon SNS to send SMS messages, your Amazon Web Services account is in the
-    #                 <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for
-    #                 you to try Amazon SNS features without risking your reputation as an SMS sender. While your
-    #                 Amazon Web Services account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send
-    #                 SMS messages only to verified destination phone numbers. For more information, including how to
-    #                 move out of the sandbox to send messages without restrictions,
-    #                 see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in
+    #                 <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for 
+    #                 you to try Amazon SNS features without risking your reputation as an SMS sender. While your 
+    #                 Amazon Web Services account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send 
+    #                 SMS messages only to verified destination phone numbers. For more information, including how to 
+    #                 move out of the sandbox to send messages without restrictions, 
+    #                 see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in 
     #                 the <i>Amazon SNS Developer Guide</i>.</p>
     # @!attribute phone_number
     #   <p>The destination phone number.</p>
@@ -2569,9 +2569,9 @@ module Aws::SNS
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue.
+    #                     <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. 
     #       Messages that can't be delivered due to client errors (for example, when the subscribed endpoint is unreachable)
-    #       or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held
+    #       or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held 
     #       in the dead-letter queue for further analysis or reprocessing.</p>
     #               </li>
     #            </ul>
@@ -2588,8 +2588,8 @@ module Aws::SNS
     #                        <p>Amazon SNS listed as a trusted entity</p>
     #                     </li>
     #                  </ul>
-    #                  <p>Specifying a valid ARN for this attribute is required for Firehose delivery stream subscriptions.
-    #                   For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html">Fanout
+    #                  <p>Specifying a valid ARN for this attribute is required for Firehose delivery stream subscriptions. 
+    #                   For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html">Fanout 
     #                       to Firehose delivery streams</a> in the <i>Amazon SNS Developer Guide</i>.</p>
     #               </li>
     #            </ul>
@@ -3017,9 +3017,9 @@ module Aws::SNS
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue.
+    #                     <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. 
     #       Messages that can't be delivered due to client errors (for example, when the subscribed endpoint is unreachable)
-    #       or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held
+    #       or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held 
     #       in the dead-letter queue for further analysis or reprocessing.</p>
     #               </li>
     #            </ul>
@@ -3036,8 +3036,8 @@ module Aws::SNS
     #                        <p>Amazon SNS listed as a trusted entity</p>
     #                     </li>
     #                  </ul>
-    #                  <p>Specifying a valid ARN for this attribute is required for Firehose delivery stream subscriptions.
-    #                   For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html">Fanout
+    #                  <p>Specifying a valid ARN for this attribute is required for Firehose delivery stream subscriptions. 
+    #                   For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html">Fanout 
     #                       to Firehose delivery streams</a> in the <i>Amazon SNS Developer Guide</i>.</p>
     #               </li>
     #            </ul>

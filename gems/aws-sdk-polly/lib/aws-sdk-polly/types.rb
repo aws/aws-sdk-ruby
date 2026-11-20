@@ -8,7 +8,7 @@ module Aws::Polly
 
     # <p>Contains a chunk of synthesized audio data.</p>
     # @!attribute audio_chunk
-    #   <p>A chunk of synthesized audio data encoded in the format specified by the
+    #   <p>A chunk of synthesized audio data encoded in the format specified by the 
     #         <code>OutputFormat</code> parameter.</p>
     #   @return [String]
     class AudioEvent < Struct.new(
@@ -114,7 +114,7 @@ module Aws::Polly
 
     # <p>Configuration that controls when synthesized audio data is sent on the output stream.</p>
     # @!attribute force
-    #   <p>Specifies whether to force the synthesis engine to immediately
+    #   <p>Specifies whether to force the synthesis engine to immediately 
     #         write buffered audio data to the output stream.</p>
     #   @return [Boolean]
     class FlushStreamConfiguration < Struct.new(
@@ -629,17 +629,17 @@ module Aws::Polly
     end
 
     # @!attribute engine
-    #   <p>Specifies the engine for Amazon Polly to use when processing input text for speech synthesis.
+    #   <p>Specifies the engine for Amazon Polly to use when processing input text for speech synthesis. 
     #         Currently, only the <code>generative</code> engine is supported.
     #         If you specify a voice that the selected engine doesn't support, Amazon Polly returns an error.</p>
     #   @return [String]
     # @!attribute language_code
-    #   <p>An optional parameter that sets the language code for the speech synthesis request. Specify this parameter only
-    #         when using a bilingual voice. If a bilingual voice is used and no language code is specified, Amazon Polly
+    #   <p>An optional parameter that sets the language code for the speech synthesis request. Specify this parameter only 
+    #         when using a bilingual voice. If a bilingual voice is used and no language code is specified, Amazon Polly 
     #         uses the default language of the bilingual voice.</p>
     #   @return [String]
     # @!attribute lexicon_names
-    #   <p>The names of one or more pronunciation lexicons for the service to apply
+    #   <p>The names of one or more pronunciation lexicons for the service to apply 
     #         during synthesis. Amazon Polly applies lexicons only when the lexicon language matches the voice language.</p>
     #   @return [Array<String>]
     # @!attribute output_format
@@ -1043,7 +1043,7 @@ module Aws::Polly
 
     # <p>Contains text content to be synthesized into speech.</p>
     # @!attribute text
-    #   <p>The text content to synthesize. If you specify <code>ssml</code> as the
+    #   <p>The text content to synthesize. If you specify <code>ssml</code> as the 
     #         <code>TextType</code>, follow the SSML format for the input text.</p>
     #   @return [String]
     # @!attribute text_type

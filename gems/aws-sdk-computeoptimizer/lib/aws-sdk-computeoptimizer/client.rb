@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -44,7 +45,6 @@ module Aws::ComputeOptimizer
     @identifier = :computeoptimizer
 
     add_plugin(::Aws::ComputeOptimizer::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -64,6 +64,8 @@ module Aws::ComputeOptimizer
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -140,23 +142,41 @@ module Aws::ComputeOptimizer
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -587,17 +607,17 @@ module Aws::ComputeOptimizer
     #   <p>
     #               The Amazon Web Services account IDs for the export Amazon ECS service recommendations.
     #           </p>
-    #            <p>If your account is the management account or the delegated administrator
-    #               of an organization, use this parameter to specify the member account you want to
+    #            <p>If your account is the management account or the delegated administrator 
+    #               of an organization, use this parameter to specify the member account you want to 
     #               export recommendations to.</p>
-    #            <p>This parameter can't be specified together with the include member accounts
+    #            <p>This parameter can't be specified together with the include member accounts 
     #               parameter. The parameters are mutually exclusive.</p>
     #            <p>If this parameter or the include member accounts parameter is omitted,
     #               the recommendations for member accounts aren't included in the export.</p>
     #            <p>You can specify multiple account IDs per request.</p>
     # @option params [Array<Types::ECSServiceRecommendationFilter>] :filters
     #   <p>
-    #               An array of objects to specify a filter that exports a more specific set
+    #               An array of objects to specify a filter that exports a more specific set 
     #               of Amazon ECS service recommendations.
     #           </p>
     # @option params [Array<String>] :fields_to_export
@@ -616,7 +636,7 @@ module Aws::ComputeOptimizer
     #                       <i>Compute Optimizer User Guide</i>.</p>
     # @option params [String] :file_format
     #   <p>
-    #               The format of the export file.
+    #               The format of the export file. 
     #           </p>
     #            <p>The CSV file is the only export file format currently supported.</p>
     # @option params [Boolean] :include_member_accounts
@@ -627,9 +647,9 @@ module Aws::ComputeOptimizer
     #               Compute Optimizer must be enabled in the organization account. For more information,
     #               see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access">Compute Optimizer and Amazon Web Services Organizations trusted access</a> in the
     #               <i>Compute Optimizer User Guide</i>.</p>
-    #            <p>If this parameter is omitted, recommendations for member accounts of the
+    #            <p>If this parameter is omitted, recommendations for member accounts of the 
     #               organization aren't included in the export file.</p>
-    #            <p>If this parameter or the account ID parameter is omitted, recommendations for
+    #            <p>If this parameter or the account ID parameter is omitted, recommendations for 
     #               member accounts aren't included in the export.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -679,10 +699,10 @@ module Aws::ComputeOptimizer
     #   <p>
     #               The Amazon Web Services account IDs for the export idle resource recommendations.
     #           </p>
-    #            <p>If your account is the management account or the delegated administrator
-    #               of an organization, use this parameter to specify the member account you want to
+    #            <p>If your account is the management account or the delegated administrator 
+    #               of an organization, use this parameter to specify the member account you want to 
     #               export recommendations to.</p>
-    #            <p>This parameter can't be specified together with the include member accounts
+    #            <p>This parameter can't be specified together with the include member accounts 
     #               parameter. The parameters are mutually exclusive.</p>
     #            <p>If this parameter or the include member accounts parameter is omitted,
     #               the recommendations for member accounts aren't included in the export.</p>
@@ -713,9 +733,9 @@ module Aws::ComputeOptimizer
     #               Compute Optimizer must be enabled in the organization account. For more information,
     #               see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access">Compute Optimizer and Amazon Web Services Organizations trusted access</a> in the
     #               <i>Compute Optimizer User Guide</i>.</p>
-    #            <p>If this parameter is omitted, recommendations for member accounts of the
+    #            <p>If this parameter is omitted, recommendations for member accounts of the 
     #               organization aren't included in the export file.</p>
-    #            <p>If this parameter or the account ID parameter is omitted, recommendations for
+    #            <p>If this parameter or the account ID parameter is omitted, recommendations for 
     #               member accounts aren't included in the export.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -852,7 +872,7 @@ module Aws::ComputeOptimizer
     #               specify the member account for which you want to export recommendations.</p>
     #            <p>This parameter can't be specified together with the include member accounts
     #               parameter. The parameters are mutually exclusive.</p>
-    #            <p>If this parameter is omitted, recommendations
+    #            <p>If this parameter is omitted, recommendations 
     #               for member accounts aren't included in the export.</p>
     #            <p>You can specify multiple account IDs per request.</p>
     # @option params [Array<Types::LicenseRecommendationFilter>] :filters
@@ -883,7 +903,7 @@ module Aws::ComputeOptimizer
     #               Compute Optimizer must be enabled in the organization account. For more information,
     #               see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access">Compute Optimizer and Amazon Web Services Organizations trusted access</a> in the
     #               <i>Compute Optimizer User Guide</i>.</p>
-    #            <p>If this parameter is omitted, recommendations for member accounts of the organization
+    #            <p>If this parameter is omitted, recommendations for member accounts of the organization 
     #               aren't included in the export file .</p>
     #            <p>This parameter cannot be specified together with the account IDs parameter. The
     #               parameters are mutually exclusive.</p>
@@ -935,17 +955,17 @@ module Aws::ComputeOptimizer
     #   <p>
     #               The Amazon Web Services account IDs for the export Amazon Aurora and RDS database recommendations.
     #           </p>
-    #            <p>If your account is the management account or the delegated administrator
-    #               of an organization, use this parameter to specify the member account you want to
+    #            <p>If your account is the management account or the delegated administrator 
+    #               of an organization, use this parameter to specify the member account you want to 
     #               export recommendations to.</p>
-    #            <p>This parameter can't be specified together with the include member accounts
+    #            <p>This parameter can't be specified together with the include member accounts 
     #               parameter. The parameters are mutually exclusive.</p>
     #            <p>If this parameter or the include member accounts parameter is omitted,
     #               the recommendations for member accounts aren't included in the export.</p>
     #            <p>You can specify multiple account IDs per request.</p>
     # @option params [Array<Types::RDSDBRecommendationFilter>] :filters
     #   <p>
-    #               An array of objects to specify a filter that exports a more specific set of
+    #               An array of objects to specify a filter that exports a more specific set of 
     #               Amazon Aurora and RDS recommendations.
     #           </p>
     # @option params [Array<String>] :fields_to_export
@@ -964,7 +984,7 @@ module Aws::ComputeOptimizer
     #                       <i>Compute Optimizer User Guide</i>.</p>
     # @option params [String] :file_format
     #   <p>
-    #               The format of the export file.
+    #               The format of the export file. 
     #           </p>
     #            <p>The CSV file is the only export file format currently supported.</p>
     # @option params [Boolean] :include_member_accounts
@@ -975,9 +995,9 @@ module Aws::ComputeOptimizer
     #               Compute Optimizer must be enabled in the organization account. For more information,
     #               see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access">Compute Optimizer and Amazon Web Services Organizations trusted access</a> in the
     #               <i>Compute Optimizer User Guide</i>.</p>
-    #            <p>If this parameter is omitted, recommendations for member accounts of the
+    #            <p>If this parameter is omitted, recommendations for member accounts of the 
     #               organization aren't included in the export file.</p>
-    #            <p>If this parameter or the account ID parameter is omitted, recommendations for
+    #            <p>If this parameter or the account ID parameter is omitted, recommendations for 
     #               member accounts aren't included in the export.</p>
     # @option params [Types::RecommendationPreferences] :recommendation_preferences
     #   <p>Describes the recommendation preferences to return in the response of a <a>GetAutoScalingGroupRecommendations</a>, <a>GetEC2InstanceRecommendations</a>, <a>GetEC2RecommendationProjectedMetrics</a>, <a>GetRDSDatabaseRecommendations</a>, and <a>GetRDSDatabaseRecommendationProjectedMetrics</a> request.</p>
@@ -1624,7 +1644,7 @@ module Aws::ComputeOptimizer
     #             Returns Amazon ECS service recommendations.
     #         </p>
     #          <p>
-    #             Compute Optimizer generates recommendations for Amazon ECS services on
+    #             Compute Optimizer generates recommendations for Amazon ECS services on 
     #             Fargate that meet a specific set of requirements. For more
     #             information, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html">Supported resources and
     #                 requirements</a> in the <i>Compute Optimizer User
@@ -1649,7 +1669,7 @@ module Aws::ComputeOptimizer
     #   <p>
     #               The maximum number of Amazon ECS service recommendations to return with a single request.
     #           </p>
-    #            <p>To retrieve the remaining results, make another request with the returned
+    #            <p>To retrieve the remaining results, make another request with the returned 
     #               <code>nextToken</code> value.</p>
     # @option params [Array<Types::ECSServiceRecommendationFilter>] :filters
     #   <p>
@@ -1659,7 +1679,7 @@ module Aws::ComputeOptimizer
     #   <p>
     #               Return the Amazon ECS service recommendations to the specified Amazon Web Services account IDs.
     #           </p>
-    #            <p>If your account is the management account or the delegated administrator
+    #            <p>If your account is the management account or the delegated administrator 
     #               of an organization, use this parameter to return the Amazon ECS service recommendations to specific
     #               member accounts.</p>
     #            <p>You can only specify one account ID per request.</p>
@@ -1901,7 +1921,7 @@ module Aws::ComputeOptimizer
       request.send_request(options)
     end
 
-    # <p>Returns idle resource recommendations. Compute Optimizer generates recommendations for
+    # <p>Returns idle resource recommendations. Compute Optimizer generates recommendations for 
     #             idle resources that meet a specific set of requirements. For more information, see
     #             <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html">Resource requirements</a> in the
     #             <i>Compute Optimizer User Guide</i>
@@ -1913,14 +1933,14 @@ module Aws::ComputeOptimizer
     #   <p>The token to advance to the next page of idle resource recommendations.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of idle resource recommendations to return with a single request. </p>
-    #            <p>To retrieve the remaining results,
+    #            <p>To retrieve the remaining results, 
     #               make another request with the returned <code>nextToken</code> value.</p>
     # @option params [Array<Types::IdleRecommendationFilter>] :filters
     #   <p>An array of objects to specify a filter that returns a more specific list of idle resource recommendations.</p>
     # @option params [Array<String>] :account_ids
     #   <p>Return the idle resource recommendations to the specified Amazon Web Services account IDs.</p>
-    #            <p>If your account is the management account
-    #               or the delegated administrator of an organization, use this parameter to return the idle resource recommendations to
+    #            <p>If your account is the management account 
+    #               or the delegated administrator of an organization, use this parameter to return the idle resource recommendations to 
     #               specific member accounts.</p>
     #            <p>You can only specify one account ID per request.</p>
     # @option params [Types::OrderBy] :order_by
@@ -2311,7 +2331,7 @@ module Aws::ComputeOptimizer
     # <p>
     #             Returns Amazon Aurora and RDS database recommendations.
     #         </p>
-    #          <p>Compute Optimizer generates recommendations for Amazon Aurora and RDS databases that
+    #          <p>Compute Optimizer generates recommendations for Amazon Aurora and RDS databases that 
     #             meet a specific set of requirements. For more
     #             information, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html">Supported resources and
     #                 requirements</a> in the <i>Compute Optimizer User
@@ -2348,7 +2368,7 @@ module Aws::ComputeOptimizer
     #   <p>
     #               Return the Amazon Aurora and RDS database recommendations to the specified Amazon Web Services account IDs.
     #           </p>
-    #            <p>If your account is the management account or the delegated administrator
+    #            <p>If your account is the management account or the delegated administrator 
     #               of an organization, use this parameter to return the Amazon Aurora and RDS database recommendations to specific
     #               member accounts.</p>
     #            <p>You can only specify one account ID per request.</p>
@@ -2599,15 +2619,15 @@ module Aws::ComputeOptimizer
     #                     or <code>Optimized</code>.</p>
     #             </li>
     #             <li>
-    #                <p>Amazon ECS services in an account that are <code>Underprovisioned</code>,
+    #                <p>Amazon ECS services in an account that are <code>Underprovisioned</code>, 
     #                     <code>Overprovisioned</code>, or <code>Optimized</code>.</p>
     #             </li>
     #             <li>
-    #                <p>Commercial software licenses in an account that are <code>InsufficientMetrics</code>,
+    #                <p>Commercial software licenses in an account that are <code>InsufficientMetrics</code>, 
     #                     <code>NotOptimized</code> or <code>Optimized</code>.</p>
     #             </li>
     #             <li>
-    #                <p>Amazon Aurora and Amazon RDS databases in an account that are <code>Underprovisioned</code>,
+    #                <p>Amazon Aurora and Amazon RDS databases in an account that are <code>Underprovisioned</code>, 
     #                     <code>Overprovisioned</code>, <code>Optimized</code>, or <code>NotOptimized</code>.</p>
     #             </li>
     #          </ul>
@@ -2762,7 +2782,7 @@ module Aws::ComputeOptimizer
     #               Guide</i>.</p>
     # @option params [String] :look_back_period
     #   <p>
-    #               The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed.
+    #               The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed. 
     #               When this preference isn't specified, we use the default value <code>DAYS_14</code>.
     #           </p>
     #            <p>You can only set this preference for the Amazon EC2 instance, Auto Scaling group, Amazon EBS volume, Amazon ECS service on Fargate, Amazon RDS DB instance, and Aurora DB cluster storage resource types.
@@ -2794,7 +2814,7 @@ module Aws::ComputeOptimizer
     #            </note>
     # @option params [Array<Types::UtilizationPreference>] :utilization_preferences
     #   <p>
-    #               The preference to control the resource’s CPU utilization threshold, CPU utilization headroom, and memory utilization headroom. When this
+    #               The preference to control the resource’s CPU utilization threshold, CPU utilization headroom, and memory utilization headroom. When this 
     #               preference isn't specified, we use the following default values.
     #           </p>
     #            <p>CPU utilization:</p>
@@ -2827,9 +2847,9 @@ module Aws::ComputeOptimizer
     #            </note>
     # @option params [Array<Types::PreferredResource>] :preferred_resources
     #   <p>
-    #               The preference to control which resource type values are considered when generating rightsizing recommendations.
-    #               You can specify this preference as a combination of include and exclude lists. You must specify either an
-    #               <code>includeList</code> or <code>excludeList</code>. If the preference is an empty set of resource type values,
+    #               The preference to control which resource type values are considered when generating rightsizing recommendations. 
+    #               You can specify this preference as a combination of include and exclude lists. You must specify either an 
+    #               <code>includeList</code> or <code>excludeList</code>. If the preference is an empty set of resource type values, 
     #               an error occurs.
     #           </p>
     #            <note>
@@ -2990,7 +3010,8 @@ module Aws::ComputeOptimizer
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

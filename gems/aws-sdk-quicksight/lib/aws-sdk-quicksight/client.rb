@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::QuickSight
     @identifier = :quicksight
 
     add_plugin(::Aws::QuickSight::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::QuickSight
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::QuickSight
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -1397,8 +1417,8 @@ module Aws::QuickSight
       request.send_request(options)
     end
 
-    # <p>Creates an action connector that enables Amazon Quick Sight to connect to external services and perform actions.
-    # 	          Action connectors support various authentication methods and can be configured with specific actions from supported connector types
+    # <p>Creates an action connector that enables Amazon Quick Sight to connect to external services and perform actions. 
+    # 	          Action connectors support various authentication methods and can be configured with specific actions from supported connector types 
     # 	          like Amazon S3, Salesforce, JIRA.</p>
     # @param [Hash, Types::CreateActionConnectorRequest] params
     # @option params [String] :aws_account_id
@@ -1587,7 +1607,7 @@ module Aws::QuickSight
     #   <p>A descriptive name for the analysis that you're creating. This name displays for the
     #               analysis in the Amazon Quick Sight console. </p>
     # @option params [Types::Parameters] :parameters
-    #   <p>The parameter names and override values that you want to use. An analysis can have
+    #   <p>The parameter names and override values that you want to use. An analysis can have 
     #               any parameter type, and some parameters might accept multiple values. </p>
     # @option params [Array<Types::ResourcePermission>] :permissions
     #   <p>A structure that describes the principals and the resource-level permissions on an
@@ -1598,7 +1618,7 @@ module Aws::QuickSight
     # @option params [Types::AnalysisSourceEntity] :source_entity
     #   <p>A source entity to use for the analysis that you're creating. This metadata structure
     #               contains details that describe a source template and one or more datasets or topics.</p>
-    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in
+    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in 
     #               order for the request to be valid.</p>
     # @option params [String] :theme_arn
     #   <p>The ARN for the theme to apply to the analysis that you're creating. To see the theme
@@ -1609,7 +1629,7 @@ module Aws::QuickSight
     # @option params [Types::AnalysisDefinition] :definition
     #   <p>The definition of an analysis.</p>
     #            <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>
-    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in
+    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in 
     #               order for the request to be valid.</p>
     # @option params [Types::ValidationStrategy] :validation_strategy
     #   <p>The option to relax the validation needed to create an analysis with definition objects. This skips the validation step for specific errors.</p>
@@ -155617,11 +155637,11 @@ module Aws::QuickSight
     # @option params [Array<Types::ResourcePermission>] :permissions
     #   <p>A list of resource permissions on the dataset.</p>
     # @option params [Types::RowLevelPermissionDataSet] :row_level_permission_data_set
-    #   <p>The row-level security configuration for the data that you want to create. This parameter is
+    #   <p>The row-level security configuration for the data that you want to create. This parameter is 
     #   			used with the legacy data preparation experience.</p>
     # @option params [Types::RowLevelPermissionTagConfiguration] :row_level_permission_tag_configuration
     #   <p>The configuration of tags on a dataset to set row-level security. Row-level security
-    #   			tags are currently supported for anonymous embedding only. This parameter is
+    #   			tags are currently supported for anonymous embedding only. This parameter is 
     #   			used with the legacy data preparation experience.</p>
     # @option params [Array<Types::ColumnLevelPermissionRule>] :column_level_permission_rules
     #   <p>A set of one or more definitions of a <code>
@@ -157207,7 +157227,7 @@ module Aws::QuickSight
     # @option params [String] :group_name
     #   <p>The name of the group that you want to add the user to.</p>
     # @option params [String] :aws_account_id
-    #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
+    #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the 
     #   			Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     # @option params [String] :namespace
     #   <p>The namespace that you want the user to be a part of.</p>
@@ -157746,7 +157766,7 @@ module Aws::QuickSight
     #   			in the original. The schema in each dataset must match its placeholder. Use the <code>TopicReferences</code>
     #   			entity to list the replacement topics for the topic placeholders listed in the original.
     #   			The schema in each topic must match its placeholder.</p>
-    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in
+    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in 
     #   			order for the request to be valid.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.</p>
@@ -157758,7 +157778,7 @@ module Aws::QuickSight
     # @option params [Types::TemplateVersionDefinition] :definition
     #   <p>The definition of a template.</p>
     #            <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>
-    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in
+    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in 
     #   			order for the request to be valid.</p>
     # @option params [Types::ValidationStrategy] :validation_strategy
     #   <p>TThe option to relax the validation needed to create a template with definition objects. This skips the validation step for specific errors.</p>
@@ -235728,7 +235748,7 @@ module Aws::QuickSight
     end
 
     # <p>Deletes a namespace and the users and groups that are associated with the namespace.
-    #         This is an asynchronous process. Assets including dashboards, analyses, datasets and data sources are not
+    #         This is an asynchronous process. Assets including dashboards, analyses, datasets and data sources are not 
     #         deleted. To delete these assets, you use the API operations for the relevant asset. </p>
     # @param [Hash, Types::DeleteNamespaceRequest] params
     # @option params [String] :aws_account_id
@@ -235997,8 +236017,8 @@ module Aws::QuickSight
       request.send_request(options)
     end
 
-    # <p>Deletes the version of the theme that the specified theme alias points to.
-    # 			If you provide a specific alias, you delete the version of the theme
+    # <p>Deletes the version of the theme that the specified theme alias points to. 
+    # 			If you provide a specific alias, you delete the version of the theme 
     # 			that the alias points to.</p>
     # @param [Hash, Types::DeleteThemeAliasRequest] params
     # @option params [String] :aws_account_id
@@ -236619,7 +236639,7 @@ module Aws::QuickSight
     # <p>Provides a summary of the metadata for an analysis.</p>
     # @param [Hash, Types::DescribeAnalysisRequest] params
     # @option params [String] :aws_account_id
-    #   <p>The ID of the Amazon Web Services account that contains the analysis. You must be using the
+    #   <p>The ID of the Amazon Web Services account that contains the analysis. You must be using the 
     #               Amazon Web Services account that the analysis is in.</p>
     # @option params [String] :analysis_id
     #   <p>The ID of the analysis that you're describing. The ID is part of the URL of the
@@ -393342,7 +393362,7 @@ module Aws::QuickSight
     # @option params [String] :flow_id
     #   <p>The unique identifier of the flow.</p>
     # @option params [String] :publish_state
-    #   <p>The publish state of the flow version to describe. Valid values are <code>DRAFT</code>, <code>PUBLISHED</code>,
+    #   <p>The publish state of the flow version to describe. Valid values are <code>DRAFT</code>, <code>PUBLISHED</code>, 
     #               or <code>PENDING_APPROVAL</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -393547,7 +393567,7 @@ module Aws::QuickSight
     # @option params [String] :group_name
     #   <p>The name of the group that you want to search.</p>
     # @option params [String] :aws_account_id
-    #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
+    #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the 
     #            Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     # @option params [String] :namespace
     #   <p>The namespace that includes the group you are searching within.</p>
@@ -478635,7 +478655,7 @@ module Aws::QuickSight
       request.send_request(options)
     end
 
-    # <p>Updates an existing action connector with new configuration details, authentication settings, or enabled actions.
+    # <p>Updates an existing action connector with new configuration details, authentication settings, or enabled actions. 
     # 	          You can modify the connector's name, description, authentication configuration, and which actions are enabled. For more information,
     # 	          <a href="https://docs.aws.amazon.com/quicksuite/latest/userguide/quick-action-auth.html">https://docs.aws.amazon.com/quicksuite/latest/userguide/quick-action-auth.html</a>.</p>
     # @param [Hash, Types::UpdateActionConnectorRequest] params
@@ -478931,7 +478951,7 @@ module Aws::QuickSight
     #   <p>A descriptive name for the analysis that you're updating. This name displays for the
     #               analysis in the Amazon Quick Sight console.</p>
     # @option params [Types::Parameters] :parameters
-    #   <p>The parameter names and override values that you want to use. An analysis can have
+    #   <p>The parameter names and override values that you want to use. An analysis can have 
     #               any parameter type, and some parameters might accept multiple values. </p>
     # @option params [Types::AnalysisSourceEntity] :source_entity
     #   <p>A source entity to use for the analysis that you're updating. This metadata structure
@@ -633219,11 +633239,11 @@ module Aws::QuickSight
     # @option params [Hash<String, Types::FieldFolder>] :field_folders
     #   <p>The folder that contains fields and nested subfolders for your dataset.</p>
     # @option params [Types::RowLevelPermissionDataSet] :row_level_permission_data_set
-    #   <p>The row-level security configuration for the data you want to create. This parameter is used
+    #   <p>The row-level security configuration for the data you want to create. This parameter is used 
     #   			with the legacy data preparation experience.</p>
     # @option params [Types::RowLevelPermissionTagConfiguration] :row_level_permission_tag_configuration
     #   <p>The configuration of tags on a dataset to set row-level security. Row-level security
-    #   			tags are currently supported for anonymous embedding only. This parameter is used with
+    #   			tags are currently supported for anonymous embedding only. This parameter is used with 
     #   		the legacy data preparation experience.</p>
     # @option params [Array<Types::ColumnLevelPermissionRule>] :column_level_permission_rules
     #   <p>A set of one or more definitions of a <code>
@@ -713380,7 +713400,8 @@ module Aws::QuickSight
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

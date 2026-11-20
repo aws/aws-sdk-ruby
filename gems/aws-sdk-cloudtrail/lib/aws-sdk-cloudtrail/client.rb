@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::CloudTrail
     @identifier = :cloudtrail
 
     add_plugin(::Aws::CloudTrail::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::CloudTrail
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::CloudTrail
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -298,14 +318,14 @@ module Aws::CloudTrail
     # <important>
     #             <p>CloudTrail Lake will no longer be open to new customers starting May 31, 2026. If you would like to use CloudTrail Lake, sign up prior to that date. Existing customers can continue to use the service as normal. For more information, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html">CloudTrail Lake availability change</a>.</p>
     #          </important>
-    #          <p>Creates a channel for CloudTrail to ingest events from a partner or external source.
-    #          After you create a channel, a CloudTrail Lake event data store can log events
+    #          <p>Creates a channel for CloudTrail to ingest events from a partner or external source. 
+    #          After you create a channel, a CloudTrail Lake event data store can log events 
     #       from the partner or source that you specify.</p>
     # @param [Hash, Types::CreateChannelRequest] params
     # @option params [String] :name
     #   <p>The name of the channel.</p>
     # @option params [String] :source
-    #   <p>The name of the partner or external event source. You cannot change this name after you create the
+    #   <p>The name of the partner or external event source. You cannot change this name after you create the 
     #            channel. A maximum of one channel is allowed per source.</p>
     #            <p>
     #            A source can be either <code>Custom</code> for all valid non-Amazon Web Services
@@ -368,22 +388,22 @@ module Aws::CloudTrail
     #          <ul>
     #             <li>
     #                <p>
-    #                   <b>Custom dashboards</b> - Custom dashboards allow you to query
+    #                   <b>Custom dashboards</b> - Custom dashboards allow you to query 
     #             events in any event data store type. You can add up to 10 widgets to a custom dashboard. You can manually refresh a custom dashboard, or you can set a refresh schedule.</p>
     #             </li>
     #             <li>
     #                <p>
     #                   <b>Highlights dashboard</b> - You can create
-    #             the Highlights dashboard to see a summary of key user activities and API usage across all your event data stores.
+    #             the Highlights dashboard to see a summary of key user activities and API usage across all your event data stores. 
     #             CloudTrail Lake manages the Highlights dashboard and refreshes the dashboard every 6 hours. To create the Highlights dashboard, you must set and enable a refresh schedule.</p>
     #             </li>
     #          </ul>
     #          <p>
-    #       CloudTrail runs queries to populate the dashboard's widgets during a manual or scheduled refresh. CloudTrail must be granted permissions to run the <code>StartQuery</code> operation on your behalf. To provide permissions, run the <code>PutResourcePolicy</code> operation to attach a resource-based policy to each event data store. For more information,
+    #       CloudTrail runs queries to populate the dashboard's widgets during a manual or scheduled refresh. CloudTrail must be granted permissions to run the <code>StartQuery</code> operation on your behalf. To provide permissions, run the <code>PutResourcePolicy</code> operation to attach a resource-based policy to each event data store. For more information, 
     #       see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-eds-dashboard">Example: Allow CloudTrail to run queries to populate a dashboard</a> in the <i>CloudTrail User Guide</i>.
     #    </p>
     #          <p>
-    #       To set a refresh schedule, CloudTrail must be granted permissions to run the <code>StartDashboardRefresh</code> operation to refresh the dashboard on your behalf. To provide permissions, run the <code>PutResourcePolicy</code> operation to attach a resource-based policy to the dashboard. For more information,
+    #       To set a refresh schedule, CloudTrail must be granted permissions to run the <code>StartDashboardRefresh</code> operation to refresh the dashboard on your behalf. To provide permissions, run the <code>PutResourcePolicy</code> operation to attach a resource-based policy to the dashboard. For more information, 
     #       see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-dashboards">
     #          Resource-based policy example for a dashboard</a> in the <i>CloudTrail User Guide</i>.
     #    </p>
@@ -398,7 +418,7 @@ module Aws::CloudTrail
     #   <p>
     #      The refresh schedule configuration for the dashboard.
     #   </p>
-    #            <p>To create the Highlights dashboard, you must set a refresh schedule and set the <code>Status</code> to <code>ENABLED</code>. The <code>Unit</code> for the refresh schedule must be <code>HOURS</code>
+    #            <p>To create the Highlights dashboard, you must set a refresh schedule and set the <code>Status</code> to <code>ENABLED</code>. The <code>Unit</code> for the refresh schedule must be <code>HOURS</code> 
     #      and the <code>Value</code> must be <code>6</code>.</p>
     # @option params [Array<Types::Tag>] :tags_list
     #   <p>A list of tags.</p>
@@ -504,15 +524,15 @@ module Aws::CloudTrail
     #   <p>The retention period of the event data store, in days. If <code>BillingMode</code> is set to <code>EXTENDABLE_RETENTION_PRICING</code>, you can set a retention period of
     #            up to 3653 days, the equivalent of 10 years. If <code>BillingMode</code> is set to <code>FIXED_RETENTION_PRICING</code>, you can set a retention period of
     #            up to 2557 days, the equivalent of seven years.</p>
-    #            <p>CloudTrail  Lake determines whether to retain an event by checking if the <code>eventTime</code>
-    #            of the event is within the specified retention period. For example, if you set a retention period of 90 days, CloudTrail will remove events
+    #            <p>CloudTrail  Lake determines whether to retain an event by checking if the <code>eventTime</code> 
+    #            of the event is within the specified retention period. For example, if you set a retention period of 90 days, CloudTrail will remove events 
     #         when the <code>eventTime</code> is older than 90 days.</p>
     #            <note>
-    #               <p>If you plan to copy trail events to this event data store, we recommend
+    #               <p>If you plan to copy trail events to this event data store, we recommend 
     #               that you consider both the age of the events that you
     #               want to copy as well as how long you want to keep the copied events
-    #               in your event data store. For example, if you copy trail events that are 5 years old
-    #               and specify a retention period of 7 years, the event data store
+    #               in your event data store. For example, if you copy trail events that are 5 years old 
+    #               and specify a retention period of 7 years, the event data store 
     #               will retain those events for two years.</p>
     #            </note>
     # @option params [Boolean] :termination_protection_enabled
@@ -568,18 +588,18 @@ module Aws::CloudTrail
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>EXTENDABLE_RETENTION_PRICING</code> - This billing mode is generally recommended if you want a flexible retention period of up to 3653 days (about 10 years).
+    #                     <code>EXTENDABLE_RETENTION_PRICING</code> - This billing mode is generally recommended if you want a flexible retention period of up to 3653 days (about 10 years). 
     #                   The default retention period for this billing mode is 366 days.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>FIXED_RETENTION_PRICING</code> - This billing mode is recommended if you expect to ingest more than 25 TB of event data per month and need a retention period of up to 2557 days (about 7 years).
+    #                     <code>FIXED_RETENTION_PRICING</code> - This billing mode is recommended if you expect to ingest more than 25 TB of event data per month and need a retention period of up to 2557 days (about 7 years). 
     #                   The default retention period for this billing mode is 2557 days.</p>
     #               </li>
     #            </ul>
     #            <p>The default value is <code>EXTENDABLE_RETENTION_PRICING</code>.</p>
-    #            <p>For more information about CloudTrail pricing,
-    #            see <a href="http://aws.amazon.com/cloudtrail/pricing/">CloudTrail Pricing</a> and
+    #            <p>For more information about CloudTrail pricing, 
+    #            see <a href="http://aws.amazon.com/cloudtrail/pricing/">CloudTrail Pricing</a> and 
     #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-manage-costs.html">Managing CloudTrail Lake costs</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -684,8 +704,8 @@ module Aws::CloudTrail
     #               </li>
     #            </ul>
     # @option params [String] :s3_bucket_name
-    #   <p>Specifies the name of the Amazon S3 bucket designated for publishing log files.
-    #            For information about bucket naming rules, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">Bucket naming rules</a>
+    #   <p>Specifies the name of the Amazon S3 bucket designated for publishing log files. 
+    #            For information about bucket naming rules, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">Bucket naming rules</a> 
     #            in the <i>Amazon Simple Storage Service User Guide</i>.
     #           </p>
     # @option params [String] :s3_key_prefix
@@ -867,8 +887,8 @@ module Aws::CloudTrail
     #          event data store ARN. After you run <code>DeleteEventDataStore</code>, the event data store
     #          enters a <code>PENDING_DELETION</code> state, and is automatically deleted after a wait
     #          period of seven days. <code>TerminationProtectionEnabled</code> must be set to
-    #             <code>False</code> on the event data store and the <code>FederationStatus</code> must be <code>DISABLED</code>.
-    #          You cannot delete an event data store if <code>TerminationProtectionEnabled</code>
+    #             <code>False</code> on the event data store and the <code>FederationStatus</code> must be <code>DISABLED</code>. 
+    #          You cannot delete an event data store if <code>TerminationProtectionEnabled</code> 
     #          is <code>True</code> or the <code>FederationStatus</code> is <code>ENABLED</code>.</p>
     #          <p>After you run <code>DeleteEventDataStore</code> on an event data store, you cannot run
     #             <code>ListQueries</code>, <code>DescribeQuery</code>, or <code>GetQueryResults</code> on
@@ -983,11 +1003,11 @@ module Aws::CloudTrail
     #             <p>CloudTrail Lake will no longer be open to new customers starting May 31, 2026. If you would like to use CloudTrail Lake, sign up prior to that date. Existing customers can continue to use the service as normal. For more information, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html">CloudTrail Lake availability change</a>.</p>
     #          </important>
     #          <p>Returns metadata about a query, including query run time in milliseconds, number of
-    #          events scanned and matched, and query status. If the query results were delivered to an S3 bucket,
+    #          events scanned and matched, and query status. If the query results were delivered to an S3 bucket, 
     #          the response also provides the S3 URI and the delivery status.</p>
-    #          <p>You must specify either <code>QueryId</code> or <code>QueryAlias</code>. Specifying the <code>QueryAlias</code> parameter
-    #          returns information about the last query run for the alias. You can provide
-    #          <code>RefreshId</code> along with <code>QueryAlias</code> to view the query results
+    #          <p>You must specify either <code>QueryId</code> or <code>QueryAlias</code>. Specifying the <code>QueryAlias</code> parameter 
+    #          returns information about the last query run for the alias. You can provide 
+    #          <code>RefreshId</code> along with <code>QueryAlias</code> to view the query results 
     #          of a dashboard query for the specified <code>RefreshId</code>.</p>
     # @param [Hash, Types::DescribeQueryRequest] params
     # @option params [String] :event_data_store
@@ -1118,8 +1138,8 @@ module Aws::CloudTrail
     #             <p>CloudTrail Lake will no longer be open to new customers starting May 31, 2026. If you would like to use CloudTrail Lake, sign up prior to that date. Existing customers can continue to use the service as normal. For more information, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html">CloudTrail Lake availability change</a>.</p>
     #          </important>
     #          <p>
-    #          Disables Lake query federation on the specified event data store. When you disable federation, CloudTrail disables
-    #          the integration with Glue, Lake Formation, and Amazon Athena.
+    #          Disables Lake query federation on the specified event data store. When you disable federation, CloudTrail disables 
+    #          the integration with Glue, Lake Formation, and Amazon Athena. 
     #          After disabling Lake query federation, you can no longer query your event data in Amazon Athena.</p>
     #          <p>No CloudTrail Lake data is deleted when you disable federation and you can continue to run queries in CloudTrail Lake.</p>
     # @param [Hash, Types::DisableFederationRequest] params
@@ -1149,14 +1169,14 @@ module Aws::CloudTrail
     #             <p>CloudTrail Lake will no longer be open to new customers starting May 31, 2026. If you would like to use CloudTrail Lake, sign up prior to that date. Existing customers can continue to use the service as normal. For more information, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html">CloudTrail Lake availability change</a>.</p>
     #          </important>
     #          <p>
-    #          Enables Lake query federation on the specified event data store. Federating an event data store lets you view the metadata associated with the event data store in the Glue
-    #          <a href="https://docs.aws.amazon.com/glue/latest/dg/components-overview.html#data-catalog-intro">Data Catalog</a> and run
-    #          SQL queries against your event data using Amazon Athena. The table metadata stored in the Glue Data Catalog
+    #          Enables Lake query federation on the specified event data store. Federating an event data store lets you view the metadata associated with the event data store in the Glue 
+    #          <a href="https://docs.aws.amazon.com/glue/latest/dg/components-overview.html#data-catalog-intro">Data Catalog</a> and run 
+    #          SQL queries against your event data using Amazon Athena. The table metadata stored in the Glue Data Catalog 
     #          lets the Athena query engine know how to find, read, and process the data that you want to query.</p>
     #          <p>When you enable Lake query federation, CloudTrail
     #          creates a managed database named <code>aws:cloudtrail</code> (if the database doesn't already exist) and a managed federated table in
     #          the Glue Data Catalog. The event data store ID is used for the table name. CloudTrail registers the role ARN and event data store in
-    #          <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation-lake-formation.html">Lake Formation</a>, the service responsible for allowing fine-grained access control
+    #          <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation-lake-formation.html">Lake Formation</a>, the service responsible for allowing fine-grained access control 
     #          of the federated resources in the Glue Data Catalog.</p>
     #          <p>For more information about Lake query federation, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html">Federate an event data store</a>.</p>
     # @param [Hash, Types::EnableFederationRequest] params
@@ -1164,7 +1184,7 @@ module Aws::CloudTrail
     #   <p>The ARN (or ID suffix of the ARN) of the event data store for which you want to enable Lake query federation.</p>
     # @option params [String] :federation_role_arn
     #   <p>
-    #            The ARN of the federation role to use for the event data store. Amazon Web Services services like Lake Formation use this federation role to access data for the federated event
+    #            The ARN of the federation role to use for the event data store. Amazon Web Services services like Lake Formation use this federation role to access data for the federated event 
     #            data store. The federation role must exist in your account and provide the <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html#query-federation-permissions-role">required minimum permissions</a>.
     #         </p>
     # @example Request syntax with placeholder values
@@ -1197,8 +1217,8 @@ module Aws::CloudTrail
     #          <p>The prompt can be a question or a statement about the event data
     #          in your event data store. For example, you can enter prompts like "What are my
     #          top errors in the past month?" and “Give me a list of users that used SNS.”</p>
-    #          <p>The prompt must be in English. For information about limitations, permissions, and supported Regions, see
-    #          <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-query-generator.html">Create CloudTrail Lake queries from natural language prompts</a>
+    #          <p>The prompt must be in English. For information about limitations, permissions, and supported Regions, see 
+    #          <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-query-generator.html">Create CloudTrail Lake queries from natural language prompts</a> 
     #          in the <i>CloudTrail </i> user guide.</p>
     #          <note>
     #             <p>Do not include any personally identifying, confidential, or sensitive information
@@ -1214,8 +1234,8 @@ module Aws::CloudTrail
     #         </p>
     # @option params [String] :prompt
     #   <p>
-    #            The prompt that you want to use to generate the query. The prompt must be in English. For example prompts, see
-    #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-query-generator.html#lake-query-generator-examples">Example prompts</a>
+    #            The prompt that you want to use to generate the query. The prompt must be in English. For example prompts, see 
+    #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-query-generator.html#lake-query-generator-examples">Example prompts</a> 
     #            in the <i>CloudTrail </i> user guide.
     #         </p>
     # @example Request syntax with placeholder values
@@ -1459,7 +1479,7 @@ module Aws::CloudTrail
     #                <p>If your event selector includes management events.</p>
     #             </li>
     #             <li>
-    #                <p>If your event selector includes network activity events, the event sources
+    #                <p>If your event selector includes network activity events, the event sources 
     #                for which you are logging network activity events.</p>
     #             </li>
     #             <li>
@@ -1604,12 +1624,12 @@ module Aws::CloudTrail
     end
 
     # <p>Describes the settings for the Insights event selectors that you configured for your
-    #          trail or event data store. <code>GetInsightSelectors</code> shows if CloudTrail Insights logging is enabled
+    #          trail or event data store. <code>GetInsightSelectors</code> shows if CloudTrail Insights logging is enabled 
     #          and which Insights types are configured with corresponding event categories. If you run
     #             <code>GetInsightSelectors</code> on a trail or event data store that does not have Insights events enabled,
     #          the operation throws the exception <code>InsightNotEnabledException</code>
     #          </p>
-    #          <p>Specify either the <code>EventDataStore</code> parameter to get Insights event selectors for an event data store,
+    #          <p>Specify either the <code>EventDataStore</code> parameter to get Insights event selectors for an event data store, 
     #          or the <code>TrailName</code> parameter to the get Insights event selectors for a trail. You cannot specify these parameters together.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html">Working with CloudTrail Insights</a> in the <i>CloudTrail User Guide</i>.</p>
     # @param [Hash, Types::GetInsightSelectorsRequest] params
@@ -1853,7 +1873,7 @@ module Aws::CloudTrail
     # <important>
     #             <p>CloudTrail Lake will no longer be open to new customers starting May 31, 2026. If you would like to use CloudTrail Lake, sign up prior to that date. Existing customers can continue to use the service as normal. For more information, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html">CloudTrail Lake availability change</a>.</p>
     #          </important>
-    #          <p> Lists the channels in the current account, and their source names.
+    #          <p> Lists the channels in the current account, and their source names. 
     #       </p>
     # @param [Hash, Types::ListChannelsRequest] params
     # @option params [Integer] :max_results
@@ -2114,7 +2134,7 @@ module Aws::CloudTrail
     # @option params [Integer] :max_results
     #   <p>The number of events to return. Possible values are 1 through 50. The default is 50.</p>
     # @option params [String] :next_token
-    #   <p>The token to use to get the next page of results after a previous API call. This token must be passed in with the same parameters that were specified in the original call.
+    #   <p>The token to use to get the next page of results after a previous API call. This token must be passed in with the same parameters that were specified in the original call. 
     #         For example, if the original call specified a EventName as a dimension with <code>PutObject</code> as a value, the call with NextToken should include those same parameters.
     #         </p>
     # @example Request syntax with placeholder values
@@ -2160,7 +2180,7 @@ module Aws::CloudTrail
       request.send_request(options)
     end
 
-    # <p>Returns Insights metrics data for trails that have enabled Insights. The request must include the <code>EventSource</code>,
+    # <p>Returns Insights metrics data for trails that have enabled Insights. The request must include the <code>EventSource</code>, 
     #          <code>EventName</code>, and <code>InsightType</code> parameters.</p>
     #          <p>If the <code>InsightType</code> is set to <code>ApiErrorRateInsight</code>, the request must also include the <code>ErrorCode</code> parameter.</p>
     #          <p>The following are the available time periods for <code>ListInsightsMetricData</code>. Each cutoff is inclusive.</p>
@@ -2178,11 +2198,11 @@ module Aws::CloudTrail
     #          <p>To use <code>ListInsightsMetricData</code> operation, you must have the following permissions:</p>
     #          <ul>
     #             <li>
-    #                <p>If <code>ListInsightsMetricData</code> is invoked with <code>TrailName</code> parameter, access to the <code>ListInsightsMetricData</code> API operation is linked to the <code>cloudtrail:LookupEvents</code> action and <code>cloudtrail:ListInsightsData</code>. To use this operation,
+    #                <p>If <code>ListInsightsMetricData</code> is invoked with <code>TrailName</code> parameter, access to the <code>ListInsightsMetricData</code> API operation is linked to the <code>cloudtrail:LookupEvents</code> action and <code>cloudtrail:ListInsightsData</code>. To use this operation, 
     #          you must have permissions to perform the <code>cloudtrail:LookupEvents</code> and <code>cloudtrail:ListInsightsData</code> action on the specific trail.</p>
     #             </li>
     #             <li>
-    #                <p>If <code>ListInsightsMetricData</code> is invoked without <code>TrailName</code> parameter, access to the <code>ListInsightsMetricData</code> API operation is linked to the <code>cloudtrail:LookupEvents</code> action only. To use this operation,
+    #                <p>If <code>ListInsightsMetricData</code> is invoked without <code>TrailName</code> parameter, access to the <code>ListInsightsMetricData</code> API operation is linked to the <code>cloudtrail:LookupEvents</code> action only. To use this operation, 
     #          you must have permissions to perform the <code>cloudtrail:LookupEvents</code> action.</p>
     #             </li>
     #          </ul>
@@ -2194,16 +2214,16 @@ module Aws::CloudTrail
     #          </note>
     # @param [Hash, Types::ListInsightsMetricDataRequest] params
     # @option params [String] :trail_name
-    #   <p>The Amazon Resource Name(ARN) or name of the trail for which you want to retrieve Insights metrics data.
-    #         This parameter should only be provided to fetch Insights metrics data generated on trails logging data events.
+    #   <p>The Amazon Resource Name(ARN) or name of the trail for which you want to retrieve Insights metrics data. 
+    #         This parameter should only be provided to fetch Insights metrics data generated on trails logging data events. 
     #         This parameter is not required for Insights metric data generated on trails logging management events.</p>
     # @option params [String] :event_source
     #   <p>The Amazon Web Services service to which the request was made, such as <code>iam.amazonaws.com</code> or <code>s3.amazonaws.com</code>.</p>
     # @option params [String] :event_name
     #   <p>The name of the event, typically the Amazon Web Services API on which unusual levels of activity were recorded.</p>
     # @option params [String] :insight_type
-    #   <p>The type of CloudTrail Insights event, which is either <code>ApiCallRateInsight</code> or <code>ApiErrorRateInsight</code>.
-    #            The <code>ApiCallRateInsight</code> Insights type analyzes write-only management API calls that are aggregated per minute against a baseline API call volume.
+    #   <p>The type of CloudTrail Insights event, which is either <code>ApiCallRateInsight</code> or <code>ApiErrorRateInsight</code>. 
+    #            The <code>ApiCallRateInsight</code> Insights type analyzes write-only management API calls that are aggregated per minute against a baseline API call volume. 
     #            The <code>ApiErrorRateInsight</code> Insights type analyzes management API calls that result in error codes.</p>
     # @option params [String] :error_code
     #   <p>Conditionally required if the <code>InsightType</code> parameter is set to <code>ApiErrorRateInsight</code>.</p>
@@ -2212,17 +2232,17 @@ module Aws::CloudTrail
     #   <p>Specifies, in UTC, the start time for time-series data. The value specified is inclusive; results include data points with the specified time stamp.</p>
     #            <p>The default is 90 days before the time of request.</p>
     # @option params [Time] :end_time
-    #   <p>Specifies, in UTC, the end time for time-series data. The value specified is exclusive;
+    #   <p>Specifies, in UTC, the end time for time-series data. The value specified is exclusive; 
     #            results include data points up to the specified time stamp.</p>
     #            <p>The default is the time of request.</p>
     # @option params [Integer] :period
-    #   <p>Granularity of data to retrieve, in seconds. Valid values are <code>60</code>, <code>300</code>, and <code>3600</code>.
+    #   <p>Granularity of data to retrieve, in seconds. Valid values are <code>60</code>, <code>300</code>, and <code>3600</code>. 
     #            If you specify any other value, you will get an error. The default is 3600 seconds.</p>
     # @option params [String] :data_type
-    #   <p>Type of data points to return. Valid values are <code>NonZeroData</code> and
+    #   <p>Type of data points to return. Valid values are <code>NonZeroData</code> and 
     #            <code>FillWithZeros</code>. The default is <code>NonZeroData</code>.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of data points to return. Valid values are integers from 1 to 21600.
+    #   <p>The maximum number of data points to return. Valid values are integers from 1 to 21600. 
     #            The default value is 21600.</p>
     # @option params [String] :next_token
     #   <p>Returned if all datapoints can't be returned in a single call. For example, due to reaching <code>MaxResults</code>.</p>
@@ -2443,11 +2463,11 @@ module Aws::CloudTrail
       request.send_request(options)
     end
 
-    # <p>Looks up <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-management-events">management events</a> or <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-insights-events">CloudTrail Insights events</a> that are captured by CloudTrail.
+    # <p>Looks up <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-management-events">management events</a> or <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-insights-events">CloudTrail Insights events</a> that are captured by CloudTrail. 
     #          You can look up events that occurred in a Region within the last 90 days.</p>
     #          <note>
     #             <p>
-    #                <code>LookupEvents</code> returns recent Insights events for trails that enable Insights. To view Insights events for an event data store, you can run queries on your
+    #                <code>LookupEvents</code> returns recent Insights events for trails that enable Insights. To view Insights events for an event data store, you can run queries on your 
     #             Insights event data store, and you can also view the Lake dashboard for Insights.</p>
     #          </note>
     #          <p>Lookup supports the following attributes for management events:</p>
@@ -2625,7 +2645,7 @@ module Aws::CloudTrail
     #          either <code>AdvancedEventSelectors</code> or <code>EventSelectors</code>, but not both. If
     #          you apply <code>AdvancedEventSelectors</code> to a trail, any existing
     #          <code>EventSelectors</code> are overwritten.</p>
-    #          <p>You can use <code>AdvancedEventSelectors</code> to
+    #          <p>You can use <code>AdvancedEventSelectors</code> to 
     #          log management events, data events for all resource types, and network activity events.</p>
     #          <p>You can use <code>EventSelectors</code> to log management events and data events for the following resource types:</p>
     #          <ul>
@@ -2646,7 +2666,7 @@ module Aws::CloudTrail
     #             </li>
     #          </ul>
     #          <p>You can't use <code>EventSelectors</code> to log network activity events.</p>
-    #          <p>If you want your trail to log Insights events, be sure the event selector or advanced event selector enables
+    #          <p>If you want your trail to log Insights events, be sure the event selector or advanced event selector enables 
     #          logging of the Insights event types you want configured for your trail. For more information about logging Insights events, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html">Working with CloudTrail Insights</a> in the <i>CloudTrail User Guide</i>.
     #          By default, trails created without specific event selectors are configured to
     #          log all read and write management events, and no data events or network activity events.</p>
@@ -2739,7 +2759,7 @@ module Aws::CloudTrail
     #            both. If you apply <code>EventSelectors</code> to a trail, any existing
     #               <code>AdvancedEventSelectors</code> are overwritten.</p>
     # @option params [Array<Types::AdvancedEventSelector>] :advanced_event_selectors
-    #   <p> Specifies the settings for advanced event selectors. You can use advanced event selectors to
+    #   <p> Specifies the settings for advanced event selectors. You can use advanced event selectors to 
     #            log management events, data events for all resource types, and network activity events.</p>
     #            <p>You can add advanced event
     #            selectors, and conditions for your advanced event selectors, up to a maximum of 500 values
@@ -2747,7 +2767,7 @@ module Aws::CloudTrail
     #               <code>AdvancedEventSelectors</code> or <code>EventSelectors</code>, but not both. If you
     #            apply <code>AdvancedEventSelectors</code> to a trail, any existing
     #               <code>EventSelectors</code> are overwritten. For more information about advanced event
-    #            selectors, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html">Logging data events</a> and
+    #            selectors, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html">Logging data events</a> and 
     #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-network-events-with-cloudtrail.html">Logging network activity events</a>
     #            in the <i>CloudTrail User Guide</i>. </p>
     # @example Request syntax with placeholder values
@@ -2835,28 +2855,28 @@ module Aws::CloudTrail
     #             Insights on data events are not supported on event data stores. For event data stores, you can only enable Insights on management events.
     #          </p>
     #          </note>
-    #          <p>To enable Insights on an event data store, you must specify the ARNs (or ID suffix of the ARNs) for the source event data store (<code>EventDataStore</code>) and the destination event data store (<code>InsightsDestination</code>). The source event data store logs management events and enables Insights.
+    #          <p>To enable Insights on an event data store, you must specify the ARNs (or ID suffix of the ARNs) for the source event data store (<code>EventDataStore</code>) and the destination event data store (<code>InsightsDestination</code>). The source event data store logs management events and enables Insights. 
     #          The destination event data store logs Insights events based upon the management event activity of the source event data store. The source and destination event data stores must belong to the same Amazon Web Services account.</p>
     #          <p>To log Insights events for a trail, you must specify the name (<code>TrailName</code>) of the CloudTrail trail for which you want to change or add Insights
     #          selectors.</p>
     #          <ul>
     #             <li>
     #                <p>
-    #                For Management events Insights: To log CloudTrail Insights on the API call rate, the trail or event data store must log <code>write</code> management events.
+    #                For Management events Insights: To log CloudTrail Insights on the API call rate, the trail or event data store must log <code>write</code> management events. 
     #                To log CloudTrail Insights on the API error rate, the trail or event data store must log <code>read</code> or <code>write</code> management events.
     #             </p>
     #             </li>
     #             <li>
     #                <p>
-    #                For Data events Insights: To log CloudTrail Insights on the API call rate or API error rate, the trail must log <code>read</code> or <code>write</code> data events. Data events Insights are not supported on event data store.
+    #                For Data events Insights: To log CloudTrail Insights on the API call rate or API error rate, the trail must log <code>read</code> or <code>write</code> data events. Data events Insights are not supported on event data store. 
     #             </p>
     #             </li>
     #          </ul>
     #          <p>To log CloudTrail Insights events on API call volume, the trail or event data store
     #          must log <code>write</code> management events. To log CloudTrail
     #          Insights events on API error rate, the trail or event data store must log <code>read</code> or
-    #             <code>write</code> management events. You can call <code>GetEventSelectors</code> on a trail
-    #          to check whether the trail logs management events. You can call <code>GetEventDataStore</code> on an
+    #             <code>write</code> management events. You can call <code>GetEventSelectors</code> on a trail 
+    #          to check whether the trail logs management events. You can call <code>GetEventDataStore</code> on an 
     #       event data store to check whether the event data store logs management events.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html">Working with CloudTrail Insights</a> in the <i>CloudTrail User Guide</i>.</p>
     # @param [Hash, Types::PutInsightSelectorsRequest] params
@@ -2865,22 +2885,22 @@ module Aws::CloudTrail
     #            selectors.</p>
     #            <p>You cannot use this parameter with the <code>EventDataStore</code> and <code>InsightsDestination</code> parameters.</p>
     # @option params [Array<Types::InsightSelector>] :insight_selectors
-    #   <p>Contains the Insights types you want to log on a specific category of events on a trail or event data store.
+    #   <p>Contains the Insights types you want to log on a specific category of events on a trail or event data store. 
     #               <code>ApiCallRateInsight</code> and <code>ApiErrorRateInsight</code> are valid Insight
     #            types.The EventCategory field can specify <code>Management</code> or <code>Data</code> events or both. For event data store, you can log Insights for management events only.</p>
     #            <p>The <code>ApiCallRateInsight</code> Insights type analyzes write-only management
     #   	         API calls or read and write data API calls that are aggregated per minute against a baseline API call volume.</p>
-    #            <p>The <code>ApiErrorRateInsight</code> Insights type analyzes management and data
+    #            <p>The <code>ApiErrorRateInsight</code> Insights type analyzes management and data 
     #   	          API calls that result in error codes. The error is shown if the API call is
     #   	          unsuccessful.</p>
     # @option params [String] :event_data_store
     #   <p>The ARN (or ID suffix of the ARN) of the source event data store for which you want to change or add Insights
-    #            selectors. To enable Insights on an event data store, you must provide both the
+    #            selectors. To enable Insights on an event data store, you must provide both the 
     #            <code>EventDataStore</code> and <code>InsightsDestination</code> parameters.</p>
     #            <p>You cannot use this parameter with the <code>TrailName</code> parameter.</p>
     # @option params [String] :insights_destination
     #   <p>
-    #            The ARN (or ID suffix of the ARN) of the destination event data store that logs Insights events. To enable Insights on an event data store, you must provide both the
+    #            The ARN (or ID suffix of the ARN) of the destination event data store that logs Insights events. To enable Insights on an event data store, you must provide both the 
     #            <code>EventDataStore</code> and <code>InsightsDestination</code> parameters.
     #         </p>
     #            <p>You cannot use this parameter with the <code>TrailName</code> parameter.</p>
@@ -2918,8 +2938,8 @@ module Aws::CloudTrail
     end
 
     # <p>
-    #          Attaches a resource-based permission policy to a CloudTrail event data store, dashboard, or channel. For more information about resource-based policies, see
-    #          <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html">CloudTrail resource-based policy examples</a>
+    #          Attaches a resource-based permission policy to a CloudTrail event data store, dashboard, or channel. For more information about resource-based policies, see 
+    #          <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html">CloudTrail resource-based policy examples</a> 
     #          in the <i>CloudTrail User Guide</i>.
     #       </p>
     # @param [Hash, Types::PutResourcePolicyRequest] params
@@ -2938,8 +2958,8 @@ module Aws::CloudTrail
     #   <p>
     #            A JSON-formatted string for an Amazon Web Services resource-based policy.
     #         </p>
-    #            <p> For example resource-based policies, see
-    #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html">CloudTrail resource-based policy examples</a>
+    #            <p> For example resource-based policies, see 
+    #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html">CloudTrail resource-based policy examples</a> 
     #            in the <i>CloudTrail User Guide</i>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3078,7 +3098,7 @@ module Aws::CloudTrail
     #             <p>CloudTrail Lake will no longer be open to new customers starting May 31, 2026. If you would like to use CloudTrail Lake, sign up prior to that date. Existing customers can continue to use the service as normal. For more information, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html">CloudTrail Lake availability change</a>.</p>
     #          </important>
     #          <p>
-    #          Searches sample queries and returns a list of sample queries that are sorted by relevance.
+    #          Searches sample queries and returns a list of sample queries that are sorted by relevance. 
     #          To search for sample queries, provide a natural language <code>SearchPhrase</code> in English.
     #       </p>
     # @param [Hash, Types::SearchSampleQueriesRequest] params
@@ -3127,7 +3147,7 @@ module Aws::CloudTrail
     # Starts a refresh of the specified dashboard.
     # </p>
     #          <p>
-    #    Each time a dashboard is refreshed, CloudTrail runs queries to populate the dashboard's widgets. CloudTrail must be granted permissions to run the <code>StartQuery</code> operation on your behalf. To provide permissions, run the <code>PutResourcePolicy</code> operation to attach a resource-based policy to each event data store. For more information,
+    #    Each time a dashboard is refreshed, CloudTrail runs queries to populate the dashboard's widgets. CloudTrail must be granted permissions to run the <code>StartQuery</code> operation on your behalf. To provide permissions, run the <code>PutResourcePolicy</code> operation to attach a resource-based policy to each event data store. For more information, 
     #    see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-eds-dashboard">Example: Allow CloudTrail to run queries to populate a dashboard</a> in the <i>CloudTrail User Guide</i>.
     # </p>
     # @param [Hash, Types::StartDashboardRefreshRequest] params
@@ -3166,7 +3186,7 @@ module Aws::CloudTrail
     # <important>
     #             <p>CloudTrail Lake will no longer be open to new customers starting May 31, 2026. If you would like to use CloudTrail Lake, sign up prior to that date. Existing customers can continue to use the service as normal. For more information, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html">CloudTrail Lake availability change</a>.</p>
     #          </important>
-    #          <p>Starts the ingestion of live events on an event data store specified as either an ARN or the ID portion of the ARN. To start ingestion, the event data store <code>Status</code> must be <code>STOPPED_INGESTION</code>
+    #          <p>Starts the ingestion of live events on an event data store specified as either an ARN or the ID portion of the ARN. To start ingestion, the event data store <code>Status</code> must be <code>STOPPED_INGESTION</code> 
     #          and the <code>eventCategory</code> must be <code>Management</code>, <code>Data</code>, <code>NetworkActivity</code>, or <code>ConfigurationItem</code>.</p>
     # @param [Hash, Types::StartEventDataStoreIngestionRequest] params
     # @option params [String] :event_data_store
@@ -3300,7 +3320,7 @@ module Aws::CloudTrail
     #             <code>DeliveryS3Uri</code> parameter to deliver the query results to an S3
     #          bucket.</p>
     #          <p>
-    #             <code>StartQuery</code> requires you specify either the <code>QueryStatement</code> parameter, or a <code>QueryAlias</code> and any <code>QueryParameters</code>. In the current release,
+    #             <code>StartQuery</code> requires you specify either the <code>QueryStatement</code> parameter, or a <code>QueryAlias</code> and any <code>QueryParameters</code>. In the current release, 
     #          the <code>QueryAlias</code> and <code>QueryParameters</code> parameters are used only for the queries that populate the CloudTrail Lake dashboards.</p>
     # @param [Hash, Types::StartQueryRequest] params
     # @option params [String] :query_statement
@@ -3344,7 +3364,7 @@ module Aws::CloudTrail
     # <important>
     #             <p>CloudTrail Lake will no longer be open to new customers starting May 31, 2026. If you would like to use CloudTrail Lake, sign up prior to that date. Existing customers can continue to use the service as normal. For more information, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html">CloudTrail Lake availability change</a>.</p>
     #          </important>
-    #          <p>Stops the ingestion of live events on an event data store specified as either an ARN or the ID portion of the ARN. To stop ingestion, the event data store <code>Status</code> must be <code>ENABLED</code>
+    #          <p>Stops the ingestion of live events on an event data store specified as either an ARN or the ID portion of the ARN. To stop ingestion, the event data store <code>Status</code> must be <code>ENABLED</code> 
     #          and the <code>eventCategory</code> must be <code>Management</code>, <code>Data</code>, <code>NetworkActivity</code>, or <code>ConfigurationItem</code>.</p>
     # @param [Hash, Types::StopEventDataStoreIngestionRequest] params
     # @option params [String] :event_data_store
@@ -3490,12 +3510,12 @@ module Aws::CloudTrail
     # Updates the specified dashboard.
     # </p>
     #          <p>
-    #       To set a refresh schedule, CloudTrail must be granted permissions to run the <code>StartDashboardRefresh</code> operation to refresh the dashboard on your behalf. To provide permissions, run the <code>PutResourcePolicy</code> operation to attach a resource-based policy to the dashboard. For more information,
+    #       To set a refresh schedule, CloudTrail must be granted permissions to run the <code>StartDashboardRefresh</code> operation to refresh the dashboard on your behalf. To provide permissions, run the <code>PutResourcePolicy</code> operation to attach a resource-based policy to the dashboard. For more information, 
     #       see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-dashboards">
     #          Resource-based policy example for a dashboard</a> in the <i>CloudTrail User Guide</i>.
     #    </p>
     #          <p>
-    #       CloudTrail runs queries to populate the dashboard's widgets during a manual or scheduled refresh. CloudTrail must be granted permissions to run the <code>StartQuery</code> operation on your behalf. To provide permissions, run the <code>PutResourcePolicy</code> operation to attach a resource-based policy to each event data store. For more information,
+    #       CloudTrail runs queries to populate the dashboard's widgets during a manual or scheduled refresh. CloudTrail must be granted permissions to run the <code>StartQuery</code> operation on your behalf. To provide permissions, run the <code>PutResourcePolicy</code> operation to attach a resource-based policy to each event data store. For more information, 
     #       see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-eds-dashboard">Example: Allow CloudTrail to run queries to populate a dashboard</a> in the <i>CloudTrail User Guide</i>.
     #    </p>
     # @param [Hash, Types::UpdateDashboardRequest] params
@@ -3604,18 +3624,18 @@ module Aws::CloudTrail
     #   <p>Specifies whether an event data store collects events logged for an organization in
     #               Organizations.</p>
     #            <note>
-    #               <p>Only the management account for the organization can convert an organization event data store to a non-organization event data store, or convert a non-organization event data store to
+    #               <p>Only the management account for the organization can convert an organization event data store to a non-organization event data store, or convert a non-organization event data store to 
     #            an organization event data store.</p>
     #            </note>
     # @option params [Integer] :retention_period
     #   <p>The retention period of the event data store, in days. If <code>BillingMode</code> is set to <code>EXTENDABLE_RETENTION_PRICING</code>, you can set a retention period of
     #            up to 3653 days, the equivalent of 10 years. If <code>BillingMode</code> is set to <code>FIXED_RETENTION_PRICING</code>, you can set a retention period of
     #            up to 2557 days, the equivalent of seven years.</p>
-    #            <p>CloudTrail  Lake determines whether to retain an event by checking if the <code>eventTime</code>
-    #            of the event is within the specified retention period. For example, if you set a retention period of 90 days, CloudTrail will remove events
+    #            <p>CloudTrail  Lake determines whether to retain an event by checking if the <code>eventTime</code> 
+    #            of the event is within the specified retention period. For example, if you set a retention period of 90 days, CloudTrail will remove events 
     #            when the <code>eventTime</code> is older than 90 days.</p>
     #            <note>
-    #               <p>If you decrease the retention period of an event data store, CloudTrail will remove any events with an <code>eventTime</code> older than the new retention period. For example, if the previous
+    #               <p>If you decrease the retention period of an event data store, CloudTrail will remove any events with an <code>eventTime</code> older than the new retention period. For example, if the previous 
     #               retention period was 365 days and you decrease it to 100 days, CloudTrail  will remove events with an <code>eventTime</code> older than 100 days.</p>
     #            </note>
     # @option params [Boolean] :termination_protection_enabled
@@ -3662,26 +3682,26 @@ module Aws::CloudTrail
     #            </ul>
     # @option params [String] :billing_mode
     #   <note>
-    #               <p>You can't change the billing mode from <code>EXTENDABLE_RETENTION_PRICING</code> to <code>FIXED_RETENTION_PRICING</code>. If <code>BillingMode</code> is set to
+    #               <p>You can't change the billing mode from <code>EXTENDABLE_RETENTION_PRICING</code> to <code>FIXED_RETENTION_PRICING</code>. If <code>BillingMode</code> is set to 
     #               <code>EXTENDABLE_RETENTION_PRICING</code> and you want to use <code>FIXED_RETENTION_PRICING</code> instead, you'll need to stop ingestion on the event data store and create a new event data store that uses <code>FIXED_RETENTION_PRICING</code>.</p>
     #            </note>
-    #            <p>The billing mode for the event data store determines the cost
+    #            <p>The billing mode for the event data store determines the cost 
     #            for ingesting events and the default and maximum retention period for the event data store.</p>
     #            <p>The following are the possible values:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>EXTENDABLE_RETENTION_PRICING</code> - This billing mode is generally recommended if you want a flexible retention period of up to 3653 days (about 10 years). The default retention period for this billing mode is
+    #                     <code>EXTENDABLE_RETENTION_PRICING</code> - This billing mode is generally recommended if you want a flexible retention period of up to 3653 days (about 10 years). The default retention period for this billing mode is 
     #                  366 days.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>FIXED_RETENTION_PRICING</code> - This billing mode is recommended if you expect to ingest more than 25 TB of event data per month and need a retention period of up to 2557 days (about 7 years).
+    #                     <code>FIXED_RETENTION_PRICING</code> - This billing mode is recommended if you expect to ingest more than 25 TB of event data per month and need a retention period of up to 2557 days (about 7 years). 
     #                  The default retention period for this billing mode is 2557 days.</p>
     #               </li>
     #            </ul>
-    #            <p>For more information about CloudTrail pricing,
-    #            see <a href="http://aws.amazon.com/cloudtrail/pricing/">CloudTrail Pricing</a> and
+    #            <p>For more information about CloudTrail pricing, 
+    #            see <a href="http://aws.amazon.com/cloudtrail/pricing/">CloudTrail Pricing</a> and 
     #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-manage-costs.html">Managing CloudTrail Lake costs</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3855,7 +3875,7 @@ module Aws::CloudTrail
     #               <code>false</code>, the trail will remain in the current Amazon Web Services account but
     #            be deleted from all member accounts in the organization.</p>
     #            <note>
-    #               <p>Only the management account for the organization can convert an organization trail to a non-organization trail, or convert a non-organization trail to
+    #               <p>Only the management account for the organization can convert an organization trail to a non-organization trail, or convert a non-organization trail to 
     #               an organization trail.</p>
     #            </note>
     # @option params [Boolean] :recursive_logging
@@ -3956,7 +3976,8 @@ module Aws::CloudTrail
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

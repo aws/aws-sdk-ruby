@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -44,7 +45,6 @@ module Aws::Translate
     @identifier = :translate
 
     add_plugin(::Aws::Translate::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -64,6 +64,8 @@ module Aws::Translate
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -140,23 +142,41 @@ module Aws::Translate
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -794,7 +814,7 @@ module Aws::Translate
     #       or more target languages. Batch translation translates each input document into each of the target languages.
     #       For more information, see
     #       <a href="https://docs.aws.amazon.com/translate/latest/dg/async.html">Asynchronous batch processing</a>.</p>
-    #
+    # 
     #          <p>Batch translation jobs can be described with the <a>DescribeTextTranslationJob</a> operation, listed with the <a>ListTextTranslationJobs</a> operation, and stopped with the <a>StopTextTranslationJob</a> operation.</p>
     # @param [Hash, Types::StartTextTranslationJobRequest] params
     # @option params [String] :job_name
@@ -960,14 +980,14 @@ module Aws::Translate
       request.send_request(options)
     end
 
-    # <p>Translates the input document from the source language to the target language.
+    # <p>Translates the input document from the source language to the target language.    
     #       This synchronous operation supports text, HTML, or Word documents as the input document.
-    #
-    #       <code>TranslateDocument</code> supports translations from English to any supported language,
+    #       
+    #       <code>TranslateDocument</code> supports translations from English to any supported language, 
     #       and from any supported language to English. Therefore, specify either the source language code
-    #       or the target language code as “en” (English).
+    #       or the target language code as “en” (English). 
     #     </p>
-    #          <p> If you set the <code>Formality</code> parameter, the request will fail if the target language does
+    #          <p> If you set the <code>Formality</code> parameter, the request will fail if the target language does 
     #        not support formality. For a list of target languages that support formality, see
     #        <a href="https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html">Setting formality</a>.
     #     </p>
@@ -976,7 +996,7 @@ module Aws::Translate
     #   <p>The content and content type for the document to be translated. The document size must not exceed 100 KB.</p>
     # @option params [Array<String>] :terminology_names
     #   <p>The name of a terminology list file to add to the translation job. This file
-    #         provides source terms and the desired translation for each term.
+    #         provides source terms and the desired translation for each term. 
     #         A terminology list can contain a maximum of 256 terms.
     #         You can use one custom terminology resource in your translation request.</p>
     #            <p>Use the <a>ListTerminologies</a> operation
@@ -994,7 +1014,7 @@ module Aws::Translate
     #         Amazon Comprehend. Otherwise, the request returns an error indicating that autodetect is not supported. </p>
     #            </note>
     # @option params [String] :target_language_code
-    #   <p>The language code requested for the translated document.
+    #   <p>The language code requested for the translated document.  
     #         For a list of supported language codes, see
     #         <a href="https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html">Supported languages</a>.</p>
     # @option params [Types::TranslationSettings] :settings
@@ -1066,7 +1086,7 @@ module Aws::Translate
     #         your character set, this may be fewer than 10,000 characters.</p>
     # @option params [Array<String>] :terminology_names
     #   <p>The name of a terminology list file to add to the translation job. This file
-    #         provides source terms and the desired translation for each term.
+    #         provides source terms and the desired translation for each term. 
     #         A terminology list can contain a maximum of 256 terms.
     #         You can use one custom terminology resource in your translation request.</p>
     #            <p>Use the <a>ListTerminologies</a> operation
@@ -1257,7 +1277,8 @@ module Aws::Translate
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

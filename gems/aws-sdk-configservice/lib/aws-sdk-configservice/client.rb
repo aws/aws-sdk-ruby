@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::ConfigService
     @identifier = :configservice
 
     add_plugin(::Aws::ConfigService::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::ConfigService
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::ConfigService
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -268,7 +288,7 @@ module Aws::ConfigService
       request.send_request(options)
     end
 
-    # <p>Returns the current configuration items for resources that are present in your Config aggregator. The operation also returns a list of resources that are not processed in the current request.
+    # <p>Returns the current configuration items for resources that are present in your Config aggregator. The operation also returns a list of resources that are not processed in the current request. 
     # 			If there are no unprocessed resources, the operation returns an empty <code>unprocessedResourceIdentifiers</code> list. </p>
     #          <note>
     #             <ul>
@@ -454,7 +474,7 @@ module Aws::ConfigService
     #             <p>Deleting rules creates configuration items (CIs) for <code>AWS::Config::ResourceCompliance</code>
     # 				that can affect your costs for the configuration recorder. If you are deleting rules which evaluate a large number of resource types,
     # 				this can lead to a spike in the number of CIs recorded.</p>
-    #             <p>To avoid the associated costs, you can opt to disable recording
+    #             <p>To avoid the associated costs, you can opt to disable recording 
     # 				for the <code>AWS::Config::ResourceCompliance</code> resource type before deleting rules, and re-enable recording after the rules have been deleted.</p>
     #             <p>However, since deleting rules is an asynchronous process, it might take an hour or more to complete. During the time
     # 				when recording is disabled for <code>AWS::Config::ResourceCompliance</code>, rule evaluations will not be recorded in the associated resource’s history.</p>
@@ -524,9 +544,9 @@ module Aws::ConfigService
       request.send_request(options)
     end
 
-    # <p>Deletes the specified conformance pack and all the Config rules, remediation actions, and all evaluation results within that
+    # <p>Deletes the specified conformance pack and all the Config rules, remediation actions, and all evaluation results within that 
     # 			conformance pack.</p>
-    #          <p>Config sets the conformance pack to <code>DELETE_IN_PROGRESS</code> until the deletion is complete.
+    #          <p>Config sets the conformance pack to <code>DELETE_IN_PROGRESS</code> until the deletion is complete. 
     # 			You cannot update a conformance pack while it is in this state.</p>
     #          <note>
     #             <p>
@@ -535,7 +555,7 @@ module Aws::ConfigService
     #             <p>Deleting rules creates configuration items (CIs) for <code>AWS::Config::ResourceCompliance</code>
     # 				that can affect your costs for the configuration recorder. If you are deleting rules which evaluate a large number of resource types,
     # 				this can lead to a spike in the number of CIs recorded.</p>
-    #             <p>To avoid the associated costs, you can opt to disable recording
+    #             <p>To avoid the associated costs, you can opt to disable recording 
     # 				for the <code>AWS::Config::ResourceCompliance</code> resource type before deleting rules, and re-enable recording after the rules have been deleted.</p>
     #             <p>However, since deleting rules is an asynchronous process, it might take an hour or more to complete. During the time
     # 				when recording is disabled for <code>AWS::Config::ResourceCompliance</code>, rule evaluations will not be recorded in the associated resource’s history.</p>
@@ -622,9 +642,9 @@ module Aws::ConfigService
 
     # <p>Deletes the specified organization Config rule and all of its evaluation results from all member accounts in that organization. </p>
     #          <p>Only a management account and a delegated administrator account can delete an organization Config rule.
-    # 		When calling this API with a delegated administrator, you must ensure Organizations
+    # 		When calling this API with a delegated administrator, you must ensure Organizations 
     # 			<code>ListDelegatedAdministrator</code> permissions are added.</p>
-    #          <p>Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete.
+    #          <p>Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. 
     # 			You cannot update a rule while it is in this state.</p>
     #          <note>
     #             <p>
@@ -633,7 +653,7 @@ module Aws::ConfigService
     #             <p>Deleting rules creates configuration items (CIs) for <code>AWS::Config::ResourceCompliance</code>
     # 				that can affect your costs for the configuration recorder. If you are deleting rules which evaluate a large number of resource types,
     # 				this can lead to a spike in the number of CIs recorded.</p>
-    #             <p>To avoid the associated costs, you can opt to disable recording
+    #             <p>To avoid the associated costs, you can opt to disable recording 
     # 				for the <code>AWS::Config::ResourceCompliance</code> resource type before deleting rules, and re-enable recording after the rules have been deleted.</p>
     #             <p>However, since deleting rules is an asynchronous process, it might take an hour or more to complete. During the time
     # 				when recording is disabled for <code>AWS::Config::ResourceCompliance</code>, rule evaluations will not be recorded in the associated resource’s history.</p>
@@ -659,9 +679,9 @@ module Aws::ConfigService
     # <p>Deletes the specified organization conformance pack and all of the Config rules and remediation actions from
     # 			all member accounts in that organization. </p>
     #          <p> Only a management account or a delegated administrator account can delete an organization conformance pack.
-    # 	When calling this API with a delegated administrator, you must ensure Organizations
+    # 	When calling this API with a delegated administrator, you must ensure Organizations 
     # 		<code>ListDelegatedAdministrator</code> permissions are added.</p>
-    #          <p>Config sets the state of a conformance pack to DELETE_IN_PROGRESS until the deletion is complete.
+    #          <p>Config sets the state of a conformance pack to DELETE_IN_PROGRESS until the deletion is complete. 
     # 				You cannot update a conformance pack while it is in this state. </p>
     #          <note>
     #             <p>
@@ -670,7 +690,7 @@ module Aws::ConfigService
     #             <p>Deleting rules creates configuration items (CIs) for <code>AWS::Config::ResourceCompliance</code>
     # 				that can affect your costs for the configuration recorder. If you are deleting rules which evaluate a large number of resource types,
     # 				this can lead to a spike in the number of CIs recorded.</p>
-    #             <p>To avoid the associated costs, you can opt to disable recording
+    #             <p>To avoid the associated costs, you can opt to disable recording 
     # 				for the <code>AWS::Config::ResourceCompliance</code> resource type before deleting rules, and re-enable recording after the rules have been deleted.</p>
     #             <p>However, since deleting rules is an asynchronous process, it might take an hour or more to complete. During the time
     # 				when recording is disabled for <code>AWS::Config::ResourceCompliance</code>, rule evaluations will not be recorded in the associated resource’s history.</p>
@@ -741,7 +761,7 @@ module Aws::ConfigService
 
     # <p>Deletes one or more remediation exceptions mentioned in the resource keys.</p>
     #          <note>
-    #             <p>Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource.
+    #             <p>Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. 
     # 			Remediation exceptions blocks auto-remediation until the exception is cleared.</p>
     #          </note>
     # @param [Hash, Types::DeleteRemediationExceptionsRequest] params
@@ -918,7 +938,7 @@ module Aws::ConfigService
     end
 
     # <p>Returns a list of compliant and noncompliant rules with the
-    # 			number of resources for compliant and noncompliant rules. Does not display rules that do not have compliance results.
+    # 			number of resources for compliant and noncompliant rules. Does not display rules that do not have compliance results. 
     # 			</p>
     #          <note>
     #             <p>The results can return an empty result page, but if you
@@ -978,7 +998,7 @@ module Aws::ConfigService
       request.send_request(options)
     end
 
-    # <p>Returns a list of the existing and deleted conformance packs and their associated compliance status with the count of compliant and noncompliant Config rules within each
+    # <p>Returns a list of the existing and deleted conformance packs and their associated compliance status with the count of compliant and noncompliant Config rules within each 
     # 			conformance pack. Also returns the total rule count which includes compliant rules, noncompliant rules, and rules that cannot be evaluated due to insufficient data.</p>
     #          <note>
     #             <p>The results can return an empty result page, but if you have a <code>nextToken</code>, the results are displayed on the next page.</p>
@@ -1837,10 +1857,10 @@ module Aws::ConfigService
 
     # <p>Provides organization Config rule deployment status for an organization.</p>
     #          <note>
-    #             <p>The status is not considered successful until organization Config rule is successfully deployed in all the member
+    #             <p>The status is not considered successful until organization Config rule is successfully deployed in all the member 
     # 			accounts with an exception of excluded accounts.</p>
     #             <p>When you specify the limit and the next token, you receive a paginated response.
-    # 			Limit and next token are not applicable if you specify organization Config rule names.
+    # 			Limit and next token are not applicable if you specify organization Config rule names. 
     # 			It is only applicable, when you request all the organization Config rules.</p>
     #          </note>
     # @param [Hash, Types::DescribeOrganizationConfigRuleStatusesRequest] params
@@ -1881,7 +1901,7 @@ module Aws::ConfigService
     # <p>Returns a list of organization Config rules. </p>
     #          <note>
     #             <p>When you specify the limit and the next token, you receive a paginated response.</p>
-    #             <p>Limit and next token are not applicable if you specify organization Config rule names.
+    #             <p>Limit and next token are not applicable if you specify organization Config rule names. 
     # 			It is only applicable, when you request all the organization Config rules.</p>
     #             <p>
     #                <i>For accounts within an organization</i>
@@ -1892,7 +1912,7 @@ module Aws::ConfigService
     # 				won't be able to see the organizational rule or conformance pack in the organization
     # 				administrator account from the delegated administrator account or see the organizational
     # 				rule or conformance pack in the delegated administrator account from organization
-    # 				administrator account. The <code>DescribeOrganizationConfigRules</code> and
+    # 				administrator account. The <code>DescribeOrganizationConfigRules</code> and 
     # 				<code>DescribeOrganizationConformancePacks</code> APIs can only see and interact with
     # 				the organization-related resource that were deployed from within the account calling
     # 				those APIs.</p>
@@ -1966,18 +1986,18 @@ module Aws::ConfigService
 
     # <p>Provides organization conformance pack deployment status for an organization. </p>
     #          <note>
-    #             <p>The status is not considered successful until organization conformance pack is successfully
+    #             <p>The status is not considered successful until organization conformance pack is successfully 
     # 				deployed in all the member accounts with an exception of excluded accounts.</p>
-    #             <p>When you specify the limit and the next token, you receive a paginated response.
-    # 				Limit and next token are not applicable if you specify organization conformance pack names.
+    #             <p>When you specify the limit and the next token, you receive a paginated response. 
+    # 				Limit and next token are not applicable if you specify organization conformance pack names. 
     # 				They are only applicable, when you request all the organization conformance packs.</p>
     #          </note>
     # @param [Hash, Types::DescribeOrganizationConformancePackStatusesRequest] params
     # @option params [Array<String>] :organization_conformance_pack_names
-    #   <p>The names of organization conformance packs for which you want status details.
+    #   <p>The names of organization conformance packs for which you want status details. 
     #   			If you do not specify any names, Config returns details for all your organization conformance packs. </p>
     # @option params [Integer] :limit
-    #   <p>The maximum number of OrganizationConformancePackStatuses returned on each page.
+    #   <p>The maximum number of OrganizationConformancePackStatuses returned on each page. 
     #   			If you do no specify a number, Config uses the default. The default is 100. </p>
     # @option params [String] :next_token
     #   <p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. </p>
@@ -2023,7 +2043,7 @@ module Aws::ConfigService
     # 				won't be able to see the organizational rule or conformance pack in the organization
     # 				administrator account from the delegated administrator account or see the organizational
     # 				rule or conformance pack in the delegated administrator account from organization
-    # 				administrator account. The <code>DescribeOrganizationConfigRules</code> and
+    # 				administrator account. The <code>DescribeOrganizationConfigRules</code> and 
     # 				<code>DescribeOrganizationConformancePacks</code> APIs can only see and interact with
     # 				the organization-related resource that were deployed from within the account calling
     # 				those APIs.</p>
@@ -2155,10 +2175,10 @@ module Aws::ConfigService
       request.send_request(options)
     end
 
-    # <p>Returns the details of one or more remediation exceptions. A detailed view of a remediation exception for a set of resources that includes an explanation of an exception and the time when the exception will be deleted.
+    # <p>Returns the details of one or more remediation exceptions. A detailed view of a remediation exception for a set of resources that includes an explanation of an exception and the time when the exception will be deleted. 
     # 			When you specify the limit and the next token, you receive a paginated response. </p>
     #          <note>
-    #             <p>Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource.
+    #             <p>Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. 
     # 				Remediation exceptions blocks auto-remediation until the exception is cleared.</p>
     #             <p>When you specify the limit and the next token, you receive a paginated response. </p>
     #             <p>Limit and next token are not applicable if you request resources in batch. It is only applicable, when you request all resources.</p>
@@ -2206,7 +2226,7 @@ module Aws::ConfigService
       request.send_request(options)
     end
 
-    # <p>Provides a detailed view of a Remediation Execution for a set of resources including state, timestamps for when steps for the remediation execution occur, and any error messages for steps that have failed.
+    # <p>Provides a detailed view of a Remediation Execution for a set of resources including state, timestamps for when steps for the remediation execution occur, and any error messages for steps that have failed. 
     # 			When you specify the limit and the next token, you receive a paginated response.</p>
     # @param [Hash, Types::DescribeRemediationExecutionStatusRequest] params
     # @option params [String] :config_rule_name
@@ -3162,7 +3182,7 @@ module Aws::ConfigService
     # @option params [Types::OrganizationResourceDetailedStatusFilters] :filters
     #   <p>An <code>OrganizationResourceDetailedStatusFilters</code> object.</p>
     # @option params [Integer] :limit
-    #   <p>The maximum number of <code>OrganizationConformancePackDetailedStatuses</code> returned on each page.
+    #   <p>The maximum number of <code>OrganizationConformancePackDetailedStatuses</code> returned on each page. 
     #   			If you do not specify a number, Config uses the default. The default is 100. </p>
     # @option params [String] :next_token
     #   <p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. </p>
@@ -3334,7 +3354,7 @@ module Aws::ConfigService
       request.send_request(options)
     end
 
-    # <p>Returns a summary of resource evaluation for the specified resource evaluation ID from the proactive rules that were run.
+    # <p>Returns a summary of resource evaluation for the specified resource evaluation ID from the proactive rules that were run. 
     # 			The results indicate which evaluation context was used to evaluate the rules, which resource details were evaluated,
     # 			the evaluation mode that was run, and whether the resource details comply with the configuration of the proactive rules. </p>
     #          <note>
@@ -3404,8 +3424,8 @@ module Aws::ConfigService
       request.send_request(options)
     end
 
-    # <p>Accepts a resource type and returns a list of resource identifiers that are aggregated for a specific resource type across accounts and regions.
-    # 			A resource identifier includes the resource type, ID, (if available) the custom resource name, source account, and source region.
+    # <p>Accepts a resource type and returns a list of resource identifiers that are aggregated for a specific resource type across accounts and regions. 
+    # 			A resource identifier includes the resource type, ID, (if available) the custom resource name, source account, and source region. 
     # 			You can narrow the results to include only resources that have specific resource IDs, or a resource name, or source account ID, or source region.</p>
     #          <p>For example, if the input consists of accountID 12345678910 and the region is us-east-1 for resource type <code>AWS::EC2::Instance</code> then the API returns all the EC2 instance identifiers of accountID 12345678910 and region us-east-1.</p>
     # @param [Hash, Types::ListAggregateDiscoveredResourcesRequest] params
@@ -3495,7 +3515,7 @@ module Aws::ConfigService
       request.send_request(options)
     end
 
-    # <p>Returns a list of conformance pack compliance scores.
+    # <p>Returns a list of conformance pack compliance scores. 
     # 			A compliance score is the percentage of the number of compliant rule-resource combinations in a conformance pack compared to the number of total possible rule-resource combinations in the conformance pack.
     # 			This metric provides you with a high-level view of the compliance state of your conformance packs. You can use it to identify, investigate, and understand
     # 			the level of compliance in your conformance packs.</p>
@@ -3604,8 +3624,8 @@ module Aws::ConfigService
     #             <p>
     #                <i>CloudFormation stack recording behavior in Config</i>
     #             </p>
-    #             <p>When a CloudFormation stack fails to create (for example, it enters the <code>ROLLBACK_FAILED</code> state),
-    # 				Config does not record a configuration item (CI) for that stack. Configuration items are only recorded for stacks that reach
+    #             <p>When a CloudFormation stack fails to create (for example, it enters the <code>ROLLBACK_FAILED</code> state), 
+    # 				Config does not record a configuration item (CI) for that stack. Configuration items are only recorded for stacks that reach 
     # 				the following states:</p>
     #             <ul>
     #                <li>
@@ -3639,8 +3659,8 @@ module Aws::ConfigService
     #                   </p>
     #                </li>
     #             </ul>
-    #             <p>Because no CI is created for a failed stack creation, you won't see configuration history
-    # 				for that stack in Config, even after the stack is deleted. This helps make sure that Config only
+    #             <p>Because no CI is created for a failed stack creation, you won't see configuration history 
+    # 				for that stack in Config, even after the stack is deleted. This helps make sure that Config only 
     # 				tracks resources that were successfully provisioned.</p>
     #          </important>
     # @param [Hash, Types::ListDiscoveredResourcesRequest] params
@@ -3701,7 +3721,7 @@ module Aws::ConfigService
     # @option params [Types::ResourceEvaluationFilters] :filters
     #   <p>Returns a <code>ResourceEvaluationFilters</code> object.</p>
     # @option params [Integer] :limit
-    #   <p>The maximum number of evaluations returned on each page. The default is 10.
+    #   <p>The maximum number of evaluations returned on each page. The default is 10. 
     #   			You cannot specify a number greater than 100. If you specify 0, Config uses the default.</p>
     # @option params [String] :next_token
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>
@@ -3898,7 +3918,7 @@ module Aws::ConfigService
     end
 
     # <p>Adds or updates an Config rule to evaluate if your
-    # 			Amazon Web Services resources comply with your desired configurations. For information on how many Config rules you can have per account,
+    # 			Amazon Web Services resources comply with your desired configurations. For information on how many Config rules you can have per account, 
     # 			see <a href="https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html">
     #                <b>Service Limits</b>
     #             </a> in the <i>Config Developer Guide</i>.</p>
@@ -3912,7 +3932,7 @@ module Aws::ConfigService
     #          <p>Config Custom Rules are rules that you create from scratch. There are two ways to create Config custom rules: with Lambda functions
     # 			(<a href="https://docs.aws.amazon.com/config/latest/developerguide/gettingstarted-concepts.html#gettingstarted-concepts-function"> Lambda Developer Guide</a>) and with Guard (<a href="https://github.com/aws-cloudformation/cloudformation-guard">Guard GitHub
     # 					Repository</a>), a policy-as-code language.
-    #
+    # 			
     # 			Config custom rules created with Lambda
     # 			are called <i>Config Custom Lambda Rules</i> and Config custom rules created with
     # 			Guard are called <i>Config Custom Policy Rules</i>.</p>
@@ -4017,7 +4037,7 @@ module Aws::ConfigService
     #          <note>
     #             <p>Config should be enabled in source accounts and regions
     # 				you want to aggregate.</p>
-    #             <p>If your source type is an organization, you must be signed in to the management account or a registered delegated administrator and all the features must be enabled in your organization.
+    #             <p>If your source type is an organization, you must be signed in to the management account or a registered delegated administrator and all the features must be enabled in your organization. 
     # 				If the caller is a management account, Config calls <code>EnableAwsServiceAccess</code> API to enable integration between Config and Organizations.
     # 				If the caller is a registered delegated administrator, Config calls <code>ListDelegatedAdministrators</code> API to verify whether the caller is a valid delegated administrator.</p>
     #             <p>To register a delegated administrator, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/set-up-aggregator-cli.html#register-a-delegated-administrator-cli">Register a Delegated Administrator</a> in the <i>Config developer guide</i>. </p>
@@ -4036,7 +4056,7 @@ module Aws::ConfigService
     #   <p>The name of the configuration aggregator.</p>
     # @option params [Array<Types::AccountAggregationSource>] :account_aggregation_sources
     #   <p>A list of AccountAggregationSource object.
-    #
+    #   			
     #   		</p>
     # @option params [Types::OrganizationAggregationSource] :organization_aggregation_source
     #   <p>An OrganizationAggregationSource object.</p>
@@ -4203,7 +4223,7 @@ module Aws::ConfigService
     end
 
     # <p>Creates or updates a conformance pack. A conformance pack is a collection of Config rules that can be easily deployed in an account and a region and across an organization.
-    # 			For information on how many conformance packs you can have per account,
+    # 			For information on how many conformance packs you can have per account, 
     # 			see <a href="https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html">
     #                <b>Service Limits</b>
     #             </a> in the <i>Config Developer Guide</i>.</p>
@@ -4218,7 +4238,7 @@ module Aws::ConfigService
     # 				permissions to create Config rules and remediation configurations, even
     # 				if your account IAM policies explicitly deny these actions.</p>
     #          </important>
-    #          <p>This API creates a service-linked role <code>AWSServiceRoleForConfigConforms</code> in your account.
+    #          <p>This API creates a service-linked role <code>AWSServiceRoleForConfigConforms</code> in your account. 
     # 		The service-linked role is created only when the role does not exist in your account. </p>
     #          <note>
     #             <p>You must specify only one of the follow parameters: <code>TemplateS3Uri</code>, <code>TemplateBody</code> or <code>TemplateSSMDocumentDetails</code>.</p>
@@ -4447,7 +4467,7 @@ module Aws::ConfigService
       request.send_request(options)
     end
 
-    # <p>Add or updates the evaluations for process checks.
+    # <p>Add or updates the evaluations for process checks.		
     # 			This API checks if the rule is a process check when the name of the Config rule is provided.</p>
     # @param [Hash, Types::PutExternalEvaluationRequest] params
     # @option params [String] :config_rule_name
@@ -4476,21 +4496,21 @@ module Aws::ConfigService
       request.send_request(options)
     end
 
-    # <p>Adds or updates an Config rule for your entire organization to evaluate if your Amazon Web Services resources comply with your
-    # 			desired configurations. For information on how many organization Config rules you can have per account,
+    # <p>Adds or updates an Config rule for your entire organization to evaluate if your Amazon Web Services resources comply with your 
+    # 			desired configurations. For information on how many organization Config rules you can have per account, 
     # 			see <a href="https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html">
     #                <b>Service Limits</b>
     #             </a> in the <i>Config Developer Guide</i>.</p>
     #          <p> Only a management account and a delegated administrator can create or update an organization Config rule.
-    # 		When calling this API with a delegated administrator, you must ensure Organizations
+    # 		When calling this API with a delegated administrator, you must ensure Organizations 
     # 		<code>ListDelegatedAdministrator</code> permissions are added. An organization can have up to 3 delegated administrators.</p>
-    #          <p>This API enables organization service access through the <code>EnableAWSServiceAccess</code> action and creates a service-linked
-    # 			role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the management or delegated administrator account of your organization.
-    # 			The service-linked role is created only when the role does not exist in the caller account.
+    #          <p>This API enables organization service access through the <code>EnableAWSServiceAccess</code> action and creates a service-linked 
+    # 			role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the management or delegated administrator account of your organization. 
+    # 			The service-linked role is created only when the role does not exist in the caller account. 
     # 			Config verifies the existence of role with <code>GetRole</code> action.</p>
     #          <p>To use this API with delegated administrator, register a delegated administrator by calling Amazon Web Services Organization
     # 			<code>register-delegated-administrator</code> for <code>config-multiaccountsetup.amazonaws.com</code>. </p>
-    #          <p>There are two types of rules: <i>Config Managed Rules</i> and <i>Config Custom Rules</i>.
+    #          <p>There are two types of rules: <i>Config Managed Rules</i> and <i>Config Custom Rules</i>. 
     # 			You can use <code>PutOrganizationConfigRule</code> to create both Config Managed Rules and Config Custom Rules.</p>
     #          <p>Config Managed Rules are predefined,
     # 			customizable rules created by Config. For a list of managed rules, see
@@ -4499,13 +4519,13 @@ module Aws::ConfigService
     #          <p>Config Custom Rules are rules that you create from scratch. There are two ways to create Config custom rules: with Lambda functions
     # 			(<a href="https://docs.aws.amazon.com/config/latest/developerguide/gettingstarted-concepts.html#gettingstarted-concepts-function"> Lambda Developer Guide</a>) and with Guard (<a href="https://github.com/aws-cloudformation/cloudformation-guard">Guard GitHub
     # 					Repository</a>), a policy-as-code language.
-    #
+    # 			
     # 			Config custom rules created with Lambda
     # 			are called <i>Config Custom Lambda Rules</i> and Config custom rules created with
     # 			Guard are called <i>Config Custom Policy Rules</i>.</p>
-    #          <p>If you are adding a new Config Custom Lambda rule, you first need to create an Lambda function in the management account or a delegated
+    #          <p>If you are adding a new Config Custom Lambda rule, you first need to create an Lambda function in the management account or a delegated 
     # 		administrator that the rule invokes to evaluate your resources. You also need to create an IAM role in the managed account that can be assumed by the Lambda function.
-    # 		When you use <code>PutOrganizationConfigRule</code> to add a Custom Lambda rule to Config, you must
+    # 		When you use <code>PutOrganizationConfigRule</code> to add a Custom Lambda rule to Config, you must 
     # 			specify the Amazon Resource Name (ARN) that Lambda assigns to the function.</p>
     #          <note>
     #             <p>Prerequisite: Ensure you call <code>EnableAllFeatures</code> API to enable all features in an organization.</p>
@@ -4588,12 +4608,12 @@ module Aws::ConfigService
       request.send_request(options)
     end
 
-    # <p>Deploys conformance packs across member accounts in an Amazon Web Services Organization. For information on how many organization conformance packs and how many Config rules you can have per account,
+    # <p>Deploys conformance packs across member accounts in an Amazon Web Services Organization. For information on how many organization conformance packs and how many Config rules you can have per account, 
     # 			see <a href="https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html">
     #                <b>Service Limits</b>
     #             </a> in the <i>Config Developer Guide</i>.</p>
-    #          <p>Only a management account and a delegated administrator can call this API.
-    # 			When calling this API with a delegated administrator, you must ensure Organizations
+    #          <p>Only a management account and a delegated administrator can call this API. 
+    # 			When calling this API with a delegated administrator, you must ensure Organizations 
     # 			<code>ListDelegatedAdministrator</code> permissions are added. An organization can have up to 3 delegated administrators.</p>
     #          <important>
     #             <p>When you use <code>PutOrganizationConformancePack</code> to deploy conformance packs across
@@ -4608,16 +4628,16 @@ module Aws::ConfigService
     # 				actions.</p>
     #          </important>
     #          <p>This API enables organization service access for <code>config-multiaccountsetup.amazonaws.com</code>
-    # 			through the <code>EnableAWSServiceAccess</code> action and creates a
-    # 			service-linked role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the management or delegated administrator account of your organization.
-    # 			The service-linked role is created only when the role does not exist in the caller account.
-    # 			To use this API with delegated administrator, register a delegated administrator by calling Amazon Web Services Organization
+    # 			through the <code>EnableAWSServiceAccess</code> action and creates a 
+    # 			service-linked role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the management or delegated administrator account of your organization. 
+    # 			The service-linked role is created only when the role does not exist in the caller account. 
+    # 			To use this API with delegated administrator, register a delegated administrator by calling Amazon Web Services Organization 
     # 			<code>register-delegate-admin</code> for <code>config-multiaccountsetup.amazonaws.com</code>.</p>
     #          <note>
     #             <p>Prerequisite: Ensure you call <code>EnableAllFeatures</code> API to enable all features in an organization.</p>
-    #             <p>You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both.
+    #             <p>You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both. 
     # 			If you provide both Config uses the <code>TemplateS3Uri</code> parameter and ignores the <code>TemplateBody</code> parameter.</p>
-    #             <p>Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created or updated.
+    #             <p>Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created or updated.  
     # 				You cannot update a conformance pack while it is in this state.</p>
     #          </note>
     # @param [Hash, Types::PutOrganizationConformancePackRequest] params
@@ -4683,18 +4703,18 @@ module Aws::ConfigService
       request.send_request(options)
     end
 
-    # <p>Adds or updates the remediation configuration with a specific Config rule with the
-    # 			selected target or action.
-    # 			The API creates the <code>RemediationConfiguration</code> object for the Config rule.
-    # 		The Config rule must already exist for you to add a remediation configuration.
+    # <p>Adds or updates the remediation configuration with a specific Config rule with the 
+    # 			selected target or action. 
+    # 			The API creates the <code>RemediationConfiguration</code> object for the Config rule. 
+    # 		The Config rule must already exist for you to add a remediation configuration. 
     # 		The target (SSM document) must exist and have permissions to use the target. </p>
     #          <note>
     #             <p>
     #                <b>Be aware of backward incompatible changes</b>
     #             </p>
-    #             <p>If you make backward incompatible changes to the SSM document,
+    #             <p>If you make backward incompatible changes to the SSM document, 
     # 			you must call this again to ensure the remediations can run.</p>
-    #             <p>This API does not support adding remediation configurations for service-linked Config Rules such as Organization Config rules,
+    #             <p>This API does not support adding remediation configurations for service-linked Config Rules such as Organization Config rules, 
     # 				the rules deployed by conformance packs, and rules deployed by Amazon Web Services Security Hub.</p>
     #          </note>
     #          <note>
@@ -4797,13 +4817,13 @@ module Aws::ConfigService
       request.send_request(options)
     end
 
-    # <p>A remediation exception is when a specified resource is no longer considered for auto-remediation.
+    # <p>A remediation exception is when a specified resource is no longer considered for auto-remediation. 
     # 			This API adds a new exception or updates an existing exception for a specified resource with a specified Config rule. </p>
     #          <note>
     #             <p>
     #                <b>Exceptions block auto remediation</b>
     #             </p>
-    #             <p>Config generates a remediation exception when a problem occurs running a remediation action for a specified resource.
+    #             <p>Config generates a remediation exception when a problem occurs running a remediation action for a specified resource. 
     # 			Remediation exceptions blocks auto-remediation until the exception is cleared.</p>
     #          </note>
     #          <note>
@@ -4888,8 +4908,8 @@ module Aws::ConfigService
     end
 
     # <p>Records the configuration state for the resource provided in the request.
-    #
-    # 			The configuration state of a resource is represented in Config as Configuration Items.
+    # 			 
+    # 			The configuration state of a resource is represented in Config as Configuration Items. 
     # 			Once this API records the configuration item, you can retrieve the list of configuration items for the custom resource type using existing Config APIs. </p>
     #          <note>
     #             <p>The custom resource type must be registered with CloudFormation. This API accepts the configuration item registered with CloudFormation.</p>
@@ -5038,10 +5058,10 @@ module Aws::ConfigService
     #          </note>
     # @param [Hash, Types::PutStoredQueryRequest] params
     # @option params [Types::StoredQuery] :stored_query
-    #   <p>A list of <code>StoredQuery</code> objects.
+    #   <p>A list of <code>StoredQuery</code> objects. 
     #   			The mandatory fields are <code>QueryName</code> and <code>Expression</code>.</p>
     #            <note>
-    #               <p>When you are creating a query, you must provide a query name and an expression.
+    #               <p>When you are creating a query, you must provide a query name and an expression. 
     #   			When you are updating a query, you must provide a query name but updating the description is optional.</p>
     #            </note>
     # @option params [Array<Types::Tag>] :tags
@@ -5130,9 +5150,9 @@ module Aws::ConfigService
       request.send_request(options)
     end
 
-    # <p>Accepts a structured query language (SQL) SELECT command and an aggregator to query configuration state of Amazon Web Services resources across multiple accounts and regions,
+    # <p>Accepts a structured query language (SQL) SELECT command and an aggregator to query configuration state of Amazon Web Services resources across multiple accounts and regions, 
     # 			performs the corresponding search, and returns resource configurations matching the properties.</p>
-    #          <p>For more information about query components, see the
+    #          <p>For more information about query components, see the 
     # 			<a href="https://docs.aws.amazon.com/config/latest/developerguide/query-components.html">
     #                <b>Query Components</b>
     #             </a> section in the <i>Config Developer Guide</i>.</p>
@@ -5183,7 +5203,7 @@ module Aws::ConfigService
     end
 
     # <p>Accepts a structured query language (SQL) <code>SELECT</code> command, performs the corresponding search, and returns resource configurations matching the properties.</p>
-    #          <p>For more information about query components, see the
+    #          <p>For more information about query components, see the 
     # 			<a href="https://docs.aws.amazon.com/config/latest/developerguide/query-components.html">
     #                <b>Query Components</b>
     #             </a> section in the <i>Config Developer Guide</i>.</p>
@@ -5367,7 +5387,7 @@ module Aws::ConfigService
     # @option params [Integer] :evaluation_timeout
     #   <p>The timeout for an evaluation. The default is 900 seconds. You cannot specify a number greater than 3600. If you specify 0, Config uses the default.</p>
     # @option params [String] :client_token
-    #   <p>A client token is a unique, case-sensitive string of up to 64 ASCII characters.
+    #   <p>A client token is a unique, case-sensitive string of up to 64 ASCII characters. 
     #   			To make an idempotent API request using one of these actions, specify a client token in the request.</p>
     #            <note>
     #               <p>Avoid reusing the same client token for other API requests. If you retry
@@ -5619,7 +5639,8 @@ module Aws::ConfigService
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

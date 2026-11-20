@@ -1743,7 +1743,7 @@ module Aws::LexModelsV2
 
     # <p>Specifies the audio and DTMF input specification.</p>
     # @!attribute start_timeout_ms
-    #   <p>Time for which a bot waits before assuming that the customer isn't going to speak or press
+    #   <p>Time for which a bot waits before assuming that the customer isn't going to speak or press 
     #            a key. This timeout is shared between Audio and DTMF inputs.</p>
     #   @return [Integer]
     # @!attribute audio_specification
@@ -1859,11 +1859,11 @@ module Aws::LexModelsV2
 
     # <p>Specifies the audio input specifications.</p>
     # @!attribute max_length_ms
-    #   <p>Time for how long Amazon Lex waits before speech input is truncated and the speech
+    #   <p>Time for how long Amazon Lex waits before speech input is truncated and the speech 
     #            is returned to application.</p>
     #   @return [Integer]
     # @!attribute end_timeout_ms
-    #   <p>Time for which a bot waits after the customer stops speaking to assume the
+    #   <p>Time for which a bot waits after the customer stops speaking to assume the 
     #            utterance is finished.</p>
     #   @return [Integer]
     class AudioSpecification < Struct.new(
@@ -1879,12 +1879,12 @@ module Aws::LexModelsV2
     #   <p>The identifier of the bot associated with this custom vocabulary.</p>
     #   @return [String]
     # @!attribute bot_version
-    #   <p>The identifier of the version of the bot associated with this
+    #   <p>The identifier of the version of the bot associated with this 
     #            custom vocabulary.</p>
     #   @return [String]
     # @!attribute locale_id
-    #   <p>The identifier of the language and locale where this custom vocabulary
-    #            is used. The string must match one of the supported locales. For more
+    #   <p>The identifier of the language and locale where this custom vocabulary 
+    #            is used. The string must match one of the supported locales. For more 
     #            information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html"> Supported Languages </a>.</p>
     #   @return [String]
     # @!attribute custom_vocabulary_item_list
@@ -1906,12 +1906,12 @@ module Aws::LexModelsV2
     #   <p>The identifier of the bot associated with this custom vocabulary.</p>
     #   @return [String]
     # @!attribute bot_version
-    #   <p>The identifier of the version of the bot associated with this
+    #   <p>The identifier of the version of the bot associated with this 
     #            custom vocabulary.</p>
     #   @return [String]
     # @!attribute locale_id
-    #   <p>The identifier of the language and locale where this custom vocabulary is used.
-    #            The string must match one of the supported locales.
+    #   <p>The identifier of the language and locale where this custom vocabulary is used. 
+    #            The string must match one of the supported locales. 
     #            For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html"> Supported Languages </a>.</p>
     #   @return [String]
     # @!attribute errors
@@ -1919,7 +1919,7 @@ module Aws::LexModelsV2
     #            The reason for the error is contained within each error object.</p>
     #   @return [Array<Types::FailedCustomVocabularyItem>]
     # @!attribute resources
-    #   <p>A list of custom vocabulary items that were
+    #   <p>A list of custom vocabulary items that were 
     #            successfully created during the operation.</p>
     #   @return [Array<Types::CustomVocabularyItem>]
     class BatchCreateCustomVocabularyItemResponse < Struct.new(
@@ -1938,12 +1938,12 @@ module Aws::LexModelsV2
     #   <p>The identifier of the bot associated with this custom vocabulary.</p>
     #   @return [String]
     # @!attribute bot_version
-    #   <p>The identifier of the version of the bot associated with this custom
+    #   <p>The identifier of the version of the bot associated with this custom 
     #            vocabulary.</p>
     #   @return [String]
     # @!attribute locale_id
-    #   <p>The identifier of the language and locale where this custom vocabulary is
-    #            used. The string must match one of the supported locales.
+    #   <p>The identifier of the language and locale where this custom vocabulary is 
+    #            used. The string must match one of the supported locales. 
     #            For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html"> Supported Languages </a>.</p>
     #   @return [String]
     # @!attribute custom_vocabulary_item_list
@@ -1965,13 +1965,13 @@ module Aws::LexModelsV2
     #   <p>The identifier of the bot associated with this custom vocabulary.</p>
     #   @return [String]
     # @!attribute bot_version
-    #   <p>The identifier of the version of the bot associated with this custom
+    #   <p>The identifier of the version of the bot associated with this custom 
     #            vocabulary.</p>
     #   @return [String]
     # @!attribute locale_id
-    #   <p>The identifier of the language and locale where this custom vocabulary is
-    #            used. The string must match one of the supported locales.
-    #            For more information, see Supported
+    #   <p>The identifier of the language and locale where this custom vocabulary is 
+    #            used. The string must match one of the supported locales. 
+    #            For more information, see Supported 
     #            languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).</p>
     #   @return [String]
     # @!attribute errors
@@ -1979,7 +1979,7 @@ module Aws::LexModelsV2
     #            The reason for the error is contained within each error object.</p>
     #   @return [Array<Types::FailedCustomVocabularyItem>]
     # @!attribute resources
-    #   <p>A list of custom vocabulary items that were
+    #   <p>A list of custom vocabulary items that were 
     #            successfully deleted during the operation.</p>
     #   @return [Array<Types::CustomVocabularyItem>]
     class BatchDeleteCustomVocabularyItemResponse < Struct.new(
@@ -1998,12 +1998,12 @@ module Aws::LexModelsV2
     #   <p>The identifier of the bot associated with this custom vocabulary</p>
     #   @return [String]
     # @!attribute bot_version
-    #   <p>The identifier of the version of the bot associated with this custom
+    #   <p>The identifier of the version of the bot associated with this custom 
     #            vocabulary.</p>
     #   @return [String]
     # @!attribute locale_id
-    #   <p>The identifier of the language and locale where this custom vocabulary
-    #            is used. The string must match one of the supported locales. For more
+    #   <p>The identifier of the language and locale where this custom vocabulary 
+    #            is used. The string must match one of the supported locales. For more 
     #            information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html"> Supported Languages </a>.</p>
     #   @return [String]
     # @!attribute custom_vocabulary_item_list
@@ -2025,12 +2025,12 @@ module Aws::LexModelsV2
     #   <p>The identifier of the bot associated with this custom vocabulary.</p>
     #   @return [String]
     # @!attribute bot_version
-    #   <p>The identifier of the version of the bot associated with this custom
+    #   <p>The identifier of the version of the bot associated with this custom 
     #            vocabulary.</p>
     #   @return [String]
     # @!attribute locale_id
-    #   <p>The identifier of the language and locale where this custom vocabulary
-    #            is used. The string must match one of the supported locales. For more
+    #   <p>The identifier of the language and locale where this custom vocabulary 
+    #            is used. The string must match one of the supported locales. For more 
     #            information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html"> Supported Languages </a>.</p>
     #   @return [String]
     # @!attribute errors
@@ -2038,7 +2038,7 @@ module Aws::LexModelsV2
     #            The reason for the error is contained within each error object.</p>
     #   @return [Array<Types::FailedCustomVocabularyItem>]
     # @!attribute resources
-    #   <p>A list of custom vocabulary items that were
+    #   <p>A list of custom vocabulary items that were 
     #            successfully updated during the operation.</p>
     #   @return [Array<Types::CustomVocabularyItem>]
     class BatchUpdateCustomVocabularyItemResponse < Struct.new(
@@ -3112,7 +3112,7 @@ module Aws::LexModelsV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A composite slot is a combination of two or more slots
+    # <p>A composite slot is a combination of two or more slots 
     #        that capture multiple pieces of information in a single user input.</p>
     # @!attribute sub_slots
     #   <p>Subslots in the composite slot.</p>
@@ -4220,7 +4220,7 @@ module Aws::LexModelsV2
     #            resource.</p>
     #   @return [String]
     # @!attribute principal
-    #   <p>An IAM principal, such as an IAM user, IAM role,
+    #   <p>An IAM principal, such as an IAM user, IAM role, 
     #            or Amazon Web Services services
     #            that is allowed or denied access to a resource. For more information,
     #            see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html">Amazon Web Services JSON policy elements: Principal</a>.</p>
@@ -4320,14 +4320,14 @@ module Aws::LexModelsV2
     #   @return [String]
     # @!attribute multiple_values_setting
     #   <p>Indicates whether the slot returns multiple values in one response.
-    #            Multi-value slots are only available in the <code>en-US</code> locale.
+    #            Multi-value slots are only available in the <code>en-US</code> locale. 
     #            If you set this value to <code>true</code> in any other locale, Amazon Lex throws a
     #               <code>ValidationException</code>. </p>
     #            <p>If the <code>multipleValuesSetting</code> is not set, the default
     #            value is <code>false</code>.</p>
     #   @return [Types::MultipleValuesSetting]
     # @!attribute sub_slot_setting
-    #   <p>Specifications for the constituent sub slots and the
+    #   <p>Specifications for the constituent sub slots and the  
     #           expression for the composite slot.</p>
     #   @return [Types::SubSlotSetting]
     class CreateSlotRequest < Struct.new(
@@ -4389,7 +4389,7 @@ module Aws::LexModelsV2
     #            response.</p>
     #   @return [Types::MultipleValuesSetting]
     # @!attribute sub_slot_setting
-    #   <p>Specifications for the constituent sub slots and the
+    #   <p>Specifications for the constituent sub slots and the  
     #           expression for the composite slot.</p>
     #   @return [Types::SubSlotSetting]
     class CreateSlotResponse < Struct.new(
@@ -4625,7 +4625,7 @@ module Aws::LexModelsV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The unique entry identifier for the custom vocabulary
+    # <p>The unique entry identifier for the custom vocabulary 
     #          items.</p>
     # @!attribute item_id
     #   <p>The unique item identifier for the custom vocabulary
@@ -4680,22 +4680,22 @@ module Aws::LexModelsV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The unique custom vocabulary item from the custom
+    # <p>The unique custom vocabulary item from the custom 
     #          vocabulary list.</p>
     # @!attribute item_id
-    #   <p>The unique item identifer for the custom vocabulary item
+    #   <p>The unique item identifer for the custom vocabulary item 
     #            from the custom vocabulary list.</p>
     #   @return [String]
     # @!attribute phrase
-    #   <p>The unique phrase for the custom vocabulary item
+    #   <p>The unique phrase for the custom vocabulary item 
     #            from the custom vocabulary list.</p>
     #   @return [String]
     # @!attribute weight
-    #   <p>The weight assigned for the custom vocabulary item
+    #   <p>The weight assigned for the custom vocabulary item 
     #            from the custom vocabulary list.</p>
     #   @return [Integer]
     # @!attribute display_as
-    #   <p>The DisplayAs value for the custom vocabulary item
+    #   <p>The DisplayAs value for the custom vocabulary item 
     #            from the custom vocabulary list.</p>
     #   @return [String]
     class CustomVocabularyItem < Struct.new(
@@ -4714,15 +4714,15 @@ module Aws::LexModelsV2
     #   <p>The maximum number of DTMF digits allowed in an utterance.</p>
     #   @return [Integer]
     # @!attribute end_timeout_ms
-    #   <p>How long the bot should wait after the last DTMF character input before assuming
+    #   <p>How long the bot should wait after the last DTMF character input before assuming 
     #            that the input has concluded.</p>
     #   @return [Integer]
     # @!attribute deletion_character
-    #   <p>The DTMF character that clears the accumulated DTMF digits and immediately ends
+    #   <p>The DTMF character that clears the accumulated DTMF digits and immediately ends 
     #            the input.</p>
     #   @return [String]
     # @!attribute end_character
-    #   <p>The DTMF character that immediately ends input. If the user does not press this
+    #   <p>The DTMF character that immediately ends input. If the user does not press this 
     #            character, the input ends after the end timeout.</p>
     #   @return [String]
     class DTMFSpecification < Struct.new(
@@ -4862,11 +4862,11 @@ module Aws::LexModelsV2
     #            delete.</p>
     #   @return [String]
     # @!attribute skip_resource_in_use_check
-    #   <p>By default, Amazon Lex checks if any other resource, such as a bot network,
-    #            is using the bot alias before it is deleted and throws a
-    #            <code>ResourceInUseException</code> exception if the alias is
+    #   <p>By default, Amazon Lex checks if any other resource, such as a bot network, 
+    #            is using the bot alias before it is deleted and throws a 
+    #            <code>ResourceInUseException</code> exception if the alias is 
     #            being used by another resource. Set this parameter to <code>true</code>
-    #            to skip this check and remove the alias even if it is being used by
+    #            to skip this check and remove the alias even if it is being used by 
     #            another resource.</p>
     #   @return [Boolean]
     class DeleteBotAliasRequest < Struct.new(
@@ -5008,11 +5008,11 @@ module Aws::LexModelsV2
     #   <p>The identifier of the bot to delete. </p>
     #   @return [String]
     # @!attribute skip_resource_in_use_check
-    #   <p>By default, Amazon Lex checks if any other resource, such as an alias or
-    #            bot network, is using the bot version before it is deleted and throws a
-    #            <code>ResourceInUseException</code> exception if the bot is
+    #   <p>By default, Amazon Lex checks if any other resource, such as an alias or 
+    #            bot network, is using the bot version before it is deleted and throws a 
+    #            <code>ResourceInUseException</code> exception if the bot is 
     #            being used by another resource. Set this parameter to <code>true</code>
-    #            to skip this check and remove the bot even if it is being used by
+    #            to skip this check and remove the bot even if it is being used by 
     #            another resource.</p>
     #   @return [Boolean]
     class DeleteBotRequest < Struct.new(
@@ -5047,11 +5047,11 @@ module Aws::LexModelsV2
     #   <p>The version of the bot to delete.</p>
     #   @return [String]
     # @!attribute skip_resource_in_use_check
-    #   <p>By default, Amazon Lex checks if any other resource, such as an alias or bot network,
-    #            is using the bot version before it is deleted and throws a
-    #            <code>ResourceInUseException</code> exception if the version is
+    #   <p>By default, Amazon Lex checks if any other resource, such as an alias or bot network, 
+    #            is using the bot version before it is deleted and throws a 
+    #            <code>ResourceInUseException</code> exception if the version is 
     #            being used by another resource. Set this parameter to <code>true</code>
-    #            to skip this check and remove the version even if it is being used by
+    #            to skip this check and remove the version even if it is being used by 
     #            another resource.</p>
     #   @return [Boolean]
     class DeleteBotVersionRequest < Struct.new(
@@ -5823,7 +5823,7 @@ module Aws::LexModelsV2
     #   <p>The locale of the bot for which to return the generation details.</p>
     #   @return [String]
     # @!attribute generation_id
-    #   <p>The unique identifier of the generation request for which to
+    #   <p>The unique identifier of the generation request for which to 
     #            return the generation details.</p>
     #   @return [String]
     class DescribeBotResourceGenerationRequest < Struct.new(
@@ -5838,7 +5838,7 @@ module Aws::LexModelsV2
     end
 
     # @!attribute bot_id
-    #   <p>The unique identifier of the bot for which the generation request was
+    #   <p>The unique identifier of the bot for which the generation request was 
     #         made.</p>
     #   @return [String]
     # @!attribute bot_version
@@ -6065,7 +6065,7 @@ module Aws::LexModelsV2
     #   <p>The locale that contains the custom vocabulary to describe.</p>
     #   @return [String]
     # @!attribute custom_vocabulary_status
-    #   <p>The status of the custom vocabulary. If the status is
+    #   <p>The status of the custom vocabulary. If the status is 
     #         <code>Ready</code> the custom vocabulary is ready to use.</p>
     #   @return [String]
     # @!attribute creation_date_time
@@ -6448,7 +6448,7 @@ module Aws::LexModelsV2
     #            value is <code>false</code>.</p>
     #   @return [Types::MultipleValuesSetting]
     # @!attribute sub_slot_setting
-    #   <p>Specifications for the constituent sub slots and the
+    #   <p>Specifications for the constituent sub slots and the  
     #           expression for the composite slot.</p>
     #   @return [Types::SubSlotSetting]
     class DescribeSlotResponse < Struct.new(
@@ -6593,9 +6593,9 @@ module Aws::LexModelsV2
     #   <p>The target bot for the test set execution details.</p>
     #   @return [Types::TestExecutionTarget]
     # @!attribute api_mode
-    #   <p>Indicates whether we use streaming or non-streaming APIs are used for
-    #         the test set execution. For streaming, <code>StartConversation</code>
-    #         Amazon Lex Runtime API is used. Whereas for non-streaming, <code>RecognizeUtterance</code>
+    #   <p>Indicates whether we use streaming or non-streaming APIs are used for 
+    #         the test set execution. For streaming, <code>StartConversation</code> 
+    #         Amazon Lex Runtime API is used. Whereas for non-streaming, <code>RecognizeUtterance</code> 
     #         and <code>RecognizeText</code> Amazon Lex Runtime API is used.</p>
     #   @return [String]
     # @!attribute test_execution_modality
@@ -6764,7 +6764,7 @@ module Aws::LexModelsV2
     #   <p>The status of the test set.</p>
     #   @return [String]
     # @!attribute role_arn
-    #   <p>The roleARN used for any operation in the test set to access
+    #   <p>The roleARN used for any operation in the test set to access 
     #         resources in the Amazon Web Services account.</p>
     #   @return [String]
     # @!attribute num_turns
@@ -7109,18 +7109,18 @@ module Aws::LexModelsV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The unique failed custom vocabulary item from the custom
+    # <p>The unique failed custom vocabulary item from the custom 
     #          vocabulary list.</p>
     # @!attribute item_id
-    #   <p>The unique item identifer for the failed custom vocabulary item
+    #   <p>The unique item identifer for the failed custom vocabulary item 
     #            from the custom vocabulary list.</p>
     #   @return [String]
     # @!attribute error_message
-    #   <p>The error message for the failed custom vocabulary item
+    #   <p>The error message for the failed custom vocabulary item 
     #            from the custom vocabulary list.</p>
     #   @return [String]
     # @!attribute error_code
-    #   <p>The unique error code for the failed custom vocabulary item
+    #   <p>The unique error code for the failed custom vocabulary item 
     #            from the custom vocabulary list.</p>
     #   @return [String]
     class FailedCustomVocabularyItem < Struct.new(
@@ -7617,7 +7617,7 @@ module Aws::LexModelsV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifications for the current state of the dialog
+    # <p>Specifications for the current state of the dialog 
     #    between the user and the bot in the test set.</p>
     # @!attribute session_attributes
     #   <p>Session attributes for the session state.</p>
@@ -8582,28 +8582,28 @@ module Aws::LexModelsV2
     end
 
     # @!attribute bot_id
-    #   <p>The unique identifier of the bot whose generation
+    #   <p>The unique identifier of the bot whose generation 
     #         requests you want to view.</p>
     #   @return [String]
     # @!attribute bot_version
-    #   <p>The version of the bot whose generation
+    #   <p>The version of the bot whose generation 
     #            requests you want to view.</p>
     #   @return [String]
     # @!attribute locale_id
-    #   <p>The locale of the bot whose generation
+    #   <p>The locale of the bot whose generation 
     #            requests you want to view.</p>
     #   @return [String]
     # @!attribute sort_by
-    #   <p>An object containing information about the attribute and the
+    #   <p>An object containing information about the attribute and the 
     #         method by which to sort the results</p>
     #   @return [Types::GenerationSortBy]
     # @!attribute max_results
     #   <p>The maximum number of results to return in the response.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>If the total number of results is greater than the number
-    #         specified in the <code>maxResults</code>, the response returns a token
-    #         in the <code>nextToken</code> field. Use this token when making a request to
+    #   <p>If the total number of results is greater than the number 
+    #         specified in the <code>maxResults</code>, the response returns a token 
+    #         in the <code>nextToken</code> field. Use this token when making a request to 
     #         return the next batch of results.</p>
     #   @return [String]
     class ListBotResourceGenerationsRequest < Struct.new(
@@ -8632,9 +8632,9 @@ module Aws::LexModelsV2
     #   <p>A list of objects, each containing information about a generation request for the bot locale.</p>
     #   @return [Array<Types::GenerationSummary>]
     # @!attribute next_token
-    #   <p>If the total number of results is greater than the number
-    #            specified in the <code>maxResults</code>, the response returns a token
-    #            in the <code>nextToken</code> field. Use this token when making a request to
+    #   <p>If the total number of results is greater than the number 
+    #            specified in the <code>maxResults</code>, the response returns a token 
+    #            in the <code>nextToken</code> field. Use this token when making a request to 
     #            return the next batch of results.</p>
     #   @return [String]
     class ListBotResourceGenerationsResponse < Struct.new(
@@ -8943,24 +8943,24 @@ module Aws::LexModelsV2
     end
 
     # @!attribute bot_id
-    #   <p>The identifier of the version of the bot associated with this custom
+    #   <p>The identifier of the version of the bot associated with this custom 
     #            vocabulary.</p>
     #   @return [String]
     # @!attribute bot_version
-    #   <p>The bot version of the bot to the list custom vocabulary
+    #   <p>The bot version of the bot to the list custom vocabulary 
     #            request.</p>
     #   @return [String]
     # @!attribute locale_id
-    #   <p>The identifier of the language and locale where this custom vocabulary
-    #            is used. The string must match one of the supported locales. For more
-    #            information, see Supported
+    #   <p>The identifier of the language and locale where this custom vocabulary 
+    #            is used. The string must match one of the supported locales. For more 
+    #            information, see Supported 
     #            languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of items returned by the list operation.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The nextToken identifier to the list custom vocabulary
+    #   <p>The nextToken identifier to the list custom vocabulary 
     #            request.</p>
     #   @return [String]
     class ListCustomVocabularyItemsRequest < Struct.new(
@@ -8979,20 +8979,20 @@ module Aws::LexModelsV2
     #   <p>The identifier of the bot associated with this custom vocabulary.</p>
     #   @return [String]
     # @!attribute bot_version
-    #   <p>The identifier of the version of the bot associated with this custom
+    #   <p>The identifier of the version of the bot associated with this custom 
     #            vocabulary.</p>
     #   @return [String]
     # @!attribute locale_id
-    #   <p>The identifier of the language and locale where this custom vocabulary
-    #            is used. The string must match one of the supported locales. For more
+    #   <p>The identifier of the language and locale where this custom vocabulary 
+    #            is used. The string must match one of the supported locales. For more 
     #            information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html"> Supported Languages </a>.</p>
     #   @return [String]
     # @!attribute custom_vocabulary_items
-    #   <p>The custom vocabulary items from the list custom vocabulary
+    #   <p>The custom vocabulary items from the list custom vocabulary 
     #            response.</p>
     #   @return [Array<Types::CustomVocabularyItem>]
     # @!attribute next_token
-    #   <p>The nextToken identifier to the list custom vocabulary
+    #   <p>The nextToken identifier to the list custom vocabulary 
     #            response.</p>
     #   @return [String]
     class ListCustomVocabularyItemsResponse < Struct.new(
@@ -9878,14 +9878,14 @@ module Aws::LexModelsV2
     #   <p>The filter for the list of results from the test set execution.</p>
     #   @return [Types::TestExecutionResultFilterBy]
     # @!attribute max_results
-    #   <p>The maximum number of test execution result items to return in each
-    #         page. If there are fewer results than the max page size, only the actual
+    #   <p>The maximum number of test execution result items to return in each 
+    #         page. If there are fewer results than the max page size, only the actual 
     #         number of results are returned.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>If the response from the <code>ListTestExecutionResultItems</code> operation
-    #         contains more results than specified in the <code>maxResults</code> parameter,
-    #         a token is returned in the response. Use that token in the <code>nextToken</code>
+    #   <p>If the response from the <code>ListTestExecutionResultItems</code> operation 
+    #         contains more results than specified in the <code>maxResults</code> parameter, 
+    #         a token is returned in the response. Use that token in the <code>nextToken</code> 
     #         parameter to return the next page of results.</p>
     #   @return [String]
     class ListTestExecutionResultItemsRequest < Struct.new(
@@ -9904,9 +9904,9 @@ module Aws::LexModelsV2
     #   @return [Types::TestExecutionResultItems]
     # @!attribute next_token
     #   <p>A token that indicates whether there are more results to return in a response
-    #         to the <code>ListTestExecutionResultItems</code> operation. If the
-    #         <code>nextToken</code> field is present, you send the contents as the
-    #         <code>nextToken</code> parameter of a <code>ListTestExecutionResultItems</code>
+    #         to the <code>ListTestExecutionResultItems</code> operation. If the 
+    #         <code>nextToken</code> field is present, you send the contents as the 
+    #         <code>nextToken</code> parameter of a <code>ListTestExecutionResultItems</code> 
     #         operation request to get the next page of results.</p>
     #   @return [String]
     class ListTestExecutionResultItemsResponse < Struct.new(
@@ -9922,13 +9922,13 @@ module Aws::LexModelsV2
     #   <p>The sort order of the test set executions.</p>
     #   @return [Types::TestExecutionSortBy]
     # @!attribute max_results
-    #   <p>The maximum number of test executions to return in each page. If there are
-    #         fewer results than the max page size, only the actual number of results are
+    #   <p>The maximum number of test executions to return in each page. If there are 
+    #         fewer results than the max page size, only the actual number of results are 
     #         returned.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>If the response from the ListTestExecutions operation contains more results
-    #         than specified in the maxResults parameter, a token is returned in the response.
+    #   <p>If the response from the ListTestExecutions operation contains more results 
+    #         than specified in the maxResults parameter, a token is returned in the response. 
     #         Use that token in the nextToken parameter to return the next page of results.</p>
     #   @return [String]
     class ListTestExecutionsRequest < Struct.new(
@@ -9945,9 +9945,9 @@ module Aws::LexModelsV2
     #   <p>The list of test executions.</p>
     #   @return [Array<Types::TestExecutionSummary>]
     # @!attribute next_token
-    #   <p>A token that indicates whether there are more results to return in a response to
-    #         the ListTestExecutions operation. If the nextToken field is present, you send the
-    #         contents as the nextToken parameter of a ListTestExecutions operation request to
+    #   <p>A token that indicates whether there are more results to return in a response to 
+    #         the ListTestExecutions operation. If the nextToken field is present, you send the 
+    #         contents as the nextToken parameter of a ListTestExecutions operation request to 
     #         get the next page of results.</p>
     #   @return [String]
     class ListTestExecutionsResponse < Struct.new(
@@ -9963,13 +9963,13 @@ module Aws::LexModelsV2
     #   <p>The identifier of the test set to list its test set records.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of test set records to return in each page. If there are
-    #         fewer records than the max page size, only the actual number of records are
+    #   <p>The maximum number of test set records to return in each page. If there are 
+    #         fewer records than the max page size, only the actual number of records are 
     #         returned.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>If the response from the ListTestSetRecords operation contains more results
-    #         than specified in the maxResults parameter, a token is returned in the response.
+    #   <p>If the response from the ListTestSetRecords operation contains more results 
+    #         than specified in the maxResults parameter, a token is returned in the response. 
     #         Use that token in the nextToken parameter to return the next page of results.</p>
     #   @return [String]
     class ListTestSetRecordsRequest < Struct.new(
@@ -9987,8 +9987,8 @@ module Aws::LexModelsV2
     #   @return [Array<Types::TestSetTurnRecord>]
     # @!attribute next_token
     #   <p>A token that indicates whether there are more records to return in a response
-    #         to the ListTestSetRecords operation. If the nextToken field is present, you
-    #         send the contents as the nextToken parameter of a ListTestSetRecords operation
+    #         to the ListTestSetRecords operation. If the nextToken field is present, you 
+    #         send the contents as the nextToken parameter of a ListTestSetRecords operation 
     #         request to get the next page of records.</p>
     #   @return [String]
     class ListTestSetRecordsResponse < Struct.new(
@@ -10004,12 +10004,12 @@ module Aws::LexModelsV2
     #   <p>The sort order for the list of test sets.</p>
     #   @return [Types::TestSetSortBy]
     # @!attribute max_results
-    #   <p>The maximum number of test sets to return in each page. If there are fewer
+    #   <p>The maximum number of test sets to return in each page. If there are fewer 
     #         results than the max page size, only the actual number of results are returned.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>If the response from the ListTestSets operation contains more results than
-    #         specified in the maxResults parameter, a token is returned in the response. Use
+    #   <p>If the response from the ListTestSets operation contains more results than 
+    #         specified in the maxResults parameter, a token is returned in the response. Use 
     #         that token in the nextToken parameter to return the next page of results.</p>
     #   @return [String]
     class ListTestSetsRequest < Struct.new(
@@ -10026,9 +10026,9 @@ module Aws::LexModelsV2
     #   <p>The selected test sets in a list of test sets.</p>
     #   @return [Array<Types::TestSetSummary>]
     # @!attribute next_token
-    #   <p>A token that indicates whether there are more results to return in a response
-    #         to the ListTestSets operation. If the nextToken field is present, you send the
-    #         contents as the nextToken parameter of a ListTestSets operation request to get
+    #   <p>A token that indicates whether there are more results to return in a response 
+    #         to the ListTestSets operation. If the nextToken field is present, you send the 
+    #         contents as the nextToken parameter of a ListTestSets operation request to get 
     #         the next page of results.</p>
     #   @return [String]
     class ListTestSetsResponse < Struct.new(
@@ -10250,18 +10250,18 @@ module Aws::LexModelsV2
       end
     end
 
-    # <p>The new custom vocabulary item from the custom
+    # <p>The new custom vocabulary item from the custom 
     #          vocabulary list.</p>
     # @!attribute phrase
-    #   <p>The unique phrase for the new custom vocabulary item from the custom
+    #   <p>The unique phrase for the new custom vocabulary item from the custom 
     #            vocabulary list.</p>
     #   @return [String]
     # @!attribute weight
-    #   <p>The weight assigned to the new custom vocabulary item from the custom
+    #   <p>The weight assigned to the new custom vocabulary item from the custom 
     #            vocabulary list.</p>
     #   @return [Integer]
     # @!attribute display_as
-    #   <p>The display as value assigned to the new custom vocabulary item from the custom
+    #   <p>The display as value assigned to the new custom vocabulary item from the custom 
     #            vocabulary list.</p>
     #   @return [String]
     class NewCustomVocabularyItem < Struct.new(
@@ -10853,9 +10853,9 @@ module Aws::LexModelsV2
     #    values.</p>
     #   @return [Array<Types::RuntimeHintValue>]
     # @!attribute sub_slot_hints
-    #   <p>A map of constituent sub slot names inside a composite slot in the intent and the phrases
-    #    that should be added for each sub slot. Inside each composite slot hints, this structure provides
-    #    a mechanism to add granular sub slot phrases. Only sub slot hints are supported for composite slots.
+    #   <p>A map of constituent sub slot names inside a composite slot in the intent and the phrases 
+    #    that should be added for each sub slot. Inside each composite slot hints, this structure provides 
+    #    a mechanism to add granular sub slot phrases. Only sub slot hints are supported for composite slots. 
     #    The intent name, composite slot name and the constituent sub slot names must exist.</p>
     #   @return [Hash<String, Types::RuntimeHintDetails>]
     class RuntimeHintDetails < Struct.new(
@@ -11430,7 +11430,7 @@ module Aws::LexModelsV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about the success and failure rate of slot resolution
+    # <p>Information about the success and failure rate of slot resolution 
     #  in the results of a test execution.</p>
     # @!attribute slot_name
     #   <p>The name of the slot.</p>
@@ -11796,7 +11796,7 @@ module Aws::LexModelsV2
     #                  value. If there is no resolution list, null is returned.</p>
     #               </li>
     #            </ul>
-    #            <p>If you don't specify the <code>valueSelectionStrategy</code>, the
+    #            <p>If you don't specify the <code>valueSelectionStrategy</code>, the 
     #            default is <code>ORIGINAL_VALUE</code>.</p>
     #   @return [String]
     # @!attribute regex_filter
@@ -12170,9 +12170,9 @@ module Aws::LexModelsV2
     #   <p>The target bot for the test set execution.</p>
     #   @return [Types::TestExecutionTarget]
     # @!attribute api_mode
-    #   <p>Indicates whether we use streaming or non-streaming APIs for the test set
-    #         execution. For streaming, StartConversation Runtime API is used. Whereas, for
-    #         non-streaming, RecognizeUtterance and RecognizeText Amazon Lex
+    #   <p>Indicates whether we use streaming or non-streaming APIs for the test set 
+    #         execution. For streaming, StartConversation Runtime API is used. Whereas, for 
+    #         non-streaming, RecognizeUtterance and RecognizeText Amazon Lex 
     #         Runtime API are used.</p>
     #   @return [String]
     # @!attribute test_execution_modality
@@ -12202,8 +12202,8 @@ module Aws::LexModelsV2
     #   <p>The target bot for the test set execution.</p>
     #   @return [Types::TestExecutionTarget]
     # @!attribute api_mode
-    #   <p>Indicates whether we use streaming or non-streaming APIs for the test set
-    #         execution. For streaming, StartConversation Amazon Lex Runtime API is used. Whereas
+    #   <p>Indicates whether we use streaming or non-streaming APIs for the test set 
+    #         execution. For streaming, StartConversation Amazon Lex Runtime API is used. Whereas 
     #         for non-streaming, RecognizeUtterance and RecognizeText Amazon Lex Runtime API are used.</p>
     #   @return [String]
     # @!attribute test_execution_modality
@@ -12235,7 +12235,7 @@ module Aws::LexModelsV2
     #   <p>The data source for the test set generation.</p>
     #   @return [Types::TestSetGenerationDataSource]
     # @!attribute role_arn
-    #   <p>The roleARN used for any operation in the test set to access
+    #   <p>The roleARN used for any operation in the test set to access 
     #         resources in the Amazon Web Services account.</p>
     #   @return [String]
     # @!attribute test_set_tags
@@ -12276,7 +12276,7 @@ module Aws::LexModelsV2
     #   <p> The data source for the test set generation.</p>
     #   @return [Types::TestSetGenerationDataSource]
     # @!attribute role_arn
-    #   <p>The roleARN used for any operation in the test set to access resources
+    #   <p>The roleARN used for any operation in the test set to access resources 
     #         in the Amazon Web Services account.</p>
     #   @return [String]
     # @!attribute test_set_tags
@@ -12400,11 +12400,11 @@ module Aws::LexModelsV2
     end
 
     # @!attribute bot_id
-    #   <p>The unique identifier of the bot containing the bot recommendation that
+    #   <p>The unique identifier of the bot containing the bot recommendation that 
     #            is being stopped.</p>
     #   @return [String]
     # @!attribute bot_version
-    #   <p>The version of the bot containing the recommendation that is being
+    #   <p>The version of the bot containing the recommendation that is being 
     #            stopped.</p>
     #   @return [String]
     # @!attribute locale_id
@@ -12414,7 +12414,7 @@ module Aws::LexModelsV2
     #            </p>
     #   @return [String]
     # @!attribute bot_recommendation_status
-    #   <p>The status of the bot recommendation. If the status is Failed,
+    #   <p>The status of the bot recommendation. If the status is Failed, 
     #            then the reasons for the failure are listed in the failureReasons field.</p>
     #   @return [String]
     # @!attribute bot_recommendation_id
@@ -12433,7 +12433,7 @@ module Aws::LexModelsV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifications for the constituent sub slots and the
+    # <p>Specifications for the constituent sub slots and the  
     #         expression for the composite slot.</p>
     # @!attribute expression
     #   <p>The expression text for defining the constituent sub slots in the composite slot using logical AND and OR operators.</p>
@@ -12455,7 +12455,7 @@ module Aws::LexModelsV2
     #   <p>Name of a constituent sub slot inside a composite slot.</p>
     #   @return [String]
     # @!attribute slot_type_id
-    #   <p>The unique identifier assigned to a slot type.
+    #   <p>The unique identifier assigned to a slot type. 
     #           This refers to either a built-in slot type or the unique slotTypeId of a custom slot type.</p>
     #   @return [String]
     class SubSlotTypeComposition < Struct.new(
@@ -12469,11 +12469,11 @@ module Aws::LexModelsV2
 
     # <p>Subslot elicitation settings.</p>
     #          <p>
-    #             <code>DefaultValueSpecification</code> is a list of default values for a constituent sub slot in a composite slot. Default values are used when
-    #         Amazon Lex hasn't determined a value for a slot. You can specify default values from context variables,
+    #             <code>DefaultValueSpecification</code> is a list of default values for a constituent sub slot in a composite slot. Default values are used when 
+    #         Amazon Lex hasn't determined a value for a slot. You can specify default values from context variables, 
     #         session attributes, and defined values. This is similar to <code>DefaultValueSpecification</code> for slots.</p>
     #          <p>
-    #             <code>PromptSpecification</code> is the prompt that Amazon Lex uses to elicit the sub slot value from the user.
+    #             <code>PromptSpecification</code> is the prompt that Amazon Lex uses to elicit the sub slot value from the user. 
     #         This is similar to <code>PromptSpecification</code> for slots.</p>
     # @!attribute default_value_specification
     #   <p>Defines a list of values that Amazon Lex should use as the default value
@@ -12484,8 +12484,8 @@ module Aws::LexModelsV2
     #            elicit a response.</p>
     #   @return [Types::PromptSpecification]
     # @!attribute sample_utterances
-    #   <p>If you know a specific pattern that users might respond to an Amazon Lex request for a sub slot value,
-    #         you can provide those utterances to improve accuracy. This is optional. In most cases Amazon Lex is capable
+    #   <p>If you know a specific pattern that users might respond to an Amazon Lex request for a sub slot value, 
+    #         you can provide those utterances to improve accuracy. This is optional. In most cases Amazon Lex is capable 
     #         of understanding user utterances. This is similar to <code>SampleUtterances</code> for slots.</p>
     #   @return [Array<Types::SampleUtterance>]
     # @!attribute wait_and_continue_specification
@@ -12529,7 +12529,7 @@ module Aws::LexModelsV2
 
     # <p>Contains information about the method by which to filter the results of the test execution.</p>
     # @!attribute result_type_filter
-    #   <p>Specifies which results to filter. See <a href="https://docs.aws.amazon.com/lexv2/latest/dg/test-results-details-test-set.html">Test result details">Test results details</a>
+    #   <p>Specifies which results to filter. See <a href="https://docs.aws.amazon.com/lexv2/latest/dg/test-results-details-test-set.html">Test result details">Test results details</a> 
     #    for details about different types of results.</p>
     #   @return [String]
     # @!attribute conversation_level_test_results_filter_by
@@ -12545,10 +12545,10 @@ module Aws::LexModelsV2
     end
 
     # <p>Contains the results of the test execution, grouped by type of results.
-    #  See <a href="https://docs.aws.amazon.com/lexv2/latest/dg/test-results-details-test-set.html">Test result details">Test results details</a>
+    #  See <a href="https://docs.aws.amazon.com/lexv2/latest/dg/test-results-details-test-set.html">Test result details">Test results details</a> 
     #  for details about different types of results.</p>
     # @!attribute overall_test_results
-    #   <p>Overall results for the test execution, including the breakdown of conversations and
+    #   <p>Overall results for the test execution, including the breakdown of conversations and 
     #    single-input utterances.</p>
     #   @return [Types::OverallTestResults]
     # @!attribute conversation_level_test_results
@@ -12578,7 +12578,7 @@ module Aws::LexModelsV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about the method by which to sort the instances of
+    # <p>Contains information about the method by which to sort the instances of 
     #       test executions you have carried out.</p>
     # @!attribute attribute
     #   <p>Specifies whether to sort the test set executions by the date and time at which the test sets were created.</p>
@@ -12618,7 +12618,7 @@ module Aws::LexModelsV2
     #   <p>Contains information about the bot used for the test execution..</p>
     #   @return [Types::TestExecutionTarget]
     # @!attribute api_mode
-    #   <p>Specifies whether the API mode for the test execution is streaming
+    #   <p>Specifies whether the API mode for the test execution is streaming 
     #         or non-streaming.</p>
     #   @return [String]
     # @!attribute test_execution_modality
@@ -12669,7 +12669,7 @@ module Aws::LexModelsV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about the bot alias used for the
+    # <p>Contains information about the bot alias used for the 
     #  test set discrepancy report.</p>
     # @!attribute bot_id
     #   <p>The unique identifier for the bot alias.</p>
@@ -12690,7 +12690,7 @@ module Aws::LexModelsV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about the resource used for the
+    # <p>Contains information about the resource used for the 
     #  test set discrepancy report.</p>
     # @!attribute bot_alias_target
     #   <p>Contains information about the bot alias used as the resource for the
@@ -12781,7 +12781,7 @@ module Aws::LexModelsV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about discrepancy in an intent information between the test set and the
+    # <p>Contains information about discrepancy in an intent information between the test set and the 
     #        bot.</p>
     # @!attribute intent_name
     #   <p>The name of the intent in the discrepancy report.</p>
@@ -13233,7 +13233,7 @@ module Aws::LexModelsV2
     #   <p>Updated speech-to-text settings to apply to the bot locale.</p>
     #   @return [Types::SpeechRecognitionSettings]
     # @!attribute generative_ai_settings
-    #   <p>Contains settings for generative AI features powered by Amazon Bedrock for your bot locale. Use this object to turn generative AI features on and off. Pricing
+    #   <p>Contains settings for generative AI features powered by Amazon Bedrock for your bot locale. Use this object to turn generative AI features on and off. Pricing 
     #         may differ if you turn a feature on. For more information, see LINK.</p>
     #   @return [Types::GenerativeAISettings]
     # @!attribute speech_detection_sensitivity
@@ -13475,7 +13475,7 @@ module Aws::LexModelsV2
     #   <p>The type of the bot to be updated.</p>
     #   @return [String]
     # @!attribute bot_members
-    #   <p>The list of bot members in the network associated
+    #   <p>The list of bot members in the network associated 
     #            with the update action.</p>
     #   @return [Array<Types::BotMember>]
     # @!attribute error_log_settings
@@ -13906,7 +13906,7 @@ module Aws::LexModelsV2
     #            value is <code>false</code>.</p>
     #   @return [Types::MultipleValuesSetting]
     # @!attribute sub_slot_setting
-    #   <p>Specifications for the constituent sub slots and the
+    #   <p>Specifications for the constituent sub slots and the  
     #           expression for the composite slot.</p>
     #   @return [Types::SubSlotSetting]
     class UpdateSlotRequest < Struct.new(
@@ -13974,7 +13974,7 @@ module Aws::LexModelsV2
     #            response.</p>
     #   @return [Types::MultipleValuesSetting]
     # @!attribute sub_slot_setting
-    #   <p>Specifications for the constituent sub slots and the
+    #   <p>Specifications for the constituent sub slots and the  
     #           expression for the composite slot.</p>
     #   @return [Types::SubSlotSetting]
     class UpdateSlotResponse < Struct.new(
@@ -14154,7 +14154,7 @@ module Aws::LexModelsV2
     #   <p>The status for the updated test set.</p>
     #   @return [String]
     # @!attribute role_arn
-    #   <p>The roleARN used for any operation in the test set to access
+    #   <p>The roleARN used for any operation in the test set to access 
     #         resources in the Amazon Web Services account.</p>
     #   @return [String]
     # @!attribute num_turns

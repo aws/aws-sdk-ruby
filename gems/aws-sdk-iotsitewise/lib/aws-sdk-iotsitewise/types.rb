@@ -2195,7 +2195,7 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains text content to which the SiteWise Assistant refers to, and generate the final response.
+    # <p>Contains text content to which the SiteWise Assistant refers to, and generate the final response. 
     #   It also contains information about the source.</p>
     # @!attribute reference
     #   <p>Contains information about the data source.</p>
@@ -2846,17 +2846,17 @@ module Aws::IoTSiteWise
     #         information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Array<Types::AssetModelPropertyDefinition>]
     # @!attribute if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
     #       The create request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     # @!attribute if_none_match
-    #   <p>Accepts <b>*</b> to reject the create request if an active version
+    #   <p>Accepts <b>*</b> to reject the create request if an active version 
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     #   @return [String]
     # @!attribute match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the create operation.</p>
     #   @return [String]
     class CreateAssetModelCompositeModelRequest < Struct.new(
@@ -3093,7 +3093,7 @@ module Aws::IoTSiteWise
     #   <p>Contains the configuration information of a job, such as the file format used to save data in Amazon S3.</p>
     #   @return [Types::JobConfiguration]
     # @!attribute adaptive_ingestion
-    #   <p>If set to true, ingest new data into IoT SiteWise storage. Measurements with notifications, metrics and transforms are
+    #   <p>If set to true, ingest new data into IoT SiteWise storage. Measurements with notifications, metrics and transforms are 
     #      computed. If set to false, historical data is ingested into IoT SiteWise as is.</p>
     #   @return [Boolean]
     # @!attribute delete_files_after_import
@@ -3180,7 +3180,7 @@ module Aws::IoTSiteWise
     #   <p>The configuration for the computation model.</p>
     #   @return [Types::ComputationModelConfiguration]
     # @!attribute computation_model_data_binding
-    #   <p>The data binding for the computation model. Key is a variable name defined in configuration.
+    #   <p>The data binding for the computation model. Key is a variable name defined in configuration. 
     #     Value is a <code>ComputationModelDataBindingValue</code> referenced by the variable.</p>
     #   @return [Hash<String, Types::ComputationModelDataBindingValue>]
     # @!attribute client_token
@@ -3390,12 +3390,12 @@ module Aws::IoTSiteWise
     #   <p>The ID of the dataset.</p>
     #   @return [String]
     # @!attribute dataset_arn
-    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset.
+    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset. 
     #     The format is <code>arn:${Partition}:iotsitewise:${Region}:${Account}:dataset/${DatasetId}</code>.</p>
     #   @return [String]
     # @!attribute dataset_status
-    #   <p>The status of the dataset. This contains the state and any error messages.
-    #     State is <code>CREATING</code> after a successfull call to this API, and any associated error message. The state is
+    #   <p>The status of the dataset. This contains the state and any error messages. 
+    #     State is <code>CREATING</code> after a successfull call to this API, and any associated error message. The state is 
     #     <code>ACTIVE</code> when ready to use.</p>
     #   @return [Types::DatasetStatus]
     class CreateDatasetResponse < Struct.new(
@@ -4032,7 +4032,7 @@ module Aws::IoTSiteWise
 
     # <p>Contains information about the dataset use and it's source.</p>
     # @!attribute dataset_arn
-    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset.
+    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset. 
     #     The format is <code>arn:${Partition}:iotsitewise:${Region}:${Account}:dataset/${DatasetId}</code>.</p>
     #   @return [String]
     # @!attribute source
@@ -4127,7 +4127,7 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The status of the dataset. This contains the state and any error messages. The state is
+    # <p>The status of the dataset. This contains the state and any error messages. The state is 
     #   <code>ACTIVE</code> when ready to use.</p>
     # @!attribute state
     #   <p>The current status of the dataset.</p>
@@ -4149,7 +4149,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the dataset.</p>
     #   @return [String]
     # @!attribute arn
-    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset.
+    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset. 
     #     The format is <code>arn:${Partition}:iotsitewise:${Region}:${Account}:dataset/${DatasetId}</code>.</p>
     #   @return [String]
     # @!attribute name
@@ -4172,7 +4172,7 @@ module Aws::IoTSiteWise
     #   <p>The date the dataset was last updated, in Unix epoch time.</p>
     #   @return [Time]
     # @!attribute status
-    #   <p>The status of the dataset. This contains the state and any error messages. The state is
+    #   <p>The status of the dataset. This contains the state and any error messages. The state is 
     #     <code>ACTIVE</code> when ready to use.</p>
     #   @return [Types::DatasetStatus]
     # @!attribute enrichment_status
@@ -4274,17 +4274,17 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     # @!attribute if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
     #       The delete request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     # @!attribute if_none_match
-    #   <p>Accepts <b>*</b> to reject the delete request if an active version
+    #   <p>Accepts <b>*</b> to reject the delete request if an active version 
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     #   @return [String]
     # @!attribute match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the delete operation.</p>
     #   @return [String]
     class DeleteAssetModelCompositeModelRequest < Struct.new(
@@ -4372,17 +4372,17 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     # @!attribute if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
     #       The delete request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     # @!attribute if_none_match
-    #   <p>Accepts <b>*</b> to reject the delete request if an active version
+    #   <p>Accepts <b>*</b> to reject the delete request if an active version 
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     #   @return [String]
     # @!attribute match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the delete operation.</p>
     #   @return [String]
     class DeleteAssetModelRequest < Struct.new(
@@ -4534,7 +4534,7 @@ module Aws::IoTSiteWise
     end
 
     # @!attribute dataset_status
-    #   <p>The status of the dataset. This contains the state and any error messages.
+    #   <p>The status of the dataset. This contains the state and any error messages. 
     #     State is <code>DELETING</code> after a successfull call to this API, and any associated error message.</p>
     #   @return [Types::DatasetStatus]
     class DeleteDatasetResponse < Struct.new(
@@ -4953,7 +4953,7 @@ module Aws::IoTSiteWise
     #       For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references">Referencing objects with external IDs</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     # @!attribute asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model.
+    #   <p>The version alias that specifies the latest or active version of the asset model. 
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
@@ -5073,7 +5073,7 @@ module Aws::IoTSiteWise
     #   <p> Whether or not to exclude asset model properties from the response. </p>
     #   @return [Boolean]
     # @!attribute asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model.
+    #   <p>The version alias that specifies the latest or active version of the asset model. 
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
@@ -5398,7 +5398,7 @@ module Aws::IoTSiteWise
     #   <p>The date the job was last updated, in Unix epoch time.</p>
     #   @return [Time]
     # @!attribute adaptive_ingestion
-    #   <p>If set to true, ingest new data into IoT SiteWise storage. Measurements with notifications, metrics and transforms are
+    #   <p>If set to true, ingest new data into IoT SiteWise storage. Measurements with notifications, metrics and transforms are 
     #      computed. If set to false, historical data is ingested into IoT SiteWise as is.</p>
     #   @return [Boolean]
     # @!attribute delete_files_after_import
@@ -5502,7 +5502,7 @@ module Aws::IoTSiteWise
     #   <p>The configuration for the computation model.</p>
     #   @return [Types::ComputationModelConfiguration]
     # @!attribute computation_model_data_binding
-    #   <p>The data binding for the computation model. Key is a variable name defined in configuration.
+    #   <p>The data binding for the computation model. Key is a variable name defined in configuration. 
     #     Value is a <code>ComputationModelDataBindingValue</code> referenced by the variable.</p>
     #   @return [Hash<String, Types::ComputationModelDataBindingValue>]
     # @!attribute computation_model_creation_date
@@ -5672,7 +5672,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the dataset.</p>
     #   @return [String]
     # @!attribute dataset_arn
-    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset.
+    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset. 
     #     The format is <code>arn:${Partition}:iotsitewise:${Region}:${Account}:dataset/${DatasetId}</code>.</p>
     #   @return [String]
     # @!attribute dataset_name
@@ -5698,8 +5698,8 @@ module Aws::IoTSiteWise
     #   <p>The data source for the dataset.</p>
     #   @return [Types::DatasetSource]
     # @!attribute dataset_status
-    #   <p>The status of the dataset. This contains the state and any error messages.
-    #     State is <code>CREATING</code> after a successfull call to this API, and any associated error message. The state is
+    #   <p>The status of the dataset. This contains the state and any error messages. 
+    #     State is <code>CREATING</code> after a successfull call to this API, and any associated error message. The state is 
     #     <code>ACTIVE</code> when ready to use.</p>
     #   @return [Types::DatasetStatus]
     # @!attribute dataset_creation_date
@@ -8315,14 +8315,14 @@ module Aws::IoTSiteWise
     end
 
     # @!attribute conversation_id
-    #   <p>The ID assigned to a conversation. IoT SiteWise automatically generates a unique ID for you, and this parameter is never required.
+    #   <p>The ID assigned to a conversation. IoT SiteWise automatically generates a unique ID for you, and this parameter is never required. 
     #     However, if you prefer to have your own ID, you must specify it here in UUID format. If you specify your own ID, it must be globally unique.</p>
     #   @return [String]
     # @!attribute message
     #   <p>A text message sent to the SiteWise Assistant by the user.</p>
     #   @return [String]
     # @!attribute enable_trace
-    #   <p>Specifies if to turn trace on or not. It is used to track the SiteWise Assistant's
+    #   <p>Specifies if to turn trace on or not. It is used to track the SiteWise Assistant's 
     #     reasoning, and data access process.</p>
     #   @return [Boolean]
     class InvokeAssistantRequest < Struct.new(
@@ -8585,7 +8585,7 @@ module Aws::IoTSiteWise
     #            <p>Default: 50</p>
     #   @return [Integer]
     # @!attribute asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model.
+    #   <p>The version alias that specifies the latest or active version of the asset model. 
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
@@ -8644,7 +8644,7 @@ module Aws::IoTSiteWise
     #            </p>
     #   @return [String]
     # @!attribute asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model.
+    #   <p>The version alias that specifies the latest or active version of the asset model. 
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
@@ -8705,7 +8705,7 @@ module Aws::IoTSiteWise
     #            <p>Default: 50</p>
     #   @return [Integer]
     # @!attribute asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model.
+    #   <p>The version alias that specifies the latest or active version of the asset model. 
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
@@ -10414,7 +10414,7 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The configuration entry associated with the specific portal type. The <code>portalTypeConfiguration</code> is a map of the <code>portalTypeKey</code> to the
+    # <p>The configuration entry associated with the specific portal type. The <code>portalTypeConfiguration</code> is a map of the <code>portalTypeKey</code> to the 
     #       <code>PortalTypeEntry</code>.</p>
     # @!attribute portal_tools
     #   <p>The array of tools associated with the specified portal type. The possible values are <code>ASSISTANT</code> and <code>DASHBOARD</code>.</p>
@@ -11363,7 +11363,7 @@ module Aws::IoTSiteWise
     #   <p>Contains the ARN of the dataset. If the source is Kendra, it's the ARN of the Kendra index.</p>
     #   @return [String]
     # @!attribute location
-    #   <p>Contains the location information where the cited text is originally stored.
+    #   <p>Contains the location information where the cited text is originally stored. 
     #     For example, if the data source is Kendra, and the text synchronized is from an S3 bucket, then the location refers to an S3 object.</p>
     #   @return [Types::Location]
     class Source < Struct.new(
@@ -12023,17 +12023,17 @@ module Aws::IoTSiteWise
     #         information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Array<Types::AssetModelProperty>]
     # @!attribute if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
     #       The update request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     # @!attribute if_none_match
-    #   <p>Accepts <b>*</b> to reject the update request if an active version
+    #   <p>Accepts <b>*</b> to reject the update request if an active version 
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     #   @return [String]
     # @!attribute match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the update operation.</p>
     #   @return [String]
     class UpdateAssetModelCompositeModelRequest < Struct.new(
@@ -12115,17 +12115,17 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     # @!attribute if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
     #       The update request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     # @!attribute if_none_match
-    #   <p>Accepts <b>*</b> to reject the update request if an active version
+    #   <p>Accepts <b>*</b> to reject the update request if an active version 
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     #   @return [String]
     # @!attribute match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the update operation.</p>
     #   @return [String]
     class UpdateAssetModelRequest < Struct.new(
@@ -12262,7 +12262,7 @@ module Aws::IoTSiteWise
     #   <p>The configuration for the computation model.</p>
     #   @return [Types::ComputationModelConfiguration]
     # @!attribute computation_model_data_binding
-    #   <p>The data binding for the computation model. Key is a variable name defined in configuration.
+    #   <p>The data binding for the computation model. Key is a variable name defined in configuration. 
     #     Value is a <code>ComputationModelDataBindingValue</code> referenced by the variable.</p>
     #   @return [Hash<String, Types::ComputationModelDataBindingValue>]
     # @!attribute client_token
@@ -12383,12 +12383,12 @@ module Aws::IoTSiteWise
     #   <p>The ID of the dataset.</p>
     #   @return [String]
     # @!attribute dataset_arn
-    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset.
+    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset. 
     #     The format is <code>arn:${Partition}:iotsitewise:${Region}:${Account}:dataset/${DatasetId}</code>.</p>
     #   @return [String]
     # @!attribute dataset_status
-    #   <p>The status of the dataset. This contains the state and any error messages.
-    #     State is <code>UPDATING</code> after a successfull call to this API, and any associated error message. The state is
+    #   <p>The status of the dataset. This contains the state and any error messages. 
+    #     State is <code>UPDATING</code> after a successfull call to this API, and any associated error message. The state is 
     #     <code>ACTIVE</code> when ready to use.</p>
     #   @return [Types::DatasetStatus]
     class UpdateDatasetResponse < Struct.new(

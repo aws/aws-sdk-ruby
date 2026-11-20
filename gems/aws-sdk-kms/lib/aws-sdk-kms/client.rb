@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::KMS
     @identifier = :kms
 
     add_plugin(::Aws::KMS::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::KMS
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::KMS
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -223,7 +243,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a>ScheduleKeyDeletion</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::CancelKeyDeletionRequest] params
     # @option params [String] :key_id
@@ -357,7 +377,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ConnectCustomKeyStoreRequest] params
     # @option params [String] :custom_key_store_id
@@ -444,7 +464,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::CreateAliasRequest] params
     # @option params [String] :alias_name
@@ -594,7 +614,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::CreateCustomKeyStoreRequest] params
     # @option params [String] :custom_key_store_name
@@ -849,7 +869,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::CreateGrantRequest] params
     # @option params [String] :key_id
@@ -1064,7 +1084,7 @@ module Aws::KMS
     #          <p>Use the parameters of <code>CreateKey</code> to specify the type of KMS key, the source of
     #       its key material, its key policy, description, tags, and other properties.</p>
     #          <note>
-    #             <p>KMS has replaced the term <i>customer master key (CMK)</i> with <i>Key Management Service key</i>
+    #             <p>KMS has replaced the term <i>customer master key (CMK)</i> with <i>Key Management Service key</i> 
     #   and <i>KMS key</i>. The concept has not changed. To prevent breaking changes, KMS is keeping some variations of this term.</p>
     #          </note>
     #          <p>To create different types of KMS keys, use the following guidance:</p>
@@ -1223,7 +1243,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::CreateKeyRequest] params
     # @option params [String] :policy
@@ -1731,7 +1751,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DecryptRequest] params
     # @option params [String] :ciphertext_blob
@@ -1740,7 +1760,7 @@ module Aws::KMS
     # @option params [Hash<String, String>] :encryption_context
     #   <p>Specifies the encryption context to use when decrypting the data.
     #         An encryption context is valid only for <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations">cryptographic operations</a> with a symmetric encryption KMS key. The standard asymmetric encryption algorithms and HMAC algorithms that KMS uses do not support an encryption context.</p>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -1803,11 +1823,11 @@ module Aws::KMS
     #   <p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p>
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     # @option params [Array<String>] :dry_run_modifiers
-    #   <p>Specifies the modifiers to apply to the dry run operation. <code>DryRunModifiers</code> is an optional parameter that only applies when <code>DryRun</code> is
+    #   <p>Specifies the modifiers to apply to the dry run operation. <code>DryRunModifiers</code> is an optional parameter that only applies when <code>DryRun</code> is 
     #           set to <code>true</code>.</p>
-    #            <p>When set to <code>IGNORE_CIPHERTEXT</code>, KMS performs only authorization validation without ciphertext validation. This allows you to test permissions
+    #            <p>When set to <code>IGNORE_CIPHERTEXT</code>, KMS performs only authorization validation without ciphertext validation. This allows you to test permissions 
     #           without requiring a valid ciphertext blob.</p>
-    #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your
+    #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your 
     #           permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     # @example To decrypt data with an asymmetric encryption KMS key
     #   # The following example decrypts data that was encrypted with an asymmetric encryption KMS key. When the KMS encryption key is asymmetric, you must specify the KMS key ID and the encryption algorithm that was used to encrypt the data.
@@ -1921,7 +1941,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DeleteAliasRequest] params
     # @option params [String] :alias_name
@@ -2011,7 +2031,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DeleteCustomKeyStoreRequest] params
     # @option params [String] :custom_key_store_id
@@ -2088,7 +2108,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DeleteImportedKeyMaterialRequest] params
     # @option params [String] :key_id
@@ -2231,7 +2251,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DeriveSharedSecretRequest] params
     # @option params [String] :key_id
@@ -2409,7 +2429,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DescribeCustomKeyStoresRequest] params
     # @option params [String] :custom_key_store_id
@@ -2566,7 +2586,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DescribeKeyRequest] params
     # @option params [String] :key_id
@@ -2844,7 +2864,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a>EnableKey</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DisableKeyRequest] params
     # @option params [String] :key_id
@@ -2930,7 +2950,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DisableKeyRotationRequest] params
     # @option params [String] :key_id
@@ -3028,7 +3048,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DisconnectCustomKeyStoreRequest] params
     # @option params [String] :custom_key_store_id
@@ -3069,7 +3089,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a>DisableKey</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::EnableKeyRequest] params
     # @option params [String] :key_id
@@ -3172,7 +3192,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::EnableKeyRotationRequest] params
     # @option params [String] :key_id
@@ -3337,7 +3357,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::EncryptRequest] params
     # @option params [String] :key_id
@@ -3373,7 +3393,7 @@ module Aws::KMS
     #            <important>
     #               <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>
     #            </important>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -3551,7 +3571,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GenerateDataKeyRequest] params
     # @option params [String] :key_id
@@ -3584,7 +3604,7 @@ module Aws::KMS
     #            <important>
     #               <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>
     #            </important>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -3752,7 +3772,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GenerateDataKeyPairRequest] params
     # @option params [Hash<String, String>] :encryption_context
@@ -3761,7 +3781,7 @@ module Aws::KMS
     #            <important>
     #               <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>
     #            </important>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -3934,7 +3954,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GenerateDataKeyPairWithoutPlaintextRequest] params
     # @option params [Hash<String, String>] :encryption_context
@@ -3943,7 +3963,7 @@ module Aws::KMS
     #            <important>
     #               <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>
     #            </important>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -4100,7 +4120,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GenerateDataKeyWithoutPlaintextRequest] params
     # @option params [String] :key_id
@@ -4133,7 +4153,7 @@ module Aws::KMS
     #            <important>
     #               <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>
     #            </important>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -4222,7 +4242,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a>VerifyMac</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GenerateMacRequest] params
     # @option params [String] :message
@@ -4307,7 +4327,7 @@ module Aws::KMS
     #          <p>
     #             <b>Required permissions</b>: <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html">kms:GenerateRandom</a> (IAM policy)</p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GenerateRandomRequest] params
     # @option params [Integer] :number_of_bytes
@@ -4431,7 +4451,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GetKeyLastUsageRequest] params
     # @option params [String] :key_id
@@ -4503,7 +4523,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html">PutKeyPolicy</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GetKeyPolicyRequest] params
     # @option params [String] :key_id
@@ -4623,7 +4643,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GetKeyRotationStatusRequest] params
     # @option params [String] :key_id
@@ -4738,7 +4758,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GetParametersForImportRequest] params
     # @option params [String] :key_id
@@ -4876,7 +4896,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a>CreateKey</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GetPublicKeyRequest] params
     # @option params [String] :key_id
@@ -5078,7 +5098,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ImportKeyMaterialRequest] params
     # @option params [String] :key_id
@@ -5249,7 +5269,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ListAliasesRequest] params
     # @option params [String] :key_id
@@ -5408,7 +5428,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ListGrantsRequest] params
     # @option params [Integer] :limit
@@ -5519,7 +5539,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ListKeyPoliciesRequest] params
     # @option params [String] :key_id
@@ -5630,7 +5650,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ListKeyRotationsRequest] params
     # @option params [String] :key_id
@@ -5731,7 +5751,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ListKeysRequest] params
     # @option params [Integer] :limit
@@ -5843,7 +5863,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ListResourceTagsRequest] params
     # @option params [String] :key_id
@@ -5980,7 +6000,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ListRetirableGrantsRequest] params
     # @option params [Integer] :limit
@@ -6068,7 +6088,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a>GetKeyPolicy</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::PutKeyPolicyRequest] params
     # @option params [String] :key_id
@@ -6277,7 +6297,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ReEncryptRequest] params
     # @option params [String] :ciphertext_blob
@@ -6286,7 +6306,7 @@ module Aws::KMS
     # @option params [Hash<String, String>] :source_encryption_context
     #   <p>Specifies the encryption context to use to decrypt the ciphertext. Enter the same
     #         encryption context that was used to encrypt the ciphertext.</p>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -6357,7 +6377,7 @@ module Aws::KMS
     #            <p>A destination encryption context is valid only when the destination KMS key is a symmetric
     #         encryption KMS key. The standard ciphertext format for asymmetric KMS keys does not include
     #         fields for metadata.</p>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -6384,11 +6404,11 @@ module Aws::KMS
     #   <p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p>
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     # @option params [Array<String>] :dry_run_modifiers
-    #   <p>Specifies the modifiers to apply to the dry run operation. <code>DryRunModifiers</code> is an optional parameter that only applies when <code>DryRun</code> is
+    #   <p>Specifies the modifiers to apply to the dry run operation. <code>DryRunModifiers</code> is an optional parameter that only applies when <code>DryRun</code> is 
     #           set to <code>true</code>.</p>
-    #            <p>When set to <code>IGNORE_CIPHERTEXT</code>, KMS performs only authorization validation without ciphertext validation. This allows you to test permissions
+    #            <p>When set to <code>IGNORE_CIPHERTEXT</code>, KMS performs only authorization validation without ciphertext validation. This allows you to test permissions 
     #           without requiring a valid ciphertext blob.</p>
-    #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your
+    #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your 
     #           permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     # @example To reencrypt data
     #   # The following example reencrypts data with the specified KMS key.
@@ -6524,7 +6544,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ReplicateKeyRequest] params
     # @option params [String] :key_id
@@ -6800,7 +6820,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::RetireGrantRequest] params
     # @option params [String] :grant_token
@@ -6898,7 +6918,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::RevokeGrantRequest] params
     # @option params [String] :key_id
@@ -7018,7 +7038,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::RotateKeyOnDemandRequest] params
     # @option params [String] :key_id
@@ -7126,7 +7146,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ScheduleKeyDeletionRequest] params
     # @option params [String] :key_id
@@ -7230,7 +7250,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a>Verify</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::SignRequest] params
     # @option params [String] :key_id
@@ -7440,7 +7460,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :key_id
@@ -7546,7 +7566,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :key_id
@@ -7659,7 +7679,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::UpdateAliasRequest] params
     # @option params [String] :alias_name
@@ -7748,8 +7768,8 @@ module Aws::KMS
     #         <code>kmsuser</code> crypto user password (<code>KeyStorePassword</code>), or to associate
     #       the custom key store with a different, but related, CloudHSM cluster
     #         (<code>CloudHsmClusterId</code>). To update most properties of an CloudHSM key store, the
-    #         <code>ConnectionState</code> of the CloudHSM key store must be <code>DISCONNECTED</code>.
-    #         However, you can update the <code>CustomKeyStoreName</code> of an AWS CloudHSM key store
+    #         <code>ConnectionState</code> of the CloudHSM key store must be <code>DISCONNECTED</code>. 
+    #         However, you can update the <code>CustomKeyStoreName</code> of an AWS CloudHSM key store 
     #         when it is in the <code>CONNECTED</code> or <code>DISCONNECTED</code> state.</p>
     #          <p>For an external key store, you can use this operation to change the custom key store
     #       friendly name (<code>NewCustomKeyStoreName</code>), or to tell KMS about a change to the
@@ -7812,7 +7832,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::UpdateCustomKeyStoreRequest] params
     # @option params [String] :custom_key_store_id
@@ -8003,7 +8023,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::UpdateKeyDescriptionRequest] params
     # @option params [String] :key_id
@@ -8119,7 +8139,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::UpdatePrimaryRegionRequest] params
     # @option params [String] :key_id
@@ -8145,10 +8165,10 @@ module Aws::KMS
     #            <p>When the operation completes, the multi-Region key in this Region will be the primary
     #         key.</p>
     # @example To update the primary Region of a multi-Region KMS key
-    #   # The following UpdatePrimaryRegion example changes the multi-Region replica key in the eu-central-1 Region to the primary key. The current primary key in the us-west-1 Region becomes a replica key.
-    # #
+    #   # The following UpdatePrimaryRegion example changes the multi-Region replica key in the eu-central-1 Region to the primary key. The current primary key in the us-west-1 Region becomes a replica key. 
+    # # 
     # # The KeyId parameter identifies the current primary key in the us-west-1 Region. The PrimaryRegion parameter indicates the Region of the replica key that will become the new primary key.
-    # #
+    # # 
     # # This operation does not return any output. To verify that primary key is changed, use the DescribeKey operation.
     #   params = {
     #     key_id: "arn:aws:kms:us-west-1:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab",
@@ -8210,7 +8230,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a>Sign</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::VerifyRequest] params
     # @option params [String] :key_id
@@ -8338,7 +8358,7 @@ module Aws::KMS
     #     signing_algorithm: ECDSA_SHA_384
     #   }
     # @example To use an asymmetric KMS key to verify a digital signature on a message digest
-    #   # This operation uses the public key in an RSA asymmetric signing key pair to verify the digital signature of a message digest. Hashing a message into a digest before sending it to KMS lets you verify messages that exceed the 4096-byte message size limit. To indicate that the value of Message is a digest, use the MessageType parameter
+    #   # This operation uses the public key in an RSA asymmetric signing key pair to verify the digital signature of a message digest. Hashing a message into a digest before sending it to KMS lets you verify messages that exceed the 4096-byte message size limit. To indicate that the value of Message is a digest, use the MessageType parameter 
     #   params = {
     #     key_id: "arn:aws:kms:us-east-2:111122223333:key/0987dcba-09fe-87dc-65ba-ab0987654321",
     #     message: "<message digest to be verified>",
@@ -8401,7 +8421,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a>GenerateMac</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::VerifyMacRequest] params
     # @option params [String] :message
@@ -8521,7 +8541,8 @@ module Aws::KMS
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

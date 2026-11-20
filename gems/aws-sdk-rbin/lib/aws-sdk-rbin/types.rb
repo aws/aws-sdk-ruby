@@ -22,7 +22,7 @@ module Aws::Rbin
     end
 
     # @!attribute retention_period
-    #   <p>Information about the retention period for which the retention rule is to
+    #   <p>Information about the retention period for which the retention rule is to 
     #     retain resources.</p>
     #   @return [Types::RetentionPeriod]
     # @!attribute description
@@ -32,7 +32,7 @@ module Aws::Rbin
     #   <p>Information about the tags to assign to the retention rule.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute resource_type
-    #   <p>The resource type to be retained by the retention rule. Currently, only EBS volumes, EBS snapshots, and EBS-backed AMIs
+    #   <p>The resource type to be retained by the retention rule. Currently, only EBS volumes, EBS snapshots, and EBS-backed AMIs 
     #         are supported.</p>
     #            <ul>
     #               <li>
@@ -48,21 +48,21 @@ module Aws::Rbin
     #            </ul>
     #   @return [String]
     # @!attribute resource_tags
-    #   <p>[Tag-level retention rules only] Specifies the resource tags to use to identify resources that are to be retained by a
-    #     tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that
-    #     have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have
+    #   <p>[Tag-level retention rules only] Specifies the resource tags to use to identify resources that are to be retained by a 
+    #     tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that 
+    #     have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have 
     #     any of the specified tag key and value pairs, it is immediately deleted without being retained by the retention rule.</p>
     #            <p>You can add the same tag key and value pair to a maximum or five retention rules.</p>
-    #            <p>To create a Region-level retention rule, omit this parameter. A Region-level retention rule
-    #         does not have any resource tags specified. It retains all deleted resources of the specified
+    #            <p>To create a Region-level retention rule, omit this parameter. A Region-level retention rule 
+    #         does not have any resource tags specified. It retains all deleted resources of the specified 
     #         resource type in the Region in which the rule is created, even if the resources are not tagged.</p>
     #   @return [Array<Types::ResourceTag>]
     # @!attribute lock_configuration
     #   <p>Information about the retention rule lock configuration.</p>
     #   @return [Types::LockConfiguration]
     # @!attribute exclude_resource_tags
-    #   <p>[Region-level retention rules only] Specifies the exclusion tags to use to identify resources that are to be excluded,
-    #   or ignored, by a Region-level retention rule. Resources that have any of these tags are not retained by the retention rule
+    #   <p>[Region-level retention rules only] Specifies the exclusion tags to use to identify resources that are to be excluded, 
+    #   or ignored, by a Region-level retention rule. Resources that have any of these tags are not retained by the retention rule 
     #   upon deletion.</p>
     #            <p>You can't specify exclusion tags for tag-level retention rules.</p>
     #   @return [Array<Types::ResourceTag>]
@@ -84,7 +84,7 @@ module Aws::Rbin
     #   <p>The unique ID of the retention rule.</p>
     #   @return [String]
     # @!attribute retention_period
-    #   <p>Information about the retention period for which the retention rule is to
+    #   <p>Information about the retention period for which the retention rule is to 
     #     retain resources.</p>
     #   @return [Types::RetentionPeriod]
     # @!attribute description
@@ -97,11 +97,11 @@ module Aws::Rbin
     #   <p>The resource type retained by the retention rule.</p>
     #   @return [String]
     # @!attribute resource_tags
-    #   <p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention
+    #   <p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention 
     #         rule.</p>
     #   @return [Array<Types::ResourceTag>]
     # @!attribute status
-    #   <p>The state of the retention rule. Only retention rules that are in the <code>available</code>
+    #   <p>The state of the retention rule. Only retention rules that are in the <code>available</code> 
     #         state retain resources.</p>
     #   @return [String]
     # @!attribute lock_configuration
@@ -116,19 +116,19 @@ module Aws::Rbin
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>pending_unlock</code> - The retention rule has been unlocked but it is still within
-    #             the unlock delay period. The retention rule can be modified or deleted only after the unlock
+    #                     <code>pending_unlock</code> - The retention rule has been unlocked but it is still within 
+    #             the unlock delay period. The retention rule can be modified or deleted only after the unlock 
     #             delay period has expired.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by
+    #                     <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by 
     #             any user with the required permissions.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>null</code> - The retention rule has never been locked. Once a retention rule has
-    #           been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states
+    #                     <code>null</code> - The retention rule has never been locked. Once a retention rule has 
+    #           been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states 
     #           only; it can never transition back to <code>null</code>.</p>
     #               </li>
     #            </ul>
@@ -137,7 +137,7 @@ module Aws::Rbin
     #   <p>The Amazon Resource Name (ARN) of the retention rule.</p>
     #   @return [String]
     # @!attribute exclude_resource_tags
-    #   <p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be
+    #   <p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be 
     #   excluded, or ignored, by the retention rule.</p>
     #   @return [Array<Types::ResourceTag>]
     class CreateRuleResponse < Struct.new(
@@ -197,15 +197,15 @@ module Aws::Rbin
     #   <p>The resource type retained by the retention rule.</p>
     #   @return [String]
     # @!attribute retention_period
-    #   <p>Information about the retention period for which the retention rule is to
+    #   <p>Information about the retention period for which the retention rule is to 
     #     retain resources.</p>
     #   @return [Types::RetentionPeriod]
     # @!attribute resource_tags
-    #   <p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention
+    #   <p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention 
     #         rule.</p>
     #   @return [Array<Types::ResourceTag>]
     # @!attribute status
-    #   <p>The state of the retention rule. Only retention rules that are in the <code>available</code>
+    #   <p>The state of the retention rule. Only retention rules that are in the <code>available</code> 
     #         state retain resources.</p>
     #   @return [String]
     # @!attribute lock_configuration
@@ -220,33 +220,33 @@ module Aws::Rbin
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>pending_unlock</code> - The retention rule has been unlocked but it is still within
-    #             the unlock delay period. The retention rule can be modified or deleted only after the unlock
+    #                     <code>pending_unlock</code> - The retention rule has been unlocked but it is still within 
+    #             the unlock delay period. The retention rule can be modified or deleted only after the unlock 
     #             delay period has expired.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by
+    #                     <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by 
     #             any user with the required permissions.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>null</code> - The retention rule has never been locked. Once a retention rule has
-    #           been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states
+    #                     <code>null</code> - The retention rule has never been locked. Once a retention rule has 
+    #           been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states 
     #           only; it can never transition back to <code>null</code>.</p>
     #               </li>
     #            </ul>
     #   @return [String]
     # @!attribute lock_end_time
-    #   <p>The date and time at which the unlock delay is set to expire. Only returned
-    #         for retention rules that have been unlocked and that are still within the unlock
+    #   <p>The date and time at which the unlock delay is set to expire. Only returned 
+    #         for retention rules that have been unlocked and that are still within the unlock 
     #         delay period.</p>
     #   @return [Time]
     # @!attribute rule_arn
     #   <p>The Amazon Resource Name (ARN) of the retention rule.</p>
     #   @return [String]
     # @!attribute exclude_resource_tags
-    #   <p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be
+    #   <p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be 
     #   excluded, or ignored, by the retention rule.</p>
     #   @return [Array<Types::ResourceTag>]
     class GetRuleResponse < Struct.new(
@@ -286,7 +286,7 @@ module Aws::Rbin
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute resource_type
-    #   <p>The resource type retained by the retention rule. Only retention rules that retain
+    #   <p>The resource type retained by the retention rule. Only retention rules that retain 
     #         the specified resource type are listed. Currently, only EBS volumes, EBS snapshots, and EBS-backed AMIs are supported.</p>
     #            <ul>
     #               <li>
@@ -301,15 +301,15 @@ module Aws::Rbin
     #            </ul>
     #   @return [String]
     # @!attribute resource_tags
-    #   <p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention
+    #   <p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention 
     #         rule.</p>
     #   @return [Array<Types::ResourceTag>]
     # @!attribute lock_state
-    #   <p>The lock state of the retention rules to list. Only retention rules with the specified
+    #   <p>The lock state of the retention rules to list. Only retention rules with the specified 
     #         lock state are returned.</p>
     #   @return [String]
     # @!attribute exclude_resource_tags
-    #   <p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be
+    #   <p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be 
     #   excluded, or ignored, by the retention rule.</p>
     #   @return [Array<Types::ResourceTag>]
     class ListRulesRequest < Struct.new(
@@ -399,15 +399,15 @@ module Aws::Rbin
     #   <p>The resource type retained by the retention rule.</p>
     #   @return [String]
     # @!attribute retention_period
-    #   <p>Information about the retention period for which the retention rule is to
+    #   <p>Information about the retention period for which the retention rule is to 
     #     retain resources.</p>
     #   @return [Types::RetentionPeriod]
     # @!attribute resource_tags
-    #   <p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention
+    #   <p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention 
     #         rule.</p>
     #   @return [Array<Types::ResourceTag>]
     # @!attribute status
-    #   <p>The state of the retention rule. Only retention rules that are in the <code>available</code>
+    #   <p>The state of the retention rule. Only retention rules that are in the <code>available</code> 
     #         state retain resources.</p>
     #   @return [String]
     # @!attribute lock_configuration
@@ -422,19 +422,19 @@ module Aws::Rbin
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>pending_unlock</code> - The retention rule has been unlocked but it is still within
-    #             the unlock delay period. The retention rule can be modified or deleted only after the unlock
+    #                     <code>pending_unlock</code> - The retention rule has been unlocked but it is still within 
+    #             the unlock delay period. The retention rule can be modified or deleted only after the unlock 
     #             delay period has expired.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by
+    #                     <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by 
     #             any user with the required permissions.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>null</code> - The retention rule has never been locked. Once a retention rule has
-    #           been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states
+    #                     <code>null</code> - The retention rule has never been locked. Once a retention rule has 
+    #           been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states 
     #           only; it can never transition back to <code>null</code>.</p>
     #               </li>
     #            </ul>
@@ -443,7 +443,7 @@ module Aws::Rbin
     #   <p>The Amazon Resource Name (ARN) of the retention rule.</p>
     #   @return [String]
     # @!attribute exclude_resource_tags
-    #   <p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be
+    #   <p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be 
     #   excluded, or ignored, by the retention rule.</p>
     #   @return [Array<Types::ResourceTag>]
     class LockRuleResponse < Struct.new(
@@ -478,7 +478,7 @@ module Aws::Rbin
       include ::Smithy::Schema::Structure
     end
 
-    # <p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention
+    # <p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention 
     #       rule.</p>
     # @!attribute resource_tag_key
     #   <p>The tag key.</p>
@@ -495,10 +495,10 @@ module Aws::Rbin
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about the retention period for which the retention rule is to
+    # <p>Information about the retention period for which the retention rule is to 
     #   retain resources.</p>
     # @!attribute retention_period_value
-    #   <p>The period value for which the retention rule is to retain resources, measured in days.
+    #   <p>The period value for which the retention rule is to retain resources, measured in days. 
     #         The supported retention periods are:</p>
     #            <ul>
     #               <li>
@@ -510,7 +510,7 @@ module Aws::Rbin
     #            </ul>
     #   @return [Integer]
     # @!attribute retention_period_unit
-    #   <p>The unit of time in which the retention period is measured. Currently, only <code>DAYS</code>
+    #   <p>The unit of time in which the retention period is measured. Currently, only <code>DAYS</code> 
     #         is supported.</p>
     #   @return [String]
     class RetentionPeriod < Struct.new(
@@ -530,7 +530,7 @@ module Aws::Rbin
     #   <p>The retention rule description.</p>
     #   @return [String]
     # @!attribute retention_period
-    #   <p>Information about the retention period for which the retention rule is to
+    #   <p>Information about the retention period for which the retention rule is to 
     #     retain resources.</p>
     #   @return [Types::RetentionPeriod]
     # @!attribute lock_state
@@ -542,19 +542,19 @@ module Aws::Rbin
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>pending_unlock</code> - The retention rule has been unlocked but it is still within
-    #             the unlock delay period. The retention rule can be modified or deleted only after the unlock
+    #                     <code>pending_unlock</code> - The retention rule has been unlocked but it is still within 
+    #             the unlock delay period. The retention rule can be modified or deleted only after the unlock 
     #             delay period has expired.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by
+    #                     <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by 
     #             any user with the required permissions.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>null</code> - The retention rule has never been locked. Once a retention rule has
-    #           been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states
+    #                     <code>null</code> - The retention rule has never been locked. Once a retention rule has 
+    #           been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states 
     #           only; it can never transition back to <code>null</code>.</p>
     #               </li>
     #            </ul>
@@ -627,15 +627,15 @@ module Aws::Rbin
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about the retention rule unlock delay. The unlock delay is the period after which
-    #       a retention rule can be modified or edited after it has been unlocked by a user with the required
+    # <p>Information about the retention rule unlock delay. The unlock delay is the period after which 
+    #       a retention rule can be modified or edited after it has been unlocked by a user with the required 
     #       permissions. The retention rule can't be modified or deleted during the unlock delay.</p>
     # @!attribute unlock_delay_value
     #   <p>The unlock delay period, measured in the unit specified for <b>
     #         UnlockDelayUnit</b>.</p>
     #   @return [Integer]
     # @!attribute unlock_delay_unit
-    #   <p>The unit of time in which to measure the unlock delay. Currently, the unlock delay can
+    #   <p>The unit of time in which to measure the unlock delay. Currently, the unlock delay can 
     #         be measured only in days.</p>
     #   @return [String]
     class UnlockDelay < Struct.new(
@@ -668,15 +668,15 @@ module Aws::Rbin
     #   <p>The resource type retained by the retention rule.</p>
     #   @return [String]
     # @!attribute retention_period
-    #   <p>Information about the retention period for which the retention rule is to
+    #   <p>Information about the retention period for which the retention rule is to 
     #     retain resources.</p>
     #   @return [Types::RetentionPeriod]
     # @!attribute resource_tags
-    #   <p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention
+    #   <p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention 
     #         rule.</p>
     #   @return [Array<Types::ResourceTag>]
     # @!attribute status
-    #   <p>The state of the retention rule. Only retention rules that are in the <code>available</code>
+    #   <p>The state of the retention rule. Only retention rules that are in the <code>available</code> 
     #         state retain resources.</p>
     #   @return [String]
     # @!attribute lock_configuration
@@ -691,33 +691,33 @@ module Aws::Rbin
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>pending_unlock</code> - The retention rule has been unlocked but it is still within
-    #             the unlock delay period. The retention rule can be modified or deleted only after the unlock
+    #                     <code>pending_unlock</code> - The retention rule has been unlocked but it is still within 
+    #             the unlock delay period. The retention rule can be modified or deleted only after the unlock 
     #             delay period has expired.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by
+    #                     <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by 
     #             any user with the required permissions.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>null</code> - The retention rule has never been locked. Once a retention rule has
-    #           been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states
+    #                     <code>null</code> - The retention rule has never been locked. Once a retention rule has 
+    #           been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states 
     #           only; it can never transition back to <code>null</code>.</p>
     #               </li>
     #            </ul>
     #   @return [String]
     # @!attribute lock_end_time
-    #   <p>The date and time at which the unlock delay is set to expire. Only returned
-    #         for retention rules that have been unlocked and that are still within the unlock
+    #   <p>The date and time at which the unlock delay is set to expire. Only returned 
+    #         for retention rules that have been unlocked and that are still within the unlock 
     #         delay period.</p>
     #   @return [Time]
     # @!attribute rule_arn
     #   <p>The Amazon Resource Name (ARN) of the retention rule.</p>
     #   @return [String]
     # @!attribute exclude_resource_tags
-    #   <p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be
+    #   <p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be 
     #   excluded, or ignored, by the retention rule.</p>
     #   @return [Array<Types::ResourceTag>]
     class UnlockRuleResponse < Struct.new(
@@ -764,7 +764,7 @@ module Aws::Rbin
     #   <p>The unique ID of the retention rule.</p>
     #   @return [String]
     # @!attribute retention_period
-    #   <p>Information about the retention period for which the retention rule is to
+    #   <p>Information about the retention period for which the retention rule is to 
     #     retain resources.</p>
     #   @return [Types::RetentionPeriod]
     # @!attribute description
@@ -772,23 +772,23 @@ module Aws::Rbin
     #   @return [String]
     # @!attribute resource_type
     #   <note>
-    #               <p>This parameter is currently not supported. You can't update a retention rule's resource type
+    #               <p>This parameter is currently not supported. You can't update a retention rule's resource type 
     #         after creation.</p>
     #            </note>
     #   @return [String]
     # @!attribute resource_tags
-    #   <p>[Tag-level retention rules only] Specifies the resource tags to use to identify resources that are to be retained by a
-    #     tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that
-    #     have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have
+    #   <p>[Tag-level retention rules only] Specifies the resource tags to use to identify resources that are to be retained by a 
+    #     tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that 
+    #     have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have 
     #     any of the specified tag key and value pairs, it is immediately deleted without being retained by the retention rule.</p>
     #            <p>You can add the same tag key and value pair to a maximum or five retention rules.</p>
-    #            <p>To create a Region-level retention rule, omit this parameter. A Region-level retention rule
-    #         does not have any resource tags specified. It retains all deleted resources of the specified
+    #            <p>To create a Region-level retention rule, omit this parameter. A Region-level retention rule 
+    #         does not have any resource tags specified. It retains all deleted resources of the specified 
     #         resource type in the Region in which the rule is created, even if the resources are not tagged.</p>
     #   @return [Array<Types::ResourceTag>]
     # @!attribute exclude_resource_tags
-    #   <p>[Region-level retention rules only] Specifies the exclusion tags to use to identify resources that are to be excluded,
-    #   or ignored, by a Region-level retention rule. Resources that have any of these tags are not retained by the retention rule
+    #   <p>[Region-level retention rules only] Specifies the exclusion tags to use to identify resources that are to be excluded, 
+    #   or ignored, by a Region-level retention rule. Resources that have any of these tags are not retained by the retention rule 
     #   upon deletion.</p>
     #            <p>You can't specify exclusion tags for tag-level retention rules.</p>
     #   @return [Array<Types::ResourceTag>]
@@ -809,7 +809,7 @@ module Aws::Rbin
     #   <p>The unique ID of the retention rule.</p>
     #   @return [String]
     # @!attribute retention_period
-    #   <p>Information about the retention period for which the retention rule is to
+    #   <p>Information about the retention period for which the retention rule is to 
     #     retain resources.</p>
     #   @return [Types::RetentionPeriod]
     # @!attribute description
@@ -819,11 +819,11 @@ module Aws::Rbin
     #   <p>The resource type retained by the retention rule.</p>
     #   @return [String]
     # @!attribute resource_tags
-    #   <p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention
+    #   <p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention 
     #         rule.</p>
     #   @return [Array<Types::ResourceTag>]
     # @!attribute status
-    #   <p>The state of the retention rule. Only retention rules that are in the <code>available</code>
+    #   <p>The state of the retention rule. Only retention rules that are in the <code>available</code> 
     #         state retain resources.</p>
     #   @return [String]
     # @!attribute lock_state
@@ -835,33 +835,33 @@ module Aws::Rbin
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>pending_unlock</code> - The retention rule has been unlocked but it is still within
-    #             the unlock delay period. The retention rule can be modified or deleted only after the unlock
+    #                     <code>pending_unlock</code> - The retention rule has been unlocked but it is still within 
+    #             the unlock delay period. The retention rule can be modified or deleted only after the unlock 
     #             delay period has expired.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by
+    #                     <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by 
     #             any user with the required permissions.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>null</code> - The retention rule has never been locked. Once a retention rule has
-    #           been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states
+    #                     <code>null</code> - The retention rule has never been locked. Once a retention rule has 
+    #           been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states 
     #           only; it can never transition back to <code>null</code>.</p>
     #               </li>
     #            </ul>
     #   @return [String]
     # @!attribute lock_end_time
-    #   <p>The date and time at which the unlock delay is set to expire. Only returned
-    #         for retention rules that have been unlocked and that are still within the unlock
+    #   <p>The date and time at which the unlock delay is set to expire. Only returned 
+    #         for retention rules that have been unlocked and that are still within the unlock 
     #         delay period.</p>
     #   @return [Time]
     # @!attribute rule_arn
     #   <p>The Amazon Resource Name (ARN) of the retention rule.</p>
     #   @return [String]
     # @!attribute exclude_resource_tags
-    #   <p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be
+    #   <p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be 
     #   excluded, or ignored, by the retention rule.</p>
     #   @return [Array<Types::ResourceTag>]
     class UpdateRuleResponse < Struct.new(

@@ -357,7 +357,7 @@ module Aws::SocialMessaging
     # @!attribute id
     #   <p>The unique identifier of your WhatsApp Business Account. WABA identifiers are formatted as
     #            <code>waba-01234567890123456789012345678901</code>. Use
-    #            <a href="https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_ListLinkedWhatsAppBusinessAccounts.html">ListLinkedWhatsAppBusinessAccounts</a> to list all WABAs
+    #            <a href="https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_ListLinkedWhatsAppBusinessAccounts.html">ListLinkedWhatsAppBusinessAccounts</a> to list all WABAs 
     #            and their details.</p>
     #   @return [String]
     class DisassociateWhatsAppBusinessAccountInput < Struct.new(
@@ -403,7 +403,7 @@ module Aws::SocialMessaging
     # @!attribute id
     #   <p>The unique identifier of the phone number. Phone number
     #            identifiers are formatted as <code>phone-number-id-01234567890123456789012345678901</code>.
-    #            Use <a href="https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html">GetLinkedWhatsAppBusinessAccount</a>
+    #            Use <a href="https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html">GetLinkedWhatsAppBusinessAccount</a> 
     #            to find a phone number's id.</p>
     #   @return [String]
     class GetLinkedWhatsAppBusinessAccountPhoneNumberInput < Struct.new(
@@ -1360,7 +1360,7 @@ module Aws::SocialMessaging
     # @!attribute origination_phone_number_id
     #   <p>The ID of the phone number to associate with the WhatsApp media file. The phone number
     #            identifiers are formatted as <code>phone-number-id-01234567890123456789012345678901</code>.
-    #            Use <a href="https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html">GetLinkedWhatsAppBusinessAccount</a>
+    #            Use <a href="https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html">GetLinkedWhatsAppBusinessAccount</a> 
     #            to find a phone number's id.</p>
     #   @return [String]
     # @!attribute source_s3_presigned_url
@@ -1479,9 +1479,9 @@ module Aws::SocialMessaging
     #   <p>The bucket name.</p>
     #   @return [String]
     # @!attribute key
-    #   <p>The S3 key prefix that defines the storage location of your media files. The prefix works like a folder path in S3,
+    #   <p>The S3 key prefix that defines the storage location of your media files. The prefix works like a folder path in S3, 
     #            and is combined with the WhatsApp mediaId to create the final file path.</p>
-    #            <p>For example, if a media file's WhatsApp mediaId is <code>123.ogg</code>, and the key is <code>audio/example.ogg</code>,
+    #            <p>For example, if a media file's WhatsApp mediaId is <code>123.ogg</code>, and the key is <code>audio/example.ogg</code>, 
     #            the final file path is <code>audio/example.ogg123.ogg</code>.</p>
     #            <p>For the same mediaId, a key of <code>audio/</code> results in the file path <code>audio/123.ogg</code>.</p>
     #   @return [String]
@@ -1878,8 +1878,8 @@ module Aws::SocialMessaging
     # @!attribute id
     #   <p>The unique identifier of the originating phone number associated with the media. Phone
     #            number identifiers are formatted as
-    #            <code>phone-number-id-01234567890123456789012345678901</code>. Use the
-    #            <a href="https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html">GetLinkedWhatsAppBusinessAccount</a>
+    #            <code>phone-number-id-01234567890123456789012345678901</code>. Use the 
+    #            <a href="https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html">GetLinkedWhatsAppBusinessAccount</a> 
     #            API action to find a phone number's id.</p>
     #   @return [String]
     # @!attribute two_factor_pin

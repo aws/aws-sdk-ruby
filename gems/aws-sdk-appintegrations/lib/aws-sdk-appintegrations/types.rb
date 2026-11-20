@@ -971,7 +971,7 @@ module Aws::AppIntegrations
     #   <p>A unique identifier for the Application.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -1003,7 +1003,7 @@ module Aws::AppIntegrations
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -1041,7 +1041,7 @@ module Aws::AppIntegrations
     #   <p>A unique identifier for the DataIntegration.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -1073,7 +1073,7 @@ module Aws::AppIntegrations
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -1107,7 +1107,7 @@ module Aws::AppIntegrations
     #   <p>The name of the event integration. </p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -1139,7 +1139,7 @@ module Aws::AppIntegrations
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results

@@ -817,15 +817,15 @@ module Aws::ConfigService
     #                <p>No permission to call <code>EnableAWSServiceAccess</code> API</p>
     #             </li>
     #             <li>
-    #                <p>The configuration aggregator cannot be updated because your Amazon Web Services Organization management account or the delegated administrator role changed.
+    #                <p>The configuration aggregator cannot be updated because your Amazon Web Services Organization management account or the delegated administrator role changed. 
     # 				Delete this aggregator and create a new one with the current Amazon Web Services Organization.</p>
     #             </li>
     #             <li>
-    #                <p>The configuration aggregator is associated with a previous Amazon Web Services Organization and Config cannot aggregate data with current Amazon Web Services Organization.
+    #                <p>The configuration aggregator is associated with a previous Amazon Web Services Organization and Config cannot aggregate data with current Amazon Web Services Organization. 
     # 				Delete this aggregator and create a new one with the current Amazon Web Services Organization.</p>
     #             </li>
     #             <li>
-    #                <p>You are not a registered delegated administrator for Config with permissions to call <code>ListDelegatedAdministrators</code> API.
+    #                <p>You are not a registered delegated administrator for Config with permissions to call <code>ListDelegatedAdministrators</code> API. 
     # 			Ensure that the management account registers delagated administrator for Config service principal name before the delegated administrator creates an aggregator.</p>
     #             </li>
     #          </ul>
@@ -978,7 +978,7 @@ module Aws::ConfigService
       end
     end
 
-    # <p>You have reached the limit of the number of tags you can use.
+    # <p>You have reached the limit of the number of tags you can use. 
     # 			For more information, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html">
     #                <b>Service Limits</b>
     #             </a> in the <i>Config Developer Guide</i>.</p>

@@ -64,7 +64,7 @@ module Aws::S3
     #               <p>Object Lambda access points are not supported by directory buckets.</p>
     #            </note>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -153,7 +153,7 @@ module Aws::S3
     end
 
     # <p>
-    #       You might receive this error for several reasons. For details, see the description of this API
+    #       You might receive this error for several reasons. For details, see the description of this API 
     #       operation.</p>
     class AccessDenied < Struct.new(
       nil,
@@ -356,12 +356,12 @@ module Aws::S3
     #   <p>The provisioning status of the annotation table. Possible values: <code>CREATING</code>, <code>BACKFILLING</code>, <code>ACTIVE</code>, <code>FAILED</code>.</p>
     #   @return [String]
     # @!attribute error
-    #   <p> If an S3 Metadata V1 <code>CreateBucketMetadataTableConfiguration</code> or V2
+    #   <p> If an S3 Metadata V1 <code>CreateBucketMetadataTableConfiguration</code> or V2 
     #         <code>CreateBucketMetadataConfiguration</code> request succeeds, but S3 Metadata was
     #         unable to create the table, this structure contains the error code and error message. </p>
     #            <note>
-    #               <p>If you created your S3 Metadata configuration before July 15, 2025, we recommend that you delete
-    #           and re-create your configuration by using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html">CreateBucketMetadataConfiguration</a> so that you can expire journal table records and create
+    #               <p>If you created your S3 Metadata configuration before July 15, 2025, we recommend that you delete 
+    #           and re-create your configuration by using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html">CreateBucketMetadataConfiguration</a> so that you can expire journal table records and create 
     #           a live inventory table.</p>
     #            </note>
     #   @return [Types::ErrorDetails]
@@ -978,7 +978,7 @@ module Aws::S3
     #               <p>Object Lambda access points are not supported by directory buckets.</p>
     #            </note>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -1109,7 +1109,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     # @!attribute sse_customer_key
-    #   <p>The server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum algorithm.
+    #   <p>The server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum algorithm. 
     #       For more information, see
     #       <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html">Protecting data using SSE-C keys</a> in the
     #       <i>Amazon S3 User Guide</i>.</p>
@@ -1118,7 +1118,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     # @!attribute sse_customer_key_md5
-    #   <p>The MD5 server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum
+    #   <p>The MD5 server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum 
     #       algorithm. For more information,
     #       see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html">Protecting data using SSE-C keys</a> in the
     #       <i>Amazon S3 User Guide</i>.</p>
@@ -1294,7 +1294,7 @@ module Aws::S3
     #           <code>Condition</code> is specified and sibling <code>HttpErrorCodeReturnedEquals</code> is not
     #         specified. If both conditions are specified, both must be true for the redirect to be applied.</p>
     #            <important>
-    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using 
     #            XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
     #               XML related object key constraints</a>.</p>
     #            </important>
@@ -1704,7 +1704,7 @@ module Aws::S3
     #            <p>The default value is <code>COPY</code>.</p>
     #            <note>
     #               <p>
-    #                  <b>Directory buckets</b> - For directory buckets in a <code>CopyObject</code> operation, only the empty tag-set is supported. Any requests that attempt to write non-empty tags into directory buckets will receive a <code>501 Not Implemented</code> status code.
+    #                  <b>Directory buckets</b> - For directory buckets in a <code>CopyObject</code> operation, only the empty tag-set is supported. Any requests that attempt to write non-empty tags into directory buckets will receive a <code>501 Not Implemented</code> status code. 
     #   When the destination bucket is a directory bucket, you will receive a <code>501 Not Implemented</code> response in any of the following situations:</p>
     #               <ul>
     #                  <li>
@@ -1798,8 +1798,8 @@ module Aws::S3
     #            </p>
     #            <ul>
     #               <li>
-    #                  <p>For directory buckets, there are only two supported options for server-side encryption: server-side encryption with Amazon S3 managed keys (SSE-S3) (<code>AES256</code>) and server-side encryption with KMS keys (SSE-KMS) (<code>aws:kms</code>). We recommend that the bucket's default encryption uses the desired encryption configuration and you don't override the bucket default encryption in your
-    #               <code>CreateSession</code> requests or <code>PUT</code> object requests. Then, new objects
+    #                  <p>For directory buckets, there are only two supported options for server-side encryption: server-side encryption with Amazon S3 managed keys (SSE-S3) (<code>AES256</code>) and server-side encryption with KMS keys (SSE-KMS) (<code>aws:kms</code>). We recommend that the bucket's default encryption uses the desired encryption configuration and you don't override the bucket default encryption in your 
+    #               <code>CreateSession</code> requests or <code>PUT</code> object requests. Then, new objects 
     #    are automatically encrypted with the desired encryption settings. For more
     #            information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html">Protecting data with server-side encryption</a> in the <i>Amazon S3 User Guide</i>. For more information about the encryption overriding behaviors in directory buckets, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-specifying-kms-encryption.html">Specifying server-side encryption with KMS for new object uploads</a>.</p>
     #               </li>
@@ -1836,7 +1836,7 @@ module Aws::S3
     #                  <li>
     #                     <p>
     #                        <b>Directory buckets </b> -
-    #               Directory buckets only support <code>EXPRESS_ONEZONE</code> (the S3 Express One Zone storage class) in Availability Zones and <code>ONEZONE_IA</code> (the S3 One Zone-Infrequent Access storage class) in Dedicated Local Zones.
+    #               Directory buckets only support <code>EXPRESS_ONEZONE</code> (the S3 Express One Zone storage class) in Availability Zones and <code>ONEZONE_IA</code> (the S3 One Zone-Infrequent Access storage class) in Dedicated Local Zones.  
     #   Unsupported storage class values won't write a destination object and will respond with the HTTP status code <code>400 Bad Request</code>.</p>
     #                  </li>
     #                  <li>
@@ -1911,12 +1911,12 @@ module Aws::S3
     #         <i>Amazon S3 User Guide</i>.</p>
     #            <p>
     #               <b>Directory buckets</b> -
-    #         To encrypt data using SSE-KMS, it's recommended to specify the
-    #   <code>x-amz-server-side-encryption</code> header to <code>aws:kms</code>. Then, the <code>x-amz-server-side-encryption-aws-kms-key-id</code> header implicitly uses
+    #         To encrypt data using SSE-KMS, it's recommended to specify the 
+    #   <code>x-amz-server-side-encryption</code> header to <code>aws:kms</code>. Then, the <code>x-amz-server-side-encryption-aws-kms-key-id</code> header implicitly uses 
     #   the bucket's default KMS customer managed key ID. If you want to explicitly set the <code>
-    #            x-amz-server-side-encryption-aws-kms-key-id</code> header, it must match the bucket's default customer managed key (using key ID or ARN, not alias). Your SSE-KMS configuration can only support 1 <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk">customer managed key</a> per directory bucket's lifetime.
-    #   The <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed key</a> (<code>aws/s3</code>) isn't supported.
-    #
+    #            x-amz-server-side-encryption-aws-kms-key-id</code> header, it must match the bucket's default customer managed key (using key ID or ARN, not alias). Your SSE-KMS configuration can only support 1 <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk">customer managed key</a> per directory bucket's lifetime. 
+    #   The <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed key</a> (<code>aws/s3</code>) isn't supported. 
+    #                               
     #    Incorrect key specification results in an HTTP <code>400 Bad Request</code> error. </p>
     #   @return [String]
     # @!attribute ssekms_encryption_context
@@ -1944,7 +1944,7 @@ module Aws::S3
     #            <note>
     #               <p>
     #                  <b>Directory buckets</b> -
-    #           S3 Bucket Keys aren't supported, when you copy SSE-KMS encrypted objects from general purpose buckets
+    #           S3 Bucket Keys aren't supported, when you copy SSE-KMS encrypted objects from general purpose buckets  
     #   to directory buckets, from directory buckets to general purpose buckets, or between directory buckets, through <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a>. In this case, Amazon S3 makes a call to KMS every time a copy request is made for a KMS-encrypted object.</p>
     #            </note>
     #   @return [Boolean]
@@ -1996,7 +1996,7 @@ module Aws::S3
     #            <p>The default value is the empty value.</p>
     #            <note>
     #               <p>
-    #                  <b>Directory buckets</b> - For directory buckets in a <code>CopyObject</code> operation, only the empty tag-set is supported. Any requests that attempt to write non-empty tags into directory buckets will receive a <code>501 Not Implemented</code> status code.
+    #                  <b>Directory buckets</b> - For directory buckets in a <code>CopyObject</code> operation, only the empty tag-set is supported. Any requests that attempt to write non-empty tags into directory buckets will receive a <code>501 Not Implemented</code> status code. 
     #   When the destination bucket is a directory bucket, you will receive a <code>501 Not Implemented</code> response in any of the following situations:</p>
     #               <ul>
     #                  <li>
@@ -2695,7 +2695,7 @@ module Aws::S3
     #               <p>Object Lambda access points are not supported by directory buckets.</p>
     #            </note>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -3008,21 +3008,21 @@ module Aws::S3
     #               <li>
     #                  <p>
     #                     <b>Directory buckets </b> -
-    #             For directory buckets, there are only two supported options for server-side encryption: server-side encryption with Amazon S3 managed keys (SSE-S3) (<code>AES256</code>) and server-side encryption with KMS keys (SSE-KMS) (<code>aws:kms</code>). We recommend that the bucket's default encryption uses the desired encryption configuration and you don't override the bucket default encryption in your
-    #               <code>CreateSession</code> requests or <code>PUT</code> object requests. Then, new objects
+    #             For directory buckets, there are only two supported options for server-side encryption: server-side encryption with Amazon S3 managed keys (SSE-S3) (<code>AES256</code>) and server-side encryption with KMS keys (SSE-KMS) (<code>aws:kms</code>). We recommend that the bucket's default encryption uses the desired encryption configuration and you don't override the bucket default encryption in your 
+    #               <code>CreateSession</code> requests or <code>PUT</code> object requests. Then, new objects 
     #    are automatically encrypted with the desired encryption settings. For more
     #            information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html">Protecting data with server-side encryption</a> in the <i>Amazon S3 User Guide</i>. For more information about the encryption overriding behaviors in directory buckets, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-specifying-kms-encryption.html">Specifying server-side encryption with KMS for new object uploads</a>. </p>
-    #                  <p>In the Zonal endpoint API calls (except <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html">UploadPartCopy</a>) using the REST API, the encryption request headers must match the encryption settings that are specified in the <code>CreateSession</code> request.
-    #                               You can't override the values of the encryption settings (<code>x-amz-server-side-encryption</code>, <code>x-amz-server-side-encryption-aws-kms-key-id</code>, <code>x-amz-server-side-encryption-context</code>, and <code>x-amz-server-side-encryption-bucket-key-enabled</code>) that are specified in the <code>CreateSession</code> request.
-    #                               You don't need to explicitly specify these encryption settings values in Zonal endpoint API calls, and
-    #                               Amazon S3 will use the encryption settings values from the <code>CreateSession</code> request to protect new objects in the directory bucket.
+    #                  <p>In the Zonal endpoint API calls (except <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html">UploadPartCopy</a>) using the REST API, the encryption request headers must match the encryption settings that are specified in the <code>CreateSession</code> request. 
+    #                               You can't override the values of the encryption settings (<code>x-amz-server-side-encryption</code>, <code>x-amz-server-side-encryption-aws-kms-key-id</code>, <code>x-amz-server-side-encryption-context</code>, and <code>x-amz-server-side-encryption-bucket-key-enabled</code>) that are specified in the <code>CreateSession</code> request. 
+    #                               You don't need to explicitly specify these encryption settings values in Zonal endpoint API calls, and   
+    #                               Amazon S3 will use the encryption settings values from the <code>CreateSession</code> request to protect new objects in the directory bucket. 
     #                              </p>
     #                  <note>
-    #                     <p>When you use the CLI or the Amazon Web Services SDKs, for <code>CreateSession</code>, the session token refreshes automatically to avoid service interruptions when a session expires. The CLI or the Amazon Web Services SDKs use the bucket's default encryption configuration for the
-    #                               <code>CreateSession</code> request. It's not supported to override the encryption settings values in the <code>CreateSession</code> request.
-    #                               So in the Zonal endpoint API calls (except <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html">UploadPartCopy</a>),
+    #                     <p>When you use the CLI or the Amazon Web Services SDKs, for <code>CreateSession</code>, the session token refreshes automatically to avoid service interruptions when a session expires. The CLI or the Amazon Web Services SDKs use the bucket's default encryption configuration for the 
+    #                               <code>CreateSession</code> request. It's not supported to override the encryption settings values in the <code>CreateSession</code> request. 
+    #                               So in the Zonal endpoint API calls (except <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html">UploadPartCopy</a>), 
     #             the encryption request headers must match the default encryption configuration of the directory bucket.
-    #
+    #   
     #   </p>
     #                  </note>
     #               </li>
@@ -3089,18 +3089,18 @@ module Aws::S3
     #   <p>Specifies the KMS key ID (Key ID, Key ARN, or Key Alias) to use for object encryption. If the KMS key doesn't exist in the same
     #            account that's issuing the command, you must use the full Key ARN not the Key ID.</p>
     #            <p>
-    #               <b>General purpose buckets</b> - If you specify <code>x-amz-server-side-encryption</code> with <code>aws:kms</code> or <code>aws:kms:dsse</code>, this header specifies the ID (Key ID, Key ARN, or Key Alias) of the KMS
+    #               <b>General purpose buckets</b> - If you specify <code>x-amz-server-side-encryption</code> with <code>aws:kms</code> or <code>aws:kms:dsse</code>, this header specifies the ID (Key ID, Key ARN, or Key Alias) of the KMS 
     #            key to use. If you specify
     #            <code>x-amz-server-side-encryption:aws:kms</code> or
     #            <code>x-amz-server-side-encryption:aws:kms:dsse</code>, but do not provide <code>x-amz-server-side-encryption-aws-kms-key-id</code>, Amazon S3 uses the Amazon Web Services managed key
     #            (<code>aws/s3</code>) to protect the data.</p>
     #            <p>
-    #               <b>Directory buckets</b> - To encrypt data using SSE-KMS, it's recommended to specify the
-    #   <code>x-amz-server-side-encryption</code> header to <code>aws:kms</code>. Then, the <code>x-amz-server-side-encryption-aws-kms-key-id</code> header implicitly uses
+    #               <b>Directory buckets</b> - To encrypt data using SSE-KMS, it's recommended to specify the 
+    #   <code>x-amz-server-side-encryption</code> header to <code>aws:kms</code>. Then, the <code>x-amz-server-side-encryption-aws-kms-key-id</code> header implicitly uses 
     #   the bucket's default KMS customer managed key ID. If you want to explicitly set the <code>
-    #            x-amz-server-side-encryption-aws-kms-key-id</code> header, it must match the bucket's default customer managed key (using key ID or ARN, not alias). Your SSE-KMS configuration can only support 1 <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk">customer managed key</a> per directory bucket's lifetime.
-    #   The <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed key</a> (<code>aws/s3</code>) isn't supported.
-    #
+    #            x-amz-server-side-encryption-aws-kms-key-id</code> header, it must match the bucket's default customer managed key (using key ID or ARN, not alias). Your SSE-KMS configuration can only support 1 <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk">customer managed key</a> per directory bucket's lifetime. 
+    #   The <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed key</a> (<code>aws/s3</code>) isn't supported. 
+    #                               
     #    Incorrect key specification results in an HTTP <code>400 Bad Request</code> error. </p>
     #   @return [String]
     # @!attribute ssekms_encryption_context
@@ -3118,8 +3118,8 @@ module Aws::S3
     #            SSE-KMS. Also, specifying this header with a PUT action doesn't affect bucket-level settings for S3
     #            Bucket Key.</p>
     #            <p>
-    #               <b>Directory buckets</b> - S3 Bucket Keys are always enabled for <code>GET</code> and <code>PUT</code> operations in a directory bucket and can’t be disabled. S3 Bucket Keys aren't supported, when you copy SSE-KMS encrypted objects from general purpose buckets
-    #   to directory buckets, from directory buckets to general purpose buckets, or between directory buckets, through <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a>, <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html">UploadPartCopy</a>, <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-objects-Batch-Ops">the Copy operation in Batch Operations</a>, or
+    #               <b>Directory buckets</b> - S3 Bucket Keys are always enabled for <code>GET</code> and <code>PUT</code> operations in a directory bucket and can’t be disabled. S3 Bucket Keys aren't supported, when you copy SSE-KMS encrypted objects from general purpose buckets  
+    #   to directory buckets, from directory buckets to general purpose buckets, or between directory buckets, through <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a>, <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html">UploadPartCopy</a>, <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-objects-Batch-Ops">the Copy operation in Batch Operations</a>, or 
     #                               <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-import-job">the import jobs</a>. In this case, Amazon S3 makes a call to KMS every time a copy request is made for a KMS-encrypted object.</p>
     #   @return [Boolean]
     # @!attribute request_payer
@@ -3239,14 +3239,14 @@ module Aws::S3
     #            </note>
     #   @return [String]
     # @!attribute ssekms_key_id
-    #   <p>If you specify <code>x-amz-server-side-encryption</code> with <code>aws:kms</code>, this header indicates the ID of the KMS
+    #   <p>If you specify <code>x-amz-server-side-encryption</code> with <code>aws:kms</code>, this header indicates the ID of the KMS 
     #            symmetric encryption customer managed key that was used for object encryption.</p>
     #   @return [String]
     # @!attribute ssekms_encryption_context
     #   <p>If present, indicates the Amazon Web Services KMS Encryption Context to use for object encryption. The value of
-    #            this header is a Base64 encoded string of a UTF-8 encoded JSON, which contains the encryption context as key-value pairs.
+    #            this header is a Base64 encoded string of a UTF-8 encoded JSON, which contains the encryption context as key-value pairs. 
     #            This value is stored as object metadata and automatically gets
-    #            passed on to Amazon Web Services KMS for future <code>GetObject</code>
+    #            passed on to Amazon Web Services KMS for future <code>GetObject</code> 
     #            operations on this object.</p>
     #   @return [String]
     # @!attribute bucket_key_enabled
@@ -3269,10 +3269,10 @@ module Aws::S3
     end
 
     # @!attribute session_mode
-    #   <p>Specifies the mode of the session that will be created, either <code>ReadWrite</code> or
-    #           <code>ReadOnly</code>. If no session mode is specified, the default behavior attempts to create
-    #           a session with the maximum allowable privilege. It will first attempt to create a
-    #           <code>ReadWrite</code> session, and if that is not allowed by permissions, it will attempt to create a
+    #   <p>Specifies the mode of the session that will be created, either <code>ReadWrite</code> or 
+    #           <code>ReadOnly</code>. If no session mode is specified, the default behavior attempts to create 
+    #           a session with the maximum allowable privilege. It will first attempt to create a 
+    #           <code>ReadWrite</code> session, and if that is not allowed by permissions, it will attempt to create a 
     #           <code>ReadOnly</code> session. If neither session type is allowed, the request will return an Access Denied error. A
     #           <code>ReadWrite</code> session is capable of executing all the Zonal endpoint API operations on a directory bucket. A
     #           <code>ReadOnly</code> session is constrained to execute the following Zonal endpoint API operations:
@@ -3285,7 +3285,7 @@ module Aws::S3
     #   @return [String]
     # @!attribute server_side_encryption
     #   <p>The server-side encryption algorithm to use when you store objects in the directory bucket.</p>
-    #            <p>For directory buckets, there are only two supported options for server-side encryption: server-side encryption with Amazon S3 managed keys (SSE-S3) (<code>AES256</code>) and server-side encryption with KMS keys (SSE-KMS) (<code>aws:kms</code>). By default, Amazon S3 encrypts data with SSE-S3.
+    #            <p>For directory buckets, there are only two supported options for server-side encryption: server-side encryption with Amazon S3 managed keys (SSE-S3) (<code>AES256</code>) and server-side encryption with KMS keys (SSE-KMS) (<code>aws:kms</code>). By default, Amazon S3 encrypts data with SSE-S3. 
     #            For more
     #            information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html">Protecting data with server-side encryption</a> in the <i>Amazon S3 User Guide</i>.</p>
     #            <p>
@@ -3297,16 +3297,16 @@ module Aws::S3
     #   @return [String]
     # @!attribute ssekms_key_id
     #   <p>If you specify <code>x-amz-server-side-encryption</code> with <code>aws:kms</code>, you must specify the <code>
-    #            x-amz-server-side-encryption-aws-kms-key-id</code> header with the ID (Key ID or Key ARN) of the KMS
+    #            x-amz-server-side-encryption-aws-kms-key-id</code> header with the ID (Key ID or Key ARN) of the KMS 
     #            symmetric encryption customer managed key to use. Otherwise, you get an HTTP <code>400 Bad Request</code> error. Only use the key ID or key ARN. The key alias format of the KMS key isn't supported. Also, if the KMS key doesn't exist in the same
     #            account that't issuing the command, you must use the full Key ARN not the Key ID. </p>
-    #            <p>Your SSE-KMS configuration can only support 1 <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk">customer managed key</a> per directory bucket's lifetime.
-    #   The <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed key</a> (<code>aws/s3</code>) isn't supported.
+    #            <p>Your SSE-KMS configuration can only support 1 <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk">customer managed key</a> per directory bucket's lifetime. 
+    #   The <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed key</a> (<code>aws/s3</code>) isn't supported. 
     #   </p>
     #   @return [String]
     # @!attribute ssekms_encryption_context
     #   <p>Specifies the Amazon Web Services KMS Encryption Context as an additional encryption context to use for object encryption. The value of
-    #            this header is a Base64 encoded string of a UTF-8 encoded JSON, which contains the encryption context as key-value pairs.
+    #            this header is a Base64 encoded string of a UTF-8 encoded JSON, which contains the encryption context as key-value pairs. 
     #            This value is stored as object metadata and automatically gets passed on
     #            to Amazon Web Services KMS for future <code>GetObject</code> operations on
     #            this object.</p>
@@ -3318,8 +3318,8 @@ module Aws::S3
     # @!attribute bucket_key_enabled
     #   <p>Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with
     #            server-side encryption using KMS keys (SSE-KMS).</p>
-    #            <p>S3 Bucket Keys are always enabled for <code>GET</code> and <code>PUT</code> operations in a directory bucket and can’t be disabled. S3 Bucket Keys aren't supported, when you copy SSE-KMS encrypted objects from general purpose buckets
-    #   to directory buckets, from directory buckets to general purpose buckets, or between directory buckets, through <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a>, <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html">UploadPartCopy</a>, <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-objects-Batch-Ops">the Copy operation in Batch Operations</a>, or
+    #            <p>S3 Bucket Keys are always enabled for <code>GET</code> and <code>PUT</code> operations in a directory bucket and can’t be disabled. S3 Bucket Keys aren't supported, when you copy SSE-KMS encrypted objects from general purpose buckets  
+    #   to directory buckets, from directory buckets to general purpose buckets, or between directory buckets, through <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a>, <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html">UploadPartCopy</a>, <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-objects-Batch-Ops">the Copy operation in Batch Operations</a>, or 
     #                               <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-import-job">the import jobs</a>. In this case, Amazon S3 makes a call to KMS every time a copy request is made for a KMS-encrypted object.</p>
     #   @return [Boolean]
     class CreateSessionRequest < Struct.new(
@@ -3446,7 +3446,7 @@ module Aws::S3
     # @!attribute expected_bucket_owner
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #            <note>
-    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code
+    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code 
     #   <code>501 Not Implemented</code>.</p>
     #            </note>
     #   @return [String]
@@ -3493,7 +3493,7 @@ module Aws::S3
     # @!attribute expected_bucket_owner
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #            <note>
-    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code
+    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code 
     #   <code>501 Not Implemented</code>.</p>
     #            </note>
     #   @return [String]
@@ -3578,7 +3578,7 @@ module Aws::S3
     # @!attribute expected_bucket_owner
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #            <note>
-    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code
+    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code 
     #   <code>501 Not Implemented</code>.</p>
     #            </note>
     #   @return [String]
@@ -3619,7 +3619,7 @@ module Aws::S3
     # @!attribute expected_bucket_owner
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #            <note>
-    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code
+    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code 
     #   <code>501 Not Implemented</code>.</p>
     #            </note>
     #   @return [String]
@@ -3659,7 +3659,7 @@ module Aws::S3
     # @!attribute expected_bucket_owner
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #            <note>
-    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code
+    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code 
     #   <code>501 Not Implemented</code>.</p>
     #            </note>
     #   @return [String]
@@ -3868,7 +3868,7 @@ module Aws::S3
     #               <p>Object Lambda access points are not supported by directory buckets.</p>
     #            </note>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -3911,7 +3911,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     # @!attribute if_match
-    #   <p>Deletes the object if the ETag (entity tag) value provided during the delete operation matches the ETag of the object in S3.
+    #   <p>Deletes the object if the ETag (entity tag) value provided during the delete operation matches the ETag of the object in S3. 
     #         If the ETag values do not match, the operation returns a <code>412 Precondition Failed</code> error.</p>
     #            <p>Expects the ETag value as a string. <code>If-Match</code> does accept a string value of an '*' (asterisk) character to denote a match of any ETag.</p>
     #            <p>For more information about conditional requests, see <a href="https://tools.ietf.org/html/rfc7232">RFC 7232</a>.</p>
@@ -3972,7 +3972,7 @@ module Aws::S3
     #            <p>
     #               <b>Access points</b> - When you use this action with an access point for general purpose buckets, you must provide the alias of the access point in place of the bucket name or specify the access point ARN. When you use this action with an access point for directory buckets, you must provide the access point name in place of the bucket name. When using the access point ARN, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -4037,7 +4037,7 @@ module Aws::S3
     #               <p>Object Lambda access points are not supported by directory buckets.</p>
     #            </note>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -4274,10 +4274,10 @@ module Aws::S3
     #     </p>
     # @!attribute table_bucket_type
     #   <p>
-    #         The type of the table bucket where the metadata configuration is stored. The <code>aws</code>
-    #         value indicates an Amazon Web Services managed table bucket, and the <code>customer</code> value indicates a
-    #         customer-managed table bucket. V2 metadata configurations are stored in Amazon Web Services managed table
-    #         buckets, and V1 metadata configurations are stored in customer-managed table buckets.
+    #         The type of the table bucket where the metadata configuration is stored. The <code>aws</code> 
+    #         value indicates an Amazon Web Services managed table bucket, and the <code>customer</code> value indicates a 
+    #         customer-managed table bucket. V2 metadata configurations are stored in Amazon Web Services managed table 
+    #         buckets, and V1 metadata configurations are stored in customer-managed table buckets. 
     #       </p>
     #   @return [String]
     # @!attribute table_bucket_arn
@@ -4287,7 +4287,7 @@ module Aws::S3
     #   @return [String]
     # @!attribute table_namespace
     #   <p>
-    #         The namespace in the table bucket where the metadata tables for a metadata configuration are
+    #         The namespace in the table bucket where the metadata tables for a metadata configuration are 
     #         stored.
     #       </p>
     #   @return [String]
@@ -6229,12 +6229,12 @@ module Aws::S3
       include ::Smithy::Schema::Structure
     end
 
-    # <p> If an S3 Metadata V1 <code>CreateBucketMetadataTableConfiguration</code> or V2
+    # <p> If an S3 Metadata V1 <code>CreateBucketMetadataTableConfiguration</code> or V2 
     #       <code>CreateBucketMetadataConfiguration</code> request succeeds, but S3 Metadata was
     #       unable to create the table, this structure contains the error code and error message. </p>
     #          <note>
-    #             <p>If you created your S3 Metadata configuration before July 15, 2025, we recommend that you delete
-    #         and re-create your configuration by using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html">CreateBucketMetadataConfiguration</a> so that you can expire journal table records and create
+    #             <p>If you created your S3 Metadata configuration before July 15, 2025, we recommend that you delete 
+    #         and re-create your configuration by using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html">CreateBucketMetadataConfiguration</a> so that you can expire journal table records and create 
     #         a live inventory table.</p>
     #          </note>
     # @!attribute error_code
@@ -6290,15 +6290,15 @@ module Aws::S3
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>AccessDeniedCreatingResources</code> - You don't have sufficient permissions to create
-    #             the required resources. Make sure that you have <code>s3tables:CreateTableBucket</code>,
-    #             <code>s3tables:CreateNamespace</code>, <code>s3tables:CreateTable</code>,
-    #             <code>s3tables:GetTable</code>, <code>s3tables:PutTablePolicy</code>,
-    #             <code>kms:DescribeKey</code>, and <code>s3tables:PutTableEncryption</code> permissions.
-    #             Additionally, ensure that the KMS key used to encrypt the table still exists, is active and
-    #             has a resource policy granting access to the S3 service principals
-    #             '<code>maintenance.s3tables.amazonaws.com</code>' and '<code>metadata.s3.amazonaws.com</code>'.
-    #             To create a new metadata table, you must delete the metadata configuration for this bucket, and
+    #                     <code>AccessDeniedCreatingResources</code> - You don't have sufficient permissions to create 
+    #             the required resources. Make sure that you have <code>s3tables:CreateTableBucket</code>, 
+    #             <code>s3tables:CreateNamespace</code>, <code>s3tables:CreateTable</code>, 
+    #             <code>s3tables:GetTable</code>, <code>s3tables:PutTablePolicy</code>, 
+    #             <code>kms:DescribeKey</code>, and <code>s3tables:PutTableEncryption</code> permissions. 
+    #             Additionally, ensure that the KMS key used to encrypt the table still exists, is active and 
+    #             has a resource policy granting access to the S3 service principals 
+    #             '<code>maintenance.s3tables.amazonaws.com</code>' and '<code>metadata.s3.amazonaws.com</code>'. 
+    #             To create a new metadata table, you must delete the metadata configuration for this bucket, and 
     #             then create a new metadata configuration. </p>
     #               </li>
     #               <li>
@@ -6322,22 +6322,22 @@ module Aws::S3
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>JournalTableAlreadyExists</code> - A journal table already exists in the Amazon Web Services managed table bucket's
+    #                     <code>JournalTableAlreadyExists</code> - A journal table already exists in the Amazon Web Services managed table bucket's 
     #             namespace. Delete the journal table, and then try again. To create a new metadata table, you must delete
     #             the metadata configuration for this bucket, and then create a new metadata configuration.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>InventoryTableAlreadyExists</code> - An inventory table already exists in the Amazon Web Services managed table
+    #                     <code>InventoryTableAlreadyExists</code> - An inventory table already exists in the Amazon Web Services managed table 
     #             bucket's namespace. Delete the inventory table, and then try again. To create a new metadata table, you must delete
     #             the metadata configuration for this bucket, and then create a new metadata configuration.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>JournalTableNotAvailable</code> - The journal table that the inventory table relies on
-    #             has a <code>FAILED</code> status. An inventory table requires a journal table with an
-    #             <code>ACTIVE</code> status. To create a new journal or inventory table, you must delete the metadata
-    #             configuration for this bucket, along with any journal or inventory tables, and then create a new
+    #                     <code>JournalTableNotAvailable</code> - The journal table that the inventory table relies on 
+    #             has a <code>FAILED</code> status. An inventory table requires a journal table with an 
+    #             <code>ACTIVE</code> status. To create a new journal or inventory table, you must delete the metadata 
+    #             configuration for this bucket, along with any journal or inventory tables, and then create a new 
     #             metadata configuration.</p>
     #               </li>
     #               <li>
@@ -6399,15 +6399,15 @@ module Aws::S3
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>AccessDeniedCreatingResources</code> - You don't have sufficient permissions to create
-    #             the required resources. Make sure that you have <code>s3tables:CreateTableBucket</code>,
-    #             <code>s3tables:CreateNamespace</code>, <code>s3tables:CreateTable</code>,
-    #             <code>s3tables:GetTable</code>, <code>s3tables:PutTablePolicy</code>,
-    #             <code>kms:DescribeKey</code>, and <code>s3tables:PutTableEncryption</code> permissions.
-    #             Additionally, ensure that the KMS key used to encrypt the table still exists, is active and
-    #             has a resource policy granting access to the S3 service principals
-    #             '<code>maintenance.s3tables.amazonaws.com</code>' and '<code>metadata.s3.amazonaws.com</code>'.
-    #             To create a new metadata table, you must delete the metadata configuration for this bucket, and
+    #                     <code>AccessDeniedCreatingResources</code> - You don't have sufficient permissions to create 
+    #             the required resources. Make sure that you have <code>s3tables:CreateTableBucket</code>, 
+    #             <code>s3tables:CreateNamespace</code>, <code>s3tables:CreateTable</code>, 
+    #             <code>s3tables:GetTable</code>, <code>s3tables:PutTablePolicy</code>, 
+    #             <code>kms:DescribeKey</code>, and <code>s3tables:PutTableEncryption</code> permissions. 
+    #             Additionally, ensure that the KMS key used to encrypt the table still exists, is active and 
+    #             has a resource policy granting access to the S3 service principals 
+    #             '<code>maintenance.s3tables.amazonaws.com</code>' and '<code>metadata.s3.amazonaws.com</code>'. 
+    #             To create a new metadata table, you must delete the metadata configuration for this bucket, and 
     #             then create a new metadata configuration. </p>
     #               </li>
     #               <li>
@@ -6431,22 +6431,22 @@ module Aws::S3
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>JournalTableAlreadyExists</code> - A journal table already exists in the Amazon Web Services managed table bucket's
+    #                     <code>JournalTableAlreadyExists</code> - A journal table already exists in the Amazon Web Services managed table bucket's 
     #             namespace. Delete the journal table, and then try again. To create a new metadata table, you must delete
     #             the metadata configuration for this bucket, and then create a new metadata configuration.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>InventoryTableAlreadyExists</code> - An inventory table already exists in the Amazon Web Services managed table
+    #                     <code>InventoryTableAlreadyExists</code> - An inventory table already exists in the Amazon Web Services managed table 
     #             bucket's namespace. Delete the inventory table, and then try again. To create a new metadata table, you must delete
     #             the metadata configuration for this bucket, and then create a new metadata configuration.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>JournalTableNotAvailable</code> - The journal table that the inventory table relies on
-    #             has a <code>FAILED</code> status. An inventory table requires a journal table with an
-    #             <code>ACTIVE</code> status. To create a new journal or inventory table, you must delete the metadata
-    #             configuration for this bucket, along with any journal or inventory tables, and then create a new
+    #                     <code>JournalTableNotAvailable</code> - The journal table that the inventory table relies on 
+    #             has a <code>FAILED</code> status. An inventory table requires a journal table with an 
+    #             <code>ACTIVE</code> status. To create a new journal or inventory table, you must delete the metadata 
+    #             configuration for this bucket, along with any journal or inventory tables, and then create a new 
     #             metadata configuration.</p>
     #               </li>
     #               <li>
@@ -6468,7 +6468,7 @@ module Aws::S3
     # @!attribute key
     #   <p>The object key name to use when a 4XX class error occurs.</p>
     #            <important>
-    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using 
     #            XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
     #               XML related object key constraints</a>.</p>
     #            </important>
@@ -6638,8 +6638,8 @@ module Aws::S3
     # @!attribute bucket
     #   <p>Specifies the S3 bucket whose ACL is being requested.</p>
     #            <p>When you use this API operation with an access point, provide the alias of the access point in place of the bucket name.</p>
-    #            <p>When you use this API operation with an Object Lambda access point, provide the alias of the Object Lambda access point in place of the bucket name.
-    #   If the Object Lambda access point alias in a request is not valid, the error code <code>InvalidAccessPointAliasError</code> is returned.
+    #            <p>When you use this API operation with an Object Lambda access point, provide the alias of the Object Lambda access point in place of the bucket name. 
+    #   If the Object Lambda access point alias in a request is not valid, the error code <code>InvalidAccessPointAliasError</code> is returned. 
     #   For more information about <code>InvalidAccessPointAliasError</code>, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList">List of
     #               Error Codes</a>.</p>
     #   @return [String]
@@ -6700,8 +6700,8 @@ module Aws::S3
     # @!attribute bucket
     #   <p>The bucket name for which to get the cors configuration.</p>
     #            <p>When you use this API operation with an access point, provide the alias of the access point in place of the bucket name.</p>
-    #            <p>When you use this API operation with an Object Lambda access point, provide the alias of the Object Lambda access point in place of the bucket name.
-    #   If the Object Lambda access point alias in a request is not valid, the error code <code>InvalidAccessPointAliasError</code> is returned.
+    #            <p>When you use this API operation with an Object Lambda access point, provide the alias of the Object Lambda access point in place of the bucket name. 
+    #   If the Object Lambda access point alias in a request is not valid, the error code <code>InvalidAccessPointAliasError</code> is returned. 
     #   For more information about <code>InvalidAccessPointAliasError</code>, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList">List of
     #               Error Codes</a>.</p>
     #   @return [String]
@@ -6740,7 +6740,7 @@ module Aws::S3
     # @!attribute expected_bucket_owner
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #            <note>
-    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code
+    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code 
     #   <code>501 Not Implemented</code>.</p>
     #            </note>
     #   @return [String]
@@ -6809,7 +6809,7 @@ module Aws::S3
     # @!attribute expected_bucket_owner
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #            <note>
-    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code
+    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code 
     #   <code>501 Not Implemented</code>.</p>
     #            </note>
     #   @return [String]
@@ -6895,8 +6895,8 @@ module Aws::S3
     # @!attribute bucket
     #   <p>The name of the bucket for which to get the location.</p>
     #            <p>When you use this API operation with an access point, provide the alias of the access point in place of the bucket name.</p>
-    #            <p>When you use this API operation with an Object Lambda access point, provide the alias of the Object Lambda access point in place of the bucket name.
-    #   If the Object Lambda access point alias in a request is not valid, the error code <code>InvalidAccessPointAliasError</code> is returned.
+    #            <p>When you use this API operation with an Object Lambda access point, provide the alias of the Object Lambda access point in place of the bucket name. 
+    #   If the Object Lambda access point alias in a request is not valid, the error code <code>InvalidAccessPointAliasError</code> is returned. 
     #   For more information about <code>InvalidAccessPointAliasError</code>, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList">List of
     #               Error Codes</a>.</p>
     #   @return [String]
@@ -7020,8 +7020,8 @@ module Aws::S3
 
     # <p> The V1 S3 Metadata configuration for a general purpose bucket. </p>
     #          <note>
-    #             <p>If you created your S3 Metadata configuration before July 15, 2025, we recommend that you delete
-    #         and re-create your configuration by using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html">CreateBucketMetadataConfiguration</a> so that you can expire journal table records and create
+    #             <p>If you created your S3 Metadata configuration before July 15, 2025, we recommend that you delete 
+    #         and re-create your configuration by using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html">CreateBucketMetadataConfiguration</a> so that you can expire journal table records and create 
     #         a live inventory table.</p>
     #          </note>
     # @!attribute metadata_table_configuration_result
@@ -7088,7 +7088,7 @@ module Aws::S3
     # @!attribute expected_bucket_owner
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #            <note>
-    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code
+    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code 
     #   <code>501 Not Implemented</code>.</p>
     #            </note>
     #   @return [String]
@@ -7132,8 +7132,8 @@ module Aws::S3
     # @!attribute bucket
     #   <p>The name of the bucket for which to get the notification configuration.</p>
     #            <p>When you use this API operation with an access point, provide the alias of the access point in place of the bucket name.</p>
-    #            <p>When you use this API operation with an Object Lambda access point, provide the alias of the Object Lambda access point in place of the bucket name.
-    #   If the Object Lambda access point alias in a request is not valid, the error code <code>InvalidAccessPointAliasError</code> is returned.
+    #            <p>When you use this API operation with an Object Lambda access point, provide the alias of the Object Lambda access point in place of the bucket name. 
+    #   If the Object Lambda access point alias in a request is not valid, the error code <code>InvalidAccessPointAliasError</code> is returned. 
     #   For more information about <code>InvalidAccessPointAliasError</code>, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList">List of
     #               Error Codes</a>.</p>
     #   @return [String]
@@ -7198,8 +7198,8 @@ module Aws::S3
     #            <p>
     #               <b>Access points</b> - When you use this API operation with an access point, provide the alias of the access point in place of the bucket name.</p>
     #            <p>
-    #               <b>Object Lambda access points</b> - When you use this API operation with an Object Lambda access point, provide the alias of the Object Lambda access point in place of the bucket name.
-    #   If the Object Lambda access point alias in a request is not valid, the error code <code>InvalidAccessPointAliasError</code> is returned.
+    #               <b>Object Lambda access points</b> - When you use this API operation with an Object Lambda access point, provide the alias of the Object Lambda access point in place of the bucket name. 
+    #   If the Object Lambda access point alias in a request is not valid, the error code <code>InvalidAccessPointAliasError</code> is returned. 
     #   For more information about <code>InvalidAccessPointAliasError</code>, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList">List of
     #               Error Codes</a>.</p>
     #            <note>
@@ -7209,7 +7209,7 @@ module Aws::S3
     # @!attribute expected_bucket_owner
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #            <note>
-    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code
+    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code 
     #   <code>501 Not Implemented</code>.</p>
     #            </note>
     #   @return [String]
@@ -7729,7 +7729,7 @@ module Aws::S3
     #               <p>Object Lambda access points are not supported by directory buckets.</p>
     #            </note>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -8225,7 +8225,7 @@ module Aws::S3
     #               <p>Object Lambda access points are not supported by directory buckets.</p>
     #            </note>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -8524,7 +8524,7 @@ module Aws::S3
     #            <p>
     #               <b>Access points</b> - When you use this action with an access point for general purpose buckets, you must provide the alias of the access point in place of the bucket name or specify the access point ARN. When you use this action with an access point for directory buckets, you must provide the access point name in place of the bucket name. When using the access point ARN, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -8752,15 +8752,15 @@ module Aws::S3
     #            <p>
     #               <b>Access points</b> - When you use this action with an access point for general purpose buckets, you must provide the alias of the access point in place of the bucket name or specify the access point ARN. When you use this action with an access point for directory buckets, you must provide the access point name in place of the bucket name. When using the access point ARN, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
     #            <p>
-    #               <b>Object Lambda access points</b> - When you use this API operation with an Object Lambda access point, provide the alias of the Object Lambda access point in place of the bucket name.
-    #   If the Object Lambda access point alias in a request is not valid, the error code <code>InvalidAccessPointAliasError</code> is returned.
+    #               <b>Object Lambda access points</b> - When you use this API operation with an Object Lambda access point, provide the alias of the Object Lambda access point in place of the bucket name. 
+    #   If the Object Lambda access point alias in a request is not valid, the error code <code>InvalidAccessPointAliasError</code> is returned. 
     #   For more information about <code>InvalidAccessPointAliasError</code>, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList">List of
     #               Error Codes</a>.</p>
     #            <note>
     #               <p>Object Lambda access points are not supported by directory buckets.</p>
     #            </note>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -9153,7 +9153,7 @@ module Aws::S3
     #               <p>Object Lambda access points are not supported by directory buckets.</p>
     #            </note>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -9364,7 +9364,7 @@ module Aws::S3
     #           <code>images/index.html</code>.) The suffix must not be empty and must not include a slash
     #         character.</p>
     #            <important>
-    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using 
     #            XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
     #               XML related object key constraints</a>.</p>
     #            </important>
@@ -9477,7 +9477,7 @@ module Aws::S3
     # @!attribute prefix
     #   <p>An object key name prefix that identifies the subset of objects to which the rule applies.</p>
     #            <important>
-    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using 
     #            XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
     #               XML related object key constraints</a>.</p>
     #            </important>
@@ -9536,7 +9536,7 @@ module Aws::S3
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A parameter or header in your request isn't valid. For details, see the description of this API
+    # <p>A parameter or header in your request isn't valid. For details, see the description of this API 
     #       operation.</p>
     class InvalidRequest < Struct.new(
       nil,
@@ -9578,7 +9578,7 @@ module Aws::S3
     # @!attribute optional_fields
     #   <p>Contains the optional fields that are included in the inventory results.</p>
     #            <note>
-    #               <p>The following optional fields are supported for directory buckets <code>Size | LastModifiedDate | StorageClass | ETag | IsMultipartUploaded |
+    #               <p>The following optional fields are supported for directory buckets <code>Size | LastModifiedDate | StorageClass | ETag | IsMultipartUploaded | 
     #         EncryptionStatus | BucketKeyStatus | ChecksumAlgorithm | LifecycleExpirationDate.</code> Throws MalformedXML error if unsupported optional field is provided. </p>
     #            </note>
     #   @return [Array<String>]
@@ -9692,7 +9692,7 @@ module Aws::S3
     #     </p>
     # @!attribute configuration_state
     #   <p>
-    #         The configuration state of the inventory table, indicating whether the inventory table is enabled
+    #         The configuration state of the inventory table, indicating whether the inventory table is enabled 
     #         or disabled.
     #       </p>
     #   @return [String]
@@ -9715,7 +9715,7 @@ module Aws::S3
     #     </p>
     # @!attribute configuration_state
     #   <p>
-    #         The configuration state of the inventory table, indicating whether the inventory table is enabled
+    #         The configuration state of the inventory table, indicating whether the inventory table is enabled 
     #         or disabled.
     #       </p>
     #   @return [String]
@@ -9729,13 +9729,13 @@ module Aws::S3
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>BACKFILLING</code> - The inventory table is in the process of being backfilled. When
-    #             you enable the inventory table for your metadata configuration, the table goes through a
-    #             process known as backfilling, during which Amazon S3 scans your general purpose bucket to retrieve
-    #             the initial metadata for all objects in the bucket. Depending on the number of objects in your
-    #             bucket, this process can take several hours. When the backfilling process is finished, the
-    #             status of your inventory table changes from <code>BACKFILLING</code> to <code>ACTIVE</code>.
-    #             After backfilling is completed, updates to your objects are reflected in the inventory table
+    #                     <code>BACKFILLING</code> - The inventory table is in the process of being backfilled. When 
+    #             you enable the inventory table for your metadata configuration, the table goes through a 
+    #             process known as backfilling, during which Amazon S3 scans your general purpose bucket to retrieve 
+    #             the initial metadata for all objects in the bucket. Depending on the number of objects in your 
+    #             bucket, this process can take several hours. When the backfilling process is finished, the 
+    #             status of your inventory table changes from <code>BACKFILLING</code> to <code>ACTIVE</code>. 
+    #             After backfilling is completed, updates to your objects are reflected in the inventory table 
     #             within one hour.</p>
     #               </li>
     #               <li>
@@ -9751,12 +9751,12 @@ module Aws::S3
     #            </ul>
     #   @return [String]
     # @!attribute error
-    #   <p> If an S3 Metadata V1 <code>CreateBucketMetadataTableConfiguration</code> or V2
+    #   <p> If an S3 Metadata V1 <code>CreateBucketMetadataTableConfiguration</code> or V2 
     #         <code>CreateBucketMetadataConfiguration</code> request succeeds, but S3 Metadata was
     #         unable to create the table, this structure contains the error code and error message. </p>
     #            <note>
-    #               <p>If you created your S3 Metadata configuration before July 15, 2025, we recommend that you delete
-    #           and re-create your configuration by using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html">CreateBucketMetadataConfiguration</a> so that you can expire journal table records and create
+    #               <p>If you created your S3 Metadata configuration before July 15, 2025, we recommend that you delete 
+    #           and re-create your configuration by using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html">CreateBucketMetadataConfiguration</a> so that you can expire journal table records and create 
     #           a live inventory table.</p>
     #            </note>
     #   @return [Types::ErrorDetails]
@@ -9787,7 +9787,7 @@ module Aws::S3
     #     </p>
     # @!attribute configuration_state
     #   <p>
-    #         The configuration state of the inventory table, indicating whether the inventory table is enabled
+    #         The configuration state of the inventory table, indicating whether the inventory table is enabled 
     #         or disabled.
     #       </p>
     #   @return [String]
@@ -9876,12 +9876,12 @@ module Aws::S3
     #            </ul>
     #   @return [String]
     # @!attribute error
-    #   <p> If an S3 Metadata V1 <code>CreateBucketMetadataTableConfiguration</code> or V2
+    #   <p> If an S3 Metadata V1 <code>CreateBucketMetadataTableConfiguration</code> or V2 
     #         <code>CreateBucketMetadataConfiguration</code> request succeeds, but S3 Metadata was
     #         unable to create the table, this structure contains the error code and error message. </p>
     #            <note>
-    #               <p>If you created your S3 Metadata configuration before July 15, 2025, we recommend that you delete
-    #           and re-create your configuration by using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html">CreateBucketMetadataConfiguration</a> so that you can expire journal table records and create
+    #               <p>If you created your S3 Metadata configuration before July 15, 2025, we recommend that you delete 
+    #           and re-create your configuration by using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html">CreateBucketMetadataConfiguration</a> so that you can expire journal table records and create 
     #           a live inventory table.</p>
     #            </note>
     #   @return [Types::ErrorDetails]
@@ -10004,7 +10004,7 @@ module Aws::S3
     # @!attribute prefix
     #   <p> The general purpose bucket prefix that identifies one or more objects to which the rule applies. We recommend using <code>Filter</code> instead of <code>Prefix</code> for new PUTs. Previous configurations where a prefix is defined will continue to operate as before.</p>
     #            <important>
-    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using 
     #            XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
     #               XML related object key constraints</a>.</p>
     #            </important>
@@ -10110,7 +10110,7 @@ module Aws::S3
     # @!attribute prefix
     #   <p>Prefix identifying one or more objects to which the rule applies.</p>
     #            <important>
-    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using 
     #            XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
     #               XML related object key constraints</a>.</p>
     #            </important>
@@ -10286,7 +10286,7 @@ module Aws::S3
     # @!attribute expected_bucket_owner
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #            <note>
-    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code
+    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code 
     #   <code>501 Not Implemented</code>.</p>
     #            </note>
     #   @return [String]
@@ -10345,7 +10345,7 @@ module Aws::S3
     # @!attribute expected_bucket_owner
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #            <note>
-    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code
+    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code 
     #   <code>501 Not Implemented</code>.</p>
     #            </note>
     #   @return [String]
@@ -10580,7 +10580,7 @@ module Aws::S3
     #               <p>Object Lambda access points are not supported by directory buckets.</p>
     #            </note>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -10636,7 +10636,7 @@ module Aws::S3
     #                 <code>NextKeyMarker</code> value from the previous response. </p>
     #                     <p>In the <code>ListMultipartUploads</code> response, the multipart uploads aren't sorted
     #               lexicographically based on the object keys.
-    #
+    #               
     #             </p>
     #                  </li>
     #               </ul>
@@ -11061,7 +11061,7 @@ module Aws::S3
     #               <p>Object Lambda access points are not supported by directory buckets.</p>
     #            </note>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -11256,7 +11256,7 @@ module Aws::S3
     #               <p>Object Lambda access points are not supported by directory buckets.</p>
     #            </note>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -11492,7 +11492,7 @@ module Aws::S3
     #               <p>Object Lambda access points are not supported by directory buckets.</p>
     #            </note>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -11523,7 +11523,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     # @!attribute sse_customer_algorithm
-    #   <p>The server-side encryption (SSE) algorithm used to encrypt the object. This parameter is needed only when the object was created
+    #   <p>The server-side encryption (SSE) algorithm used to encrypt the object. This parameter is needed only when the object was created 
     #       using a checksum algorithm. For more information,
     #       see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html">Protecting data using SSE-C keys</a> in the
     #       <i>Amazon S3 User Guide</i>.</p>
@@ -11532,7 +11532,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     # @!attribute sse_customer_key
-    #   <p>The server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum algorithm.
+    #   <p>The server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum algorithm. 
     #       For more information, see
     #       <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html">Protecting data using SSE-C keys</a> in the
     #       <i>Amazon S3 User Guide</i>.</p>
@@ -11541,7 +11541,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     # @!attribute sse_customer_key_md5
-    #   <p>The MD5 server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum
+    #   <p>The MD5 server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum 
     #       algorithm. For more information,
     #       see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html">Protecting data using SSE-C keys</a> in the
     #       <i>Amazon S3 User Guide</i>.</p>
@@ -11700,8 +11700,8 @@ module Aws::S3
 
     # <p> The V1 S3 Metadata configuration for a general purpose bucket. </p>
     #          <note>
-    #             <p>If you created your S3 Metadata configuration before July 15, 2025, we recommend that you delete
-    #         and re-create your configuration by using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html">CreateBucketMetadataConfiguration</a> so that you can expire journal table records and create
+    #             <p>If you created your S3 Metadata configuration before July 15, 2025, we recommend that you delete 
+    #         and re-create your configuration by using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html">CreateBucketMetadataConfiguration</a> so that you can expire journal table records and create 
     #         a live inventory table.</p>
     #          </note>
     # @!attribute s3_tables_destination
@@ -11723,8 +11723,8 @@ module Aws::S3
     #       must be unique within the <code>aws_s3_metadata</code> namespace in the destination table bucket.
     #     </p>
     #          <note>
-    #             <p>If you created your S3 Metadata configuration before July 15, 2025, we recommend that you delete
-    #         and re-create your configuration by using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html">CreateBucketMetadataConfiguration</a> so that you can expire journal table records and create
+    #             <p>If you created your S3 Metadata configuration before July 15, 2025, we recommend that you delete 
+    #         and re-create your configuration by using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html">CreateBucketMetadataConfiguration</a> so that you can expire journal table records and create 
     #         a live inventory table.</p>
     #          </note>
     # @!attribute s3_tables_destination_result
@@ -11746,16 +11746,16 @@ module Aws::S3
     #     </p>
     # @!attribute sse_algorithm
     #   <p>
-    #         The encryption type specified for a metadata table. To specify server-side encryption with
-    #         Key Management Service (KMS) keys (SSE-KMS), use the <code>aws:kms</code> value. To specify server-side
-    #         encryption with Amazon S3 managed keys (SSE-S3), use the <code>AES256</code> value.
+    #         The encryption type specified for a metadata table. To specify server-side encryption with 
+    #         Key Management Service (KMS) keys (SSE-KMS), use the <code>aws:kms</code> value. To specify server-side 
+    #         encryption with Amazon S3 managed keys (SSE-S3), use the <code>AES256</code> value. 
     #       </p>
     #   @return [String]
     # @!attribute kms_key_arn
     #   <p>
     #         If server-side encryption with Key Management Service (KMS) keys (SSE-KMS) is specified, you must also
-    #         specify the KMS key Amazon Resource Name (ARN). You must specify a customer-managed KMS key
-    #         that's located in the same Region as the general purpose bucket that corresponds to the metadata
+    #         specify the KMS key Amazon Resource Name (ARN). You must specify a customer-managed KMS key 
+    #         that's located in the same Region as the general purpose bucket that corresponds to the metadata 
     #         table configuration.
     #       </p>
     #   @return [String]
@@ -12172,15 +12172,15 @@ module Aws::S3
     end
 
     # <p>
-    #       The updated server-side encryption type for this object. The <code>UpdateObjectEncryption</code>
+    #       The updated server-side encryption type for this object. The <code>UpdateObjectEncryption</code> 
     #       operation supports the SSE-S3 and SSE-KMS encryption types.
     #     </p>
     #          <p>Valid Values: <code>SSES3</code> | <code>SSEKMS</code>
     #          </p>
     # @!attribute ssekms
     #   <p>
-    #         Specifies to update the object encryption type to server-side encryption with Key Management Service (KMS) keys
-    #         (SSE-KMS).
+    #         Specifies to update the object encryption type to server-side encryption with Key Management Service (KMS) keys 
+    #         (SSE-KMS). 
     #       </p>
     #   @return [Types::SSEKMSEncryption]
     class ObjectEncryption < Struct.new(
@@ -12198,7 +12198,7 @@ module Aws::S3
     # @!attribute key
     #   <p>Key name of the object.</p>
     #            <important>
-    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using 
     #            XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
     #               XML related object key constraints</a>.</p>
     #            </important>
@@ -13003,7 +13003,7 @@ module Aws::S3
     # @!attribute expected_bucket_owner
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #            <note>
-    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code
+    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code 
     #   <code>501 Not Implemented</code>.</p>
     #            </note>
     #   @return [String]
@@ -13060,7 +13060,7 @@ module Aws::S3
     # @!attribute expected_bucket_owner
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #            <note>
-    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code
+    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code 
     #   <code>501 Not Implemented</code>.</p>
     #            </note>
     #   @return [String]
@@ -13218,7 +13218,7 @@ module Aws::S3
     # @!attribute expected_bucket_owner
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #            <note>
-    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code
+    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code 
     #   <code>501 Not Implemented</code>.</p>
     #            </note>
     #   @return [String]
@@ -13396,7 +13396,7 @@ module Aws::S3
     # @!attribute expected_bucket_owner
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #            <note>
-    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code
+    #               <p>For directory buckets, this header is not supported in this API operation. If you specify this header, the request fails with the HTTP status code 
     #   <code>501 Not Implemented</code>.</p>
     #            </note>
     #   @return [String]
@@ -13629,7 +13629,7 @@ module Aws::S3
     #            <p>
     #               <b>Access points</b> - When you use this action with an access point for general purpose buckets, you must provide the alias of the access point in place of the bucket name or specify the access point ARN. When you use this action with an access point for directory buckets, you must provide the access point name in place of the bucket name. When using the access point ARN, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -14156,9 +14156,9 @@ module Aws::S3
     #   @return [String]
     # @!attribute ssekms_encryption_context
     #   <p>If present, indicates the Amazon Web Services KMS Encryption Context to use for object encryption. The value of
-    #            this header is a Base64 encoded string of a UTF-8 encoded JSON, which contains the encryption context as key-value pairs.
+    #            this header is a Base64 encoded string of a UTF-8 encoded JSON, which contains the encryption context as key-value pairs. 
     #            This value is stored as object metadata and automatically gets
-    #            passed on to Amazon Web Services KMS for future <code>GetObject</code>
+    #            passed on to Amazon Web Services KMS for future <code>GetObject</code> 
     #            operations on this object.</p>
     #   @return [String]
     # @!attribute bucket_key_enabled
@@ -14255,7 +14255,7 @@ module Aws::S3
     #               <p>Object Lambda access points are not supported by directory buckets.</p>
     #            </note>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -14540,21 +14540,21 @@ module Aws::S3
     #               <li>
     #                  <p>
     #                     <b>Directory buckets </b> -
-    #             For directory buckets, there are only two supported options for server-side encryption: server-side encryption with Amazon S3 managed keys (SSE-S3) (<code>AES256</code>) and server-side encryption with KMS keys (SSE-KMS) (<code>aws:kms</code>). We recommend that the bucket's default encryption uses the desired encryption configuration and you don't override the bucket default encryption in your
-    #               <code>CreateSession</code> requests or <code>PUT</code> object requests. Then, new objects
+    #             For directory buckets, there are only two supported options for server-side encryption: server-side encryption with Amazon S3 managed keys (SSE-S3) (<code>AES256</code>) and server-side encryption with KMS keys (SSE-KMS) (<code>aws:kms</code>). We recommend that the bucket's default encryption uses the desired encryption configuration and you don't override the bucket default encryption in your 
+    #               <code>CreateSession</code> requests or <code>PUT</code> object requests. Then, new objects 
     #    are automatically encrypted with the desired encryption settings. For more
     #            information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html">Protecting data with server-side encryption</a> in the <i>Amazon S3 User Guide</i>. For more information about the encryption overriding behaviors in directory buckets, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-specifying-kms-encryption.html">Specifying server-side encryption with KMS for new object uploads</a>. </p>
-    #                  <p>In the Zonal endpoint API calls (except <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html">UploadPartCopy</a>) using the REST API, the encryption request headers must match the encryption settings that are specified in the <code>CreateSession</code> request.
-    #                               You can't override the values of the encryption settings (<code>x-amz-server-side-encryption</code>, <code>x-amz-server-side-encryption-aws-kms-key-id</code>, <code>x-amz-server-side-encryption-context</code>, and <code>x-amz-server-side-encryption-bucket-key-enabled</code>) that are specified in the <code>CreateSession</code> request.
-    #                               You don't need to explicitly specify these encryption settings values in Zonal endpoint API calls, and
-    #                               Amazon S3 will use the encryption settings values from the <code>CreateSession</code> request to protect new objects in the directory bucket.
+    #                  <p>In the Zonal endpoint API calls (except <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html">UploadPartCopy</a>) using the REST API, the encryption request headers must match the encryption settings that are specified in the <code>CreateSession</code> request. 
+    #                               You can't override the values of the encryption settings (<code>x-amz-server-side-encryption</code>, <code>x-amz-server-side-encryption-aws-kms-key-id</code>, <code>x-amz-server-side-encryption-context</code>, and <code>x-amz-server-side-encryption-bucket-key-enabled</code>) that are specified in the <code>CreateSession</code> request. 
+    #                               You don't need to explicitly specify these encryption settings values in Zonal endpoint API calls, and   
+    #                               Amazon S3 will use the encryption settings values from the <code>CreateSession</code> request to protect new objects in the directory bucket. 
     #                              </p>
     #                  <note>
-    #                     <p>When you use the CLI or the Amazon Web Services SDKs, for <code>CreateSession</code>, the session token refreshes automatically to avoid service interruptions when a session expires. The CLI or the Amazon Web Services SDKs use the bucket's default encryption configuration for the
-    #                               <code>CreateSession</code> request. It's not supported to override the encryption settings values in the <code>CreateSession</code> request.
-    #                               So in the Zonal endpoint API calls (except <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html">UploadPartCopy</a>),
+    #                     <p>When you use the CLI or the Amazon Web Services SDKs, for <code>CreateSession</code>, the session token refreshes automatically to avoid service interruptions when a session expires. The CLI or the Amazon Web Services SDKs use the bucket's default encryption configuration for the 
+    #                               <code>CreateSession</code> request. It's not supported to override the encryption settings values in the <code>CreateSession</code> request. 
+    #                               So in the Zonal endpoint API calls (except <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html">UploadPartCopy</a>), 
     #             the encryption request headers must match the default encryption configuration of the directory bucket.
-    #
+    #   
     #   </p>
     #                  </note>
     #               </li>
@@ -14632,23 +14632,23 @@ module Aws::S3
     #   <p>Specifies the KMS key ID (Key ID, Key ARN, or Key Alias) to use for object encryption. If the KMS key doesn't exist in the same
     #            account that's issuing the command, you must use the full Key ARN not the Key ID.</p>
     #            <p>
-    #               <b>General purpose buckets</b> - If you specify <code>x-amz-server-side-encryption</code> with <code>aws:kms</code> or <code>aws:kms:dsse</code>, this header specifies the ID (Key ID, Key ARN, or Key Alias) of the KMS
+    #               <b>General purpose buckets</b> - If you specify <code>x-amz-server-side-encryption</code> with <code>aws:kms</code> or <code>aws:kms:dsse</code>, this header specifies the ID (Key ID, Key ARN, or Key Alias) of the KMS 
     #            key to use. If you specify
     #            <code>x-amz-server-side-encryption:aws:kms</code> or
     #            <code>x-amz-server-side-encryption:aws:kms:dsse</code>, but do not provide <code>x-amz-server-side-encryption-aws-kms-key-id</code>, Amazon S3 uses the Amazon Web Services managed key
     #            (<code>aws/s3</code>) to protect the data.</p>
     #            <p>
-    #               <b>Directory buckets</b> - To encrypt data using SSE-KMS, it's recommended to specify the
-    #   <code>x-amz-server-side-encryption</code> header to <code>aws:kms</code>. Then, the <code>x-amz-server-side-encryption-aws-kms-key-id</code> header implicitly uses
+    #               <b>Directory buckets</b> - To encrypt data using SSE-KMS, it's recommended to specify the 
+    #   <code>x-amz-server-side-encryption</code> header to <code>aws:kms</code>. Then, the <code>x-amz-server-side-encryption-aws-kms-key-id</code> header implicitly uses 
     #   the bucket's default KMS customer managed key ID. If you want to explicitly set the <code>
-    #            x-amz-server-side-encryption-aws-kms-key-id</code> header, it must match the bucket's default customer managed key (using key ID or ARN, not alias). Your SSE-KMS configuration can only support 1 <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk">customer managed key</a> per directory bucket's lifetime.
-    #   The <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed key</a> (<code>aws/s3</code>) isn't supported.
-    #
+    #            x-amz-server-side-encryption-aws-kms-key-id</code> header, it must match the bucket's default customer managed key (using key ID or ARN, not alias). Your SSE-KMS configuration can only support 1 <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk">customer managed key</a> per directory bucket's lifetime. 
+    #   The <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed key</a> (<code>aws/s3</code>) isn't supported. 
+    #                               
     #    Incorrect key specification results in an HTTP <code>400 Bad Request</code> error. </p>
     #   @return [String]
     # @!attribute ssekms_encryption_context
     #   <p>Specifies the Amazon Web Services KMS Encryption Context as an additional encryption context to use for object encryption. The value of
-    #            this header is a Base64 encoded string of a UTF-8 encoded JSON, which contains the encryption context as key-value pairs.
+    #            this header is a Base64 encoded string of a UTF-8 encoded JSON, which contains the encryption context as key-value pairs. 
     #            This value is stored as object metadata and automatically gets passed on
     #            to Amazon Web Services KMS for future <code>GetObject</code> operations on
     #            this object.</p>
@@ -14666,8 +14666,8 @@ module Aws::S3
     #            SSE-KMS. Also, specifying this header with a PUT action doesn't affect bucket-level settings for S3
     #            Bucket Key.</p>
     #            <p>
-    #               <b>Directory buckets</b> - S3 Bucket Keys are always enabled for <code>GET</code> and <code>PUT</code> operations in a directory bucket and can’t be disabled. S3 Bucket Keys aren't supported, when you copy SSE-KMS encrypted objects from general purpose buckets
-    #   to directory buckets, from directory buckets to general purpose buckets, or between directory buckets, through <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a>, <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html">UploadPartCopy</a>, <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-objects-Batch-Ops">the Copy operation in Batch Operations</a>, or
+    #               <b>Directory buckets</b> - S3 Bucket Keys are always enabled for <code>GET</code> and <code>PUT</code> operations in a directory bucket and can’t be disabled. S3 Bucket Keys aren't supported, when you copy SSE-KMS encrypted objects from general purpose buckets  
+    #   to directory buckets, from directory buckets to general purpose buckets, or between directory buckets, through <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a>, <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html">UploadPartCopy</a>, <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-objects-Batch-Ops">the Copy operation in Batch Operations</a>, or 
     #                               <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-import-job">the import jobs</a>. In this case, Amazon S3 makes a call to KMS every time a copy request is made for a KMS-encrypted object.</p>
     #   @return [Boolean]
     # @!attribute request_payer
@@ -14879,7 +14879,7 @@ module Aws::S3
     #            <p>
     #               <b>Access points</b> - When you use this action with an access point for general purpose buckets, you must provide the alias of the access point in place of the bucket name or specify the access point ARN. When you use this action with an access point for directory buckets, you must provide the access point name in place of the bucket name. When using the access point ARN, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -15003,9 +15003,9 @@ module Aws::S3
     #   @return [String]
     # @!attribute days
     #   <p>
-    #         If you enable journal table record expiration, you can set the number of days to retain your
-    #         journal table records. Journal table records must be retained for a minimum of 7 days. To set
-    #         this value, specify any whole number from <code>7</code> to <code>2147483647</code>. For example,
+    #         If you enable journal table record expiration, you can set the number of days to retain your 
+    #         journal table records. Journal table records must be retained for a minimum of 7 days. To set 
+    #         this value, specify any whole number from <code>7</code> to <code>2147483647</code>. For example, 
     #         to retain your journal table records for one year, set this value to <code>365</code>.
     #       </p>
     #   @return [Integer]
@@ -15057,7 +15057,7 @@ module Aws::S3
     #           <code>/documents</code>. Not required if one of the siblings is present. Can be present only if
     #           <code>ReplaceKeyWith</code> is not provided.</p>
     #            <important>
-    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using 
     #            XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
     #               XML related object key constraints</a>.</p>
     #            </important>
@@ -15067,7 +15067,7 @@ module Aws::S3
     #           <code>error.html</code>. Not required if one of the siblings is present. Can be present only if
     #           <code>ReplaceKeyPrefixWith</code> is not provided.</p>
     #            <important>
-    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using 
     #            XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
     #               XML related object key constraints</a>.</p>
     #            </important>
@@ -15246,7 +15246,7 @@ module Aws::S3
     #         maximum prefix length is 1,024 characters. To include all objects in a bucket, specify an empty string.
     #         </p>
     #            <important>
-    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using 
     #            XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
     #               XML related object key constraints</a>.</p>
     #            </important>
@@ -15341,7 +15341,7 @@ module Aws::S3
     # @!attribute prefix
     #   <p>An object key name prefix that identifies the subset of objects to which the rule applies.</p>
     #            <important>
-    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+    #               <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using 
     #            XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
     #               XML related object key constraints</a>.</p>
     #            </important>
@@ -15458,7 +15458,7 @@ module Aws::S3
     #            <p>
     #               <b>Access points</b> - When you use this action with an access point for general purpose buckets, you must provide the alias of the access point in place of the bucket name or specify the access point ARN. When you use this action with an access point for directory buckets, you must provide the access point name in place of the bucket name. When using the access point ARN, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -15675,8 +15675,8 @@ module Aws::S3
     #       must be unique within the <code>aws_s3_metadata</code> namespace in the destination table bucket.
     #     </p>
     #          <note>
-    #             <p>If you created your S3 Metadata configuration before July 15, 2025, we recommend that you delete
-    #         and re-create your configuration by using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html">CreateBucketMetadataConfiguration</a> so that you can expire journal table records and create
+    #             <p>If you created your S3 Metadata configuration before July 15, 2025, we recommend that you delete 
+    #         and re-create your configuration by using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html">CreateBucketMetadataConfiguration</a> so that you can expire journal table records and create 
     #         a live inventory table.</p>
     #          </note>
     # @!attribute table_bucket_arn
@@ -15703,8 +15703,8 @@ module Aws::S3
     #       must be unique within the <code>aws_s3_metadata</code> namespace in the destination table bucket.
     #     </p>
     #          <note>
-    #             <p>If you created your S3 Metadata configuration before July 15, 2025, we recommend that you delete
-    #         and re-create your configuration by using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html">CreateBucketMetadataConfiguration</a> so that you can expire journal table records and create
+    #             <p>If you created your S3 Metadata configuration before July 15, 2025, we recommend that you delete 
+    #         and re-create your configuration by using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html">CreateBucketMetadataConfiguration</a> so that you can expire journal table records and create 
     #         a live inventory table.</p>
     #          </note>
     # @!attribute table_bucket_arn
@@ -15752,26 +15752,26 @@ module Aws::S3
 
     # <p>
     #       If <code>SSEKMS</code> is specified for <code>ObjectEncryption</code>, this data type specifies
-    #       the Amazon Web Services KMS key Amazon Resource Name (ARN) to use and whether to use an S3 Bucket Key for
+    #       the Amazon Web Services KMS key Amazon Resource Name (ARN) to use and whether to use an S3 Bucket Key for 
     #       server-side encryption using Key Management Service (KMS) keys (SSE-KMS).
     #     </p>
     # @!attribute kms_key_arn
     #   <p>
-    #         Specifies the Amazon Web Services KMS key Amazon Resource Name (ARN) to use for the updated server-side encryption
-    #         type. Required if <code>ObjectEncryption</code> specifies <code>SSEKMS</code>.
+    #         Specifies the Amazon Web Services KMS key Amazon Resource Name (ARN) to use for the updated server-side encryption 
+    #         type. Required if <code>ObjectEncryption</code> specifies <code>SSEKMS</code>. 
     #       </p>
     #            <note>
-    #               <p>You must specify the full Amazon Web Services KMS key ARN. The KMS key ID and KMS key alias aren't
+    #               <p>You must specify the full Amazon Web Services KMS key ARN. The KMS key ID and KMS key alias aren't 
     #           supported.</p>
     #            </note>
     #            <p>Pattern: (<code>arn:aws[-a-z0-9]*:kms:[-a-z0-9]*:[0-9]{12}:key/.+</code>)</p>
     #   @return [String]
     # @!attribute bucket_key_enabled
     #   <p>
-    #         Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with server-side encryption
-    #         using Key Management Service (KMS) keys (SSE-KMS). If this value isn't specified, it defaults to <code>false</code>.
-    #         Setting this value to <code>true</code> causes Amazon S3 to use an S3 Bucket Key for object encryption with
-    #         SSE-KMS. For more information, see
+    #         Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with server-side encryption 
+    #         using Key Management Service (KMS) keys (SSE-KMS). If this value isn't specified, it defaults to <code>false</code>. 
+    #         Setting this value to <code>true</code> causes Amazon S3 to use an S3 Bucket Key for object encryption with 
+    #         SSE-KMS. For more information, see 
     #         <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html">
     #           Using Amazon S3 Bucket Keys</a> in the <i>Amazon S3 User Guide</i>.
     #       </p>
@@ -15884,19 +15884,19 @@ module Aws::S3
     #   <p>The object key.</p>
     #   @return [String]
     # @!attribute sse_customer_algorithm
-    #   <p>The server-side encryption (SSE) algorithm used to encrypt the object. This parameter is needed only when the object was created
+    #   <p>The server-side encryption (SSE) algorithm used to encrypt the object. This parameter is needed only when the object was created 
     #       using a checksum algorithm. For more information,
     #       see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html">Protecting data using SSE-C keys</a> in the
     #       <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     # @!attribute sse_customer_key
-    #   <p>The server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum algorithm.
+    #   <p>The server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum algorithm. 
     #       For more information, see
     #       <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html">Protecting data using SSE-C keys</a> in the
     #       <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     # @!attribute sse_customer_key_md5
-    #   <p>The MD5 server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum
+    #   <p>The MD5 server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum 
     #       algorithm. For more information,
     #       see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html">Protecting data using SSE-C keys</a> in the
     #       <i>Amazon S3 User Guide</i>.</p>
@@ -16015,8 +16015,8 @@ module Aws::S3
     #                <li>
     #                   <p>
     #                      <b>Directory buckets</b> -
-    #             Your SSE-KMS configuration can only support 1 <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk">customer managed key</a> per directory bucket's lifetime.
-    # The <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed key</a> (<code>aws/s3</code>) isn't supported.
+    #             Your SSE-KMS configuration can only support 1 <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk">customer managed key</a> per directory bucket's lifetime. 
+    # The <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed key</a> (<code>aws/s3</code>) isn't supported. 
     # </p>
     #                </li>
     #                <li>
@@ -16149,8 +16149,8 @@ module Aws::S3
     #                  <li>
     #                     <p>
     #                        <b>Directory buckets</b> -
-    #               S3 Bucket Keys are always enabled for <code>GET</code> and <code>PUT</code> operations in a directory bucket and can’t be disabled. S3 Bucket Keys aren't supported, when you copy SSE-KMS encrypted objects from general purpose buckets
-    #   to directory buckets, from directory buckets to general purpose buckets, or between directory buckets, through <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a>, <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html">UploadPartCopy</a>, <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-objects-Batch-Ops">the Copy operation in Batch Operations</a>, or
+    #               S3 Bucket Keys are always enabled for <code>GET</code> and <code>PUT</code> operations in a directory bucket and can’t be disabled. S3 Bucket Keys aren't supported, when you copy SSE-KMS encrypted objects from general purpose buckets  
+    #   to directory buckets, from directory buckets to general purpose buckets, or between directory buckets, through <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a>, <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html">UploadPartCopy</a>, <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-objects-Batch-Ops">the Copy operation in Batch Operations</a>, or 
     #                               <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-import-job">the import jobs</a>. In this case, Amazon S3 makes a call to KMS every time a copy request is made for a KMS-encrypted object.</p>
     #                  </li>
     #               </ul>
@@ -16189,7 +16189,7 @@ module Aws::S3
     # @!attribute session_token
     #   <p>A part of the temporary security credentials. The session token is used to validate the temporary
     #         security credentials.
-    #
+    #         
     #       </p>
     #   @return [String]
     # @!attribute expiration
@@ -16514,7 +16514,7 @@ module Aws::S3
 
     # @!attribute bucket
     #   <p>
-    #         The general purpose bucket that corresponds to the metadata configuration that you want to
+    #         The general purpose bucket that corresponds to the metadata configuration that you want to 
     #         enable or disable an inventory table for.
     #       </p>
     #   @return [String]
@@ -16530,12 +16530,12 @@ module Aws::S3
     #   @return [String]
     # @!attribute inventory_table_configuration
     #   <p>
-    #         The contents of your inventory table configuration.
+    #         The contents of your inventory table configuration.      
     #       </p>
     #   @return [Types::InventoryTableConfigurationUpdates]
     # @!attribute expected_bucket_owner
     #   <p>
-    #         The expected owner of the general purpose bucket that corresponds to the metadata table
+    #         The expected owner of the general purpose bucket that corresponds to the metadata table 
     #         configuration that you want to enable or disable an inventory table for.
     #       </p>
     #   @return [String]
@@ -16553,7 +16553,7 @@ module Aws::S3
 
     # @!attribute bucket
     #   <p>
-    #         The general purpose bucket that corresponds to the metadata configuration that you want to
+    #         The general purpose bucket that corresponds to the metadata configuration that you want to 
     #         enable or disable journal table record expiration for.
     #       </p>
     #   @return [String]
@@ -16574,8 +16574,8 @@ module Aws::S3
     #   @return [Types::JournalTableConfigurationUpdates]
     # @!attribute expected_bucket_owner
     #   <p>
-    #         The expected owner of the general purpose bucket that corresponds to the metadata table
-    #         configuration that you want to enable or disable journal table record expiration for.
+    #         The expected owner of the general purpose bucket that corresponds to the metadata table 
+    #         configuration that you want to enable or disable journal table record expiration for.      
     #       </p>
     #   @return [String]
     class UpdateBucketMetadataJournalTableConfigurationRequest < Struct.new(
@@ -16594,14 +16594,14 @@ module Aws::S3
     #   <p>
     #         The name of the general purpose bucket that contains the specified object key name.
     #       </p>
-    #            <p>When you use this operation with an access point attached to a general purpose bucket, you
-    #         must either provide the alias of the access point in place of the bucket name or you must specify
-    #         the access point Amazon Resource Name (ARN). When using the access point ARN, you must direct
-    #         requests to the access point hostname. The access point hostname takes the form
+    #            <p>When you use this operation with an access point attached to a general purpose bucket, you 
+    #         must either provide the alias of the access point in place of the bucket name or you must specify 
+    #         the access point Amazon Resource Name (ARN). When using the access point ARN, you must direct 
+    #         requests to the access point hostname. The access point hostname takes the form 
     #         <code>
-    #                  <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com</code>.
-    #         When using this operation with an access point through the Amazon Web Services SDKs, you provide the access point
-    #         ARN in place of the bucket name. For more information about access point ARNs, see
+    #                  <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com</code>. 
+    #         When using this operation with an access point through the Amazon Web Services SDKs, you provide the access point 
+    #         ARN in place of the bucket name. For more information about access point ARNs, see 
     #         <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-naming.html">
     #           Referencing access points</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -16617,7 +16617,7 @@ module Aws::S3
     #   @return [String]
     # @!attribute object_encryption
     #   <p>
-    #         The updated server-side encryption type for this object. The <code>UpdateObjectEncryption</code>
+    #         The updated server-side encryption type for this object. The <code>UpdateObjectEncryption</code> 
     #         operation supports the SSE-S3 and SSE-KMS encryption types.
     #       </p>
     #            <p>Valid Values: <code>SSES3</code> | <code>SSEKMS</code>
@@ -16635,8 +16635,8 @@ module Aws::S3
     #   @return [String]
     # @!attribute expected_bucket_owner
     #   <p>
-    #         The account ID of the expected bucket owner. If the account ID that you provide doesn't match the
-    #         actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code>
+    #         The account ID of the expected bucket owner. If the account ID that you provide doesn't match the 
+    #         actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> 
     #         (access denied).
     #       </p>
     #   @return [String]
@@ -16647,14 +16647,14 @@ module Aws::S3
     #   @return [String]
     # @!attribute checksum_algorithm
     #   <p>
-    #         Indicates the algorithm used to create the checksum for the object when you use an Amazon Web Services SDK. This header
-    #         doesn't provide any additional functionality if you don't use the SDK. When you send this header,
-    #         there must be a corresponding <code>x-amz-checksum</code> or <code>x-amz-trailer</code> header sent.
-    #         Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    #         Indicates the algorithm used to create the checksum for the object when you use an Amazon Web Services SDK. This header 
+    #         doesn't provide any additional functionality if you don't use the SDK. When you send this header, 
+    #         there must be a corresponding <code>x-amz-checksum</code> or <code>x-amz-trailer</code> header sent. 
+    #         Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more 
     #         information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html">
-    #           Checking object integrity </a> in the <i>Amazon S3 User Guide</i>.
+    #           Checking object integrity </a> in the <i>Amazon S3 User Guide</i>.  
     #       </p>
-    #            <p>If you provide an individual checksum, Amazon S3 ignores any provided <code>ChecksumAlgorithm</code>
+    #            <p>If you provide an individual checksum, Amazon S3 ignores any provided <code>ChecksumAlgorithm</code> 
     #         parameter.</p>
     #   @return [String]
     class UpdateObjectEncryptionRequest < Struct.new(
@@ -16771,7 +16771,7 @@ module Aws::S3
     #               <p>Object Lambda access points are not supported by directory buckets.</p>
     #            </note>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
@@ -17105,7 +17105,7 @@ module Aws::S3
     #               <p>Object Lambda access points are not supported by directory buckets.</p>
     #            </note>
     #            <p>
-    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the
+    #               <b>S3 on Outposts</b> - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the 
     #                        form <code>
     #                  <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]

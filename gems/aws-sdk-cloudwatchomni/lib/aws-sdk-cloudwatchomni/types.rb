@@ -268,11 +268,11 @@ module Aws::CloudWatchOmni
     # @!attribute state
     #   Live evaluation state (read-only, system-managed). Populated by GetAlert. ListAlerts
     #   reports state on `AlertSummary` instead, where it stays required.
-    #
+    #   
     #   Absent on CreateAlert: a newly created alert has never been evaluated, so any state
     #   reported there would be a default rather than an observation. Call GetAlert for live
     #   state. Not @required for that reason — GetAlert always populates it.
-    #
+    #   
     #   `contributorSummary` is nested inside this member, so it too is absent on CreateAlert.
     #   @return [Types::AlertStateInfo]
     # @!attribute notification_rules
@@ -308,7 +308,7 @@ module Aws::CloudWatchOmni
     end
 
     # The condition that determines when the alert fires.
-    #
+    # 
     # On UpdateAlert a supplied condition is replaced whole, not merged: an omitted
     # {@code warningThreshold} or {@code criticalThreshold} removes that tier, and an
     # omitted {@code thresholdField} clears it. A condition must keep at least one
@@ -346,7 +346,7 @@ module Aws::CloudWatchOmni
     # {30, 60, 120, 300, 600, 900, 1800, 3600}; {@code pendingDurationSeconds} and
     # {@code recoveryDurationSeconds} must be multiples of {@code intervalSeconds}.
     # A duration of 0 means fire/clear immediately with no delay.
-    #
+    # 
     # On UpdateAlert a supplied evaluation block is replaced whole, not merged: an
     # omitted {@code pendingDurationSeconds} or {@code recoveryDurationSeconds} is
     # cleared to unset (no such duration), not preserved and not defaulted to 0.
@@ -738,7 +738,7 @@ module Aws::CloudWatchOmni
     # @!attribute alert
     #   The alert that was created. The same `Alert` shape GetAlert returns, so a caller need
     #   not read the alert back to learn its timestamps or its minted alert id.
-    #
+    #   
     #   {@code alert.state} is absent here — see the `state` member of `Alert`. Every other
     #   member is populated exactly as GetAlert populates it.
     #   @return [Types::Alert]
@@ -1604,7 +1604,7 @@ module Aws::CloudWatchOmni
     end
 
     # How a resource's data at rest is encrypted.
-    #
+    # 
     # `kmsKeyArn` is required when `encryptionStrategy` is CUSTOMER_MANAGED and must be
     # absent when it is AWS_OWNED; a mismatch is a ValidationException rather than a
     # silently ignored field, so a caller that selects AWS_OWNED while still passing a key
@@ -3548,7 +3548,7 @@ module Aws::CloudWatchOmni
     # @!attribute row_scope_groups
     #   Row-level filters for this scope, as an OR of AND-groups: a row is visible
     #   when it matches every filter in any one group. Requires signalTypes.
-    #
+    #   
     #   Row filters are additive across a principal's matching grants. A signal type
     #   with no matching group is unrestricted, and when rowScopeGroups is omitted
     #   all rows are visible for all signal types.
@@ -3589,7 +3589,7 @@ module Aws::CloudWatchOmni
     end
 
     # Top-level rule definition.
-    #
+    # 
     # {@code telemetryRule} members are optional at the Smithy level to support
     # PATCH semantics on UpdateAlert (send only the sub-blocks you want to
     # change). On CreateAlert, presence is enforced by the service-side validator.

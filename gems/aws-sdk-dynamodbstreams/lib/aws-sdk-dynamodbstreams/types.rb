@@ -518,10 +518,10 @@ module Aws::DynamoDBStreams
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This optional field contains the filter
+    # <p>This optional field contains the filter 
     #             definition for the <code>DescribeStream</code> API.</p>
     # @!attribute type
-    #   <p>Contains the type of filter to be applied on the <code>DescribeStream</code> API.
+    #   <p>Contains the type of filter to be applied on the <code>DescribeStream</code> API. 
     #               Currently, the only value this parameter accepts is <code>CHILD_SHARDS</code>.</p>
     #   @return [String]
     # @!attribute shard_id

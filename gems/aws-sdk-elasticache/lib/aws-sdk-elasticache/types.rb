@@ -310,7 +310,7 @@ module Aws::ElastiCache
     #                        </note>
     #                        <p>
     #                           <b>M6g node types</b> (available only for Redis OSS engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward):
-    #
+    #   					    
     #   					 	<code>cache.m6g.large</code>,
     #   							<code>cache.m6g.xlarge</code>,
     #   							<code>cache.m6g.2xlarge</code>,
@@ -344,13 +344,13 @@ module Aws::ElastiCache
     #                        </p>
     #                        <p>
     #                           <b>T3 node types:</b>
-    #                           <code>cache.t3.micro</code>,
+    #                           <code>cache.t3.micro</code>, 
     #       						<code>cache.t3.small</code>,
     #       						<code>cache.t3.medium</code>
     #                        </p>
     #                        <p>
     #                           <b>T2 node types:</b>
-    #                           <code>cache.t2.micro</code>,
+    #                           <code>cache.t2.micro</code>, 
     #       						<code>cache.t2.small</code>,
     #       						<code>cache.t2.medium</code>
     #                        </p>
@@ -363,15 +363,15 @@ module Aws::ElastiCache
     #                        </p>
     #                        <p>
     #                           <b>M1 node types:</b>
-    #                           <code>cache.m1.small</code>,
-    #   						   <code>cache.m1.medium</code>,
+    #                           <code>cache.m1.small</code>, 
+    #   						   <code>cache.m1.medium</code>, 
     #   						   <code>cache.m1.large</code>,
     #   						   <code>cache.m1.xlarge</code>
     #                        </p>
     #                        <p>
     #                           <b>M3 node types:</b>
     #                           <code>cache.m3.medium</code>,
-    #       						<code>cache.m3.large</code>,
+    #       						<code>cache.m3.large</code>, 
     #       						<code>cache.m3.xlarge</code>,
     #       						<code>cache.m3.2xlarge</code>
     #                        </p>
@@ -396,7 +396,7 @@ module Aws::ElastiCache
     #                     <li>
     #                        <p>Current generation: </p>
     #                        <p>
-    #                           <b>R7g node types</b>:
+    #                           <b>R7g node types</b>:	
     #   							<code>cache.r7g.large</code>,
     #   							<code>cache.r7g.xlarge</code>,
     #   							<code>cache.r7g.2xlarge</code>,
@@ -442,15 +442,15 @@ module Aws::ElastiCache
     #                        <p>Previous generation: (not recommended. Existing clusters are still supported but creation of new clusters is not supported for these types.)</p>
     #                        <p>
     #                           <b>M2 node types:</b>
-    #                           <code>cache.m2.xlarge</code>,
+    #                           <code>cache.m2.xlarge</code>, 
     #       						<code>cache.m2.2xlarge</code>,
     #       						<code>cache.m2.4xlarge</code>
     #                        </p>
     #                        <p>
     #                           <b>R3 node types:</b>
-    #                           <code>cache.r3.large</code>,
+    #                           <code>cache.r3.large</code>, 
     #       						<code>cache.r3.xlarge</code>,
-    #       						<code>cache.r3.2xlarge</code>,
+    #       						<code>cache.r3.2xlarge</code>,  
     #       						<code>cache.r3.4xlarge</code>,
     #       						<code>cache.r3.8xlarge</code>
     #                        </p>
@@ -604,7 +604,7 @@ module Aws::ElastiCache
     #            </p>
     #   @return [String]
     # @!attribute auth_token_enabled
-    #   <p>A flag that enables using an <code>AuthToken</code> (password) when issuing Valkey or Redis OSS
+    #   <p>A flag that enables using an <code>AuthToken</code> (password) when issuing Valkey or Redis OSS 
     #               commands.</p>
     #            <p>Default: <code>false</code>
     #            </p>
@@ -815,7 +815,7 @@ module Aws::ElastiCache
     #                      </note>
     #                      <p>
     #                         <b>M6g node types</b> (available only for Redis OSS engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward):
-    #
+    # 					    
     # 					 	<code>cache.m6g.large</code>,
     # 							<code>cache.m6g.xlarge</code>,
     # 							<code>cache.m6g.2xlarge</code>,
@@ -849,13 +849,13 @@ module Aws::ElastiCache
     #                      </p>
     #                      <p>
     #                         <b>T3 node types:</b>
-    #                         <code>cache.t3.micro</code>,
+    #                         <code>cache.t3.micro</code>, 
     #     						<code>cache.t3.small</code>,
     #     						<code>cache.t3.medium</code>
     #                      </p>
     #                      <p>
     #                         <b>T2 node types:</b>
-    #                         <code>cache.t2.micro</code>,
+    #                         <code>cache.t2.micro</code>, 
     #     						<code>cache.t2.small</code>,
     #     						<code>cache.t2.medium</code>
     #                      </p>
@@ -868,15 +868,15 @@ module Aws::ElastiCache
     #                      </p>
     #                      <p>
     #                         <b>M1 node types:</b>
-    #                         <code>cache.m1.small</code>,
-    # 						   <code>cache.m1.medium</code>,
+    #                         <code>cache.m1.small</code>, 
+    # 						   <code>cache.m1.medium</code>, 
     # 						   <code>cache.m1.large</code>,
     # 						   <code>cache.m1.xlarge</code>
     #                      </p>
     #                      <p>
     #                         <b>M3 node types:</b>
     #                         <code>cache.m3.medium</code>,
-    #     						<code>cache.m3.large</code>,
+    #     						<code>cache.m3.large</code>, 
     #     						<code>cache.m3.xlarge</code>,
     #     						<code>cache.m3.2xlarge</code>
     #                      </p>
@@ -901,7 +901,7 @@ module Aws::ElastiCache
     #                   <li>
     #                      <p>Current generation: </p>
     #                      <p>
-    #                         <b>R7g node types</b>:
+    #                         <b>R7g node types</b>:	
     # 							<code>cache.r7g.large</code>,
     # 							<code>cache.r7g.xlarge</code>,
     # 							<code>cache.r7g.2xlarge</code>,
@@ -947,15 +947,15 @@ module Aws::ElastiCache
     #                      <p>Previous generation: (not recommended. Existing clusters are still supported but creation of new clusters is not supported for these types.)</p>
     #                      <p>
     #                         <b>M2 node types:</b>
-    #                         <code>cache.m2.xlarge</code>,
+    #                         <code>cache.m2.xlarge</code>, 
     #     						<code>cache.m2.2xlarge</code>,
     #     						<code>cache.m2.4xlarge</code>
     #                      </p>
     #                      <p>
     #                         <b>R3 node types:</b>
-    #                         <code>cache.r3.large</code>,
+    #                         <code>cache.r3.large</code>, 
     #     						<code>cache.r3.xlarge</code>,
-    #     						<code>cache.r3.2xlarge</code>,
+    #     						<code>cache.r3.2xlarge</code>,  
     #     						<code>cache.r3.4xlarge</code>,
     #     						<code>cache.r3.8xlarge</code>
     #                      </p>
@@ -1483,7 +1483,7 @@ module Aws::ElastiCache
 
     # <p>The usage limits for storage and ElastiCache Processing Units for the cache.</p>
     # @!attribute data_storage
-    #   <p>
+    #   <p> 
     #               The maximum data storage limit in the cache, expressed in Gigabytes.
     #           </p>
     #   @return [Types::DataStorage]
@@ -1784,7 +1784,7 @@ module Aws::ElastiCache
     #                        </note>
     #                        <p>
     #                           <b>M6g node types</b> (available only for Redis OSS engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward):
-    #
+    #   					    
     #   					 	<code>cache.m6g.large</code>,
     #   							<code>cache.m6g.xlarge</code>,
     #   							<code>cache.m6g.2xlarge</code>,
@@ -1818,13 +1818,13 @@ module Aws::ElastiCache
     #                        </p>
     #                        <p>
     #                           <b>T3 node types:</b>
-    #                           <code>cache.t3.micro</code>,
+    #                           <code>cache.t3.micro</code>, 
     #       						<code>cache.t3.small</code>,
     #       						<code>cache.t3.medium</code>
     #                        </p>
     #                        <p>
     #                           <b>T2 node types:</b>
-    #                           <code>cache.t2.micro</code>,
+    #                           <code>cache.t2.micro</code>, 
     #       						<code>cache.t2.small</code>,
     #       						<code>cache.t2.medium</code>
     #                        </p>
@@ -1837,15 +1837,15 @@ module Aws::ElastiCache
     #                        </p>
     #                        <p>
     #                           <b>M1 node types:</b>
-    #                           <code>cache.m1.small</code>,
-    #   						   <code>cache.m1.medium</code>,
+    #                           <code>cache.m1.small</code>, 
+    #   						   <code>cache.m1.medium</code>, 
     #   						   <code>cache.m1.large</code>,
     #   						   <code>cache.m1.xlarge</code>
     #                        </p>
     #                        <p>
     #                           <b>M3 node types:</b>
     #                           <code>cache.m3.medium</code>,
-    #       						<code>cache.m3.large</code>,
+    #       						<code>cache.m3.large</code>, 
     #       						<code>cache.m3.xlarge</code>,
     #       						<code>cache.m3.2xlarge</code>
     #                        </p>
@@ -1870,7 +1870,7 @@ module Aws::ElastiCache
     #                     <li>
     #                        <p>Current generation: </p>
     #                        <p>
-    #                           <b>R7g node types</b>:
+    #                           <b>R7g node types</b>:	
     #   							<code>cache.r7g.large</code>,
     #   							<code>cache.r7g.xlarge</code>,
     #   							<code>cache.r7g.2xlarge</code>,
@@ -1916,15 +1916,15 @@ module Aws::ElastiCache
     #                        <p>Previous generation: (not recommended. Existing clusters are still supported but creation of new clusters is not supported for these types.)</p>
     #                        <p>
     #                           <b>M2 node types:</b>
-    #                           <code>cache.m2.xlarge</code>,
+    #                           <code>cache.m2.xlarge</code>, 
     #       						<code>cache.m2.2xlarge</code>,
     #       						<code>cache.m2.4xlarge</code>
     #                        </p>
     #                        <p>
     #                           <b>R3 node types:</b>
-    #                           <code>cache.r3.large</code>,
+    #                           <code>cache.r3.large</code>, 
     #       						<code>cache.r3.xlarge</code>,
-    #       						<code>cache.r3.2xlarge</code>,
+    #       						<code>cache.r3.2xlarge</code>,  
     #       						<code>cache.r3.4xlarge</code>,
     #       						<code>cache.r3.8xlarge</code>
     #                        </p>
@@ -2035,7 +2035,7 @@ module Aws::ElastiCache
     #            </note>
     #   @return [String]
     # @!attribute auto_minor_version_upgrade
-    #   <p> If you are running Valkey 7.2 and above or Redis OSS engine version 6.0 and above, set this parameter to yes
+    #   <p> If you are running Valkey 7.2 and above or Redis OSS engine version 6.0 and above, set this parameter to yes 
     #               to opt-in to the next auto minor version upgrade campaign. This parameter is
     #               disabled for previous versions.  </p>
     #   @return [Boolean]
@@ -2469,7 +2469,7 @@ module Aws::ElastiCache
     #                        </note>
     #                        <p>
     #                           <b>M6g node types</b> (available only for Redis OSS engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward):
-    #
+    #   					    
     #   					 	<code>cache.m6g.large</code>,
     #   							<code>cache.m6g.xlarge</code>,
     #   							<code>cache.m6g.2xlarge</code>,
@@ -2503,13 +2503,13 @@ module Aws::ElastiCache
     #                        </p>
     #                        <p>
     #                           <b>T3 node types:</b>
-    #                           <code>cache.t3.micro</code>,
+    #                           <code>cache.t3.micro</code>, 
     #       						<code>cache.t3.small</code>,
     #       						<code>cache.t3.medium</code>
     #                        </p>
     #                        <p>
     #                           <b>T2 node types:</b>
-    #                           <code>cache.t2.micro</code>,
+    #                           <code>cache.t2.micro</code>, 
     #       						<code>cache.t2.small</code>,
     #       						<code>cache.t2.medium</code>
     #                        </p>
@@ -2522,15 +2522,15 @@ module Aws::ElastiCache
     #                        </p>
     #                        <p>
     #                           <b>M1 node types:</b>
-    #                           <code>cache.m1.small</code>,
-    #   						   <code>cache.m1.medium</code>,
+    #                           <code>cache.m1.small</code>, 
+    #   						   <code>cache.m1.medium</code>, 
     #   						   <code>cache.m1.large</code>,
     #   						   <code>cache.m1.xlarge</code>
     #                        </p>
     #                        <p>
     #                           <b>M3 node types:</b>
     #                           <code>cache.m3.medium</code>,
-    #       						<code>cache.m3.large</code>,
+    #       						<code>cache.m3.large</code>, 
     #       						<code>cache.m3.xlarge</code>,
     #       						<code>cache.m3.2xlarge</code>
     #                        </p>
@@ -2555,7 +2555,7 @@ module Aws::ElastiCache
     #                     <li>
     #                        <p>Current generation: </p>
     #                        <p>
-    #                           <b>R7g node types</b>:
+    #                           <b>R7g node types</b>:	
     #   							<code>cache.r7g.large</code>,
     #   							<code>cache.r7g.xlarge</code>,
     #   							<code>cache.r7g.2xlarge</code>,
@@ -2601,15 +2601,15 @@ module Aws::ElastiCache
     #                        <p>Previous generation: (not recommended. Existing clusters are still supported but creation of new clusters is not supported for these types.)</p>
     #                        <p>
     #                           <b>M2 node types:</b>
-    #                           <code>cache.m2.xlarge</code>,
+    #                           <code>cache.m2.xlarge</code>, 
     #       						<code>cache.m2.2xlarge</code>,
     #       						<code>cache.m2.4xlarge</code>
     #                        </p>
     #                        <p>
     #                           <b>R3 node types:</b>
-    #                           <code>cache.r3.large</code>,
+    #                           <code>cache.r3.large</code>, 
     #       						<code>cache.r3.xlarge</code>,
-    #       						<code>cache.r3.2xlarge</code>,
+    #       						<code>cache.r3.2xlarge</code>,  
     #       						<code>cache.r3.4xlarge</code>,
     #       						<code>cache.r3.8xlarge</code>
     #                        </p>
@@ -2768,7 +2768,7 @@ module Aws::ElastiCache
     #            </note>
     #   @return [String]
     # @!attribute auto_minor_version_upgrade
-    #   <p> If you are running Valkey 7.2 and above or Redis OSS engine version 6.0 and above, set this parameter to yes
+    #   <p> If you are running Valkey 7.2 and above or Redis OSS engine version 6.0 and above, set this parameter to yes 
     #               to opt-in to the next auto minor version upgrade campaign. This parameter is
     #               disabled for previous versions.  </p>
     #   @return [Boolean]
@@ -2884,7 +2884,7 @@ module Aws::ElastiCache
     # @!attribute cluster_mode
     #   <p>Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must first
     #               set the cluster mode to Compatible. Compatible mode allows your Valkey or Redis OSS clients to connect
-    #               using both cluster mode enabled and cluster mode disabled. After you migrate all Valkey or Redis OSS
+    #               using both cluster mode enabled and cluster mode disabled. After you migrate all Valkey or Redis OSS 
     #               clients to use cluster mode enabled, you can then complete cluster mode configuration
     #               and set the cluster mode to Enabled.</p>
     #   @return [String]
@@ -2960,8 +2960,8 @@ module Aws::ElastiCache
     #   <p>User-provided identifier for the serverless cache. This parameter is stored as a lowercase string.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>User-provided description for the serverless cache.
-    #              The default is NULL, i.e. if no description is provided then an empty string will be returned.
+    #   <p>User-provided description for the serverless cache.  
+    #              The default is NULL, i.e. if no description is provided then an empty string will be returned. 
     #              The maximum length is 255 characters. </p>
     #   @return [String]
     # @!attribute engine
@@ -2977,9 +2977,9 @@ module Aws::ElastiCache
     #   <p>ARN of the customer managed key for encrypting the data at rest. If no KMS key is provided, a default service key is used.</p>
     #   @return [String]
     # @!attribute security_group_ids
-    #   <p>A list of the one or more VPC security groups to be associated with the serverless cache.
-    #              The security group will authorize traffic access for the VPC end-point (private-link).
-    #              If no other information is given this will be the VPC’s Default Security Group that is associated with the cluster VPC
+    #   <p>A list of the one or more VPC security groups to be associated with the serverless cache. 
+    #              The security group will authorize traffic access for the VPC end-point (private-link). 
+    #              If no other information is given this will be the VPC’s Default Security Group that is associated with the cluster VPC 
     #              end-point.</p>
     #   @return [Array<String>]
     # @!attribute snapshot_arns_to_restore
@@ -2992,7 +2992,7 @@ module Aws::ElastiCache
     #   <p>The identifier of the UserGroup to be associated with the serverless cache.  Available for Valkey and Redis OSS only. Default is NULL.</p>
     #   @return [String]
     # @!attribute subnet_ids
-    #   <p>A list of the identifiers of the subnets where the VPC endpoint for the serverless cache will be deployed.
+    #   <p>A list of the identifiers of the subnets where the VPC endpoint for the serverless cache will be deployed. 
     #              All the subnetIds must belong to the same VPC.</p>
     #   @return [Array<String>]
     # @!attribute snapshot_retention_limit
@@ -3000,7 +3000,7 @@ module Aws::ElastiCache
     #              Available for Valkey, Redis OSS and Serverless Memcached only. The maximum value allowed is 35 days.</p>
     #   @return [Integer]
     # @!attribute daily_snapshot_time
-    #   <p>The daily time that snapshots will be created from the new serverless cache. By default this number is populated with
+    #   <p>The daily time that snapshots will be created from the new serverless cache. By default this number is populated with 
     #              0, i.e. no snapshots will be created on an automatic daily basis. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
     #   @return [String]
     # @!attribute network_type
@@ -4220,7 +4220,7 @@ module Aws::ElastiCache
     #                        </note>
     #                        <p>
     #                           <b>M6g node types</b> (available only for Redis OSS engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward):
-    #
+    #   					    
     #   					 	<code>cache.m6g.large</code>,
     #   							<code>cache.m6g.xlarge</code>,
     #   							<code>cache.m6g.2xlarge</code>,
@@ -4254,13 +4254,13 @@ module Aws::ElastiCache
     #                        </p>
     #                        <p>
     #                           <b>T3 node types:</b>
-    #                           <code>cache.t3.micro</code>,
+    #                           <code>cache.t3.micro</code>, 
     #       						<code>cache.t3.small</code>,
     #       						<code>cache.t3.medium</code>
     #                        </p>
     #                        <p>
     #                           <b>T2 node types:</b>
-    #                           <code>cache.t2.micro</code>,
+    #                           <code>cache.t2.micro</code>, 
     #       						<code>cache.t2.small</code>,
     #       						<code>cache.t2.medium</code>
     #                        </p>
@@ -4273,15 +4273,15 @@ module Aws::ElastiCache
     #                        </p>
     #                        <p>
     #                           <b>M1 node types:</b>
-    #                           <code>cache.m1.small</code>,
-    #   						   <code>cache.m1.medium</code>,
+    #                           <code>cache.m1.small</code>, 
+    #   						   <code>cache.m1.medium</code>, 
     #   						   <code>cache.m1.large</code>,
     #   						   <code>cache.m1.xlarge</code>
     #                        </p>
     #                        <p>
     #                           <b>M3 node types:</b>
     #                           <code>cache.m3.medium</code>,
-    #       						<code>cache.m3.large</code>,
+    #       						<code>cache.m3.large</code>, 
     #       						<code>cache.m3.xlarge</code>,
     #       						<code>cache.m3.2xlarge</code>
     #                        </p>
@@ -4306,7 +4306,7 @@ module Aws::ElastiCache
     #                     <li>
     #                        <p>Current generation: </p>
     #                        <p>
-    #                           <b>R7g node types</b>:
+    #                           <b>R7g node types</b>:	
     #   							<code>cache.r7g.large</code>,
     #   							<code>cache.r7g.xlarge</code>,
     #   							<code>cache.r7g.2xlarge</code>,
@@ -4352,15 +4352,15 @@ module Aws::ElastiCache
     #                        <p>Previous generation: (not recommended. Existing clusters are still supported but creation of new clusters is not supported for these types.)</p>
     #                        <p>
     #                           <b>M2 node types:</b>
-    #                           <code>cache.m2.xlarge</code>,
+    #                           <code>cache.m2.xlarge</code>, 
     #       						<code>cache.m2.2xlarge</code>,
     #       						<code>cache.m2.4xlarge</code>
     #                        </p>
     #                        <p>
     #                           <b>R3 node types:</b>
-    #                           <code>cache.r3.large</code>,
+    #                           <code>cache.r3.large</code>, 
     #       						<code>cache.r3.xlarge</code>,
-    #       						<code>cache.r3.2xlarge</code>,
+    #       						<code>cache.r3.2xlarge</code>,  
     #       						<code>cache.r3.4xlarge</code>,
     #       						<code>cache.r3.8xlarge</code>
     #                        </p>
@@ -4470,7 +4470,7 @@ module Aws::ElastiCache
     #                        </note>
     #                        <p>
     #                           <b>M6g node types</b> (available only for Redis OSS engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward):
-    #
+    #   					    
     #   					 	<code>cache.m6g.large</code>,
     #   							<code>cache.m6g.xlarge</code>,
     #   							<code>cache.m6g.2xlarge</code>,
@@ -4504,13 +4504,13 @@ module Aws::ElastiCache
     #                        </p>
     #                        <p>
     #                           <b>T3 node types:</b>
-    #                           <code>cache.t3.micro</code>,
+    #                           <code>cache.t3.micro</code>, 
     #       						<code>cache.t3.small</code>,
     #       						<code>cache.t3.medium</code>
     #                        </p>
     #                        <p>
     #                           <b>T2 node types:</b>
-    #                           <code>cache.t2.micro</code>,
+    #                           <code>cache.t2.micro</code>, 
     #       						<code>cache.t2.small</code>,
     #       						<code>cache.t2.medium</code>
     #                        </p>
@@ -4523,15 +4523,15 @@ module Aws::ElastiCache
     #                        </p>
     #                        <p>
     #                           <b>M1 node types:</b>
-    #                           <code>cache.m1.small</code>,
-    #   						   <code>cache.m1.medium</code>,
+    #                           <code>cache.m1.small</code>, 
+    #   						   <code>cache.m1.medium</code>, 
     #   						   <code>cache.m1.large</code>,
     #   						   <code>cache.m1.xlarge</code>
     #                        </p>
     #                        <p>
     #                           <b>M3 node types:</b>
     #                           <code>cache.m3.medium</code>,
-    #       						<code>cache.m3.large</code>,
+    #       						<code>cache.m3.large</code>, 
     #       						<code>cache.m3.xlarge</code>,
     #       						<code>cache.m3.2xlarge</code>
     #                        </p>
@@ -4556,7 +4556,7 @@ module Aws::ElastiCache
     #                     <li>
     #                        <p>Current generation: </p>
     #                        <p>
-    #                           <b>R7g node types</b>:
+    #                           <b>R7g node types</b>:	
     #   							<code>cache.r7g.large</code>,
     #   							<code>cache.r7g.xlarge</code>,
     #   							<code>cache.r7g.2xlarge</code>,
@@ -4602,15 +4602,15 @@ module Aws::ElastiCache
     #                        <p>Previous generation: (not recommended. Existing clusters are still supported but creation of new clusters is not supported for these types.)</p>
     #                        <p>
     #                           <b>M2 node types:</b>
-    #                           <code>cache.m2.xlarge</code>,
+    #                           <code>cache.m2.xlarge</code>, 
     #       						<code>cache.m2.2xlarge</code>,
     #       						<code>cache.m2.4xlarge</code>
     #                        </p>
     #                        <p>
     #                           <b>R3 node types:</b>
-    #                           <code>cache.r3.large</code>,
+    #                           <code>cache.r3.large</code>, 
     #       						<code>cache.r3.xlarge</code>,
-    #       						<code>cache.r3.2xlarge</code>,
+    #       						<code>cache.r3.2xlarge</code>,  
     #       						<code>cache.r3.4xlarge</code>,
     #       						<code>cache.r3.8xlarge</code>
     #                        </p>
@@ -4684,7 +4684,7 @@ module Aws::ElastiCache
     end
 
     # @!attribute serverless_cache_name
-    #   <p>The identifier of serverless cache. If this parameter is specified,
+    #   <p>The identifier of serverless cache. If this parameter is specified, 
     #              only snapshots associated with that specific serverless cache are described. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
     #   @return [String]
     # @!attribute serverless_cache_snapshot_name
@@ -4695,13 +4695,13 @@ module Aws::ElastiCache
     #   <p>The type of snapshot that is being described. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>An optional marker returned from a prior request to support pagination of results from this operation.
-    #              If this parameter is specified, the response includes only records beyond the marker,
+    #   <p>An optional marker returned from a prior request to support pagination of results from this operation. 
+    #              If this parameter is specified, the response includes only records beyond the marker, 
     #              up to the value specified by max-results. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of records to include in the response. If more records exist than
-    #              the specified max-results value, a market is included in the response so that remaining results
+    #   <p>The maximum number of records to include in the response. If more records exist than 
+    #              the specified max-results value, a market is included in the response so that remaining results 
     #              can be retrieved. Available for Valkey, Redis OSS and Serverless Memcached only.The default is 50. The Validation Constraints are a maximum of 50.</p>
     #   @return [Integer]
     class DescribeServerlessCacheSnapshotsRequest < Struct.new(
@@ -4717,8 +4717,8 @@ module Aws::ElastiCache
     end
 
     # @!attribute next_token
-    #   <p>An optional marker returned from a prior request to support pagination of results from this operation.
-    #              If this parameter is specified, the response includes only records beyond the marker,
+    #   <p>An optional marker returned from a prior request to support pagination of results from this operation. 
+    #              If this parameter is specified, the response includes only records beyond the marker, 
     #              up to the value specified by max-results. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
     #   @return [String]
     # @!attribute serverless_cache_snapshots
@@ -4734,17 +4734,17 @@ module Aws::ElastiCache
     end
 
     # @!attribute serverless_cache_name
-    #   <p>The identifier for the serverless cache. If this parameter is specified,
+    #   <p>The identifier for the serverless cache. If this parameter is specified, 
     #              only information about that specific serverless cache is returned. Default: NULL</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of records in the response. If more records exist than the specified max-records value,
-    #              the next token is included in the response so that remaining results can be retrieved.
+    #   <p>The maximum number of records in the response. If more records exist than the specified max-records value, 
+    #              the next token is included in the response so that remaining results can be retrieved. 
     #              The default is 50.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>An optional marker returned from a prior request to support pagination of results from this operation.
-    #              If this parameter is specified, the response includes only records beyond the marker,
+    #   <p>An optional marker returned from a prior request to support pagination of results from this operation. 
+    #              If this parameter is specified, the response includes only records beyond the marker, 
     #              up to the value specified by MaxResults.</p>
     #   @return [String]
     class DescribeServerlessCachesRequest < Struct.new(
@@ -4758,8 +4758,8 @@ module Aws::ElastiCache
     end
 
     # @!attribute next_token
-    #   <p>An optional marker returned from a prior request to support pagination of results from this operation.
-    #              If this parameter is specified, the response includes only records beyond the marker,
+    #   <p>An optional marker returned from a prior request to support pagination of results from this operation. 
+    #              If this parameter is specified, the response includes only records beyond the marker, 
     #              up to the value specified by MaxResults.</p>
     #   @return [String]
     # @!attribute serverless_caches
@@ -5207,7 +5207,7 @@ module Aws::ElastiCache
     #   <p>The identifier of the serverless cache snapshot to be exported to S3. Available for Valkey and Redis OSS only.</p>
     #   @return [String]
     # @!attribute s3_bucket_name
-    #   <p>Name of the Amazon S3 bucket to export the snapshot to. The Amazon S3 bucket must also be in same region
+    #   <p>Name of the Amazon S3 bucket to export the snapshot to. The Amazon S3 bucket must also be in same region 
     #              as the snapshot. Available for Valkey and Redis OSS only.</p>
     #   @return [String]
     class ExportServerlessCacheSnapshotRequest < Struct.new(
@@ -5339,7 +5339,7 @@ module Aws::ElastiCache
     #   <p>Indicates the slot configuration and global identifier for each slice group.</p>
     #   @return [Array<Types::GlobalNodeGroup>]
     # @!attribute auth_token_enabled
-    #   <p>A flag that enables using an <code>AuthToken</code> (password) when issuing Valkey or Redis OSS
+    #   <p>A flag that enables using an <code>AuthToken</code> (password) when issuing Valkey or Redis OSS 
     #               commands.</p>
     #            <p>Default: <code>false</code>
     #            </p>
@@ -6141,11 +6141,11 @@ module Aws::ElastiCache
     #               reboot, or the next failure reboot, whichever occurs first.</p>
     #            <important>
     #               <p>If you perform a <code>ModifyCacheCluster</code> before a pending modification is
-    #                   applied, the pending modification is replaced by the newer modification. However,
-    #                   a pending node-count increase on Memcached clusters cannot be superseded by a request
-    #                   to add fewer nodes. To change a pending node addition, first cancel it by setting
-    #                   <code>NumCacheNodes</code> equal to the current number of nodes in the cluster, then
-    #                   submit the new request. See the <code>NumCacheNodes</code> parameter for details on
+    #                   applied, the pending modification is replaced by the newer modification. However, 
+    #                   a pending node-count increase on Memcached clusters cannot be superseded by a request 
+    #                   to add fewer nodes. To change a pending node addition, first cancel it by setting 
+    #                   <code>NumCacheNodes</code> equal to the current number of nodes in the cluster, then 
+    #                   submit the new request. See the <code>NumCacheNodes</code> parameter for details on 
     #                   node scaling behavior.</p>
     #            </important>
     #            <p>Valid values: <code>true</code> | <code>false</code>
@@ -6166,7 +6166,7 @@ module Aws::ElastiCache
     #               cluster and create it anew with the earlier engine version. </p>
     #   @return [String]
     # @!attribute auto_minor_version_upgrade
-    #   <p> If you are running Valkey 7.2 or Redis OSS engine version 6.0 or later, set this parameter to yes
+    #   <p> If you are running Valkey 7.2 or Redis OSS engine version 6.0 or later, set this parameter to yes 
     #               to opt-in to the next auto minor version upgrade campaign. This parameter is
     #               disabled for previous versions.  </p>
     #   @return [Boolean]
@@ -6785,8 +6785,8 @@ module Aws::ElastiCache
     #   <p>User-provided identifier for the serverless cache to be modified.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>User provided description for the serverless cache.
-    #              Default = NULL, i.e. the existing description is not removed/modified.
+    #   <p>User provided description for the serverless cache. 
+    #              Default = NULL, i.e. the existing description is not removed/modified. 
     #              The description has a maximum length of 255 characters.</p>
     #   @return [String]
     # @!attribute cache_usage_limits
@@ -6796,19 +6796,19 @@ module Aws::ElastiCache
     #   <p>The identifier of the UserGroup to be removed from association with the Valkey and Redis OSS serverless cache.  Available for Valkey and Redis OSS only. Default is NULL.</p>
     #   @return [Boolean]
     # @!attribute user_group_id
-    #   <p>The identifier of the UserGroup to be associated with the serverless cache. Available for Valkey and Redis OSS only.
+    #   <p>The identifier of the UserGroup to be associated with the serverless cache. Available for Valkey and Redis OSS only. 
     #              Default is NULL -  the existing UserGroup is not removed.</p>
     #   @return [String]
     # @!attribute security_group_ids
-    #   <p>The new list of VPC security groups to be associated with the serverless cache.
-    #              Populating this list means the current VPC security groups will be removed.
-    #              This security group is used to authorize traffic access for the VPC end-point (private-link).
+    #   <p>The new list of VPC security groups to be associated with the serverless cache. 
+    #              Populating this list means the current VPC security groups will be removed. 
+    #              This security group is used to authorize traffic access for the VPC end-point (private-link). 
     #              Default = NULL -  the existing list of VPC security groups is not removed.</p>
     #   @return [Array<String>]
     # @!attribute snapshot_retention_limit
-    #   <p>The number of days for which Elasticache retains automatic snapshots before deleting them.
+    #   <p>The number of days for which Elasticache retains automatic snapshots before deleting them. 
     #              Available for Valkey, Redis OSS and Serverless Memcached only.
-    #              Default = NULL, i.e. the existing snapshot-retention-limit will not be removed or modified.
+    #              Default = NULL, i.e. the existing snapshot-retention-limit will not be removed or modified. 
     #              The maximum value allowed is 35 days.</p>
     #   @return [Integer]
     # @!attribute daily_snapshot_time
@@ -7715,7 +7715,7 @@ module Aws::ElastiCache
     #               group.</p>
     #   @return [String]
     # @!attribute auth_token_enabled
-    #   <p>A flag that enables using an <code>AuthToken</code> (password) when issuing Valkey or Redis OSS
+    #   <p>A flag that enables using an <code>AuthToken</code> (password) when issuing Valkey or Redis OSS 
     #               commands.</p>
     #            <p>Default: <code>false</code>
     #            </p>
@@ -7790,7 +7790,7 @@ module Aws::ElastiCache
     # @!attribute cluster_mode
     #   <p>Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must first
     #               set the cluster mode to Compatible. Compatible mode allows your Valkey or Redis OSS clients to connect
-    #               using both cluster mode enabled and cluster mode disabled. After you migrate all Valkey or Redis OSS
+    #               using both cluster mode enabled and cluster mode disabled. After you migrate all Valkey or Redis OSS 
     #               clients to use cluster mode enabled, you can then complete cluster mode configuration
     #               and set the cluster mode to Enabled.</p>
     #   @return [String]
@@ -7996,7 +7996,7 @@ module Aws::ElastiCache
     #                        </note>
     #                        <p>
     #                           <b>M6g node types</b> (available only for Redis OSS engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward):
-    #
+    #   					    
     #   					 	<code>cache.m6g.large</code>,
     #   							<code>cache.m6g.xlarge</code>,
     #   							<code>cache.m6g.2xlarge</code>,
@@ -8030,13 +8030,13 @@ module Aws::ElastiCache
     #                        </p>
     #                        <p>
     #                           <b>T3 node types:</b>
-    #                           <code>cache.t3.micro</code>,
+    #                           <code>cache.t3.micro</code>, 
     #       						<code>cache.t3.small</code>,
     #       						<code>cache.t3.medium</code>
     #                        </p>
     #                        <p>
     #                           <b>T2 node types:</b>
-    #                           <code>cache.t2.micro</code>,
+    #                           <code>cache.t2.micro</code>, 
     #       						<code>cache.t2.small</code>,
     #       						<code>cache.t2.medium</code>
     #                        </p>
@@ -8049,15 +8049,15 @@ module Aws::ElastiCache
     #                        </p>
     #                        <p>
     #                           <b>M1 node types:</b>
-    #                           <code>cache.m1.small</code>,
-    #   						   <code>cache.m1.medium</code>,
+    #                           <code>cache.m1.small</code>, 
+    #   						   <code>cache.m1.medium</code>, 
     #   						   <code>cache.m1.large</code>,
     #   						   <code>cache.m1.xlarge</code>
     #                        </p>
     #                        <p>
     #                           <b>M3 node types:</b>
     #                           <code>cache.m3.medium</code>,
-    #       						<code>cache.m3.large</code>,
+    #       						<code>cache.m3.large</code>, 
     #       						<code>cache.m3.xlarge</code>,
     #       						<code>cache.m3.2xlarge</code>
     #                        </p>
@@ -8082,7 +8082,7 @@ module Aws::ElastiCache
     #                     <li>
     #                        <p>Current generation: </p>
     #                        <p>
-    #                           <b>R7g node types</b>:
+    #                           <b>R7g node types</b>:	
     #   							<code>cache.r7g.large</code>,
     #   							<code>cache.r7g.xlarge</code>,
     #   							<code>cache.r7g.2xlarge</code>,
@@ -8128,15 +8128,15 @@ module Aws::ElastiCache
     #                        <p>Previous generation: (not recommended. Existing clusters are still supported but creation of new clusters is not supported for these types.)</p>
     #                        <p>
     #                           <b>M2 node types:</b>
-    #                           <code>cache.m2.xlarge</code>,
+    #                           <code>cache.m2.xlarge</code>, 
     #       						<code>cache.m2.2xlarge</code>,
     #       						<code>cache.m2.4xlarge</code>
     #                        </p>
     #                        <p>
     #                           <b>R3 node types:</b>
-    #                           <code>cache.r3.large</code>,
+    #                           <code>cache.r3.large</code>, 
     #       						<code>cache.r3.xlarge</code>,
-    #       						<code>cache.r3.2xlarge</code>,
+    #       						<code>cache.r3.2xlarge</code>,  
     #       						<code>cache.r3.4xlarge</code>,
     #       						<code>cache.r3.8xlarge</code>
     #                        </p>
@@ -8301,7 +8301,7 @@ module Aws::ElastiCache
     #                        </note>
     #                        <p>
     #                           <b>M6g node types</b> (available only for Redis OSS engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward):
-    #
+    #   					    
     #   					 	<code>cache.m6g.large</code>,
     #   							<code>cache.m6g.xlarge</code>,
     #   							<code>cache.m6g.2xlarge</code>,
@@ -8335,13 +8335,13 @@ module Aws::ElastiCache
     #                        </p>
     #                        <p>
     #                           <b>T3 node types:</b>
-    #                           <code>cache.t3.micro</code>,
+    #                           <code>cache.t3.micro</code>, 
     #       						<code>cache.t3.small</code>,
     #       						<code>cache.t3.medium</code>
     #                        </p>
     #                        <p>
     #                           <b>T2 node types:</b>
-    #                           <code>cache.t2.micro</code>,
+    #                           <code>cache.t2.micro</code>, 
     #       						<code>cache.t2.small</code>,
     #       						<code>cache.t2.medium</code>
     #                        </p>
@@ -8354,15 +8354,15 @@ module Aws::ElastiCache
     #                        </p>
     #                        <p>
     #                           <b>M1 node types:</b>
-    #                           <code>cache.m1.small</code>,
-    #   						   <code>cache.m1.medium</code>,
+    #                           <code>cache.m1.small</code>, 
+    #   						   <code>cache.m1.medium</code>, 
     #   						   <code>cache.m1.large</code>,
     #   						   <code>cache.m1.xlarge</code>
     #                        </p>
     #                        <p>
     #                           <b>M3 node types:</b>
     #                           <code>cache.m3.medium</code>,
-    #       						<code>cache.m3.large</code>,
+    #       						<code>cache.m3.large</code>, 
     #       						<code>cache.m3.xlarge</code>,
     #       						<code>cache.m3.2xlarge</code>
     #                        </p>
@@ -8387,7 +8387,7 @@ module Aws::ElastiCache
     #                     <li>
     #                        <p>Current generation: </p>
     #                        <p>
-    #                           <b>R7g node types</b>:
+    #                           <b>R7g node types</b>:	
     #   							<code>cache.r7g.large</code>,
     #   							<code>cache.r7g.xlarge</code>,
     #   							<code>cache.r7g.2xlarge</code>,
@@ -8433,15 +8433,15 @@ module Aws::ElastiCache
     #                        <p>Previous generation: (not recommended. Existing clusters are still supported but creation of new clusters is not supported for these types.)</p>
     #                        <p>
     #                           <b>M2 node types:</b>
-    #                           <code>cache.m2.xlarge</code>,
+    #                           <code>cache.m2.xlarge</code>, 
     #       						<code>cache.m2.2xlarge</code>,
     #       						<code>cache.m2.4xlarge</code>
     #                        </p>
     #                        <p>
     #                           <b>R3 node types:</b>
-    #                           <code>cache.r3.large</code>,
+    #                           <code>cache.r3.large</code>, 
     #       						<code>cache.r3.xlarge</code>,
-    #       						<code>cache.r3.2xlarge</code>,
+    #       						<code>cache.r3.2xlarge</code>,  
     #       						<code>cache.r3.4xlarge</code>,
     #       						<code>cache.r3.8xlarge</code>
     #                        </p>
@@ -8735,7 +8735,7 @@ module Aws::ElastiCache
     #               <code>sse-kms</code> if a customer-managed KMS key is used.</p>
     #   @return [String]
     # @!attribute security_group_ids
-    #   <p>The IDs of the EC2 security groups associated with the serverless
+    #   <p>The IDs of the EC2 security groups associated with the serverless 
     #              cache.</p>
     #   @return [Array<String>]
     # @!attribute endpoint
@@ -8753,7 +8753,7 @@ module Aws::ElastiCache
     #   <p>The identifier of the user group associated with the serverless cache. Available for Valkey and Redis OSS only. Default is NULL.</p>
     #   @return [String]
     # @!attribute subnet_ids
-    #   <p>If no subnet IDs are given and your VPC is in us-west-1, then ElastiCache will select 2 default subnets across AZs in your VPC.
+    #   <p>If no subnet IDs are given and your VPC is in us-west-1, then ElastiCache will select 2 default subnets across AZs in your VPC. 
     #              For all other Regions, if no subnet IDs are given then ElastiCache will select 3 default subnets across AZs in your default VPC.</p>
     #   @return [Array<String>]
     # @!attribute snapshot_retention_limit
@@ -8764,9 +8764,9 @@ module Aws::ElastiCache
     #              specific time on a daily basis. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
     #   @return [String]
     # @!attribute network_type
-    #   <p>The type of IP address protocol used by the serverless cache.
+    #   <p>The type of IP address protocol used by the serverless cache. 
     #              Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>.
-    #              <code>ipv6</code> is only supported with IPv6-only subnets.
+    #              <code>ipv6</code> is only supported with IPv6-only subnets. 
     #              If not specified, defaults to <code>ipv4</code>, unless all provided subnets are IPv6-only, in which case it defaults to <code>ipv6</code>.</p>
     #   @return [String]
     # @!attribute connection_type
@@ -9093,7 +9093,7 @@ module Aws::ElastiCache
     #                        </note>
     #                        <p>
     #                           <b>M6g node types</b> (available only for Redis OSS engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward):
-    #
+    #   					    
     #   					 	<code>cache.m6g.large</code>,
     #   							<code>cache.m6g.xlarge</code>,
     #   							<code>cache.m6g.2xlarge</code>,
@@ -9127,13 +9127,13 @@ module Aws::ElastiCache
     #                        </p>
     #                        <p>
     #                           <b>T3 node types:</b>
-    #                           <code>cache.t3.micro</code>,
+    #                           <code>cache.t3.micro</code>, 
     #       						<code>cache.t3.small</code>,
     #       						<code>cache.t3.medium</code>
     #                        </p>
     #                        <p>
     #                           <b>T2 node types:</b>
-    #                           <code>cache.t2.micro</code>,
+    #                           <code>cache.t2.micro</code>, 
     #       						<code>cache.t2.small</code>,
     #       						<code>cache.t2.medium</code>
     #                        </p>
@@ -9146,15 +9146,15 @@ module Aws::ElastiCache
     #                        </p>
     #                        <p>
     #                           <b>M1 node types:</b>
-    #                           <code>cache.m1.small</code>,
-    #   						   <code>cache.m1.medium</code>,
+    #                           <code>cache.m1.small</code>, 
+    #   						   <code>cache.m1.medium</code>, 
     #   						   <code>cache.m1.large</code>,
     #   						   <code>cache.m1.xlarge</code>
     #                        </p>
     #                        <p>
     #                           <b>M3 node types:</b>
     #                           <code>cache.m3.medium</code>,
-    #       						<code>cache.m3.large</code>,
+    #       						<code>cache.m3.large</code>, 
     #       						<code>cache.m3.xlarge</code>,
     #       						<code>cache.m3.2xlarge</code>
     #                        </p>
@@ -9179,7 +9179,7 @@ module Aws::ElastiCache
     #                     <li>
     #                        <p>Current generation: </p>
     #                        <p>
-    #                           <b>R7g node types</b>:
+    #                           <b>R7g node types</b>:	
     #   							<code>cache.r7g.large</code>,
     #   							<code>cache.r7g.xlarge</code>,
     #   							<code>cache.r7g.2xlarge</code>,
@@ -9225,15 +9225,15 @@ module Aws::ElastiCache
     #                        <p>Previous generation: (not recommended. Existing clusters are still supported but creation of new clusters is not supported for these types.)</p>
     #                        <p>
     #                           <b>M2 node types:</b>
-    #                           <code>cache.m2.xlarge</code>,
+    #                           <code>cache.m2.xlarge</code>, 
     #       						<code>cache.m2.2xlarge</code>,
     #       						<code>cache.m2.4xlarge</code>
     #                        </p>
     #                        <p>
     #                           <b>R3 node types:</b>
-    #                           <code>cache.r3.large</code>,
+    #                           <code>cache.r3.large</code>, 
     #       						<code>cache.r3.xlarge</code>,
-    #       						<code>cache.r3.2xlarge</code>,
+    #       						<code>cache.r3.2xlarge</code>,  
     #       						<code>cache.r3.4xlarge</code>,
     #       						<code>cache.r3.8xlarge</code>
     #                        </p>
