@@ -79,6 +79,10 @@ module Aws
         end
 
         def prepare_validation(headers, validation_list)
+          # Automatic stub data is not an HTTP response and has no modeled
+          # checksum to validate. Explicit stubs continue through validation.
+          return if @context[:generated_stub]
+
           validation_list.each do |algorithm|
             header_name = Checksums.header_name(algorithm)
             expected = headers[header_name]

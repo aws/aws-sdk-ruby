@@ -368,6 +368,26 @@ module Aws
             expect { validator.raise_if_failed }.not_to raise_error
           end
 
+          it 'does not validate a checksum on a generated stub response' do
+            add_response_checksum_behavior(%w[CRC32])
+            context = client.operation(string: 'payload').context
+            validator = Checksums::ResponseValidator.new(
+              context,
+              Extension.http_checksum(context.operation)
+            ).register
+            context.http_response.reset
+            context[:generated_stub] = true
+            context.http_response.signal_done(
+              status_code: 200,
+              headers: {
+                'x-amz-checksum-crc32' => 'bm90LWEtY2hlY2tzdW0='
+              },
+              body: '{}'
+            )
+
+            expect { validator.raise_if_failed }.not_to raise_error
+          end
+
           it 'does not validate a response without an enabled validation mode' do
             add_response_checksum_behavior(%w[CRC32])
             configured = client_class.new(
