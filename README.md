@@ -53,7 +53,7 @@ The SDK searches the following locations for credentials:
     * Process Credentials (`credential_process`)
     * SSO Credentials (`sso_session`, `sso_account_id`, `sso_role_name`, `sso_region`)
   * Unless `ENV['AWS_SDK_CONFIG_OPT_OUT']` is set, the shared configuration ini file at `~/.aws/config` will also be parsed for credentials.
-    * A profile in this file that sets `daemon_credential` gets short-lived credentials from a local [credential daemon](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-credential-daemon.html), ahead of any other credentials for that profile.
+    * A profile in this file that sets `credential_daemon` gets short-lived credentials from a local [credential daemon](https://docs.aws.amazon.com/cli/latest/userguide/cli-authentication-credsd.html), ahead of any other credentials for that profile.
 * From an instance profile when running on EC2 or from the ECS credential provider when running in an ECS container with that feature enabled.
 
 **Shared configuration is loaded only a single time, and credentials are provided statically at client creation time. Shared credentials do not refresh.**
