@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add `Aws.eager_load!` to eagerly resolve constants registered by loaded AWS SDK gems.
+
 3.271.1 (2026-11-20)
 ------------------
 
