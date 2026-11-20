@@ -34,7 +34,7 @@ module Aws
       end
 
       it 'raises an error when process returns invalid JSON' do
-        process = %w[echo 'invalid json']
+        process = ['echo', 'invalid json']
         expect { ProcessCredentialsProvider.new(process) }.to raise_error(/Malformed JSON payload/)
       end
 
