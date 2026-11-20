@@ -204,7 +204,7 @@ module Aws
 
     # @api private
     # Builds a {CredentialDaemonCredentials} provider for a profile in the
-    # shared config file that sets `daemon_credential`.
+    # shared config file that sets `credential_daemon`.
     #
     # @param [Hash] opts
     # @option opts [String] :profile
@@ -220,22 +220,22 @@ module Aws
         # raises the SSO provider's error for the missing key
         sso_credentials_from_profile(@parsed_config, p)
         raise ArgumentError,
-              "Profile #{p} sets daemon_credential with only one of sso_account_id and sso_role_name"
+              "Profile #{p} sets credential_daemon with only one of sso_account_id and sso_role_name"
       end
 
       prof_config = @parsed_config[p]
-      name = prof_config['daemon_credential']
+      name = prof_config['credential_daemon']
       CredentialDaemonCredentials.validate_credential_name!(name, p)
       cred_config = @parsed_credentials.fetch(p, {})
       if prof_config['web_identity_token_file'] || cred_config['web_identity_token_file']
         raise CredentialDaemonCredentials.invalid_config(
-          "profile '#{p}' has two credential sources, daemon_credential and " \
+          "profile '#{p}' has two credential sources, credential_daemon and " \
           'web_identity_token_file; remove one of them'
         )
       end
       if prof_config['role_arn'] || cred_config['role_arn']
         raise CredentialDaemonCredentials.invalid_config(
-          "profile '#{p}' sets daemon_credential together with role_arn; " \
+          "profile '#{p}' sets credential_daemon together with role_arn; " \
           "move the role to its own profile and set source_profile = #{p} there"
         )
       end
@@ -277,7 +277,7 @@ module Aws
       "unable to sign request without token set: profile '#{profile}' keeps its " \
       'SSO session in the credential daemon; services that use bearer tokens ' \
       'need an SSO session stored in the shared config and SSO token cache files ' \
-      '(run aws sso login with a profile that does not set daemon_credential)'
+      '(run aws sso login with a profile that does not set credential_daemon)'
     end
 
     # Source a custom configured endpoint from the shared configuration file
@@ -461,13 +461,13 @@ module Aws
     end
 
     # Returns nil when the profile is not resolved by the credential daemon:
-    # daemon_credential is only read from the shared config file. A profile
+    # credential_daemon is only read from the shared config file. A profile
     # with an SSO session or start URL but neither sso_account_id nor
-    # sso_role_name is resolved as if daemon_credential were absent.
+    # sso_role_name is resolved as if credential_daemon were absent.
     def credential_daemon_profile_kind(profile)
       return unless @config_enabled && @parsed_config &&
                     (prof_config = @parsed_config[profile]) &&
-                    prof_config.key?('daemon_credential')
+                    prof_config.key?('credential_daemon')
 
       if prof_config['sso_session'] || prof_config['sso_start_url']
         case (prof_config.keys & SSO_CREDENTIAL_PROFILE_KEYS).size

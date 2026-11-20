@@ -6,7 +6,7 @@ module Aws
     # Keys that keep an empty value (`key =` with nothing after it) as `''`.
     # Other keys with an empty value start a nested section and are dropped
     # when no nested lines follow.
-    EMPTY_VALUE_KEYS = %w[daemon_credential].freeze
+    EMPTY_VALUE_KEYS = %w[credential_daemon].freeze
 
     class << self
 

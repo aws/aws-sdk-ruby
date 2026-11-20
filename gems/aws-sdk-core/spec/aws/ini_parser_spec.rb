@@ -76,14 +76,14 @@ s3 =
       expect(parsed['blank-property']['s3']['blank_sub_property']).to eq(' ')
     end
 
-    it 'keeps an empty daemon_credential as an empty string' do
-      parsed = IniParser.ini_parse("[profile dev]\ndaemon_credential =\nregion =\n")
-      expect(parsed['dev']).to eq('daemon_credential' => '')
+    it 'keeps an empty credential_daemon as an empty string' do
+      parsed = IniParser.ini_parse("[profile dev]\ncredential_daemon =\nregion =\n")
+      expect(parsed['dev']).to eq('credential_daemon' => '')
     end
 
-    it 'parses nested lines under an empty daemon_credential as a nested section' do
-      parsed = IniParser.ini_parse("[profile dev]\ndaemon_credential =\n  a = b\n")
-      expect(parsed['dev']['daemon_credential']).to eq('a' => 'b')
+    it 'parses nested lines under an empty credential_daemon as a nested section' do
+      parsed = IniParser.ini_parse("[profile dev]\ncredential_daemon =\n  a = b\n")
+      expect(parsed['dev']['credential_daemon']).to eq('a' => 'b')
     end
   end
 end

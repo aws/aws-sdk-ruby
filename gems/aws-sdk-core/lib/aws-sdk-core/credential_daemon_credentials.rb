@@ -20,16 +20,18 @@ module Aws
   #     ec2 = Aws::EC2::Client.new(credentials: credentials)
   #
   # The default credential provider chain uses this provider for a profile
-  # in the shared config file that sets `daemon_credential`.
+  # in the shared config file that sets `credential_daemon`.
   #
   # The socket is found in this order, on every fetch:
   #
-  # 1. `ENV['AWS_CREDENTIAL_DAEMON_SOCKET']`, when it is an absolute path.
-  #    An empty or relative value counts as unset.
-  # 2. `$HOME/.aws/credential-daemon.sock`, when anything is there: a
+  # 1. The `:socket_path` option, when it is an absolute path.
+  # 2. `ENV['AWS_CREDENTIAL_DAEMON_SOCKET']`, when it is an absolute path.
+  # 3. `$HOME/.aws/credential-daemon.sock`, when anything is there: a
   #    socket, a symbolic link, or a link whose target is missing. `HOME`
   #    is read from the environment, and this location is skipped when
   #    `HOME` is unset, empty or relative.
+  #
+  # An empty or relative value for the first two counts as unset.
   #
   # The provider dials the first location that applies and tries no other
   # one if that dial fails. When no location applies, it raises
@@ -83,6 +85,9 @@ module Aws
     #   the SSO role to get credentials for.
     # @option options [String] :role_name With `:account_id`, the name of
     #   the SSO role to get credentials for.
+    # @option options [String] :socket_path The path of the credential
+    #   daemon's socket, checked before `AWS_CREDENTIAL_DAEMON_SOCKET`. An
+    #   empty or relative path counts as unset.
     # @option options [Numeric] :connect_timeout (1) Seconds to wait for the
     #   connection to the socket.
     # @option options [Numeric] :call_timeout (5) Seconds to wait for the
@@ -101,6 +106,7 @@ module Aws
         @account_id = account_id
         @role_name = role_name
       end
+      @socket_path = socket_path_option(options)
       @connect_timeout = timeout_option(options, :connect_timeout, DEFAULT_CONNECT_TIMEOUT)
       @call_timeout = timeout_option(options, :call_timeout, DEFAULT_CALL_TIMEOUT)
       @async_refresh = false
@@ -119,6 +125,13 @@ module Aws
       return value if value.is_a?(Numeric) && value.positive?
 
       raise ArgumentError, "expected :#{key} to be a positive number, got #{value.inspect}"
+    end
+
+    def socket_path_option(options)
+      value = options.delete(:socket_path)
+      return value if value.nil? || value.is_a?(String)
+
+      raise ArgumentError, "expected :socket_path to be a String, got #{value.inspect}"
     end
 
     def refresh
@@ -151,8 +164,8 @@ module Aws
     # Raises NOT_RUNNING when no location applies or when the HOME link's
     # target is missing.
     def socket_path
-      env = ENV[SOCKET_ENV]
-      return env if env && env.start_with?('/')
+      configured = configured_socket_path
+      return configured if configured
 
       path = home_socket_path
       raise no_socket_location unless path && File.lstat(path)
@@ -161,6 +174,12 @@ module Aws
       path
     rescue SystemCallError
       raise no_socket_location
+    end
+
+    # The `:socket_path` option or else AWS_CREDENTIAL_DAEMON_SOCKET, or nil
+    # when neither is an absolute path.
+    def configured_socket_path
+      [@socket_path, ENV[SOCKET_ENV]].find { |path| path&.start_with?('/') }
     end
 
     # `$HOME/.aws/credential-daemon.sock`, or nil when HOME is unset, empty
@@ -469,7 +488,7 @@ module Aws
       def validate_credential_name!(name, profile = nil)
         return if name.is_a?(String) && NAME_PATTERN.match?(name)
 
-        where = profile ? "profile '#{sanitize(profile)}' has an invalid daemon_credential value" : 'invalid credential name'
+        where = profile ? "profile '#{sanitize(profile)}' has an invalid credential_daemon value" : 'invalid credential name'
         raise invalid_config(
           "#{where} '#{sanitize(name)}'; it must be 1-64 characters from A-Z, " \
           "a-z, 0-9, '.', '_' and '-' and must not start with '.'"
