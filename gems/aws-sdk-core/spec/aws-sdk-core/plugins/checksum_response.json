@@ -1,0 +1,95 @@
+[
+  {
+    "documentation": "Successful payload validation with CRC32 checksum.",
+    "responsePayload": "{}",
+    "responseAlgorithms": ["CRC32"],
+    "responseHeaders": {
+      "x-amz-checksum-crc32": "o6a/Qw=="
+    },
+    "expect": {
+      "kind": "success"
+    }
+  },
+  {
+    "documentation": "Successful payload validation with SHA1 checksum.",
+    "responsePayload": "{}",
+    "responseAlgorithms": ["SHA1"],
+    "responseHeaders": {
+      "x-amz-checksum-sha1": "vyGp6PvFo4RvsFtPoIWeCReyIC8="
+    },
+    "expect": {
+      "kind": "success"
+    }
+  },
+  {
+    "documentation": "Successful payload validation with SHA256 checksum.",
+    "responsePayload": "{}",
+    "responseAlgorithms": ["SHA256"],
+    "responseHeaders": {
+      "x-amz-checksum-sha256": "RBNvo1WzZ4oRRq0W9+hknpT7T8If536DEMBg9hyq/4o="
+    },
+    "expect": {
+      "kind": "success"
+    }
+  },
+  {
+    "documentation": "Successful payload validation with SHA512 checksum.",
+    "responsePayload": "{}",
+    "responseAlgorithms": ["SHA512"],
+    "responseHeaders": {
+      "x-amz-checksum-sha512": "J8dGcK23UHX60FjVzq97IMTneGyDuuijL2Jvl4KvNMmjPCBG72D9Knh403jin+yFGAa72aZ4ePOp8c2kgwdj/Q=="
+    },
+    "expect": {
+      "kind": "success"
+    }
+  },
+  {
+    "documentation": "The highest-priority supported checksum is selected.",
+    "responsePayload": "{}",
+    "responseAlgorithms": ["SHA256", "CRC32"],
+    "responseHeaders": {
+      "x-amz-checksum-sha256": "RBNvo1WzZ4oRRq0W9+hknpT7T8If536DEMBg9hyq/4o=",
+      "x-amz-checksum-crc32": "AAAAAA=="
+    },
+    "expect": {
+      "kind": "failure",
+      "message": "Checksum validation failed on x-amz-checksum-crc32"
+    }
+  },
+  {
+    "documentation": "A malformed higher-priority checksum falls back to the next candidate.",
+    "responsePayload": "{}",
+    "responseAlgorithms": ["CRC32", "SHA256"],
+    "responseHeaders": {
+      "x-amz-checksum-crc32": "not base64",
+      "x-amz-checksum-sha256": "RBNvo1WzZ4oRRq0W9+hknpT7T8If536DEMBg9hyq/4o="
+    },
+    "expect": {
+      "kind": "success"
+    }
+  },
+  {
+    "documentation": "Unsupported modeled algorithms are ignored.",
+    "responsePayload": "{}",
+    "responseAlgorithms": ["UNKNOWN", "CRC32"],
+    "responseHeaders": {
+      "x-amz-checksum-unknown": "unknown",
+      "x-amz-checksum-crc32": "o6a/Qw=="
+    },
+    "expect": {
+      "kind": "success"
+    }
+  },
+  {
+    "documentation": "A valid Base64 checksum with the wrong value fails validation.",
+    "responsePayload": "{}",
+    "responseAlgorithms": ["CRC32"],
+    "responseHeaders": {
+      "x-amz-checksum-crc32": "bm90LWEtY2hlY2tzdW0="
+    },
+    "expect": {
+      "kind": "failure",
+      "message": "Checksum validation failed on x-amz-checksum-crc32"
+    }
+  }
+]
