@@ -112,6 +112,21 @@ Known AWS regions include (not specific to this service):
         expect(resp.string).to eq('value')
       end
 
+      it 'supports response stubbing when Object defines stubs' do
+        original_stubs = Object.instance_method(:stubs) if
+          Object.instance_methods(false).include?(:stubs)
+        Object.send(:define_method, :stubs) do |_stubbed_methods|
+          raise 'Object#stubs should not be called'
+        end
+
+        client.stub_responses(:example_operation, string: 'value')
+        expect(client.example_operation.string).to eq('value')
+      ensure
+        Object.send(:remove_method, :stubs) if
+          Object.instance_methods(false).include?(:stubs)
+        Object.send(:define_method, :stubs, original_stubs) if original_stubs
+      end
+
       it 'accepts a list of stubs' do
         client.stub_responses(:example_operation, [
           { string: 'value-1' },

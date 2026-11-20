@@ -219,7 +219,7 @@ module Aws
     def next_stub(context)
       operation_name = context.operation_name.to_sym
       stub = @config.stubs_mutex.synchronize do
-        stubs = @config.stubs[operation_name] || []
+        stubs = @config[:stubs][operation_name] || []
         case stubs.length
         when 0 then stub_data(operation_name)
         when 1 then stubs.first
@@ -235,7 +235,7 @@ module Aws
 
     def apply_stubs(operation_name, stubs)
       @config.stubs_mutex.synchronize do
-        @config.stubs[operation_name.to_sym] = stubs
+        @config[:stubs][operation_name.to_sym] = stubs
       end
     end
 
