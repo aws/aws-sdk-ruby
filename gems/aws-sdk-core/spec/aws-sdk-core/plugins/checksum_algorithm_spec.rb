@@ -100,6 +100,8 @@ module Aws
 
           Checksums::SUPPORTED_ALGORITHMS.each do |algorithm|
             it "uses a #{algorithm} trailer checksum for eligible streaming requests" do
+              skip 'Trailer checksums are disabled on JRuby' if defined?(JRUBY_VERSION)
+
               add_streaming_request_behavior
 
               response = client.operation(
@@ -124,25 +126,6 @@ module Aws
             end
           end
 
-          it 'buffers short source reads into valid non-final aws-chunked chunks' do
-            add_streaming_request_behavior
-            source = Class.new(StringIO) do
-              def read(length = nil, buffer = nil)
-                super([length || 3, 3].min, buffer)
-              end
-            end.new('z' * 20_000)
-
-            encoded = client
-                      .operation(streaming_blob: source)
-                      .context.http_request.body.read
-            chunk_sizes = encoded
-                          .scan(/^([0-9a-f]+)\r$/).flatten
-                          .map { |hex| hex.to_i(16) }.reject(&:zero?)
-
-            expect(chunk_sizes[0...-1]).to all(be >= 8 * 1024)
-            expect(chunk_sizes.sum).to eq(20_000)
-          end
-
           it 'falls back to a header checksum for streaming requests over HTTP' do
             add_streaming_request_behavior
             configured = client_class.new(
@@ -156,6 +139,20 @@ module Aws
             expect(headers['x-amz-checksum-crc32'])
               .to eq(checksum_for('CRC32', StringIO.new('payload')))
             expect(headers['x-amz-trailer']).to be_nil
+          end
+
+          it 'falls back to a header checksum for streaming requests on JRuby' do
+            stub_const('JRUBY_VERSION', '9.4.0.0')
+            add_streaming_request_behavior
+
+            response = client.operation(streaming_blob: StringIO.new('payload'))
+            request = response.context.http_request
+
+            expect(request.headers['x-amz-checksum-crc32'])
+              .to eq(checksum_for('CRC32', StringIO.new('payload')))
+            expect(request.headers['x-amz-content-sha256']).to be_nil
+            expect(request.headers['x-amz-trailer']).to be_nil
+            expect(request.body.read).to eq('payload')
           end
 
           it 'does not calculate an optional checksum in when_required mode' do

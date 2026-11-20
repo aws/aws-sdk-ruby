@@ -114,6 +114,28 @@ module Aws
           expect(wrapper.read).to include('x-amz-checksum-crc32:')
         end
 
+        it 'buffers short source reads into valid non-final chunks' do
+          source = Class.new(StringIO) do
+            def read(length = nil, buffer = nil)
+              super([length || 3, 3].min, buffer)
+            end
+          end.new('z' * 20_000)
+          wrapper = described_class.new(
+            io: source,
+            algorithm: 'CRC32',
+            trailer_name: 'x-amz-checksum-crc32'
+          )
+
+          chunk_sizes =
+            wrapper
+            .read
+            .scan(/^([0-9a-f]+)\r$/).flatten
+            .map { |hex| hex.to_i(16) }.reject(&:zero?)
+
+          expect(chunk_sizes[0...-1]).to all(be >= 8 * 1024)
+          expect(chunk_sizes.sum).to eq(20_000)
+        end
+
         it 'reuses a completed checksum after rewind' do
           first = wrapper.read
           source.string = 'other payload'
