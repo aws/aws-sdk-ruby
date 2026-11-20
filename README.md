@@ -125,6 +125,23 @@ Aws.config[:credentials] = Aws::Credentials.new(
 For more information on how to configure credentials, see the developer guide
 for [configuring AWS SDK for Ruby](https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html).
 
+## Eager loading
+
+The SDK normally loads service constants when your application first uses them.
+Applications that want to load SDK constants during startup can opt in after
+requiring their service gems:
+
+```ruby
+require 'aws-sdk-s3'
+require 'aws-sdk-sqs'
+
+Aws.eager_load!
+```
+
+`Aws.eager_load!` loads SDK constants from gems that were required before the
+call. It does not make any AWS service requests. Requiring only the service
+gems your application uses limits the code loaded into memory.
+
 ## API Clients
 
 Construct a service client to make API calls. Each client provides a 1-to-1

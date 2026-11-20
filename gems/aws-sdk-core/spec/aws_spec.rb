@@ -58,4 +58,19 @@ module Aws
       expect(conn_pool.size).to eq(0)
     end
   end
+
+  describe '.eager_load!' do
+    it 'resolves constants under loaded SDK namespaces' do
+      service = Module.new
+      stub_const('Aws::TestService', service)
+
+      allow(Aws).to receive(:constants).and_return([:TestService])
+      allow(service).to receive(:constants).and_return([:Client])
+      expect(Aws).to receive(:const_get)
+        .with(:TestService).and_call_original
+      expect(service).to receive(:const_get).with(:Client)
+
+      expect(Aws.eager_load!).to be_nil
+    end
+  end
 end
