@@ -8,6 +8,8 @@ module Aws
       # @api private
       class ChecksumAlgorithm < Smithy::Client::Plugin
         DEFAULT_CHECKSUM = Checksums::DEFAULT_ALGORITHM
+        REQUEST_CHECKSUM_ENV = 'AWS_REQUEST_CHECKSUM_CALCULATION'
+        RESPONSE_CHECKSUM_ENV = 'AWS_RESPONSE_CHECKSUM_VALIDATION'
 
         option(
           :request_checksum_calculation,
@@ -24,10 +26,10 @@ module Aws
               modeled `requestAlgorithmMember`.
           DOCS
           resolve_mode(
-            ENV.fetch('AWS_REQUEST_CHECKSUM_CALCULATION', nil),
+            ENV.fetch(REQUEST_CHECKSUM_ENV, nil),
             profile_value(config, 'request_checksum_calculation'),
             option: :request_checksum_calculation,
-            environment: 'AWS_REQUEST_CHECKSUM_CALCULATION'
+            environment: REQUEST_CHECKSUM_ENV
           )
         end
 
@@ -46,10 +48,10 @@ module Aws
               the modeled `requestValidationModeMember` to `ENABLED`.
           DOCS
           resolve_mode(
-            ENV.fetch('AWS_RESPONSE_CHECKSUM_VALIDATION', nil),
+            ENV.fetch(RESPONSE_CHECKSUM_ENV, nil),
             profile_value(config, 'response_checksum_validation'),
             option: :response_checksum_validation,
-            environment: 'AWS_RESPONSE_CHECKSUM_VALIDATION'
+            environment: RESPONSE_CHECKSUM_ENV
           )
         end
 
@@ -72,15 +74,15 @@ module Aws
 
         def after_initialize(client)
           config = client.config
-          config.request_checksum_calculation = ChecksumAlgorithm.resolve_mode(
+          config.request_checksum_calculation = self.class.resolve_mode(
             config.request_checksum_calculation,
             option: :request_checksum_calculation,
-            environment: 'AWS_REQUEST_CHECKSUM_CALCULATION'
+            environment: REQUEST_CHECKSUM_ENV
           )
-          config.response_checksum_validation = ChecksumAlgorithm.resolve_mode(
+          config.response_checksum_validation = self.class.resolve_mode(
             config.response_checksum_validation,
             option: :response_checksum_validation,
-            environment: 'AWS_RESPONSE_CHECKSUM_VALIDATION'
+            environment: RESPONSE_CHECKSUM_ENV
           )
         end
 
@@ -89,7 +91,9 @@ module Aws
           handlers.add(ChecksumHandler, step: :build, priority: 15)
         end
 
-        # Applies modeled defaults before protocol serialization.
+        # Populates modeled checksum input members from client configuration
+        # before protocol serialization turns params into headers.
+        # @api private
         class ChecksumDefaultsHandler < Smithy::Client::Handler
           def call(context)
             context[:http_checksum] ||= {}
@@ -105,8 +109,10 @@ module Aws
             return unless checksum
             return unless (member = checksum[:request_algorithm_member])
             return if context.params.key?(member)
-            return unless checksum[:request_checksum_required] ||
-                          context.config.request_checksum_calculation == 'when_supported'
+
+            required = checksum[:request_checksum_required]
+            supported = context.config.request_checksum_calculation == 'when_supported'
+            return unless required || supported
 
             context.params[member] = DEFAULT_CHECKSUM
             context[:http_checksum][:defaulted_request_algorithm] = true
@@ -122,6 +128,7 @@ module Aws
         end
 
         # Coordinates flexible checksum request and response processing.
+        # @api private
         class ChecksumHandler < Smithy::Client::Handler
           def call(context)
             checksum = Extension.http_checksum(context.operation)

@@ -6,20 +6,22 @@ require_relative '../checksums'
 module Aws
   module Core
     module Checksums
-      # Validates a modeled checksum with one rolling digest while response
-      # data is received, without buffering the payload.
+      # Updates one digest as response chunks arrive, so validation does not
+      # retain a second copy of the payload in memory.
+      # @api private
       class ResponseValidator
         def initialize(context, checksum)
           @context = context
           @checksum = checksum
+          @skip_response_validation =
+            context[:http_checksum]&.[](:skip_response_validation)
           @state = {}
         end
 
         def register
-          return self unless enabled?
+          return self unless validation_enabled?
 
           validation_list = validation_algorithms
-          @context[:http_checksum][:validation_list] = validation_list
           add_headers_listener(validation_list)
           add_data_listener
           add_success_listener
@@ -33,17 +35,13 @@ module Aws
         private
 
         def validation_algorithms
-          @context.operation.fetch_metadata(
-            :aws_http_checksum_response_algorithms
-          ) do
-            (
-              Checksums::RESPONSE_ALGORITHM_PRIORITIES &
-              @checksum[:response_algorithms]
-            ).freeze
-          end
+          Extension.http_checksum_validation_algorithms(
+            @context.operation,
+            Checksums::RESPONSE_ALGORITHM_PRIORITIES
+          )
         end
 
-        def enabled?
+        def validation_enabled?
           return false unless @checksum
           return false if @checksum[:response_algorithms].empty?
 
@@ -55,15 +53,7 @@ module Aws
         def add_headers_listener(validation_list)
           @context.http_response.on_headers do |_status, headers|
             @state.clear
-            header_name, algorithm, expected =
-              response_header_to_verify(headers, validation_list)
-            next unless header_name
-            next if skip_checksum?(expected)
-
-            @state[:algorithm] = algorithm
-            @state[:header_name] = header_name
-            @state[:digest] = Checksums.digest_for(algorithm)
-            @state[:expected] = expected
+            prepare_validation(headers, validation_list)
           end
         end
 
@@ -78,28 +68,29 @@ module Aws
             next unless @state[:digest]
 
             computed = @state[:digest].base64digest
-            if computed == @state[:expected]
-              @context[:http_checksum][:validated] = @state[:algorithm]
-            else
-              record_failure(computed)
-            end
+            record_failure(computed) unless computed == @state[:expected]
           end
         end
 
-        def skip_checksum?(expected)
-          @context[:http_checksum][:skip_on_suffix] &&
-            /-\d+$/.match?(expected)
+        def skip_response_validation?(expected)
+          # Service plugins may provide a predicate for response checksum
+          # values that Core cannot validate generically.
+          expected && @skip_response_validation&.call(expected)
         end
 
-        def response_header_to_verify(headers, validation_list)
+        def prepare_validation(headers, validation_list)
           validation_list.each do |algorithm|
-            header_name = "x-amz-checksum-#{algorithm.downcase}"
+            header_name = Checksums.header_name(algorithm)
             expected = headers[header_name]
+            next unless expected
+            break if skip_response_validation?(expected)
             next unless valid_base64_checksum?(expected)
 
-            return [header_name, algorithm, expected]
+            @state[:header_name] = header_name
+            @state[:digest] = Checksums.digest_for(algorithm)
+            @state[:expected] = expected
+            break
           end
-          nil
         end
 
         # Valid Base64 values are checksum candidates regardless of decoded length.

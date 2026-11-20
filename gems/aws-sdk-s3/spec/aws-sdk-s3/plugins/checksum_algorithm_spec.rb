@@ -1,62 +1,74 @@
 # frozen_string_literal: true
 
 require_relative '../../spec_helper'
+require 'aws-sdk-core/plugins/checksum_algorithm'
 
 module Aws
   module S3
     module Plugins
       describe ChecksumAlgorithm do
-        let(:client_options) do
-          {
-            region: 'us-east-1',
-            stub_responses: true
-          }
+        before(:context) do
+          Client.add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
         end
 
-        it 'skips SEP whole multipart checksums with a part-count suffix' do
-          client = Client.new(**client_options)
+        after(:context) do
+          Client.remove_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+        end
+
+        let(:client) { Client.new(region: 'us-east-1', stub_responses: true) }
+
+        it 'returns GetObject responses without validating multipart checksums' do
           client.stub_responses(
             :get_object,
             status_code: 200,
-            headers: { 'x-amz-checksum-crc32' => 'AAAAAA==-2' },
+            headers: {
+              'x-amz-checksum-crc32' => 'AAAAAA==-2',
+              'x-amz-checksum-sha256' => 'AAAAAA=='
+            },
             body: 'payload'
           )
 
-          response = client.get_object(
-            bucket: 'bucket',
-            key: 'key',
-            checksum_mode: 'ENABLED'
-          )
-
-          expect(response.context[:http_checksum][:skip_on_suffix]).to be(true)
-          expect(response.context[:http_checksum][:validated]).to be_nil
+          expect do
+            client.get_object(
+              bucket: 'bucket',
+              key: 'key',
+              checksum_mode: 'ENABLED'
+            ).body.read
+          end.not_to raise_error
         end
 
-        it 'preserves the V3 trailer fallback for an explicit custom endpoint' do
-          client = Client.new(
-            **client_options,
-            endpoint: 'https://example.com'
-          )
-
-          response = client.put_object(
-            bucket: 'bucket',
-            key: 'key',
+        it 'validates GetObject checksums without a multipart suffix' do
+          client.stub_responses(
+            :get_object,
+            status_code: 200,
+            headers: { 'x-amz-checksum-crc32' => 'AAAAAA==' },
             body: 'payload'
           )
 
-          expect(response.context[:skip_trailer_checksums]).to be(true)
+          expect do
+            client.get_object(
+              bucket: 'bucket',
+              key: 'key',
+              checksum_mode: 'ENABLED'
+            ).body.read
+          end.to raise_error(Aws::Core::Errors::ChecksumError)
         end
 
-        it 'allows trailer checksums with the default endpoint provider' do
-          client = Client.new(**client_options)
-
-          response = client.put_object(
-            bucket: 'bucket',
-            key: 'key',
+        it 'validates an available lower-priority GetObject checksum' do
+          client.stub_responses(
+            :get_object,
+            status_code: 200,
+            headers: { 'x-amz-checksum-sha256' => 'AAAAAA==' },
             body: 'payload'
           )
 
-          expect(response.context[:skip_trailer_checksums]).to be_nil
+          expect do
+            client.get_object(
+              bucket: 'bucket',
+              key: 'key',
+              checksum_mode: 'ENABLED'
+            ).body.read
+          end.to raise_error(Aws::Core::Errors::ChecksumError)
         end
       end
     end

@@ -61,6 +61,21 @@ module Aws
           end
         end
 
+        # Resolves and caches whether an operation can use a checksum trailer.
+        def http_checksum_trailer_eligible?(operation)
+          operation.fetch_metadata(:aws_http_checksum_trailer_eligible) do
+            !SCHEMA_EXTENSION.streaming_member(operation.input).nil? &&
+              operation.traits.key?('aws.auth#unsignedPayload')
+          end
+        end
+
+        # Resolves and caches supported response algorithms in priority order.
+        def http_checksum_validation_algorithms(operation, priorities)
+          operation.fetch_metadata(:aws_http_checksum_response_algorithms) do
+            (priorities & http_checksum(operation)[:response_algorithms]).freeze
+          end
+        end
+
         # Resolves and caches the AWS SDK service identifier.
         #
         # Example:

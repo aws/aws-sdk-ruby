@@ -15,6 +15,19 @@ module Aws
           )
         end
 
+        it 'emits the exact aws-chunked wire format' do
+          expected = "b\r\nHello world\r\n" \
+                     "0\r\nx-amz-checksum-crc32:i9aeUg==\r\n\r\n"
+          wrapper = described_class.new(
+            io: StringIO.new('Hello world'),
+            algorithm: 'CRC32',
+            trailer_name: 'x-amz-checksum-crc32'
+          )
+
+          expect(wrapper.read).to eq(expected)
+          expect(wrapper.size).to eq(expected.bytesize)
+        end
+
         it 'writes a read result into the supplied output buffer' do
           buffer = +'old value'
 
@@ -121,17 +134,8 @@ module Aws
           encoded = wrapper.read
 
           expect(encoded).to include(
-            "x-amz-checksum-crc32:#{checksum_for(source)}"
+            "x-amz-checksum-crc32:#{checksum_for('CRC32', source)}"
           )
-        end
-
-        def checksum_for(io)
-          digest = Checksums.digest_for('CRC32')
-          io.rewind
-          digest.update(io.read)
-          digest.base64digest
-        ensure
-          io.rewind
         end
       end
     end

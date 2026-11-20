@@ -20,7 +20,7 @@ module Aws
           def call(context)
             checksum_context = context[:http_checksum] || {}
             if SCHEMA_EXTENSION.checksum_required?(context.operation) &&
-               !checksum_context[:request_algorithm]
+               !checksum_context[:request_checksum_applied]
               context.http_request.headers['Content-Md5'] ||= md5(context.http_request.body)
             end
             @handler.call(context)

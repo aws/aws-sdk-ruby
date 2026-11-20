@@ -7,18 +7,14 @@ module Aws
     module Checksums
       # Encodes a streaming request body using aws-chunked framing and adds
       # the calculated checksum as the final trailer.
+      # @api private
       class TrailerIO
         # TODO: Support configurable stream chunk sizes when Smithy Client's
         # Net::HTTP transport exposes an equivalent capability.
         DEFAULT_CHUNK_SIZE = 16_384
         CHUNK_OVERHEAD = 4
+        TRAILER_OVERHEAD = 8
         HEX_BASE = 16
-        BASE64_CHECKSUM_LENGTHS = {
-          'CRC32' => 8,
-          'SHA1' => 28,
-          'SHA256' => 44,
-          'SHA512' => 88
-        }.freeze
 
         def initialize(io:, algorithm:, trailer_name:)
           @io = io
@@ -33,7 +29,7 @@ module Aws
           @encoded_buffer = ''.b
           @source_eof = false
           @eof = false
-          @completed_checksum = nil
+          @completed_checksum = nil # Set after EOF when the digest is final.
         end
 
         def size
@@ -57,6 +53,8 @@ module Aws
           @encoded_buffer = ''.b
           @source_eof = false
           @eof = false
+          # Reuse a finished checksum across retries. An interrupted attempt
+          # has no completed value, so it starts a fresh digest.
           @digest = Checksums.digest_for(@algorithm) unless @completed_checksum
         end
 
@@ -127,10 +125,11 @@ module Aws
           @eof = true
         end
 
-        # The chunk terminator, separators, and final CRLFs add eight bytes.
+        # "0\r\n", the trailer colon, and the final "\r\n\r\n" add eight bytes.
         def trailer_length
-          8 + @trailer_name.bytesize +
-            BASE64_CHECKSUM_LENGTHS.fetch(@algorithm)
+          TRAILER_OVERHEAD +
+            @trailer_name.bytesize +
+            Checksums.base64_length(@algorithm)
         end
 
         def read_data_chunk
