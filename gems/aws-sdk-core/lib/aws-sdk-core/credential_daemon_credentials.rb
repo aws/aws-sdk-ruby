@@ -43,7 +43,7 @@ module Aws
     include CredentialProvider
     include RefreshingCredentials
 
-    CREDENTIAL_DAEMON_DOC = 'https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-credential-daemon.html'
+    CREDENTIAL_DAEMON_DOC = 'https://docs.aws.amazon.com/cli/latest/userguide/cli-authentication-credsd.html'
 
     NOT_RUNNING = 'NOT_RUNNING'
     REAUTH_REQUIRED = 'REAUTH_REQUIRED'
