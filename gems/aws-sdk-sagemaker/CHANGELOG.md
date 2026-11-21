@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.419.0 (2026-11-21)
+------------------
+
+* Feature - Amazon SageMaker AI adds APIs to view capacity reservations and their usage.
+
 1.418.0 (2026-11-20)
 ------------------
 

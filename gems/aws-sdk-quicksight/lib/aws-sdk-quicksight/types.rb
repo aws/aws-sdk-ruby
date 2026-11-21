@@ -34,6 +34,169 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # An access control application. It defines how an external client signs
+    # in to Quick Sight with OAuth 2.0. Client secret values are never
+    # included.
+    #
+    # @!attribute [rw] application_id
+    #   The ID of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The Quick Sight namespace that the access control application
+    #   belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_type
+    #   The authentication protocol that the access control application
+    #   uses.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time when the access control application was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time when the access control application was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tenant_url
+    #   The tenant URL of the access control application. This URL hosts the
+    #   OAuth 2.0 and OpenID Connect endpoints for the application, such as
+    #   `/authorize`, `/token`, `/.well-known/openid-configuration`, and
+    #   `/jwks`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] idc_application_arn
+    #   The ARN of the Amazon Web Services IAM Identity Center application
+    #   that Quick Sight manages for this access control application. This
+    #   value is present when the `IdpAuthorizingType` is `IDC_AUTH_CODE`,
+    #   or when a trusted token issuer is configured.
+    #   @return [String]
+    #
+    # @!attribute [rw] idp_authorizing_configuration
+    #   The identity provider configuration of the access control
+    #   application. Client secret values are never included.
+    #   @return [Types::IdpAuthorizingConfig]
+    #
+    # @!attribute [rw] quick_authentication_configuration
+    #   The Quick Sight authentication configuration of the access control
+    #   application. Client secret values are never included.
+    #   @return [Types::QuickAuthenticationConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AccessControlApplication AWS API Documentation
+    #
+    class AccessControlApplication < Struct.new(
+      :application_id,
+      :arn,
+      :name,
+      :namespace,
+      :authentication_type,
+      :status,
+      :created_time,
+      :last_updated_time,
+      :tenant_url,
+      :description,
+      :idc_application_arn,
+      :idp_authorizing_configuration,
+      :quick_authentication_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of an access control application, including its ID, ARN,
+    # name, namespace, authentication type, status, and timestamps.
+    #
+    # @!attribute [rw] application_id
+    #   The ID of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The Quick Sight namespace that the access control application
+    #   belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_type
+    #   The authentication protocol that the access control application
+    #   uses.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time when the access control application was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time when the access control application was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tenant_url
+    #   The tenant URL of the access control application. This URL hosts the
+    #   OAuth 2.0 and OpenID Connect endpoints for the application, such as
+    #   `/authorize`, `/token`, `/.well-known/openid-configuration`, and
+    #   `/jwks`.
+    #   @return [String]
+    #
+    # @!attribute [rw] idp_authorizing_configuration
+    #   A summary of the identity provider configuration of the access
+    #   control application, without client secret information.
+    #   @return [Types::IdpAuthorizingConfigSummary]
+    #
+    # @!attribute [rw] quick_authentication_configuration
+    #   The Quick Sight authentication configuration of the access control
+    #   application. Client secret values are never included.
+    #   @return [Types::QuickAuthenticationConfig]
+    #
+    # @!attribute [rw] description
+    #   The description of the access control application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AccessControlApplicationSummary AWS API Documentation
+    #
+    class AccessControlApplicationSummary < Struct.new(
+      :application_id,
+      :arn,
+      :name,
+      :namespace,
+      :authentication_type,
+      :status,
+      :created_time,
+      :last_updated_time,
+      :tenant_url,
+      :idp_authorizing_configuration,
+      :quick_authentication_configuration,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The access control settings for a knowledge base. Use this structure
     # to enable or disable document-level access control lists (ACLs) that
     # filter query results based on the permissions from the source data
@@ -4237,6 +4400,109 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that contains the policy
+    #   and the principals.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_arn
+    #   The ARN of the policy to remove. For each principal, the operation
+    #   removes the assignment only if the principal currently has this
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arns
+    #   A list of 1–50 principal ARNs to remove the policy from. Each ARN
+    #   must be unique within the request.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BatchDeletePolicyAssignmentByPolicyRequest AWS API Documentation
+    #
+    class BatchDeletePolicyAssignmentByPolicyRequest < Struct.new(
+      :account_id,
+      :policy_arn,
+      :principal_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_arn
+    #   The ARN of the policy from the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] success
+    #   A list of principals that no longer have the policy.
+    #   @return [Array<Types::BatchDeletePolicyAssignmentSuccess>]
+    #
+    # @!attribute [rw] errors
+    #   A list of principals that the operation couldn't remove the policy
+    #   from, with the reason for each failure.
+    #   @return [Array<Types::BatchDeletePolicyAssignmentError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BatchDeletePolicyAssignmentByPolicyResponse AWS API Documentation
+    #
+    class BatchDeletePolicyAssignmentByPolicyResponse < Struct.new(
+      :policy_arn,
+      :success,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A principal that a `BatchDeletePolicyAssignmentByPolicy` request
+    # couldn't remove the policy from.
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the principal.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The reason the entry failed. Possible values:
+    #
+    #   * `ValidationException` – The entry is not valid.
+    #
+    #   * `ResourceNotFoundException` – The principal doesn't exist.
+    #
+    #   * `ConflictException` – The principal has a different policy of the
+    #     same type, or the assignment changed while this request was being
+    #     processed.
+    #
+    #   * `ThrottlingException` – The entry was throttled. You can retry
+    #     this entry.
+    #
+    #   * `InternalFailureException` – An internal error occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A description of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BatchDeletePolicyAssignmentError AWS API Documentation
+    #
+    class BatchDeletePolicyAssignmentError < Struct.new(
+      :principal_arn,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A principal that no longer has the policy after a
+    # `BatchDeletePolicyAssignmentByPolicy` request, including a principal
+    # that didn't have the policy.
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the principal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BatchDeletePolicyAssignmentSuccess AWS API Documentation
+    #
+    class BatchDeletePolicyAssignmentSuccess < Struct.new(
+      :principal_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account that you want to delete a
     #   reviewed answers in.
@@ -4375,6 +4641,119 @@ module Aws::QuickSight
     class BatchDescribeUserLimitsResponse < Struct.new(
       :user_limits,
       :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that contains the policy
+    #   and the principals.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_arn
+    #   The ARN of the policy to assign.
+    #   @return [String]
+    #
+    # @!attribute [rw] assignments
+    #   A list of 1–50 principals to assign the policy to. Each principal
+    #   ARN must be unique within the request.
+    #   @return [Array<Types::PutAssignmentEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BatchPutPolicyAssignmentByPolicyRequest AWS API Documentation
+    #
+    class BatchPutPolicyAssignmentByPolicyRequest < Struct.new(
+      :account_id,
+      :policy_arn,
+      :assignments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_arn
+    #   The ARN of the policy from the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] success
+    #   A list of principals that the policy was assigned to.
+    #   @return [Array<Types::BatchPutPolicyAssignmentSuccess>]
+    #
+    # @!attribute [rw] errors
+    #   A list of principals that the policy couldn't be assigned to, with
+    #   the reason for each failure.
+    #   @return [Array<Types::BatchPutPolicyAssignmentError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BatchPutPolicyAssignmentByPolicyResponse AWS API Documentation
+    #
+    class BatchPutPolicyAssignmentByPolicyResponse < Struct.new(
+      :policy_arn,
+      :success,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A principal that a `BatchPutPolicyAssignmentByPolicy` request
+    # couldn't assign the policy to.
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the principal.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The reason the entry failed. Possible values:
+    #
+    #   * `ValidationException` – The entry is not valid.
+    #
+    #   * `ResourceNotFoundException` – The principal doesn't exist, or the
+    #     policy was deleted while the request was being processed.
+    #
+    #   * `ConflictException` – The principal doesn't have the existing
+    #     policy that you specified, or the assignment changed since the
+    #     revision that you specified.
+    #
+    #   * `ThrottlingException` – The entry was throttled. You can retry
+    #     this entry.
+    #
+    #   * `InternalFailureException` – An internal error occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A description of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BatchPutPolicyAssignmentError AWS API Documentation
+    #
+    class BatchPutPolicyAssignmentError < Struct.new(
+      :principal_arn,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A principal that a `BatchPutPolicyAssignmentByPolicy` request assigned
+    # the policy to.
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the principal.
+    #   @return [String]
+    #
+    # @!attribute [rw] replaced_policy_arn
+    #   The ARN of the policy that this assignment replaced. This value is
+    #   absent if the principal had no policy of this type before the
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The revision of the assignment after this request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BatchPutPolicyAssignmentSuccess AWS API Documentation
+    #
+    class BatchPutPolicyAssignmentSuccess < Struct.new(
+      :principal_arn,
+      :replaced_policy_arn,
+      :revision)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6473,6 +6852,24 @@ module Aws::QuickSight
     #   The ability to use Model Context Protocol actions.
     #   @return [String]
     #
+    # @!attribute [rw] local_mcp_action
+    #   The ability to create, update, and use local Model Context Protocol
+    #   (MCP) actions. This capability includes
+    #   `CreateAndUpdateLocalMCPAction` and `UseLocalMCPAction`.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_local_mcp_action
+    #   The ability to create and update local Model Context Protocol (MCP)
+    #   server configurations. Denying this capability does not by itself
+    #   deny use of previously configured local MCP servers.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_local_mcp_action
+    #   The ability to start local Model Context Protocol (MCP) servers and
+    #   use their actions, including actions from previously configured
+    #   local MCP servers.
+    #   @return [String]
+    #
     # @!attribute [rw] open_api_action
     #   The ability to perform actions using OpenAPI Specification
     #   connectors.
@@ -8223,6 +8620,9 @@ module Aws::QuickSight
       :create_and_update_mcp_action,
       :share_mcp_action,
       :use_mcp_action,
+      :local_mcp_action,
+      :create_and_update_local_mcp_action,
+      :use_local_mcp_action,
       :open_api_action,
       :create_and_update_open_api_action,
       :share_open_api_action,
@@ -9020,6 +9420,50 @@ module Aws::QuickSight
       :client_credentials_details)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The configuration of a new client secret that your IdP provides.
+    #
+    # @!attribute [rw] client_secret_source_type
+    #   The source of the client secret. The only valid value is
+    #   `IDP_PROVIDED`: your IdP issued the secret value.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret_configuration_detail
+    #   The details of the client secret. This is required when the
+    #   `ClientSecretSourceType` is `IDP_PROVIDED`.
+    #   @return [Types::ClientSecretConfigurationDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ClientSecretConfiguration AWS API Documentation
+    #
+    class ClientSecretConfiguration < Struct.new(
+      :client_secret_source_type,
+      :client_secret_configuration_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of an IdP-provided client secret. Required when
+    # `ClientSecretSourceType` is `IDP_PROVIDED`.
+    #
+    # @note ClientSecretConfigurationDetail is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] idp
+    #   An IdP-provided client secret, with the Amazon Web Services Secrets
+    #   Manager secret ARN for each Region.
+    #   @return [Types::IdpClientSecretInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ClientSecretConfigurationDetail AWS API Documentation
+    #
+    class ClientSecretConfigurationDetail < Struct.new(
+      :idp,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Idp < ClientSecretConfigurationDetail; end
+      class Unknown < ClientSecretConfigurationDetail; end
     end
 
     # The cluster marker that is a part of the cluster marker configuration.
@@ -10338,6 +10782,189 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The ID for the access control application. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #
+    #   Quick Sight reserves IDs that start with `quick-aca-` for the access
+    #   control application of the Quick Sight desktop application. To
+    #   create one, the ID must be `quick-aca-` followed by your Amazon Web
+    #   Services account ID and the namespace, separated by a hyphen. For
+    #   example, `quick-aca-111122223333-default`. In addition,
+    #   `QuickAuthenticationType` must be `QUICK_MANAGED_PUBLIC_AUTH_CODE`
+    #   with `http://localhost:18080` as the only redirect URI, and
+    #   `IdpAuthorizingType` must be `IDC_AUTH_CODE` or
+    #   `QUICK_MANAGED_AUTH_CODE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The Quick Sight namespace for the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_type
+    #   The authentication protocol that the access control application
+    #   uses.
+    #   @return [String]
+    #
+    # @!attribute [rw] idp_authorizing_configuration
+    #   The identity provider configuration of the access control
+    #   application.
+    #   @return [Types::IdpAuthorizingConfigInput]
+    #
+    # @!attribute [rw] quick_authentication_configuration
+    #   The Quick Sight authentication configuration of the access control
+    #   application. You provide redirect URIs, and Quick Sight generates
+    #   the client ID.
+    #   @return [Types::QuickAuthenticationConfigInput]
+    #
+    # @!attribute [rw] tags
+    #   The tags to assign to the access control application.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAccessControlApplicationRequest AWS API Documentation
+    #
+    class CreateAccessControlApplicationRequest < Struct.new(
+      :aws_account_id,
+      :application_id,
+      :name,
+      :description,
+      :namespace,
+      :authentication_type,
+      :idp_authorizing_configuration,
+      :quick_authentication_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The ID of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_control_application_status
+    #   The status of the access control application. A new application is
+    #   always `ENABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time when the access control application was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tenant_url
+    #   The tenant URL of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] idc_application_arn
+    #   The ARN of the Amazon Web Services IAM Identity Center application
+    #   that Quick Sight manages for this access control application. This
+    #   value is present when the `IdpAuthorizingType` is `IDC_AUTH_CODE`,
+    #   or when a trusted token issuer is configured.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_authentication_configuration
+    #   The generated Quick Sight authentication configuration. It contains
+    #   the generated client ID.
+    #   @return [Types::QuickAuthenticationConfigCreateOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAccessControlApplicationResponse AWS API Documentation
+    #
+    class CreateAccessControlApplicationResponse < Struct.new(
+      :status,
+      :request_id,
+      :application_id,
+      :arn,
+      :access_control_application_status,
+      :created_time,
+      :tenant_url,
+      :idc_application_arn,
+      :quick_authentication_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The ID of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the client secret, for example
+    #   `rotation-june-2026`. If you don't provide a description, the
+    #   client secret has no description.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret_configuration
+    #   The source of the client secret, which is your IdP, and the Amazon
+    #   Web Services Secrets Manager ARNs of the secret.
+    #   @return [Types::ClientSecretConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAccessControlApplicationSecretRequest AWS API Documentation
+    #
+    class CreateAccessControlApplicationSecretRequest < Struct.new(
+      :aws_account_id,
+      :application_id,
+      :description,
+      :client_secret_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret_id
+    #   The ID of the client secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the client secret was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAccessControlApplicationSecretResponse AWS API Documentation
+    #
+    class CreateAccessControlApplicationSecretResponse < Struct.new(
+      :status,
+      :request_id,
+      :client_secret_id,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The ID for the Amazon Web Services account that you want to
     #   customize Quick Sight for.
     #   @return [String]
@@ -11459,6 +12086,13 @@ module Aws::QuickSight
     #   Required when using the new data preparation experience.
     #   @return [Types::SemanticModelConfiguration]
     #
+    # @!attribute [rw] unmaterialized_calculated_columns
+    #   A list of unmaterialized calculated columns for the dataset. These
+    #   columns are computed at analysis time and are not stored in the
+    #   prepared data. You can only use this with the new data preparation
+    #   experience.
+    #   @return [Array<Types::UnmaterializedCalculatedColumn>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateDataSetRequest AWS API Documentation
     #
     class CreateDataSetRequest < Struct.new(
@@ -11481,7 +12115,8 @@ module Aws::QuickSight
       :performance_configuration,
       :use_as,
       :data_prep_configuration,
-      :semantic_model_configuration)
+      :semantic_model_configuration,
+      :unmaterialized_calculated_columns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12129,6 +12764,95 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_connector_id
+    #   The ID for the inbound connector. This ID is unique per Amazon Web
+    #   Services Region for each Amazon Web Services account.
+    #
+    #   For a `QUICK_DESKTOP` inbound connector, the ID must be
+    #   `ibc-desktop-` followed by your Amazon Web Services account ID and
+    #   the Region that you call, separated by a hyphen. For example,
+    #   `ibc-desktop-111122223333-us-east-1`. Quick Sight reserves IDs that
+    #   start with `ibc-desktop-` for `QUICK_DESKTOP` inbound connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_connector_configuration
+    #   The configuration of the inbound connector.
+    #   @return [Types::InboundConnectorConfig]
+    #
+    # @!attribute [rw] tags
+    #   The tags to assign to the inbound connector.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateInboundConnectorRequest AWS API Documentation
+    #
+    class CreateInboundConnectorRequest < Struct.new(
+      :aws_account_id,
+      :inbound_connector_id,
+      :name,
+      :description,
+      :inbound_connector_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_connector_id
+    #   The ID of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_url
+    #   The endpoint URL that clients use to reach Quick Sight through the
+    #   inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_connector_status
+    #   The status of the inbound connector. A new connector is always
+    #   `ENABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time when the inbound connector was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateInboundConnectorResponse AWS API Documentation
+    #
+    class CreateInboundConnectorResponse < Struct.new(
+      :status,
+      :request_id,
+      :inbound_connector_id,
+      :arn,
+      :tenant_url,
+      :inbound_connector_status,
+      :created_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] data_set_id
     #   The ID of the dataset used in the ingestion.
     #   @return [String]
@@ -12182,6 +12906,81 @@ module Aws::QuickSight
       :arn,
       :ingestion_id,
       :ingestion_status,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier for the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_id
+    #   A unique identifier for the knowledge base refresh schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_frequency
+    #   The frequency configuration for the refresh schedule. The frequency
+    #   configuration specifies how often the schedule runs and, for weekly
+    #   or monthly schedules, the day on which it runs.
+    #   @return [Types::KnowledgeBaseRefreshFrequency]
+    #
+    # @!attribute [rw] start_time
+    #   The date and time, in ISO 8601 format, after which the schedule can
+    #   start refreshing the knowledge base. The first refresh runs at the
+    #   next scheduled time after this date and time. If you don't specify
+    #   a value, the schedule becomes active immediately, and the first
+    #   refresh runs at the next scheduled time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state that you want the refresh schedule to have when you create
+    #   it. If you don't specify a state, the schedule is created in the
+    #   `ENABLED` state. A schedule that isn't `ENABLED` doesn't run
+    #   refreshes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateKnowledgeBaseRefreshScheduleRequest AWS API Documentation
+    #
+    class CreateKnowledgeBaseRefreshScheduleRequest < Struct.new(
+      :aws_account_id,
+      :knowledge_base_id,
+      :schedule_id,
+      :schedule_frequency,
+      :start_time,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] schedule_id
+    #   The unique identifier for the refresh schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base that the
+    #   schedule applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateKnowledgeBaseRefreshScheduleResponse AWS API Documentation
+    #
+    class CreateKnowledgeBaseRefreshScheduleResponse < Struct.new(
+      :schedule_id,
+      :knowledge_base_arn,
       :request_id,
       :status)
       SENSITIVE = []
@@ -15384,6 +16183,11 @@ module Aws::QuickSight
     #   The semantic model configuration associated with this dataset.
     #   @return [Types::SemanticModelConfiguration]
     #
+    # @!attribute [rw] unmaterialized_calculated_columns
+    #   The unmaterialized calculated columns associated with this dataset.
+    #   You can only use this with the new data preparation experience.
+    #   @return [Array<Types::UnmaterializedCalculatedColumn>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSet AWS API Documentation
     #
     class DataSet < Struct.new(
@@ -15407,7 +16211,8 @@ module Aws::QuickSight
       :performance_configuration,
       :use_as,
       :data_prep_configuration,
-      :semantic_model_configuration)
+      :semantic_model_configuration,
+      :unmaterialized_calculated_columns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17757,6 +18562,94 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The ID of the access control application to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] idc_application_arn
+    #   The ARN of an IAM Identity Center application that Quick Sight
+    #   created for an access control application that has already been
+    #   deleted. Provide this ARN to clean up the IAM Identity Center
+    #   application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteAccessControlApplicationRequest AWS API Documentation
+    #
+    class DeleteAccessControlApplicationRequest < Struct.new(
+      :aws_account_id,
+      :application_id,
+      :idc_application_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The ID of the deleted access control application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteAccessControlApplicationResponse AWS API Documentation
+    #
+    class DeleteAccessControlApplicationResponse < Struct.new(
+      :status,
+      :request_id,
+      :application_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The ID of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret_id
+    #   The ID of the client secret.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteAccessControlApplicationSecretRequest AWS API Documentation
+    #
+    class DeleteAccessControlApplicationSecretRequest < Struct.new(
+      :aws_account_id,
+      :application_id,
+      :client_secret_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteAccessControlApplicationSecretResponse AWS API Documentation
+    #
+    class DeleteAccessControlApplicationSecretResponse < Struct.new(
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account from which you want to
     #   unapply the custom permissions profile.
     #   @return [String]
@@ -18681,6 +19574,97 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_connector_id
+    #   The ID of the inbound connector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteInboundConnectorRequest AWS API Documentation
+    #
+    class DeleteInboundConnectorRequest < Struct.new(
+      :aws_account_id,
+      :inbound_connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_connector_id
+    #   The ID of the deleted inbound connector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteInboundConnectorResponse AWS API Documentation
+    #
+    class DeleteInboundConnectorResponse < Struct.new(
+      :status,
+      :request_id,
+      :inbound_connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier for the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_id
+    #   The unique identifier for the refresh schedule to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteKnowledgeBaseRefreshScheduleRequest AWS API Documentation
+    #
+    class DeleteKnowledgeBaseRefreshScheduleRequest < Struct.new(
+      :aws_account_id,
+      :knowledge_base_id,
+      :schedule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] schedule_id
+    #   The unique identifier for the deleted refresh schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base that the
+    #   schedule applied to.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteKnowledgeBaseRefreshScheduleResponse AWS API Documentation
+    #
+    class DeleteKnowledgeBaseRefreshScheduleResponse < Struct.new(
+      :schedule_id,
+      :knowledge_base_arn,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account that contains the
     #   knowledge base.
     #   @return [String]
@@ -18835,6 +19819,42 @@ module Aws::QuickSight
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   principal.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_arn
+    #   The ARN of the policy to remove. The operation removes the
+    #   assignment only if the principal currently has this policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the user, group, or account to remove the policy from.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The revision of the assignment from your most recent read. If the
+    #   assignment has changed since that revision, the request fails with a
+    #   `ConflictException`. If you don't specify a value, the operation
+    #   doesn't check the revision.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeletePolicyAssignmentRequest AWS API Documentation
+    #
+    class DeletePolicyAssignmentRequest < Struct.new(
+      :account_id,
+      :policy_arn,
+      :principal_arn,
+      :revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeletePolicyAssignmentResponse AWS API Documentation
+    #
+    class DeletePolicyAssignmentResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] data_set_id
     #   The ID of the dataset.
@@ -19559,6 +20579,46 @@ module Aws::QuickSight
       :availability_status,
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The ID of the access control application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAccessControlApplicationRequest AWS API Documentation
+    #
+    class DescribeAccessControlApplicationRequest < Struct.new(
+      :aws_account_id,
+      :application_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_control_application
+    #   The access control application.
+    #   @return [Types::AccessControlApplication]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAccessControlApplicationResponse AWS API Documentation
+    #
+    class DescribeAccessControlApplicationResponse < Struct.new(
+      :status,
+      :request_id,
+      :access_control_application)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21872,6 +22932,46 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_connector_id
+    #   The ID of the inbound connector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeInboundConnectorRequest AWS API Documentation
+    #
+    class DescribeInboundConnectorRequest < Struct.new(
+      :aws_account_id,
+      :inbound_connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_connector
+    #   The inbound connector.
+    #   @return [Types::InboundConnector]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeInboundConnectorResponse AWS API Documentation
+    #
+    class DescribeInboundConnectorResponse < Struct.new(
+      :status,
+      :request_id,
+      :inbound_connector)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The Amazon Web Services account ID.
     #   @return [String]
     #
@@ -22067,6 +23167,57 @@ module Aws::QuickSight
       :knowledge_base_arn,
       :knowledge_base_id,
       :permissions,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier for the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_id
+    #   The unique identifier for the refresh schedule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeKnowledgeBaseRefreshScheduleRequest AWS API Documentation
+    #
+    class DescribeKnowledgeBaseRefreshScheduleRequest < Struct.new(
+      :aws_account_id,
+      :knowledge_base_id,
+      :schedule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] schedule
+    #   The refresh schedule for the knowledge base.
+    #   @return [Types::KnowledgeBaseRefreshScheduleSummary]
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base that the
+    #   schedule applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeKnowledgeBaseRefreshScheduleResponse AWS API Documentation
+    #
+    class DescribeKnowledgeBaseRefreshScheduleResponse < Struct.new(
+      :schedule,
+      :knowledge_base_arn,
       :request_id,
       :status)
       SENSITIVE = []
@@ -24082,6 +25233,159 @@ module Aws::QuickSight
     #
     class ExportWithHiddenFieldsOption < Struct.new(
       :availability_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for an external OpenID Connect IdP that uses the
+    # authorization code flow with a confidential client. Client secret
+    # values are never included.
+    #
+    # @!attribute [rw] client_id
+    #   The OAuth 2.0 client ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] issuer_url
+    #   The issuer URL of the external OpenID Connect IdP.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secrets
+    #   The client secrets of the confidential client, with the Amazon Web
+    #   Services Secrets Manager ARN for each Region. Secret values are
+    #   never included.
+    #   @return [Array<Types::ExternalIdpConfidentialClientSecret>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ExternalIdpConfidentialAuthCodeAuthorizingConfig AWS API Documentation
+    #
+    class ExternalIdpConfidentialAuthCodeAuthorizingConfig < Struct.new(
+      :client_id,
+      :issuer_url,
+      :client_secrets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for an external OpenID Connect IdP that uses a
+    # confidential client. Provide the first client secret here. To add or
+    # remove client secrets later, use
+    # `CreateAccessControlApplicationSecret` and
+    # `DeleteAccessControlApplicationSecret`.
+    #
+    # @!attribute [rw] client_id
+    #   The OAuth 2.0 client ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] issuer_url
+    #   The issuer URL of the external OpenID Connect IdP.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   The first client secret of the confidential client.
+    #   @return [Types::IdpClientSecretInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ExternalIdpConfidentialAuthCodeAuthorizingConfigInput AWS API Documentation
+    #
+    class ExternalIdpConfidentialAuthCodeAuthorizingConfigInput < Struct.new(
+      :client_id,
+      :issuer_url,
+      :client_secret)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the configuration for an external OpenID Connect IdP that
+    # uses a confidential client.
+    #
+    # @!attribute [rw] client_id
+    #   The OAuth 2.0 client ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] issuer_url
+    #   The issuer URL of the external OpenID Connect IdP.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary AWS API Documentation
+    #
+    class ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary < Struct.new(
+      :client_id,
+      :issuer_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The external IdP settings to update for a confidential client.
+    #
+    # @!attribute [rw] client_id
+    #   The OAuth 2.0 client ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] issuer_url
+    #   The issuer URL of the external OpenID Connect IdP.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput AWS API Documentation
+    #
+    class ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput < Struct.new(
+      :client_id,
+      :issuer_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A client secret of a confidential external IdP client. Secret values
+    # are never included.
+    #
+    # @!attribute [rw] client_secret_id
+    #   The ID of the client secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] regional_secret_manager_arns
+    #   The ARN of the Amazon Web Services Secrets Manager secret that holds
+    #   the client secret, for each Region.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the client secret was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time when the secret's Region ARNs were last updated. This
+    #   value is present only after you call
+    #   `UpdateAccessControlApplicationSecret`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the client secret.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ExternalIdpConfidentialClientSecret AWS API Documentation
+    #
+    class ExternalIdpConfidentialClientSecret < Struct.new(
+      :client_secret_id,
+      :regional_secret_manager_arns,
+      :created_at,
+      :updated_at,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for an external OpenID Connect IdP that uses the
+    # authorization code flow with PKCE and a public client.
+    #
+    # @!attribute [rw] client_id
+    #   The OAuth 2.0 client ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] issuer_url
+    #   The issuer URL of the external OpenID Connect IdP.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ExternalIdpPublicAuthCodeAuthorizingConfig AWS API Documentation
+    #
+    class ExternalIdpPublicAuthCodeAuthorizingConfig < Struct.new(
+      :client_id,
+      :issuer_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26659,8 +27963,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] namespace
     #   The Amazon Quick Sight namespace that the anonymous user virtually
-    #   belongs to. If you are not using an Amazon Quick custom namespace,
-    #   set this to `default`.
+    #   belongs to. If you are not using an Quick custom namespace, set this
+    #   to `default`.
     #   @return [String]
     #
     # @!attribute [rw] session_tags
@@ -26691,7 +27995,7 @@ module Aws::QuickSight
     #
     #   Besides, these are not the tags used for the Amazon Web Services
     #   resource tagging feature. For more information, see [Using Row-Level
-    #   Security (RLS) with Tags][1] in the *Amazon Quick User Guide*.
+    #   Security (RLS) with Tags][1] in the *Quick User Guide*.
     #
     #
     #
@@ -26756,8 +28060,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] anonymous_user_arn
-    #   The Amazon Resource Name (ARN) to use for the anonymous Amazon Quick
-    #   user.
+    #   The Amazon Resource Name (ARN) to use for the anonymous Quick user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GenerateEmbedUrlForAnonymousUserResponse AWS API Documentation
@@ -27979,10 +29282,10 @@ module Aws::QuickSight
     #   @return [Boolean]
     #
     # @!attribute [rw] user_arn
-    #   The Amazon Quick user's Amazon Resource Name (ARN), for use with
-    #   `QUICKSIGHT` identity type. You can use this for any Amazon Quick
-    #   users in your account (readers, authors, or admins) authenticated as
-    #   one of the following:
+    #   The Quick user's Amazon Resource Name (ARN), for use with
+    #   `QUICKSIGHT` identity type. You can use this for any Quick users in
+    #   your account (readers, authors, or admins) authenticated as one of
+    #   the following:
     #
     #   * Active Directory (AD) users or group members
     #
@@ -28188,8 +29491,6 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # ///////////////////////// /////////////////////////
-    #
     # @!attribute [rw] aws_account_id
     #   The ID for the Amazon Web Services account that the user whose
     #   identity context you want to retrieve is in. Currently, you use the
@@ -28274,6 +29575,67 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   principal.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_type
+    #   The type of policy to describe. Choose one of the following values:
+    #
+    #   * `LIMITS_PROFILE` – A limits profile that sets resource usage
+    #     limits.
+    #
+    #   * `CUSTOM_PERMISSIONS` – A custom permissions profile that restricts
+    #     the capabilities available to a principal.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the user, group, or account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetPolicyAssignmentRequest AWS API Documentation
+    #
+    class GetPolicyAssignmentRequest < Struct.new(
+      :account_id,
+      :policy_type,
+      :principal_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_arn
+    #   The ARN of the policy that the principal has. The response doesn't
+    #   include this value if the principal has no policy of the requested
+    #   type.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_name
+    #   The display name of the assigned policy. This value is absent if the
+    #   policy has no name or the name can't be retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time that the assignment was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] revision
+    #   The current revision of the assignment. Pass this value in a later
+    #   `PutPolicyAssignment` or `DeletePolicyAssignment` request to make
+    #   sure that the assignment hasn't changed.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetPolicyAssignmentResponse AWS API Documentation
+    #
+    class GetPolicyAssignmentResponse < Struct.new(
+      :policy_arn,
+      :policy_name,
+      :updated_at,
+      :revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] aws_account_id
     #   The ID for the Amazon Web Services account associated with your
     #   Amazon Quick Sight subscription.
@@ -28304,10 +29666,10 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] user_arn
-    #   The Amazon Quick user's Amazon Resource Name (ARN), for use with
-    #   `QUICKSIGHT` identity type. You can use this for any type of Amazon
-    #   Quick users in your account (readers, authors, or admins). They need
-    #   to be authenticated as one of the following:
+    #   The Quick user's Amazon Resource Name (ARN), for use with
+    #   `QUICKSIGHT` identity type. You can use this for any type of Quick
+    #   users in your account (readers, authors, or admins). They need to be
+    #   authenticated as one of the following:
     #
     #   1.  Active Directory (AD) users or group members
     #
@@ -29525,6 +30887,23 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A trusted token issuer configuration. When you provide it, Quick Sight
+    # authenticates the user with the external IdP and then exchanges the
+    # token with IAM Identity Center through the specified trusted token
+    # issuer.
+    #
+    # @!attribute [rw] idc_trusted_token_issuer_arn
+    #   The ARN of the trusted token issuer in IAM Identity Center.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/IdcTrustedTokenIssuerConfig AWS API Documentation
+    #
+    class IdcTrustedTokenIssuerConfig < Struct.new(
+      :idc_trusted_token_issuer_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The definition for the identifier.
     #
     # @!attribute [rw] identity
@@ -29569,6 +30948,256 @@ module Aws::QuickSight
     class IdentityTypeNotSupportedException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The identity provider configuration of an access control application.
+    #
+    # @!attribute [rw] idp_authorizing_type
+    #   How users of the access control application are authenticated.
+    #   @return [String]
+    #
+    # @!attribute [rw] idp_authorizing_configuration_detail
+    #   The details of the external IdP configuration. This is present when
+    #   the `IdpAuthorizingType` is `EXTERNAL_IDP_PUBLIC_AUTH_CODE` or
+    #   `EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE`.
+    #   @return [Types::IdpAuthorizingConfigurationDetail]
+    #
+    # @!attribute [rw] idc_trusted_token_issuer_configuration
+    #   A trusted token issuer configuration. When you provide it, Quick
+    #   Sight authenticates the user with the external IdP and then
+    #   exchanges the token with IAM Identity Center through the specified
+    #   trusted token issuer. You can't change it after the application is
+    #   created.
+    #   @return [Types::IdcTrustedTokenIssuerConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/IdpAuthorizingConfig AWS API Documentation
+    #
+    class IdpAuthorizingConfig < Struct.new(
+      :idp_authorizing_type,
+      :idp_authorizing_configuration_detail,
+      :idc_trusted_token_issuer_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The identity provider configuration for a new access control
+    # application.
+    #
+    # @!attribute [rw] idp_authorizing_type
+    #   How users of the access control application are authenticated.
+    #   @return [String]
+    #
+    # @!attribute [rw] idp_authorizing_configuration_detail_input
+    #   The details of the external IdP configuration. This is present when
+    #   the `IdpAuthorizingType` is `EXTERNAL_IDP_PUBLIC_AUTH_CODE` or
+    #   `EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE`.
+    #   @return [Types::IdpAuthorizingConfigurationDetailInput]
+    #
+    # @!attribute [rw] idc_trusted_token_issuer_configuration
+    #   A trusted token issuer configuration. When you provide it, Quick
+    #   Sight authenticates the user with the external IdP and then
+    #   exchanges the token with IAM Identity Center through the specified
+    #   trusted token issuer. You can't change it after the application is
+    #   created.
+    #
+    #   This is required when the application uses an external IdP and its
+    #   namespace uses IAM Identity Center.
+    #   @return [Types::IdcTrustedTokenIssuerConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/IdpAuthorizingConfigInput AWS API Documentation
+    #
+    class IdpAuthorizingConfigInput < Struct.new(
+      :idp_authorizing_type,
+      :idp_authorizing_configuration_detail_input,
+      :idc_trusted_token_issuer_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the identity provider configuration of an access control
+    # application.
+    #
+    # @!attribute [rw] idp_authorizing_type
+    #   How users of the access control application are authenticated.
+    #   @return [String]
+    #
+    # @!attribute [rw] idp_authorizing_configuration_summary_detail
+    #   The details of the external IdP configuration. This is present when
+    #   the `IdpAuthorizingType` is `EXTERNAL_IDP_PUBLIC_AUTH_CODE` or
+    #   `EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE`.
+    #   @return [Types::IdpAuthorizingConfigurationSummaryDetail]
+    #
+    # @!attribute [rw] idc_trusted_token_issuer_configuration
+    #   A trusted token issuer configuration. When you provide it, Quick
+    #   Sight authenticates the user with the external IdP and then
+    #   exchanges the token with IAM Identity Center through the specified
+    #   trusted token issuer. You can't change it after the application is
+    #   created.
+    #   @return [Types::IdcTrustedTokenIssuerConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/IdpAuthorizingConfigSummary AWS API Documentation
+    #
+    class IdpAuthorizingConfigSummary < Struct.new(
+      :idp_authorizing_type,
+      :idp_authorizing_configuration_summary_detail,
+      :idc_trusted_token_issuer_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The identity provider settings to update. To manage client secrets,
+    # use the client secret operations instead.
+    #
+    # @!attribute [rw] idp_authorizing_type
+    #   How users of the access control application are authenticated.
+    #   @return [String]
+    #
+    # @!attribute [rw] idp_authorizing_configuration_detail_input
+    #   The details of the external IdP configuration. This is present when
+    #   the `IdpAuthorizingType` is `EXTERNAL_IDP_PUBLIC_AUTH_CODE` or
+    #   `EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE`.
+    #   @return [Types::IdpAuthorizingConfigurationDetailUpdateInput]
+    #
+    # @!attribute [rw] idc_trusted_token_issuer_configuration
+    #   A trusted token issuer configuration. When you provide it, Quick
+    #   Sight authenticates the user with the external IdP and then
+    #   exchanges the token with IAM Identity Center through the specified
+    #   trusted token issuer. You can't change it after the application is
+    #   created.
+    #   @return [Types::IdcTrustedTokenIssuerConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/IdpAuthorizingConfigUpdateInput AWS API Documentation
+    #
+    class IdpAuthorizingConfigUpdateInput < Struct.new(
+      :idp_authorizing_type,
+      :idp_authorizing_configuration_detail_input,
+      :idc_trusted_token_issuer_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the identity provider configuration.
+    #
+    # @note IdpAuthorizingConfigurationDetail is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of IdpAuthorizingConfigurationDetail corresponding to the set member.
+    #
+    # @!attribute [rw] external_idp_public_auth_code
+    #   The configuration for an external IdP with a public client.
+    #   @return [Types::ExternalIdpPublicAuthCodeAuthorizingConfig]
+    #
+    # @!attribute [rw] external_idp_confidential_auth_code
+    #   The configuration for an external IdP with a confidential client.
+    #   @return [Types::ExternalIdpConfidentialAuthCodeAuthorizingConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/IdpAuthorizingConfigurationDetail AWS API Documentation
+    #
+    class IdpAuthorizingConfigurationDetail < Struct.new(
+      :external_idp_public_auth_code,
+      :external_idp_confidential_auth_code,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ExternalIdpPublicAuthCode < IdpAuthorizingConfigurationDetail; end
+      class ExternalIdpConfidentialAuthCode < IdpAuthorizingConfigurationDetail; end
+      class Unknown < IdpAuthorizingConfigurationDetail; end
+    end
+
+    # The details of the identity provider configuration.
+    #
+    # @note IdpAuthorizingConfigurationDetailInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] external_idp_public_auth_code
+    #   The configuration for an external IdP with a public client.
+    #   @return [Types::ExternalIdpPublicAuthCodeAuthorizingConfig]
+    #
+    # @!attribute [rw] external_idp_confidential_auth_code
+    #   The configuration for an external IdP with a confidential client.
+    #   @return [Types::ExternalIdpConfidentialAuthCodeAuthorizingConfigInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/IdpAuthorizingConfigurationDetailInput AWS API Documentation
+    #
+    class IdpAuthorizingConfigurationDetailInput < Struct.new(
+      :external_idp_public_auth_code,
+      :external_idp_confidential_auth_code,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ExternalIdpPublicAuthCode < IdpAuthorizingConfigurationDetailInput; end
+      class ExternalIdpConfidentialAuthCode < IdpAuthorizingConfigurationDetailInput; end
+      class Unknown < IdpAuthorizingConfigurationDetailInput; end
+    end
+
+    # The identity provider details to update.
+    #
+    # @note IdpAuthorizingConfigurationDetailUpdateInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] external_idp_public_auth_code
+    #   The configuration for an external IdP with a public client.
+    #   @return [Types::ExternalIdpPublicAuthCodeAuthorizingConfig]
+    #
+    # @!attribute [rw] external_idp_confidential_auth_code
+    #   The configuration for an external IdP with a confidential client.
+    #   @return [Types::ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/IdpAuthorizingConfigurationDetailUpdateInput AWS API Documentation
+    #
+    class IdpAuthorizingConfigurationDetailUpdateInput < Struct.new(
+      :external_idp_public_auth_code,
+      :external_idp_confidential_auth_code,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ExternalIdpPublicAuthCode < IdpAuthorizingConfigurationDetailUpdateInput; end
+      class ExternalIdpConfidentialAuthCode < IdpAuthorizingConfigurationDetailUpdateInput; end
+      class Unknown < IdpAuthorizingConfigurationDetailUpdateInput; end
+    end
+
+    # A summary of the identity provider configuration details.
+    #
+    # @note IdpAuthorizingConfigurationSummaryDetail is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of IdpAuthorizingConfigurationSummaryDetail corresponding to the set member.
+    #
+    # @!attribute [rw] external_idp_public_auth_code
+    #   The configuration for an external IdP with a public client.
+    #   @return [Types::ExternalIdpPublicAuthCodeAuthorizingConfig]
+    #
+    # @!attribute [rw] external_idp_confidential_auth_code
+    #   The configuration for an external IdP with a confidential client.
+    #   @return [Types::ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/IdpAuthorizingConfigurationSummaryDetail AWS API Documentation
+    #
+    class IdpAuthorizingConfigurationSummaryDetail < Struct.new(
+      :external_idp_public_auth_code,
+      :external_idp_confidential_auth_code,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ExternalIdpPublicAuthCode < IdpAuthorizingConfigurationSummaryDetail; end
+      class ExternalIdpConfidentialAuthCode < IdpAuthorizingConfigurationSummaryDetail; end
+      class Unknown < IdpAuthorizingConfigurationSummaryDetail; end
+    end
+
+    # An IdP-provided client secret that you store in Amazon Web Services
+    # Secrets Manager.
+    #
+    # @!attribute [rw] regional_secret_manager_arns
+    #   The ARN of the Amazon Web Services Secrets Manager secret that holds
+    #   the client secret, for each Region.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/IdpClientSecretInput AWS API Documentation
+    #
+    class IdpClientSecretInput < Struct.new(
+      :regional_secret_manager_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29879,6 +31508,155 @@ module Aws::QuickSight
     class ImportTableOperationSource < Struct.new(
       :source_table_id,
       :column_id_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An inbound connector. To read or change the access control
+    # applications that are associated with the connector, use
+    # `ListInboundConnectorApplicationAssociations` and
+    # `UpdateInboundConnectorApplicationAssociations`.
+    #
+    # @!attribute [rw] inbound_connector_id
+    #   The ID of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_url
+    #   The endpoint URL that clients use to reach Quick Sight through the
+    #   inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time when the inbound connector was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time when the inbound connector was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] inbound_connector_configuration
+    #   The configuration of the inbound connector.
+    #   @return [Types::InboundConnectorConfig]
+    #
+    # @!attribute [rw] description
+    #   The description of the inbound connector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InboundConnector AWS API Documentation
+    #
+    class InboundConnector < Struct.new(
+      :inbound_connector_id,
+      :arn,
+      :name,
+      :status,
+      :tenant_url,
+      :created_time,
+      :last_updated_time,
+      :inbound_connector_configuration,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An association between an inbound connector and an access control
+    # application.
+    #
+    # @!attribute [rw] access_control_application_arn
+    #   The ARN of the associated access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time when the association was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InboundConnectorApplicationAssociationSummary AWS API Documentation
+    #
+    class InboundConnectorApplicationAssociationSummary < Struct.new(
+      :access_control_application_arn,
+      :created_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of an inbound connector, including its type.
+    #
+    # @!attribute [rw] inbound_connector_type
+    #   The type of the inbound connector. You can't change the type after
+    #   the connector is created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InboundConnectorConfig AWS API Documentation
+    #
+    class InboundConnectorConfig < Struct.new(
+      :inbound_connector_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of an inbound connector, including its ID, ARN, name,
+    # status, tenant URL, configuration, and timestamps.
+    #
+    # @!attribute [rw] inbound_connector_id
+    #   The ID of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time when the inbound connector was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time when the inbound connector was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tenant_url
+    #   The endpoint URL that clients use to reach Quick Sight through the
+    #   inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_connector_configuration
+    #   The configuration of the inbound connector.
+    #   @return [Types::InboundConnectorConfig]
+    #
+    # @!attribute [rw] description
+    #   The description of the inbound connector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InboundConnectorSummary AWS API Documentation
+    #
+    class InboundConnectorSummary < Struct.new(
+      :inbound_connector_id,
+      :arn,
+      :name,
+      :status,
+      :created_time,
+      :last_updated_time,
+      :tenant_url,
+      :inbound_connector_configuration,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31240,6 +33018,113 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Specifies how often a knowledge base refresh schedule runs and, for
+    # weekly or monthly schedules, which day the refresh runs.
+    #
+    # @!attribute [rw] interval
+    #   The interval at which the schedule refreshes the knowledge base.
+    #   Valid values include:
+    #
+    #   * `DAILY` – The schedule refreshes the knowledge base once each day.
+    #
+    #   * `WEEKLY` – The schedule refreshes the knowledge base once each
+    #     week, on the day that you specify in `RefreshOnDay.DayOfWeek`.
+    #
+    #   * `MONTHLY` – The schedule refreshes the knowledge base once each
+    #     month, on the day that you specify in `RefreshOnDay.DayOfMonth`.
+    #
+    #   * `HOURLY` – The schedule refreshes the knowledge base once each
+    #     hour. Available only if your account is enabled for hourly
+    #     refresh. Otherwise, the request fails with an
+    #     `InvalidParameterValueException`.
+    #
+    #   For `DAILY`, `WEEKLY`, and `MONTHLY` intervals, the service chooses
+    #   the time of day at which the refresh runs. You can't specify the
+    #   time of day.
+    #   @return [String]
+    #
+    # @!attribute [rw] refresh_on_day
+    #   The day on which the refresh runs. This parameter is required for a
+    #   `WEEKLY` or `MONTHLY` interval: specify the day of the week for
+    #   `WEEKLY` or the day of the month for `MONTHLY`. If you don't
+    #   specify it for one of these intervals, the request fails. This
+    #   parameter isn't used for a `DAILY` or `HOURLY` interval.
+    #   @return [Types::KnowledgeBaseScheduleRefreshOnEntity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KnowledgeBaseRefreshFrequency AWS API Documentation
+    #
+    class KnowledgeBaseRefreshFrequency < Struct.new(
+      :interval,
+      :refresh_on_day)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a knowledge base refresh schedule, including its
+    # identifier, frequency, start time, and state. The
+    # `DescribeKnowledgeBaseRefreshSchedule` and
+    # `ListKnowledgeBaseRefreshSchedules` operations return this summary.
+    #
+    # @!attribute [rw] schedule_id
+    #   The unique identifier for the refresh schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_frequency
+    #   The frequency configuration for the refresh schedule. The frequency
+    #   configuration specifies how often the schedule runs and, for weekly
+    #   or monthly schedules, the day on which it runs.
+    #   @return [Types::KnowledgeBaseRefreshFrequency]
+    #
+    # @!attribute [rw] start_time
+    #   The date and time, in ISO 8601 format, after which the schedule can
+    #   start refreshing the knowledge base.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The current state of the refresh schedule. A schedule that isn't
+    #   `ENABLED` doesn't run refreshes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KnowledgeBaseRefreshScheduleSummary AWS API Documentation
+    #
+    class KnowledgeBaseRefreshScheduleSummary < Struct.new(
+      :schedule_id,
+      :schedule_frequency,
+      :start_time,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The day on which the refresh runs. Specify one of the following:
+    #
+    # * `DayOfWeek` – For a weekly schedule.
+    #
+    # * `DayOfMonth` – For a monthly schedule.
+    #
+    # @!attribute [rw] day_of_week
+    #   The day of the week on which a weekly refresh runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] day_of_month
+    #   The day of the month on which a monthly refresh runs. Valid values
+    #   include:
+    #
+    #   * `1` through `28` – The refresh runs on that day of each month.
+    #
+    #   * `LAST_DAY_OF_MONTH` – The refresh runs on the last day of each
+    #     month.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KnowledgeBaseScheduleRefreshOnEntity AWS API Documentation
+    #
+    class KnowledgeBaseScheduleRefreshOnEntity < Struct.new(
+      :day_of_week,
+      :day_of_month)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A filter to apply when searching knowledge bases.
     #
     # @!attribute [rw] name
@@ -32135,6 +34020,64 @@ module Aws::QuickSight
     #
     class LinkSharingConfiguration < Struct.new(
       :permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace to filter by. If you don't specify a namespace,
+    #   access control applications in all namespaces are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListAccessControlApplicationsRequest AWS API Documentation
+    #
+    class ListAccessControlApplicationsRequest < Struct.new(
+      :aws_account_id,
+      :namespace,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_control_applications
+    #   A list of access control application summaries.
+    #   @return [Array<Types::AccessControlApplicationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListAccessControlApplicationsResponse AWS API Documentation
+    #
+    class ListAccessControlApplicationsResponse < Struct.new(
+      :status,
+      :request_id,
+      :access_control_applications,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33413,6 +35356,121 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_connector_id
+    #   The ID of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListInboundConnectorApplicationAssociationsRequest AWS API Documentation
+    #
+    class ListInboundConnectorApplicationAssociationsRequest < Struct.new(
+      :aws_account_id,
+      :inbound_connector_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_associations
+    #   A list of the access control applications that are associated with
+    #   the inbound connector.
+    #   @return [Array<Types::InboundConnectorApplicationAssociationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListInboundConnectorApplicationAssociationsResponse AWS API Documentation
+    #
+    class ListInboundConnectorApplicationAssociationsResponse < Struct.new(
+      :status,
+      :request_id,
+      :application_associations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The inbound connector type to filter by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListInboundConnectorsRequest AWS API Documentation
+    #
+    class ListInboundConnectorsRequest < Struct.new(
+      :aws_account_id,
+      :max_results,
+      :next_token,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_connector_summaries
+    #   A list of inbound connector summaries.
+    #   @return [Array<Types::InboundConnectorSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListInboundConnectorsResponse AWS API Documentation
+    #
+    class ListInboundConnectorsResponse < Struct.new(
+      :status,
+      :request_id,
+      :inbound_connector_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] data_set_id
     #   The ID of the dataset used in the ingestion.
     #   @return [String]
@@ -33462,6 +35520,71 @@ module Aws::QuickSight
     #
     class ListIngestionsResponse < Struct.new(
       :ingestions,
+      :next_token,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier for the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. If you don't specify a
+    #   value, the request returns the first page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single page. Valid
+    #   values are 1 through 100. If you don't specify a value, the default
+    #   is 25.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListKnowledgeBaseRefreshSchedulesRequest AWS API Documentation
+    #
+    class ListKnowledgeBaseRefreshSchedulesRequest < Struct.new(
+      :aws_account_id,
+      :knowledge_base_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] schedule_summaries
+    #   A list of refresh schedules for the knowledge base.
+    #   @return [Array<Types::KnowledgeBaseRefreshScheduleSummary>]
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base that the
+    #   schedules apply to.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListKnowledgeBaseRefreshSchedulesResponse AWS API Documentation
+    #
+    class ListKnowledgeBaseRefreshSchedulesResponse < Struct.new(
+      :schedule_summaries,
+      :knowledge_base_arn,
       :next_token,
       :request_id,
       :status)
@@ -33682,6 +35805,68 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that contains the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_arn
+    #   The ARN of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_type
+    #   An optional filter that limits the results to principals of the
+    #   specified type. If you don't specify a value, the operation returns
+    #   principals of all types. You can specify one of the following
+    #   values:
+    #
+    #   * `USER` – An Amazon Quick Sight user.
+    #
+    #   * `GROUP` – An Amazon Quick Sight group.
+    #
+    #   * `ACCOUNT` – The Amazon Quick Sight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Valid
+    #   range is 1–100. If you don't specify a value, the operation returns
+    #   up to 100 results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned by a previous call. Use it to get the next page
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListPrincipalsForPolicyRequest AWS API Documentation
+    #
+    class ListPrincipalsForPolicyRequest < Struct.new(
+      :account_id,
+      :policy_arn,
+      :principal_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] principals
+    #   A list of principals that the policy is assigned to.
+    #   @return [Array<Types::PolicyPrincipal>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results. This value is absent if
+    #   there are no more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListPrincipalsForPolicyResponse AWS API Documentation
+    #
+    class ListPrincipalsForPolicyResponse < Struct.new(
+      :principals,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37230,9 +39415,9 @@ module Aws::QuickSight
     #
     # @!attribute [rw] principal
     #   The Amazon Resource Name (ARN) of the principal. This can be an
-    #   Amazon Quick user, group or namespace associated with the flow.
-    #   Namespace principal can only be set as a viewer and will grant
-    #   everyone in the same namespace viewer permissions.
+    #   Quick user, group or namespace associated with the flow. Namespace
+    #   principal can only be set as a viewer and will grant everyone in the
+    #   same namespace viewer permissions.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Permission AWS API Documentation
@@ -38376,6 +40561,35 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A principal that a governance policy is assigned to.
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the user, group, or account.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_type
+    #   The type of the principal.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time that the assignment was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] revision
+    #   The current revision of the assignment.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PolicyPrincipal AWS API Documentation
+    #
+    class PolicyPrincipal < Struct.new(
+      :principal_arn,
+      :principal_type,
+      :updated_at,
+      :revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The parameters for PostgreSQL.
     #
     # @!attribute [rw] host
@@ -38615,6 +40829,36 @@ module Aws::QuickSight
       class Unknown < ProviderConfig; end
     end
 
+    # A principal to assign a policy to in a
+    # `BatchPutPolicyAssignmentByPolicy` request.
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the user, group, or account to assign the policy to.
+    #   @return [String]
+    #
+    # @!attribute [rw] existing_policy_arn
+    #   The ARN of the policy that you expect the principal to have before
+    #   this request. If the principal has a different policy of the same
+    #   type, or no policy of that type, this entry fails with a
+    #   `ConflictException` error code and makes no change.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The revision of the assignment from your most recent read. If the
+    #   assignment has changed since that revision, this entry fails with a
+    #   `ConflictException` error code.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PutAssignmentEntry AWS API Documentation
+    #
+    class PutAssignmentEntry < Struct.new(
+      :principal_arn,
+      :existing_policy_arn,
+      :revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] aws_account_id
     #   The Amazon Web Services account ID.
     #   @return [String]
@@ -38650,6 +40894,71 @@ module Aws::QuickSight
     class PutDataSetRefreshPropertiesResponse < Struct.new(
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that contains the policy
+    #   and the principal.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_arn
+    #   The Amazon Resource Name (ARN) of the policy to assign.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the user, group, or account to assign the policy to.
+    #   @return [String]
+    #
+    # @!attribute [rw] existing_policy_arn
+    #   The ARN of the policy that you expect the principal to have before
+    #   this request. If the principal has a different policy of the same
+    #   type, or no policy of that type, the request fails with a
+    #   `ConflictException` and makes no change. If you don't specify a
+    #   value, the operation doesn't check the existing assignment.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The revision of the assignment from your most recent read. If the
+    #   assignment has changed since that revision, the request fails with a
+    #   `ConflictException`. If you don't specify a value, the operation
+    #   doesn't check the revision.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PutPolicyAssignmentRequest AWS API Documentation
+    #
+    class PutPolicyAssignmentRequest < Struct.new(
+      :account_id,
+      :policy_arn,
+      :principal_arn,
+      :existing_policy_arn,
+      :revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_arn
+    #   The ARN of the policy that is now assigned to the principal.
+    #   @return [String]
+    #
+    # @!attribute [rw] replaced_policy_arn
+    #   The ARN of the policy that this request replaced. This value is
+    #   absent if the principal had no policy of this type before the
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The revision of the assignment after this request. Use this value in
+    #   later requests to detect concurrent changes.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PutPolicyAssignmentResponse AWS API Documentation
+    #
+    class PutPolicyAssignmentResponse < Struct.new(
+      :policy_arn,
+      :replaced_policy_arn,
+      :revision)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38744,6 +41053,166 @@ module Aws::QuickSight
     class QueueInfo < Struct.new(
       :waiting_on_ingestion,
       :queued_ingestion)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Quick Sight authentication configuration of an access control
+    # application.
+    #
+    # @!attribute [rw] quick_authentication_type
+    #   How the external client authenticates to Quick Sight.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_authentication_configuration_detail
+    #   The details of the Quick Sight authentication configuration.
+    #   @return [Types::QuickAuthenticationConfigurationDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/QuickAuthenticationConfig AWS API Documentation
+    #
+    class QuickAuthenticationConfig < Struct.new(
+      :quick_authentication_type,
+      :quick_authentication_configuration_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Quick Sight authentication configuration that is returned when an
+    # access control application is created.
+    #
+    # @!attribute [rw] quick_authentication_type
+    #   How the external client authenticates to Quick Sight.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_authentication_configuration_detail_create_output
+    #   The details of the Quick Sight authentication configuration.
+    #   @return [Types::QuickAuthenticationConfigurationDetailCreateOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/QuickAuthenticationConfigCreateOutput AWS API Documentation
+    #
+    class QuickAuthenticationConfigCreateOutput < Struct.new(
+      :quick_authentication_type,
+      :quick_authentication_configuration_detail_create_output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Quick Sight authentication configuration for an access control
+    # application.
+    #
+    # @!attribute [rw] quick_authentication_type
+    #   How the external client authenticates to Quick Sight.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_authentication_configuration_detail_input
+    #   The details of the Quick Sight authentication configuration.
+    #   @return [Types::QuickAuthenticationConfigurationDetailInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/QuickAuthenticationConfigInput AWS API Documentation
+    #
+    class QuickAuthenticationConfigInput < Struct.new(
+      :quick_authentication_type,
+      :quick_authentication_configuration_detail_input)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the Quick Sight authentication configuration.
+    #
+    # @note QuickAuthenticationConfigurationDetail is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of QuickAuthenticationConfigurationDetail corresponding to the set member.
+    #
+    # @!attribute [rw] quick_managed_public_auth_code
+    #   The configuration of a Quick Sight-managed public client.
+    #   @return [Types::QuickManagedPublicAuthCodeQuickAuthenticationConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/QuickAuthenticationConfigurationDetail AWS API Documentation
+    #
+    class QuickAuthenticationConfigurationDetail < Struct.new(
+      :quick_managed_public_auth_code,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class QuickManagedPublicAuthCode < QuickAuthenticationConfigurationDetail; end
+      class Unknown < QuickAuthenticationConfigurationDetail; end
+    end
+
+    # The details of the Quick Sight authentication configuration that is
+    # returned when an access control application is created.
+    #
+    # @note QuickAuthenticationConfigurationDetailCreateOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of QuickAuthenticationConfigurationDetailCreateOutput corresponding to the set member.
+    #
+    # @!attribute [rw] quick_managed_public_auth_code
+    #   The configuration of a Quick Sight-managed public client.
+    #   @return [Types::QuickManagedPublicAuthCodeQuickAuthenticationConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/QuickAuthenticationConfigurationDetailCreateOutput AWS API Documentation
+    #
+    class QuickAuthenticationConfigurationDetailCreateOutput < Struct.new(
+      :quick_managed_public_auth_code,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class QuickManagedPublicAuthCode < QuickAuthenticationConfigurationDetailCreateOutput; end
+      class Unknown < QuickAuthenticationConfigurationDetailCreateOutput; end
+    end
+
+    # The details of the Quick Sight authentication configuration. Provide
+    # redirect URIs.
+    #
+    # @note QuickAuthenticationConfigurationDetailInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] quick_managed_public_auth_code
+    #   The configuration of a Quick Sight-managed public client.
+    #   @return [Types::QuickManagedAuthCodeQuickAuthenticationConfigInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/QuickAuthenticationConfigurationDetailInput AWS API Documentation
+    #
+    class QuickAuthenticationConfigurationDetailInput < Struct.new(
+      :quick_managed_public_auth_code,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class QuickManagedPublicAuthCode < QuickAuthenticationConfigurationDetailInput; end
+      class Unknown < QuickAuthenticationConfigurationDetailInput; end
+    end
+
+    # The configuration for a Quick Sight-managed client. You provide the
+    # redirect URIs, and Quick Sight generates the client ID.
+    #
+    # @!attribute [rw] redirect_uris
+    #   The OAuth 2.0 redirect URIs of the client.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/QuickManagedAuthCodeQuickAuthenticationConfigInput AWS API Documentation
+    #
+    class QuickManagedAuthCodeQuickAuthenticationConfigInput < Struct.new(
+      :redirect_uris)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of a Quick Sight-managed public client that uses
+    # PKCE.
+    #
+    # @!attribute [rw] redirect_uris
+    #   The OAuth 2.0 redirect URIs of the client.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_id
+    #   The OAuth 2.0 client ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/QuickManagedPublicAuthCodeQuickAuthenticationConfig AWS API Documentation
+    #
+    class QuickManagedPublicAuthCodeQuickAuthenticationConfig < Struct.new(
+      :redirect_uris,
+      :client_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39459,6 +41928,16 @@ module Aws::QuickSight
     #   Database.
     #   @return [String]
     #
+    # @!attribute [rw] federated_catalog
+    #   The federated database to use for table and schema discovery.
+    #   Specify the exact database name returned by `SHOW DATABASES`, such
+    #   as `producer_database@catalog_name`. This value must differ from
+    #   `Database`, which specifies the database used for the connection.
+    #
+    #   For `UpdateDataSource`, omit this parameter to keep the current
+    #   catalog, or specify an empty string to clear the configured catalog.
+    #   @return [String]
+    #
     # @!attribute [rw] cluster_id
     #   Cluster ID. This field can be blank if the `Host` and `Port` are
     #   provided.
@@ -39488,6 +41967,7 @@ module Aws::QuickSight
       :host,
       :port,
       :database,
+      :federated_catalog,
       :cluster_id,
       :iam_parameters,
       :identity_center_configuration)
@@ -40253,7 +42733,7 @@ module Aws::QuickSight
     #   console embedding experience. This can be used along with custom
     #   permissions to restrict access to certain features. For more
     #   information, see [Customizing Access to the Amazon Quick Sight
-    #   Console][1] in the *Amazon Quick User Guide*.
+    #   Console][1] in the *Quick User Guide*.
     #
     #   Use ` GenerateEmbedUrlForRegisteredUser ` where you want to provide
     #   an authoring portal that allows users to create data sources,
@@ -40264,16 +42744,16 @@ module Aws::QuickSight
     #   the ` UpdateUser ` API operation. Use the ` RegisterUser ` API
     #   operation to add a new user with a custom permission profile
     #   attached. For more information, see the following sections in the
-    #   *Amazon Quick User Guide*:
+    #   *Quick User Guide*:
     #
     #   * [Embedding the Full Functionality of the Amazon Quick Sight
     #     Console for Authenticated Users][2]
     #
-    #   * [Customizing Access to the Amazon Quick Console][1]
+    #   * [Customizing Access to the Quick Console][1]
     #
     #   For more information about the high-level steps for embedding and
     #   for an interactive demo of the ways you can customize embedding,
-    #   visit the [Amazon Quick Developer Portal][3].
+    #   visit the [Quick Developer Portal][3].
     #
     #
     #
@@ -43930,7 +46410,7 @@ module Aws::QuickSight
     #   These are not the tags that are used for Amazon Web Services
     #   resource tagging. For more information on row level security in
     #   Amazon Quick Sight, see [Using Row-Level Security (RLS) with
-    #   Tags][1]in the *Amazon Quick User Guide*.
+    #   Tags][1]in the *Quick User Guide*.
     #
     #
     #
@@ -49851,6 +52331,41 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A calculated column that is not materialized in the prepared data. The
+    # column is computed at analysis time and can use aggregate expressions.
+    #
+    # @!attribute [rw] column_id
+    #   A unique ID to identify the unmaterialized calculated column.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_name
+    #   The name of the unmaterialized calculated column.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   An expression that defines the unmaterialized calculated column.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The data type of the unmaterialized calculated column.
+    #   @return [String]
+    #
+    # @!attribute [rw] sub_type
+    #   The sub data type of the unmaterialized calculated column.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UnmaterializedCalculatedColumn AWS API Documentation
+    #
+    class UnmaterializedCalculatedColumn < Struct.new(
+      :column_id,
+      :column_name,
+      :expression,
+      :type,
+      :sub_type)
+      SENSITIVE = [:expression]
+      include Aws::Structure
+    end
+
     # A transform operation that converts columns into rows, normalizing the
     # data structure.
     #
@@ -49999,6 +52514,157 @@ module Aws::QuickSight
     class UntagResourceResponse < Struct.new(
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The ID of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The new name of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The new description of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] idp_authorizing_configuration
+    #   The identity provider settings to update, such as the client ID and
+    #   issuer URL. You can't change the `IdpAuthorizingType` or the
+    #   trusted token issuer. To manage client secrets, use the client
+    #   secret operations.
+    #   @return [Types::IdpAuthorizingConfigUpdateInput]
+    #
+    # @!attribute [rw] quick_authentication_configuration
+    #   The Quick Sight authentication settings to update, such as redirect
+    #   URIs. You can't change the `QuickAuthenticationType`.
+    #   @return [Types::QuickAuthenticationConfigInput]
+    #
+    # @!attribute [rw] status
+    #   The new status of the access control application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccessControlApplicationRequest AWS API Documentation
+    #
+    class UpdateAccessControlApplicationRequest < Struct.new(
+      :aws_account_id,
+      :application_id,
+      :name,
+      :description,
+      :idp_authorizing_configuration,
+      :quick_authentication_configuration,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The ID of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_control_application_status
+    #   The status of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time when the access control application was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccessControlApplicationResponse AWS API Documentation
+    #
+    class UpdateAccessControlApplicationResponse < Struct.new(
+      :status,
+      :request_id,
+      :application_id,
+      :arn,
+      :access_control_application_status,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The ID of the access control application.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret_id
+    #   The ID of the client secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_regional_secret_manager_arns
+    #   The Region ARNs to add or replace. The Region in each ARN must match
+    #   its key.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] remove_regional_secret_manager_arns
+    #   The Regions whose ARNs to remove. You can't remove the last
+    #   remaining Region. To remove it, delete the client secret instead.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccessControlApplicationSecretRequest AWS API Documentation
+    #
+    class UpdateAccessControlApplicationSecretRequest < Struct.new(
+      :aws_account_id,
+      :application_id,
+      :client_secret_id,
+      :update_regional_secret_manager_arns,
+      :remove_regional_secret_manager_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret_id
+    #   The ID of the client secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The time when the client secret was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] regional_secret_manager_arns
+    #   The Region ARNs of the client secret after the update.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccessControlApplicationSecretResponse AWS API Documentation
+    #
+    class UpdateAccessControlApplicationSecretResponse < Struct.new(
+      :status,
+      :request_id,
+      :client_secret_id,
+      :updated_at,
+      :regional_secret_manager_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -51468,6 +54134,13 @@ module Aws::QuickSight
     #   Required when using the new data preparation experience.
     #   @return [Types::SemanticModelConfiguration]
     #
+    # @!attribute [rw] unmaterialized_calculated_columns
+    #   A list of unmaterialized calculated columns for the dataset. These
+    #   columns are computed at analysis time and are not stored in the
+    #   prepared data. You can only use this with the new data preparation
+    #   experience.
+    #   @return [Array<Types::UnmaterializedCalculatedColumn>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDataSetRequest AWS API Documentation
     #
     class UpdateDataSetRequest < Struct.new(
@@ -51486,7 +54159,8 @@ module Aws::QuickSight
       :dataset_parameters,
       :performance_configuration,
       :data_prep_configuration,
-      :semantic_model_configuration)
+      :semantic_model_configuration,
+      :unmaterialized_calculated_columns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52233,6 +54907,130 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_connector_id
+    #   The ID of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] associate_access_control_applications
+    #   The ARNs of up to 20 access control applications to associate with
+    #   the inbound connector. ARNs that are already associated are ignored.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] disassociate_access_control_applications
+    #   The ARNs of up to 20 access control applications to disassociate
+    #   from the inbound connector. ARNs that aren't associated are
+    #   ignored.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateInboundConnectorApplicationAssociationsRequest AWS API Documentation
+    #
+    class UpdateInboundConnectorApplicationAssociationsRequest < Struct.new(
+      :aws_account_id,
+      :inbound_connector_id,
+      :associate_access_control_applications,
+      :disassociate_access_control_applications)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateInboundConnectorApplicationAssociationsResponse AWS API Documentation
+    #
+    class UpdateInboundConnectorApplicationAssociationsResponse < Struct.new(
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_connector_id
+    #   The ID of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The new name of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The new description of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_connector_configuration
+    #   The new configuration of the inbound connector. You can't change
+    #   the `InboundConnectorType`.
+    #   @return [Types::InboundConnectorConfig]
+    #
+    # @!attribute [rw] inbound_connector_status
+    #   The new status of the inbound connector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateInboundConnectorRequest AWS API Documentation
+    #
+    class UpdateInboundConnectorRequest < Struct.new(
+      :aws_account_id,
+      :inbound_connector_id,
+      :name,
+      :description,
+      :inbound_connector_configuration,
+      :inbound_connector_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_connector_id
+    #   The ID of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_connector_status
+    #   The status of the inbound connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time when the inbound connector was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateInboundConnectorResponse AWS API Documentation
+    #
+    class UpdateInboundConnectorResponse < Struct.new(
+      :status,
+      :request_id,
+      :inbound_connector_id,
+      :arn,
+      :inbound_connector_status,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account that contains the IP
     #   rules.
     #   @return [String]
@@ -52391,6 +55189,80 @@ module Aws::QuickSight
       :knowledge_base_arn,
       :knowledge_base_id,
       :permissions,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier for the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_id
+    #   The unique identifier for the refresh schedule to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_frequency
+    #   The frequency configuration for the refresh schedule. The frequency
+    #   configuration specifies how often the schedule runs and, for weekly
+    #   or monthly schedules, the day on which it runs. If you don't
+    #   specify this parameter, the schedule keeps its existing frequency.
+    #   @return [Types::KnowledgeBaseRefreshFrequency]
+    #
+    # @!attribute [rw] start_time
+    #   The date and time, in ISO 8601 format, after which the schedule can
+    #   start refreshing the knowledge base. The first refresh runs at the
+    #   next scheduled time after this date and time. If you don't specify
+    #   this parameter, the schedule keeps its existing start time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of the refresh schedule. A schedule that isn't `ENABLED`
+    #   doesn't run refreshes. If you don't specify this parameter, the
+    #   schedule keeps its existing state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateKnowledgeBaseRefreshScheduleRequest AWS API Documentation
+    #
+    class UpdateKnowledgeBaseRefreshScheduleRequest < Struct.new(
+      :aws_account_id,
+      :knowledge_base_id,
+      :schedule_id,
+      :schedule_frequency,
+      :start_time,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] schedule_id
+    #   The unique identifier for the refresh schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base that the
+    #   schedule applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateKnowledgeBaseRefreshScheduleResponse AWS API Documentation
+    #
+    class UpdateKnowledgeBaseRefreshScheduleResponse < Struct.new(
+      :schedule_id,
+      :knowledge_base_arn,
       :request_id,
       :status)
       SENSITIVE = []
@@ -54688,6 +57560,48 @@ module Aws::QuickSight
       :role_arn,
       :created_time,
       :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input fails to satisfy the constraints specified by the service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_list
+    #   A list of the request fields that failed validation.
+    #   @return [Array<Types::ValidationExceptionField>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message,
+      :request_id,
+      :field_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A request field that failed validation.
+    #
+    # @!attribute [rw] name
+    #   The name of the field that failed validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that describes why the field failed validation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ValidationExceptionField AWS API Documentation
+    #
+    class ValidationExceptionField < Struct.new(
+      :name,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

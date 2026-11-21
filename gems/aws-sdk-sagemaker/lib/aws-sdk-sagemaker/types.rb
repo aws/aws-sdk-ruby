@@ -5414,6 +5414,438 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Details about a SageMaker Capacity Reservation. A SageMaker Capacity
+    # Reservation reserves a number of instances of one instance type in one
+    # Availability Zone for a period of time.
+    #
+    # @!attribute [rw] sm_capacity_reservation_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker Capacity
+    #   Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] sm_capacity_reservation_id
+    #   The ID of the SageMaker Capacity Reservation. The ID is the last
+    #   part of the ARN and starts with `smcr-`.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The ID of the Amazon Web Services account that owns the SageMaker
+    #   Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the SageMaker Capacity Reservation. SageMaker AI sets
+    #   the status from the start and end times of the reservation. Valid
+    #   values:
+    #
+    #   Scheduled
+    #
+    #   : The current time is before `StartTime`.
+    #
+    #   Active
+    #
+    #   : The current time is between `StartTime` and `EndTime`. You can use
+    #     the reserved instances.
+    #
+    #   Expired
+    #
+    #   : The current time is at or after `EndTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The SageMaker AI instance type of the reserved instances, for
+    #   example `ml.p5.48xlarge`.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The name of the Availability Zone of the reserved instances, for
+    #   example `us-east-1a`. Availability Zone names can map to different
+    #   physical zones in different accounts. To identify the same zone
+    #   across accounts, use `AvailabilityZoneId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone of the reserved instances, for
+    #   example `use1-az1`. An Availability Zone ID identifies the same
+    #   physical zone in every account.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_instance_count
+    #   The number of instances in the SageMaker Capacity Reservation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_time
+    #   The time when the reserved instances become available.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time when the SageMaker Capacity Reservation ends. This value is
+    #   not returned if the reservation has no end time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the SageMaker Capacity Reservation was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CapacityReservationDetail AWS API Documentation
+    #
+    class CapacityReservationDetail < Struct.new(
+      :sm_capacity_reservation_arn,
+      :sm_capacity_reservation_id,
+      :owner,
+      :status,
+      :instance_type,
+      :availability_zone,
+      :availability_zone_id,
+      :total_instance_count,
+      :start_time,
+      :end_time,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The association between the SageMaker AI endpoints in your account and
+    # a SageMaker Capacity Reservation, through one ML capacity reservation.
+    # To use the reserved instances for an endpoint, specify the ML capacity
+    # reservation ARN in the `MlReservationArn` field of
+    # `ProductionVariantCapacityReservationConfig` when you call
+    # `CreateEndpointConfig`.
+    #
+    # @!attribute [rw] ml_reservation_id
+    #   The name of the ML capacity reservation. The name is the last part
+    #   of the ML capacity reservation ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the association. Valid values:
+    #
+    #   Pending
+    #
+    #   : SageMaker AI is adding or removing the association.
+    #
+    #   Active
+    #
+    #   : The resources are associated with the SageMaker Capacity
+    #     Reservation and can use its instances.
+    #
+    #   Inactive
+    #
+    #   : The resources are not associated with the SageMaker Capacity
+    #     Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_criteria
+    #   How endpoints in your account match the ML capacity reservation.
+    #   Valid values:
+    #
+    #   Open
+    #
+    #   : Endpoints in your account use the ML capacity reservation
+    #     automatically when their instance type matches. You don't specify
+    #     the ML capacity reservation ARN when you create the endpoint.
+    #
+    #   Targeted
+    #
+    #   : An endpoint uses the ML capacity reservation only when you specify
+    #     its ARN when you create or update the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_sharing
+    #   Whether one endpoint or multiple endpoints can use the ML capacity
+    #   reservation. Valid values:
+    #
+    #   SingleEndpoint
+    #
+    #   : Only one endpoint can use the ML capacity reservation.
+    #
+    #   MultipleEndpoints
+    #
+    #   : Multiple endpoints can use the ML capacity reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] ml_reservation_arn
+    #   The Amazon Resource Name (ARN) of the ML capacity reservation.
+    #   Specify this ARN in `CreateEndpointConfig` to use the reserved
+    #   instances for an endpoint. For a new ML capacity reservation, this
+    #   value is returned when the status is `Active`.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason that the most recent attempt to add or remove the
+    #   association failed. This value is returned only when the most recent
+    #   attempt failed. After a failure to add the association, the status
+    #   is `Inactive`. After a failure to remove the association, the status
+    #   is `Active`.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_time
+    #   The time when SageMaker AI started the current association. This
+    #   time resets when you add the association again after it was removed
+    #   or after it failed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CapacityReservationEndpointsAssociation AWS API Documentation
+    #
+    class CapacityReservationEndpointsAssociation < Struct.new(
+      :ml_reservation_id,
+      :status,
+      :match_criteria,
+      :endpoint_sharing,
+      :ml_reservation_arn,
+      :failure_reason,
+      :associated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter for the `ListCapacityReservations` operation. A reservation
+    # matches the filter when its value for `Name` equals any of the values
+    # in `Values`.
+    #
+    # @!attribute [rw] name
+    #   The name of the field to filter on. The only supported value is
+    #   `Status`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values to match. For the `Status` filter, valid values are
+    #   `Scheduled`, `Active`, and `Expired`. Values are case sensitive. You
+    #   can specify up to 10 values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CapacityReservationFilter AWS API Documentation
+    #
+    class CapacityReservationFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The association between the SageMaker AI HyperPod clusters in your
+    # account and a SageMaker Capacity Reservation.
+    #
+    # @!attribute [rw] status
+    #   The status of the association. Valid values:
+    #
+    #   Pending
+    #
+    #   : SageMaker AI is adding or removing the association.
+    #
+    #   Active
+    #
+    #   : The resources are associated with the SageMaker Capacity
+    #     Reservation and can use its instances.
+    #
+    #   Inactive
+    #
+    #   : The resources are not associated with the SageMaker Capacity
+    #     Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason that the most recent attempt to add or remove the
+    #   association failed. This value is returned only when the most recent
+    #   attempt failed. After a failure to add the association, the status
+    #   is `Inactive`. After a failure to remove the association, the status
+    #   is `Active`.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_time
+    #   The time when SageMaker AI started the current association. This
+    #   time resets when you add the association again after it was removed
+    #   or after it failed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CapacityReservationHyperPodClustersAssociation AWS API Documentation
+    #
+    class CapacityReservationHyperPodClustersAssociation < Struct.new(
+      :status,
+      :failure_reason,
+      :associated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The instances from a SageMaker Capacity Reservation that one account
+    # uses.
+    #
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that uses the instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] in_use_instance_count
+    #   The number of instances that the account uses, across all resource
+    #   types.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resources_usage
+    #   The instance usage for each resource type that has instances in use
+    #   in the account.
+    #   @return [Array<Types::CapacityReservationResourceUsage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CapacityReservationInstanceUsage AWS API Documentation
+    #
+    class CapacityReservationInstanceUsage < Struct.new(
+      :account_id,
+      :in_use_instance_count,
+      :resources_usage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An association between one type of resource in your account and a
+    # SageMaker Capacity Reservation. Each item contains exactly one member.
+    #
+    # @note CapacityReservationResourceAssociation is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CapacityReservationResourceAssociation corresponding to the set member.
+    #
+    # @!attribute [rw] hyper_pod_clusters
+    #   The association between the SageMaker AI HyperPod clusters in your
+    #   account and the SageMaker Capacity Reservation. The association
+    #   applies to all HyperPod clusters in your account.
+    #   @return [Types::CapacityReservationHyperPodClustersAssociation]
+    #
+    # @!attribute [rw] endpoints
+    #   The association between the SageMaker AI endpoints in your account
+    #   and the SageMaker Capacity Reservation, through one ML capacity
+    #   reservation. The response includes one item for each ML capacity
+    #   reservation.
+    #   @return [Types::CapacityReservationEndpointsAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CapacityReservationResourceAssociation AWS API Documentation
+    #
+    class CapacityReservationResourceAssociation < Struct.new(
+      :hyper_pod_clusters,
+      :endpoints,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class HyperPodClusters < CapacityReservationResourceAssociation; end
+      class Endpoints < CapacityReservationResourceAssociation; end
+      class Unknown < CapacityReservationResourceAssociation; end
+    end
+
+    # The instances from a SageMaker Capacity Reservation that one resource
+    # type uses in an account.
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource that uses the instances. Valid values:
+    #
+    #   HyperPodClusters
+    #
+    #   : SageMaker AI HyperPod clusters.
+    #
+    #   Endpoints
+    #
+    #   : SageMaker AI endpoints.
+    #   @return [String]
+    #
+    # @!attribute [rw] in_use_instance_count
+    #   The number of instances from the SageMaker Capacity Reservation that
+    #   are in use.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CapacityReservationResourceUsage AWS API Documentation
+    #
+    class CapacityReservationResourceUsage < Struct.new(
+      :resource_type,
+      :in_use_instance_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a SageMaker Capacity Reservation.
+    #
+    # @!attribute [rw] sm_capacity_reservation_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker Capacity
+    #   Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] sm_capacity_reservation_id
+    #   The ID of the SageMaker Capacity Reservation. The ID is the last
+    #   part of the ARN and starts with `smcr-`.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The ID of the Amazon Web Services account that owns the SageMaker
+    #   Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the SageMaker Capacity Reservation. SageMaker AI sets
+    #   the status from the start and end times of the reservation. Valid
+    #   values:
+    #
+    #   Scheduled
+    #
+    #   : The current time is before `StartTime`.
+    #
+    #   Active
+    #
+    #   : The current time is between `StartTime` and `EndTime`. You can use
+    #     the reserved instances.
+    #
+    #   Expired
+    #
+    #   : The current time is at or after `EndTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The SageMaker AI instance type of the reserved instances, for
+    #   example `ml.p5.48xlarge`.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The name of the Availability Zone of the reserved instances, for
+    #   example `us-east-1a`. Availability Zone names can map to different
+    #   physical zones in different accounts. To identify the same zone
+    #   across accounts, use `AvailabilityZoneId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone of the reserved instances, for
+    #   example `use1-az1`. An Availability Zone ID identifies the same
+    #   physical zone in every account.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_instance_count
+    #   The number of instances in the SageMaker Capacity Reservation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_time
+    #   The time when the reserved instances become available.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time when the SageMaker Capacity Reservation ends. This value is
+    #   not returned if the reservation has no end time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the SageMaker Capacity Reservation was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CapacityReservationSummary AWS API Documentation
+    #
+    class CapacityReservationSummary < Struct.new(
+      :sm_capacity_reservation_arn,
+      :sm_capacity_reservation_id,
+      :owner,
+      :status,
+      :instance_type,
+      :availability_zone,
+      :availability_zone_id,
+      :total_instance_count,
+      :start_time,
+      :end_time,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the type and size of the endpoint capacity to activate for a
     # blue/green deployment, a rolling deployment, or a rollback strategy.
     # You can specify your batches as either instance count or the overall
@@ -19263,6 +19695,32 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] sm_capacity_reservation_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker Capacity
+    #   Reservation. The ARN has the format
+    #   `arn:aws:sagemaker:region:account-id:sm-capacity-reservation/smcr-id`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCapacityReservationRequest AWS API Documentation
+    #
+    class DescribeCapacityReservationRequest < Struct.new(
+      :sm_capacity_reservation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_reservation
+    #   Details about the SageMaker Capacity Reservation.
+    #   @return [Types::CapacityReservationDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCapacityReservationResponse AWS API Documentation
+    #
+    class DescribeCapacityReservationResponse < Struct.new(
+      :capacity_reservation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] event_id
     #   The unique identifier (UUID) of the event to describe. This ID can
     #   be obtained from the `ListClusterEvents` operation.
@@ -25048,6 +25506,66 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] sm_capacity_reservation_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker Capacity
+    #   Reservation. The ARN has the format
+    #   `arn:aws:sagemaker:region:account-id:sm-capacity-reservation/smcr-id`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If more
+    #   results are available, the response includes a `NextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was truncated, the response includes a
+    #   `NextToken` value. To retrieve the next set of results, use that
+    #   token in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeResourceAssociationsRequest AWS API Documentation
+    #
+    class DescribeResourceAssociationsRequest < Struct.new(
+      :sm_capacity_reservation_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sm_capacity_reservation_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker Capacity
+    #   Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] sm_capacity_reservation_id
+    #   The ID of the SageMaker Capacity Reservation. The ID is the last
+    #   part of the ARN and starts with `smcr-`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_associations
+    #   The associations between resources in your account and the SageMaker
+    #   Capacity Reservation. The list is empty when your account has no
+    #   associations with the reservation.
+    #   @return [Array<Types::CapacityReservationResourceAssociation>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, SageMaker AI returns this token. To
+    #   retrieve the next set of results, use this token in your next
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeResourceAssociationsResponse AWS API Documentation
+    #
+    class DescribeResourceAssociationsResponse < Struct.new(
+      :sm_capacity_reservation_arn,
+      :sm_capacity_reservation_id,
+      :resource_associations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] domain_id
     #   The ID of the associated domain.
     #   @return [String]
@@ -29737,6 +30255,78 @@ module Aws::SageMaker
     #
     class GenerativeAiSettings < Struct.new(
       :amazon_bedrock_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sm_capacity_reservation_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker Capacity
+    #   Reservation. The ARN has the format
+    #   `arn:aws:sagemaker:region:account-id:sm-capacity-reservation/smcr-id`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If more
+    #   results are available, the response includes a `NextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was truncated, the response includes a
+    #   `NextToken` value. To retrieve the next set of results, use that
+    #   token in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetCapacityReservationUsageRequest AWS API Documentation
+    #
+    class GetCapacityReservationUsageRequest < Struct.new(
+      :sm_capacity_reservation_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sm_capacity_reservation_id
+    #   The ID of the SageMaker Capacity Reservation. The ID is the last
+    #   part of the ARN and starts with `smcr-`.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_instance_count
+    #   The number of instances in the SageMaker Capacity Reservation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] available_instance_count
+    #   The number of instances in the SageMaker Capacity Reservation that
+    #   are not in use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_refresh_time
+    #   The time when SageMaker AI last refreshed the usage counts in this
+    #   response.
+    #   @return [Time]
+    #
+    # @!attribute [rw] instance_usage_set
+    #   The instance usage for each account that uses instances from the
+    #   SageMaker Capacity Reservation, sorted by account ID. Each account
+    #   appears at most once across all pages. The list is empty when no
+    #   instances are in use.
+    #   @return [Array<Types::CapacityReservationInstanceUsage>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, SageMaker AI returns this token. To
+    #   retrieve the next set of results, use this token in your next
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetCapacityReservationUsageResponse AWS API Documentation
+    #
+    class GetCapacityReservationUsageResponse < Struct.new(
+      :sm_capacity_reservation_id,
+      :total_instance_count,
+      :available_instance_count,
+      :last_refresh_time,
+      :instance_usage_set,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36961,6 +37551,52 @@ module Aws::SageMaker
     #
     class ListCandidatesForAutoMLJobResponse < Struct.new(
       :candidates,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If more
+    #   results are available, the response includes a `NextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was truncated, the response includes a
+    #   `NextToken` value. To retrieve the next set of results, use that
+    #   token in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that returns only the reservations that match it. You can
+    #   specify one filter. If you don't specify a filter, the response
+    #   includes all reservations in your account.
+    #   @return [Array<Types::CapacityReservationFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCapacityReservationsRequest AWS API Documentation
+    #
+    class ListCapacityReservationsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_reservation_summaries
+    #   Summaries of the SageMaker Capacity Reservations in your account.
+    #   @return [Array<Types::CapacityReservationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, SageMaker AI returns this token. To
+    #   retrieve the next set of results, use this token in your next
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCapacityReservationsResponse AWS API Documentation
+    #
+    class ListCapacityReservationsResponse < Struct.new(
+      :capacity_reservation_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure

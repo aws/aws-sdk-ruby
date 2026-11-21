@@ -3949,6 +3949,16 @@ module Aws
                                    ) -> _DescribeAutoMLJobV2ResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAutoMLJobV2ResponseSuccess
 
+      interface _DescribeCapacityReservationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCapacityReservationResponse]
+        def capacity_reservation: () -> Types::CapacityReservationDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_capacity_reservation-instance_method
+      def describe_capacity_reservation: (
+                                           sm_capacity_reservation_arn: ::String
+                                         ) -> _DescribeCapacityReservationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCapacityReservationResponseSuccess
+
       interface _DescribeClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterResponse]
         def cluster_arn: () -> ::String
@@ -5222,6 +5232,21 @@ module Aws
                                       ) -> _DescribeReservedCapacityResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReservedCapacityResponseSuccess
 
+      interface _DescribeResourceAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeResourceAssociationsResponse]
+        def sm_capacity_reservation_arn: () -> ::String
+        def sm_capacity_reservation_id: () -> ::String
+        def resource_associations: () -> ::Array[Types::CapacityReservationResourceAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_resource_associations-instance_method
+      def describe_resource_associations: (
+                                            sm_capacity_reservation_arn: ::String,
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _DescribeResourceAssociationsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResourceAssociationsResponseSuccess
+
       interface _DescribeSpaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSpaceResponse]
         def domain_id: () -> ::String
@@ -5550,6 +5575,23 @@ module Aws
                                   training_plan_extension_offering_id: ::String
                                 ) -> _ExtendTrainingPlanResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExtendTrainingPlanResponseSuccess
+
+      interface _GetCapacityReservationUsageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCapacityReservationUsageResponse]
+        def sm_capacity_reservation_id: () -> ::String
+        def total_instance_count: () -> ::Integer
+        def available_instance_count: () -> ::Integer
+        def last_refresh_time: () -> ::Time
+        def instance_usage_set: () -> ::Array[Types::CapacityReservationInstanceUsage]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#get_capacity_reservation_usage-instance_method
+      def get_capacity_reservation_usage: (
+                                            sm_capacity_reservation_arn: ::String,
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _GetCapacityReservationUsageResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCapacityReservationUsageResponseSuccess
 
       interface _GetDeviceFleetReportResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDeviceFleetReportResponse]
@@ -5889,6 +5931,24 @@ module Aws
                                              ?next_token: ::String
                                            ) -> _ListCandidatesForAutoMLJobResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCandidatesForAutoMLJobResponseSuccess
+
+      interface _ListCapacityReservationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCapacityReservationsResponse]
+        def capacity_reservation_summaries: () -> ::Array[Types::CapacityReservationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_capacity_reservations-instance_method
+      def list_capacity_reservations: (
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String,
+                                        ?filters: Array[
+                                          {
+                                            name: ("Status"),
+                                            values: Array[::String]
+                                          }
+                                        ]
+                                      ) -> _ListCapacityReservationsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCapacityReservationsResponseSuccess
 
       interface _ListClusterEventsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterEventsResponse]

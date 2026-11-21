@@ -1096,6 +1096,87 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class CapacityReservationDetail
+      attr_accessor sm_capacity_reservation_arn: ::String
+      attr_accessor sm_capacity_reservation_id: ::String
+      attr_accessor owner: ::String
+      attr_accessor status: ("Scheduled" | "Active" | "Expired")
+      attr_accessor instance_type: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor total_instance_count: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CapacityReservationEndpointsAssociation
+      attr_accessor ml_reservation_id: ::String
+      attr_accessor status: ("Pending" | "Active" | "Inactive")
+      attr_accessor match_criteria: ("Open" | "Targeted")
+      attr_accessor endpoint_sharing: ("SingleEndpoint" | "MultipleEndpoints")
+      attr_accessor ml_reservation_arn: ::String
+      attr_accessor failure_reason: ::String
+      attr_accessor associated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CapacityReservationFilter
+      attr_accessor name: ("Status")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CapacityReservationHyperPodClustersAssociation
+      attr_accessor status: ("Pending" | "Active" | "Inactive")
+      attr_accessor failure_reason: ::String
+      attr_accessor associated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CapacityReservationInstanceUsage
+      attr_accessor account_id: ::String
+      attr_accessor in_use_instance_count: ::Integer
+      attr_accessor resources_usage: ::Array[Types::CapacityReservationResourceUsage]
+      SENSITIVE: []
+    end
+
+    class CapacityReservationResourceAssociation
+      attr_accessor hyper_pod_clusters: Types::CapacityReservationHyperPodClustersAssociation
+      attr_accessor endpoints: Types::CapacityReservationEndpointsAssociation
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class HyperPodClusters < CapacityReservationResourceAssociation
+      end
+      class Endpoints < CapacityReservationResourceAssociation
+      end
+      class Unknown < CapacityReservationResourceAssociation
+      end
+    end
+
+    class CapacityReservationResourceUsage
+      attr_accessor resource_type: ("HyperPodClusters" | "Endpoints")
+      attr_accessor in_use_instance_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class CapacityReservationSummary
+      attr_accessor sm_capacity_reservation_arn: ::String
+      attr_accessor sm_capacity_reservation_id: ::String
+      attr_accessor owner: ::String
+      attr_accessor status: ("Scheduled" | "Active" | "Expired")
+      attr_accessor instance_type: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor total_instance_count: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
     class CapacitySize
       attr_accessor type: ("INSTANCE_COUNT" | "CAPACITY_PERCENT")
       attr_accessor value: ::Integer
@@ -1412,7 +1493,7 @@ module Aws::SageMaker
       attr_accessor kubernetes_config: Types::ClusterKubernetesConfigDetails
       attr_accessor capacity_requirements: Types::ClusterCapacityRequirements
       attr_accessor target_state_count: ::Integer
-      attr_accessor software_update_status: ("Pending" | "InProgress" | "Succeeded" | "Failed" | "RollbackInProgress" | "RollbackComplete")
+      attr_accessor software_update_status: ("Pending" | "InProgress" | "Succeeded" | "Failed" | "RollbackInProgress" | "RollbackComplete" | "PartiallySucceeded")
       attr_accessor active_software_update_config: Types::DeploymentConfiguration
       attr_accessor slurm_config: Types::ClusterSlurmConfigDetails
       attr_accessor network_interface: Types::ClusterNetworkInterfaceDetails
@@ -4165,6 +4246,16 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class DescribeCapacityReservationRequest
+      attr_accessor sm_capacity_reservation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCapacityReservationResponse
+      attr_accessor capacity_reservation: Types::CapacityReservationDetail
+      SENSITIVE: []
+    end
+
     class DescribeClusterEventRequest
       attr_accessor event_id: ::String
       attr_accessor cluster_name: ::String
@@ -5439,6 +5530,21 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class DescribeResourceAssociationsRequest
+      attr_accessor sm_capacity_reservation_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResourceAssociationsResponse
+      attr_accessor sm_capacity_reservation_arn: ::String
+      attr_accessor sm_capacity_reservation_id: ::String
+      attr_accessor resource_associations: ::Array[Types::CapacityReservationResourceAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class DescribeSpaceRequest
       attr_accessor domain_id: ::String
       attr_accessor space_name: ::String
@@ -6473,6 +6579,23 @@ module Aws::SageMaker
 
     class GenerativeAiSettings
       attr_accessor amazon_bedrock_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetCapacityReservationUsageRequest
+      attr_accessor sm_capacity_reservation_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCapacityReservationUsageResponse
+      attr_accessor sm_capacity_reservation_id: ::String
+      attr_accessor total_instance_count: ::Integer
+      attr_accessor available_instance_count: ::Integer
+      attr_accessor last_refresh_time: ::Time
+      attr_accessor instance_usage_set: ::Array[Types::CapacityReservationInstanceUsage]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -7796,6 +7919,19 @@ module Aws::SageMaker
 
     class ListCandidatesForAutoMLJobResponse
       attr_accessor candidates: ::Array[Types::AutoMLCandidate]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCapacityReservationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::CapacityReservationFilter]
+      SENSITIVE: []
+    end
+
+    class ListCapacityReservationsResponse
+      attr_accessor capacity_reservation_summaries: ::Array[Types::CapacityReservationSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end

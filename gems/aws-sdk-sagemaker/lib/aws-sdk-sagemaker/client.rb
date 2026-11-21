@@ -15842,6 +15842,48 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Returns details about a SageMaker Capacity Reservation, such as its
+    # instance type, instance count, Availability Zone, and start and end
+    # times.
+    #
+    # @option params [required, String] :sm_capacity_reservation_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation.
+    #   The ARN has the format
+    #   `arn:aws:sagemaker:region:account-id:sm-capacity-reservation/smcr-id`.
+    #
+    # @return [Types::DescribeCapacityReservationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCapacityReservationResponse#capacity_reservation #capacity_reservation} => Types::CapacityReservationDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_capacity_reservation({
+    #     sm_capacity_reservation_arn: "CapacityReservationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_reservation.sm_capacity_reservation_arn #=> String
+    #   resp.capacity_reservation.sm_capacity_reservation_id #=> String
+    #   resp.capacity_reservation.owner #=> String
+    #   resp.capacity_reservation.status #=> String, one of "Scheduled", "Active", "Expired"
+    #   resp.capacity_reservation.instance_type #=> String
+    #   resp.capacity_reservation.availability_zone #=> String
+    #   resp.capacity_reservation.availability_zone_id #=> String
+    #   resp.capacity_reservation.total_instance_count #=> Integer
+    #   resp.capacity_reservation.start_time #=> Time
+    #   resp.capacity_reservation.end_time #=> Time
+    #   resp.capacity_reservation.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCapacityReservation AWS API Documentation
+    #
+    # @overload describe_capacity_reservation(params = {})
+    # @param [Hash] params ({})
+    def describe_capacity_reservation(params = {}, options = {})
+      req = build_request(:describe_capacity_reservation, params)
+      req.send_request(options)
+    end
+
     # Retrieves information of a SageMaker HyperPod cluster.
     #
     # @option params [required, String] :cluster_name
@@ -15957,7 +15999,7 @@ module Aws::SageMaker
     #   resp.instance_groups[0].kubernetes_config.desired_taints[0].value #=> String
     #   resp.instance_groups[0].kubernetes_config.desired_taints[0].effect #=> String, one of "NoSchedule", "PreferNoSchedule", "NoExecute"
     #   resp.instance_groups[0].target_state_count #=> Integer
-    #   resp.instance_groups[0].software_update_status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "RollbackInProgress", "RollbackComplete"
+    #   resp.instance_groups[0].software_update_status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "RollbackInProgress", "RollbackComplete", "PartiallySucceeded"
     #   resp.instance_groups[0].active_software_update_config.rolling_update_policy.maximum_batch_size.type #=> String, one of "INSTANCE_COUNT", "CAPACITY_PERCENTAGE"
     #   resp.instance_groups[0].active_software_update_config.rolling_update_policy.maximum_batch_size.value #=> Integer
     #   resp.instance_groups[0].active_software_update_config.rolling_update_policy.rollback_maximum_batch_size.type #=> String, one of "INSTANCE_COUNT", "CAPACITY_PERCENTAGE"
@@ -21252,6 +21294,68 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Returns the resources in your account that are associated with a
+    # SageMaker Capacity Reservation and the status of each association.
+    # Resources include SageMaker AI HyperPod clusters and SageMaker AI
+    # endpoints.
+    #
+    # @option params [required, String] :sm_capacity_reservation_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation.
+    #   The ARN has the format
+    #   `arn:aws:sagemaker:region:account-id:sm-capacity-reservation/smcr-id`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If more
+    #   results are available, the response includes a `NextToken` value.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was truncated, the response includes a
+    #   `NextToken` value. To retrieve the next set of results, use that token
+    #   in your next request.
+    #
+    # @return [Types::DescribeResourceAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeResourceAssociationsResponse#sm_capacity_reservation_arn #sm_capacity_reservation_arn} => String
+    #   * {Types::DescribeResourceAssociationsResponse#sm_capacity_reservation_id #sm_capacity_reservation_id} => String
+    #   * {Types::DescribeResourceAssociationsResponse#resource_associations #resource_associations} => Array&lt;Types::CapacityReservationResourceAssociation&gt;
+    #   * {Types::DescribeResourceAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_resource_associations({
+    #     sm_capacity_reservation_arn: "CapacityReservationArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sm_capacity_reservation_arn #=> String
+    #   resp.sm_capacity_reservation_id #=> String
+    #   resp.resource_associations #=> Array
+    #   resp.resource_associations[0].hyper_pod_clusters.status #=> String, one of "Pending", "Active", "Inactive"
+    #   resp.resource_associations[0].hyper_pod_clusters.failure_reason #=> String
+    #   resp.resource_associations[0].hyper_pod_clusters.associated_time #=> Time
+    #   resp.resource_associations[0].endpoints.ml_reservation_id #=> String
+    #   resp.resource_associations[0].endpoints.status #=> String, one of "Pending", "Active", "Inactive"
+    #   resp.resource_associations[0].endpoints.match_criteria #=> String, one of "Open", "Targeted"
+    #   resp.resource_associations[0].endpoints.endpoint_sharing #=> String, one of "SingleEndpoint", "MultipleEndpoints"
+    #   resp.resource_associations[0].endpoints.ml_reservation_arn #=> String
+    #   resp.resource_associations[0].endpoints.failure_reason #=> String
+    #   resp.resource_associations[0].endpoints.associated_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeResourceAssociations AWS API Documentation
+    #
+    # @overload describe_resource_associations(params = {})
+    # @param [Hash] params ({})
+    def describe_resource_associations(params = {}, options = {})
+      req = build_request(:describe_resource_associations, params)
+      req.send_request(options)
+    end
+
     # Describes the space.
     #
     # @option params [required, String] :domain_id
@@ -22604,6 +22708,68 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Returns the number of instances in use from a SageMaker Capacity
+    # Reservation, for each account that uses them.
+    #
+    # SageMaker AI refreshes the usage counts periodically. The
+    # `LastRefreshTime` value shows when the counts were last refreshed.
+    #
+    # @option params [required, String] :sm_capacity_reservation_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation.
+    #   The ARN has the format
+    #   `arn:aws:sagemaker:region:account-id:sm-capacity-reservation/smcr-id`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If more
+    #   results are available, the response includes a `NextToken` value.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was truncated, the response includes a
+    #   `NextToken` value. To retrieve the next set of results, use that token
+    #   in your next request.
+    #
+    # @return [Types::GetCapacityReservationUsageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCapacityReservationUsageResponse#sm_capacity_reservation_id #sm_capacity_reservation_id} => String
+    #   * {Types::GetCapacityReservationUsageResponse#total_instance_count #total_instance_count} => Integer
+    #   * {Types::GetCapacityReservationUsageResponse#available_instance_count #available_instance_count} => Integer
+    #   * {Types::GetCapacityReservationUsageResponse#last_refresh_time #last_refresh_time} => Time
+    #   * {Types::GetCapacityReservationUsageResponse#instance_usage_set #instance_usage_set} => Array&lt;Types::CapacityReservationInstanceUsage&gt;
+    #   * {Types::GetCapacityReservationUsageResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_capacity_reservation_usage({
+    #     sm_capacity_reservation_arn: "CapacityReservationArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sm_capacity_reservation_id #=> String
+    #   resp.total_instance_count #=> Integer
+    #   resp.available_instance_count #=> Integer
+    #   resp.last_refresh_time #=> Time
+    #   resp.instance_usage_set #=> Array
+    #   resp.instance_usage_set[0].account_id #=> String
+    #   resp.instance_usage_set[0].in_use_instance_count #=> Integer
+    #   resp.instance_usage_set[0].resources_usage #=> Array
+    #   resp.instance_usage_set[0].resources_usage[0].resource_type #=> String, one of "HyperPodClusters", "Endpoints"
+    #   resp.instance_usage_set[0].resources_usage[0].in_use_instance_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetCapacityReservationUsage AWS API Documentation
+    #
+    # @overload get_capacity_reservation_usage(params = {})
+    # @param [Hash] params ({})
+    def get_capacity_reservation_usage(params = {}, options = {})
+      req = build_request(:get_capacity_reservation_usage, params)
+      req.send_request(options)
+    end
+
     # Describes a fleet.
     #
     # @option params [required, String] :device_fleet_name
@@ -23905,6 +24071,69 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def list_candidates_for_auto_ml_job(params = {}, options = {})
       req = build_request(:list_candidates_for_auto_ml_job, params)
+      req.send_request(options)
+    end
+
+    # Lists the SageMaker Capacity Reservations in your account.
+    #
+    # An empty list is a valid response.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If more
+    #   results are available, the response includes a `NextToken` value.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was truncated, the response includes a
+    #   `NextToken` value. To retrieve the next set of results, use that token
+    #   in your next request.
+    #
+    # @option params [Array<Types::CapacityReservationFilter>] :filters
+    #   A filter that returns only the reservations that match it. You can
+    #   specify one filter. If you don't specify a filter, the response
+    #   includes all reservations in your account.
+    #
+    # @return [Types::ListCapacityReservationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCapacityReservationsResponse#capacity_reservation_summaries #capacity_reservation_summaries} => Array&lt;Types::CapacityReservationSummary&gt;
+    #   * {Types::ListCapacityReservationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_capacity_reservations({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         name: "Status", # required, accepts Status
+    #         values: ["CapacityReservationFilterValue"], # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_reservation_summaries #=> Array
+    #   resp.capacity_reservation_summaries[0].sm_capacity_reservation_arn #=> String
+    #   resp.capacity_reservation_summaries[0].sm_capacity_reservation_id #=> String
+    #   resp.capacity_reservation_summaries[0].owner #=> String
+    #   resp.capacity_reservation_summaries[0].status #=> String, one of "Scheduled", "Active", "Expired"
+    #   resp.capacity_reservation_summaries[0].instance_type #=> String
+    #   resp.capacity_reservation_summaries[0].availability_zone #=> String
+    #   resp.capacity_reservation_summaries[0].availability_zone_id #=> String
+    #   resp.capacity_reservation_summaries[0].total_instance_count #=> Integer
+    #   resp.capacity_reservation_summaries[0].start_time #=> Time
+    #   resp.capacity_reservation_summaries[0].end_time #=> Time
+    #   resp.capacity_reservation_summaries[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCapacityReservations AWS API Documentation
+    #
+    # @overload list_capacity_reservations(params = {})
+    # @param [Hash] params ({})
+    def list_capacity_reservations(params = {}, options = {})
+      req = build_request(:list_capacity_reservations, params)
       req.send_request(options)
     end
 
@@ -36944,7 +37173,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.418.0'
+      context[:gem_version] = '1.419.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

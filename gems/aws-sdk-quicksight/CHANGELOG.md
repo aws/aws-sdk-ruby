@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.215.0 (2026-11-21)
+------------------
+
+* Feature - Quicksight public SDK release for November 20
+
 1.214.0 (2026-11-18)
 ------------------
 

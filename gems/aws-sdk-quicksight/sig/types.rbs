@@ -15,6 +15,39 @@ module Aws::QuickSight
       SENSITIVE: [:api_key, :email]
     end
 
+    class AccessControlApplication
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor authentication_type: ("OIDC")
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor tenant_url: ::String
+      attr_accessor description: ::String
+      attr_accessor idc_application_arn: ::String
+      attr_accessor idp_authorizing_configuration: Types::IdpAuthorizingConfig
+      attr_accessor quick_authentication_configuration: Types::QuickAuthenticationConfig
+      SENSITIVE: []
+    end
+
+    class AccessControlApplicationSummary
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor authentication_type: ("OIDC")
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor tenant_url: ::String
+      attr_accessor idp_authorizing_configuration: Types::IdpAuthorizingConfigSummary
+      attr_accessor quick_authentication_configuration: Types::QuickAuthenticationConfig
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
     class AccessControlConfiguration
       attr_accessor is_acl_enabled: bool
       SENSITIVE: []
@@ -385,8 +418,8 @@ module Aws::QuickSight
       attr_accessor policy_arn: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor actions: ::Array[("SHARE")]
-      attr_accessor asset_types: ::Array[("AGENT" | "SPACE" | "KNOWLEDGE_BASE")]
+      attr_accessor actions: ::Array[("SHARE" | "PUBLISH")]
+      attr_accessor asset_types: ::Array[("AGENT" | "SPACE" | "KNOWLEDGE_BASE" | "FLOW")]
       attr_accessor applicable_to: Types::ApplicableTo
       attr_accessor approval_groups: ::Array[::String]
       attr_accessor created_at: ::Time
@@ -1087,6 +1120,32 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class BatchDeletePolicyAssignmentByPolicyRequest
+      attr_accessor account_id: ::String
+      attr_accessor policy_arn: ::String
+      attr_accessor principal_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDeletePolicyAssignmentByPolicyResponse
+      attr_accessor policy_arn: ::String
+      attr_accessor success: ::Array[Types::BatchDeletePolicyAssignmentSuccess]
+      attr_accessor errors: ::Array[Types::BatchDeletePolicyAssignmentError]
+      SENSITIVE: []
+    end
+
+    class BatchDeletePolicyAssignmentError
+      attr_accessor principal_arn: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeletePolicyAssignmentSuccess
+      attr_accessor principal_arn: ::String
+      SENSITIVE: []
+    end
+
     class BatchDeleteTopicReviewedAnswerRequest
       attr_accessor aws_account_id: ::String
       attr_accessor topic_id: ::String
@@ -1123,6 +1182,34 @@ module Aws::QuickSight
     class BatchDescribeUserLimitsResponse
       attr_accessor user_limits: ::Array[Types::UserLimits]
       attr_accessor errors: ::Array[Types::BatchDescribeUserLimitsError]
+      SENSITIVE: []
+    end
+
+    class BatchPutPolicyAssignmentByPolicyRequest
+      attr_accessor account_id: ::String
+      attr_accessor policy_arn: ::String
+      attr_accessor assignments: ::Array[Types::PutAssignmentEntry]
+      SENSITIVE: []
+    end
+
+    class BatchPutPolicyAssignmentByPolicyResponse
+      attr_accessor policy_arn: ::String
+      attr_accessor success: ::Array[Types::BatchPutPolicyAssignmentSuccess]
+      attr_accessor errors: ::Array[Types::BatchPutPolicyAssignmentError]
+      SENSITIVE: []
+    end
+
+    class BatchPutPolicyAssignmentError
+      attr_accessor principal_arn: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchPutPolicyAssignmentSuccess
+      attr_accessor principal_arn: ::String
+      attr_accessor replaced_policy_arn: ::String
+      attr_accessor revision: ::Integer
       SENSITIVE: []
     end
 
@@ -1548,6 +1635,9 @@ module Aws::QuickSight
       attr_accessor create_and_update_mcp_action: ("DENY" | "ALLOW")
       attr_accessor share_mcp_action: ("DENY" | "ALLOW")
       attr_accessor use_mcp_action: ("DENY" | "ALLOW")
+      attr_accessor local_mcp_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_local_mcp_action: ("DENY" | "ALLOW")
+      attr_accessor use_local_mcp_action: ("DENY" | "ALLOW")
       attr_accessor open_api_action: ("DENY" | "ALLOW")
       attr_accessor create_and_update_open_api_action: ("DENY" | "ALLOW")
       attr_accessor share_open_api_action: ("DENY" | "ALLOW")
@@ -2043,6 +2133,23 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ClientSecretConfiguration
+      attr_accessor client_secret_source_type: ("IDP_PROVIDED")
+      attr_accessor client_secret_configuration_detail: Types::ClientSecretConfigurationDetail
+      SENSITIVE: []
+    end
+
+    class ClientSecretConfigurationDetail
+      attr_accessor idp: Types::IdpClientSecretInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Idp < ClientSecretConfigurationDetail
+      end
+      class Unknown < ClientSecretConfigurationDetail
+      end
+    end
+
     class ClusterMarker
       attr_accessor simple_cluster_marker: Types::SimpleClusterMarker
       SENSITIVE: []
@@ -2404,6 +2511,48 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class CreateAccessControlApplicationRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor application_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor namespace: ::String
+      attr_accessor authentication_type: ("OIDC")
+      attr_accessor idp_authorizing_configuration: Types::IdpAuthorizingConfigInput
+      attr_accessor quick_authentication_configuration: Types::QuickAuthenticationConfigInput
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateAccessControlApplicationResponse
+      attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor access_control_application_status: ("ENABLED" | "DISABLED")
+      attr_accessor created_time: ::Time
+      attr_accessor tenant_url: ::String
+      attr_accessor idc_application_arn: ::String
+      attr_accessor quick_authentication_configuration: Types::QuickAuthenticationConfigCreateOutput
+      SENSITIVE: []
+    end
+
+    class CreateAccessControlApplicationSecretRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor application_id: ::String
+      attr_accessor description: ::String
+      attr_accessor client_secret_configuration: Types::ClientSecretConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateAccessControlApplicationSecretResponse
+      attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      attr_accessor client_secret_id: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
     class CreateAccountCustomizationRequest
       attr_accessor aws_account_id: ::String
       attr_accessor namespace: ::String
@@ -2526,8 +2675,8 @@ module Aws::QuickSight
       attr_accessor policy_id: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor actions: ::Array[("SHARE")]
-      attr_accessor asset_types: ::Array[("AGENT" | "SPACE" | "KNOWLEDGE_BASE")]
+      attr_accessor actions: ::Array[("SHARE" | "PUBLISH")]
+      attr_accessor asset_types: ::Array[("AGENT" | "SPACE" | "KNOWLEDGE_BASE" | "FLOW")]
       attr_accessor applicable_to: Types::ApplicableTo
       attr_accessor approval_groups: ::Array[::String]
       SENSITIVE: []
@@ -2626,6 +2775,7 @@ module Aws::QuickSight
       attr_accessor use_as: ("RLS_RULES")
       attr_accessor data_prep_configuration: Types::DataPrepConfiguration
       attr_accessor semantic_model_configuration: Types::SemanticModelConfiguration
+      attr_accessor unmaterialized_calculated_columns: ::Array[Types::UnmaterializedCalculatedColumn]
       SENSITIVE: []
     end
 
@@ -2786,6 +2936,27 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class CreateInboundConnectorRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor inbound_connector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor inbound_connector_configuration: Types::InboundConnectorConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateInboundConnectorResponse
+      attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      attr_accessor inbound_connector_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor tenant_url: ::String
+      attr_accessor inbound_connector_status: ("ENABLED" | "DISABLED")
+      attr_accessor created_time: ::Time
+      SENSITIVE: []
+    end
+
     class CreateIngestionRequest
       attr_accessor data_set_id: ::String
       attr_accessor ingestion_id: ::String
@@ -2798,6 +2969,24 @@ module Aws::QuickSight
       attr_accessor arn: ::String
       attr_accessor ingestion_id: ::String
       attr_accessor ingestion_status: ("INITIALIZED" | "QUEUED" | "RUNNING" | "FAILED" | "COMPLETED" | "CANCELLED")
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateKnowledgeBaseRefreshScheduleRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor schedule_id: ::String
+      attr_accessor schedule_frequency: Types::KnowledgeBaseRefreshFrequency
+      attr_accessor start_time: ::Time
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class CreateKnowledgeBaseRefreshScheduleResponse
+      attr_accessor schedule_id: ::String
+      attr_accessor knowledge_base_arn: ::String
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
       SENSITIVE: []
@@ -3594,6 +3783,7 @@ module Aws::QuickSight
       attr_accessor use_as: ("RLS_RULES")
       attr_accessor data_prep_configuration: Types::DataPrepConfiguration
       attr_accessor semantic_model_configuration: Types::SemanticModelConfiguration
+      attr_accessor unmaterialized_calculated_columns: ::Array[Types::UnmaterializedCalculatedColumn]
       SENSITIVE: []
     end
 
@@ -4160,6 +4350,33 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DeleteAccessControlApplicationRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor application_id: ::String
+      attr_accessor idc_application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessControlApplicationResponse
+      attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessControlApplicationSecretRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor application_id: ::String
+      attr_accessor client_secret_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessControlApplicationSecretResponse
+      attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
     class DeleteAccountCustomPermissionRequest
       attr_accessor aws_account_id: ::String
       SENSITIVE: []
@@ -4462,6 +4679,34 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DeleteInboundConnectorRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor inbound_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInboundConnectorResponse
+      attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      attr_accessor inbound_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKnowledgeBaseRefreshScheduleRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor schedule_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKnowledgeBaseRefreshScheduleResponse
+      attr_accessor schedule_id: ::String
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
     class DeleteKnowledgeBaseRequest
       attr_accessor aws_account_id: ::String
       attr_accessor knowledge_base_id: ::String
@@ -4511,6 +4756,17 @@ module Aws::QuickSight
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
       SENSITIVE: []
+    end
+
+    class DeletePolicyAssignmentRequest
+      attr_accessor account_id: ::String
+      attr_accessor policy_arn: ::String
+      attr_accessor principal_arn: ::String
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeletePolicyAssignmentResponse < Aws::EmptyStructure
     end
 
     class DeleteRefreshScheduleRequest
@@ -4726,6 +4982,19 @@ module Aws::QuickSight
       attr_accessor availability_status: ("AVAILABLE" | "UNAVAILABLE" | "PARTIALLY_AVAILABLE")
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeAccessControlApplicationRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccessControlApplicationResponse
+      attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      attr_accessor access_control_application: Types::AccessControlApplication
       SENSITIVE: []
     end
 
@@ -5353,6 +5622,19 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DescribeInboundConnectorRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor inbound_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInboundConnectorResponse
+      attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      attr_accessor inbound_connector: Types::InboundConnector
+      SENSITIVE: []
+    end
+
     class DescribeIngestionRequest
       attr_accessor aws_account_id: ::String
       attr_accessor data_set_id: ::String
@@ -5408,6 +5690,21 @@ module Aws::QuickSight
       attr_accessor knowledge_base_arn: ::String
       attr_accessor knowledge_base_id: ::String
       attr_accessor permissions: ::Array[Types::ResourcePermission]
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeKnowledgeBaseRefreshScheduleRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor schedule_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeKnowledgeBaseRefreshScheduleResponse
+      attr_accessor schedule: Types::KnowledgeBaseRefreshScheduleSummary
+      attr_accessor knowledge_base_arn: ::String
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
       SENSITIVE: []
@@ -5975,6 +6272,47 @@ module Aws::QuickSight
 
     class ExportWithHiddenFieldsOption
       attr_accessor availability_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ExternalIdpConfidentialAuthCodeAuthorizingConfig
+      attr_accessor client_id: ::String
+      attr_accessor issuer_url: ::String
+      attr_accessor client_secrets: ::Array[Types::ExternalIdpConfidentialClientSecret]
+      SENSITIVE: []
+    end
+
+    class ExternalIdpConfidentialAuthCodeAuthorizingConfigInput
+      attr_accessor client_id: ::String
+      attr_accessor issuer_url: ::String
+      attr_accessor client_secret: Types::IdpClientSecretInput
+      SENSITIVE: []
+    end
+
+    class ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary
+      attr_accessor client_id: ::String
+      attr_accessor issuer_url: ::String
+      SENSITIVE: []
+    end
+
+    class ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput
+      attr_accessor client_id: ::String
+      attr_accessor issuer_url: ::String
+      SENSITIVE: []
+    end
+
+    class ExternalIdpConfidentialClientSecret
+      attr_accessor client_secret_id: ::String
+      attr_accessor regional_secret_manager_arns: ::Hash[::String, ::String]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ExternalIdpPublicAuthCodeAuthorizingConfig
+      attr_accessor client_id: ::String
+      attr_accessor issuer_url: ::String
       SENSITIVE: []
     end
 
@@ -7033,6 +7371,21 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class GetPolicyAssignmentRequest
+      attr_accessor account_id: ::String
+      attr_accessor policy_type: ("LIMITS_PROFILE" | "CUSTOM_PERMISSIONS")
+      attr_accessor principal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyAssignmentResponse
+      attr_accessor policy_arn: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
     class GetSessionEmbedUrlRequest
       attr_accessor aws_account_id: ::String
       attr_accessor entry_point: ::String
@@ -7338,6 +7691,11 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class IdcTrustedTokenIssuerConfig
+      attr_accessor idc_trusted_token_issuer_arn: ::String
+      SENSITIVE: []
+    end
+
     class Identifier
       attr_accessor identity: ::String
       SENSITIVE: []
@@ -7351,6 +7709,95 @@ module Aws::QuickSight
     class IdentityTypeNotSupportedException
       attr_accessor message: ::String
       attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class IdpAuthorizingConfig
+      attr_accessor idp_authorizing_type: ("EXTERNAL_IDP_PUBLIC_AUTH_CODE" | "EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE" | "QUICK_MANAGED_AUTH_CODE" | "IDC_AUTH_CODE")
+      attr_accessor idp_authorizing_configuration_detail: Types::IdpAuthorizingConfigurationDetail
+      attr_accessor idc_trusted_token_issuer_configuration: Types::IdcTrustedTokenIssuerConfig
+      SENSITIVE: []
+    end
+
+    class IdpAuthorizingConfigInput
+      attr_accessor idp_authorizing_type: ("EXTERNAL_IDP_PUBLIC_AUTH_CODE" | "EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE" | "QUICK_MANAGED_AUTH_CODE" | "IDC_AUTH_CODE")
+      attr_accessor idp_authorizing_configuration_detail_input: Types::IdpAuthorizingConfigurationDetailInput
+      attr_accessor idc_trusted_token_issuer_configuration: Types::IdcTrustedTokenIssuerConfig
+      SENSITIVE: []
+    end
+
+    class IdpAuthorizingConfigSummary
+      attr_accessor idp_authorizing_type: ("EXTERNAL_IDP_PUBLIC_AUTH_CODE" | "EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE" | "QUICK_MANAGED_AUTH_CODE" | "IDC_AUTH_CODE")
+      attr_accessor idp_authorizing_configuration_summary_detail: Types::IdpAuthorizingConfigurationSummaryDetail
+      attr_accessor idc_trusted_token_issuer_configuration: Types::IdcTrustedTokenIssuerConfig
+      SENSITIVE: []
+    end
+
+    class IdpAuthorizingConfigUpdateInput
+      attr_accessor idp_authorizing_type: ("EXTERNAL_IDP_PUBLIC_AUTH_CODE" | "EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE" | "QUICK_MANAGED_AUTH_CODE" | "IDC_AUTH_CODE")
+      attr_accessor idp_authorizing_configuration_detail_input: Types::IdpAuthorizingConfigurationDetailUpdateInput
+      attr_accessor idc_trusted_token_issuer_configuration: Types::IdcTrustedTokenIssuerConfig
+      SENSITIVE: []
+    end
+
+    class IdpAuthorizingConfigurationDetail
+      attr_accessor external_idp_public_auth_code: Types::ExternalIdpPublicAuthCodeAuthorizingConfig
+      attr_accessor external_idp_confidential_auth_code: Types::ExternalIdpConfidentialAuthCodeAuthorizingConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ExternalIdpPublicAuthCode < IdpAuthorizingConfigurationDetail
+      end
+      class ExternalIdpConfidentialAuthCode < IdpAuthorizingConfigurationDetail
+      end
+      class Unknown < IdpAuthorizingConfigurationDetail
+      end
+    end
+
+    class IdpAuthorizingConfigurationDetailInput
+      attr_accessor external_idp_public_auth_code: Types::ExternalIdpPublicAuthCodeAuthorizingConfig
+      attr_accessor external_idp_confidential_auth_code: Types::ExternalIdpConfidentialAuthCodeAuthorizingConfigInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ExternalIdpPublicAuthCode < IdpAuthorizingConfigurationDetailInput
+      end
+      class ExternalIdpConfidentialAuthCode < IdpAuthorizingConfigurationDetailInput
+      end
+      class Unknown < IdpAuthorizingConfigurationDetailInput
+      end
+    end
+
+    class IdpAuthorizingConfigurationDetailUpdateInput
+      attr_accessor external_idp_public_auth_code: Types::ExternalIdpPublicAuthCodeAuthorizingConfig
+      attr_accessor external_idp_confidential_auth_code: Types::ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ExternalIdpPublicAuthCode < IdpAuthorizingConfigurationDetailUpdateInput
+      end
+      class ExternalIdpConfidentialAuthCode < IdpAuthorizingConfigurationDetailUpdateInput
+      end
+      class Unknown < IdpAuthorizingConfigurationDetailUpdateInput
+      end
+    end
+
+    class IdpAuthorizingConfigurationSummaryDetail
+      attr_accessor external_idp_public_auth_code: Types::ExternalIdpPublicAuthCodeAuthorizingConfig
+      attr_accessor external_idp_confidential_auth_code: Types::ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ExternalIdpPublicAuthCode < IdpAuthorizingConfigurationSummaryDetail
+      end
+      class ExternalIdpConfidentialAuthCode < IdpAuthorizingConfigurationSummaryDetail
+      end
+      class Unknown < IdpAuthorizingConfigurationSummaryDetail
+      end
+    end
+
+    class IdpClientSecretInput
+      attr_accessor regional_secret_manager_arns: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -7445,6 +7892,43 @@ module Aws::QuickSight
     class ImportTableOperationSource
       attr_accessor source_table_id: ::String
       attr_accessor column_id_mappings: ::Array[Types::DataSetColumnIdMapping]
+      SENSITIVE: []
+    end
+
+    class InboundConnector
+      attr_accessor inbound_connector_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor tenant_url: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor inbound_connector_configuration: Types::InboundConnectorConfig
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class InboundConnectorApplicationAssociationSummary
+      attr_accessor access_control_application_arn: ::String
+      attr_accessor created_time: ::Time
+      SENSITIVE: []
+    end
+
+    class InboundConnectorConfig
+      attr_accessor inbound_connector_type: ("QUICK_DESKTOP")
+      SENSITIVE: []
+    end
+
+    class InboundConnectorSummary
+      attr_accessor inbound_connector_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor tenant_url: ::String
+      attr_accessor inbound_connector_configuration: Types::InboundConnectorConfig
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
@@ -7783,6 +8267,26 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class KnowledgeBaseRefreshFrequency
+      attr_accessor interval: ("DAILY" | "WEEKLY" | "MONTHLY" | "HOURLY")
+      attr_accessor refresh_on_day: Types::KnowledgeBaseScheduleRefreshOnEntity
+      SENSITIVE: []
+    end
+
+    class KnowledgeBaseRefreshScheduleSummary
+      attr_accessor schedule_id: ::String
+      attr_accessor schedule_frequency: Types::KnowledgeBaseRefreshFrequency
+      attr_accessor start_time: ::Time
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class KnowledgeBaseScheduleRefreshOnEntity
+      attr_accessor day_of_week: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")
+      attr_accessor day_of_month: ::String
+      SENSITIVE: []
+    end
+
     class KnowledgeBaseSearchFilter
       attr_accessor name: ("KNOWLEDGE_BASE_ID" | "KNOWLEDGE_BASE_NAME" | "DIRECT_QUICKSIGHT_OWNER" | "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER" | "DIRECT_QUICKSIGHT_SOLE_OWNER" | "KNOWLEDGE_BASE_SIZE_BYTES" | "PRIMARY_OWNER" | "DATASOURCE_ARN")
       attr_accessor operator: ("STRING_EQUALS" | "STRING_LIKE" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN_OR_EQUALS")
@@ -7992,6 +8496,22 @@ module Aws::QuickSight
 
     class LinkSharingConfiguration
       attr_accessor permissions: ::Array[Types::ResourcePermission]
+      SENSITIVE: []
+    end
+
+    class ListAccessControlApplicationsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor namespace: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessControlApplicationsResponse
+      attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      attr_accessor access_control_applications: ::Array[Types::AccessControlApplicationSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -8360,6 +8880,38 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ListInboundConnectorApplicationAssociationsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor inbound_connector_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInboundConnectorApplicationAssociationsResponse
+      attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      attr_accessor application_associations: ::Array[Types::InboundConnectorApplicationAssociationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInboundConnectorsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor type: ::Array[("QUICK_DESKTOP")]
+      SENSITIVE: []
+    end
+
+    class ListInboundConnectorsResponse
+      attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      attr_accessor inbound_connector_summaries: ::Array[Types::InboundConnectorSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListIngestionsRequest
       attr_accessor data_set_id: ::String
       attr_accessor next_token: ::String
@@ -8370,6 +8922,23 @@ module Aws::QuickSight
 
     class ListIngestionsResponse
       attr_accessor ingestions: ::Array[Types::Ingestion]
+      attr_accessor next_token: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListKnowledgeBaseRefreshSchedulesRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListKnowledgeBaseRefreshSchedulesResponse
+      attr_accessor schedule_summaries: ::Array[Types::KnowledgeBaseRefreshScheduleSummary]
+      attr_accessor knowledge_base_arn: ::String
       attr_accessor next_token: ::String
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
@@ -8432,6 +9001,21 @@ module Aws::QuickSight
       attr_accessor next_token: ::String
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPrincipalsForPolicyRequest
+      attr_accessor account_id: ::String
+      attr_accessor policy_arn: ::String
+      attr_accessor principal_type: ("USER" | "GROUP" | "ACCOUNT")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPrincipalsForPolicyResponse
+      attr_accessor principals: ::Array[Types::PolicyPrincipal]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -9663,6 +10247,14 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class PolicyPrincipal
+      attr_accessor principal_arn: ::String
+      attr_accessor principal_type: ("USER" | "GROUP" | "ACCOUNT")
+      attr_accessor updated_at: ::Time
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
     class PostgreSqlParameters
       attr_accessor host: ::String
       attr_accessor port: ::Integer
@@ -9736,6 +10328,13 @@ module Aws::QuickSight
       end
     end
 
+    class PutAssignmentEntry
+      attr_accessor principal_arn: ::String
+      attr_accessor existing_policy_arn: ::String
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
     class PutDataSetRefreshPropertiesRequest
       attr_accessor aws_account_id: ::String
       attr_accessor data_set_id: ::String
@@ -9746,6 +10345,22 @@ module Aws::QuickSight
     class PutDataSetRefreshPropertiesResponse
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutPolicyAssignmentRequest
+      attr_accessor account_id: ::String
+      attr_accessor policy_arn: ::String
+      attr_accessor principal_arn: ::String
+      attr_accessor existing_policy_arn: ::String
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutPolicyAssignmentResponse
+      attr_accessor policy_arn: ::String
+      attr_accessor replaced_policy_arn: ::String
+      attr_accessor revision: ::Integer
       SENSITIVE: []
     end
 
@@ -9775,6 +10390,68 @@ module Aws::QuickSight
     class QueueInfo
       attr_accessor waiting_on_ingestion: ::String
       attr_accessor queued_ingestion: ::String
+      SENSITIVE: []
+    end
+
+    class QuickAuthenticationConfig
+      attr_accessor quick_authentication_type: ("QUICK_MANAGED_PUBLIC_AUTH_CODE")
+      attr_accessor quick_authentication_configuration_detail: Types::QuickAuthenticationConfigurationDetail
+      SENSITIVE: []
+    end
+
+    class QuickAuthenticationConfigCreateOutput
+      attr_accessor quick_authentication_type: ("QUICK_MANAGED_PUBLIC_AUTH_CODE")
+      attr_accessor quick_authentication_configuration_detail_create_output: Types::QuickAuthenticationConfigurationDetailCreateOutput
+      SENSITIVE: []
+    end
+
+    class QuickAuthenticationConfigInput
+      attr_accessor quick_authentication_type: ("QUICK_MANAGED_PUBLIC_AUTH_CODE")
+      attr_accessor quick_authentication_configuration_detail_input: Types::QuickAuthenticationConfigurationDetailInput
+      SENSITIVE: []
+    end
+
+    class QuickAuthenticationConfigurationDetail
+      attr_accessor quick_managed_public_auth_code: Types::QuickManagedPublicAuthCodeQuickAuthenticationConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class QuickManagedPublicAuthCode < QuickAuthenticationConfigurationDetail
+      end
+      class Unknown < QuickAuthenticationConfigurationDetail
+      end
+    end
+
+    class QuickAuthenticationConfigurationDetailCreateOutput
+      attr_accessor quick_managed_public_auth_code: Types::QuickManagedPublicAuthCodeQuickAuthenticationConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class QuickManagedPublicAuthCode < QuickAuthenticationConfigurationDetailCreateOutput
+      end
+      class Unknown < QuickAuthenticationConfigurationDetailCreateOutput
+      end
+    end
+
+    class QuickAuthenticationConfigurationDetailInput
+      attr_accessor quick_managed_public_auth_code: Types::QuickManagedAuthCodeQuickAuthenticationConfigInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class QuickManagedPublicAuthCode < QuickAuthenticationConfigurationDetailInput
+      end
+      class Unknown < QuickAuthenticationConfigurationDetailInput
+      end
+    end
+
+    class QuickManagedAuthCodeQuickAuthenticationConfigInput
+      attr_accessor redirect_uris: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class QuickManagedPublicAuthCodeQuickAuthenticationConfig
+      attr_accessor redirect_uris: ::Array[::String]
+      attr_accessor client_id: ::String
       SENSITIVE: []
     end
 
@@ -9989,6 +10666,7 @@ module Aws::QuickSight
       attr_accessor host: ::String
       attr_accessor port: ::Integer
       attr_accessor database: ::String
+      attr_accessor federated_catalog: ::String
       attr_accessor cluster_id: ::String
       attr_accessor iam_parameters: Types::RedshiftIAMParameters
       attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration
@@ -12591,6 +13269,15 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class UnmaterializedCalculatedColumn
+      attr_accessor column_id: ::String
+      attr_accessor column_name: ::String
+      attr_accessor expression: ::String
+      attr_accessor type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME")
+      attr_accessor sub_type: ("FLOAT" | "FIXED")
+      SENSITIVE: [:expression]
+    end
+
     class UnpivotOperation
       attr_accessor alias: ::String
       attr_accessor source: Types::TransformOperationSource
@@ -12629,6 +13316,45 @@ module Aws::QuickSight
     class UntagResourceResponse
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateAccessControlApplicationRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor application_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor idp_authorizing_configuration: Types::IdpAuthorizingConfigUpdateInput
+      attr_accessor quick_authentication_configuration: Types::QuickAuthenticationConfigInput
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateAccessControlApplicationResponse
+      attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor access_control_application_status: ("ENABLED" | "DISABLED")
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateAccessControlApplicationSecretRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor application_id: ::String
+      attr_accessor client_secret_id: ::String
+      attr_accessor update_regional_secret_manager_arns: ::Hash[::String, ::String]
+      attr_accessor remove_regional_secret_manager_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateAccessControlApplicationSecretResponse
+      attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      attr_accessor client_secret_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor regional_secret_manager_arns: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -12827,8 +13553,8 @@ module Aws::QuickSight
       attr_accessor policy_id: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor actions: ::Array[("SHARE")]
-      attr_accessor asset_types: ::Array[("AGENT" | "SPACE" | "KNOWLEDGE_BASE")]
+      attr_accessor actions: ::Array[("SHARE" | "PUBLISH")]
+      attr_accessor asset_types: ::Array[("AGENT" | "SPACE" | "KNOWLEDGE_BASE" | "FLOW")]
       attr_accessor applicable_to: Types::ApplicableTo
       attr_accessor approval_groups: ::Array[::String]
       SENSITIVE: []
@@ -13013,6 +13739,7 @@ module Aws::QuickSight
       attr_accessor performance_configuration: Types::PerformanceConfiguration
       attr_accessor data_prep_configuration: Types::DataPrepConfiguration
       attr_accessor semantic_model_configuration: Types::SemanticModelConfiguration
+      attr_accessor unmaterialized_calculated_columns: ::Array[Types::UnmaterializedCalculatedColumn]
       SENSITIVE: []
     end
 
@@ -13209,6 +13936,40 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class UpdateInboundConnectorApplicationAssociationsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor inbound_connector_id: ::String
+      attr_accessor associate_access_control_applications: ::Array[::String]
+      attr_accessor disassociate_access_control_applications: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateInboundConnectorApplicationAssociationsResponse
+      attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateInboundConnectorRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor inbound_connector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor inbound_connector_configuration: Types::InboundConnectorConfig
+      attr_accessor inbound_connector_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateInboundConnectorResponse
+      attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      attr_accessor inbound_connector_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor inbound_connector_status: ("ENABLED" | "DISABLED")
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
     class UpdateIpRestrictionRequest
       attr_accessor aws_account_id: ::String
       attr_accessor ip_restriction_rule_map: ::Hash[::String, ::String]
@@ -13250,6 +14011,24 @@ module Aws::QuickSight
       attr_accessor knowledge_base_arn: ::String
       attr_accessor knowledge_base_id: ::String
       attr_accessor permissions: ::Array[Types::ResourcePermission]
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateKnowledgeBaseRefreshScheduleRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor schedule_id: ::String
+      attr_accessor schedule_frequency: Types::KnowledgeBaseRefreshFrequency
+      attr_accessor start_time: ::Time
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateKnowledgeBaseRefreshScheduleResponse
+      attr_accessor schedule_id: ::String
+      attr_accessor knowledge_base_arn: ::String
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
       SENSITIVE: []
@@ -13848,6 +14627,19 @@ module Aws::QuickSight
       attr_accessor role_arn: ::String
       attr_accessor created_time: ::Time
       attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 

@@ -363,7 +363,32 @@ module Aws::SageMaker
     CandidateSteps = Shapes::ListShape.new(name: 'CandidateSteps')
     CanvasAppSettings = Shapes::StructureShape.new(name: 'CanvasAppSettings')
     CapacityReservation = Shapes::StructureShape.new(name: 'CapacityReservation')
+    CapacityReservationArn = Shapes::StringShape.new(name: 'CapacityReservationArn')
+    CapacityReservationAvailabilityZoneId = Shapes::StringShape.new(name: 'CapacityReservationAvailabilityZoneId')
+    CapacityReservationDetail = Shapes::StructureShape.new(name: 'CapacityReservationDetail')
+    CapacityReservationEndpointSharing = Shapes::StringShape.new(name: 'CapacityReservationEndpointSharing')
+    CapacityReservationEndpointsAssociation = Shapes::StructureShape.new(name: 'CapacityReservationEndpointsAssociation')
+    CapacityReservationFilter = Shapes::StructureShape.new(name: 'CapacityReservationFilter')
+    CapacityReservationFilterName = Shapes::StringShape.new(name: 'CapacityReservationFilterName')
+    CapacityReservationFilterValue = Shapes::StringShape.new(name: 'CapacityReservationFilterValue')
+    CapacityReservationFilterValues = Shapes::ListShape.new(name: 'CapacityReservationFilterValues')
+    CapacityReservationFilters = Shapes::ListShape.new(name: 'CapacityReservationFilters')
+    CapacityReservationHyperPodClustersAssociation = Shapes::StructureShape.new(name: 'CapacityReservationHyperPodClustersAssociation')
+    CapacityReservationInstanceType = Shapes::StringShape.new(name: 'CapacityReservationInstanceType')
+    CapacityReservationInstanceUsage = Shapes::StructureShape.new(name: 'CapacityReservationInstanceUsage')
+    CapacityReservationInstanceUsageSet = Shapes::ListShape.new(name: 'CapacityReservationInstanceUsageSet')
+    CapacityReservationMatchCriteria = Shapes::StringShape.new(name: 'CapacityReservationMatchCriteria')
+    CapacityReservationMlReservationId = Shapes::StringShape.new(name: 'CapacityReservationMlReservationId')
+    CapacityReservationOptInStatus = Shapes::StringShape.new(name: 'CapacityReservationOptInStatus')
     CapacityReservationPreference = Shapes::StringShape.new(name: 'CapacityReservationPreference')
+    CapacityReservationResourceAssociation = Shapes::UnionShape.new(name: 'CapacityReservationResourceAssociation')
+    CapacityReservationResourceAssociations = Shapes::ListShape.new(name: 'CapacityReservationResourceAssociations')
+    CapacityReservationResourceType = Shapes::StringShape.new(name: 'CapacityReservationResourceType')
+    CapacityReservationResourceUsage = Shapes::StructureShape.new(name: 'CapacityReservationResourceUsage')
+    CapacityReservationResourceUsageSet = Shapes::ListShape.new(name: 'CapacityReservationResourceUsageSet')
+    CapacityReservationStatus = Shapes::StringShape.new(name: 'CapacityReservationStatus')
+    CapacityReservationSummaries = Shapes::ListShape.new(name: 'CapacityReservationSummaries')
+    CapacityReservationSummary = Shapes::StructureShape.new(name: 'CapacityReservationSummary')
     CapacityReservationType = Shapes::StringShape.new(name: 'CapacityReservationType')
     CapacitySize = Shapes::StructureShape.new(name: 'CapacitySize')
     CapacitySizeConfig = Shapes::StructureShape.new(name: 'CapacitySizeConfig')
@@ -987,6 +1012,8 @@ module Aws::SageMaker
     DescribeAutoMLJobResponse = Shapes::StructureShape.new(name: 'DescribeAutoMLJobResponse')
     DescribeAutoMLJobV2Request = Shapes::StructureShape.new(name: 'DescribeAutoMLJobV2Request')
     DescribeAutoMLJobV2Response = Shapes::StructureShape.new(name: 'DescribeAutoMLJobV2Response')
+    DescribeCapacityReservationRequest = Shapes::StructureShape.new(name: 'DescribeCapacityReservationRequest')
+    DescribeCapacityReservationResponse = Shapes::StructureShape.new(name: 'DescribeCapacityReservationResponse')
     DescribeClusterEventRequest = Shapes::StructureShape.new(name: 'DescribeClusterEventRequest')
     DescribeClusterEventResponse = Shapes::StructureShape.new(name: 'DescribeClusterEventResponse')
     DescribeClusterExtensionRequest = Shapes::StructureShape.new(name: 'DescribeClusterExtensionRequest')
@@ -1103,6 +1130,8 @@ module Aws::SageMaker
     DescribeProjectOutput = Shapes::StructureShape.new(name: 'DescribeProjectOutput')
     DescribeReservedCapacityRequest = Shapes::StructureShape.new(name: 'DescribeReservedCapacityRequest')
     DescribeReservedCapacityResponse = Shapes::StructureShape.new(name: 'DescribeReservedCapacityResponse')
+    DescribeResourceAssociationsRequest = Shapes::StructureShape.new(name: 'DescribeResourceAssociationsRequest')
+    DescribeResourceAssociationsResponse = Shapes::StructureShape.new(name: 'DescribeResourceAssociationsResponse')
     DescribeSpaceRequest = Shapes::StructureShape.new(name: 'DescribeSpaceRequest')
     DescribeSpaceResponse = Shapes::StructureShape.new(name: 'DescribeSpaceResponse')
     DescribeStudioLifecycleConfigRequest = Shapes::StructureShape.new(name: 'DescribeStudioLifecycleConfigRequest')
@@ -1407,6 +1436,8 @@ module Aws::SageMaker
     FrameworkVersion = Shapes::StringShape.new(name: 'FrameworkVersion')
     GenerateCandidateDefinitionsOnly = Shapes::BooleanShape.new(name: 'GenerateCandidateDefinitionsOnly')
     GenerativeAiSettings = Shapes::StructureShape.new(name: 'GenerativeAiSettings')
+    GetCapacityReservationUsageRequest = Shapes::StructureShape.new(name: 'GetCapacityReservationUsageRequest')
+    GetCapacityReservationUsageResponse = Shapes::StructureShape.new(name: 'GetCapacityReservationUsageResponse')
     GetDeviceFleetReportRequest = Shapes::StructureShape.new(name: 'GetDeviceFleetReportRequest')
     GetDeviceFleetReportResponse = Shapes::StructureShape.new(name: 'GetDeviceFleetReportResponse')
     GetEndpointPolicyRequest = Shapes::StructureShape.new(name: 'GetEndpointPolicyRequest')
@@ -1817,6 +1848,8 @@ module Aws::SageMaker
     ListAutoMLJobsResponse = Shapes::StructureShape.new(name: 'ListAutoMLJobsResponse')
     ListCandidatesForAutoMLJobRequest = Shapes::StructureShape.new(name: 'ListCandidatesForAutoMLJobRequest')
     ListCandidatesForAutoMLJobResponse = Shapes::StructureShape.new(name: 'ListCandidatesForAutoMLJobResponse')
+    ListCapacityReservationsRequest = Shapes::StructureShape.new(name: 'ListCapacityReservationsRequest')
+    ListCapacityReservationsResponse = Shapes::StructureShape.new(name: 'ListCapacityReservationsResponse')
     ListClusterEventsRequest = Shapes::StructureShape.new(name: 'ListClusterEventsRequest')
     ListClusterEventsResponse = Shapes::StructureShape.new(name: 'ListClusterEventsResponse')
     ListClusterExtensionVersionsRequest = Shapes::StructureShape.new(name: 'ListClusterExtensionVersionsRequest')
@@ -2697,6 +2730,7 @@ module Aws::SageMaker
     S3SchemaUri = Shapes::StringShape.new(name: 'S3SchemaUri')
     S3StorageConfig = Shapes::StructureShape.new(name: 'S3StorageConfig')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
+    SageMakerCapacityReservationId = Shapes::StringShape.new(name: 'SageMakerCapacityReservationId')
     SageMakerImageName = Shapes::StringShape.new(name: 'SageMakerImageName')
     SageMakerImageVersionAlias = Shapes::StringShape.new(name: 'SageMakerImageVersionAlias')
     SageMakerImageVersionAliases = Shapes::ListShape.new(name: 'SageMakerImageVersionAliases')
@@ -4183,6 +4217,79 @@ module Aws::SageMaker
     CapacityReservation.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
     CapacityReservation.add_member(:type, Shapes::ShapeRef.new(shape: CapacityReservationType, location_name: "Type"))
     CapacityReservation.struct_class = Types::CapacityReservation
+
+    CapacityReservationDetail.add_member(:sm_capacity_reservation_arn, Shapes::ShapeRef.new(shape: CapacityReservationArn, required: true, location_name: "SMCapacityReservationArn"))
+    CapacityReservationDetail.add_member(:sm_capacity_reservation_id, Shapes::ShapeRef.new(shape: SageMakerCapacityReservationId, required: true, location_name: "SMCapacityReservationId"))
+    CapacityReservationDetail.add_member(:owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "Owner"))
+    CapacityReservationDetail.add_member(:status, Shapes::ShapeRef.new(shape: CapacityReservationStatus, required: true, location_name: "Status"))
+    CapacityReservationDetail.add_member(:instance_type, Shapes::ShapeRef.new(shape: CapacityReservationInstanceType, required: true, location_name: "InstanceType"))
+    CapacityReservationDetail.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    CapacityReservationDetail.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: CapacityReservationAvailabilityZoneId, required: true, location_name: "AvailabilityZoneId"))
+    CapacityReservationDetail.add_member(:total_instance_count, Shapes::ShapeRef.new(shape: TotalInstanceCount, required: true, location_name: "TotalInstanceCount"))
+    CapacityReservationDetail.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
+    CapacityReservationDetail.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    CapacityReservationDetail.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    CapacityReservationDetail.struct_class = Types::CapacityReservationDetail
+
+    CapacityReservationEndpointsAssociation.add_member(:ml_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationMlReservationId, location_name: "MlReservationId"))
+    CapacityReservationEndpointsAssociation.add_member(:status, Shapes::ShapeRef.new(shape: CapacityReservationOptInStatus, required: true, location_name: "Status"))
+    CapacityReservationEndpointsAssociation.add_member(:match_criteria, Shapes::ShapeRef.new(shape: CapacityReservationMatchCriteria, location_name: "MatchCriteria"))
+    CapacityReservationEndpointsAssociation.add_member(:endpoint_sharing, Shapes::ShapeRef.new(shape: CapacityReservationEndpointSharing, location_name: "EndpointSharing"))
+    CapacityReservationEndpointsAssociation.add_member(:ml_reservation_arn, Shapes::ShapeRef.new(shape: MlReservationArn, location_name: "MlReservationArn"))
+    CapacityReservationEndpointsAssociation.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    CapacityReservationEndpointsAssociation.add_member(:associated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "AssociatedTime"))
+    CapacityReservationEndpointsAssociation.struct_class = Types::CapacityReservationEndpointsAssociation
+
+    CapacityReservationFilter.add_member(:name, Shapes::ShapeRef.new(shape: CapacityReservationFilterName, required: true, location_name: "Name"))
+    CapacityReservationFilter.add_member(:values, Shapes::ShapeRef.new(shape: CapacityReservationFilterValues, required: true, location_name: "Values"))
+    CapacityReservationFilter.struct_class = Types::CapacityReservationFilter
+
+    CapacityReservationFilterValues.member = Shapes::ShapeRef.new(shape: CapacityReservationFilterValue)
+
+    CapacityReservationFilters.member = Shapes::ShapeRef.new(shape: CapacityReservationFilter)
+
+    CapacityReservationHyperPodClustersAssociation.add_member(:status, Shapes::ShapeRef.new(shape: CapacityReservationOptInStatus, required: true, location_name: "Status"))
+    CapacityReservationHyperPodClustersAssociation.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    CapacityReservationHyperPodClustersAssociation.add_member(:associated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "AssociatedTime"))
+    CapacityReservationHyperPodClustersAssociation.struct_class = Types::CapacityReservationHyperPodClustersAssociation
+
+    CapacityReservationInstanceUsage.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    CapacityReservationInstanceUsage.add_member(:in_use_instance_count, Shapes::ShapeRef.new(shape: InUseInstanceCount, required: true, location_name: "InUseInstanceCount"))
+    CapacityReservationInstanceUsage.add_member(:resources_usage, Shapes::ShapeRef.new(shape: CapacityReservationResourceUsageSet, required: true, location_name: "ResourcesUsage"))
+    CapacityReservationInstanceUsage.struct_class = Types::CapacityReservationInstanceUsage
+
+    CapacityReservationInstanceUsageSet.member = Shapes::ShapeRef.new(shape: CapacityReservationInstanceUsage)
+
+    CapacityReservationResourceAssociation.add_member(:hyper_pod_clusters, Shapes::ShapeRef.new(shape: CapacityReservationHyperPodClustersAssociation, location_name: "HyperPodClusters"))
+    CapacityReservationResourceAssociation.add_member(:endpoints, Shapes::ShapeRef.new(shape: CapacityReservationEndpointsAssociation, location_name: "Endpoints"))
+    CapacityReservationResourceAssociation.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CapacityReservationResourceAssociation.add_member_subclass(:hyper_pod_clusters, Types::CapacityReservationResourceAssociation::HyperPodClusters)
+    CapacityReservationResourceAssociation.add_member_subclass(:endpoints, Types::CapacityReservationResourceAssociation::Endpoints)
+    CapacityReservationResourceAssociation.add_member_subclass(:unknown, Types::CapacityReservationResourceAssociation::Unknown)
+    CapacityReservationResourceAssociation.struct_class = Types::CapacityReservationResourceAssociation
+
+    CapacityReservationResourceAssociations.member = Shapes::ShapeRef.new(shape: CapacityReservationResourceAssociation)
+
+    CapacityReservationResourceUsage.add_member(:resource_type, Shapes::ShapeRef.new(shape: CapacityReservationResourceType, required: true, location_name: "ResourceType"))
+    CapacityReservationResourceUsage.add_member(:in_use_instance_count, Shapes::ShapeRef.new(shape: InUseInstanceCount, required: true, location_name: "InUseInstanceCount"))
+    CapacityReservationResourceUsage.struct_class = Types::CapacityReservationResourceUsage
+
+    CapacityReservationResourceUsageSet.member = Shapes::ShapeRef.new(shape: CapacityReservationResourceUsage)
+
+    CapacityReservationSummaries.member = Shapes::ShapeRef.new(shape: CapacityReservationSummary)
+
+    CapacityReservationSummary.add_member(:sm_capacity_reservation_arn, Shapes::ShapeRef.new(shape: CapacityReservationArn, required: true, location_name: "SMCapacityReservationArn"))
+    CapacityReservationSummary.add_member(:sm_capacity_reservation_id, Shapes::ShapeRef.new(shape: SageMakerCapacityReservationId, required: true, location_name: "SMCapacityReservationId"))
+    CapacityReservationSummary.add_member(:owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "Owner"))
+    CapacityReservationSummary.add_member(:status, Shapes::ShapeRef.new(shape: CapacityReservationStatus, required: true, location_name: "Status"))
+    CapacityReservationSummary.add_member(:instance_type, Shapes::ShapeRef.new(shape: CapacityReservationInstanceType, required: true, location_name: "InstanceType"))
+    CapacityReservationSummary.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    CapacityReservationSummary.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: CapacityReservationAvailabilityZoneId, required: true, location_name: "AvailabilityZoneId"))
+    CapacityReservationSummary.add_member(:total_instance_count, Shapes::ShapeRef.new(shape: TotalInstanceCount, required: true, location_name: "TotalInstanceCount"))
+    CapacityReservationSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
+    CapacityReservationSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    CapacityReservationSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    CapacityReservationSummary.struct_class = Types::CapacityReservationSummary
 
     CapacitySize.add_member(:type, Shapes::ShapeRef.new(shape: CapacitySizeType, required: true, location_name: "Type"))
     CapacitySize.add_member(:value, Shapes::ShapeRef.new(shape: CapacitySizeValue, required: true, location_name: "Value"))
@@ -6594,6 +6701,12 @@ module Aws::SageMaker
     DescribeAutoMLJobV2Response.add_member(:auto_ml_compute_config, Shapes::ShapeRef.new(shape: AutoMLComputeConfig, location_name: "AutoMLComputeConfig"))
     DescribeAutoMLJobV2Response.struct_class = Types::DescribeAutoMLJobV2Response
 
+    DescribeCapacityReservationRequest.add_member(:sm_capacity_reservation_arn, Shapes::ShapeRef.new(shape: CapacityReservationArn, required: true, location_name: "SMCapacityReservationArn"))
+    DescribeCapacityReservationRequest.struct_class = Types::DescribeCapacityReservationRequest
+
+    DescribeCapacityReservationResponse.add_member(:capacity_reservation, Shapes::ShapeRef.new(shape: CapacityReservationDetail, required: true, location_name: "CapacityReservation"))
+    DescribeCapacityReservationResponse.struct_class = Types::DescribeCapacityReservationResponse
+
     DescribeClusterEventRequest.add_member(:event_id, Shapes::ShapeRef.new(shape: EventId, required: true, location_name: "EventId"))
     DescribeClusterEventRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
     DescribeClusterEventRequest.struct_class = Types::DescribeClusterEventRequest
@@ -7636,6 +7749,17 @@ module Aws::SageMaker
     DescribeReservedCapacityResponse.add_member(:ultra_server_summary, Shapes::ShapeRef.new(shape: UltraServerSummary, location_name: "UltraServerSummary"))
     DescribeReservedCapacityResponse.struct_class = Types::DescribeReservedCapacityResponse
 
+    DescribeResourceAssociationsRequest.add_member(:sm_capacity_reservation_arn, Shapes::ShapeRef.new(shape: CapacityReservationArn, required: true, location_name: "SMCapacityReservationArn"))
+    DescribeResourceAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeResourceAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeResourceAssociationsRequest.struct_class = Types::DescribeResourceAssociationsRequest
+
+    DescribeResourceAssociationsResponse.add_member(:sm_capacity_reservation_arn, Shapes::ShapeRef.new(shape: CapacityReservationArn, required: true, location_name: "SMCapacityReservationArn"))
+    DescribeResourceAssociationsResponse.add_member(:sm_capacity_reservation_id, Shapes::ShapeRef.new(shape: SageMakerCapacityReservationId, required: true, location_name: "SMCapacityReservationId"))
+    DescribeResourceAssociationsResponse.add_member(:resource_associations, Shapes::ShapeRef.new(shape: CapacityReservationResourceAssociations, required: true, location_name: "ResourceAssociations"))
+    DescribeResourceAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeResourceAssociationsResponse.struct_class = Types::DescribeResourceAssociationsResponse
+
     DescribeSpaceRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
     DescribeSpaceRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: SpaceName, required: true, location_name: "SpaceName"))
     DescribeSpaceRequest.struct_class = Types::DescribeSpaceRequest
@@ -8511,6 +8635,19 @@ module Aws::SageMaker
 
     GenerativeAiSettings.add_member(:amazon_bedrock_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "AmazonBedrockRoleArn"))
     GenerativeAiSettings.struct_class = Types::GenerativeAiSettings
+
+    GetCapacityReservationUsageRequest.add_member(:sm_capacity_reservation_arn, Shapes::ShapeRef.new(shape: CapacityReservationArn, required: true, location_name: "SMCapacityReservationArn"))
+    GetCapacityReservationUsageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    GetCapacityReservationUsageRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetCapacityReservationUsageRequest.struct_class = Types::GetCapacityReservationUsageRequest
+
+    GetCapacityReservationUsageResponse.add_member(:sm_capacity_reservation_id, Shapes::ShapeRef.new(shape: SageMakerCapacityReservationId, required: true, location_name: "SMCapacityReservationId"))
+    GetCapacityReservationUsageResponse.add_member(:total_instance_count, Shapes::ShapeRef.new(shape: TotalInstanceCount, required: true, location_name: "TotalInstanceCount"))
+    GetCapacityReservationUsageResponse.add_member(:available_instance_count, Shapes::ShapeRef.new(shape: AvailableInstanceCount, required: true, location_name: "AvailableInstanceCount"))
+    GetCapacityReservationUsageResponse.add_member(:last_refresh_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastRefreshTime"))
+    GetCapacityReservationUsageResponse.add_member(:instance_usage_set, Shapes::ShapeRef.new(shape: CapacityReservationInstanceUsageSet, required: true, location_name: "InstanceUsageSet"))
+    GetCapacityReservationUsageResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetCapacityReservationUsageResponse.struct_class = Types::GetCapacityReservationUsageResponse
 
     GetDeviceFleetReportRequest.add_member(:device_fleet_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "DeviceFleetName"))
     GetDeviceFleetReportRequest.struct_class = Types::GetDeviceFleetReportRequest
@@ -9634,6 +9771,15 @@ module Aws::SageMaker
     ListCandidatesForAutoMLJobResponse.add_member(:candidates, Shapes::ShapeRef.new(shape: AutoMLCandidates, required: true, location_name: "Candidates"))
     ListCandidatesForAutoMLJobResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListCandidatesForAutoMLJobResponse.struct_class = Types::ListCandidatesForAutoMLJobResponse
+
+    ListCapacityReservationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListCapacityReservationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListCapacityReservationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: CapacityReservationFilters, location_name: "Filters"))
+    ListCapacityReservationsRequest.struct_class = Types::ListCapacityReservationsRequest
+
+    ListCapacityReservationsResponse.add_member(:capacity_reservation_summaries, Shapes::ShapeRef.new(shape: CapacityReservationSummaries, required: true, location_name: "CapacityReservationSummaries"))
+    ListCapacityReservationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListCapacityReservationsResponse.struct_class = Types::ListCapacityReservationsResponse
 
     ListClusterEventsRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
     ListClusterEventsRequest.add_member(:instance_group_name, Shapes::ShapeRef.new(shape: ClusterInstanceGroupName, location_name: "InstanceGroupName"))
@@ -15897,6 +16043,15 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
+      api.add_operation(:describe_capacity_reservation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCapacityReservation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeCapacityReservationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeCapacityReservationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
       api.add_operation(:describe_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeCluster"
         o.http_method = "POST"
@@ -16409,6 +16564,21 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
+      api.add_operation(:describe_resource_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeResourceAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeResourceAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeResourceAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_space, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeSpace"
         o.http_method = "POST"
@@ -16571,6 +16741,21 @@ module Aws::SageMaker
         o.input = Shapes::ShapeRef.new(shape: ExtendTrainingPlanRequest)
         o.output = Shapes::ShapeRef.new(shape: ExtendTrainingPlanResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:get_capacity_reservation_usage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCapacityReservationUsage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCapacityReservationUsageRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCapacityReservationUsageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_device_fleet_report, Seahorse::Model::Operation.new.tap do |o|
@@ -16808,6 +16993,20 @@ module Aws::SageMaker
         o.input = Shapes::ShapeRef.new(shape: ListCandidatesForAutoMLJobRequest)
         o.output = Shapes::ShapeRef.new(shape: ListCandidatesForAutoMLJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_capacity_reservations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCapacityReservations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListCapacityReservationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCapacityReservationsResponse)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
