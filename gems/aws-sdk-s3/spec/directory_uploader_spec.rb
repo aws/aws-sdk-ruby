@@ -131,6 +131,17 @@ module Aws
             expect(result[:completed_uploads]).to eq(4)
           end
 
+          it 'applies only to files when uploading recursively' do
+            uploaded_keys = []
+            mutex = Mutex.new
+            allow(client).to receive(:put_object) { |p| mutex.synchronize { uploaded_keys << p[:key] } }
+            filter_callback = ->(_path, file) { File.extname(file) == '.jpg' }
+            result = uploader.upload(temp_dir, 'test-bucket', recursive: true, filter_callback: filter_callback)
+
+            expect(uploaded_keys).to contain_exactly('images/photo1.jpg', 'images/thumbnails/thumb.jpg')
+            expect(result[:completed_uploads]).to eq(2)
+          end
+
           it 'raises instead of hanging when the callback raises a non-StandardError',
              thread_report_on_exception: false do
             filter_callback = ->(_path, file) { file == 'medium.log' ? raise(SystemStackError, 'filter failed') : true }

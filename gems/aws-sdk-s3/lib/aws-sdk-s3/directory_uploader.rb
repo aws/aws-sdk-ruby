@@ -223,14 +223,12 @@ module Aws
         def scan_directory(dir_path, key_prefix: '', ancestors: nil)
           Dir.each_child(dir_path) do |entry|
             full_path = File.join(dir_path, entry)
-            next unless include_file?(full_path, entry)
-
             stat = get_file_stat(full_path)
             next unless stat
 
             if stat.directory?
               handle_directory(full_path, entry, key_prefix, ancestors)
-            elsif stat.file? # skip non-file types
+            elsif stat.file? && include_file?(full_path, entry) # skip non-file types
               key = key_prefix.empty? ? entry : File.join(key_prefix, entry)
               @file_queue << build_upload_entry(full_path, key)
             end
