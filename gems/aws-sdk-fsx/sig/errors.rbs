@@ -37,6 +37,9 @@ module Aws
       class BadRequest < ServiceError
         def message: () -> ::String
       end
+      class ClusterPeerNotFound < ServiceError
+        def message: () -> ::String
+      end
       class DataRepositoryAssociationNotFound < ServiceError
         def message: () -> ::String
       end
@@ -128,7 +131,16 @@ module Aws
         def limit: () -> ::String
         def message: () -> ::String
       end
+      class SnapmirrorPolicyNotFound < ServiceError
+        def message: () -> ::String
+      end
+      class SnapmirrorRelationshipNotFound < ServiceError
+        def message: () -> ::String
+      end
       class SnapshotNotFound < ServiceError
+        def message: () -> ::String
+      end
+      class SnapshotPolicyNotFound < ServiceError
         def message: () -> ::String
       end
       class SourceBackupUnavailable < ServiceError
@@ -136,6 +148,9 @@ module Aws
         def backup_id: () -> ::String
       end
       class StorageVirtualMachineNotFound < ServiceError
+        def message: () -> ::String
+      end
+      class StorageVirtualMachinePeerNotFound < ServiceError
         def message: () -> ::String
       end
       class TooManyAccessPoints < ServiceError

@@ -482,23 +482,40 @@ module Aws::CloudFrontKeyValueStore
 
     # @!group API Operations
 
-    # Deletes the key value pair specified by the key.
+    # Deletes the key-value pair specified by the key.
     #
     # @option params [required, String] :kvs_arn
-    #   The Amazon Resource Name (ARN) of the Key Value Store.
+    #   The Amazon Resource Name (ARN) of the key value store.
     #
     # @option params [required, String] :key
     #   The key to delete.
     #
     # @option params [required, String] :if_match
-    #   The current version (ETag) of the Key Value Store that you are
-    #   deleting keys from, which you can get using DescribeKeyValueStore.
+    #   The current version (`ETag`) of the key value store that you are
+    #   deleting keys from, which you can get by using the
+    #   `DescribeKeyValueStore` API operation.
     #
     # @return [Types::DeleteKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteKeyResponse#item_count #item_count} => Integer
     #   * {Types::DeleteKeyResponse#total_size_in_bytes #total_size_in_bytes} => Integer
     #   * {Types::DeleteKeyResponse#etag #etag} => String
+    #
+    #
+    # @example Example: Delete 'key1' from the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58'
+    #
+    #   resp = client.delete_key({
+    #     if_match: "KV0AB12C3DEF456", 
+    #     key: "key1", 
+    #     kvs_arn: "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "KV7XY89Z0ABC012", 
+    #     item_count: 3, 
+    #     total_size_in_bytes: 5, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -523,10 +540,10 @@ module Aws::CloudFrontKeyValueStore
       req.send_request(options)
     end
 
-    # Returns metadata information about Key Value Store.
+    # Returns metadata information about the key value store.
     #
     # @option params [required, String] :kvs_arn
-    #   The Amazon Resource Name (ARN) of the Key Value Store.
+    #   The Amazon Resource Name (ARN) of the key value store.
     #
     # @return [Types::DescribeKeyValueStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -538,6 +555,42 @@ module Aws::CloudFrontKeyValueStore
     #   * {Types::DescribeKeyValueStoreResponse#last_modified #last_modified} => Time
     #   * {Types::DescribeKeyValueStoreResponse#status #status} => String
     #   * {Types::DescribeKeyValueStoreResponse#failure_reason #failure_reason} => String
+    #
+    #
+    # @example Example: Describe the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58'
+    #
+    #   resp = client.describe_key_value_store({
+    #     kvs_arn: "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created: Time.parse("2023-11-01T22:18:46Z"), 
+    #     etag: "KV7XY89Z0ABC012", 
+    #     failure_reason: "Datasource size exceeds the allowed limit", 
+    #     item_count: 0, 
+    #     kvs_arn: "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58", 
+    #     last_modified: Time.parse("2023-11-01T14:28:17Z"), 
+    #     status: "IMPORT_FAILURE", 
+    #     total_size_in_bytes: 0, 
+    #   }
+    #
+    # @example Example: Describe the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-1234a9d35678'
+    #
+    #   resp = client.describe_key_value_store({
+    #     kvs_arn: "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-1234a9d35678", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created: Time.parse("2023-11-01T22:18:46Z"), 
+    #     etag: "KV7XY89Z0ABC012", 
+    #     item_count: 4, 
+    #     kvs_arn: "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-1234a9d35678", 
+    #     last_modified: Time.parse("2023-11-01T14:28:17Z"), 
+    #     status: "READY", 
+    #     total_size_in_bytes: 15, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -565,10 +618,10 @@ module Aws::CloudFrontKeyValueStore
       req.send_request(options)
     end
 
-    # Returns a key value pair.
+    # Returns a key-value pair.
     #
     # @option params [required, String] :kvs_arn
-    #   The Amazon Resource Name (ARN) of the Key Value Store.
+    #   The Amazon Resource Name (ARN) of the key value store.
     #
     # @option params [required, String] :key
     #   The key to get.
@@ -579,6 +632,22 @@ module Aws::CloudFrontKeyValueStore
     #   * {Types::GetKeyResponse#value #value} => String
     #   * {Types::GetKeyResponse#item_count #item_count} => Integer
     #   * {Types::GetKeyResponse#total_size_in_bytes #total_size_in_bytes} => Integer
+    #
+    #
+    # @example Example: Get 'key1' from the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58'
+    #
+    #   resp = client.get_key({
+    #     key: "key1", 
+    #     kvs_arn: "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     item_count: 4, 
+    #     key: "key1", 
+    #     total_size_in_bytes: 15, 
+    #     value: "value1", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -603,13 +672,13 @@ module Aws::CloudFrontKeyValueStore
       req.send_request(options)
     end
 
-    # Returns a list of key value pairs.
+    # Returns a list of key-value pairs.
     #
     # @option params [required, String] :kvs_arn
-    #   The Amazon Resource Name (ARN) of the Key Value Store.
+    #   The Amazon Resource Name (ARN) of the key value store.
     #
     # @option params [String] :next_token
-    #   If nextToken is returned in the response, there are more results
+    #   If `nextToken` is returned in the response, there are more results
     #   available. Make the next call using the returned token to retrieve the
     #   next page.
     #
@@ -623,6 +692,60 @@ module Aws::CloudFrontKeyValueStore
     #   * {Types::ListKeysResponse#items #items} => Array&lt;Types::ListKeysResponseListItem&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List keys in the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58'
+    #
+    #   resp = client.list_keys({
+    #     kvs_arn: "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58", 
+    #     max_results: 3, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         key: "key1", 
+    #         value: "value1", 
+    #       }, 
+    #       {
+    #         key: "key2", 
+    #         value: "value2", 
+    #       }, 
+    #       {
+    #         key: "key3", 
+    #         value: "value3", 
+    #       }, 
+    #     ], 
+    #     next_token: "hVTTZndkpBZ0VRZ0R1RF", 
+    #   }
+    #
+    # @example Example: List the next page in the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58'
+    #
+    #   resp = client.list_keys({
+    #     kvs_arn: "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58", 
+    #     max_results: 3, 
+    #     next_token: "hVTTZndkpBZ0VRZ0R1RF", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         key: "key4", 
+    #         value: "value4", 
+    #       }, 
+    #       {
+    #         key: "key5", 
+    #         value: "value5", 
+    #       }, 
+    #       {
+    #         key: "key6", 
+    #         value: "value6", 
+    #       }, 
+    #     ], 
+    #     next_token: "hQTlB5YmM5UFNoFQvMk", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -648,7 +771,7 @@ module Aws::CloudFrontKeyValueStore
       req.send_request(options)
     end
 
-    # Creates a new key value pair or replaces the value of an existing key.
+    # Creates a new key-value pair or replaces the value of an existing key.
     #
     # @option params [required, String] :key
     #   The key to put.
@@ -657,17 +780,35 @@ module Aws::CloudFrontKeyValueStore
     #   The value to put.
     #
     # @option params [required, String] :kvs_arn
-    #   The Amazon Resource Name (ARN) of the Key Value Store.
+    #   The Amazon Resource Name (ARN) of the key value store.
     #
     # @option params [required, String] :if_match
-    #   The current version (ETag) of the Key Value Store that you are putting
-    #   keys into, which you can get using DescribeKeyValueStore.
+    #   The current version (`ETag`) of the key value store that you are
+    #   putting keys into, which you can get by using the
+    #   `DescribeKeyValueStore` API operation.
     #
     # @return [Types::PutKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutKeyResponse#item_count #item_count} => Integer
     #   * {Types::PutKeyResponse#total_size_in_bytes #total_size_in_bytes} => Integer
     #   * {Types::PutKeyResponse#etag #etag} => String
+    #
+    #
+    # @example Example: Put 'key1' with 'value1' into the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58'
+    #
+    #   resp = client.put_key({
+    #     if_match: "KV0AB12C3DEF456", 
+    #     key: "key1", 
+    #     kvs_arn: "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58", 
+    #     value: "value1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "KV7XY89Z0ABC012", 
+    #     item_count: 4, 
+    #     total_size_in_bytes: 15, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -693,18 +834,19 @@ module Aws::CloudFrontKeyValueStore
       req.send_request(options)
     end
 
-    # Puts or Deletes multiple key value pairs in a single, all-or-nothing
+    # Puts or deletes multiple key-value pairs in a single, all-or-nothing
     # operation.
     #
     # @option params [required, String] :kvs_arn
-    #   The Amazon Resource Name (ARN) of the Key Value Store.
+    #   The Amazon Resource Name (ARN) of the key value store.
     #
     # @option params [required, String] :if_match
-    #   The current version (ETag) of the Key Value Store that you are
-    #   updating keys of, which you can get using DescribeKeyValueStore.
+    #   The current version (`ETag`) of the key value store that you are
+    #   updating keys of, which you can get by using the
+    #   `DescribeKeyValueStore` API operation.
     #
     # @option params [Array<Types::PutKeyRequestListItem>] :puts
-    #   List of key value pairs to put.
+    #   List of key-value pairs to put.
     #
     # @option params [Array<Types::DeleteKeyRequestListItem>] :deletes
     #   List of keys to delete.
@@ -714,6 +856,85 @@ module Aws::CloudFrontKeyValueStore
     #   * {Types::UpdateKeysResponse#item_count #item_count} => Integer
     #   * {Types::UpdateKeysResponse#total_size_in_bytes #total_size_in_bytes} => Integer
     #   * {Types::UpdateKeysResponse#etag #etag} => String
+    #
+    #
+    # @example Example: Put 2 keys into the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58'
+    #
+    #   resp = client.update_keys({
+    #     if_match: "KV0AB12C3DEF456", 
+    #     kvs_arn: "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58", 
+    #     puts: [
+    #       {
+    #         key: "key1", 
+    #         value: "value1", 
+    #       }, 
+    #       {
+    #         key: "key2", 
+    #         value: "value2", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "KV7XY89Z0ABC012", 
+    #     item_count: 4, 
+    #     total_size_in_bytes: 15, 
+    #   }
+    #
+    # @example Example: Delete 2 keys from the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58'
+    #
+    #   resp = client.update_keys({
+    #     deletes: [
+    #       {
+    #         key: "key1", 
+    #       }, 
+    #       {
+    #         key: "key2", 
+    #       }, 
+    #     ], 
+    #     if_match: "KV0AB12C3DEF456", 
+    #     kvs_arn: "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "KV7XY89Z0ABC012", 
+    #     item_count: 4, 
+    #     total_size_in_bytes: 15, 
+    #   }
+    #
+    # @example Example: Put 2 keys into and delete 1 key from the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58'
+    #
+    #   resp = client.update_keys({
+    #     deletes: [
+    #       {
+    #         key: "key3", 
+    #       }, 
+    #       {
+    #         key: "key4", 
+    #       }, 
+    #     ], 
+    #     if_match: "KV0AB12C3DEF456", 
+    #     kvs_arn: "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58", 
+    #     puts: [
+    #       {
+    #         key: "key1", 
+    #         value: "value1", 
+    #       }, 
+    #       {
+    #         key: "key2", 
+    #         value: "value2", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "KV7XY89Z0ABC012", 
+    #     item_count: 4, 
+    #     total_size_in_bytes: 15, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -766,7 +987,7 @@ module Aws::CloudFrontKeyValueStore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudfrontkeyvaluestore'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -274,7 +274,7 @@ module Aws::CloudWatchOmni
     end
 
     class CreateIntegrationInput
-      attr_accessor integration_type: ("AWS_CONFIG_SLREC" | "SLACK" | "EXTERNAL_AGENT" | "AWS_INTEGRATION")
+      attr_accessor integration_type: ("AWS_CONFIG_SLREC" | "AWS_CONFIG_AZURE_SLREC" | "SLACK" | "EXTERNAL_AGENT" | "AWS_INTEGRATION")
       attr_accessor name: ::String
       attr_accessor credential: Types::IntegrationCredential
       attr_accessor integration_attributes: ::Hash[::String, ::String]
@@ -722,7 +722,7 @@ module Aws::CloudWatchOmni
     class Integration
       attr_accessor integration_id: ::String
       attr_accessor integration_arn: ::String
-      attr_accessor integration_type: ("AWS_CONFIG_SLREC" | "SLACK" | "EXTERNAL_AGENT" | "AWS_INTEGRATION")
+      attr_accessor integration_type: ("AWS_CONFIG_SLREC" | "AWS_CONFIG_AZURE_SLREC" | "SLACK" | "EXTERNAL_AGENT" | "AWS_INTEGRATION")
       attr_accessor name: ::String
       attr_accessor status: ("ACTIVE" | "DELETED" | "PENDING" | "PENDING_OAUTH" | "ERROR" | "FAILED")
       attr_accessor auth_type: ("NONE" | "OAUTH2" | "API_KEY")
@@ -858,7 +858,7 @@ module Aws::CloudWatchOmni
     end
 
     class ListIntegrationsInput
-      attr_accessor integration_type: ("AWS_CONFIG_SLREC" | "SLACK" | "EXTERNAL_AGENT" | "AWS_INTEGRATION")
+      attr_accessor integration_type: ("AWS_CONFIG_SLREC" | "AWS_CONFIG_AZURE_SLREC" | "SLACK" | "EXTERNAL_AGENT" | "AWS_INTEGRATION")
       attr_accessor status: ("ACTIVE" | "DELETED" | "PENDING" | "PENDING_OAUTH" | "ERROR" | "FAILED")
       attr_accessor name: ::String
       attr_accessor next_token: ::String

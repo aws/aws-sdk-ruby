@@ -859,7 +859,7 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.backup.file_system.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.backup.file_system.administrative_actions #=> Array
-    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.backup.file_system.administrative_actions[0].request_time #=> Time
     #   resp.backup.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -899,6 +899,8 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -906,6 +908,8 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.volume_id #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
@@ -938,12 +942,20 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.name #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
-    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.snapmirror_label #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.expiry_time #=> Time
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.uuid #=> String
     #   resp.backup.file_system.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.backup.file_system.administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.backup.file_system.administrative_actions[0].message #=> String
@@ -1034,6 +1046,8 @@ module Aws::FSx
     #   resp.backup.volume.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.backup.volume.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.backup.volume.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.backup.volume.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.backup.volume.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.backup.volume.resource_arn #=> String
     #   resp.backup.volume.tags #=> Array
     #   resp.backup.volume.tags[0].key #=> String
@@ -1041,8 +1055,10 @@ module Aws::FSx
     #   resp.backup.volume.volume_id #=> String
     #   resp.backup.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backup.volume.lifecycle_transition_reason.message #=> String
+    #   resp.backup.volume.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.backup.volume.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.backup.volume.administrative_actions #=> Array
-    #   resp.backup.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.backup.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.backup.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.backup.volume.administrative_actions[0].request_time #=> Time
     #   resp.backup.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -1175,12 +1191,20 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.name #=> String
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.creation_time #=> Time
-    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.snapmirror_label #=> String
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.expiry_time #=> Time
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.uuid #=> String
     #   resp.backup.volume.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.backup.volume.administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.backup.volume.administrative_actions[0].message #=> String
@@ -1306,7 +1330,7 @@ module Aws::FSx
     #   resp.volume_id #=> String
     #   resp.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
     #   resp.administrative_actions #=> Array
-    #   resp.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.administrative_actions[0].progress_percent #=> Integer
     #   resp.administrative_actions[0].request_time #=> Time
     #   resp.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -1467,6 +1491,8 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.administrative_actions[0].target_volume_values.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -1474,6 +1500,8 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_volume_values.volume_id #=> String
     #   resp.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
     #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
@@ -1506,12 +1534,20 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_snapshot_values.name #=> String
     #   resp.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.administrative_actions[0].target_snapshot_values.creation_time #=> Time
-    #   resp.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.administrative_actions[0].target_snapshot_values.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
+    #   resp.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
     #   resp.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.administrative_actions[0].target_snapshot_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.administrative_actions[0].target_snapshot_values.ontap_configuration.snapmirror_label #=> String
+    #   resp.administrative_actions[0].target_snapshot_values.ontap_configuration.expiry_time #=> Time
+    #   resp.administrative_actions[0].target_snapshot_values.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.administrative_actions[0].target_snapshot_values.ontap_configuration.uuid #=> String
     #   resp.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.administrative_actions[0].message #=> String
@@ -1636,6 +1672,8 @@ module Aws::FSx
     #
     #   resp.s3_access_point_attachment.lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED", "MISCONFIGURED"
     #   resp.s3_access_point_attachment.lifecycle_transition_reason.message #=> String
+    #   resp.s3_access_point_attachment.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.s3_access_point_attachment.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.s3_access_point_attachment.creation_time #=> Time
     #   resp.s3_access_point_attachment.name #=> String
     #   resp.s3_access_point_attachment.type #=> String, one of "OPENZFS", "ONTAP"
@@ -1895,7 +1933,7 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.backup.file_system.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.backup.file_system.administrative_actions #=> Array
-    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.backup.file_system.administrative_actions[0].request_time #=> Time
     #   resp.backup.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -1935,6 +1973,8 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -1942,6 +1982,8 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.volume_id #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
@@ -1974,12 +2016,20 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.name #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
-    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.snapmirror_label #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.expiry_time #=> Time
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.uuid #=> String
     #   resp.backup.file_system.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.backup.file_system.administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.backup.file_system.administrative_actions[0].message #=> String
@@ -2070,6 +2120,8 @@ module Aws::FSx
     #   resp.backup.volume.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.backup.volume.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.backup.volume.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.backup.volume.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.backup.volume.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.backup.volume.resource_arn #=> String
     #   resp.backup.volume.tags #=> Array
     #   resp.backup.volume.tags[0].key #=> String
@@ -2077,8 +2129,10 @@ module Aws::FSx
     #   resp.backup.volume.volume_id #=> String
     #   resp.backup.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backup.volume.lifecycle_transition_reason.message #=> String
+    #   resp.backup.volume.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.backup.volume.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.backup.volume.administrative_actions #=> Array
-    #   resp.backup.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.backup.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.backup.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.backup.volume.administrative_actions[0].request_time #=> Time
     #   resp.backup.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -2211,12 +2265,20 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.name #=> String
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.creation_time #=> Time
-    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.snapmirror_label #=> String
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.expiry_time #=> Time
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.uuid #=> String
     #   resp.backup.volume.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.backup.volume.administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.backup.volume.administrative_actions[0].message #=> String
@@ -2254,6 +2316,118 @@ module Aws::FSx
     # @param [Hash] params ({})
     def create_backup(params = {}, options = {})
       req = build_request(:create_backup, params)
+      req.send_request(options)
+    end
+
+    # Creates a cluster peer relationship between an Amazon FSx for NetApp
+    # ONTAP file system and another ONTAP cluster.
+    #
+    # The `CreateClusterPeer` operation returns while the cluster peer's
+    # lifecycle state is still `CREATING`. You can check the cluster peer
+    # creation status by calling the DescribeClusterPeers operation.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 63 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :file_system_id
+    #   Specifies the ID of the Amazon FSx for NetApp ONTAP file system on
+    #   which to create the cluster peer relationship.
+    #
+    # @option params [required, Array<String>] :peer_addresses
+    #   Specifies the IP addresses of the intercluster logical interfaces
+    #   (LIFs) on the peer cluster.
+    #
+    # @option params [required, String] :passphrase_secret_arn
+    #   Specifies the Amazon Resource Name (ARN) of the Amazon Web Services
+    #   Secrets Manager secret containing the cluster peering passphrase.
+    #   Store the passphrase as a plaintext secret value, not as a key-value
+    #   pair. The secret must be in the same Amazon Web Services Region as the
+    #   file system. You must use the same passphrase when you create the
+    #   cluster peer relationship on the peer cluster.
+    #
+    # @option params [String] :peer_cluster_name
+    #   Specifies the name that the file system uses to identify the peer
+    #   cluster.
+    #
+    # @option params [required, String] :allowed_svm_mode
+    #   Specifies which SVMs on the file system are preauthorized for SVM
+    #   peering with the peer cluster.
+    #
+    #   * `ALL` – All SVMs on the file system are preauthorized. You can't
+    #     specify `AllowedSvmIds` along with this property.
+    #
+    #   * `NONE` – No SVMs on the file system are preauthorized. You can't
+    #     specify `AllowedSvmIds` along with this property.
+    #
+    #   * `SPECIFIED` – Only the SVMs in `AllowedSvmIds` are preauthorized.
+    #     You must specify `AllowedSvmIds` along with this property.
+    #
+    # @option params [Array<String>] :allowed_svm_ids
+    #   Specifies the IDs of the SVMs on the file system that are
+    #   preauthorized for SVM peering with the peer cluster. You can specify
+    #   `AllowedSvmIds` only when `AllowedSvmMode` is `SPECIFIED`.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #
+    # @return [Types::CreateClusterPeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateClusterPeerResponse#cluster_peer #cluster_peer} => Types::ClusterPeer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_cluster_peer({
+    #     client_request_token: "ClientRequestToken",
+    #     file_system_id: "FileSystemId", # required
+    #     peer_addresses: ["IpAddress"], # required
+    #     passphrase_secret_arn: "CustomerSecretsManagerARN", # required
+    #     peer_cluster_name: "PeerClusterName",
+    #     allowed_svm_mode: "ALL", # required, accepts ALL, NONE, SPECIFIED
+    #     allowed_svm_ids: ["StorageVirtualMachineId"],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_peer.resource_arn #=> String
+    #   resp.cluster_peer.cluster_peer_id #=> String
+    #   resp.cluster_peer.file_system_id #=> String
+    #   resp.cluster_peer.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #   resp.cluster_peer.lifecycle_transition_reason.message #=> String
+    #   resp.cluster_peer.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.cluster_peer.lifecycle_transition_reason.ontap_error.code #=> String
+    #   resp.cluster_peer.tags #=> Array
+    #   resp.cluster_peer.tags[0].key #=> String
+    #   resp.cluster_peer.tags[0].value #=> String
+    #   resp.cluster_peer.peer_addresses #=> Array
+    #   resp.cluster_peer.peer_addresses[0] #=> String
+    #   resp.cluster_peer.peer_cluster_name #=> String
+    #   resp.cluster_peer.passphrase_secret_arn #=> String
+    #   resp.cluster_peer.allowed_svm_mode #=> String, one of "ALL", "NONE", "SPECIFIED"
+    #   resp.cluster_peer.allowed_svm_ids #=> Array
+    #   resp.cluster_peer.allowed_svm_ids[0] #=> String
+    #   resp.cluster_peer.status #=> String
+    #   resp.cluster_peer.uuid #=> String
+    #   resp.cluster_peer.authentication_status.state #=> String
+    #   resp.cluster_peer.authentication_status.in_use #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateClusterPeer AWS API Documentation
+    #
+    # @overload create_cluster_peer(params = {})
+    # @param [Hash] params ({})
+    def create_cluster_peer(params = {}, options = {})
+      req = build_request(:create_cluster_peer, params)
       req.send_request(options)
     end
 
@@ -3327,7 +3501,7 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.file_system.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.file_system.administrative_actions #=> Array
-    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -3367,6 +3541,8 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -3374,6 +3550,8 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.volume_id #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
@@ -3406,12 +3584,20 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_snapshot_values.name #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
-    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.snapmirror_label #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.expiry_time #=> Time
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.uuid #=> String
     #   resp.file_system.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.file_system.administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.file_system.administrative_actions[0].message #=> String
@@ -3917,7 +4103,7 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.file_system.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.file_system.administrative_actions #=> Array
-    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -3957,6 +4143,8 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -3964,6 +4152,8 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.volume_id #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
@@ -3996,12 +4186,20 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_snapshot_values.name #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
-    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.snapmirror_label #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.expiry_time #=> Time
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.uuid #=> String
     #   resp.file_system.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.file_system.administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.file_system.administrative_actions[0].message #=> String
@@ -4061,9 +4259,258 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Creates a snapshot of an existing Amazon FSx for OpenZFS volume. With
-    # snapshots, you can easily undo file changes and compare file versions
-    # by restoring the volume to a previous version.
+    # Creates a SnapMirror policy for an Amazon FSx for NetApp ONTAP file
+    # system or storage virtual machine (SVM). A SnapMirror policy defines
+    # how the SnapMirror relationships that use the policy replicate data,
+    # including which snapshots to transfer, the maximum number of snapshots
+    # to retain on the destination volume, and when to transfer data.
+    #
+    # The `CreateSnapmirrorPolicy` operation returns while the SnapMirror
+    # policy's lifecycle state is still `CREATING`. You can check the
+    # SnapMirror policy creation status by calling the
+    # DescribeSnapmirrorPolicies operation.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 63 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :file_system_id
+    #   Specifies the ID of the Amazon FSx for NetApp ONTAP file system on
+    #   which to create the SnapMirror policy. You must specify either a
+    #   `FileSystemId` or a `StorageVirtualMachineId`, but not both.
+    #
+    # @option params [String] :storage_virtual_machine_id
+    #   Specifies the ID of the SVM on which to create the SnapMirror policy.
+    #   You must specify either a `FileSystemId` or a
+    #   `StorageVirtualMachineId`, but not both.
+    #
+    # @option params [required, String] :name
+    #   Specifies the name of the SnapMirror policy.
+    #
+    # @option params [String] :snapshot_copy_mode
+    #   Specifies which snapshots SnapMirror transfers to the destination
+    #   volume:
+    #
+    #   * `COPY_ALL_SOURCE_SNAPSHOTS` – SnapMirror copies all snapshots of the
+    #     source volume to the destination volume on a transfer. You can't
+    #     specify `RetentionRules` along with this property.
+    #
+    #   * `COPY_LATEST_SOURCE_SNAPSHOT` – SnapMirror copies the latest
+    #     snapshot of the source volume to the destination volume on a
+    #     transfer. You can't specify `RetentionRules` along with this
+    #     property.
+    #
+    #   * `NO_CREATE_SNAPSHOT_ON_SOURCE` – SnapMirror doesn't create a
+    #     snapshot on the source volume at beginning of an update or resync
+    #     operation. You must specify `RetentionRules` along with this
+    #     property.
+    #
+    #   If you don't specify a `SnapshotCopyMode`, SnapMirror creates a new
+    #   snapshot of the source volume and copies it, along with any snapshots
+    #   that match `RetentionRules`, to the destination volume on a transfer.
+    #   `RetentionRules` is optional.
+    #
+    # @option params [Array<Types::SnapmirrorPolicyRetentionRule>] :retention_rules
+    #   Specifies the rules that determine which snapshots SnapMirror retains
+    #   on the destination volume, based on their SnapMirror labels.
+    #
+    # @option params [String] :transfer_schedule
+    #   Specifies the name of the ONTAP schedule that determines when
+    #   SnapMirror transfers data.
+    #
+    # @option params [Boolean] :network_compression_enabled
+    #   Specifies whether SnapMirror compresses data when it transfers the
+    #   data over the network. This value defaults to `false`.
+    #
+    # @option params [Integer] :throttle_in_kbps
+    #   Specifies the maximum bandwidth, in kilobytes per second (KBps), that
+    #   SnapMirror uses to transfer data. A value of `0` means that the
+    #   bandwidth is unlimited.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #
+    # @return [Types::CreateSnapmirrorPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSnapmirrorPolicyResponse#snapmirror_policy #snapmirror_policy} => Types::SnapmirrorPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_snapmirror_policy({
+    #     client_request_token: "ClientRequestToken",
+    #     file_system_id: "FileSystemId",
+    #     storage_virtual_machine_id: "StorageVirtualMachineId",
+    #     name: "SnapmirrorPolicyName", # required
+    #     snapshot_copy_mode: "COPY_ALL_SOURCE_SNAPSHOTS", # accepts COPY_ALL_SOURCE_SNAPSHOTS, COPY_LATEST_SOURCE_SNAPSHOT, NO_CREATE_SNAPSHOT_ON_SOURCE
+    #     retention_rules: [
+    #       {
+    #         label: "SnapmirrorLabel", # required
+    #         count: 1, # required
+    #         creation_schedule: "SnapmirrorPolicyCreationScheduleName",
+    #       },
+    #     ],
+    #     transfer_schedule: "SnapmirrorTransferScheduleName",
+    #     network_compression_enabled: false,
+    #     throttle_in_kbps: 1,
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapmirror_policy.resource_arn #=> String
+    #   resp.snapmirror_policy.snapmirror_policy_id #=> String
+    #   resp.snapmirror_policy.file_system_id #=> String
+    #   resp.snapmirror_policy.storage_virtual_machine_id #=> String
+    #   resp.snapmirror_policy.name #=> String
+    #   resp.snapmirror_policy.snapshot_copy_mode #=> String, one of "COPY_ALL_SOURCE_SNAPSHOTS", "COPY_LATEST_SOURCE_SNAPSHOT", "NO_CREATE_SNAPSHOT_ON_SOURCE"
+    #   resp.snapmirror_policy.retention_rules #=> Array
+    #   resp.snapmirror_policy.retention_rules[0].label #=> String
+    #   resp.snapmirror_policy.retention_rules[0].count #=> Integer
+    #   resp.snapmirror_policy.retention_rules[0].creation_schedule #=> String
+    #   resp.snapmirror_policy.transfer_schedule #=> String
+    #   resp.snapmirror_policy.network_compression_enabled #=> Boolean
+    #   resp.snapmirror_policy.throttle_in_kbps #=> Integer
+    #   resp.snapmirror_policy.scope #=> String, one of "FILESYSTEM", "SVM"
+    #   resp.snapmirror_policy.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #   resp.snapmirror_policy.uuid #=> String
+    #   resp.snapmirror_policy.lifecycle_transition_reason.message #=> String
+    #   resp.snapmirror_policy.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.snapmirror_policy.lifecycle_transition_reason.ontap_error.code #=> String
+    #   resp.snapmirror_policy.tags #=> Array
+    #   resp.snapmirror_policy.tags[0].key #=> String
+    #   resp.snapmirror_policy.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateSnapmirrorPolicy AWS API Documentation
+    #
+    # @overload create_snapmirror_policy(params = {})
+    # @param [Hash] params ({})
+    def create_snapmirror_policy(params = {}, options = {})
+      req = build_request(:create_snapmirror_policy, params)
+      req.send_request(options)
+    end
+
+    # Creates a SnapMirror relationship that replicates data from a source
+    # volume to a destination volume on an Amazon FSx for NetApp ONTAP file
+    # system.
+    #
+    # The `CreateSnapmirrorRelationship` operation returns while the
+    # SnapMirror relationship's lifecycle state is still `CREATING`. You
+    # can check the SnapMirror relationship creation status by calling the
+    # DescribeSnapmirrorRelationships operation.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 63 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::CreateSnapmirrorSource] :source
+    #   Specifies the source endpoint of the SnapMirror relationship.
+    #
+    # @option params [required, Types::CreateSnapmirrorDestination] :destination
+    #   Specifies the destination endpoint of the SnapMirror relationship.
+    #
+    # @option params [String] :policy_id
+    #   Specifies the ID of the SnapMirror policy that the SnapMirror
+    #   relationship uses.
+    #
+    # @option params [String] :transfer_schedule
+    #   Specifies the name of the ONTAP schedule that determines when
+    #   SnapMirror transfers data for the relationship. This schedule
+    #   overrides the transfer schedule of the SnapMirror policy.
+    #
+    # @option params [Integer] :throttle_in_kbps
+    #   Specifies the maximum bandwidth, in kilobytes per second (KBps), that
+    #   SnapMirror uses to transfer data for the relationship. A value of `0`
+    #   means that the bandwidth is unlimited. This value overrides the
+    #   throttle of the SnapMirror policy.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #
+    # @return [Types::CreateSnapmirrorRelationshipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSnapmirrorRelationshipResponse#snapmirror_relationship #snapmirror_relationship} => Types::SnapmirrorRelationship
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_snapmirror_relationship({
+    #     client_request_token: "ClientRequestToken",
+    #     source: { # required
+    #       path: "SnapmirrorPath", # required
+    #     },
+    #     destination: { # required
+    #       volume_id: "VolumeId", # required
+    #     },
+    #     policy_id: "SnapmirrorPolicyId",
+    #     transfer_schedule: "SnapmirrorTransferScheduleName",
+    #     throttle_in_kbps: 1,
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapmirror_relationship.resource_arn #=> String
+    #   resp.snapmirror_relationship.snapmirror_relationship_id #=> String
+    #   resp.snapmirror_relationship.file_system_id #=> String
+    #   resp.snapmirror_relationship.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #   resp.snapmirror_relationship.lifecycle_transition_reason.message #=> String
+    #   resp.snapmirror_relationship.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.snapmirror_relationship.lifecycle_transition_reason.ontap_error.code #=> String
+    #   resp.snapmirror_relationship.tags #=> Array
+    #   resp.snapmirror_relationship.tags[0].key #=> String
+    #   resp.snapmirror_relationship.tags[0].value #=> String
+    #   resp.snapmirror_relationship.source.path #=> String
+    #   resp.snapmirror_relationship.destination.path #=> String
+    #   resp.snapmirror_relationship.destination.volume_id #=> String
+    #   resp.snapmirror_relationship.snapmirror_policy.policy_id #=> String
+    #   resp.snapmirror_relationship.snapmirror_policy.policy_name #=> String
+    #   resp.snapmirror_relationship.transfer_schedule #=> String
+    #   resp.snapmirror_relationship.throttle_in_kbps #=> Integer
+    #   resp.snapmirror_relationship.state #=> String, one of "UNINITIALIZED", "TRANSFERRING", "SNAPMIRRORED", "PAUSED", "BROKEN_OFF"
+    #   resp.snapmirror_relationship.healthy #=> Boolean
+    #   resp.snapmirror_relationship.unhealthy_reason #=> String
+    #   resp.snapmirror_relationship.lag_time_in_minutes #=> Integer
+    #   resp.snapmirror_relationship.exported_snapshot.snapshot_id #=> String
+    #   resp.snapmirror_relationship.exported_snapshot.snapshot_name #=> String
+    #   resp.snapmirror_relationship.transfer_state.state #=> String
+    #   resp.snapmirror_relationship.transfer_state.type #=> String
+    #   resp.snapmirror_relationship.transfer_state.bytes_transferred #=> Integer
+    #   resp.snapmirror_relationship.transfer_state.duration #=> String
+    #   resp.snapmirror_relationship.transfer_state.end_time #=> Time
+    #   resp.snapmirror_relationship.uuid #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateSnapmirrorRelationship AWS API Documentation
+    #
+    # @overload create_snapmirror_relationship(params = {})
+    # @param [Hash] params ({})
+    def create_snapmirror_relationship(params = {}, options = {})
+      req = build_request(:create_snapmirror_relationship, params)
+      req.send_request(options)
+    end
+
+    # Creates a snapshot of an existing Amazon FSx for OpenZFS or Amazon FSx
+    # for NetApp ONTAP volume. With snapshots, you can easily undo file
+    # changes and compare file versions by restoring the volume to a
+    # previous version.
     #
     # If a snapshot with the specified client request token exists, and the
     # parameters match, this operation returns the description of the
@@ -4072,8 +4519,8 @@ module Aws::FSx
     # `IncompatibleParameterError`. If a snapshot with the specified client
     # request token doesn't exist, `CreateSnapshot` does the following:
     #
-    # * Creates a new OpenZFS snapshot with an assigned ID, and an initial
-    #   lifecycle state of `CREATING`.
+    # * Creates a new snapshot with an assigned ID, and an initial lifecycle
+    #   state of `CREATING`.
     #
     # * Returns the description of the snapshot.
     #
@@ -4111,6 +4558,9 @@ module Aws::FSx
     # @option params [Array<Types::Tag>] :tags
     #   A list of `Tag` values, with a maximum of 50 elements.
     #
+    # @option params [Types::CreateOntapSnapshotConfiguration] :ontap_configuration
+    #   Specifies the configuration to use when creating the ONTAP snapshot.
+    #
     # @return [Types::CreateSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSnapshotResponse#snapshot #snapshot} => Types::Snapshot
@@ -4127,6 +4577,11 @@ module Aws::FSx
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     ontap_configuration: {
+    #       snapmirror_label: "SnapmirrorLabel",
+    #       expiry_time: Time.now,
+    #       snaplock_expiry_time: Time.now,
+    #     },
     #   })
     #
     # @example Response structure
@@ -4136,13 +4591,16 @@ module Aws::FSx
     #   resp.snapshot.name #=> String
     #   resp.snapshot.volume_id #=> String
     #   resp.snapshot.creation_time #=> Time
-    #   resp.snapshot.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.snapshot.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.snapshot.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.snapshot.lifecycle_transition_reason.message #=> String
+    #   resp.snapshot.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.snapshot.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.snapshot.tags #=> Array
     #   resp.snapshot.tags[0].key #=> String
     #   resp.snapshot.tags[0].value #=> String
     #   resp.snapshot.administrative_actions #=> Array
-    #   resp.snapshot.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.snapshot.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.snapshot.administrative_actions[0].progress_percent #=> Integer
     #   resp.snapshot.administrative_actions[0].request_time #=> Time
     #   resp.snapshot.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -4303,6 +4761,8 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.snapshot.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -4310,6 +4770,8 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_volume_values.volume_id #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.snapshot.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
@@ -4341,6 +4803,11 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.snapshot.administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.snapshot.administrative_actions[0].message #=> String
+    #   resp.snapshot.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.snapshot.ontap_configuration.snapmirror_label #=> String
+    #   resp.snapshot.ontap_configuration.expiry_time #=> Time
+    #   resp.snapshot.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.snapshot.ontap_configuration.uuid #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateSnapshot AWS API Documentation
     #
@@ -4348,6 +4815,116 @@ module Aws::FSx
     # @param [Hash] params ({})
     def create_snapshot(params = {}, options = {})
       req = build_request(:create_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Creates a snapshot policy for an Amazon FSx for NetApp ONTAP file
+    # system or storage virtual machine (SVM). A snapshot policy defines the
+    # schedules on which ONTAP automatically creates snapshots of the
+    # volumes that use the policy, and the maximum number of snapshots to
+    # retain for each schedule.
+    #
+    # The `CreateSnapshotPolicy` operation returns while the snapshot
+    # policy's lifecycle state is still `CREATING`. You can check the
+    # snapshot policy creation status by calling the
+    # DescribeSnapshotPolicies operation.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 63 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :file_system_id
+    #   Specifies the ID of the Amazon FSx for NetApp ONTAP file system on
+    #   which to create the snapshot policy. You must specify either a
+    #   `FileSystemId` or a `StorageVirtualMachineId`, but not both.
+    #
+    # @option params [String] :storage_virtual_machine_id
+    #   Specifies the ID of the SVM on which to create the snapshot policy.
+    #   You must specify either a `FileSystemId` or a
+    #   `StorageVirtualMachineId`, but not both.
+    #
+    # @option params [required, String] :name
+    #   Specifies the name of the snapshot policy.
+    #
+    # @option params [Boolean] :enabled
+    #   Specifies whether the snapshot policy is enabled. This value defaults
+    #   to `true`.
+    #
+    # @option params [required, Array<Types::SnapshotPolicySchedule>] :schedules
+    #   Specifies the schedules on which ONTAP creates snapshots for the
+    #   snapshot policy.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #
+    # @return [Types::CreateSnapshotPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSnapshotPolicyResponse#snapshot_policy #snapshot_policy} => Types::SnapshotPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_snapshot_policy({
+    #     client_request_token: "ClientRequestToken",
+    #     file_system_id: "FileSystemId",
+    #     storage_virtual_machine_id: "StorageVirtualMachineId",
+    #     name: "SnapshotPolicyName", # required
+    #     enabled: false,
+    #     schedules: [ # required
+    #       {
+    #         name: "SnapshotPolicyScheduleName", # required
+    #         count: 1, # required
+    #         prefix: "SnapshotPolicySchedulePrefix",
+    #         snapmirror_label: "SnapmirrorLabel",
+    #         retention_period: {
+    #           type: "SECONDS", # required, accepts SECONDS, MINUTES, HOURS, DAYS, MONTHS, YEARS, INFINITE
+    #           value: 1,
+    #         },
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot_policy.resource_arn #=> String
+    #   resp.snapshot_policy.snapshot_policy_id #=> String
+    #   resp.snapshot_policy.file_system_id #=> String
+    #   resp.snapshot_policy.storage_virtual_machine_id #=> String
+    #   resp.snapshot_policy.name #=> String
+    #   resp.snapshot_policy.enabled #=> Boolean
+    #   resp.snapshot_policy.schedules #=> Array
+    #   resp.snapshot_policy.schedules[0].name #=> String
+    #   resp.snapshot_policy.schedules[0].count #=> Integer
+    #   resp.snapshot_policy.schedules[0].prefix #=> String
+    #   resp.snapshot_policy.schedules[0].snapmirror_label #=> String
+    #   resp.snapshot_policy.schedules[0].retention_period.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE"
+    #   resp.snapshot_policy.schedules[0].retention_period.value #=> Integer
+    #   resp.snapshot_policy.scope #=> String, one of "FILESYSTEM", "SVM"
+    #   resp.snapshot_policy.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #   resp.snapshot_policy.uuid #=> String
+    #   resp.snapshot_policy.lifecycle_transition_reason.message #=> String
+    #   resp.snapshot_policy.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.snapshot_policy.lifecycle_transition_reason.ontap_error.code #=> String
+    #   resp.snapshot_policy.tags #=> Array
+    #   resp.snapshot_policy.tags[0].key #=> String
+    #   resp.snapshot_policy.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateSnapshotPolicy AWS API Documentation
+    #
+    # @overload create_snapshot_policy(params = {})
+    # @param [Hash] params ({})
+    def create_snapshot_policy(params = {}, options = {})
+      req = build_request(:create_snapshot_policy, params)
       req.send_request(options)
     end
 
@@ -4480,6 +5057,8 @@ module Aws::FSx
     #   resp.storage_virtual_machine.tags[0].key #=> String
     #   resp.storage_virtual_machine.tags[0].value #=> String
     #   resp.storage_virtual_machine.lifecycle_transition_reason.message #=> String
+    #   resp.storage_virtual_machine.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.storage_virtual_machine.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.storage_virtual_machine.root_volume_security_style #=> String, one of "UNIX", "NTFS", "MIXED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateStorageVirtualMachine AWS API Documentation
@@ -4488,6 +5067,94 @@ module Aws::FSx
     # @param [Hash] params ({})
     def create_storage_virtual_machine(params = {}, options = {})
       req = build_request(:create_storage_virtual_machine, params)
+      req.send_request(options)
+    end
+
+    # Creates a storage virtual machine (SVM) peer relationship between an
+    # SVM on an Amazon FSx for NetApp ONTAP file system and another SVM.
+    #
+    # The `CreateStorageVirtualMachinePeer` operation returns while the SVM
+    # peer's lifecycle state is still `CREATING`. You can check the SVM
+    # peer creation status by calling the DescribeStorageVirtualMachinePeers
+    # operation.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 63 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :storage_virtual_machine_id
+    #   Specifies the ID of the SVM on which to create the SVM peer
+    #   relationship.
+    #
+    # @option params [required, String] :peer_svm_name
+    #   Specifies the name of the SVM to peer with.
+    #
+    # @option params [String] :peer_cluster_name
+    #   Specifies the name of the peer cluster that the peer SVM is on.
+    #
+    # @option params [required, Array<String>] :applications
+    #   Specifies the applications that the SVM peer relationship authorizes.
+    #
+    # @option params [String] :peer_svm_alias
+    #   Specifies the name that the local cluster uses to identify the peer
+    #   SVM.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #
+    # @return [Types::CreateStorageVirtualMachinePeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateStorageVirtualMachinePeerResponse#storage_virtual_machine_peer #storage_virtual_machine_peer} => Types::StorageVirtualMachinePeer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_storage_virtual_machine_peer({
+    #     client_request_token: "ClientRequestToken",
+    #     storage_virtual_machine_id: "StorageVirtualMachineId", # required
+    #     peer_svm_name: "PeerSvmName", # required
+    #     peer_cluster_name: "PeerClusterName",
+    #     applications: ["SNAPMIRROR"], # required, accepts SNAPMIRROR, FILE_COPY, LUN_COPY, FLEXCACHE
+    #     peer_svm_alias: "PeerSvmAlias",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_virtual_machine_peer.resource_arn #=> String
+    #   resp.storage_virtual_machine_peer.storage_virtual_machine_peer_id #=> String
+    #   resp.storage_virtual_machine_peer.storage_virtual_machine_id #=> String
+    #   resp.storage_virtual_machine_peer.file_system_id #=> String
+    #   resp.storage_virtual_machine_peer.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #   resp.storage_virtual_machine_peer.lifecycle_transition_reason.message #=> String
+    #   resp.storage_virtual_machine_peer.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.storage_virtual_machine_peer.lifecycle_transition_reason.ontap_error.code #=> String
+    #   resp.storage_virtual_machine_peer.tags #=> Array
+    #   resp.storage_virtual_machine_peer.tags[0].key #=> String
+    #   resp.storage_virtual_machine_peer.tags[0].value #=> String
+    #   resp.storage_virtual_machine_peer.peer_svm_name #=> String
+    #   resp.storage_virtual_machine_peer.peer_svm_alias #=> String
+    #   resp.storage_virtual_machine_peer.peer_cluster_name #=> String
+    #   resp.storage_virtual_machine_peer.applications #=> Array
+    #   resp.storage_virtual_machine_peer.applications[0] #=> String, one of "SNAPMIRROR", "FILE_COPY", "LUN_COPY", "FLEXCACHE"
+    #   resp.storage_virtual_machine_peer.state #=> String, one of "PEERED", "REJECTED", "SUSPENDED", "INITIATED", "PENDING", "INITIALIZING"
+    #   resp.storage_virtual_machine_peer.uuid #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateStorageVirtualMachinePeer AWS API Documentation
+    #
+    # @overload create_storage_virtual_machine_peer(params = {})
+    # @param [Hash] params ({})
+    def create_storage_virtual_machine_peer(params = {}, options = {})
+      req = build_request(:create_storage_virtual_machine_peer, params)
       req.send_request(options)
     end
 
@@ -4539,7 +5206,7 @@ module Aws::FSx
     #         name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
     #       },
     #       ontap_volume_type: "RW", # accepts RW, DP
-    #       snapshot_policy: "SnapshotPolicy",
+    #       snapshot_policy: "SnapshotPolicyName",
     #       copy_tags_to_backups: false,
     #       snaplock_configuration: {
     #         audit_log_volume: false,
@@ -4571,6 +5238,10 @@ module Aws::FSx
     #         constituents_per_aggregate: 1,
     #       },
     #       size_in_bytes: 1,
+    #       clone_configuration: {
+    #         parent_volume_id: "VolumeId", # required
+    #         snapshot_id: "SnapshotId",
+    #       },
     #     },
     #     tags: [
     #       {
@@ -4646,6 +5317,8 @@ module Aws::FSx
     #   resp.volume.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.volume.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.volume.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.volume.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.volume.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.volume.resource_arn #=> String
     #   resp.volume.tags #=> Array
     #   resp.volume.tags[0].key #=> String
@@ -4653,8 +5326,10 @@ module Aws::FSx
     #   resp.volume.volume_id #=> String
     #   resp.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volume.lifecycle_transition_reason.message #=> String
+    #   resp.volume.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.volume.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.volume.administrative_actions #=> Array
-    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.volume.administrative_actions[0].request_time #=> Time
     #   resp.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -4787,12 +5462,20 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_snapshot_values.name #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.creation_time #=> Time
-    #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.volume.administrative_actions[0].target_snapshot_values.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.volume.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.snapmirror_label #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.expiry_time #=> Time
+    #   resp.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.uuid #=> String
     #   resp.volume.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.volume.administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.volume.administrative_actions[0].message #=> String
@@ -4878,7 +5561,7 @@ module Aws::FSx
     #         name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
     #       },
     #       ontap_volume_type: "RW", # accepts RW, DP
-    #       snapshot_policy: "SnapshotPolicy",
+    #       snapshot_policy: "SnapshotPolicyName",
     #       copy_tags_to_backups: false,
     #       snaplock_configuration: {
     #         audit_log_volume: false,
@@ -4910,6 +5593,10 @@ module Aws::FSx
     #         constituents_per_aggregate: 1,
     #       },
     #       size_in_bytes: 1,
+    #       clone_configuration: {
+    #         parent_volume_id: "VolumeId", # required
+    #         snapshot_id: "SnapshotId",
+    #       },
     #     },
     #     tags: [
     #       {
@@ -4955,6 +5642,8 @@ module Aws::FSx
     #   resp.volume.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.volume.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.volume.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.volume.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.volume.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.volume.resource_arn #=> String
     #   resp.volume.tags #=> Array
     #   resp.volume.tags[0].key #=> String
@@ -4962,8 +5651,10 @@ module Aws::FSx
     #   resp.volume.volume_id #=> String
     #   resp.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volume.lifecycle_transition_reason.message #=> String
+    #   resp.volume.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.volume.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.volume.administrative_actions #=> Array
-    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.volume.administrative_actions[0].request_time #=> Time
     #   resp.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -5096,12 +5787,20 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_snapshot_values.name #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.creation_time #=> Time
-    #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.volume.administrative_actions[0].target_snapshot_values.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.volume.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.snapmirror_label #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.expiry_time #=> Time
+    #   resp.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.uuid #=> String
     #   resp.volume.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.volume.administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.volume.administrative_actions[0].message #=> String
@@ -5199,6 +5898,46 @@ module Aws::FSx
     # @param [Hash] params ({})
     def delete_backup(params = {}, options = {})
       req = build_request(:delete_backup, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon FSx for NetApp ONTAP cluster peer relationship.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 63 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :cluster_peer_id
+    #   The ID of the cluster peer that you are deleting.
+    #
+    # @return [Types::DeleteClusterPeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteClusterPeerResponse#cluster_peer_id #cluster_peer_id} => String
+    #   * {Types::DeleteClusterPeerResponse#lifecycle #lifecycle} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_cluster_peer({
+    #     client_request_token: "ClientRequestToken",
+    #     cluster_peer_id: "ClusterPeerId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_peer_id #=> String
+    #   resp.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteClusterPeer AWS API Documentation
+    #
+    # @overload delete_cluster_peer(params = {})
+    # @param [Hash] params ({})
+    def delete_cluster_peer(params = {}, options = {})
+      req = build_request(:delete_cluster_peer, params)
       req.send_request(options)
     end
 
@@ -5478,9 +6217,90 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Deletes an Amazon FSx for OpenZFS snapshot. After deletion, the
-    # snapshot no longer exists, and its data is gone. Deleting a snapshot
-    # doesn't affect snapshots stored in a file system backup.
+    # Deletes an Amazon FSx for NetApp ONTAP SnapMirror policy.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 63 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :snapmirror_policy_id
+    #   The ID of the SnapMirror policy that you are deleting.
+    #
+    # @return [Types::DeleteSnapmirrorPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSnapmirrorPolicyResponse#snapmirror_policy_id #snapmirror_policy_id} => String
+    #   * {Types::DeleteSnapmirrorPolicyResponse#lifecycle #lifecycle} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_snapmirror_policy({
+    #     client_request_token: "ClientRequestToken",
+    #     snapmirror_policy_id: "SnapmirrorPolicyId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapmirror_policy_id #=> String
+    #   resp.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteSnapmirrorPolicy AWS API Documentation
+    #
+    # @overload delete_snapmirror_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_snapmirror_policy(params = {}, options = {})
+      req = build_request(:delete_snapmirror_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon FSx for NetApp ONTAP SnapMirror relationship.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 63 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :snapmirror_relationship_id
+    #   The ID of the SnapMirror relationship that you are deleting.
+    #
+    # @return [Types::DeleteSnapmirrorRelationshipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSnapmirrorRelationshipResponse#snapmirror_relationship_id #snapmirror_relationship_id} => String
+    #   * {Types::DeleteSnapmirrorRelationshipResponse#lifecycle #lifecycle} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_snapmirror_relationship({
+    #     client_request_token: "ClientRequestToken",
+    #     snapmirror_relationship_id: "SnapmirrorRelationshipId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapmirror_relationship_id #=> String
+    #   resp.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteSnapmirrorRelationship AWS API Documentation
+    #
+    # @overload delete_snapmirror_relationship(params = {})
+    # @param [Hash] params ({})
+    def delete_snapmirror_relationship(params = {}, options = {})
+      req = build_request(:delete_snapmirror_relationship, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon FSx for OpenZFS or Amazon FSx for NetApp ONTAP
+    # snapshot. After deletion, the snapshot no longer exists, and its data
+    # is gone. Deleting a snapshot doesn't affect snapshots stored in a
+    # file system backup.
     #
     # The `DeleteSnapshot` operation returns instantly. The snapshot appears
     # with the lifecycle status of `DELETING` until the deletion is
@@ -5513,7 +6333,7 @@ module Aws::FSx
     # @example Response structure
     #
     #   resp.snapshot_id #=> String
-    #   resp.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteSnapshot AWS API Documentation
     #
@@ -5521,6 +6341,46 @@ module Aws::FSx
     # @param [Hash] params ({})
     def delete_snapshot(params = {}, options = {})
       req = build_request(:delete_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon FSx for NetApp ONTAP snapshot policy.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 63 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :snapshot_policy_id
+    #   The ID of the snapshot policy that you are deleting.
+    #
+    # @return [Types::DeleteSnapshotPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSnapshotPolicyResponse#snapshot_policy_id #snapshot_policy_id} => String
+    #   * {Types::DeleteSnapshotPolicyResponse#lifecycle #lifecycle} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_snapshot_policy({
+    #     client_request_token: "ClientRequestToken",
+    #     snapshot_policy_id: "SnapshotPolicyId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot_policy_id #=> String
+    #   resp.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteSnapshotPolicy AWS API Documentation
+    #
+    # @overload delete_snapshot_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_snapshot_policy(params = {}, options = {})
+      req = build_request(:delete_snapshot_policy, params)
       req.send_request(options)
     end
 
@@ -5563,6 +6423,47 @@ module Aws::FSx
     # @param [Hash] params ({})
     def delete_storage_virtual_machine(params = {}, options = {})
       req = build_request(:delete_storage_virtual_machine, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon FSx for NetApp ONTAP storage virtual machine (SVM)
+    # peer relationship.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 63 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :storage_virtual_machine_peer_id
+    #   The ID of the SVM peer that you are deleting.
+    #
+    # @return [Types::DeleteStorageVirtualMachinePeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteStorageVirtualMachinePeerResponse#storage_virtual_machine_peer_id #storage_virtual_machine_peer_id} => String
+    #   * {Types::DeleteStorageVirtualMachinePeerResponse#lifecycle #lifecycle} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_storage_virtual_machine_peer({
+    #     client_request_token: "ClientRequestToken",
+    #     storage_virtual_machine_peer_id: "StorageVirtualMachinePeerId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_virtual_machine_peer_id #=> String
+    #   resp.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteStorageVirtualMachinePeer AWS API Documentation
+    #
+    # @overload delete_storage_virtual_machine_peer(params = {})
+    # @param [Hash] params ({})
+    def delete_storage_virtual_machine_peer(params = {}, options = {})
+      req = build_request(:delete_storage_virtual_machine_peer, params)
       req.send_request(options)
     end
 
@@ -5830,7 +6731,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.backups[0].file_system.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.backups[0].file_system.administrative_actions #=> Array
-    #   resp.backups[0].file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.backups[0].file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.backups[0].file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.backups[0].file_system.administrative_actions[0].request_time #=> Time
     #   resp.backups[0].file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -5870,6 +6771,8 @@ module Aws::FSx
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -5877,6 +6780,8 @@ module Aws::FSx
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.volume_id #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
@@ -5909,12 +6814,20 @@ module Aws::FSx
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.name #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
-    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.snapmirror_label #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.expiry_time #=> Time
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.uuid #=> String
     #   resp.backups[0].file_system.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.backups[0].file_system.administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.backups[0].file_system.administrative_actions[0].message #=> String
@@ -6005,6 +6918,8 @@ module Aws::FSx
     #   resp.backups[0].volume.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.backups[0].volume.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.backups[0].volume.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.backups[0].volume.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.backups[0].volume.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.backups[0].volume.resource_arn #=> String
     #   resp.backups[0].volume.tags #=> Array
     #   resp.backups[0].volume.tags[0].key #=> String
@@ -6012,8 +6927,10 @@ module Aws::FSx
     #   resp.backups[0].volume.volume_id #=> String
     #   resp.backups[0].volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backups[0].volume.lifecycle_transition_reason.message #=> String
+    #   resp.backups[0].volume.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.backups[0].volume.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.backups[0].volume.administrative_actions #=> Array
-    #   resp.backups[0].volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.backups[0].volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.backups[0].volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].request_time #=> Time
     #   resp.backups[0].volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -6146,12 +7063,20 @@ module Aws::FSx
     #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.name #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.creation_time #=> Time
-    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.ontap_configuration.snapmirror_label #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.ontap_configuration.expiry_time #=> Time
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.ontap_configuration.uuid #=> String
     #   resp.backups[0].volume.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].message #=> String
@@ -6190,6 +7115,94 @@ module Aws::FSx
     # @param [Hash] params ({})
     def describe_backups(params = {}, options = {})
       req = build_request(:describe_backups, params)
+      req.send_request(options)
+    end
+
+    # Returns the description of specific Amazon FSx for NetApp ONTAP
+    # cluster peers, if a `ClusterPeerIds` value is provided. Otherwise,
+    # this operation returns all cluster peers owned by your Amazon Web
+    # Services account in the Amazon Web Services Region of the endpoint
+    # that you're calling.
+    #
+    # When retrieving all cluster peers, you can optionally specify the
+    # `MaxResults` parameter to limit the number of cluster peers in a
+    # response. If more cluster peers remain, Amazon FSx returns a
+    # `NextToken` value in the response. In this case, send a later request
+    # with the `NextToken` request parameter set to the value of `NextToken`
+    # from the last response.
+    #
+    # @option params [Array<String>] :cluster_peer_ids
+    #   The IDs of the cluster peers that you want to retrieve. If you also
+    #   specify `Filters`, only cluster peers that match both the IDs and the
+    #   filters are returned. If any IDs aren't found, or if a filter
+    #   excludes any of them, a `ClusterPeerNotFound` error occurs.
+    #
+    # @option params [Array<Types::ClusterPeerFilter>] :filters
+    #   The filters structure. The supported name is `file-system-id`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of resources to return in the response. This value
+    #   must be an integer greater than zero.
+    #
+    # @option params [String] :next_token
+    #   (Optional) Opaque pagination token returned from a previous operation
+    #   (String). If present, this token indicates from what point you can
+    #   continue processing the request, where the previous `NextToken` value
+    #   left off.
+    #
+    # @return [Types::DescribeClusterPeersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClusterPeersResponse#cluster_peers #cluster_peers} => Array&lt;Types::ClusterPeer&gt;
+    #   * {Types::DescribeClusterPeersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_cluster_peers({
+    #     cluster_peer_ids: ["ClusterPeerId"],
+    #     filters: [
+    #       {
+    #         name: "file-system-id", # accepts file-system-id
+    #         values: ["ClusterPeerFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_peers #=> Array
+    #   resp.cluster_peers[0].resource_arn #=> String
+    #   resp.cluster_peers[0].cluster_peer_id #=> String
+    #   resp.cluster_peers[0].file_system_id #=> String
+    #   resp.cluster_peers[0].lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #   resp.cluster_peers[0].lifecycle_transition_reason.message #=> String
+    #   resp.cluster_peers[0].lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.cluster_peers[0].lifecycle_transition_reason.ontap_error.code #=> String
+    #   resp.cluster_peers[0].tags #=> Array
+    #   resp.cluster_peers[0].tags[0].key #=> String
+    #   resp.cluster_peers[0].tags[0].value #=> String
+    #   resp.cluster_peers[0].peer_addresses #=> Array
+    #   resp.cluster_peers[0].peer_addresses[0] #=> String
+    #   resp.cluster_peers[0].peer_cluster_name #=> String
+    #   resp.cluster_peers[0].passphrase_secret_arn #=> String
+    #   resp.cluster_peers[0].allowed_svm_mode #=> String, one of "ALL", "NONE", "SPECIFIED"
+    #   resp.cluster_peers[0].allowed_svm_ids #=> Array
+    #   resp.cluster_peers[0].allowed_svm_ids[0] #=> String
+    #   resp.cluster_peers[0].status #=> String
+    #   resp.cluster_peers[0].uuid #=> String
+    #   resp.cluster_peers[0].authentication_status.state #=> String
+    #   resp.cluster_peers[0].authentication_status.in_use #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeClusterPeers AWS API Documentation
+    #
+    # @overload describe_cluster_peers(params = {})
+    # @param [Hash] params ({})
+    def describe_cluster_peers(params = {}, options = {})
+      req = build_request(:describe_cluster_peers, params)
       req.send_request(options)
     end
 
@@ -6734,7 +7747,7 @@ module Aws::FSx
     #   resp.file_systems[0].lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.file_systems[0].lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.file_systems[0].administrative_actions #=> Array
-    #   resp.file_systems[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.file_systems[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.file_systems[0].administrative_actions[0].progress_percent #=> Integer
     #   resp.file_systems[0].administrative_actions[0].request_time #=> Time
     #   resp.file_systems[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -6774,6 +7787,8 @@ module Aws::FSx
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -6781,6 +7796,8 @@ module Aws::FSx
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.volume_id #=> String
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
@@ -6813,12 +7830,20 @@ module Aws::FSx
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.name #=> String
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.creation_time #=> Time
-    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.tags[0].value #=> String
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.ontap_configuration.snapmirror_label #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.ontap_configuration.expiry_time #=> Time
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.ontap_configuration.uuid #=> String
     #   resp.file_systems[0].administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.file_systems[0].administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.file_systems[0].administrative_actions[0].message #=> String
@@ -6932,6 +7957,8 @@ module Aws::FSx
     #   resp.s3_access_point_attachments #=> Array
     #   resp.s3_access_point_attachments[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED", "MISCONFIGURED"
     #   resp.s3_access_point_attachments[0].lifecycle_transition_reason.message #=> String
+    #   resp.s3_access_point_attachments[0].lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.s3_access_point_attachments[0].lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.s3_access_point_attachments[0].creation_time #=> Time
     #   resp.s3_access_point_attachments[0].name #=> String
     #   resp.s3_access_point_attachments[0].type #=> String, one of "OPENZFS", "ONTAP"
@@ -6985,10 +8012,290 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Returns the description of specific Amazon FSx for OpenZFS snapshots,
-    # if a `SnapshotIds` value is provided. Otherwise, this operation
-    # returns all snapshots owned by your Amazon Web Services account in the
-    # Amazon Web Services Region of the endpoint that you're calling.
+    # Returns the description of specific Amazon FSx for NetApp ONTAP
+    # SnapMirror policies, if a `SnapmirrorPolicyIds` value is provided.
+    # Otherwise, this operation returns all SnapMirror policies owned by
+    # your Amazon Web Services account in the Amazon Web Services Region of
+    # the endpoint that you're calling.
+    #
+    # When retrieving all SnapMirror policies, you can optionally specify
+    # the `MaxResults` parameter to limit the number of SnapMirror policies
+    # in a response. If more SnapMirror policies remain, Amazon FSx returns
+    # a `NextToken` value in the response. In this case, send a later
+    # request with the `NextToken` request parameter set to the value of
+    # `NextToken` from the last response.
+    #
+    # @option params [Array<String>] :snapmirror_policy_ids
+    #   The IDs of the SnapMirror policies that you want to retrieve. If you
+    #   also specify `Filters`, only SnapMirror policies that match both the
+    #   IDs and the filters are returned. If any IDs aren't found, or if a
+    #   filter excludes any of them, a `SnapmirrorPolicyNotFound` error
+    #   occurs.
+    #
+    # @option params [Array<Types::SnapmirrorPolicyFilter>] :filters
+    #   The filters structure. The supported names are `file-system-id` or
+    #   `storage-virtual-machine-id`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of resources to return in the response. This value
+    #   must be an integer greater than zero.
+    #
+    # @option params [String] :next_token
+    #   (Optional) Opaque pagination token returned from a previous operation
+    #   (String). If present, this token indicates from what point you can
+    #   continue processing the request, where the previous `NextToken` value
+    #   left off.
+    #
+    # @return [Types::DescribeSnapmirrorPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSnapmirrorPoliciesResponse#snapmirror_policies #snapmirror_policies} => Array&lt;Types::SnapmirrorPolicy&gt;
+    #   * {Types::DescribeSnapmirrorPoliciesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_snapmirror_policies({
+    #     snapmirror_policy_ids: ["SnapmirrorPolicyId"],
+    #     filters: [
+    #       {
+    #         name: "file-system-id", # accepts file-system-id, storage-virtual-machine-id
+    #         values: ["SnapmirrorPolicyFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapmirror_policies #=> Array
+    #   resp.snapmirror_policies[0].resource_arn #=> String
+    #   resp.snapmirror_policies[0].snapmirror_policy_id #=> String
+    #   resp.snapmirror_policies[0].file_system_id #=> String
+    #   resp.snapmirror_policies[0].storage_virtual_machine_id #=> String
+    #   resp.snapmirror_policies[0].name #=> String
+    #   resp.snapmirror_policies[0].snapshot_copy_mode #=> String, one of "COPY_ALL_SOURCE_SNAPSHOTS", "COPY_LATEST_SOURCE_SNAPSHOT", "NO_CREATE_SNAPSHOT_ON_SOURCE"
+    #   resp.snapmirror_policies[0].retention_rules #=> Array
+    #   resp.snapmirror_policies[0].retention_rules[0].label #=> String
+    #   resp.snapmirror_policies[0].retention_rules[0].count #=> Integer
+    #   resp.snapmirror_policies[0].retention_rules[0].creation_schedule #=> String
+    #   resp.snapmirror_policies[0].transfer_schedule #=> String
+    #   resp.snapmirror_policies[0].network_compression_enabled #=> Boolean
+    #   resp.snapmirror_policies[0].throttle_in_kbps #=> Integer
+    #   resp.snapmirror_policies[0].scope #=> String, one of "FILESYSTEM", "SVM"
+    #   resp.snapmirror_policies[0].lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #   resp.snapmirror_policies[0].uuid #=> String
+    #   resp.snapmirror_policies[0].lifecycle_transition_reason.message #=> String
+    #   resp.snapmirror_policies[0].lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.snapmirror_policies[0].lifecycle_transition_reason.ontap_error.code #=> String
+    #   resp.snapmirror_policies[0].tags #=> Array
+    #   resp.snapmirror_policies[0].tags[0].key #=> String
+    #   resp.snapmirror_policies[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeSnapmirrorPolicies AWS API Documentation
+    #
+    # @overload describe_snapmirror_policies(params = {})
+    # @param [Hash] params ({})
+    def describe_snapmirror_policies(params = {}, options = {})
+      req = build_request(:describe_snapmirror_policies, params)
+      req.send_request(options)
+    end
+
+    # Returns the description of specific Amazon FSx for NetApp ONTAP
+    # SnapMirror relationships, if a `SnapmirrorRelationshipIds` value is
+    # provided. Otherwise, this operation returns all SnapMirror
+    # relationships owned by your Amazon Web Services account in the Amazon
+    # Web Services Region of the endpoint that you're calling.
+    #
+    # When retrieving all SnapMirror relationships, you can optionally
+    # specify the `MaxResults` parameter to limit the number of SnapMirror
+    # relationships in a response. If more SnapMirror relationships remain,
+    # Amazon FSx returns a `NextToken` value in the response. In this case,
+    # send a later request with the `NextToken` request parameter set to the
+    # value of `NextToken` from the last response.
+    #
+    # @option params [Array<String>] :snapmirror_relationship_ids
+    #   The IDs of the SnapMirror relationships that you want to retrieve. If
+    #   you also specify `Filters`, only SnapMirror relationships that match
+    #   both the IDs and the filters are returned. If any IDs aren't found,
+    #   or if a filter excludes any of them, a
+    #   `SnapmirrorRelationshipNotFound` error occurs.
+    #
+    # @option params [Array<Types::SnapmirrorRelationshipFilter>] :filters
+    #   The filters structure. The supported names are `file-system-id` or
+    #   `destination-volume-id`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of resources to return in the response. This value
+    #   must be an integer greater than zero.
+    #
+    # @option params [String] :next_token
+    #   (Optional) Opaque pagination token returned from a previous operation
+    #   (String). If present, this token indicates from what point you can
+    #   continue processing the request, where the previous `NextToken` value
+    #   left off.
+    #
+    # @return [Types::DescribeSnapmirrorRelationshipsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSnapmirrorRelationshipsResponse#snapmirror_relationships #snapmirror_relationships} => Array&lt;Types::SnapmirrorRelationship&gt;
+    #   * {Types::DescribeSnapmirrorRelationshipsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_snapmirror_relationships({
+    #     snapmirror_relationship_ids: ["SnapmirrorRelationshipId"],
+    #     filters: [
+    #       {
+    #         name: "file-system-id", # accepts file-system-id, destination-volume-id
+    #         values: ["SnapmirrorRelationshipFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapmirror_relationships #=> Array
+    #   resp.snapmirror_relationships[0].resource_arn #=> String
+    #   resp.snapmirror_relationships[0].snapmirror_relationship_id #=> String
+    #   resp.snapmirror_relationships[0].file_system_id #=> String
+    #   resp.snapmirror_relationships[0].lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #   resp.snapmirror_relationships[0].lifecycle_transition_reason.message #=> String
+    #   resp.snapmirror_relationships[0].lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.snapmirror_relationships[0].lifecycle_transition_reason.ontap_error.code #=> String
+    #   resp.snapmirror_relationships[0].tags #=> Array
+    #   resp.snapmirror_relationships[0].tags[0].key #=> String
+    #   resp.snapmirror_relationships[0].tags[0].value #=> String
+    #   resp.snapmirror_relationships[0].source.path #=> String
+    #   resp.snapmirror_relationships[0].destination.path #=> String
+    #   resp.snapmirror_relationships[0].destination.volume_id #=> String
+    #   resp.snapmirror_relationships[0].snapmirror_policy.policy_id #=> String
+    #   resp.snapmirror_relationships[0].snapmirror_policy.policy_name #=> String
+    #   resp.snapmirror_relationships[0].transfer_schedule #=> String
+    #   resp.snapmirror_relationships[0].throttle_in_kbps #=> Integer
+    #   resp.snapmirror_relationships[0].state #=> String, one of "UNINITIALIZED", "TRANSFERRING", "SNAPMIRRORED", "PAUSED", "BROKEN_OFF"
+    #   resp.snapmirror_relationships[0].healthy #=> Boolean
+    #   resp.snapmirror_relationships[0].unhealthy_reason #=> String
+    #   resp.snapmirror_relationships[0].lag_time_in_minutes #=> Integer
+    #   resp.snapmirror_relationships[0].exported_snapshot.snapshot_id #=> String
+    #   resp.snapmirror_relationships[0].exported_snapshot.snapshot_name #=> String
+    #   resp.snapmirror_relationships[0].transfer_state.state #=> String
+    #   resp.snapmirror_relationships[0].transfer_state.type #=> String
+    #   resp.snapmirror_relationships[0].transfer_state.bytes_transferred #=> Integer
+    #   resp.snapmirror_relationships[0].transfer_state.duration #=> String
+    #   resp.snapmirror_relationships[0].transfer_state.end_time #=> Time
+    #   resp.snapmirror_relationships[0].uuid #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeSnapmirrorRelationships AWS API Documentation
+    #
+    # @overload describe_snapmirror_relationships(params = {})
+    # @param [Hash] params ({})
+    def describe_snapmirror_relationships(params = {}, options = {})
+      req = build_request(:describe_snapmirror_relationships, params)
+      req.send_request(options)
+    end
+
+    # Returns the description of specific Amazon FSx for NetApp ONTAP
+    # snapshot policies, if a `SnapshotPolicyIds` value is provided.
+    # Otherwise, this operation returns all snapshot policies owned by your
+    # Amazon Web Services account in the Amazon Web Services Region of the
+    # endpoint that you're calling.
+    #
+    # When retrieving all snapshot policies, you can optionally specify the
+    # `MaxResults` parameter to limit the number of snapshot policies in a
+    # response. If more snapshot policies remain, Amazon FSx returns a
+    # `NextToken` value in the response. In this case, send a later request
+    # with the `NextToken` request parameter set to the value of `NextToken`
+    # from the last response.
+    #
+    # @option params [Array<String>] :snapshot_policy_ids
+    #   The IDs of the snapshot policies that you want to retrieve. If you
+    #   also specify `Filters`, only snapshot policies that match both the IDs
+    #   and the filters are returned. If any IDs aren't found, or if a filter
+    #   excludes any of them, a `SnapshotPolicyNotFound` error occurs.
+    #
+    # @option params [Array<Types::SnapshotPolicyFilter>] :filters
+    #   The filters structure. The supported names are `file-system-id` or
+    #   `storage-virtual-machine-id`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of resources to return in the response. This value
+    #   must be an integer greater than zero.
+    #
+    # @option params [String] :next_token
+    #   (Optional) Opaque pagination token returned from a previous operation
+    #   (String). If present, this token indicates from what point you can
+    #   continue processing the request, where the previous `NextToken` value
+    #   left off.
+    #
+    # @return [Types::DescribeSnapshotPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSnapshotPoliciesResponse#snapshot_policies #snapshot_policies} => Array&lt;Types::SnapshotPolicy&gt;
+    #   * {Types::DescribeSnapshotPoliciesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_snapshot_policies({
+    #     snapshot_policy_ids: ["SnapshotPolicyId"],
+    #     filters: [
+    #       {
+    #         name: "file-system-id", # accepts file-system-id, storage-virtual-machine-id
+    #         values: ["SnapshotPolicyFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot_policies #=> Array
+    #   resp.snapshot_policies[0].resource_arn #=> String
+    #   resp.snapshot_policies[0].snapshot_policy_id #=> String
+    #   resp.snapshot_policies[0].file_system_id #=> String
+    #   resp.snapshot_policies[0].storage_virtual_machine_id #=> String
+    #   resp.snapshot_policies[0].name #=> String
+    #   resp.snapshot_policies[0].enabled #=> Boolean
+    #   resp.snapshot_policies[0].schedules #=> Array
+    #   resp.snapshot_policies[0].schedules[0].name #=> String
+    #   resp.snapshot_policies[0].schedules[0].count #=> Integer
+    #   resp.snapshot_policies[0].schedules[0].prefix #=> String
+    #   resp.snapshot_policies[0].schedules[0].snapmirror_label #=> String
+    #   resp.snapshot_policies[0].schedules[0].retention_period.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE"
+    #   resp.snapshot_policies[0].schedules[0].retention_period.value #=> Integer
+    #   resp.snapshot_policies[0].scope #=> String, one of "FILESYSTEM", "SVM"
+    #   resp.snapshot_policies[0].lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #   resp.snapshot_policies[0].uuid #=> String
+    #   resp.snapshot_policies[0].lifecycle_transition_reason.message #=> String
+    #   resp.snapshot_policies[0].lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.snapshot_policies[0].lifecycle_transition_reason.ontap_error.code #=> String
+    #   resp.snapshot_policies[0].tags #=> Array
+    #   resp.snapshot_policies[0].tags[0].key #=> String
+    #   resp.snapshot_policies[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeSnapshotPolicies AWS API Documentation
+    #
+    # @overload describe_snapshot_policies(params = {})
+    # @param [Hash] params ({})
+    def describe_snapshot_policies(params = {}, options = {})
+      req = build_request(:describe_snapshot_policies, params)
+      req.send_request(options)
+    end
+
+    # Returns the description of specific Amazon FSx for OpenZFS and Amazon
+    # FSx for NetApp ONTAP snapshots, if a `SnapshotIds` value is provided.
+    # Otherwise, this operation returns all snapshots owned by your Amazon
+    # Web Services account in the Amazon Web Services Region of the endpoint
+    # that you're calling.
     #
     # When retrieving all snapshots, you can optionally specify the
     # `MaxResults` parameter to limit the number of snapshots in a response.
@@ -7013,8 +8320,11 @@ module Aws::FSx
     #   the responses of a multi-call iteration is unspecified.
     #
     # @option params [Array<String>] :snapshot_ids
-    #   The IDs of the snapshots that you want to retrieve. This parameter
-    #   value overrides any filters. If any IDs aren't found, a
+    #   The IDs of the snapshots that you want to retrieve. You can include
+    #   snapshots of Amazon FSx for OpenZFS and Amazon FSx for NetApp ONTAP
+    #   volumes in the same request. If you also specify `Filters`, only
+    #   snapshots that match both the IDs and the filters are returned. If any
+    #   IDs aren't found, or if a filter excludes any of them, a
     #   `SnapshotNotFound` error occurs.
     #
     # @option params [Array<Types::SnapshotFilter>] :filters
@@ -7067,13 +8377,16 @@ module Aws::FSx
     #   resp.snapshots[0].name #=> String
     #   resp.snapshots[0].volume_id #=> String
     #   resp.snapshots[0].creation_time #=> Time
-    #   resp.snapshots[0].lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.snapshots[0].lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.snapshots[0].snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.snapshots[0].lifecycle_transition_reason.message #=> String
+    #   resp.snapshots[0].lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.snapshots[0].lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.snapshots[0].tags #=> Array
     #   resp.snapshots[0].tags[0].key #=> String
     #   resp.snapshots[0].tags[0].value #=> String
     #   resp.snapshots[0].administrative_actions #=> Array
-    #   resp.snapshots[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.snapshots[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.snapshots[0].administrative_actions[0].progress_percent #=> Integer
     #   resp.snapshots[0].administrative_actions[0].request_time #=> Time
     #   resp.snapshots[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -7234,6 +8547,8 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -7241,6 +8556,8 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.volume_id #=> String
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
@@ -7272,6 +8589,11 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.snapshots[0].administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.snapshots[0].administrative_actions[0].message #=> String
+    #   resp.snapshots[0].ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.snapshots[0].ontap_configuration.snapmirror_label #=> String
+    #   resp.snapshots[0].ontap_configuration.expiry_time #=> Time
+    #   resp.snapshots[0].ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.snapshots[0].ontap_configuration.uuid #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeSnapshots AWS API Documentation
@@ -7280,6 +8602,94 @@ module Aws::FSx
     # @param [Hash] params ({})
     def describe_snapshots(params = {}, options = {})
       req = build_request(:describe_snapshots, params)
+      req.send_request(options)
+    end
+
+    # Returns the description of specific Amazon FSx for NetApp ONTAP
+    # storage virtual machine (SVM) peers, if a
+    # `StorageVirtualMachinePeerIds` value is provided. Otherwise, this
+    # operation returns all SVM peers owned by your Amazon Web Services
+    # account in the Amazon Web Services Region of the endpoint that you're
+    # calling.
+    #
+    # When retrieving all SVM peers, you can optionally specify the
+    # `MaxResults` parameter to limit the number of SVM peers in a response.
+    # If more SVM peers remain, Amazon FSx returns a `NextToken` value in
+    # the response. In this case, send a later request with the `NextToken`
+    # request parameter set to the value of `NextToken` from the last
+    # response.
+    #
+    # @option params [Array<String>] :storage_virtual_machine_peer_ids
+    #   The IDs of the SVM peers that you want to retrieve. If you also
+    #   specify `Filters`, only SVM peers that match both the IDs and the
+    #   filters are returned. If any IDs aren't found, or if a filter
+    #   excludes any of them, a `StorageVirtualMachinePeerNotFound` error
+    #   occurs.
+    #
+    # @option params [Array<Types::StorageVirtualMachinePeerFilter>] :filters
+    #   The filters structure. The supported names are `file-system-id` or
+    #   `storage-virtual-machine-id`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of resources to return in the response. This value
+    #   must be an integer greater than zero.
+    #
+    # @option params [String] :next_token
+    #   (Optional) Opaque pagination token returned from a previous operation
+    #   (String). If present, this token indicates from what point you can
+    #   continue processing the request, where the previous `NextToken` value
+    #   left off.
+    #
+    # @return [Types::DescribeStorageVirtualMachinePeersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeStorageVirtualMachinePeersResponse#storage_virtual_machine_peers #storage_virtual_machine_peers} => Array&lt;Types::StorageVirtualMachinePeer&gt;
+    #   * {Types::DescribeStorageVirtualMachinePeersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_storage_virtual_machine_peers({
+    #     storage_virtual_machine_peer_ids: ["StorageVirtualMachinePeerId"],
+    #     filters: [
+    #       {
+    #         name: "file-system-id", # accepts file-system-id, storage-virtual-machine-id
+    #         values: ["StorageVirtualMachinePeerFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_virtual_machine_peers #=> Array
+    #   resp.storage_virtual_machine_peers[0].resource_arn #=> String
+    #   resp.storage_virtual_machine_peers[0].storage_virtual_machine_peer_id #=> String
+    #   resp.storage_virtual_machine_peers[0].storage_virtual_machine_id #=> String
+    #   resp.storage_virtual_machine_peers[0].file_system_id #=> String
+    #   resp.storage_virtual_machine_peers[0].lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #   resp.storage_virtual_machine_peers[0].lifecycle_transition_reason.message #=> String
+    #   resp.storage_virtual_machine_peers[0].lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.storage_virtual_machine_peers[0].lifecycle_transition_reason.ontap_error.code #=> String
+    #   resp.storage_virtual_machine_peers[0].tags #=> Array
+    #   resp.storage_virtual_machine_peers[0].tags[0].key #=> String
+    #   resp.storage_virtual_machine_peers[0].tags[0].value #=> String
+    #   resp.storage_virtual_machine_peers[0].peer_svm_name #=> String
+    #   resp.storage_virtual_machine_peers[0].peer_svm_alias #=> String
+    #   resp.storage_virtual_machine_peers[0].peer_cluster_name #=> String
+    #   resp.storage_virtual_machine_peers[0].applications #=> Array
+    #   resp.storage_virtual_machine_peers[0].applications[0] #=> String, one of "SNAPMIRROR", "FILE_COPY", "LUN_COPY", "FLEXCACHE"
+    #   resp.storage_virtual_machine_peers[0].state #=> String, one of "PEERED", "REJECTED", "SUSPENDED", "INITIATED", "PENDING", "INITIALIZING"
+    #   resp.storage_virtual_machine_peers[0].uuid #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeStorageVirtualMachinePeers AWS API Documentation
+    #
+    # @overload describe_storage_virtual_machine_peers(params = {})
+    # @param [Hash] params ({})
+    def describe_storage_virtual_machine_peers(params = {}, options = {})
+      req = build_request(:describe_storage_virtual_machine_peers, params)
       req.send_request(options)
     end
 
@@ -7366,6 +8776,8 @@ module Aws::FSx
     #   resp.storage_virtual_machines[0].tags[0].key #=> String
     #   resp.storage_virtual_machines[0].tags[0].value #=> String
     #   resp.storage_virtual_machines[0].lifecycle_transition_reason.message #=> String
+    #   resp.storage_virtual_machines[0].lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.storage_virtual_machines[0].lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.storage_virtual_machines[0].root_volume_security_style #=> String, one of "UNIX", "NTFS", "MIXED"
     #   resp.next_token #=> String
     #
@@ -7456,6 +8868,8 @@ module Aws::FSx
     #   resp.volumes[0].ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.volumes[0].ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.volumes[0].ontap_configuration.size_in_bytes #=> Integer
+    #   resp.volumes[0].ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.volumes[0].ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.volumes[0].resource_arn #=> String
     #   resp.volumes[0].tags #=> Array
     #   resp.volumes[0].tags[0].key #=> String
@@ -7463,8 +8877,10 @@ module Aws::FSx
     #   resp.volumes[0].volume_id #=> String
     #   resp.volumes[0].volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volumes[0].lifecycle_transition_reason.message #=> String
+    #   resp.volumes[0].lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.volumes[0].lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.volumes[0].administrative_actions #=> Array
-    #   resp.volumes[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.volumes[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.volumes[0].administrative_actions[0].progress_percent #=> Integer
     #   resp.volumes[0].administrative_actions[0].request_time #=> Time
     #   resp.volumes[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -7597,12 +9013,20 @@ module Aws::FSx
     #   resp.volumes[0].administrative_actions[0].target_snapshot_values.name #=> String
     #   resp.volumes[0].administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.volumes[0].administrative_actions[0].target_snapshot_values.creation_time #=> Time
-    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volumes[0].administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.volumes[0].administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.volumes[0].administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.volumes[0].administrative_actions[0].target_snapshot_values.tags[0].value #=> String
     #   resp.volumes[0].administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.ontap_configuration.snapmirror_label #=> String
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.ontap_configuration.expiry_time #=> Time
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.ontap_configuration.uuid #=> String
     #   resp.volumes[0].administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.volumes[0].administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.volumes[0].administrative_actions[0].message #=> String
@@ -7942,7 +9366,7 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.file_system.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.file_system.administrative_actions #=> Array
-    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -7982,6 +9406,8 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -7989,6 +9415,8 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.volume_id #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
@@ -8021,12 +9449,20 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_snapshot_values.name #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
-    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.snapmirror_label #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.expiry_time #=> Time
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.uuid #=> String
     #   resp.file_system.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.file_system.administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.file_system.administrative_actions[0].message #=> String
@@ -8138,7 +9574,7 @@ module Aws::FSx
     #   resp.volume_id #=> String
     #   resp.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
     #   resp.administrative_actions #=> Array
-    #   resp.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.administrative_actions[0].progress_percent #=> Integer
     #   resp.administrative_actions[0].request_time #=> Time
     #   resp.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -8299,6 +9735,8 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.administrative_actions[0].target_volume_values.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -8306,6 +9744,8 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_volume_values.volume_id #=> String
     #   resp.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
     #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
@@ -8338,12 +9778,20 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_snapshot_values.name #=> String
     #   resp.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.administrative_actions[0].target_snapshot_values.creation_time #=> Time
-    #   resp.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.administrative_actions[0].target_snapshot_values.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
+    #   resp.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
     #   resp.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.administrative_actions[0].target_snapshot_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.administrative_actions[0].target_snapshot_values.ontap_configuration.snapmirror_label #=> String
+    #   resp.administrative_actions[0].target_snapshot_values.ontap_configuration.expiry_time #=> Time
+    #   resp.administrative_actions[0].target_snapshot_values.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.administrative_actions[0].target_snapshot_values.ontap_configuration.uuid #=> String
     #   resp.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.administrative_actions[0].message #=> String
@@ -8463,7 +9911,7 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.file_system.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.file_system.administrative_actions #=> Array
-    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -8503,6 +9951,8 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -8510,6 +9960,8 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.volume_id #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
@@ -8542,12 +9994,20 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_snapshot_values.name #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
-    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.snapmirror_label #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.expiry_time #=> Time
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.uuid #=> String
     #   resp.file_system.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.file_system.administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.file_system.administrative_actions[0].message #=> String
@@ -8691,6 +10151,75 @@ module Aws::FSx
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates an Amazon FSx for NetApp ONTAP cluster peer relationship.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 63 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :cluster_peer_id
+    #   The ID of the cluster peer that you want to update.
+    #
+    # @option params [String] :peer_cluster_name
+    #   Specifies the name that the file system uses to identify the peer
+    #   cluster.
+    #
+    # @option params [Array<String>] :peer_addresses
+    #   Specifies the IP addresses of the intercluster logical interfaces
+    #   (LIFs) on the peer cluster. The addresses that you specify replace the
+    #   existing peer addresses.
+    #
+    # @return [Types::UpdateClusterPeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateClusterPeerResponse#cluster_peer #cluster_peer} => Types::ClusterPeer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cluster_peer({
+    #     client_request_token: "ClientRequestToken",
+    #     cluster_peer_id: "ClusterPeerId", # required
+    #     peer_cluster_name: "PeerClusterName",
+    #     peer_addresses: ["IpAddress"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_peer.resource_arn #=> String
+    #   resp.cluster_peer.cluster_peer_id #=> String
+    #   resp.cluster_peer.file_system_id #=> String
+    #   resp.cluster_peer.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #   resp.cluster_peer.lifecycle_transition_reason.message #=> String
+    #   resp.cluster_peer.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.cluster_peer.lifecycle_transition_reason.ontap_error.code #=> String
+    #   resp.cluster_peer.tags #=> Array
+    #   resp.cluster_peer.tags[0].key #=> String
+    #   resp.cluster_peer.tags[0].value #=> String
+    #   resp.cluster_peer.peer_addresses #=> Array
+    #   resp.cluster_peer.peer_addresses[0] #=> String
+    #   resp.cluster_peer.peer_cluster_name #=> String
+    #   resp.cluster_peer.passphrase_secret_arn #=> String
+    #   resp.cluster_peer.allowed_svm_mode #=> String, one of "ALL", "NONE", "SPECIFIED"
+    #   resp.cluster_peer.allowed_svm_ids #=> Array
+    #   resp.cluster_peer.allowed_svm_ids[0] #=> String
+    #   resp.cluster_peer.status #=> String
+    #   resp.cluster_peer.uuid #=> String
+    #   resp.cluster_peer.authentication_status.state #=> String
+    #   resp.cluster_peer.authentication_status.in_use #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateClusterPeer AWS API Documentation
+    #
+    # @overload update_cluster_peer(params = {})
+    # @param [Hash] params ({})
+    def update_cluster_peer(params = {}, options = {})
+      req = build_request(:update_cluster_peer, params)
       req.send_request(options)
     end
 
@@ -9287,7 +10816,7 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.file_system.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.file_system.administrative_actions #=> Array
-    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -9327,6 +10856,8 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -9334,6 +10865,8 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.volume_id #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
@@ -9366,12 +10899,20 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_snapshot_values.name #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
-    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.snapmirror_label #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.expiry_time #=> Time
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.ontap_configuration.uuid #=> String
     #   resp.file_system.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.file_system.administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.file_system.administrative_actions[0].message #=> String
@@ -9488,7 +11029,7 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Updates the name of an Amazon FSx for OpenZFS snapshot.
+    # Updates an Amazon FSx for NetApp ONTAP SnapMirror policy.
     #
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
@@ -9499,12 +11040,212 @@ module Aws::FSx
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :name
+    # @option params [required, String] :snapmirror_policy_id
+    #   The ID of the SnapMirror policy that you want to update.
+    #
+    # @option params [Array<Types::SnapmirrorPolicyRetentionRule>] :retention_rules
+    #   Specifies the rules that determine which snapshots SnapMirror retains
+    #   on the destination volume, based on their SnapMirror labels. The rules
+    #   that you specify replace all the SnapMirror policy's existing
+    #   retention rules. To keep an existing rule, include it in the list. To
+    #   remove all retention rules, specify an empty list.
+    #
+    # @option params [String] :transfer_schedule
+    #   Specifies the name of the ONTAP schedule that determines when
+    #   SnapMirror transfers data. To remove the transfer schedule, specify an
+    #   empty string.
+    #
+    # @option params [Boolean] :network_compression_enabled
+    #   Specifies whether SnapMirror compresses data when it transfers the
+    #   data over the network.
+    #
+    # @option params [Integer] :throttle_in_kbps
+    #   Specifies the maximum bandwidth, in kilobytes per second (KBps), that
+    #   SnapMirror uses to transfer data. A value of `0` means that the
+    #   bandwidth is unlimited.
+    #
+    # @return [Types::UpdateSnapmirrorPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSnapmirrorPolicyResponse#snapmirror_policy #snapmirror_policy} => Types::SnapmirrorPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_snapmirror_policy({
+    #     client_request_token: "ClientRequestToken",
+    #     snapmirror_policy_id: "SnapmirrorPolicyId", # required
+    #     retention_rules: [
+    #       {
+    #         label: "SnapmirrorLabel", # required
+    #         count: 1, # required
+    #         creation_schedule: "SnapmirrorPolicyCreationScheduleName",
+    #       },
+    #     ],
+    #     transfer_schedule: "SnapmirrorTransferScheduleName",
+    #     network_compression_enabled: false,
+    #     throttle_in_kbps: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapmirror_policy.resource_arn #=> String
+    #   resp.snapmirror_policy.snapmirror_policy_id #=> String
+    #   resp.snapmirror_policy.file_system_id #=> String
+    #   resp.snapmirror_policy.storage_virtual_machine_id #=> String
+    #   resp.snapmirror_policy.name #=> String
+    #   resp.snapmirror_policy.snapshot_copy_mode #=> String, one of "COPY_ALL_SOURCE_SNAPSHOTS", "COPY_LATEST_SOURCE_SNAPSHOT", "NO_CREATE_SNAPSHOT_ON_SOURCE"
+    #   resp.snapmirror_policy.retention_rules #=> Array
+    #   resp.snapmirror_policy.retention_rules[0].label #=> String
+    #   resp.snapmirror_policy.retention_rules[0].count #=> Integer
+    #   resp.snapmirror_policy.retention_rules[0].creation_schedule #=> String
+    #   resp.snapmirror_policy.transfer_schedule #=> String
+    #   resp.snapmirror_policy.network_compression_enabled #=> Boolean
+    #   resp.snapmirror_policy.throttle_in_kbps #=> Integer
+    #   resp.snapmirror_policy.scope #=> String, one of "FILESYSTEM", "SVM"
+    #   resp.snapmirror_policy.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #   resp.snapmirror_policy.uuid #=> String
+    #   resp.snapmirror_policy.lifecycle_transition_reason.message #=> String
+    #   resp.snapmirror_policy.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.snapmirror_policy.lifecycle_transition_reason.ontap_error.code #=> String
+    #   resp.snapmirror_policy.tags #=> Array
+    #   resp.snapmirror_policy.tags[0].key #=> String
+    #   resp.snapmirror_policy.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateSnapmirrorPolicy AWS API Documentation
+    #
+    # @overload update_snapmirror_policy(params = {})
+    # @param [Hash] params ({})
+    def update_snapmirror_policy(params = {}, options = {})
+      req = build_request(:update_snapmirror_policy, params)
+      req.send_request(options)
+    end
+
+    # Updates an Amazon FSx for NetApp ONTAP SnapMirror relationship.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 63 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :snapmirror_relationship_id
+    #   The ID of the SnapMirror relationship that you want to update.
+    #
+    # @option params [String] :policy_id
+    #   Specifies the ID of the SnapMirror policy that the SnapMirror
+    #   relationship uses.
+    #
+    # @option params [String] :transfer_schedule
+    #   Specifies the name of the ONTAP schedule that determines when
+    #   SnapMirror transfers data for the relationship. This schedule
+    #   overrides the transfer schedule of the SnapMirror policy.
+    #
+    # @option params [Integer] :throttle_in_kbps
+    #   Specifies the maximum bandwidth, in kilobytes per second (KBps), that
+    #   SnapMirror uses to transfer data for the relationship. A value of `0`
+    #   means that the bandwidth is unlimited. This value overrides the
+    #   throttle of the SnapMirror policy.
+    #
+    # @option params [String] :state
+    #   Specifies the state to set for the SnapMirror relationship:
+    #
+    #   * `SNAPMIRRORED` – Resumes a paused SnapMirror relationship, or
+    #     resynchronizes a broken-off SnapMirror relationship.
+    #
+    #   * `PAUSED` – Pauses SnapMirror transfers for the relationship.
+    #
+    #   * `BROKEN_OFF` – Breaks off the SnapMirror relationship, which makes
+    #     the destination volume writable.
+    #
+    #   Setting `State` to `SNAPMIRRORED` on a relationship that is
+    #   `BROKEN_OFF` might resynchronize the relationship. A resync overwrites
+    #   the destination volume with data from the source volume, and discards
+    #   any data written to the destination volume that isn't present on the
+    #   source volume. Use caution when you resynchronize a relationship.
+    #
+    # @return [Types::UpdateSnapmirrorRelationshipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSnapmirrorRelationshipResponse#snapmirror_relationship #snapmirror_relationship} => Types::SnapmirrorRelationship
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_snapmirror_relationship({
+    #     client_request_token: "ClientRequestToken",
+    #     snapmirror_relationship_id: "SnapmirrorRelationshipId", # required
+    #     policy_id: "SnapmirrorPolicyId",
+    #     transfer_schedule: "SnapmirrorTransferScheduleName",
+    #     throttle_in_kbps: 1,
+    #     state: "SNAPMIRRORED", # accepts SNAPMIRRORED, PAUSED, BROKEN_OFF
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapmirror_relationship.resource_arn #=> String
+    #   resp.snapmirror_relationship.snapmirror_relationship_id #=> String
+    #   resp.snapmirror_relationship.file_system_id #=> String
+    #   resp.snapmirror_relationship.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #   resp.snapmirror_relationship.lifecycle_transition_reason.message #=> String
+    #   resp.snapmirror_relationship.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.snapmirror_relationship.lifecycle_transition_reason.ontap_error.code #=> String
+    #   resp.snapmirror_relationship.tags #=> Array
+    #   resp.snapmirror_relationship.tags[0].key #=> String
+    #   resp.snapmirror_relationship.tags[0].value #=> String
+    #   resp.snapmirror_relationship.source.path #=> String
+    #   resp.snapmirror_relationship.destination.path #=> String
+    #   resp.snapmirror_relationship.destination.volume_id #=> String
+    #   resp.snapmirror_relationship.snapmirror_policy.policy_id #=> String
+    #   resp.snapmirror_relationship.snapmirror_policy.policy_name #=> String
+    #   resp.snapmirror_relationship.transfer_schedule #=> String
+    #   resp.snapmirror_relationship.throttle_in_kbps #=> Integer
+    #   resp.snapmirror_relationship.state #=> String, one of "UNINITIALIZED", "TRANSFERRING", "SNAPMIRRORED", "PAUSED", "BROKEN_OFF"
+    #   resp.snapmirror_relationship.healthy #=> Boolean
+    #   resp.snapmirror_relationship.unhealthy_reason #=> String
+    #   resp.snapmirror_relationship.lag_time_in_minutes #=> Integer
+    #   resp.snapmirror_relationship.exported_snapshot.snapshot_id #=> String
+    #   resp.snapmirror_relationship.exported_snapshot.snapshot_name #=> String
+    #   resp.snapmirror_relationship.transfer_state.state #=> String
+    #   resp.snapmirror_relationship.transfer_state.type #=> String
+    #   resp.snapmirror_relationship.transfer_state.bytes_transferred #=> Integer
+    #   resp.snapmirror_relationship.transfer_state.duration #=> String
+    #   resp.snapmirror_relationship.transfer_state.end_time #=> Time
+    #   resp.snapmirror_relationship.uuid #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateSnapmirrorRelationship AWS API Documentation
+    #
+    # @overload update_snapmirror_relationship(params = {})
+    # @param [Hash] params ({})
+    def update_snapmirror_relationship(params = {}, options = {})
+      req = build_request(:update_snapmirror_relationship, params)
+      req.send_request(options)
+    end
+
+    # Updates an Amazon FSx for OpenZFS or Amazon FSx for NetApp ONTAP
+    # snapshot.
+    #
+    # For Amazon FSx for OpenZFS snapshots, you can update only the name.
+    # For Amazon FSx for NetApp ONTAP snapshots, you can update the name and
+    # the properties in `OntapConfiguration`.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 63 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :name
     #   The name of the snapshot to update.
     #
     # @option params [required, String] :snapshot_id
     #   The ID of the snapshot that you want to update, in the format
     #   `fsvolsnap-0123456789abcdef0`.
+    #
+    # @option params [Types::UpdateOntapSnapshotConfiguration] :ontap_configuration
+    #   The configuration of the ONTAP snapshot that you are updating.
     #
     # @return [Types::UpdateSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9514,8 +11255,13 @@ module Aws::FSx
     #
     #   resp = client.update_snapshot({
     #     client_request_token: "ClientRequestToken",
-    #     name: "SnapshotName", # required
+    #     name: "SnapshotName",
     #     snapshot_id: "SnapshotId", # required
+    #     ontap_configuration: {
+    #       snapmirror_label: "SnapmirrorLabel",
+    #       expiry_time: Time.now,
+    #       snaplock_expiry_time: Time.now,
+    #     },
     #   })
     #
     # @example Response structure
@@ -9525,13 +11271,16 @@ module Aws::FSx
     #   resp.snapshot.name #=> String
     #   resp.snapshot.volume_id #=> String
     #   resp.snapshot.creation_time #=> Time
-    #   resp.snapshot.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.snapshot.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.snapshot.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.snapshot.lifecycle_transition_reason.message #=> String
+    #   resp.snapshot.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.snapshot.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.snapshot.tags #=> Array
     #   resp.snapshot.tags[0].key #=> String
     #   resp.snapshot.tags[0].value #=> String
     #   resp.snapshot.administrative_actions #=> Array
-    #   resp.snapshot.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.snapshot.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.snapshot.administrative_actions[0].progress_percent #=> Integer
     #   resp.snapshot.administrative_actions[0].request_time #=> Time
     #   resp.snapshot.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -9692,6 +11441,8 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.snapshot.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -9699,6 +11450,8 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_volume_values.volume_id #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.snapshot.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
@@ -9730,6 +11483,11 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.snapshot.administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.snapshot.administrative_actions[0].message #=> String
+    #   resp.snapshot.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.snapshot.ontap_configuration.snapmirror_label #=> String
+    #   resp.snapshot.ontap_configuration.expiry_time #=> Time
+    #   resp.snapshot.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.snapshot.ontap_configuration.uuid #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateSnapshot AWS API Documentation
     #
@@ -9737,6 +11495,70 @@ module Aws::FSx
     # @param [Hash] params ({})
     def update_snapshot(params = {}, options = {})
       req = build_request(:update_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Updates an Amazon FSx for NetApp ONTAP snapshot policy. You can enable
+    # or disable the snapshot policy.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 63 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :snapshot_policy_id
+    #   The ID of the snapshot policy that you want to update.
+    #
+    # @option params [Boolean] :enabled
+    #   Specifies whether the snapshot policy is enabled.
+    #
+    # @return [Types::UpdateSnapshotPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSnapshotPolicyResponse#snapshot_policy #snapshot_policy} => Types::SnapshotPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_snapshot_policy({
+    #     client_request_token: "ClientRequestToken",
+    #     snapshot_policy_id: "SnapshotPolicyId", # required
+    #     enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot_policy.resource_arn #=> String
+    #   resp.snapshot_policy.snapshot_policy_id #=> String
+    #   resp.snapshot_policy.file_system_id #=> String
+    #   resp.snapshot_policy.storage_virtual_machine_id #=> String
+    #   resp.snapshot_policy.name #=> String
+    #   resp.snapshot_policy.enabled #=> Boolean
+    #   resp.snapshot_policy.schedules #=> Array
+    #   resp.snapshot_policy.schedules[0].name #=> String
+    #   resp.snapshot_policy.schedules[0].count #=> Integer
+    #   resp.snapshot_policy.schedules[0].prefix #=> String
+    #   resp.snapshot_policy.schedules[0].snapmirror_label #=> String
+    #   resp.snapshot_policy.schedules[0].retention_period.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE"
+    #   resp.snapshot_policy.schedules[0].retention_period.value #=> Integer
+    #   resp.snapshot_policy.scope #=> String, one of "FILESYSTEM", "SVM"
+    #   resp.snapshot_policy.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #   resp.snapshot_policy.uuid #=> String
+    #   resp.snapshot_policy.lifecycle_transition_reason.message #=> String
+    #   resp.snapshot_policy.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.snapshot_policy.lifecycle_transition_reason.ontap_error.code #=> String
+    #   resp.snapshot_policy.tags #=> Array
+    #   resp.snapshot_policy.tags[0].key #=> String
+    #   resp.snapshot_policy.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateSnapshotPolicy AWS API Documentation
+    #
+    # @overload update_snapshot_policy(params = {})
+    # @param [Hash] params ({})
+    def update_snapshot_policy(params = {}, options = {})
+      req = build_request(:update_snapshot_policy, params)
       req.send_request(options)
     end
 
@@ -9828,6 +11650,8 @@ module Aws::FSx
     #   resp.storage_virtual_machine.tags[0].key #=> String
     #   resp.storage_virtual_machine.tags[0].value #=> String
     #   resp.storage_virtual_machine.lifecycle_transition_reason.message #=> String
+    #   resp.storage_virtual_machine.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.storage_virtual_machine.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.storage_virtual_machine.root_volume_security_style #=> String, one of "UNIX", "NTFS", "MIXED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateStorageVirtualMachine AWS API Documentation
@@ -9836,6 +11660,83 @@ module Aws::FSx
     # @param [Hash] params ({})
     def update_storage_virtual_machine(params = {}, options = {})
       req = build_request(:update_storage_virtual_machine, params)
+      req.send_request(options)
+    end
+
+    # Updates an Amazon FSx for NetApp ONTAP storage virtual machine (SVM)
+    # peer relationship.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 63 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :storage_virtual_machine_peer_id
+    #   The ID of the SVM peer that you want to update.
+    #
+    # @option params [Array<String>] :applications
+    #   Specifies the applications that the SVM peer relationship authorizes.
+    #   The applications that you specify replace the existing applications.
+    #
+    # @option params [String] :peer_svm_alias
+    #   Specifies the name that the local cluster uses to identify the peer
+    #   SVM.
+    #
+    # @option params [String] :state
+    #   Specifies the state to set for the SVM peer relationship:
+    #
+    #   * `PEERED` – Accepts a pending peering request, or resumes a suspended
+    #     SVM peer relationship.
+    #
+    #   * `SUSPENDED` – Suspends the SVM peer relationship.
+    #
+    #   * `REJECTED` – Rejects a pending peering request.
+    #
+    # @return [Types::UpdateStorageVirtualMachinePeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateStorageVirtualMachinePeerResponse#storage_virtual_machine_peer #storage_virtual_machine_peer} => Types::StorageVirtualMachinePeer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_storage_virtual_machine_peer({
+    #     client_request_token: "ClientRequestToken",
+    #     storage_virtual_machine_peer_id: "StorageVirtualMachinePeerId", # required
+    #     applications: ["SNAPMIRROR"], # accepts SNAPMIRROR, FILE_COPY, LUN_COPY, FLEXCACHE
+    #     peer_svm_alias: "PeerSvmAlias",
+    #     state: "PEERED", # accepts PEERED, REJECTED, SUSPENDED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_virtual_machine_peer.resource_arn #=> String
+    #   resp.storage_virtual_machine_peer.storage_virtual_machine_peer_id #=> String
+    #   resp.storage_virtual_machine_peer.storage_virtual_machine_id #=> String
+    #   resp.storage_virtual_machine_peer.file_system_id #=> String
+    #   resp.storage_virtual_machine_peer.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED"
+    #   resp.storage_virtual_machine_peer.lifecycle_transition_reason.message #=> String
+    #   resp.storage_virtual_machine_peer.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.storage_virtual_machine_peer.lifecycle_transition_reason.ontap_error.code #=> String
+    #   resp.storage_virtual_machine_peer.tags #=> Array
+    #   resp.storage_virtual_machine_peer.tags[0].key #=> String
+    #   resp.storage_virtual_machine_peer.tags[0].value #=> String
+    #   resp.storage_virtual_machine_peer.peer_svm_name #=> String
+    #   resp.storage_virtual_machine_peer.peer_svm_alias #=> String
+    #   resp.storage_virtual_machine_peer.peer_cluster_name #=> String
+    #   resp.storage_virtual_machine_peer.applications #=> Array
+    #   resp.storage_virtual_machine_peer.applications[0] #=> String, one of "SNAPMIRROR", "FILE_COPY", "LUN_COPY", "FLEXCACHE"
+    #   resp.storage_virtual_machine_peer.state #=> String, one of "PEERED", "REJECTED", "SUSPENDED", "INITIATED", "PENDING", "INITIALIZING"
+    #   resp.storage_virtual_machine_peer.uuid #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateStorageVirtualMachinePeer AWS API Documentation
+    #
+    # @overload update_storage_virtual_machine_peer(params = {})
+    # @param [Hash] params ({})
+    def update_storage_virtual_machine_peer(params = {}, options = {})
+      req = build_request(:update_storage_virtual_machine_peer, params)
       req.send_request(options)
     end
 
@@ -9885,7 +11786,7 @@ module Aws::FSx
     #         cooling_period: 1,
     #         name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
     #       },
-    #       snapshot_policy: "SnapshotPolicy",
+    #       snapshot_policy: "SnapshotPolicyName",
     #       copy_tags_to_backups: false,
     #       snaplock_configuration: {
     #         audit_log_volume: false,
@@ -9911,6 +11812,9 @@ module Aws::FSx
     #         volume_append_mode_enabled: false,
     #       },
     #       size_in_bytes: 1,
+    #       clone_configuration: {
+    #         split_action: "START", # accepts START
+    #       },
     #     },
     #     name: "VolumeName",
     #     open_zfs_configuration: {
@@ -9975,6 +11879,8 @@ module Aws::FSx
     #   resp.volume.ontap_configuration.aggregate_configuration.aggregates[0] #=> String
     #   resp.volume.ontap_configuration.aggregate_configuration.total_constituents #=> Integer
     #   resp.volume.ontap_configuration.size_in_bytes #=> Integer
+    #   resp.volume.ontap_configuration.clone_configuration.parent_volume_id #=> String
+    #   resp.volume.ontap_configuration.clone_configuration.snapshot_id #=> String
     #   resp.volume.resource_arn #=> String
     #   resp.volume.tags #=> Array
     #   resp.volume.tags[0].key #=> String
@@ -9982,8 +11888,10 @@ module Aws::FSx
     #   resp.volume.volume_id #=> String
     #   resp.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volume.lifecycle_transition_reason.message #=> String
+    #   resp.volume.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.volume.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.volume.administrative_actions #=> Array
-    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
+    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP", "VOLUME_CLONE_SPLIT"
     #   resp.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.volume.administrative_actions[0].request_time #=> Time
     #   resp.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
@@ -10116,12 +12024,20 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_snapshot_values.name #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.creation_time #=> Time
-    #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE", "FAILED"
+    #   resp.volume.administrative_actions[0].target_snapshot_values.snapshot_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.message #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.ontap_error.code #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.volume.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.snapmirror_label #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.expiry_time #=> Time
+    #   resp.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.snaplock_expiry_time #=> Time
+    #   resp.volume.administrative_actions[0].target_snapshot_values.ontap_configuration.uuid #=> String
     #   resp.volume.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.volume.administrative_actions[0].remaining_transfer_bytes #=> Integer
     #   resp.volume.administrative_actions[0].message #=> String
@@ -10179,7 +12095,7 @@ module Aws::FSx
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.153.0'
+      context[:gem_version] = '1.154.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

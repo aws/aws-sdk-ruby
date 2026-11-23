@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2026-11-23)
+------------------
+
+* Feature - This release adds support for KVSHQ API in the AWS European Sovereign Cloud. Requests for key value stores in the aws-eusc partition are now routed to account-based endpoints under cloudfront-kvs.global.api.amazonwebservices.eu.
+
 1.53.0 (2026-11-18)
 ------------------
 

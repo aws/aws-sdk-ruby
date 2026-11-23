@@ -33,6 +33,8 @@ module Aws::FSx
     Alias = Shapes::StructureShape.new(name: 'Alias')
     AliasLifecycle = Shapes::StringShape.new(name: 'AliasLifecycle')
     Aliases = Shapes::ListShape.new(name: 'Aliases')
+    AllowedSvmIds = Shapes::ListShape.new(name: 'AllowedSvmIds')
+    AllowedSvmMode = Shapes::StringShape.new(name: 'AllowedSvmMode')
     AlternateDNSName = Shapes::StringShape.new(name: 'AlternateDNSName')
     AlternateDNSNames = Shapes::ListShape.new(name: 'AlternateDNSNames')
     ArchivePath = Shapes::StringShape.new(name: 'ArchivePath')
@@ -62,6 +64,23 @@ module Aws::FSx
     CancelDataRepositoryTaskResponse = Shapes::StructureShape.new(name: 'CancelDataRepositoryTaskResponse')
     CapacityToRelease = Shapes::IntegerShape.new(name: 'CapacityToRelease')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
+    CloneConfiguration = Shapes::StructureShape.new(name: 'CloneConfiguration')
+    CloneSplitAction = Shapes::StringShape.new(name: 'CloneSplitAction')
+    ClusterPeer = Shapes::StructureShape.new(name: 'ClusterPeer')
+    ClusterPeerAuthenticationInUse = Shapes::StringShape.new(name: 'ClusterPeerAuthenticationInUse')
+    ClusterPeerAuthenticationState = Shapes::StringShape.new(name: 'ClusterPeerAuthenticationState')
+    ClusterPeerAuthenticationStatus = Shapes::StructureShape.new(name: 'ClusterPeerAuthenticationStatus')
+    ClusterPeerFilter = Shapes::StructureShape.new(name: 'ClusterPeerFilter')
+    ClusterPeerFilterName = Shapes::StringShape.new(name: 'ClusterPeerFilterName')
+    ClusterPeerFilterValue = Shapes::StringShape.new(name: 'ClusterPeerFilterValue')
+    ClusterPeerFilterValues = Shapes::ListShape.new(name: 'ClusterPeerFilterValues')
+    ClusterPeerFilters = Shapes::ListShape.new(name: 'ClusterPeerFilters')
+    ClusterPeerId = Shapes::StringShape.new(name: 'ClusterPeerId')
+    ClusterPeerIds = Shapes::ListShape.new(name: 'ClusterPeerIds')
+    ClusterPeerLifecycle = Shapes::StringShape.new(name: 'ClusterPeerLifecycle')
+    ClusterPeerNotFound = Shapes::StructureShape.new(name: 'ClusterPeerNotFound')
+    ClusterPeerStatus = Shapes::StringShape.new(name: 'ClusterPeerStatus')
+    ClusterPeers = Shapes::ListShape.new(name: 'ClusterPeers')
     CompletionReport = Shapes::StructureShape.new(name: 'CompletionReport')
     CoolingPeriod = Shapes::IntegerShape.new(name: 'CoolingPeriod')
     CopyBackupRequest = Shapes::StructureShape.new(name: 'CopyBackupRequest')
@@ -77,6 +96,9 @@ module Aws::FSx
     CreateAndAttachS3AccessPointS3Configuration = Shapes::StructureShape.new(name: 'CreateAndAttachS3AccessPointS3Configuration')
     CreateBackupRequest = Shapes::StructureShape.new(name: 'CreateBackupRequest')
     CreateBackupResponse = Shapes::StructureShape.new(name: 'CreateBackupResponse')
+    CreateCloneConfiguration = Shapes::StructureShape.new(name: 'CreateCloneConfiguration')
+    CreateClusterPeerRequest = Shapes::StructureShape.new(name: 'CreateClusterPeerRequest')
+    CreateClusterPeerResponse = Shapes::StructureShape.new(name: 'CreateClusterPeerResponse')
     CreateDataRepositoryAssociationRequest = Shapes::StructureShape.new(name: 'CreateDataRepositoryAssociationRequest')
     CreateDataRepositoryAssociationResponse = Shapes::StructureShape.new(name: 'CreateDataRepositoryAssociationResponse')
     CreateDataRepositoryTaskRequest = Shapes::StructureShape.new(name: 'CreateDataRepositoryTaskRequest')
@@ -94,12 +116,23 @@ module Aws::FSx
     CreateFileSystemRequest = Shapes::StructureShape.new(name: 'CreateFileSystemRequest')
     CreateFileSystemResponse = Shapes::StructureShape.new(name: 'CreateFileSystemResponse')
     CreateFileSystemWindowsConfiguration = Shapes::StructureShape.new(name: 'CreateFileSystemWindowsConfiguration')
+    CreateOntapSnapshotConfiguration = Shapes::StructureShape.new(name: 'CreateOntapSnapshotConfiguration')
     CreateOntapVolumeConfiguration = Shapes::StructureShape.new(name: 'CreateOntapVolumeConfiguration')
     CreateOpenZFSOriginSnapshotConfiguration = Shapes::StructureShape.new(name: 'CreateOpenZFSOriginSnapshotConfiguration')
     CreateOpenZFSVolumeConfiguration = Shapes::StructureShape.new(name: 'CreateOpenZFSVolumeConfiguration')
     CreateSnaplockConfiguration = Shapes::StructureShape.new(name: 'CreateSnaplockConfiguration')
+    CreateSnapmirrorDestination = Shapes::StructureShape.new(name: 'CreateSnapmirrorDestination')
+    CreateSnapmirrorPolicyRequest = Shapes::StructureShape.new(name: 'CreateSnapmirrorPolicyRequest')
+    CreateSnapmirrorPolicyResponse = Shapes::StructureShape.new(name: 'CreateSnapmirrorPolicyResponse')
+    CreateSnapmirrorRelationshipRequest = Shapes::StructureShape.new(name: 'CreateSnapmirrorRelationshipRequest')
+    CreateSnapmirrorRelationshipResponse = Shapes::StructureShape.new(name: 'CreateSnapmirrorRelationshipResponse')
+    CreateSnapmirrorSource = Shapes::StructureShape.new(name: 'CreateSnapmirrorSource')
+    CreateSnapshotPolicyRequest = Shapes::StructureShape.new(name: 'CreateSnapshotPolicyRequest')
+    CreateSnapshotPolicyResponse = Shapes::StructureShape.new(name: 'CreateSnapshotPolicyResponse')
     CreateSnapshotRequest = Shapes::StructureShape.new(name: 'CreateSnapshotRequest')
     CreateSnapshotResponse = Shapes::StructureShape.new(name: 'CreateSnapshotResponse')
+    CreateStorageVirtualMachinePeerRequest = Shapes::StructureShape.new(name: 'CreateStorageVirtualMachinePeerRequest')
+    CreateStorageVirtualMachinePeerResponse = Shapes::StructureShape.new(name: 'CreateStorageVirtualMachinePeerResponse')
     CreateStorageVirtualMachineRequest = Shapes::StructureShape.new(name: 'CreateStorageVirtualMachineRequest')
     CreateStorageVirtualMachineResponse = Shapes::StructureShape.new(name: 'CreateStorageVirtualMachineResponse')
     CreateSvmActiveDirectoryConfiguration = Shapes::StructureShape.new(name: 'CreateSvmActiveDirectoryConfiguration')
@@ -138,6 +171,8 @@ module Aws::FSx
     DataRepositoryTasks = Shapes::ListShape.new(name: 'DataRepositoryTasks')
     DeleteBackupRequest = Shapes::StructureShape.new(name: 'DeleteBackupRequest')
     DeleteBackupResponse = Shapes::StructureShape.new(name: 'DeleteBackupResponse')
+    DeleteClusterPeerRequest = Shapes::StructureShape.new(name: 'DeleteClusterPeerRequest')
+    DeleteClusterPeerResponse = Shapes::StructureShape.new(name: 'DeleteClusterPeerResponse')
     DeleteDataInFileSystem = Shapes::BooleanShape.new(name: 'DeleteDataInFileSystem')
     DeleteDataRepositoryAssociationRequest = Shapes::StructureShape.new(name: 'DeleteDataRepositoryAssociationRequest')
     DeleteDataRepositoryAssociationResponse = Shapes::StructureShape.new(name: 'DeleteDataRepositoryAssociationResponse')
@@ -155,8 +190,16 @@ module Aws::FSx
     DeleteFileSystemWindowsResponse = Shapes::StructureShape.new(name: 'DeleteFileSystemWindowsResponse')
     DeleteOpenZFSVolumeOption = Shapes::StringShape.new(name: 'DeleteOpenZFSVolumeOption')
     DeleteOpenZFSVolumeOptions = Shapes::ListShape.new(name: 'DeleteOpenZFSVolumeOptions')
+    DeleteSnapmirrorPolicyRequest = Shapes::StructureShape.new(name: 'DeleteSnapmirrorPolicyRequest')
+    DeleteSnapmirrorPolicyResponse = Shapes::StructureShape.new(name: 'DeleteSnapmirrorPolicyResponse')
+    DeleteSnapmirrorRelationshipRequest = Shapes::StructureShape.new(name: 'DeleteSnapmirrorRelationshipRequest')
+    DeleteSnapmirrorRelationshipResponse = Shapes::StructureShape.new(name: 'DeleteSnapmirrorRelationshipResponse')
+    DeleteSnapshotPolicyRequest = Shapes::StructureShape.new(name: 'DeleteSnapshotPolicyRequest')
+    DeleteSnapshotPolicyResponse = Shapes::StructureShape.new(name: 'DeleteSnapshotPolicyResponse')
     DeleteSnapshotRequest = Shapes::StructureShape.new(name: 'DeleteSnapshotRequest')
     DeleteSnapshotResponse = Shapes::StructureShape.new(name: 'DeleteSnapshotResponse')
+    DeleteStorageVirtualMachinePeerRequest = Shapes::StructureShape.new(name: 'DeleteStorageVirtualMachinePeerRequest')
+    DeleteStorageVirtualMachinePeerResponse = Shapes::StructureShape.new(name: 'DeleteStorageVirtualMachinePeerResponse')
     DeleteStorageVirtualMachineRequest = Shapes::StructureShape.new(name: 'DeleteStorageVirtualMachineRequest')
     DeleteStorageVirtualMachineResponse = Shapes::StructureShape.new(name: 'DeleteStorageVirtualMachineResponse')
     DeleteVolumeOntapConfiguration = Shapes::StructureShape.new(name: 'DeleteVolumeOntapConfiguration')
@@ -166,6 +209,8 @@ module Aws::FSx
     DeleteVolumeResponse = Shapes::StructureShape.new(name: 'DeleteVolumeResponse')
     DescribeBackupsRequest = Shapes::StructureShape.new(name: 'DescribeBackupsRequest')
     DescribeBackupsResponse = Shapes::StructureShape.new(name: 'DescribeBackupsResponse')
+    DescribeClusterPeersRequest = Shapes::StructureShape.new(name: 'DescribeClusterPeersRequest')
+    DescribeClusterPeersResponse = Shapes::StructureShape.new(name: 'DescribeClusterPeersResponse')
     DescribeDataRepositoryAssociationsRequest = Shapes::StructureShape.new(name: 'DescribeDataRepositoryAssociationsRequest')
     DescribeDataRepositoryAssociationsResponse = Shapes::StructureShape.new(name: 'DescribeDataRepositoryAssociationsResponse')
     DescribeDataRepositoryTasksRequest = Shapes::StructureShape.new(name: 'DescribeDataRepositoryTasksRequest')
@@ -180,8 +225,16 @@ module Aws::FSx
     DescribeS3AccessPointAttachmentsResponse = Shapes::StructureShape.new(name: 'DescribeS3AccessPointAttachmentsResponse')
     DescribeSharedVpcConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeSharedVpcConfigurationRequest')
     DescribeSharedVpcConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeSharedVpcConfigurationResponse')
+    DescribeSnapmirrorPoliciesRequest = Shapes::StructureShape.new(name: 'DescribeSnapmirrorPoliciesRequest')
+    DescribeSnapmirrorPoliciesResponse = Shapes::StructureShape.new(name: 'DescribeSnapmirrorPoliciesResponse')
+    DescribeSnapmirrorRelationshipsRequest = Shapes::StructureShape.new(name: 'DescribeSnapmirrorRelationshipsRequest')
+    DescribeSnapmirrorRelationshipsResponse = Shapes::StructureShape.new(name: 'DescribeSnapmirrorRelationshipsResponse')
+    DescribeSnapshotPoliciesRequest = Shapes::StructureShape.new(name: 'DescribeSnapshotPoliciesRequest')
+    DescribeSnapshotPoliciesResponse = Shapes::StructureShape.new(name: 'DescribeSnapshotPoliciesResponse')
     DescribeSnapshotsRequest = Shapes::StructureShape.new(name: 'DescribeSnapshotsRequest')
     DescribeSnapshotsResponse = Shapes::StructureShape.new(name: 'DescribeSnapshotsResponse')
+    DescribeStorageVirtualMachinePeersRequest = Shapes::StructureShape.new(name: 'DescribeStorageVirtualMachinePeersRequest')
+    DescribeStorageVirtualMachinePeersResponse = Shapes::StructureShape.new(name: 'DescribeStorageVirtualMachinePeersResponse')
     DescribeStorageVirtualMachinesRequest = Shapes::StructureShape.new(name: 'DescribeStorageVirtualMachinesRequest')
     DescribeStorageVirtualMachinesResponse = Shapes::StructureShape.new(name: 'DescribeStorageVirtualMachinesResponse')
     DescribeVolumesRequest = Shapes::StructureShape.new(name: 'DescribeVolumesRequest')
@@ -203,6 +256,7 @@ module Aws::FSx
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EventType = Shapes::StringShape.new(name: 'EventType')
     EventTypes = Shapes::ListShape.new(name: 'EventTypes')
+    ExpiryTime = Shapes::TimestampShape.new(name: 'ExpiryTime')
     FailedCount = Shapes::IntegerShape.new(name: 'FailedCount')
     FileCache = Shapes::StructureShape.new(name: 'FileCache')
     FileCacheCreating = Shapes::StructureShape.new(name: 'FileCacheCreating')
@@ -269,6 +323,7 @@ module Aws::FSx
     Ipv6AddressRange = Shapes::StringShape.new(name: 'Ipv6AddressRange')
     JunctionPath = Shapes::StringShape.new(name: 'JunctionPath')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
+    LagTimeInMinutes = Shapes::IntegerShape.new(name: 'LagTimeInMinutes')
     LastUpdatedTime = Shapes::TimestampShape.new(name: 'LastUpdatedTime')
     LifecycleTransitionReason = Shapes::StructureShape.new(name: 'LifecycleTransitionReason')
     LimitedMaxResults = Shapes::IntegerShape.new(name: 'LimitedMaxResults')
@@ -306,10 +361,12 @@ module Aws::FSx
     NotServiceResourceError = Shapes::StructureShape.new(name: 'NotServiceResourceError')
     OntapDeploymentType = Shapes::StringShape.new(name: 'OntapDeploymentType')
     OntapEndpointIpAddresses = Shapes::ListShape.new(name: 'OntapEndpointIpAddresses')
+    OntapError = Shapes::StructureShape.new(name: 'OntapError')
     OntapFileSystemConfiguration = Shapes::StructureShape.new(name: 'OntapFileSystemConfiguration')
     OntapFileSystemIdentity = Shapes::StructureShape.new(name: 'OntapFileSystemIdentity')
     OntapFileSystemUserName = Shapes::StringShape.new(name: 'OntapFileSystemUserName')
     OntapFileSystemUserType = Shapes::StringShape.new(name: 'OntapFileSystemUserType')
+    OntapSnapshotConfiguration = Shapes::StructureShape.new(name: 'OntapSnapshotConfiguration')
     OntapUnixFileSystemUser = Shapes::StructureShape.new(name: 'OntapUnixFileSystemUser')
     OntapVolumeConfiguration = Shapes::StructureShape.new(name: 'OntapVolumeConfiguration')
     OntapVolumeType = Shapes::StringShape.new(name: 'OntapVolumeType')
@@ -338,6 +395,10 @@ module Aws::FSx
     OpenZFSVolumeConfiguration = Shapes::StructureShape.new(name: 'OpenZFSVolumeConfiguration')
     OrganizationalUnitDistinguishedName = Shapes::StringShape.new(name: 'OrganizationalUnitDistinguishedName')
     Parameter = Shapes::StringShape.new(name: 'Parameter')
+    PeerAddresses = Shapes::ListShape.new(name: 'PeerAddresses')
+    PeerClusterName = Shapes::StringShape.new(name: 'PeerClusterName')
+    PeerSvmAlias = Shapes::StringShape.new(name: 'PeerSvmAlias')
+    PeerSvmName = Shapes::StringShape.new(name: 'PeerSvmName')
     PerUnitStorageThroughput = Shapes::IntegerShape.new(name: 'PerUnitStorageThroughput')
     PrivilegedDelete = Shapes::StringShape.new(name: 'PrivilegedDelete')
     ProgressPercent = Shapes::IntegerShape.new(name: 'ProgressPercent')
@@ -393,8 +454,54 @@ module Aws::FSx
     ServiceLimitExceeded = Shapes::StructureShape.new(name: 'ServiceLimitExceeded')
     SizeInBytes = Shapes::IntegerShape.new(name: 'SizeInBytes')
     SnaplockConfiguration = Shapes::StructureShape.new(name: 'SnaplockConfiguration')
+    SnaplockExpiryTime = Shapes::TimestampShape.new(name: 'SnaplockExpiryTime')
     SnaplockRetentionPeriod = Shapes::StructureShape.new(name: 'SnaplockRetentionPeriod')
     SnaplockType = Shapes::StringShape.new(name: 'SnaplockType')
+    SnapmirrorDestination = Shapes::StructureShape.new(name: 'SnapmirrorDestination')
+    SnapmirrorExportedSnapshot = Shapes::StructureShape.new(name: 'SnapmirrorExportedSnapshot')
+    SnapmirrorExportedSnapshotName = Shapes::StringShape.new(name: 'SnapmirrorExportedSnapshotName')
+    SnapmirrorHealthy = Shapes::BooleanShape.new(name: 'SnapmirrorHealthy')
+    SnapmirrorLabel = Shapes::StringShape.new(name: 'SnapmirrorLabel')
+    SnapmirrorPath = Shapes::StringShape.new(name: 'SnapmirrorPath')
+    SnapmirrorPolicies = Shapes::ListShape.new(name: 'SnapmirrorPolicies')
+    SnapmirrorPolicy = Shapes::StructureShape.new(name: 'SnapmirrorPolicy')
+    SnapmirrorPolicyCreationScheduleName = Shapes::StringShape.new(name: 'SnapmirrorPolicyCreationScheduleName')
+    SnapmirrorPolicyFilter = Shapes::StructureShape.new(name: 'SnapmirrorPolicyFilter')
+    SnapmirrorPolicyFilterName = Shapes::StringShape.new(name: 'SnapmirrorPolicyFilterName')
+    SnapmirrorPolicyFilterValue = Shapes::StringShape.new(name: 'SnapmirrorPolicyFilterValue')
+    SnapmirrorPolicyFilterValues = Shapes::ListShape.new(name: 'SnapmirrorPolicyFilterValues')
+    SnapmirrorPolicyFilters = Shapes::ListShape.new(name: 'SnapmirrorPolicyFilters')
+    SnapmirrorPolicyId = Shapes::StringShape.new(name: 'SnapmirrorPolicyId')
+    SnapmirrorPolicyIds = Shapes::ListShape.new(name: 'SnapmirrorPolicyIds')
+    SnapmirrorPolicyLifecycle = Shapes::StringShape.new(name: 'SnapmirrorPolicyLifecycle')
+    SnapmirrorPolicyName = Shapes::StringShape.new(name: 'SnapmirrorPolicyName')
+    SnapmirrorPolicyNotFound = Shapes::StructureShape.new(name: 'SnapmirrorPolicyNotFound')
+    SnapmirrorPolicyRetentionCount = Shapes::IntegerShape.new(name: 'SnapmirrorPolicyRetentionCount')
+    SnapmirrorPolicyRetentionRule = Shapes::StructureShape.new(name: 'SnapmirrorPolicyRetentionRule')
+    SnapmirrorPolicyRetentionRules = Shapes::ListShape.new(name: 'SnapmirrorPolicyRetentionRules')
+    SnapmirrorPolicyScope = Shapes::StringShape.new(name: 'SnapmirrorPolicyScope')
+    SnapmirrorPolicySnapshotCopyMode = Shapes::StringShape.new(name: 'SnapmirrorPolicySnapshotCopyMode')
+    SnapmirrorRelationship = Shapes::StructureShape.new(name: 'SnapmirrorRelationship')
+    SnapmirrorRelationshipFilter = Shapes::StructureShape.new(name: 'SnapmirrorRelationshipFilter')
+    SnapmirrorRelationshipFilterName = Shapes::StringShape.new(name: 'SnapmirrorRelationshipFilterName')
+    SnapmirrorRelationshipFilterValue = Shapes::StringShape.new(name: 'SnapmirrorRelationshipFilterValue')
+    SnapmirrorRelationshipFilterValues = Shapes::ListShape.new(name: 'SnapmirrorRelationshipFilterValues')
+    SnapmirrorRelationshipFilters = Shapes::ListShape.new(name: 'SnapmirrorRelationshipFilters')
+    SnapmirrorRelationshipId = Shapes::StringShape.new(name: 'SnapmirrorRelationshipId')
+    SnapmirrorRelationshipIds = Shapes::ListShape.new(name: 'SnapmirrorRelationshipIds')
+    SnapmirrorRelationshipLifecycle = Shapes::StringShape.new(name: 'SnapmirrorRelationshipLifecycle')
+    SnapmirrorRelationshipNotFound = Shapes::StructureShape.new(name: 'SnapmirrorRelationshipNotFound')
+    SnapmirrorRelationshipPolicy = Shapes::StructureShape.new(name: 'SnapmirrorRelationshipPolicy')
+    SnapmirrorRelationshipState = Shapes::StringShape.new(name: 'SnapmirrorRelationshipState')
+    SnapmirrorRelationships = Shapes::ListShape.new(name: 'SnapmirrorRelationships')
+    SnapmirrorSource = Shapes::StructureShape.new(name: 'SnapmirrorSource')
+    SnapmirrorTransferBytes = Shapes::IntegerShape.new(name: 'SnapmirrorTransferBytes')
+    SnapmirrorTransferDuration = Shapes::StringShape.new(name: 'SnapmirrorTransferDuration')
+    SnapmirrorTransferScheduleName = Shapes::StringShape.new(name: 'SnapmirrorTransferScheduleName')
+    SnapmirrorTransferState = Shapes::StructureShape.new(name: 'SnapmirrorTransferState')
+    SnapmirrorTransferStatus = Shapes::StringShape.new(name: 'SnapmirrorTransferStatus')
+    SnapmirrorTransferType = Shapes::StringShape.new(name: 'SnapmirrorTransferType')
+    SnapmirrorUnhealthyReason = Shapes::StringShape.new(name: 'SnapmirrorUnhealthyReason')
     Snapshot = Shapes::StructureShape.new(name: 'Snapshot')
     SnapshotFilter = Shapes::StructureShape.new(name: 'SnapshotFilter')
     SnapshotFilterName = Shapes::StringShape.new(name: 'SnapshotFilterName')
@@ -406,7 +513,29 @@ module Aws::FSx
     SnapshotLifecycle = Shapes::StringShape.new(name: 'SnapshotLifecycle')
     SnapshotName = Shapes::StringShape.new(name: 'SnapshotName')
     SnapshotNotFound = Shapes::StructureShape.new(name: 'SnapshotNotFound')
-    SnapshotPolicy = Shapes::StringShape.new(name: 'SnapshotPolicy')
+    SnapshotPolicies = Shapes::ListShape.new(name: 'SnapshotPolicies')
+    SnapshotPolicy = Shapes::StructureShape.new(name: 'SnapshotPolicy')
+    SnapshotPolicyFilter = Shapes::StructureShape.new(name: 'SnapshotPolicyFilter')
+    SnapshotPolicyFilterName = Shapes::StringShape.new(name: 'SnapshotPolicyFilterName')
+    SnapshotPolicyFilterValue = Shapes::StringShape.new(name: 'SnapshotPolicyFilterValue')
+    SnapshotPolicyFilterValues = Shapes::ListShape.new(name: 'SnapshotPolicyFilterValues')
+    SnapshotPolicyFilters = Shapes::ListShape.new(name: 'SnapshotPolicyFilters')
+    SnapshotPolicyId = Shapes::StringShape.new(name: 'SnapshotPolicyId')
+    SnapshotPolicyIds = Shapes::ListShape.new(name: 'SnapshotPolicyIds')
+    SnapshotPolicyLifecycle = Shapes::StringShape.new(name: 'SnapshotPolicyLifecycle')
+    SnapshotPolicyName = Shapes::StringShape.new(name: 'SnapshotPolicyName')
+    SnapshotPolicyNotFound = Shapes::StructureShape.new(name: 'SnapshotPolicyNotFound')
+    SnapshotPolicyRetentionPeriod = Shapes::StructureShape.new(name: 'SnapshotPolicyRetentionPeriod')
+    SnapshotPolicyRetentionPeriodType = Shapes::StringShape.new(name: 'SnapshotPolicyRetentionPeriodType')
+    SnapshotPolicyRetentionPeriodValue = Shapes::IntegerShape.new(name: 'SnapshotPolicyRetentionPeriodValue')
+    SnapshotPolicySchedule = Shapes::StructureShape.new(name: 'SnapshotPolicySchedule')
+    SnapshotPolicyScheduleCount = Shapes::IntegerShape.new(name: 'SnapshotPolicyScheduleCount')
+    SnapshotPolicyScheduleList = Shapes::ListShape.new(name: 'SnapshotPolicyScheduleList')
+    SnapshotPolicyScheduleName = Shapes::StringShape.new(name: 'SnapshotPolicyScheduleName')
+    SnapshotPolicySchedulePrefix = Shapes::StringShape.new(name: 'SnapshotPolicySchedulePrefix')
+    SnapshotPolicyScope = Shapes::StringShape.new(name: 'SnapshotPolicyScope')
+    SnapshotSizeInMegabytes = Shapes::IntegerShape.new(name: 'SnapshotSizeInMegabytes')
+    SnapshotType = Shapes::StringShape.new(name: 'SnapshotType')
     Snapshots = Shapes::ListShape.new(name: 'Snapshots')
     SourceBackupId = Shapes::StringShape.new(name: 'SourceBackupId')
     SourceBackupUnavailable = Shapes::StructureShape.new(name: 'SourceBackupUnavailable')
@@ -427,6 +556,21 @@ module Aws::FSx
     StorageVirtualMachineLifecycle = Shapes::StringShape.new(name: 'StorageVirtualMachineLifecycle')
     StorageVirtualMachineName = Shapes::StringShape.new(name: 'StorageVirtualMachineName')
     StorageVirtualMachineNotFound = Shapes::StructureShape.new(name: 'StorageVirtualMachineNotFound')
+    StorageVirtualMachinePeer = Shapes::StructureShape.new(name: 'StorageVirtualMachinePeer')
+    StorageVirtualMachinePeerApplication = Shapes::StringShape.new(name: 'StorageVirtualMachinePeerApplication')
+    StorageVirtualMachinePeerApplications = Shapes::ListShape.new(name: 'StorageVirtualMachinePeerApplications')
+    StorageVirtualMachinePeerFilter = Shapes::StructureShape.new(name: 'StorageVirtualMachinePeerFilter')
+    StorageVirtualMachinePeerFilterName = Shapes::StringShape.new(name: 'StorageVirtualMachinePeerFilterName')
+    StorageVirtualMachinePeerFilterValue = Shapes::StringShape.new(name: 'StorageVirtualMachinePeerFilterValue')
+    StorageVirtualMachinePeerFilterValues = Shapes::ListShape.new(name: 'StorageVirtualMachinePeerFilterValues')
+    StorageVirtualMachinePeerFilters = Shapes::ListShape.new(name: 'StorageVirtualMachinePeerFilters')
+    StorageVirtualMachinePeerId = Shapes::StringShape.new(name: 'StorageVirtualMachinePeerId')
+    StorageVirtualMachinePeerIds = Shapes::ListShape.new(name: 'StorageVirtualMachinePeerIds')
+    StorageVirtualMachinePeerLifecycle = Shapes::StringShape.new(name: 'StorageVirtualMachinePeerLifecycle')
+    StorageVirtualMachinePeerNotFound = Shapes::StructureShape.new(name: 'StorageVirtualMachinePeerNotFound')
+    StorageVirtualMachinePeerState = Shapes::StringShape.new(name: 'StorageVirtualMachinePeerState')
+    StorageVirtualMachinePeerUpdateState = Shapes::StringShape.new(name: 'StorageVirtualMachinePeerUpdateState')
+    StorageVirtualMachinePeers = Shapes::ListShape.new(name: 'StorageVirtualMachinePeers')
     StorageVirtualMachineRootVolumeSecurityStyle = Shapes::StringShape.new(name: 'StorageVirtualMachineRootVolumeSecurityStyle')
     StorageVirtualMachineSubtype = Shapes::StringShape.new(name: 'StorageVirtualMachineSubtype')
     StorageVirtualMachines = Shapes::ListShape.new(name: 'StorageVirtualMachines')
@@ -446,6 +590,7 @@ module Aws::FSx
     Tags = Shapes::ListShape.new(name: 'Tags')
     TaskId = Shapes::StringShape.new(name: 'TaskId')
     TaskIds = Shapes::ListShape.new(name: 'TaskIds')
+    ThrottleInKbps = Shapes::IntegerShape.new(name: 'ThrottleInKbps')
     ThroughputCapacityMbps = Shapes::IntegerShape.new(name: 'ThroughputCapacityMbps')
     ThroughputCapacityPerHAPair = Shapes::IntegerShape.new(name: 'ThroughputCapacityPerHAPair')
     TieringPolicy = Shapes::StructureShape.new(name: 'TieringPolicy')
@@ -459,6 +604,10 @@ module Aws::FSx
     UnsupportedOperation = Shapes::StructureShape.new(name: 'UnsupportedOperation')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdatableSnapmirrorRelationshipState = Shapes::StringShape.new(name: 'UpdatableSnapmirrorRelationshipState')
+    UpdateCloneConfiguration = Shapes::StructureShape.new(name: 'UpdateCloneConfiguration')
+    UpdateClusterPeerRequest = Shapes::StructureShape.new(name: 'UpdateClusterPeerRequest')
+    UpdateClusterPeerResponse = Shapes::StructureShape.new(name: 'UpdateClusterPeerResponse')
     UpdateDataRepositoryAssociationRequest = Shapes::StructureShape.new(name: 'UpdateDataRepositoryAssociationRequest')
     UpdateDataRepositoryAssociationResponse = Shapes::StructureShape.new(name: 'UpdateDataRepositoryAssociationResponse')
     UpdateFileCacheLustreConfiguration = Shapes::StructureShape.new(name: 'UpdateFileCacheLustreConfiguration')
@@ -471,6 +620,7 @@ module Aws::FSx
     UpdateFileSystemRequest = Shapes::StructureShape.new(name: 'UpdateFileSystemRequest')
     UpdateFileSystemResponse = Shapes::StructureShape.new(name: 'UpdateFileSystemResponse')
     UpdateFileSystemWindowsConfiguration = Shapes::StructureShape.new(name: 'UpdateFileSystemWindowsConfiguration')
+    UpdateOntapSnapshotConfiguration = Shapes::StructureShape.new(name: 'UpdateOntapSnapshotConfiguration')
     UpdateOntapVolumeConfiguration = Shapes::StructureShape.new(name: 'UpdateOntapVolumeConfiguration')
     UpdateOpenZFSVolumeConfiguration = Shapes::StructureShape.new(name: 'UpdateOpenZFSVolumeConfiguration')
     UpdateOpenZFSVolumeOption = Shapes::StringShape.new(name: 'UpdateOpenZFSVolumeOption')
@@ -478,8 +628,16 @@ module Aws::FSx
     UpdateSharedVpcConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateSharedVpcConfigurationRequest')
     UpdateSharedVpcConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateSharedVpcConfigurationResponse')
     UpdateSnaplockConfiguration = Shapes::StructureShape.new(name: 'UpdateSnaplockConfiguration')
+    UpdateSnapmirrorPolicyRequest = Shapes::StructureShape.new(name: 'UpdateSnapmirrorPolicyRequest')
+    UpdateSnapmirrorPolicyResponse = Shapes::StructureShape.new(name: 'UpdateSnapmirrorPolicyResponse')
+    UpdateSnapmirrorRelationshipRequest = Shapes::StructureShape.new(name: 'UpdateSnapmirrorRelationshipRequest')
+    UpdateSnapmirrorRelationshipResponse = Shapes::StructureShape.new(name: 'UpdateSnapmirrorRelationshipResponse')
+    UpdateSnapshotPolicyRequest = Shapes::StructureShape.new(name: 'UpdateSnapshotPolicyRequest')
+    UpdateSnapshotPolicyResponse = Shapes::StructureShape.new(name: 'UpdateSnapshotPolicyResponse')
     UpdateSnapshotRequest = Shapes::StructureShape.new(name: 'UpdateSnapshotRequest')
     UpdateSnapshotResponse = Shapes::StructureShape.new(name: 'UpdateSnapshotResponse')
+    UpdateStorageVirtualMachinePeerRequest = Shapes::StructureShape.new(name: 'UpdateStorageVirtualMachinePeerRequest')
+    UpdateStorageVirtualMachinePeerResponse = Shapes::StructureShape.new(name: 'UpdateStorageVirtualMachinePeerResponse')
     UpdateStorageVirtualMachineRequest = Shapes::StructureShape.new(name: 'UpdateStorageVirtualMachineRequest')
     UpdateStorageVirtualMachineResponse = Shapes::StructureShape.new(name: 'UpdateStorageVirtualMachineResponse')
     UpdateSvmActiveDirectoryConfiguration = Shapes::StructureShape.new(name: 'UpdateSvmActiveDirectoryConfiguration')
@@ -557,6 +715,8 @@ module Aws::FSx
 
     Aliases.member = Shapes::ShapeRef.new(shape: Alias)
 
+    AllowedSvmIds.member = Shapes::ShapeRef.new(shape: StorageVirtualMachineId)
+
     AlternateDNSNames.member = Shapes::ShapeRef.new(shape: AlternateDNSName)
 
     AssociateFileSystemAliasesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
@@ -627,6 +787,45 @@ module Aws::FSx
     CancelDataRepositoryTaskResponse.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskId, location_name: "TaskId"))
     CancelDataRepositoryTaskResponse.struct_class = Types::CancelDataRepositoryTaskResponse
 
+    CloneConfiguration.add_member(:parent_volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "ParentVolumeId"))
+    CloneConfiguration.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
+    CloneConfiguration.struct_class = Types::CloneConfiguration
+
+    ClusterPeer.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
+    ClusterPeer.add_member(:cluster_peer_id, Shapes::ShapeRef.new(shape: ClusterPeerId, location_name: "ClusterPeerId"))
+    ClusterPeer.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
+    ClusterPeer.add_member(:lifecycle, Shapes::ShapeRef.new(shape: ClusterPeerLifecycle, location_name: "Lifecycle"))
+    ClusterPeer.add_member(:lifecycle_transition_reason, Shapes::ShapeRef.new(shape: LifecycleTransitionReason, location_name: "LifecycleTransitionReason"))
+    ClusterPeer.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ClusterPeer.add_member(:peer_addresses, Shapes::ShapeRef.new(shape: PeerAddresses, location_name: "PeerAddresses"))
+    ClusterPeer.add_member(:peer_cluster_name, Shapes::ShapeRef.new(shape: PeerClusterName, location_name: "PeerClusterName"))
+    ClusterPeer.add_member(:passphrase_secret_arn, Shapes::ShapeRef.new(shape: CustomerSecretsManagerARN, location_name: "PassphraseSecretArn"))
+    ClusterPeer.add_member(:allowed_svm_mode, Shapes::ShapeRef.new(shape: AllowedSvmMode, location_name: "AllowedSvmMode"))
+    ClusterPeer.add_member(:allowed_svm_ids, Shapes::ShapeRef.new(shape: AllowedSvmIds, location_name: "AllowedSvmIds"))
+    ClusterPeer.add_member(:status, Shapes::ShapeRef.new(shape: ClusterPeerStatus, location_name: "Status"))
+    ClusterPeer.add_member(:uuid, Shapes::ShapeRef.new(shape: UUID, location_name: "UUID"))
+    ClusterPeer.add_member(:authentication_status, Shapes::ShapeRef.new(shape: ClusterPeerAuthenticationStatus, location_name: "AuthenticationStatus"))
+    ClusterPeer.struct_class = Types::ClusterPeer
+
+    ClusterPeerAuthenticationStatus.add_member(:state, Shapes::ShapeRef.new(shape: ClusterPeerAuthenticationState, location_name: "State"))
+    ClusterPeerAuthenticationStatus.add_member(:in_use, Shapes::ShapeRef.new(shape: ClusterPeerAuthenticationInUse, location_name: "InUse"))
+    ClusterPeerAuthenticationStatus.struct_class = Types::ClusterPeerAuthenticationStatus
+
+    ClusterPeerFilter.add_member(:name, Shapes::ShapeRef.new(shape: ClusterPeerFilterName, location_name: "Name"))
+    ClusterPeerFilter.add_member(:values, Shapes::ShapeRef.new(shape: ClusterPeerFilterValues, location_name: "Values"))
+    ClusterPeerFilter.struct_class = Types::ClusterPeerFilter
+
+    ClusterPeerFilterValues.member = Shapes::ShapeRef.new(shape: ClusterPeerFilterValue)
+
+    ClusterPeerFilters.member = Shapes::ShapeRef.new(shape: ClusterPeerFilter)
+
+    ClusterPeerIds.member = Shapes::ShapeRef.new(shape: ClusterPeerId)
+
+    ClusterPeerNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ClusterPeerNotFound.struct_class = Types::ClusterPeerNotFound
+
+    ClusterPeers.member = Shapes::ShapeRef.new(shape: ClusterPeer)
+
     CompletionReport.add_member(:enabled, Shapes::ShapeRef.new(shape: Flag, required: true, location_name: "Enabled"))
     CompletionReport.add_member(:path, Shapes::ShapeRef.new(shape: ArchivePath, location_name: "Path"))
     CompletionReport.add_member(:format, Shapes::ShapeRef.new(shape: ReportFormat, location_name: "Format"))
@@ -691,6 +890,23 @@ module Aws::FSx
 
     CreateBackupResponse.add_member(:backup, Shapes::ShapeRef.new(shape: Backup, location_name: "Backup"))
     CreateBackupResponse.struct_class = Types::CreateBackupResponse
+
+    CreateCloneConfiguration.add_member(:parent_volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "ParentVolumeId"))
+    CreateCloneConfiguration.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
+    CreateCloneConfiguration.struct_class = Types::CreateCloneConfiguration
+
+    CreateClusterPeerRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    CreateClusterPeerRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
+    CreateClusterPeerRequest.add_member(:peer_addresses, Shapes::ShapeRef.new(shape: PeerAddresses, required: true, location_name: "PeerAddresses"))
+    CreateClusterPeerRequest.add_member(:passphrase_secret_arn, Shapes::ShapeRef.new(shape: CustomerSecretsManagerARN, required: true, location_name: "PassphraseSecretArn"))
+    CreateClusterPeerRequest.add_member(:peer_cluster_name, Shapes::ShapeRef.new(shape: PeerClusterName, location_name: "PeerClusterName"))
+    CreateClusterPeerRequest.add_member(:allowed_svm_mode, Shapes::ShapeRef.new(shape: AllowedSvmMode, required: true, location_name: "AllowedSvmMode"))
+    CreateClusterPeerRequest.add_member(:allowed_svm_ids, Shapes::ShapeRef.new(shape: AllowedSvmIds, location_name: "AllowedSvmIds"))
+    CreateClusterPeerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateClusterPeerRequest.struct_class = Types::CreateClusterPeerRequest
+
+    CreateClusterPeerResponse.add_member(:cluster_peer, Shapes::ShapeRef.new(shape: ClusterPeer, location_name: "ClusterPeer"))
+    CreateClusterPeerResponse.struct_class = Types::CreateClusterPeerResponse
 
     CreateDataRepositoryAssociationRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     CreateDataRepositoryAssociationRequest.add_member(:file_system_path, Shapes::ShapeRef.new(shape: Namespace, location_name: "FileSystemPath"))
@@ -849,6 +1065,11 @@ module Aws::FSx
     CreateFileSystemWindowsConfiguration.add_member(:fsrm_configuration, Shapes::ShapeRef.new(shape: WindowsFsrmConfiguration, location_name: "FsrmConfiguration"))
     CreateFileSystemWindowsConfiguration.struct_class = Types::CreateFileSystemWindowsConfiguration
 
+    CreateOntapSnapshotConfiguration.add_member(:snapmirror_label, Shapes::ShapeRef.new(shape: SnapmirrorLabel, location_name: "SnapmirrorLabel"))
+    CreateOntapSnapshotConfiguration.add_member(:expiry_time, Shapes::ShapeRef.new(shape: ExpiryTime, location_name: "ExpiryTime"))
+    CreateOntapSnapshotConfiguration.add_member(:snaplock_expiry_time, Shapes::ShapeRef.new(shape: SnaplockExpiryTime, location_name: "SnaplockExpiryTime"))
+    CreateOntapSnapshotConfiguration.struct_class = Types::CreateOntapSnapshotConfiguration
+
     CreateOntapVolumeConfiguration.add_member(:junction_path, Shapes::ShapeRef.new(shape: JunctionPath, location_name: "JunctionPath"))
     CreateOntapVolumeConfiguration.add_member(:security_style, Shapes::ShapeRef.new(shape: SecurityStyle, location_name: "SecurityStyle"))
     CreateOntapVolumeConfiguration.add_member(:size_in_megabytes, Shapes::ShapeRef.new(shape: VolumeCapacity, deprecated: true, location_name: "SizeInMegabytes", metadata: {"deprecatedMessage" => "This property is deprecated, use SizeInBytes instead"}))
@@ -856,12 +1077,13 @@ module Aws::FSx
     CreateOntapVolumeConfiguration.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, required: true, location_name: "StorageVirtualMachineId"))
     CreateOntapVolumeConfiguration.add_member(:tiering_policy, Shapes::ShapeRef.new(shape: TieringPolicy, location_name: "TieringPolicy"))
     CreateOntapVolumeConfiguration.add_member(:ontap_volume_type, Shapes::ShapeRef.new(shape: InputOntapVolumeType, location_name: "OntapVolumeType"))
-    CreateOntapVolumeConfiguration.add_member(:snapshot_policy, Shapes::ShapeRef.new(shape: SnapshotPolicy, location_name: "SnapshotPolicy"))
+    CreateOntapVolumeConfiguration.add_member(:snapshot_policy, Shapes::ShapeRef.new(shape: SnapshotPolicyName, location_name: "SnapshotPolicy"))
     CreateOntapVolumeConfiguration.add_member(:copy_tags_to_backups, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
     CreateOntapVolumeConfiguration.add_member(:snaplock_configuration, Shapes::ShapeRef.new(shape: CreateSnaplockConfiguration, location_name: "SnaplockConfiguration"))
     CreateOntapVolumeConfiguration.add_member(:volume_style, Shapes::ShapeRef.new(shape: VolumeStyle, location_name: "VolumeStyle"))
     CreateOntapVolumeConfiguration.add_member(:aggregate_configuration, Shapes::ShapeRef.new(shape: CreateAggregateConfiguration, location_name: "AggregateConfiguration"))
     CreateOntapVolumeConfiguration.add_member(:size_in_bytes, Shapes::ShapeRef.new(shape: VolumeCapacityBytes, location_name: "SizeInBytes"))
+    CreateOntapVolumeConfiguration.add_member(:clone_configuration, Shapes::ShapeRef.new(shape: CreateCloneConfiguration, location_name: "CloneConfiguration"))
     CreateOntapVolumeConfiguration.struct_class = Types::CreateOntapVolumeConfiguration
 
     CreateOpenZFSOriginSnapshotConfiguration.add_member(:snapshot_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "SnapshotARN"))
@@ -888,14 +1110,72 @@ module Aws::FSx
     CreateSnaplockConfiguration.add_member(:volume_append_mode_enabled, Shapes::ShapeRef.new(shape: Flag, location_name: "VolumeAppendModeEnabled"))
     CreateSnaplockConfiguration.struct_class = Types::CreateSnaplockConfiguration
 
+    CreateSnapmirrorDestination.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
+    CreateSnapmirrorDestination.struct_class = Types::CreateSnapmirrorDestination
+
+    CreateSnapmirrorPolicyRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    CreateSnapmirrorPolicyRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
+    CreateSnapmirrorPolicyRequest.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, location_name: "StorageVirtualMachineId"))
+    CreateSnapmirrorPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: SnapmirrorPolicyName, required: true, location_name: "Name"))
+    CreateSnapmirrorPolicyRequest.add_member(:snapshot_copy_mode, Shapes::ShapeRef.new(shape: SnapmirrorPolicySnapshotCopyMode, location_name: "SnapshotCopyMode"))
+    CreateSnapmirrorPolicyRequest.add_member(:retention_rules, Shapes::ShapeRef.new(shape: SnapmirrorPolicyRetentionRules, location_name: "RetentionRules"))
+    CreateSnapmirrorPolicyRequest.add_member(:transfer_schedule, Shapes::ShapeRef.new(shape: SnapmirrorTransferScheduleName, location_name: "TransferSchedule"))
+    CreateSnapmirrorPolicyRequest.add_member(:network_compression_enabled, Shapes::ShapeRef.new(shape: Flag, location_name: "NetworkCompressionEnabled"))
+    CreateSnapmirrorPolicyRequest.add_member(:throttle_in_kbps, Shapes::ShapeRef.new(shape: ThrottleInKbps, location_name: "ThrottleInKbps"))
+    CreateSnapmirrorPolicyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateSnapmirrorPolicyRequest.struct_class = Types::CreateSnapmirrorPolicyRequest
+
+    CreateSnapmirrorPolicyResponse.add_member(:snapmirror_policy, Shapes::ShapeRef.new(shape: SnapmirrorPolicy, location_name: "SnapmirrorPolicy"))
+    CreateSnapmirrorPolicyResponse.struct_class = Types::CreateSnapmirrorPolicyResponse
+
+    CreateSnapmirrorRelationshipRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    CreateSnapmirrorRelationshipRequest.add_member(:source, Shapes::ShapeRef.new(shape: CreateSnapmirrorSource, required: true, location_name: "Source"))
+    CreateSnapmirrorRelationshipRequest.add_member(:destination, Shapes::ShapeRef.new(shape: CreateSnapmirrorDestination, required: true, location_name: "Destination"))
+    CreateSnapmirrorRelationshipRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: SnapmirrorPolicyId, location_name: "PolicyId"))
+    CreateSnapmirrorRelationshipRequest.add_member(:transfer_schedule, Shapes::ShapeRef.new(shape: SnapmirrorTransferScheduleName, location_name: "TransferSchedule"))
+    CreateSnapmirrorRelationshipRequest.add_member(:throttle_in_kbps, Shapes::ShapeRef.new(shape: ThrottleInKbps, location_name: "ThrottleInKbps"))
+    CreateSnapmirrorRelationshipRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateSnapmirrorRelationshipRequest.struct_class = Types::CreateSnapmirrorRelationshipRequest
+
+    CreateSnapmirrorRelationshipResponse.add_member(:snapmirror_relationship, Shapes::ShapeRef.new(shape: SnapmirrorRelationship, location_name: "SnapmirrorRelationship"))
+    CreateSnapmirrorRelationshipResponse.struct_class = Types::CreateSnapmirrorRelationshipResponse
+
+    CreateSnapmirrorSource.add_member(:path, Shapes::ShapeRef.new(shape: SnapmirrorPath, required: true, location_name: "Path"))
+    CreateSnapmirrorSource.struct_class = Types::CreateSnapmirrorSource
+
+    CreateSnapshotPolicyRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    CreateSnapshotPolicyRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
+    CreateSnapshotPolicyRequest.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, location_name: "StorageVirtualMachineId"))
+    CreateSnapshotPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: SnapshotPolicyName, required: true, location_name: "Name"))
+    CreateSnapshotPolicyRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Flag, location_name: "Enabled"))
+    CreateSnapshotPolicyRequest.add_member(:schedules, Shapes::ShapeRef.new(shape: SnapshotPolicyScheduleList, required: true, location_name: "Schedules"))
+    CreateSnapshotPolicyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateSnapshotPolicyRequest.struct_class = Types::CreateSnapshotPolicyRequest
+
+    CreateSnapshotPolicyResponse.add_member(:snapshot_policy, Shapes::ShapeRef.new(shape: SnapshotPolicy, location_name: "SnapshotPolicy"))
+    CreateSnapshotPolicyResponse.struct_class = Types::CreateSnapshotPolicyResponse
+
     CreateSnapshotRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateSnapshotRequest.add_member(:name, Shapes::ShapeRef.new(shape: SnapshotName, required: true, location_name: "Name"))
     CreateSnapshotRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
     CreateSnapshotRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateSnapshotRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: CreateOntapSnapshotConfiguration, location_name: "OntapConfiguration"))
     CreateSnapshotRequest.struct_class = Types::CreateSnapshotRequest
 
     CreateSnapshotResponse.add_member(:snapshot, Shapes::ShapeRef.new(shape: Snapshot, location_name: "Snapshot"))
     CreateSnapshotResponse.struct_class = Types::CreateSnapshotResponse
+
+    CreateStorageVirtualMachinePeerRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    CreateStorageVirtualMachinePeerRequest.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, required: true, location_name: "StorageVirtualMachineId"))
+    CreateStorageVirtualMachinePeerRequest.add_member(:peer_svm_name, Shapes::ShapeRef.new(shape: PeerSvmName, required: true, location_name: "PeerSvmName"))
+    CreateStorageVirtualMachinePeerRequest.add_member(:peer_cluster_name, Shapes::ShapeRef.new(shape: PeerClusterName, location_name: "PeerClusterName"))
+    CreateStorageVirtualMachinePeerRequest.add_member(:applications, Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerApplications, required: true, location_name: "Applications"))
+    CreateStorageVirtualMachinePeerRequest.add_member(:peer_svm_alias, Shapes::ShapeRef.new(shape: PeerSvmAlias, location_name: "PeerSvmAlias"))
+    CreateStorageVirtualMachinePeerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateStorageVirtualMachinePeerRequest.struct_class = Types::CreateStorageVirtualMachinePeerRequest
+
+    CreateStorageVirtualMachinePeerResponse.add_member(:storage_virtual_machine_peer, Shapes::ShapeRef.new(shape: StorageVirtualMachinePeer, location_name: "StorageVirtualMachinePeer"))
+    CreateStorageVirtualMachinePeerResponse.struct_class = Types::CreateStorageVirtualMachinePeerResponse
 
     CreateStorageVirtualMachineRequest.add_member(:active_directory_configuration, Shapes::ShapeRef.new(shape: CreateSvmActiveDirectoryConfiguration, location_name: "ActiveDirectoryConfiguration"))
     CreateStorageVirtualMachineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
@@ -1027,6 +1307,14 @@ module Aws::FSx
     DeleteBackupResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: BackupLifecycle, location_name: "Lifecycle"))
     DeleteBackupResponse.struct_class = Types::DeleteBackupResponse
 
+    DeleteClusterPeerRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    DeleteClusterPeerRequest.add_member(:cluster_peer_id, Shapes::ShapeRef.new(shape: ClusterPeerId, required: true, location_name: "ClusterPeerId"))
+    DeleteClusterPeerRequest.struct_class = Types::DeleteClusterPeerRequest
+
+    DeleteClusterPeerResponse.add_member(:cluster_peer_id, Shapes::ShapeRef.new(shape: ClusterPeerId, location_name: "ClusterPeerId"))
+    DeleteClusterPeerResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: ClusterPeerLifecycle, location_name: "Lifecycle"))
+    DeleteClusterPeerResponse.struct_class = Types::DeleteClusterPeerResponse
+
     DeleteDataRepositoryAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: DataRepositoryAssociationId, required: true, location_name: "AssociationId"))
     DeleteDataRepositoryAssociationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteDataRepositoryAssociationRequest.add_member(:delete_data_in_file_system, Shapes::ShapeRef.new(shape: DeleteDataInFileSystem, location_name: "DeleteDataInFileSystem"))
@@ -1088,6 +1376,30 @@ module Aws::FSx
 
     DeleteOpenZFSVolumeOptions.member = Shapes::ShapeRef.new(shape: DeleteOpenZFSVolumeOption)
 
+    DeleteSnapmirrorPolicyRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    DeleteSnapmirrorPolicyRequest.add_member(:snapmirror_policy_id, Shapes::ShapeRef.new(shape: SnapmirrorPolicyId, required: true, location_name: "SnapmirrorPolicyId"))
+    DeleteSnapmirrorPolicyRequest.struct_class = Types::DeleteSnapmirrorPolicyRequest
+
+    DeleteSnapmirrorPolicyResponse.add_member(:snapmirror_policy_id, Shapes::ShapeRef.new(shape: SnapmirrorPolicyId, location_name: "SnapmirrorPolicyId"))
+    DeleteSnapmirrorPolicyResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: SnapmirrorPolicyLifecycle, location_name: "Lifecycle"))
+    DeleteSnapmirrorPolicyResponse.struct_class = Types::DeleteSnapmirrorPolicyResponse
+
+    DeleteSnapmirrorRelationshipRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    DeleteSnapmirrorRelationshipRequest.add_member(:snapmirror_relationship_id, Shapes::ShapeRef.new(shape: SnapmirrorRelationshipId, required: true, location_name: "SnapmirrorRelationshipId"))
+    DeleteSnapmirrorRelationshipRequest.struct_class = Types::DeleteSnapmirrorRelationshipRequest
+
+    DeleteSnapmirrorRelationshipResponse.add_member(:snapmirror_relationship_id, Shapes::ShapeRef.new(shape: SnapmirrorRelationshipId, location_name: "SnapmirrorRelationshipId"))
+    DeleteSnapmirrorRelationshipResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: SnapmirrorRelationshipLifecycle, location_name: "Lifecycle"))
+    DeleteSnapmirrorRelationshipResponse.struct_class = Types::DeleteSnapmirrorRelationshipResponse
+
+    DeleteSnapshotPolicyRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    DeleteSnapshotPolicyRequest.add_member(:snapshot_policy_id, Shapes::ShapeRef.new(shape: SnapshotPolicyId, required: true, location_name: "SnapshotPolicyId"))
+    DeleteSnapshotPolicyRequest.struct_class = Types::DeleteSnapshotPolicyRequest
+
+    DeleteSnapshotPolicyResponse.add_member(:snapshot_policy_id, Shapes::ShapeRef.new(shape: SnapshotPolicyId, location_name: "SnapshotPolicyId"))
+    DeleteSnapshotPolicyResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: SnapshotPolicyLifecycle, location_name: "Lifecycle"))
+    DeleteSnapshotPolicyResponse.struct_class = Types::DeleteSnapshotPolicyResponse
+
     DeleteSnapshotRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteSnapshotRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
     DeleteSnapshotRequest.struct_class = Types::DeleteSnapshotRequest
@@ -1095,6 +1407,14 @@ module Aws::FSx
     DeleteSnapshotResponse.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
     DeleteSnapshotResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: SnapshotLifecycle, location_name: "Lifecycle"))
     DeleteSnapshotResponse.struct_class = Types::DeleteSnapshotResponse
+
+    DeleteStorageVirtualMachinePeerRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    DeleteStorageVirtualMachinePeerRequest.add_member(:storage_virtual_machine_peer_id, Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerId, required: true, location_name: "StorageVirtualMachinePeerId"))
+    DeleteStorageVirtualMachinePeerRequest.struct_class = Types::DeleteStorageVirtualMachinePeerRequest
+
+    DeleteStorageVirtualMachinePeerResponse.add_member(:storage_virtual_machine_peer_id, Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerId, location_name: "StorageVirtualMachinePeerId"))
+    DeleteStorageVirtualMachinePeerResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerLifecycle, location_name: "Lifecycle"))
+    DeleteStorageVirtualMachinePeerResponse.struct_class = Types::DeleteStorageVirtualMachinePeerResponse
 
     DeleteStorageVirtualMachineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteStorageVirtualMachineRequest.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, required: true, location_name: "StorageVirtualMachineId"))
@@ -1136,6 +1456,16 @@ module Aws::FSx
     DescribeBackupsResponse.add_member(:backups, Shapes::ShapeRef.new(shape: Backups, location_name: "Backups"))
     DescribeBackupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeBackupsResponse.struct_class = Types::DescribeBackupsResponse
+
+    DescribeClusterPeersRequest.add_member(:cluster_peer_ids, Shapes::ShapeRef.new(shape: ClusterPeerIds, location_name: "ClusterPeerIds"))
+    DescribeClusterPeersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ClusterPeerFilters, location_name: "Filters"))
+    DescribeClusterPeersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeClusterPeersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeClusterPeersRequest.struct_class = Types::DescribeClusterPeersRequest
+
+    DescribeClusterPeersResponse.add_member(:cluster_peers, Shapes::ShapeRef.new(shape: ClusterPeers, location_name: "ClusterPeers"))
+    DescribeClusterPeersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeClusterPeersResponse.struct_class = Types::DescribeClusterPeersResponse
 
     DescribeDataRepositoryAssociationsRequest.add_member(:association_ids, Shapes::ShapeRef.new(shape: DataRepositoryAssociationIds, location_name: "AssociationIds"))
     DescribeDataRepositoryAssociationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
@@ -1200,6 +1530,36 @@ module Aws::FSx
     DescribeSharedVpcConfigurationResponse.add_member(:enable_fsx_route_table_updates_from_participant_accounts, Shapes::ShapeRef.new(shape: VerboseFlag, location_name: "EnableFsxRouteTableUpdatesFromParticipantAccounts"))
     DescribeSharedVpcConfigurationResponse.struct_class = Types::DescribeSharedVpcConfigurationResponse
 
+    DescribeSnapmirrorPoliciesRequest.add_member(:snapmirror_policy_ids, Shapes::ShapeRef.new(shape: SnapmirrorPolicyIds, location_name: "SnapmirrorPolicyIds"))
+    DescribeSnapmirrorPoliciesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SnapmirrorPolicyFilters, location_name: "Filters"))
+    DescribeSnapmirrorPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeSnapmirrorPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeSnapmirrorPoliciesRequest.struct_class = Types::DescribeSnapmirrorPoliciesRequest
+
+    DescribeSnapmirrorPoliciesResponse.add_member(:snapmirror_policies, Shapes::ShapeRef.new(shape: SnapmirrorPolicies, location_name: "SnapmirrorPolicies"))
+    DescribeSnapmirrorPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeSnapmirrorPoliciesResponse.struct_class = Types::DescribeSnapmirrorPoliciesResponse
+
+    DescribeSnapmirrorRelationshipsRequest.add_member(:snapmirror_relationship_ids, Shapes::ShapeRef.new(shape: SnapmirrorRelationshipIds, location_name: "SnapmirrorRelationshipIds"))
+    DescribeSnapmirrorRelationshipsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SnapmirrorRelationshipFilters, location_name: "Filters"))
+    DescribeSnapmirrorRelationshipsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeSnapmirrorRelationshipsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeSnapmirrorRelationshipsRequest.struct_class = Types::DescribeSnapmirrorRelationshipsRequest
+
+    DescribeSnapmirrorRelationshipsResponse.add_member(:snapmirror_relationships, Shapes::ShapeRef.new(shape: SnapmirrorRelationships, location_name: "SnapmirrorRelationships"))
+    DescribeSnapmirrorRelationshipsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeSnapmirrorRelationshipsResponse.struct_class = Types::DescribeSnapmirrorRelationshipsResponse
+
+    DescribeSnapshotPoliciesRequest.add_member(:snapshot_policy_ids, Shapes::ShapeRef.new(shape: SnapshotPolicyIds, location_name: "SnapshotPolicyIds"))
+    DescribeSnapshotPoliciesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SnapshotPolicyFilters, location_name: "Filters"))
+    DescribeSnapshotPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeSnapshotPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeSnapshotPoliciesRequest.struct_class = Types::DescribeSnapshotPoliciesRequest
+
+    DescribeSnapshotPoliciesResponse.add_member(:snapshot_policies, Shapes::ShapeRef.new(shape: SnapshotPolicies, location_name: "SnapshotPolicies"))
+    DescribeSnapshotPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeSnapshotPoliciesResponse.struct_class = Types::DescribeSnapshotPoliciesResponse
+
     DescribeSnapshotsRequest.add_member(:snapshot_ids, Shapes::ShapeRef.new(shape: SnapshotIds, location_name: "SnapshotIds"))
     DescribeSnapshotsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SnapshotFilters, location_name: "Filters"))
     DescribeSnapshotsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -1210,6 +1570,16 @@ module Aws::FSx
     DescribeSnapshotsResponse.add_member(:snapshots, Shapes::ShapeRef.new(shape: Snapshots, location_name: "Snapshots"))
     DescribeSnapshotsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeSnapshotsResponse.struct_class = Types::DescribeSnapshotsResponse
+
+    DescribeStorageVirtualMachinePeersRequest.add_member(:storage_virtual_machine_peer_ids, Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerIds, location_name: "StorageVirtualMachinePeerIds"))
+    DescribeStorageVirtualMachinePeersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerFilters, location_name: "Filters"))
+    DescribeStorageVirtualMachinePeersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeStorageVirtualMachinePeersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeStorageVirtualMachinePeersRequest.struct_class = Types::DescribeStorageVirtualMachinePeersRequest
+
+    DescribeStorageVirtualMachinePeersResponse.add_member(:storage_virtual_machine_peers, Shapes::ShapeRef.new(shape: StorageVirtualMachinePeers, location_name: "StorageVirtualMachinePeers"))
+    DescribeStorageVirtualMachinePeersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeStorageVirtualMachinePeersResponse.struct_class = Types::DescribeStorageVirtualMachinePeersResponse
 
     DescribeStorageVirtualMachinesRequest.add_member(:storage_virtual_machine_ids, Shapes::ShapeRef.new(shape: StorageVirtualMachineIds, location_name: "StorageVirtualMachineIds"))
     DescribeStorageVirtualMachinesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: StorageVirtualMachineFilters, location_name: "Filters"))
@@ -1433,6 +1803,7 @@ module Aws::FSx
     InvalidSourceKmsKey.struct_class = Types::InvalidSourceKmsKey
 
     LifecycleTransitionReason.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LifecycleTransitionReason.add_member(:ontap_error, Shapes::ShapeRef.new(shape: OntapError, location_name: "OntapError"))
     LifecycleTransitionReason.struct_class = Types::LifecycleTransitionReason
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))
@@ -1502,6 +1873,10 @@ module Aws::FSx
 
     OntapEndpointIpAddresses.member = Shapes::ShapeRef.new(shape: IpAddress)
 
+    OntapError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    OntapError.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    OntapError.struct_class = Types::OntapError
+
     OntapFileSystemConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
     OntapFileSystemConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
     OntapFileSystemConfiguration.add_member(:deployment_type, Shapes::ShapeRef.new(shape: OntapDeploymentType, location_name: "DeploymentType"))
@@ -1523,6 +1898,13 @@ module Aws::FSx
     OntapFileSystemIdentity.add_member(:windows_user, Shapes::ShapeRef.new(shape: OntapWindowsFileSystemUser, location_name: "WindowsUser"))
     OntapFileSystemIdentity.struct_class = Types::OntapFileSystemIdentity
 
+    OntapSnapshotConfiguration.add_member(:size_in_megabytes, Shapes::ShapeRef.new(shape: SnapshotSizeInMegabytes, location_name: "SizeInMegabytes"))
+    OntapSnapshotConfiguration.add_member(:snapmirror_label, Shapes::ShapeRef.new(shape: SnapmirrorLabel, location_name: "SnapmirrorLabel"))
+    OntapSnapshotConfiguration.add_member(:expiry_time, Shapes::ShapeRef.new(shape: ExpiryTime, location_name: "ExpiryTime"))
+    OntapSnapshotConfiguration.add_member(:snaplock_expiry_time, Shapes::ShapeRef.new(shape: SnaplockExpiryTime, location_name: "SnaplockExpiryTime"))
+    OntapSnapshotConfiguration.add_member(:uuid, Shapes::ShapeRef.new(shape: UUID, location_name: "UUID"))
+    OntapSnapshotConfiguration.struct_class = Types::OntapSnapshotConfiguration
+
     OntapUnixFileSystemUser.add_member(:name, Shapes::ShapeRef.new(shape: OntapFileSystemUserName, required: true, location_name: "Name"))
     OntapUnixFileSystemUser.struct_class = Types::OntapUnixFileSystemUser
 
@@ -1536,12 +1918,13 @@ module Aws::FSx
     OntapVolumeConfiguration.add_member(:tiering_policy, Shapes::ShapeRef.new(shape: TieringPolicy, location_name: "TieringPolicy"))
     OntapVolumeConfiguration.add_member(:uuid, Shapes::ShapeRef.new(shape: UUID, location_name: "UUID"))
     OntapVolumeConfiguration.add_member(:ontap_volume_type, Shapes::ShapeRef.new(shape: OntapVolumeType, location_name: "OntapVolumeType"))
-    OntapVolumeConfiguration.add_member(:snapshot_policy, Shapes::ShapeRef.new(shape: SnapshotPolicy, location_name: "SnapshotPolicy"))
+    OntapVolumeConfiguration.add_member(:snapshot_policy, Shapes::ShapeRef.new(shape: SnapshotPolicyName, location_name: "SnapshotPolicy"))
     OntapVolumeConfiguration.add_member(:copy_tags_to_backups, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
     OntapVolumeConfiguration.add_member(:snaplock_configuration, Shapes::ShapeRef.new(shape: SnaplockConfiguration, location_name: "SnaplockConfiguration"))
     OntapVolumeConfiguration.add_member(:volume_style, Shapes::ShapeRef.new(shape: VolumeStyle, location_name: "VolumeStyle"))
     OntapVolumeConfiguration.add_member(:aggregate_configuration, Shapes::ShapeRef.new(shape: AggregateConfiguration, location_name: "AggregateConfiguration"))
     OntapVolumeConfiguration.add_member(:size_in_bytes, Shapes::ShapeRef.new(shape: VolumeCapacityBytes, location_name: "SizeInBytes"))
+    OntapVolumeConfiguration.add_member(:clone_configuration, Shapes::ShapeRef.new(shape: CloneConfiguration, location_name: "CloneConfiguration"))
     OntapVolumeConfiguration.struct_class = Types::OntapVolumeConfiguration
 
     OntapWindowsFileSystemUser.add_member(:name, Shapes::ShapeRef.new(shape: OntapFileSystemUserName, required: true, location_name: "Name"))
@@ -1629,6 +2012,8 @@ module Aws::FSx
     OpenZFSVolumeConfiguration.add_member(:destination_snapshot, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "DestinationSnapshot"))
     OpenZFSVolumeConfiguration.add_member(:copy_strategy, Shapes::ShapeRef.new(shape: OpenZFSCopyStrategy, location_name: "CopyStrategy"))
     OpenZFSVolumeConfiguration.struct_class = Types::OpenZFSVolumeConfiguration
+
+    PeerAddresses.member = Shapes::ShapeRef.new(shape: IpAddress)
 
     ReleaseConfiguration.add_member(:duration_since_last_access, Shapes::ShapeRef.new(shape: DurationSinceLastAccess, location_name: "DurationSinceLastAccess"))
     ReleaseConfiguration.struct_class = Types::ReleaseConfiguration
@@ -1759,15 +2144,113 @@ module Aws::FSx
     SnaplockRetentionPeriod.add_member(:maximum_retention, Shapes::ShapeRef.new(shape: RetentionPeriod, required: true, location_name: "MaximumRetention"))
     SnaplockRetentionPeriod.struct_class = Types::SnaplockRetentionPeriod
 
+    SnapmirrorDestination.add_member(:path, Shapes::ShapeRef.new(shape: SnapmirrorPath, location_name: "Path"))
+    SnapmirrorDestination.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
+    SnapmirrorDestination.struct_class = Types::SnapmirrorDestination
+
+    SnapmirrorExportedSnapshot.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
+    SnapmirrorExportedSnapshot.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: SnapmirrorExportedSnapshotName, location_name: "SnapshotName"))
+    SnapmirrorExportedSnapshot.struct_class = Types::SnapmirrorExportedSnapshot
+
+    SnapmirrorPolicies.member = Shapes::ShapeRef.new(shape: SnapmirrorPolicy)
+
+    SnapmirrorPolicy.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
+    SnapmirrorPolicy.add_member(:snapmirror_policy_id, Shapes::ShapeRef.new(shape: SnapmirrorPolicyId, location_name: "SnapmirrorPolicyId"))
+    SnapmirrorPolicy.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
+    SnapmirrorPolicy.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, location_name: "StorageVirtualMachineId"))
+    SnapmirrorPolicy.add_member(:name, Shapes::ShapeRef.new(shape: SnapmirrorPolicyName, location_name: "Name"))
+    SnapmirrorPolicy.add_member(:snapshot_copy_mode, Shapes::ShapeRef.new(shape: SnapmirrorPolicySnapshotCopyMode, location_name: "SnapshotCopyMode"))
+    SnapmirrorPolicy.add_member(:retention_rules, Shapes::ShapeRef.new(shape: SnapmirrorPolicyRetentionRules, location_name: "RetentionRules"))
+    SnapmirrorPolicy.add_member(:transfer_schedule, Shapes::ShapeRef.new(shape: SnapmirrorTransferScheduleName, location_name: "TransferSchedule"))
+    SnapmirrorPolicy.add_member(:network_compression_enabled, Shapes::ShapeRef.new(shape: Flag, location_name: "NetworkCompressionEnabled"))
+    SnapmirrorPolicy.add_member(:throttle_in_kbps, Shapes::ShapeRef.new(shape: ThrottleInKbps, location_name: "ThrottleInKbps"))
+    SnapmirrorPolicy.add_member(:scope, Shapes::ShapeRef.new(shape: SnapmirrorPolicyScope, location_name: "Scope"))
+    SnapmirrorPolicy.add_member(:lifecycle, Shapes::ShapeRef.new(shape: SnapmirrorPolicyLifecycle, location_name: "Lifecycle"))
+    SnapmirrorPolicy.add_member(:uuid, Shapes::ShapeRef.new(shape: UUID, location_name: "UUID"))
+    SnapmirrorPolicy.add_member(:lifecycle_transition_reason, Shapes::ShapeRef.new(shape: LifecycleTransitionReason, location_name: "LifecycleTransitionReason"))
+    SnapmirrorPolicy.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    SnapmirrorPolicy.struct_class = Types::SnapmirrorPolicy
+
+    SnapmirrorPolicyFilter.add_member(:name, Shapes::ShapeRef.new(shape: SnapmirrorPolicyFilterName, location_name: "Name"))
+    SnapmirrorPolicyFilter.add_member(:values, Shapes::ShapeRef.new(shape: SnapmirrorPolicyFilterValues, location_name: "Values"))
+    SnapmirrorPolicyFilter.struct_class = Types::SnapmirrorPolicyFilter
+
+    SnapmirrorPolicyFilterValues.member = Shapes::ShapeRef.new(shape: SnapmirrorPolicyFilterValue)
+
+    SnapmirrorPolicyFilters.member = Shapes::ShapeRef.new(shape: SnapmirrorPolicyFilter)
+
+    SnapmirrorPolicyIds.member = Shapes::ShapeRef.new(shape: SnapmirrorPolicyId)
+
+    SnapmirrorPolicyNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    SnapmirrorPolicyNotFound.struct_class = Types::SnapmirrorPolicyNotFound
+
+    SnapmirrorPolicyRetentionRule.add_member(:label, Shapes::ShapeRef.new(shape: SnapmirrorLabel, required: true, location_name: "Label"))
+    SnapmirrorPolicyRetentionRule.add_member(:count, Shapes::ShapeRef.new(shape: SnapmirrorPolicyRetentionCount, required: true, location_name: "Count"))
+    SnapmirrorPolicyRetentionRule.add_member(:creation_schedule, Shapes::ShapeRef.new(shape: SnapmirrorPolicyCreationScheduleName, location_name: "CreationSchedule"))
+    SnapmirrorPolicyRetentionRule.struct_class = Types::SnapmirrorPolicyRetentionRule
+
+    SnapmirrorPolicyRetentionRules.member = Shapes::ShapeRef.new(shape: SnapmirrorPolicyRetentionRule)
+
+    SnapmirrorRelationship.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
+    SnapmirrorRelationship.add_member(:snapmirror_relationship_id, Shapes::ShapeRef.new(shape: SnapmirrorRelationshipId, location_name: "SnapmirrorRelationshipId"))
+    SnapmirrorRelationship.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
+    SnapmirrorRelationship.add_member(:lifecycle, Shapes::ShapeRef.new(shape: SnapmirrorRelationshipLifecycle, location_name: "Lifecycle"))
+    SnapmirrorRelationship.add_member(:lifecycle_transition_reason, Shapes::ShapeRef.new(shape: LifecycleTransitionReason, location_name: "LifecycleTransitionReason"))
+    SnapmirrorRelationship.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    SnapmirrorRelationship.add_member(:source, Shapes::ShapeRef.new(shape: SnapmirrorSource, location_name: "Source"))
+    SnapmirrorRelationship.add_member(:destination, Shapes::ShapeRef.new(shape: SnapmirrorDestination, location_name: "Destination"))
+    SnapmirrorRelationship.add_member(:snapmirror_policy, Shapes::ShapeRef.new(shape: SnapmirrorRelationshipPolicy, location_name: "SnapmirrorPolicy"))
+    SnapmirrorRelationship.add_member(:transfer_schedule, Shapes::ShapeRef.new(shape: SnapmirrorTransferScheduleName, location_name: "TransferSchedule"))
+    SnapmirrorRelationship.add_member(:throttle_in_kbps, Shapes::ShapeRef.new(shape: ThrottleInKbps, location_name: "ThrottleInKbps"))
+    SnapmirrorRelationship.add_member(:state, Shapes::ShapeRef.new(shape: SnapmirrorRelationshipState, location_name: "State"))
+    SnapmirrorRelationship.add_member(:healthy, Shapes::ShapeRef.new(shape: SnapmirrorHealthy, location_name: "Healthy"))
+    SnapmirrorRelationship.add_member(:unhealthy_reason, Shapes::ShapeRef.new(shape: SnapmirrorUnhealthyReason, location_name: "UnhealthyReason"))
+    SnapmirrorRelationship.add_member(:lag_time_in_minutes, Shapes::ShapeRef.new(shape: LagTimeInMinutes, location_name: "LagTimeInMinutes"))
+    SnapmirrorRelationship.add_member(:exported_snapshot, Shapes::ShapeRef.new(shape: SnapmirrorExportedSnapshot, location_name: "ExportedSnapshot"))
+    SnapmirrorRelationship.add_member(:transfer_state, Shapes::ShapeRef.new(shape: SnapmirrorTransferState, location_name: "TransferState"))
+    SnapmirrorRelationship.add_member(:uuid, Shapes::ShapeRef.new(shape: UUID, location_name: "UUID"))
+    SnapmirrorRelationship.struct_class = Types::SnapmirrorRelationship
+
+    SnapmirrorRelationshipFilter.add_member(:name, Shapes::ShapeRef.new(shape: SnapmirrorRelationshipFilterName, location_name: "Name"))
+    SnapmirrorRelationshipFilter.add_member(:values, Shapes::ShapeRef.new(shape: SnapmirrorRelationshipFilterValues, location_name: "Values"))
+    SnapmirrorRelationshipFilter.struct_class = Types::SnapmirrorRelationshipFilter
+
+    SnapmirrorRelationshipFilterValues.member = Shapes::ShapeRef.new(shape: SnapmirrorRelationshipFilterValue)
+
+    SnapmirrorRelationshipFilters.member = Shapes::ShapeRef.new(shape: SnapmirrorRelationshipFilter)
+
+    SnapmirrorRelationshipIds.member = Shapes::ShapeRef.new(shape: SnapmirrorRelationshipId)
+
+    SnapmirrorRelationshipNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    SnapmirrorRelationshipNotFound.struct_class = Types::SnapmirrorRelationshipNotFound
+
+    SnapmirrorRelationshipPolicy.add_member(:policy_id, Shapes::ShapeRef.new(shape: SnapmirrorPolicyId, location_name: "PolicyId"))
+    SnapmirrorRelationshipPolicy.add_member(:policy_name, Shapes::ShapeRef.new(shape: SnapmirrorPolicyName, location_name: "PolicyName"))
+    SnapmirrorRelationshipPolicy.struct_class = Types::SnapmirrorRelationshipPolicy
+
+    SnapmirrorRelationships.member = Shapes::ShapeRef.new(shape: SnapmirrorRelationship)
+
+    SnapmirrorSource.add_member(:path, Shapes::ShapeRef.new(shape: SnapmirrorPath, location_name: "Path"))
+    SnapmirrorSource.struct_class = Types::SnapmirrorSource
+
+    SnapmirrorTransferState.add_member(:state, Shapes::ShapeRef.new(shape: SnapmirrorTransferStatus, location_name: "State"))
+    SnapmirrorTransferState.add_member(:type, Shapes::ShapeRef.new(shape: SnapmirrorTransferType, location_name: "Type"))
+    SnapmirrorTransferState.add_member(:bytes_transferred, Shapes::ShapeRef.new(shape: SnapmirrorTransferBytes, location_name: "BytesTransferred"))
+    SnapmirrorTransferState.add_member(:duration, Shapes::ShapeRef.new(shape: SnapmirrorTransferDuration, location_name: "Duration"))
+    SnapmirrorTransferState.add_member(:end_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "EndTime"))
+    SnapmirrorTransferState.struct_class = Types::SnapmirrorTransferState
+
     Snapshot.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
     Snapshot.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
     Snapshot.add_member(:name, Shapes::ShapeRef.new(shape: SnapshotName, location_name: "Name"))
     Snapshot.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
     Snapshot.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
     Snapshot.add_member(:lifecycle, Shapes::ShapeRef.new(shape: SnapshotLifecycle, location_name: "Lifecycle"))
+    Snapshot.add_member(:snapshot_type, Shapes::ShapeRef.new(shape: SnapshotType, location_name: "SnapshotType"))
     Snapshot.add_member(:lifecycle_transition_reason, Shapes::ShapeRef.new(shape: LifecycleTransitionReason, location_name: "LifecycleTransitionReason"))
     Snapshot.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     Snapshot.add_member(:administrative_actions, Shapes::ShapeRef.new(shape: AdministrativeActions, location_name: "AdministrativeActions"))
+    Snapshot.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: OntapSnapshotConfiguration, location_name: "OntapConfiguration"))
     Snapshot.struct_class = Types::Snapshot
 
     SnapshotFilter.add_member(:name, Shapes::ShapeRef.new(shape: SnapshotFilterName, location_name: "Name"))
@@ -1782,6 +2265,48 @@ module Aws::FSx
 
     SnapshotNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     SnapshotNotFound.struct_class = Types::SnapshotNotFound
+
+    SnapshotPolicies.member = Shapes::ShapeRef.new(shape: SnapshotPolicy)
+
+    SnapshotPolicy.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
+    SnapshotPolicy.add_member(:snapshot_policy_id, Shapes::ShapeRef.new(shape: SnapshotPolicyId, location_name: "SnapshotPolicyId"))
+    SnapshotPolicy.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
+    SnapshotPolicy.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, location_name: "StorageVirtualMachineId"))
+    SnapshotPolicy.add_member(:name, Shapes::ShapeRef.new(shape: SnapshotPolicyName, location_name: "Name"))
+    SnapshotPolicy.add_member(:enabled, Shapes::ShapeRef.new(shape: Flag, location_name: "Enabled"))
+    SnapshotPolicy.add_member(:schedules, Shapes::ShapeRef.new(shape: SnapshotPolicyScheduleList, location_name: "Schedules"))
+    SnapshotPolicy.add_member(:scope, Shapes::ShapeRef.new(shape: SnapshotPolicyScope, location_name: "Scope"))
+    SnapshotPolicy.add_member(:lifecycle, Shapes::ShapeRef.new(shape: SnapshotPolicyLifecycle, location_name: "Lifecycle"))
+    SnapshotPolicy.add_member(:uuid, Shapes::ShapeRef.new(shape: UUID, location_name: "UUID"))
+    SnapshotPolicy.add_member(:lifecycle_transition_reason, Shapes::ShapeRef.new(shape: LifecycleTransitionReason, location_name: "LifecycleTransitionReason"))
+    SnapshotPolicy.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    SnapshotPolicy.struct_class = Types::SnapshotPolicy
+
+    SnapshotPolicyFilter.add_member(:name, Shapes::ShapeRef.new(shape: SnapshotPolicyFilterName, location_name: "Name"))
+    SnapshotPolicyFilter.add_member(:values, Shapes::ShapeRef.new(shape: SnapshotPolicyFilterValues, location_name: "Values"))
+    SnapshotPolicyFilter.struct_class = Types::SnapshotPolicyFilter
+
+    SnapshotPolicyFilterValues.member = Shapes::ShapeRef.new(shape: SnapshotPolicyFilterValue)
+
+    SnapshotPolicyFilters.member = Shapes::ShapeRef.new(shape: SnapshotPolicyFilter)
+
+    SnapshotPolicyIds.member = Shapes::ShapeRef.new(shape: SnapshotPolicyId)
+
+    SnapshotPolicyNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    SnapshotPolicyNotFound.struct_class = Types::SnapshotPolicyNotFound
+
+    SnapshotPolicyRetentionPeriod.add_member(:type, Shapes::ShapeRef.new(shape: SnapshotPolicyRetentionPeriodType, required: true, location_name: "Type"))
+    SnapshotPolicyRetentionPeriod.add_member(:value, Shapes::ShapeRef.new(shape: SnapshotPolicyRetentionPeriodValue, location_name: "Value"))
+    SnapshotPolicyRetentionPeriod.struct_class = Types::SnapshotPolicyRetentionPeriod
+
+    SnapshotPolicySchedule.add_member(:name, Shapes::ShapeRef.new(shape: SnapshotPolicyScheduleName, required: true, location_name: "Name"))
+    SnapshotPolicySchedule.add_member(:count, Shapes::ShapeRef.new(shape: SnapshotPolicyScheduleCount, required: true, location_name: "Count"))
+    SnapshotPolicySchedule.add_member(:prefix, Shapes::ShapeRef.new(shape: SnapshotPolicySchedulePrefix, location_name: "Prefix"))
+    SnapshotPolicySchedule.add_member(:snapmirror_label, Shapes::ShapeRef.new(shape: SnapmirrorLabel, location_name: "SnapmirrorLabel"))
+    SnapshotPolicySchedule.add_member(:retention_period, Shapes::ShapeRef.new(shape: SnapshotPolicyRetentionPeriod, location_name: "RetentionPeriod"))
+    SnapshotPolicySchedule.struct_class = Types::SnapshotPolicySchedule
+
+    SnapshotPolicyScheduleList.member = Shapes::ShapeRef.new(shape: SnapshotPolicySchedule)
 
     Snapshots.member = Shapes::ShapeRef.new(shape: Snapshot)
 
@@ -1823,6 +2348,38 @@ module Aws::FSx
 
     StorageVirtualMachineNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     StorageVirtualMachineNotFound.struct_class = Types::StorageVirtualMachineNotFound
+
+    StorageVirtualMachinePeer.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
+    StorageVirtualMachinePeer.add_member(:storage_virtual_machine_peer_id, Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerId, location_name: "StorageVirtualMachinePeerId"))
+    StorageVirtualMachinePeer.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, location_name: "StorageVirtualMachineId"))
+    StorageVirtualMachinePeer.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
+    StorageVirtualMachinePeer.add_member(:lifecycle, Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerLifecycle, location_name: "Lifecycle"))
+    StorageVirtualMachinePeer.add_member(:lifecycle_transition_reason, Shapes::ShapeRef.new(shape: LifecycleTransitionReason, location_name: "LifecycleTransitionReason"))
+    StorageVirtualMachinePeer.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    StorageVirtualMachinePeer.add_member(:peer_svm_name, Shapes::ShapeRef.new(shape: PeerSvmName, location_name: "PeerSvmName"))
+    StorageVirtualMachinePeer.add_member(:peer_svm_alias, Shapes::ShapeRef.new(shape: PeerSvmAlias, location_name: "PeerSvmAlias"))
+    StorageVirtualMachinePeer.add_member(:peer_cluster_name, Shapes::ShapeRef.new(shape: PeerClusterName, location_name: "PeerClusterName"))
+    StorageVirtualMachinePeer.add_member(:applications, Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerApplications, location_name: "Applications"))
+    StorageVirtualMachinePeer.add_member(:state, Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerState, location_name: "State"))
+    StorageVirtualMachinePeer.add_member(:uuid, Shapes::ShapeRef.new(shape: UUID, location_name: "UUID"))
+    StorageVirtualMachinePeer.struct_class = Types::StorageVirtualMachinePeer
+
+    StorageVirtualMachinePeerApplications.member = Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerApplication)
+
+    StorageVirtualMachinePeerFilter.add_member(:name, Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerFilterName, location_name: "Name"))
+    StorageVirtualMachinePeerFilter.add_member(:values, Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerFilterValues, location_name: "Values"))
+    StorageVirtualMachinePeerFilter.struct_class = Types::StorageVirtualMachinePeerFilter
+
+    StorageVirtualMachinePeerFilterValues.member = Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerFilterValue)
+
+    StorageVirtualMachinePeerFilters.member = Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerFilter)
+
+    StorageVirtualMachinePeerIds.member = Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerId)
+
+    StorageVirtualMachinePeerNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    StorageVirtualMachinePeerNotFound.struct_class = Types::StorageVirtualMachinePeerNotFound
+
+    StorageVirtualMachinePeers.member = Shapes::ShapeRef.new(shape: StorageVirtualMachinePeer)
 
     StorageVirtualMachines.member = Shapes::ShapeRef.new(shape: StorageVirtualMachine)
 
@@ -1877,6 +2434,18 @@ module Aws::FSx
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateCloneConfiguration.add_member(:split_action, Shapes::ShapeRef.new(shape: CloneSplitAction, location_name: "SplitAction"))
+    UpdateCloneConfiguration.struct_class = Types::UpdateCloneConfiguration
+
+    UpdateClusterPeerRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    UpdateClusterPeerRequest.add_member(:cluster_peer_id, Shapes::ShapeRef.new(shape: ClusterPeerId, required: true, location_name: "ClusterPeerId"))
+    UpdateClusterPeerRequest.add_member(:peer_cluster_name, Shapes::ShapeRef.new(shape: PeerClusterName, location_name: "PeerClusterName"))
+    UpdateClusterPeerRequest.add_member(:peer_addresses, Shapes::ShapeRef.new(shape: PeerAddresses, location_name: "PeerAddresses"))
+    UpdateClusterPeerRequest.struct_class = Types::UpdateClusterPeerRequest
+
+    UpdateClusterPeerResponse.add_member(:cluster_peer, Shapes::ShapeRef.new(shape: ClusterPeer, location_name: "ClusterPeer"))
+    UpdateClusterPeerResponse.struct_class = Types::UpdateClusterPeerResponse
 
     UpdateDataRepositoryAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: DataRepositoryAssociationId, required: true, location_name: "AssociationId"))
     UpdateDataRepositoryAssociationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
@@ -1966,15 +2535,21 @@ module Aws::FSx
     UpdateFileSystemWindowsConfiguration.add_member(:fsrm_configuration, Shapes::ShapeRef.new(shape: WindowsFsrmConfiguration, location_name: "FsrmConfiguration"))
     UpdateFileSystemWindowsConfiguration.struct_class = Types::UpdateFileSystemWindowsConfiguration
 
+    UpdateOntapSnapshotConfiguration.add_member(:snapmirror_label, Shapes::ShapeRef.new(shape: SnapmirrorLabel, location_name: "SnapmirrorLabel"))
+    UpdateOntapSnapshotConfiguration.add_member(:expiry_time, Shapes::ShapeRef.new(shape: ExpiryTime, location_name: "ExpiryTime"))
+    UpdateOntapSnapshotConfiguration.add_member(:snaplock_expiry_time, Shapes::ShapeRef.new(shape: SnaplockExpiryTime, location_name: "SnaplockExpiryTime"))
+    UpdateOntapSnapshotConfiguration.struct_class = Types::UpdateOntapSnapshotConfiguration
+
     UpdateOntapVolumeConfiguration.add_member(:junction_path, Shapes::ShapeRef.new(shape: JunctionPath, location_name: "JunctionPath"))
     UpdateOntapVolumeConfiguration.add_member(:security_style, Shapes::ShapeRef.new(shape: SecurityStyle, location_name: "SecurityStyle"))
     UpdateOntapVolumeConfiguration.add_member(:size_in_megabytes, Shapes::ShapeRef.new(shape: VolumeCapacity, location_name: "SizeInMegabytes"))
     UpdateOntapVolumeConfiguration.add_member(:storage_efficiency_enabled, Shapes::ShapeRef.new(shape: Flag, location_name: "StorageEfficiencyEnabled"))
     UpdateOntapVolumeConfiguration.add_member(:tiering_policy, Shapes::ShapeRef.new(shape: TieringPolicy, location_name: "TieringPolicy"))
-    UpdateOntapVolumeConfiguration.add_member(:snapshot_policy, Shapes::ShapeRef.new(shape: SnapshotPolicy, location_name: "SnapshotPolicy"))
+    UpdateOntapVolumeConfiguration.add_member(:snapshot_policy, Shapes::ShapeRef.new(shape: SnapshotPolicyName, location_name: "SnapshotPolicy"))
     UpdateOntapVolumeConfiguration.add_member(:copy_tags_to_backups, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
     UpdateOntapVolumeConfiguration.add_member(:snaplock_configuration, Shapes::ShapeRef.new(shape: UpdateSnaplockConfiguration, location_name: "SnaplockConfiguration"))
     UpdateOntapVolumeConfiguration.add_member(:size_in_bytes, Shapes::ShapeRef.new(shape: VolumeCapacityBytes, location_name: "SizeInBytes"))
+    UpdateOntapVolumeConfiguration.add_member(:clone_configuration, Shapes::ShapeRef.new(shape: UpdateCloneConfiguration, location_name: "CloneConfiguration"))
     UpdateOntapVolumeConfiguration.struct_class = Types::UpdateOntapVolumeConfiguration
 
     UpdateOpenZFSVolumeConfiguration.add_member(:storage_capacity_reservation_gi_b, Shapes::ShapeRef.new(shape: IntegerNoMaxFromNegativeOne, location_name: "StorageCapacityReservationGiB"))
@@ -2002,13 +2577,54 @@ module Aws::FSx
     UpdateSnaplockConfiguration.add_member(:volume_append_mode_enabled, Shapes::ShapeRef.new(shape: Flag, location_name: "VolumeAppendModeEnabled"))
     UpdateSnaplockConfiguration.struct_class = Types::UpdateSnaplockConfiguration
 
+    UpdateSnapmirrorPolicyRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    UpdateSnapmirrorPolicyRequest.add_member(:snapmirror_policy_id, Shapes::ShapeRef.new(shape: SnapmirrorPolicyId, required: true, location_name: "SnapmirrorPolicyId"))
+    UpdateSnapmirrorPolicyRequest.add_member(:retention_rules, Shapes::ShapeRef.new(shape: SnapmirrorPolicyRetentionRules, location_name: "RetentionRules"))
+    UpdateSnapmirrorPolicyRequest.add_member(:transfer_schedule, Shapes::ShapeRef.new(shape: SnapmirrorTransferScheduleName, location_name: "TransferSchedule"))
+    UpdateSnapmirrorPolicyRequest.add_member(:network_compression_enabled, Shapes::ShapeRef.new(shape: Flag, location_name: "NetworkCompressionEnabled"))
+    UpdateSnapmirrorPolicyRequest.add_member(:throttle_in_kbps, Shapes::ShapeRef.new(shape: ThrottleInKbps, location_name: "ThrottleInKbps"))
+    UpdateSnapmirrorPolicyRequest.struct_class = Types::UpdateSnapmirrorPolicyRequest
+
+    UpdateSnapmirrorPolicyResponse.add_member(:snapmirror_policy, Shapes::ShapeRef.new(shape: SnapmirrorPolicy, location_name: "SnapmirrorPolicy"))
+    UpdateSnapmirrorPolicyResponse.struct_class = Types::UpdateSnapmirrorPolicyResponse
+
+    UpdateSnapmirrorRelationshipRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    UpdateSnapmirrorRelationshipRequest.add_member(:snapmirror_relationship_id, Shapes::ShapeRef.new(shape: SnapmirrorRelationshipId, required: true, location_name: "SnapmirrorRelationshipId"))
+    UpdateSnapmirrorRelationshipRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: SnapmirrorPolicyId, location_name: "PolicyId"))
+    UpdateSnapmirrorRelationshipRequest.add_member(:transfer_schedule, Shapes::ShapeRef.new(shape: SnapmirrorTransferScheduleName, location_name: "TransferSchedule"))
+    UpdateSnapmirrorRelationshipRequest.add_member(:throttle_in_kbps, Shapes::ShapeRef.new(shape: ThrottleInKbps, location_name: "ThrottleInKbps"))
+    UpdateSnapmirrorRelationshipRequest.add_member(:state, Shapes::ShapeRef.new(shape: UpdatableSnapmirrorRelationshipState, location_name: "State"))
+    UpdateSnapmirrorRelationshipRequest.struct_class = Types::UpdateSnapmirrorRelationshipRequest
+
+    UpdateSnapmirrorRelationshipResponse.add_member(:snapmirror_relationship, Shapes::ShapeRef.new(shape: SnapmirrorRelationship, location_name: "SnapmirrorRelationship"))
+    UpdateSnapmirrorRelationshipResponse.struct_class = Types::UpdateSnapmirrorRelationshipResponse
+
+    UpdateSnapshotPolicyRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    UpdateSnapshotPolicyRequest.add_member(:snapshot_policy_id, Shapes::ShapeRef.new(shape: SnapshotPolicyId, required: true, location_name: "SnapshotPolicyId"))
+    UpdateSnapshotPolicyRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Flag, location_name: "Enabled"))
+    UpdateSnapshotPolicyRequest.struct_class = Types::UpdateSnapshotPolicyRequest
+
+    UpdateSnapshotPolicyResponse.add_member(:snapshot_policy, Shapes::ShapeRef.new(shape: SnapshotPolicy, location_name: "SnapshotPolicy"))
+    UpdateSnapshotPolicyResponse.struct_class = Types::UpdateSnapshotPolicyResponse
+
     UpdateSnapshotRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
-    UpdateSnapshotRequest.add_member(:name, Shapes::ShapeRef.new(shape: SnapshotName, required: true, location_name: "Name"))
+    UpdateSnapshotRequest.add_member(:name, Shapes::ShapeRef.new(shape: SnapshotName, location_name: "Name"))
     UpdateSnapshotRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
+    UpdateSnapshotRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: UpdateOntapSnapshotConfiguration, location_name: "OntapConfiguration"))
     UpdateSnapshotRequest.struct_class = Types::UpdateSnapshotRequest
 
     UpdateSnapshotResponse.add_member(:snapshot, Shapes::ShapeRef.new(shape: Snapshot, location_name: "Snapshot"))
     UpdateSnapshotResponse.struct_class = Types::UpdateSnapshotResponse
+
+    UpdateStorageVirtualMachinePeerRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    UpdateStorageVirtualMachinePeerRequest.add_member(:storage_virtual_machine_peer_id, Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerId, required: true, location_name: "StorageVirtualMachinePeerId"))
+    UpdateStorageVirtualMachinePeerRequest.add_member(:applications, Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerApplications, location_name: "Applications"))
+    UpdateStorageVirtualMachinePeerRequest.add_member(:peer_svm_alias, Shapes::ShapeRef.new(shape: PeerSvmAlias, location_name: "PeerSvmAlias"))
+    UpdateStorageVirtualMachinePeerRequest.add_member(:state, Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerUpdateState, location_name: "State"))
+    UpdateStorageVirtualMachinePeerRequest.struct_class = Types::UpdateStorageVirtualMachinePeerRequest
+
+    UpdateStorageVirtualMachinePeerResponse.add_member(:storage_virtual_machine_peer, Shapes::ShapeRef.new(shape: StorageVirtualMachinePeer, location_name: "StorageVirtualMachinePeer"))
+    UpdateStorageVirtualMachinePeerResponse.struct_class = Types::UpdateStorageVirtualMachinePeerResponse
 
     UpdateStorageVirtualMachineRequest.add_member(:active_directory_configuration, Shapes::ShapeRef.new(shape: UpdateSvmActiveDirectoryConfiguration, location_name: "ActiveDirectoryConfiguration"))
     UpdateStorageVirtualMachineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
@@ -2204,6 +2820,20 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:create_cluster_peer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateClusterPeer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateClusterPeerRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateClusterPeerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+      end)
+
       api.add_operation(:create_data_repository_association, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDataRepositoryAssociation"
         o.http_method = "POST"
@@ -2283,6 +2913,34 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: MissingFileSystemConfiguration)
       end)
 
+      api.add_operation(:create_snapmirror_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSnapmirrorPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateSnapmirrorPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSnapmirrorPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: StorageVirtualMachineNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+      end)
+
+      api.add_operation(:create_snapmirror_relationship, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSnapmirrorRelationship"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateSnapmirrorRelationshipRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSnapmirrorRelationshipResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: VolumeNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+      end)
+
       api.add_operation(:create_snapshot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateSnapshot"
         o.http_method = "POST"
@@ -2293,6 +2951,21 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: VolumeNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+      end)
+
+      api.add_operation(:create_snapshot_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSnapshotPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateSnapshotPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSnapshotPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: StorageVirtualMachineNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
       end)
 
       api.add_operation(:create_storage_virtual_machine, Seahorse::Model::Operation.new.tap do |o|
@@ -2304,6 +2977,20 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: ActiveDirectoryError)
         o.errors << Shapes::ShapeRef.new(shape: BadRequest)
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+      end)
+
+      api.add_operation(:create_storage_virtual_machine_peer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateStorageVirtualMachinePeer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateStorageVirtualMachinePeerRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateStorageVirtualMachinePeerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: StorageVirtualMachineNotFound)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
@@ -2324,6 +3011,7 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: StorageVirtualMachineNotFound)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: VolumeNotFound)
       end)
 
       api.add_operation(:create_volume_from_backup, Seahorse::Model::Operation.new.tap do |o|
@@ -2355,6 +3043,18 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: BackupBeingCopied)
+      end)
+
+      api.add_operation(:delete_cluster_peer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteClusterPeer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteClusterPeerRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteClusterPeerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterPeerNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:delete_data_repository_association, Seahorse::Model::Operation.new.tap do |o|
@@ -2396,6 +3096,30 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:delete_snapmirror_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSnapmirrorPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSnapmirrorPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSnapmirrorPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: SnapmirrorPolicyNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+      end)
+
+      api.add_operation(:delete_snapmirror_relationship, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSnapmirrorRelationship"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSnapmirrorRelationshipRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSnapmirrorRelationshipResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: SnapmirrorRelationshipNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:delete_snapshot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteSnapshot"
         o.http_method = "POST"
@@ -2405,6 +3129,19 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: BadRequest)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+      end)
+
+      api.add_operation(:delete_snapshot_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSnapshotPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSnapshotPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSnapshotPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: SnapshotPolicyNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
       end)
 
       api.add_operation(:delete_storage_virtual_machine, Seahorse::Model::Operation.new.tap do |o|
@@ -2417,6 +3154,18 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: StorageVirtualMachineNotFound)
+      end)
+
+      api.add_operation(:delete_storage_virtual_machine_peer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteStorageVirtualMachinePeer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteStorageVirtualMachinePeerRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteStorageVirtualMachinePeerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:delete_volume, Seahorse::Model::Operation.new.tap do |o|
@@ -2442,6 +3191,24 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
         o.errors << Shapes::ShapeRef.new(shape: VolumeNotFound)
         o.errors << Shapes::ShapeRef.new(shape: BackupNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_cluster_peers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeClusterPeers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeClusterPeersRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeClusterPeersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterPeerNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -2567,6 +3334,58 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:describe_snapmirror_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSnapmirrorPolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSnapmirrorPoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSnapmirrorPoliciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: SnapmirrorPolicyNotFound)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_snapmirror_relationships, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSnapmirrorRelationships"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSnapmirrorRelationshipsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSnapmirrorRelationshipsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: SnapmirrorRelationshipNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: VolumeNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_snapshot_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSnapshotPolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSnapshotPoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSnapshotPoliciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: SnapshotPolicyNotFound)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_snapshots, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeSnapshots"
         o.http_method = "POST"
@@ -2576,6 +3395,25 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: BadRequest)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotNotFound)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_storage_virtual_machine_peers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeStorageVirtualMachinePeers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeStorageVirtualMachinePeersRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeStorageVirtualMachinePeersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: StorageVirtualMachineNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2722,6 +3560,18 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: ResourceDoesNotSupportTagging)
       end)
 
+      api.add_operation(:update_cluster_peer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateClusterPeer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateClusterPeerRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateClusterPeerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterPeerNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:update_data_repository_association, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateDataRepositoryAssociation"
         o.http_method = "POST"
@@ -2777,6 +3627,30 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:update_snapmirror_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSnapmirrorPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSnapmirrorPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSnapmirrorPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: SnapmirrorPolicyNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+      end)
+
+      api.add_operation(:update_snapmirror_relationship, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSnapmirrorRelationship"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSnapmirrorRelationshipRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSnapmirrorRelationshipResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: SnapmirrorRelationshipNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:update_snapshot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateSnapshot"
         o.http_method = "POST"
@@ -2786,6 +3660,19 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: BadRequest)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+      end)
+
+      api.add_operation(:update_snapshot_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSnapshotPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSnapshotPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSnapshotPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: SnapshotPolicyNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
       end)
 
       api.add_operation(:update_storage_virtual_machine, Seahorse::Model::Operation.new.tap do |o|
@@ -2799,6 +3686,18 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: StorageVirtualMachineNotFound)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+      end)
+
+      api.add_operation(:update_storage_virtual_machine_peer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateStorageVirtualMachinePeer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateStorageVirtualMachinePeerRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateStorageVirtualMachinePeerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: StorageVirtualMachinePeerNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:update_volume, Seahorse::Model::Operation.new.tap do |o|

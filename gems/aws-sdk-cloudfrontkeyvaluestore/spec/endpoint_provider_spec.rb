@@ -14,9 +14,9 @@ module Aws::CloudFrontKeyValueStore
   describe EndpointProvider do
     subject { Aws::CloudFrontKeyValueStore::EndpointProvider.new }
 
-    context "FIPS should error" do
+    context "FIPS without a KVS ARN, should error on the missing ARN" do
       let(:expected) do
-        {"error" => "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore."}
+        {"error" => "KVS ARN must be provided to use this service"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -159,13 +159,67 @@ module Aws::CloudFrontKeyValueStore
       end
     end
 
-    context "Valid account based endpoint with FIPS, should error" do
+    context "Valid account based endpoint with FIPS resolves to the same endpoint" do
       let(:expected) do
-        {"error" => "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore."}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "cloudfront-keyvaluestore", "name" => "sigv4a", "signingRegionSet" => ["*"]}]}, "url" => "https://123456789012.cloudfront-kvs.global.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{kvs_arn: "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba", region: "us-east-1", use_fips: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Valid account based endpoint with FIPS, without SDK region" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "cloudfront-keyvaluestore", "name" => "sigv4a", "signingRegionSet" => ["*"]}]}, "url" => "https://123456789012.cloudfront-kvs.global.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{kvs_arn: "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba", use_fips: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "FIPS with a custom sdk endpoint override, should error" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{kvs_arn: "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba", region: "us-east-1", endpoint: "https://my-override.example.com", use_fips: true})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "FIPS with a custom sdk endpoint override, without SDK region, should error" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{kvs_arn: "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba", endpoint: "https://my-override.example.com", use_fips: true})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "FIPS in an unsupported partition reports the partition, not FIPS" do
+      let(:expected) do
+        {"error" => "CloudFront-KeyValueStore is not supported in partition `aws-cn`"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{kvs_arn: "arn:aws-cn:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba", use_fips: true})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -207,6 +261,140 @@ module Aws::CloudFrontKeyValueStore
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{kvs_arn: "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba", region: "us-gov-east-1", endpoint: "https://my-override.example.com"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Valid aws ARN, aws-eusc SDK region, should error" do
+      let(:expected) do
+        {"error" => "Client was configured for partition `aws-eusc` but Kvs ARN has `aws`"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{kvs_arn: "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba", region: "eusc-de-east-1"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Empty ARN resource type should error" do
+      let(:expected) do
+        {"error" => "No resource type found in the KVS ARN. Resource type must be `key-value-store`."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{kvs_arn: "arn:aws:cloudfront::123456789012:/my-first-kvs-e10b1dce4f394248811e77167e0451ba"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Valid account based endpoint in aws-eusc" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "cloudfront-keyvaluestore", "name" => "sigv4a", "signingRegionSet" => ["*"]}]}, "url" => "https://123456789012.cloudfront-kvs.global.api.amazonwebservices.eu"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{kvs_arn: "arn:aws-eusc:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Valid account based endpoint in aws-eusc, with SDK region" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "cloudfront-keyvaluestore", "name" => "sigv4a", "signingRegionSet" => ["*"]}]}, "url" => "https://123456789012.cloudfront-kvs.global.api.amazonwebservices.eu"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{kvs_arn: "arn:aws-eusc:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba", region: "eusc-de-east-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Valid aws-eusc ARN, aws SDK region, should error" do
+      let(:expected) do
+        {"error" => "Client was configured for partition `aws` but Kvs ARN has `aws-eusc`"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{kvs_arn: "arn:aws-eusc:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba", region: "us-east-1"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Valid account based endpoint in aws-eusc with FIPS, should error" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{kvs_arn: "arn:aws-eusc:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba", region: "eusc-de-east-1", use_fips: true})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "aws-eusc with FIPS and a custom endpoint override reports the partition-level FIPS error" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{kvs_arn: "arn:aws-eusc:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba", region: "eusc-de-east-1", endpoint: "https://my-override.example.com", use_fips: true})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Custom sdk endpoint override in aws-eusc" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "cloudfront-keyvaluestore", "name" => "sigv4a", "signingRegionSet" => ["*"]}]}, "url" => "https://123456789012.my-override.example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{kvs_arn: "arn:aws-eusc:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba", region: "eusc-de-east-1", endpoint: "https://my-override.example.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Custom sdk endpoint override with path and http in aws-eusc" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "cloudfront-keyvaluestore", "name" => "sigv4a", "signingRegionSet" => ["*"]}]}, "url" => "http://123456789012.my-override.example.com/custom-path"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{kvs_arn: "arn:aws-eusc:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba", endpoint: "http://my-override.example.com/custom-path"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Custom override in aws-eusc with different partition should error" do
+      let(:expected) do
+        {"error" => "Client was configured for partition `aws` but Kvs ARN has `aws-eusc`"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{kvs_arn: "arn:aws-eusc:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba", region: "us-east-1", endpoint: "https://my-override.example.com"})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])

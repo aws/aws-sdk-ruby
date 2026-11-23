@@ -33,6 +33,12 @@ module Aws::CloudFront
           if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-cn") && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, false)
             return Aws::Endpoints::Endpoint.new(url: "https://cloudfront-fips.cn-northwest-1.amazonaws.com.cn", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "cn-northwest-1"}]})
           end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-eusc") && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, false)
+            return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.amazonaws.eu", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eusc-de-east-1"}]})
+          end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-eusc") && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
+            return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.global.api.amazonwebservices.eu", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eusc-de-east-1"}]})
+          end
           if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
               return Aws::Endpoints::Endpoint.new(url: "https://cloudfront-fips.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "#{partition_result['implicitGlobalRegion']}"}]})

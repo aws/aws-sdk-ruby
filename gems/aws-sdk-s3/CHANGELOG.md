@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.245.2 (2026-11-23)
+------------------
+
 * Issue - Fix `TransferManager#upload_directory` applying `:filter_callback` to subdirectories when `recursive: true`, which skipped every file under a subdirectory the callback did not accept.
 
 1.245.1 (2026-11-20)

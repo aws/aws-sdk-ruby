@@ -37,7 +37,7 @@ module Aws::CloudFrontKeyValueStore
     end
 
     # @!attribute [rw] kvs_arn
-    #   The Amazon Resource Name (ARN) of the Key Value Store.
+    #   The Amazon Resource Name (ARN) of the key value store.
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -45,8 +45,9 @@ module Aws::CloudFrontKeyValueStore
     #   @return [String]
     #
     # @!attribute [rw] if_match
-    #   The current version (ETag) of the Key Value Store that you are
-    #   deleting keys from, which you can get using DescribeKeyValueStore.
+    #   The current version (`ETag`) of the key value store that you are
+    #   deleting keys from, which you can get by using the
+    #   `DescribeKeyValueStore` API operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-keyvaluestore-2022-07-26/DeleteKeyRequest AWS API Documentation
@@ -62,7 +63,7 @@ module Aws::CloudFrontKeyValueStore
     # List item for keys to delete.
     #
     # @!attribute [rw] key
-    #   The key of the key value pair to be deleted.
+    #   The key of the key-value pair to be deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-keyvaluestore-2022-07-26/DeleteKeyRequestListItem AWS API Documentation
@@ -73,20 +74,20 @@ module Aws::CloudFrontKeyValueStore
       include Aws::Structure
     end
 
-    # Metadata information about a Key Value Store.
+    # Metadata information about a key value store.
     #
     # @!attribute [rw] item_count
-    #   Number of key value pairs in the Key Value Store after the
+    #   Number of key-value pairs in the key value store after the
     #   successful delete.
     #   @return [Integer]
     #
     # @!attribute [rw] total_size_in_bytes
-    #   Total size of the Key Value Store after the successful delete, in
+    #   Total size of the key value store after the successful delete, in
     #   bytes.
     #   @return [Integer]
     #
     # @!attribute [rw] etag
-    #   The current version identifier of the Key Value Store after the
+    #   The current version identifier of the key value store after the
     #   successful delete.
     #   @return [String]
     #
@@ -101,7 +102,7 @@ module Aws::CloudFrontKeyValueStore
     end
 
     # @!attribute [rw] kvs_arn
-    #   The Amazon Resource Name (ARN) of the Key Value Store.
+    #   The Amazon Resource Name (ARN) of the key value store.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-keyvaluestore-2022-07-26/DescribeKeyValueStoreRequest AWS API Documentation
@@ -112,40 +113,40 @@ module Aws::CloudFrontKeyValueStore
       include Aws::Structure
     end
 
-    # Metadata information about a Key Value Store.
+    # Metadata information about a key value store.
     #
     # @!attribute [rw] item_count
-    #   Number of key value pairs in the Key Value Store.
+    #   Number of key-value pairs in the key value store.
     #   @return [Integer]
     #
     # @!attribute [rw] total_size_in_bytes
-    #   Total size of the Key Value Store in bytes.
+    #   Total size of the key value store in bytes.
     #   @return [Integer]
     #
     # @!attribute [rw] kvs_arn
-    #   The Amazon Resource Name (ARN) of the Key Value Store.
+    #   The Amazon Resource Name (ARN) of the key value store.
     #   @return [String]
     #
     # @!attribute [rw] created
-    #   Date and time when the Key Value Store was created.
+    #   Date and time when the key value store was created.
     #   @return [Time]
     #
     # @!attribute [rw] etag
-    #   The version identifier for the current version of the Key Value
-    #   Store.
+    #   The version identifier for the current version of the key value
+    #   store.
     #   @return [String]
     #
     # @!attribute [rw] last_modified
-    #   Date and time when the key value pairs in the Key Value Store was
+    #   Date and time when the key-value pairs in the key value store was
     #   last modified.
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The current status of the Key Value Store.
+    #   The current status of the key value store.
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
-    #   The reason for Key Value Store creation failure.
+    #   The reason why the key value store wasn't created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-keyvaluestore-2022-07-26/DescribeKeyValueStoreResponse AWS API Documentation
@@ -164,7 +165,7 @@ module Aws::CloudFrontKeyValueStore
     end
 
     # @!attribute [rw] kvs_arn
-    #   The Amazon Resource Name (ARN) of the Key Value Store.
+    #   The Amazon Resource Name (ARN) of the key value store.
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -180,22 +181,22 @@ module Aws::CloudFrontKeyValueStore
       include Aws::Structure
     end
 
-    # A key value pair.
+    # A key-value pair.
     #
     # @!attribute [rw] key
-    #   The key of the key value pair.
+    #   The key of the key-value pair.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of the key value pair.
+    #   The value of the key-value pair.
     #   @return [String]
     #
     # @!attribute [rw] item_count
-    #   Number of key value pairs in the Key Value Store.
+    #   Number of key-value pairs in the key value store.
     #   @return [Integer]
     #
     # @!attribute [rw] total_size_in_bytes
-    #   Total size of the Key Value Store in bytes.
+    #   Total size of the key value store in bytes.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-keyvaluestore-2022-07-26/GetKeyResponse AWS API Documentation
@@ -223,11 +224,11 @@ module Aws::CloudFrontKeyValueStore
     end
 
     # @!attribute [rw] kvs_arn
-    #   The Amazon Resource Name (ARN) of the Key Value Store.
+    #   The Amazon Resource Name (ARN) of the key value store.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   If nextToken is returned in the response, there are more results
+    #   If `nextToken` is returned in the response, there are more results
     #   available. Make the next call using the returned token to retrieve
     #   the next page.
     #   @return [String]
@@ -248,13 +249,13 @@ module Aws::CloudFrontKeyValueStore
     end
 
     # @!attribute [rw] next_token
-    #   If nextToken is returned in the response, there are more results
+    #   If `nextToken` is returned in the response, there are more results
     #   available. Make the next call using the returned token to retrieve
     #   the next page.
     #   @return [String]
     #
     # @!attribute [rw] items
-    #   Key value pairs
+    #   The key-value pairs.
     #   @return [Array<Types::ListKeysResponseListItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-keyvaluestore-2022-07-26/ListKeysResponse AWS API Documentation
@@ -266,14 +267,14 @@ module Aws::CloudFrontKeyValueStore
       include Aws::Structure
     end
 
-    # A key value pair.
+    # A key-value pair.
     #
     # @!attribute [rw] key
-    #   The key of the key value pair.
+    #   The key of the key-value pair.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of the key value pair.
+    #   The value of the key-value pair.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-keyvaluestore-2022-07-26/ListKeysResponseListItem AWS API Documentation
@@ -285,7 +286,7 @@ module Aws::CloudFrontKeyValueStore
       include Aws::Structure
     end
 
-    # A key value pair.
+    # A key-value pair.
     #
     # @!attribute [rw] key
     #   The key to put.
@@ -296,12 +297,13 @@ module Aws::CloudFrontKeyValueStore
     #   @return [String]
     #
     # @!attribute [rw] kvs_arn
-    #   The Amazon Resource Name (ARN) of the Key Value Store.
+    #   The Amazon Resource Name (ARN) of the key value store.
     #   @return [String]
     #
     # @!attribute [rw] if_match
-    #   The current version (ETag) of the Key Value Store that you are
-    #   putting keys into, which you can get using DescribeKeyValueStore.
+    #   The current version (`ETag`) of the key value store that you are
+    #   putting keys into, which you can get by using the
+    #   `DescribeKeyValueStore` API operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-keyvaluestore-2022-07-26/PutKeyRequest AWS API Documentation
@@ -315,14 +317,14 @@ module Aws::CloudFrontKeyValueStore
       include Aws::Structure
     end
 
-    # List item for key value pair to put.
+    # List item for key-value pair to put.
     #
     # @!attribute [rw] key
-    #   The key of the key value pair list item to put.
+    #   The key of the key-value pair list item to put.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value for the key value pair to put.
+    #   The value for the key-value pair to put.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-keyvaluestore-2022-07-26/PutKeyRequestListItem AWS API Documentation
@@ -334,20 +336,20 @@ module Aws::CloudFrontKeyValueStore
       include Aws::Structure
     end
 
-    # Metadata information about a Key Value Store.
+    # Metadata information about a key value store.
     #
     # @!attribute [rw] item_count
-    #   Number of key value pairs in the Key Value Store after the
+    #   Number of key-value pairs in the key value store after the
     #   successful put.
     #   @return [Integer]
     #
     # @!attribute [rw] total_size_in_bytes
-    #   Total size of the Key Value Store after the successful put, in
+    #   Total size of the key value store after the successful put, in
     #   bytes.
     #   @return [Integer]
     #
     # @!attribute [rw] etag
-    #   The current version identifier of the Key Value Store after the
+    #   The current version identifier of the key value store after the
     #   successful put.
     #   @return [String]
     #
@@ -388,16 +390,17 @@ module Aws::CloudFrontKeyValueStore
     end
 
     # @!attribute [rw] kvs_arn
-    #   The Amazon Resource Name (ARN) of the Key Value Store.
+    #   The Amazon Resource Name (ARN) of the key value store.
     #   @return [String]
     #
     # @!attribute [rw] if_match
-    #   The current version (ETag) of the Key Value Store that you are
-    #   updating keys of, which you can get using DescribeKeyValueStore.
+    #   The current version (`ETag`) of the key value store that you are
+    #   updating keys of, which you can get by using the
+    #   `DescribeKeyValueStore` API operation.
     #   @return [String]
     #
     # @!attribute [rw] puts
-    #   List of key value pairs to put.
+    #   List of key-value pairs to put.
     #   @return [Array<Types::PutKeyRequestListItem>]
     #
     # @!attribute [rw] deletes
@@ -415,20 +418,20 @@ module Aws::CloudFrontKeyValueStore
       include Aws::Structure
     end
 
-    # Metadata information about a Key Value Store.
+    # Metadata information about a key value store.
     #
     # @!attribute [rw] item_count
-    #   Number of key value pairs in the Key Value Store after the
+    #   Number of key-value pairs in the key value store after the
     #   successful update.
     #   @return [Integer]
     #
     # @!attribute [rw] total_size_in_bytes
-    #   Total size of the Key Value Store after the successful update, in
+    #   Total size of the key value store after the successful update, in
     #   bytes.
     #   @return [Integer]
     #
     # @!attribute [rw] etag
-    #   The current version identifier of the Key Value Store after the
+    #   The current version identifier of the key value store after the
     #   successful update.
     #   @return [String]
     #

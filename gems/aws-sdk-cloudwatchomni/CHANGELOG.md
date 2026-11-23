@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2026-11-23)
+------------------
+
+* Feature - Release of the new integration type in CreateIntegration API - Used to add Microsoft Azure resources to the Amazon CloudWatch Omni context graph through an AWS Config connector for your Azure tenant.
+
 1.14.0 (2026-11-18)
 ------------------
 

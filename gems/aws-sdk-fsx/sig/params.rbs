@@ -179,7 +179,11 @@ module Aws
         aggregates: Array[::String]?,
         constituents_per_aggregate: ::Integer?
       }?,
-      size_in_bytes: ::Integer?
+      size_in_bytes: ::Integer?,
+      clone_configuration: {
+        parent_volume_id: ::String,
+        snapshot_id: ::String?
+      }?
     }
 
       type self_managed_active_directory_configuration_updates = {

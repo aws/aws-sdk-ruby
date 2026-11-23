@@ -1,6 +1,19 @@
 {
   "version" : 2,
   "testCases" : [ {
+    "id" : "ListSpacesSuccess",
+    "operationName" : "ListSpaces",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
     "id" : "ListDomainsSuccess",
     "operationName" : "ListDomains",
     "input" : { },
@@ -21,19 +34,6 @@
     },
     "expectation" : {
       "failure" : { }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListSpacesSuccess",
-    "operationName" : "ListSpaces",
-    "input" : { },
-    "expectation" : {
-      "success" : { }
     },
     "config" : {
       "region" : "us-east-1",

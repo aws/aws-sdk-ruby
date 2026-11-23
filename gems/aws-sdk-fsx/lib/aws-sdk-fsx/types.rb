@@ -193,6 +193,12 @@ module Aws::FSx
     #     (`CopySnapshotAndUpdateVolume`), or CLI
     #     (`copy-snapshot-and-update-volume`).
     #
+    #   * `VOLUME_CLONE_SPLIT` - An FSx for ONTAP volume clone is being
+    #     split from its parent volume. You can initiate this from the
+    #     Amazon FSx console, Amazon FSx API (`UpdateVolume`) or CLI
+    #     (`update-volume`) by setting `SplitAction` to `START` in the
+    #     volume's `CloneConfiguration`.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-throughput-capacity.html
@@ -205,9 +211,9 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] progress_percent
-    #   The percentage-complete status of a `STORAGE_OPTIMIZATION` or
-    #   `DOWNLOAD_DATA_FROM_BACKUP` administrative action. Does not apply to
-    #   any other administrative action type.
+    #   The percentage-complete status of a `STORAGE_OPTIMIZATION`,
+    #   `DOWNLOAD_DATA_FROM_BACKUP`, or `VOLUME_CLONE_SPLIT` administrative
+    #   action. Does not apply to any other administrative action type.
     #   @return [Integer]
     #
     # @!attribute [rw] request_time
@@ -266,7 +272,8 @@ module Aws::FSx
     #   @return [Types::Volume]
     #
     # @!attribute [rw] target_snapshot_values
-    #   A snapshot of an Amazon FSx for OpenZFS volume.
+    #   A snapshot of an Amazon FSx for OpenZFS or Amazon FSx for NetApp
+    #   ONTAP volume.
     #   @return [Types::Snapshot]
     #
     # @!attribute [rw] total_transfer_bytes
@@ -854,6 +861,185 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # Describes the parent volume, and the snapshot if one was specified,
+    # that an FSx for ONTAP volume clone was created from.
+    #
+    # @!attribute [rw] parent_volume_id
+    #   The ID of the parent volume that the clone was created from.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot of the parent volume that the clone was
+    #   created from, if you specified one when you created the clone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CloneConfiguration AWS API Documentation
+    #
+    class CloneConfiguration < Struct.new(
+      :parent_volume_id,
+      :snapshot_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Amazon FSx for NetApp ONTAP cluster peer relationship.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
+    #   identify Amazon Web Services resources. We require an ARN when you
+    #   need to specify a resource unambiguously across all of Amazon Web
+    #   Services. For more information, see [Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_peer_id
+    #   The system-generated, unique ID of the cluster peer.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle status of the cluster peer can be one of the
+    #   following:
+    #
+    #   * `CREATED` – The cluster peer is fully available for use.
+    #
+    #   * `CREATING` – Amazon FSx is creating the cluster peer.
+    #
+    #   * `DELETING` – Amazon FSx is deleting the cluster peer.
+    #
+    #   * `FAILED` – Amazon FSx was unable to create the cluster peer.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_transition_reason
+    #   The reason why the cluster peer lifecycle status changed.
+    #   @return [Types::LifecycleTransitionReason]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] peer_addresses
+    #   The IP addresses of the intercluster logical interfaces (LIFs) on
+    #   the peer cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] peer_cluster_name
+    #   The name that the file system uses to identify the peer cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] passphrase_secret_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret containing the cluster peering passphrase.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_svm_mode
+    #   Indicates which SVMs on the file system are preauthorized for SVM
+    #   peering with the peer cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_svm_ids
+    #   The IDs of the SVMs on the file system that are preauthorized for
+    #   SVM peering with the peer cluster, if `AllowedSvmMode` is
+    #   `SPECIFIED`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the connection to the peer cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] uuid
+    #   The cluster peer's universally unique identifier (UUID).
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_status
+    #   The authentication status of the cluster peer relationship.
+    #   @return [Types::ClusterPeerAuthenticationStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ClusterPeer AWS API Documentation
+    #
+    class ClusterPeer < Struct.new(
+      :resource_arn,
+      :cluster_peer_id,
+      :file_system_id,
+      :lifecycle,
+      :lifecycle_transition_reason,
+      :tags,
+      :peer_addresses,
+      :peer_cluster_name,
+      :passphrase_secret_arn,
+      :allowed_svm_mode,
+      :allowed_svm_ids,
+      :status,
+      :uuid,
+      :authentication_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the authentication status of an Amazon FSx for NetApp ONTAP
+    # cluster peer relationship.
+    #
+    # @!attribute [rw] state
+    #   The authentication state of the cluster peer relationship.
+    #   @return [String]
+    #
+    # @!attribute [rw] in_use
+    #   The status of the authentication that the cluster peer relationship
+    #   is using.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ClusterPeerAuthenticationStatus AWS API Documentation
+    #
+    class ClusterPeerAuthenticationStatus < Struct.new(
+      :state,
+      :in_use)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter used to restrict the results of describe calls for Amazon FSx
+    # for NetApp ONTAP cluster peers.
+    #
+    # @!attribute [rw] name
+    #   The name for this filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of the filter. These are all the values for any of the
+    #   applied filters.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ClusterPeerFilter AWS API Documentation
+    #
+    class ClusterPeerFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # No Amazon FSx cluster peers were found based on the supplied
+    # parameters.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ClusterPeerNotFound AWS API Documentation
+    #
+    class ClusterPeerNotFound < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides a report detailing the data repository task results of the
     # files processed that match the criteria specified in the report
     # `Scope` parameter. FSx delivers the report to the file system's
@@ -1319,6 +1505,114 @@ module Aws::FSx
     #
     class CreateBackupResponse < Struct.new(
       :backup)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the parent volume, and optionally the snapshot, that an FSx
+    # for ONTAP volume clone is created from.
+    #
+    # @!attribute [rw] parent_volume_id
+    #   Specifies the ID of the volume to clone.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   Specifies the ID of a snapshot of the parent volume to create the
+    #   clone from. The snapshot's lifecycle state must be `AVAILABLE`. If
+    #   you don't specify a snapshot, ONTAP creates a new snapshot of the
+    #   parent volume and creates the clone from it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateCloneConfiguration AWS API Documentation
+    #
+    class CreateCloneConfiguration < Struct.new(
+      :parent_volume_id,
+      :snapshot_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   Specifies the ID of the Amazon FSx for NetApp ONTAP file system on
+    #   which to create the cluster peer relationship.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_addresses
+    #   Specifies the IP addresses of the intercluster logical interfaces
+    #   (LIFs) on the peer cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] passphrase_secret_arn
+    #   Specifies the Amazon Resource Name (ARN) of the Amazon Web Services
+    #   Secrets Manager secret containing the cluster peering passphrase.
+    #   Store the passphrase as a plaintext secret value, not as a key-value
+    #   pair. The secret must be in the same Amazon Web Services Region as
+    #   the file system. You must use the same passphrase when you create
+    #   the cluster peer relationship on the peer cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_cluster_name
+    #   Specifies the name that the file system uses to identify the peer
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_svm_mode
+    #   Specifies which SVMs on the file system are preauthorized for SVM
+    #   peering with the peer cluster.
+    #
+    #   * `ALL` – All SVMs on the file system are preauthorized. You can't
+    #     specify `AllowedSvmIds` along with this property.
+    #
+    #   * `NONE` – No SVMs on the file system are preauthorized. You can't
+    #     specify `AllowedSvmIds` along with this property.
+    #
+    #   * `SPECIFIED` – Only the SVMs in `AllowedSvmIds` are preauthorized.
+    #     You must specify `AllowedSvmIds` along with this property.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_svm_ids
+    #   Specifies the IDs of the SVMs on the file system that are
+    #   preauthorized for SVM peering with the peer cluster. You can specify
+    #   `AllowedSvmIds` only when `AllowedSvmMode` is `SPECIFIED`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateClusterPeerRequest AWS API Documentation
+    #
+    class CreateClusterPeerRequest < Struct.new(
+      :client_request_token,
+      :file_system_id,
+      :peer_addresses,
+      :passphrase_secret_arn,
+      :peer_cluster_name,
+      :allowed_svm_mode,
+      :allowed_svm_ids,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_peer
+    #   A description of the cluster peer.
+    #   @return [Types::ClusterPeer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateClusterPeerResponse AWS API Documentation
+    #
+    class CreateClusterPeerResponse < Struct.new(
+      :cluster_peer)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3072,6 +3366,38 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # Specifies the configuration of the ONTAP snapshot that you are
+    # creating.
+    #
+    # @!attribute [rw] snapmirror_label
+    #   Specifies the SnapMirror label to assign to the snapshot. SnapMirror
+    #   policies use labels to select which snapshots to replicate to a
+    #   destination volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiry_time
+    #   Specifies the date and time when the snapshot expires. You can't
+    #   delete the snapshot before this time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] snaplock_expiry_time
+    #   Specifies the date and time until which the snapshot is locked. This
+    #   setting takes effect only if snapshot locking is enabled on the
+    #   volume. Snapshot locking is separate from SnapLock, and enabling
+    #   SnapLock on a volume doesn't enable snapshot locking. You can't
+    #   delete the snapshot before this time.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateOntapSnapshotConfiguration AWS API Documentation
+    #
+    class CreateOntapSnapshotConfiguration < Struct.new(
+      :snapmirror_label,
+      :expiry_time,
+      :snaplock_expiry_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the configuration of the ONTAP volume that you are creating.
     #
     # @!attribute [rw] junction_path
@@ -3239,6 +3565,12 @@ module Aws::FSx
     #   Specifies the configured size of the volume, in bytes.
     #   @return [Integer]
     #
+    # @!attribute [rw] clone_configuration
+    #   Specifies the configuration to use when creating the volume as a
+    #   clone of another FSx for ONTAP volume. A clone is a writable,
+    #   point-in-time copy of its parent volume.
+    #   @return [Types::CreateCloneConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateOntapVolumeConfiguration AWS API Documentation
     #
     class CreateOntapVolumeConfiguration < Struct.new(
@@ -3254,7 +3586,8 @@ module Aws::FSx
       :snaplock_configuration,
       :volume_style,
       :aggregate_configuration,
-      :size_in_bytes)
+      :size_in_bytes,
+      :clone_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3532,6 +3865,273 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # Specifies the destination endpoint of the Amazon FSx for NetApp ONTAP
+    # SnapMirror relationship that you are creating.
+    #
+    # @!attribute [rw] volume_id
+    #   Specifies the ID of the destination volume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateSnapmirrorDestination AWS API Documentation
+    #
+    class CreateSnapmirrorDestination < Struct.new(
+      :volume_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   Specifies the ID of the Amazon FSx for NetApp ONTAP file system on
+    #   which to create the SnapMirror policy. You must specify either a
+    #   `FileSystemId` or a `StorageVirtualMachineId`, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_virtual_machine_id
+    #   Specifies the ID of the SVM on which to create the SnapMirror
+    #   policy. You must specify either a `FileSystemId` or a
+    #   `StorageVirtualMachineId`, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Specifies the name of the SnapMirror policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_copy_mode
+    #   Specifies which snapshots SnapMirror transfers to the destination
+    #   volume:
+    #
+    #   * `COPY_ALL_SOURCE_SNAPSHOTS` – SnapMirror copies all snapshots of
+    #     the source volume to the destination volume on a transfer. You
+    #     can't specify `RetentionRules` along with this property.
+    #
+    #   * `COPY_LATEST_SOURCE_SNAPSHOT` – SnapMirror copies the latest
+    #     snapshot of the source volume to the destination volume on a
+    #     transfer. You can't specify `RetentionRules` along with this
+    #     property.
+    #
+    #   * `NO_CREATE_SNAPSHOT_ON_SOURCE` – SnapMirror doesn't create a
+    #     snapshot on the source volume at beginning of an update or resync
+    #     operation. You must specify `RetentionRules` along with this
+    #     property.
+    #
+    #   If you don't specify a `SnapshotCopyMode`, SnapMirror creates a new
+    #   snapshot of the source volume and copies it, along with any
+    #   snapshots that match `RetentionRules`, to the destination volume on
+    #   a transfer. `RetentionRules` is optional.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_rules
+    #   Specifies the rules that determine which snapshots SnapMirror
+    #   retains on the destination volume, based on their SnapMirror labels.
+    #   @return [Array<Types::SnapmirrorPolicyRetentionRule>]
+    #
+    # @!attribute [rw] transfer_schedule
+    #   Specifies the name of the ONTAP schedule that determines when
+    #   SnapMirror transfers data.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_compression_enabled
+    #   Specifies whether SnapMirror compresses data when it transfers the
+    #   data over the network. This value defaults to `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] throttle_in_kbps
+    #   Specifies the maximum bandwidth, in kilobytes per second (KBps),
+    #   that SnapMirror uses to transfer data. A value of `0` means that the
+    #   bandwidth is unlimited.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateSnapmirrorPolicyRequest AWS API Documentation
+    #
+    class CreateSnapmirrorPolicyRequest < Struct.new(
+      :client_request_token,
+      :file_system_id,
+      :storage_virtual_machine_id,
+      :name,
+      :snapshot_copy_mode,
+      :retention_rules,
+      :transfer_schedule,
+      :network_compression_enabled,
+      :throttle_in_kbps,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapmirror_policy
+    #   A description of the SnapMirror policy.
+    #   @return [Types::SnapmirrorPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateSnapmirrorPolicyResponse AWS API Documentation
+    #
+    class CreateSnapmirrorPolicyResponse < Struct.new(
+      :snapmirror_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   Specifies the source endpoint of the SnapMirror relationship.
+    #   @return [Types::CreateSnapmirrorSource]
+    #
+    # @!attribute [rw] destination
+    #   Specifies the destination endpoint of the SnapMirror relationship.
+    #   @return [Types::CreateSnapmirrorDestination]
+    #
+    # @!attribute [rw] policy_id
+    #   Specifies the ID of the SnapMirror policy that the SnapMirror
+    #   relationship uses.
+    #   @return [String]
+    #
+    # @!attribute [rw] transfer_schedule
+    #   Specifies the name of the ONTAP schedule that determines when
+    #   SnapMirror transfers data for the relationship. This schedule
+    #   overrides the transfer schedule of the SnapMirror policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] throttle_in_kbps
+    #   Specifies the maximum bandwidth, in kilobytes per second (KBps),
+    #   that SnapMirror uses to transfer data for the relationship. A value
+    #   of `0` means that the bandwidth is unlimited. This value overrides
+    #   the throttle of the SnapMirror policy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateSnapmirrorRelationshipRequest AWS API Documentation
+    #
+    class CreateSnapmirrorRelationshipRequest < Struct.new(
+      :client_request_token,
+      :source,
+      :destination,
+      :policy_id,
+      :transfer_schedule,
+      :throttle_in_kbps,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapmirror_relationship
+    #   A description of the SnapMirror relationship.
+    #   @return [Types::SnapmirrorRelationship]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateSnapmirrorRelationshipResponse AWS API Documentation
+    #
+    class CreateSnapmirrorRelationshipResponse < Struct.new(
+      :snapmirror_relationship)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the source endpoint of the Amazon FSx for NetApp ONTAP
+    # SnapMirror relationship that you are creating.
+    #
+    # @!attribute [rw] path
+    #   Specifies the path of the source volume, in the format
+    #   `svm_name:volume_name`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateSnapmirrorSource AWS API Documentation
+    #
+    class CreateSnapmirrorSource < Struct.new(
+      :path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   Specifies the ID of the Amazon FSx for NetApp ONTAP file system on
+    #   which to create the snapshot policy. You must specify either a
+    #   `FileSystemId` or a `StorageVirtualMachineId`, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_virtual_machine_id
+    #   Specifies the ID of the SVM on which to create the snapshot policy.
+    #   You must specify either a `FileSystemId` or a
+    #   `StorageVirtualMachineId`, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Specifies the name of the snapshot policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether the snapshot policy is enabled. This value
+    #   defaults to `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] schedules
+    #   Specifies the schedules on which ONTAP creates snapshots for the
+    #   snapshot policy.
+    #   @return [Array<Types::SnapshotPolicySchedule>]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateSnapshotPolicyRequest AWS API Documentation
+    #
+    class CreateSnapshotPolicyRequest < Struct.new(
+      :client_request_token,
+      :file_system_id,
+      :storage_virtual_machine_id,
+      :name,
+      :enabled,
+      :schedules,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_policy
+    #   A description of the snapshot policy.
+    #   @return [Types::SnapshotPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateSnapshotPolicyResponse AWS API Documentation
+    #
+    class CreateSnapshotPolicyResponse < Struct.new(
+      :snapshot_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
     #   of up to 63 ASCII characters. This token is automatically filled on
@@ -3554,13 +4154,18 @@ module Aws::FSx
     #   A list of `Tag` values, with a maximum of 50 elements.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] ontap_configuration
+    #   Specifies the configuration to use when creating the ONTAP snapshot.
+    #   @return [Types::CreateOntapSnapshotConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateSnapshotRequest AWS API Documentation
     #
     class CreateSnapshotRequest < Struct.new(
       :client_request_token,
       :name,
       :volume_id,
-      :tags)
+      :tags,
+      :ontap_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3573,6 +4178,69 @@ module Aws::FSx
     #
     class CreateSnapshotResponse < Struct.new(
       :snapshot)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_virtual_machine_id
+    #   Specifies the ID of the SVM on which to create the SVM peer
+    #   relationship.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_svm_name
+    #   Specifies the name of the SVM to peer with.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_cluster_name
+    #   Specifies the name of the peer cluster that the peer SVM is on.
+    #   @return [String]
+    #
+    # @!attribute [rw] applications
+    #   Specifies the applications that the SVM peer relationship
+    #   authorizes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] peer_svm_alias
+    #   Specifies the name that the local cluster uses to identify the peer
+    #   SVM.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateStorageVirtualMachinePeerRequest AWS API Documentation
+    #
+    class CreateStorageVirtualMachinePeerRequest < Struct.new(
+      :client_request_token,
+      :storage_virtual_machine_id,
+      :peer_svm_name,
+      :peer_cluster_name,
+      :applications,
+      :peer_svm_alias,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] storage_virtual_machine_peer
+    #   A description of the SVM peer.
+    #   @return [Types::StorageVirtualMachinePeer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateStorageVirtualMachinePeerResponse AWS API Documentation
+    #
+    class CreateStorageVirtualMachinePeerResponse < Struct.new(
+      :storage_virtual_machine_peer)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4512,6 +5180,48 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_peer_id
+    #   The ID of the cluster peer that you are deleting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteClusterPeerRequest AWS API Documentation
+    #
+    class DeleteClusterPeerRequest < Struct.new(
+      :client_request_token,
+      :cluster_peer_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_peer_id
+    #   The ID of the cluster peer that's being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle state of the cluster peer being deleted. If the
+    #   `DeleteClusterPeer` operation is successful, this value is
+    #   `DELETING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteClusterPeerResponse AWS API Documentation
+    #
+    class DeleteClusterPeerResponse < Struct.new(
+      :cluster_peer_id,
+      :lifecycle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] association_id
     #   The ID of the data repository association that you want to delete.
     #   @return [String]
@@ -4849,6 +5559,132 @@ module Aws::FSx
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] snapmirror_policy_id
+    #   The ID of the SnapMirror policy that you are deleting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteSnapmirrorPolicyRequest AWS API Documentation
+    #
+    class DeleteSnapmirrorPolicyRequest < Struct.new(
+      :client_request_token,
+      :snapmirror_policy_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapmirror_policy_id
+    #   The ID of the SnapMirror policy that's being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle state of the SnapMirror policy being deleted. If the
+    #   `DeleteSnapmirrorPolicy` operation is successful, this value is
+    #   `DELETING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteSnapmirrorPolicyResponse AWS API Documentation
+    #
+    class DeleteSnapmirrorPolicyResponse < Struct.new(
+      :snapmirror_policy_id,
+      :lifecycle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapmirror_relationship_id
+    #   The ID of the SnapMirror relationship that you are deleting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteSnapmirrorRelationshipRequest AWS API Documentation
+    #
+    class DeleteSnapmirrorRelationshipRequest < Struct.new(
+      :client_request_token,
+      :snapmirror_relationship_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapmirror_relationship_id
+    #   The ID of the SnapMirror relationship that's being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle state of the SnapMirror relationship being deleted. If
+    #   the `DeleteSnapmirrorRelationship` operation is successful, this
+    #   value is `DELETING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteSnapmirrorRelationshipResponse AWS API Documentation
+    #
+    class DeleteSnapmirrorRelationshipResponse < Struct.new(
+      :snapmirror_relationship_id,
+      :lifecycle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_policy_id
+    #   The ID of the snapshot policy that you are deleting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteSnapshotPolicyRequest AWS API Documentation
+    #
+    class DeleteSnapshotPolicyRequest < Struct.new(
+      :client_request_token,
+      :snapshot_policy_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_policy_id
+    #   The ID of the snapshot policy that's being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle state of the snapshot policy being deleted. If the
+    #   `DeleteSnapshotPolicy` operation is successful, this value is
+    #   `DELETING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteSnapshotPolicyResponse AWS API Documentation
+    #
+    class DeleteSnapshotPolicyResponse < Struct.new(
+      :snapshot_policy_id,
+      :lifecycle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @!attribute [rw] snapshot_id
     #   The ID of the snapshot that you want to delete.
     #   @return [String]
@@ -4875,6 +5711,48 @@ module Aws::FSx
     #
     class DeleteSnapshotResponse < Struct.new(
       :snapshot_id,
+      :lifecycle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_virtual_machine_peer_id
+    #   The ID of the SVM peer that you are deleting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteStorageVirtualMachinePeerRequest AWS API Documentation
+    #
+    class DeleteStorageVirtualMachinePeerRequest < Struct.new(
+      :client_request_token,
+      :storage_virtual_machine_peer_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] storage_virtual_machine_peer_id
+    #   The ID of the SVM peer that's being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle state of the SVM peer being deleted. If the
+    #   `DeleteStorageVirtualMachinePeer` operation is successful, this
+    #   value is `DELETING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteStorageVirtualMachinePeerResponse AWS API Documentation
+    #
+    class DeleteStorageVirtualMachinePeerResponse < Struct.new(
+      :storage_virtual_machine_peer_id,
       :lifecycle)
       SENSITIVE = []
       include Aws::Structure
@@ -5109,6 +5987,61 @@ module Aws::FSx
     #
     class DescribeBackupsResponse < Struct.new(
       :backups,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_peer_ids
+    #   The IDs of the cluster peers that you want to retrieve. If you also
+    #   specify `Filters`, only cluster peers that match both the IDs and
+    #   the filters are returned. If any IDs aren't found, or if a filter
+    #   excludes any of them, a `ClusterPeerNotFound` error occurs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   The filters structure. The supported name is `file-system-id`.
+    #   @return [Array<Types::ClusterPeerFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of resources to return in the response. This
+    #   value must be an integer greater than zero.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeClusterPeersRequest AWS API Documentation
+    #
+    class DescribeClusterPeersRequest < Struct.new(
+      :cluster_peer_ids,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_peers
+    #   Describes each cluster peer returned by the `DescribeClusterPeers`
+    #   operation.
+    #   @return [Array<Types::ClusterPeer>]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeClusterPeersResponse AWS API Documentation
+    #
+    class DescribeClusterPeersResponse < Struct.new(
+      :cluster_peers,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -5456,9 +6389,183 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # @!attribute [rw] snapmirror_policy_ids
+    #   The IDs of the SnapMirror policies that you want to retrieve. If you
+    #   also specify `Filters`, only SnapMirror policies that match both the
+    #   IDs and the filters are returned. If any IDs aren't found, or if a
+    #   filter excludes any of them, a `SnapmirrorPolicyNotFound` error
+    #   occurs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   The filters structure. The supported names are `file-system-id` or
+    #   `storage-virtual-machine-id`.
+    #   @return [Array<Types::SnapmirrorPolicyFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of resources to return in the response. This
+    #   value must be an integer greater than zero.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeSnapmirrorPoliciesRequest AWS API Documentation
+    #
+    class DescribeSnapmirrorPoliciesRequest < Struct.new(
+      :snapmirror_policy_ids,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapmirror_policies
+    #   Describes each SnapMirror policy returned by the
+    #   `DescribeSnapmirrorPolicies` operation.
+    #   @return [Array<Types::SnapmirrorPolicy>]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeSnapmirrorPoliciesResponse AWS API Documentation
+    #
+    class DescribeSnapmirrorPoliciesResponse < Struct.new(
+      :snapmirror_policies,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapmirror_relationship_ids
+    #   The IDs of the SnapMirror relationships that you want to retrieve.
+    #   If you also specify `Filters`, only SnapMirror relationships that
+    #   match both the IDs and the filters are returned. If any IDs aren't
+    #   found, or if a filter excludes any of them, a
+    #   `SnapmirrorRelationshipNotFound` error occurs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   The filters structure. The supported names are `file-system-id` or
+    #   `destination-volume-id`.
+    #   @return [Array<Types::SnapmirrorRelationshipFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of resources to return in the response. This
+    #   value must be an integer greater than zero.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeSnapmirrorRelationshipsRequest AWS API Documentation
+    #
+    class DescribeSnapmirrorRelationshipsRequest < Struct.new(
+      :snapmirror_relationship_ids,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapmirror_relationships
+    #   Describes each SnapMirror relationship returned by the
+    #   `DescribeSnapmirrorRelationships` operation.
+    #   @return [Array<Types::SnapmirrorRelationship>]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeSnapmirrorRelationshipsResponse AWS API Documentation
+    #
+    class DescribeSnapmirrorRelationshipsResponse < Struct.new(
+      :snapmirror_relationships,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_policy_ids
+    #   The IDs of the snapshot policies that you want to retrieve. If you
+    #   also specify `Filters`, only snapshot policies that match both the
+    #   IDs and the filters are returned. If any IDs aren't found, or if a
+    #   filter excludes any of them, a `SnapshotPolicyNotFound` error
+    #   occurs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   The filters structure. The supported names are `file-system-id` or
+    #   `storage-virtual-machine-id`.
+    #   @return [Array<Types::SnapshotPolicyFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of resources to return in the response. This
+    #   value must be an integer greater than zero.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeSnapshotPoliciesRequest AWS API Documentation
+    #
+    class DescribeSnapshotPoliciesRequest < Struct.new(
+      :snapshot_policy_ids,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_policies
+    #   Describes each snapshot policy returned by the
+    #   `DescribeSnapshotPolicies` operation.
+    #   @return [Array<Types::SnapshotPolicy>]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeSnapshotPoliciesResponse AWS API Documentation
+    #
+    class DescribeSnapshotPoliciesResponse < Struct.new(
+      :snapshot_policies,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] snapshot_ids
-    #   The IDs of the snapshots that you want to retrieve. This parameter
-    #   value overrides any filters. If any IDs aren't found, a
+    #   The IDs of the snapshots that you want to retrieve. You can include
+    #   snapshots of Amazon FSx for OpenZFS and Amazon FSx for NetApp ONTAP
+    #   volumes in the same request. If you also specify `Filters`, only
+    #   snapshots that match both the IDs and the filters are returned. If
+    #   any IDs aren't found, or if a filter excludes any of them, a
     #   `SnapshotNotFound` error occurs.
     #   @return [Array<String>]
     #
@@ -5513,6 +6620,63 @@ module Aws::FSx
     #
     class DescribeSnapshotsResponse < Struct.new(
       :snapshots,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] storage_virtual_machine_peer_ids
+    #   The IDs of the SVM peers that you want to retrieve. If you also
+    #   specify `Filters`, only SVM peers that match both the IDs and the
+    #   filters are returned. If any IDs aren't found, or if a filter
+    #   excludes any of them, a `StorageVirtualMachinePeerNotFound` error
+    #   occurs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   The filters structure. The supported names are `file-system-id` or
+    #   `storage-virtual-machine-id`.
+    #   @return [Array<Types::StorageVirtualMachinePeerFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of resources to return in the response. This
+    #   value must be an integer greater than zero.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeStorageVirtualMachinePeersRequest AWS API Documentation
+    #
+    class DescribeStorageVirtualMachinePeersRequest < Struct.new(
+      :storage_virtual_machine_peer_ids,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] storage_virtual_machine_peers
+    #   Describes each SVM peer returned by the
+    #   `DescribeStorageVirtualMachinePeers` operation.
+    #   @return [Array<Types::StorageVirtualMachinePeer>]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeStorageVirtualMachinePeersResponse AWS API Documentation
+    #
+    class DescribeStorageVirtualMachinePeersResponse < Struct.new(
+      :storage_virtual_machine_peers,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -6832,10 +7996,16 @@ module Aws::FSx
     #   A detailed error message.
     #   @return [String]
     #
+    # @!attribute [rw] ontap_error
+    #   The error returned by ONTAP when an operation on the resource fails.
+    #   Returned only for certain FSx for ONTAP resources.
+    #   @return [Types::OntapError]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/LifecycleTransitionReason AWS API Documentation
     #
     class LifecycleTransitionReason < Struct.new(
-      :message)
+      :message,
+      :ontap_error)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7338,6 +8508,26 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # An error returned by ONTAP for an operation on an Amazon FSx for
+    # NetApp ONTAP resource.
+    #
+    # @!attribute [rw] message
+    #   The error message returned by ONTAP.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The error code returned by ONTAP.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapError AWS API Documentation
+    #
+    class OntapError < Struct.new(
+      :message,
+      :code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for the FSx for NetApp ONTAP file system.
     #
     # @!attribute [rw] automatic_backup_retention_days
@@ -7563,6 +8753,46 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # The configuration of an Amazon FSx for NetApp ONTAP snapshot.
+    #
+    # @!attribute [rw] size_in_megabytes
+    #   The configured size of the snapshot, in megabytes (MBs).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] snapmirror_label
+    #   The SnapMirror label of the snapshot. SnapMirror policies use labels
+    #   to select which snapshots to replicate to a destination volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiry_time
+    #   The date and time when the snapshot expires. You can't delete the
+    #   snapshot before this time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] snaplock_expiry_time
+    #   The date and time until which the snapshot is locked. This setting
+    #   takes effect only if snapshot locking is enabled on the volume.
+    #   Snapshot locking is separate from SnapLock, and enabling SnapLock on
+    #   a volume doesn't enable snapshot locking. You can't delete the
+    #   snapshot before this time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] uuid
+    #   The snapshot's universally unique identifier (UUID).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapSnapshotConfiguration AWS API Documentation
+    #
+    class OntapSnapshotConfiguration < Struct.new(
+      :size_in_megabytes,
+      :snapmirror_label,
+      :expiry_time,
+      :snaplock_expiry_time,
+      :uuid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The FSx for ONTAP UNIX file system user that is used for authorizing
     # all file access requests that are made using the S3 access point.
     #
@@ -7719,6 +8949,12 @@ module Aws::FSx
     #   The configured size of the volume, in bytes.
     #   @return [Integer]
     #
+    # @!attribute [rw] clone_configuration
+    #   The clone configuration of the volume, if the volume is a clone.
+    #   This property doesn't appear for a volume that isn't a clone, or
+    #   for a clone that has been split from its parent volume.
+    #   @return [Types::CloneConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapVolumeConfiguration AWS API Documentation
     #
     class OntapVolumeConfiguration < Struct.new(
@@ -7737,7 +8973,8 @@ module Aws::FSx
       :snaplock_configuration,
       :volume_style,
       :aggregate_configuration,
-      :size_in_bytes)
+      :size_in_bytes,
+      :clone_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9162,7 +10399,480 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # A snapshot of an Amazon FSx for OpenZFS volume.
+    # Describes the destination endpoint of an Amazon FSx for NetApp ONTAP
+    # SnapMirror relationship. The destination volume is always an Amazon
+    # FSx for NetApp ONTAP volume.
+    #
+    # @!attribute [rw] path
+    #   The path of the destination volume, in the format
+    #   `svm_name:volume_name`.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_id
+    #   The ID of the destination volume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SnapmirrorDestination AWS API Documentation
+    #
+    class SnapmirrorDestination < Struct.new(
+      :path,
+      :volume_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the latest snapshot that SnapMirror transferred to the
+    # destination volume of an Amazon FSx for NetApp ONTAP SnapMirror
+    # relationship.
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot, if Amazon FSx manages the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_name
+    #   The name of the snapshot in ONTAP.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SnapmirrorExportedSnapshot AWS API Documentation
+    #
+    class SnapmirrorExportedSnapshot < Struct.new(
+      :snapshot_id,
+      :snapshot_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Amazon FSx for NetApp ONTAP SnapMirror policy.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
+    #   identify Amazon Web Services resources. We require an ARN when you
+    #   need to specify a resource unambiguously across all of Amazon Web
+    #   Services. For more information, see [Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] snapmirror_policy_id
+    #   The system-generated, unique ID of the SnapMirror policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_virtual_machine_id
+    #   The ID of the SnapMirror policy's storage virtual machine, if you
+    #   created the SnapMirror policy on a storage virtual machine.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the SnapMirror policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_copy_mode
+    #   The snapshot copy mode of the SnapMirror policy, which determines
+    #   which snapshots SnapMirror transfers to the destination volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_rules
+    #   The rules that determine which snapshots SnapMirror retains on the
+    #   destination volume.
+    #   @return [Array<Types::SnapmirrorPolicyRetentionRule>]
+    #
+    # @!attribute [rw] transfer_schedule
+    #   The name of the ONTAP schedule that determines when SnapMirror
+    #   transfers data.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_compression_enabled
+    #   Specifies whether SnapMirror compresses data when it transfers the
+    #   data over the network. This value defaults to `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] throttle_in_kbps
+    #   The maximum bandwidth, in kilobytes per second (KBps), that
+    #   SnapMirror uses to transfer data. A value of `0` means that the
+    #   bandwidth is unlimited.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scope
+    #   The scope of the SnapMirror policy can be one of the following:
+    #
+    #   * `FILESYSTEM` – The SnapMirror policy was created on the file
+    #     system.
+    #
+    #   * `SVM` – The SnapMirror policy was created on an SVM.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle status of the SnapMirror policy can be one of the
+    #   following:
+    #
+    #   * `CREATED` – The SnapMirror policy is fully available for use.
+    #
+    #   * `CREATING` – Amazon FSx is creating the SnapMirror policy.
+    #
+    #   * `DELETING` – Amazon FSx is deleting the SnapMirror policy.
+    #
+    #   * `FAILED` – Amazon FSx was unable to create the SnapMirror policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] uuid
+    #   The SnapMirror policy's universally unique identifier (UUID).
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_transition_reason
+    #   The reason why the SnapMirror policy lifecycle status changed.
+    #   @return [Types::LifecycleTransitionReason]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SnapmirrorPolicy AWS API Documentation
+    #
+    class SnapmirrorPolicy < Struct.new(
+      :resource_arn,
+      :snapmirror_policy_id,
+      :file_system_id,
+      :storage_virtual_machine_id,
+      :name,
+      :snapshot_copy_mode,
+      :retention_rules,
+      :transfer_schedule,
+      :network_compression_enabled,
+      :throttle_in_kbps,
+      :scope,
+      :lifecycle,
+      :uuid,
+      :lifecycle_transition_reason,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter used to restrict the results of describe calls for Amazon FSx
+    # for NetApp ONTAP SnapMirror policies.
+    #
+    # @!attribute [rw] name
+    #   The name for this filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of the filter. These are all the values for any of the
+    #   applied filters.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SnapmirrorPolicyFilter AWS API Documentation
+    #
+    class SnapmirrorPolicyFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # No Amazon FSx SnapMirror policies were found based on the supplied
+    # parameters.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SnapmirrorPolicyNotFound AWS API Documentation
+    #
+    class SnapmirrorPolicyNotFound < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a snapshot retention rule for an Amazon FSx for NetApp ONTAP
+    # SnapMirror policy.
+    #
+    # @!attribute [rw] label
+    #   The SnapMirror label of the snapshots that the rule applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of snapshots with the label to retain on the destination
+    #   volume.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_schedule
+    #   The name of the ONTAP schedule on which SnapMirror creates snapshots
+    #   with the label directly on the destination volume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SnapmirrorPolicyRetentionRule AWS API Documentation
+    #
+    class SnapmirrorPolicyRetentionRule < Struct.new(
+      :label,
+      :count,
+      :creation_schedule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Amazon FSx for NetApp ONTAP SnapMirror relationship.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
+    #   identify Amazon Web Services resources. We require an ARN when you
+    #   need to specify a resource unambiguously across all of Amazon Web
+    #   Services. For more information, see [Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] snapmirror_relationship_id
+    #   The system-generated, unique ID of the SnapMirror relationship.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   The globally unique ID of the file system that the destination
+    #   volume is on, assigned by Amazon FSx.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle status of the SnapMirror relationship can be one of
+    #   the following:
+    #
+    #   * `CREATED` – The SnapMirror relationship is fully available for
+    #     use.
+    #
+    #   * `CREATING` – Amazon FSx is creating the SnapMirror relationship.
+    #
+    #   * `DELETING` – Amazon FSx is deleting the SnapMirror relationship.
+    #
+    #   * `FAILED` – Amazon FSx was unable to create the SnapMirror
+    #     relationship.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_transition_reason
+    #   The reason why the SnapMirror relationship lifecycle status changed.
+    #   @return [Types::LifecycleTransitionReason]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] source
+    #   The source endpoint of the SnapMirror relationship.
+    #   @return [Types::SnapmirrorSource]
+    #
+    # @!attribute [rw] destination
+    #   The destination endpoint of the SnapMirror relationship.
+    #   @return [Types::SnapmirrorDestination]
+    #
+    # @!attribute [rw] snapmirror_policy
+    #   The SnapMirror policy that the SnapMirror relationship uses.
+    #   @return [Types::SnapmirrorRelationshipPolicy]
+    #
+    # @!attribute [rw] transfer_schedule
+    #   The name of the ONTAP schedule that determines when SnapMirror
+    #   transfers data for the relationship. This schedule overrides the
+    #   transfer schedule of the SnapMirror policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] throttle_in_kbps
+    #   The maximum bandwidth, in kilobytes per second (KBps), that
+    #   SnapMirror uses to transfer data for the relationship. A value of
+    #   `0` means that the bandwidth is unlimited. This value overrides the
+    #   throttle of the SnapMirror policy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   The state of the SnapMirror relationship in ONTAP can be one of the
+    #   following:
+    #
+    #   * `UNINITIALIZED` – SnapMirror hasn't transferred the baseline copy
+    #     of the source volume to the destination volume.
+    #
+    #   * `TRANSFERRING` – SnapMirror is transferring data to the
+    #     destination volume.
+    #
+    #   * `SNAPMIRRORED` – SnapMirror transferred the baseline copy, and the
+    #     destination volume receives updates from the source volume.
+    #
+    #   * `PAUSED` – SnapMirror transfers for the relationship are paused.
+    #
+    #   * `BROKEN_OFF` – The relationship is broken off, and the destination
+    #     volume is writable. SnapMirror doesn't transfer data to the
+    #     destination volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] healthy
+    #   Indicates whether ONTAP reports the SnapMirror relationship as
+    #   healthy.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] unhealthy_reason
+    #   The reason that ONTAP reports for why the SnapMirror relationship is
+    #   unhealthy, if `Healthy` is `false`.
+    #   @return [String]
+    #
+    # @!attribute [rw] lag_time_in_minutes
+    #   The time, in minutes, since ONTAP created the latest snapshot that
+    #   SnapMirror transferred to the destination volume.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] exported_snapshot
+    #   The latest snapshot that SnapMirror transferred to the destination
+    #   volume.
+    #   @return [Types::SnapmirrorExportedSnapshot]
+    #
+    # @!attribute [rw] transfer_state
+    #   The latest SnapMirror transfer for the relationship. If a transfer
+    #   is in progress, this is the in-progress transfer. Otherwise, it's
+    #   the most recently completed transfer.
+    #   @return [Types::SnapmirrorTransferState]
+    #
+    # @!attribute [rw] uuid
+    #   The SnapMirror relationship's universally unique identifier (UUID).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SnapmirrorRelationship AWS API Documentation
+    #
+    class SnapmirrorRelationship < Struct.new(
+      :resource_arn,
+      :snapmirror_relationship_id,
+      :file_system_id,
+      :lifecycle,
+      :lifecycle_transition_reason,
+      :tags,
+      :source,
+      :destination,
+      :snapmirror_policy,
+      :transfer_schedule,
+      :throttle_in_kbps,
+      :state,
+      :healthy,
+      :unhealthy_reason,
+      :lag_time_in_minutes,
+      :exported_snapshot,
+      :transfer_state,
+      :uuid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter used to restrict the results of describe calls for Amazon FSx
+    # for NetApp ONTAP SnapMirror relationships.
+    #
+    # @!attribute [rw] name
+    #   The name for this filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of the filter. These are all the values for any of the
+    #   applied filters.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SnapmirrorRelationshipFilter AWS API Documentation
+    #
+    class SnapmirrorRelationshipFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # No Amazon FSx SnapMirror relationships were found based on the
+    # supplied parameters.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SnapmirrorRelationshipNotFound AWS API Documentation
+    #
+    class SnapmirrorRelationshipNotFound < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the SnapMirror policy that an Amazon FSx for NetApp ONTAP
+    # SnapMirror relationship uses.
+    #
+    # @!attribute [rw] policy_id
+    #   The ID of the SnapMirror policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the SnapMirror policy in ONTAP.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SnapmirrorRelationshipPolicy AWS API Documentation
+    #
+    class SnapmirrorRelationshipPolicy < Struct.new(
+      :policy_id,
+      :policy_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the source endpoint of an Amazon FSx for NetApp ONTAP
+    # SnapMirror relationship. The source volume can be on an Amazon FSx for
+    # NetApp ONTAP file system or on another ONTAP cluster.
+    #
+    # @!attribute [rw] path
+    #   The path of the source volume, in the format `svm_name:volume_name`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SnapmirrorSource AWS API Documentation
+    #
+    class SnapmirrorSource < Struct.new(
+      :path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the latest transfer of an Amazon FSx for NetApp ONTAP
+    # SnapMirror relationship.
+    #
+    # @!attribute [rw] state
+    #   The state of the transfer that ONTAP reports.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the transfer that ONTAP reports.
+    #   @return [String]
+    #
+    # @!attribute [rw] bytes_transferred
+    #   The number of bytes that the transfer transferred.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] duration
+    #   The duration of the transfer, in ISO 8601 duration format.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   The time that the transfer ended.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SnapmirrorTransferState AWS API Documentation
+    #
+    class SnapmirrorTransferState < Struct.new(
+      :state,
+      :type,
+      :bytes_transferred,
+      :duration,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A snapshot of an Amazon FSx for OpenZFS or Amazon FSx for NetApp ONTAP
+    # volume.
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
@@ -9203,10 +10913,16 @@ module Aws::FSx
     #   * `DELETING` - Amazon FSx is deleting the snapshot.
     #
     #   * `AVAILABLE` - The snapshot is fully available.
+    #
+    #   * `FAILED` - Amazon FSx was unable to create the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_type
+    #   The type of the snapshot.
     #   @return [String]
     #
     # @!attribute [rw] lifecycle_transition_reason
-    #   Describes why a resource lifecycle state changed.
+    #   The reason why the snapshot lifecycle status changed.
     #   @return [Types::LifecycleTransitionReason]
     #
     # @!attribute [rw] tags
@@ -9219,6 +10935,10 @@ module Aws::FSx
     #   changes to the Amazon FSx system.
     #   @return [Array<Types::AdministrativeAction>]
     #
+    # @!attribute [rw] ontap_configuration
+    #   The configuration of an Amazon FSx for NetApp ONTAP snapshot.
+    #   @return [Types::OntapSnapshotConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/Snapshot AWS API Documentation
     #
     class Snapshot < Struct.new(
@@ -9228,9 +10948,11 @@ module Aws::FSx
       :volume_id,
       :creation_time,
       :lifecycle,
+      :snapshot_type,
       :lifecycle_transition_reason,
       :tags,
-      :administrative_actions)
+      :administrative_actions,
+      :ontap_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9267,6 +10989,198 @@ module Aws::FSx
     #
     class SnapshotNotFound < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Amazon FSx for NetApp ONTAP snapshot policy.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
+    #   identify Amazon Web Services resources. We require an ARN when you
+    #   need to specify a resource unambiguously across all of Amazon Web
+    #   Services. For more information, see [Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_policy_id
+    #   The system-generated, unique ID of the snapshot policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_virtual_machine_id
+    #   The ID of the snapshot policy's storage virtual machine, if you
+    #   created the snapshot policy on a storage virtual machine.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the snapshot policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether the snapshot policy is enabled. This value
+    #   defaults to `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] schedules
+    #   The schedules on which ONTAP creates snapshots for the snapshot
+    #   policy.
+    #   @return [Array<Types::SnapshotPolicySchedule>]
+    #
+    # @!attribute [rw] scope
+    #   The scope of the snapshot policy can be one of the following:
+    #
+    #   * `FILESYSTEM` – The snapshot policy was created on the file system.
+    #
+    #   * `SVM` – The snapshot policy was created on an SVM.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle status of the snapshot policy can be one of the
+    #   following:
+    #
+    #   * `CREATED` – The snapshot policy is fully available for use.
+    #
+    #   * `CREATING` – Amazon FSx is creating the snapshot policy.
+    #
+    #   * `DELETING` – Amazon FSx is deleting the snapshot policy.
+    #
+    #   * `FAILED` – Amazon FSx was unable to create the snapshot policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] uuid
+    #   The snapshot policy's universally unique identifier (UUID).
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_transition_reason
+    #   The reason why the snapshot policy lifecycle status changed.
+    #   @return [Types::LifecycleTransitionReason]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SnapshotPolicy AWS API Documentation
+    #
+    class SnapshotPolicy < Struct.new(
+      :resource_arn,
+      :snapshot_policy_id,
+      :file_system_id,
+      :storage_virtual_machine_id,
+      :name,
+      :enabled,
+      :schedules,
+      :scope,
+      :lifecycle,
+      :uuid,
+      :lifecycle_transition_reason,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter used to restrict the results of describe calls for Amazon FSx
+    # for NetApp ONTAP snapshot policies.
+    #
+    # @!attribute [rw] name
+    #   The name for this filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of the filter. These are all the values for any of the
+    #   applied filters.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SnapshotPolicyFilter AWS API Documentation
+    #
+    class SnapshotPolicyFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # No Amazon FSx snapshot policies were found based on the supplied
+    # parameters.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SnapshotPolicyNotFound AWS API Documentation
+    #
+    class SnapshotPolicyNotFound < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The length of time that snapshots created by this schedule are locked.
+    # This setting applies only to volumes that have snapshot locking
+    # enabled.
+    #
+    # @!attribute [rw] type
+    #   The unit of time for the retention period. If you set it to
+    #   `INFINITE`, the snapshots are retained forever.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Defines the amount of time for the retention period. You can't set
+    #   a value for `INFINITE`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SnapshotPolicyRetentionPeriod AWS API Documentation
+    #
+    class SnapshotPolicyRetentionPeriod < Struct.new(
+      :type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a schedule for an Amazon FSx for NetApp ONTAP snapshot
+    # policy.
+    #
+    # @!attribute [rw] name
+    #   The name of the ONTAP schedule that determines when snapshots are
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of snapshots to retain for the schedule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix
+    #   The prefix for the schedule to use when creating snapshots.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapmirror_label
+    #   The SnapMirror label to assign to the snapshots that the schedule
+    #   creates. SnapMirror policies use labels to select which snapshots to
+    #   replicate to a destination volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_period
+    #   The length of time that the snapshots that the schedule creates are
+    #   locked. This setting applies only to volumes that have snapshot
+    #   locking enabled.
+    #   @return [Types::SnapshotPolicyRetentionPeriod]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SnapshotPolicySchedule AWS API Documentation
+    #
+    class SnapshotPolicySchedule < Struct.new(
+      :name,
+      :count,
+      :prefix,
+      :snapmirror_label,
+      :retention_period)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9457,6 +11371,158 @@ module Aws::FSx
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/StorageVirtualMachineNotFound AWS API Documentation
     #
     class StorageVirtualMachineNotFound < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Amazon FSx for NetApp ONTAP storage virtual machine (SVM)
+    # peer relationship.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
+    #   identify Amazon Web Services resources. We require an ARN when you
+    #   need to specify a resource unambiguously across all of Amazon Web
+    #   Services. For more information, see [Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_virtual_machine_peer_id
+    #   The system-generated, unique ID of the SVM peer.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_virtual_machine_id
+    #   The ID of the SVM on the file system that the SVM peer relationship
+    #   belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle status of the SVM peer can be one of the following:
+    #
+    #   * `CREATED` – The SVM peer is fully available for use.
+    #
+    #   * `CREATING` – Amazon FSx is creating the SVM peer.
+    #
+    #   * `DELETING` – Amazon FSx is deleting the SVM peer.
+    #
+    #   * `FAILED` – Amazon FSx was unable to create the SVM peer.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_transition_reason
+    #   The reason why the SVM peer lifecycle status changed.
+    #   @return [Types::LifecycleTransitionReason]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] peer_svm_name
+    #   The name of the SVM on the peer cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_svm_alias
+    #   The name that the local cluster uses to identify the peer SVM.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_cluster_name
+    #   The name of the peer cluster that the peer SVM is on.
+    #   @return [String]
+    #
+    # @!attribute [rw] applications
+    #   The applications that the SVM peer relationship authorizes. The
+    #   applications can be one or more of the following:
+    #
+    #   * `SNAPMIRROR` – SnapMirror replication.
+    #
+    #   * `FILE_COPY` – File copy.
+    #
+    #   * `LUN_COPY` – LUN copy.
+    #
+    #   * `FLEXCACHE` – FlexCache.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] state
+    #   The state of the SVM peer relationship in ONTAP can be one of the
+    #   following:
+    #
+    #   * `PEERED` – The SVM peer relationship is established.
+    #
+    #   * `INITIATED` – The local cluster sent a peering request to the peer
+    #     SVM.
+    #
+    #   * `PENDING` – A peering request from the peer SVM is waiting for
+    #     acceptance.
+    #
+    #   * `INITIALIZING` – ONTAP is setting up the SVM peer relationship.
+    #
+    #   * `SUSPENDED` – The SVM peer relationship is suspended.
+    #
+    #   * `REJECTED` – The peering request was rejected.
+    #   @return [String]
+    #
+    # @!attribute [rw] uuid
+    #   The SVM peer's universally unique identifier (UUID).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/StorageVirtualMachinePeer AWS API Documentation
+    #
+    class StorageVirtualMachinePeer < Struct.new(
+      :resource_arn,
+      :storage_virtual_machine_peer_id,
+      :storage_virtual_machine_id,
+      :file_system_id,
+      :lifecycle,
+      :lifecycle_transition_reason,
+      :tags,
+      :peer_svm_name,
+      :peer_svm_alias,
+      :peer_cluster_name,
+      :applications,
+      :state,
+      :uuid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter used to restrict the results of describe calls for Amazon FSx
+    # for NetApp ONTAP storage virtual machine (SVM) peers.
+    #
+    # @!attribute [rw] name
+    #   The name for this filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of the filter. These are all the values for any of the
+    #   applied filters.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/StorageVirtualMachinePeerFilter AWS API Documentation
+    #
+    class StorageVirtualMachinePeerFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # No Amazon FSx storage virtual machine (SVM) peers were found based on
+    # the supplied parameters.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/StorageVirtualMachinePeerNotFound AWS API Documentation
+    #
+    class StorageVirtualMachinePeerNotFound < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -9733,6 +11799,92 @@ module Aws::FSx
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # Specifies changes to the clone configuration of an FSx for ONTAP
+    # volume.
+    #
+    # @!attribute [rw] split_action
+    #   Set to `START` to split the clone from its parent volume. Splitting
+    #   copies the data that the clone shares with the parent volume, so
+    #   that the clone becomes an independent volume that no longer depends
+    #   on the parent. After the split, the volume uses storage for all of
+    #   its data.
+    #
+    #   When you split a clone, keep the following in mind:
+    #
+    #   * `SplitAction` must be the only property that you change in the
+    #     `UpdateVolume` request.
+    #
+    #   * You can't split a data protection (`DP`) clone.
+    #
+    #   * The split fails if the clone has locked snapshots, such as
+    #     snapshots that a SnapMirror relationship uses or that a retention
+    #     period protects, or if a backup of the clone is in progress. To
+    #     allow the split, Amazon FSx deletes the snapshots that it created
+    #     for backups of the clone, so the next backup transfers more data.
+    #     Amazon FSx doesn't delete snapshots that you created.
+    #
+    #   The split runs in the background. To monitor its progress, use the
+    #   `VOLUME_CLONE_SPLIT` administrative action in the volume's
+    #   `AdministrativeActions`. When the split completes, the volume no
+    #   longer has a `CloneConfiguration`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateCloneConfiguration AWS API Documentation
+    #
+    class UpdateCloneConfiguration < Struct.new(
+      :split_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_peer_id
+    #   The ID of the cluster peer that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_cluster_name
+    #   Specifies the name that the file system uses to identify the peer
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_addresses
+    #   Specifies the IP addresses of the intercluster logical interfaces
+    #   (LIFs) on the peer cluster. The addresses that you specify replace
+    #   the existing peer addresses.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateClusterPeerRequest AWS API Documentation
+    #
+    class UpdateClusterPeerRequest < Struct.new(
+      :client_request_token,
+      :cluster_peer_id,
+      :peer_cluster_name,
+      :peer_addresses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_peer
+    #   A description of the cluster peer that was just updated.
+    #   @return [Types::ClusterPeer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateClusterPeerResponse AWS API Documentation
+    #
+    class UpdateClusterPeerResponse < Struct.new(
+      :cluster_peer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] association_id
     #   The ID of the data repository association that you are updating.
@@ -10555,6 +12707,38 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # Used to specify changes to the ONTAP configuration for the snapshot
+    # you are updating.
+    #
+    # @!attribute [rw] snapmirror_label
+    #   Specifies the SnapMirror label for the snapshot. SnapMirror policies
+    #   use labels to select which snapshots to replicate to a destination
+    #   volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiry_time
+    #   Specifies the date and time when the snapshot expires. You can't
+    #   delete the snapshot before this time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] snaplock_expiry_time
+    #   Specifies the date and time until which the snapshot is locked. This
+    #   setting takes effect only if snapshot locking is enabled on the
+    #   volume. Snapshot locking is separate from SnapLock, and enabling
+    #   SnapLock on a volume doesn't enable snapshot locking. You can't
+    #   delete the snapshot before this time.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateOntapSnapshotConfiguration AWS API Documentation
+    #
+    class UpdateOntapSnapshotConfiguration < Struct.new(
+      :snapmirror_label,
+      :expiry_time,
+      :snaplock_expiry_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Used to specify changes to the ONTAP configuration for the volume you
     # are updating.
     #
@@ -10631,6 +12815,11 @@ module Aws::FSx
     #   The configured size of the volume, in bytes.
     #   @return [Integer]
     #
+    # @!attribute [rw] clone_configuration
+    #   Specifies the clone configuration changes to make to the volume. Use
+    #   this property to split a clone from its parent volume.
+    #   @return [Types::UpdateCloneConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateOntapVolumeConfiguration AWS API Documentation
     #
     class UpdateOntapVolumeConfiguration < Struct.new(
@@ -10642,7 +12831,8 @@ module Aws::FSx
       :snapshot_policy,
       :copy_tags_to_backups,
       :snaplock_configuration,
-      :size_in_bytes)
+      :size_in_bytes,
+      :clone_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10839,6 +13029,186 @@ module Aws::FSx
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] snapmirror_policy_id
+    #   The ID of the SnapMirror policy that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_rules
+    #   Specifies the rules that determine which snapshots SnapMirror
+    #   retains on the destination volume, based on their SnapMirror labels.
+    #   The rules that you specify replace all the SnapMirror policy's
+    #   existing retention rules. To keep an existing rule, include it in
+    #   the list. To remove all retention rules, specify an empty list.
+    #   @return [Array<Types::SnapmirrorPolicyRetentionRule>]
+    #
+    # @!attribute [rw] transfer_schedule
+    #   Specifies the name of the ONTAP schedule that determines when
+    #   SnapMirror transfers data. To remove the transfer schedule, specify
+    #   an empty string.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_compression_enabled
+    #   Specifies whether SnapMirror compresses data when it transfers the
+    #   data over the network.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] throttle_in_kbps
+    #   Specifies the maximum bandwidth, in kilobytes per second (KBps),
+    #   that SnapMirror uses to transfer data. A value of `0` means that the
+    #   bandwidth is unlimited.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateSnapmirrorPolicyRequest AWS API Documentation
+    #
+    class UpdateSnapmirrorPolicyRequest < Struct.new(
+      :client_request_token,
+      :snapmirror_policy_id,
+      :retention_rules,
+      :transfer_schedule,
+      :network_compression_enabled,
+      :throttle_in_kbps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapmirror_policy
+    #   A description of the SnapMirror policy that was just updated.
+    #   @return [Types::SnapmirrorPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateSnapmirrorPolicyResponse AWS API Documentation
+    #
+    class UpdateSnapmirrorPolicyResponse < Struct.new(
+      :snapmirror_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapmirror_relationship_id
+    #   The ID of the SnapMirror relationship that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_id
+    #   Specifies the ID of the SnapMirror policy that the SnapMirror
+    #   relationship uses.
+    #   @return [String]
+    #
+    # @!attribute [rw] transfer_schedule
+    #   Specifies the name of the ONTAP schedule that determines when
+    #   SnapMirror transfers data for the relationship. This schedule
+    #   overrides the transfer schedule of the SnapMirror policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] throttle_in_kbps
+    #   Specifies the maximum bandwidth, in kilobytes per second (KBps),
+    #   that SnapMirror uses to transfer data for the relationship. A value
+    #   of `0` means that the bandwidth is unlimited. This value overrides
+    #   the throttle of the SnapMirror policy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   Specifies the state to set for the SnapMirror relationship:
+    #
+    #   * `SNAPMIRRORED` – Resumes a paused SnapMirror relationship, or
+    #     resynchronizes a broken-off SnapMirror relationship.
+    #
+    #   * `PAUSED` – Pauses SnapMirror transfers for the relationship.
+    #
+    #   * `BROKEN_OFF` – Breaks off the SnapMirror relationship, which makes
+    #     the destination volume writable.
+    #
+    #   Setting `State` to `SNAPMIRRORED` on a relationship that is
+    #   `BROKEN_OFF` might resynchronize the relationship. A resync
+    #   overwrites the destination volume with data from the source volume,
+    #   and discards any data written to the destination volume that isn't
+    #   present on the source volume. Use caution when you resynchronize a
+    #   relationship.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateSnapmirrorRelationshipRequest AWS API Documentation
+    #
+    class UpdateSnapmirrorRelationshipRequest < Struct.new(
+      :client_request_token,
+      :snapmirror_relationship_id,
+      :policy_id,
+      :transfer_schedule,
+      :throttle_in_kbps,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapmirror_relationship
+    #   A description of the SnapMirror relationship that was just updated.
+    #   @return [Types::SnapmirrorRelationship]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateSnapmirrorRelationshipResponse AWS API Documentation
+    #
+    class UpdateSnapmirrorRelationshipResponse < Struct.new(
+      :snapmirror_relationship)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_policy_id
+    #   The ID of the snapshot policy that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether the snapshot policy is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateSnapshotPolicyRequest AWS API Documentation
+    #
+    class UpdateSnapshotPolicyRequest < Struct.new(
+      :client_request_token,
+      :snapshot_policy_id,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_policy
+    #   A description of the snapshot policy that was just updated.
+    #   @return [Types::SnapshotPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateSnapshotPolicyResponse AWS API Documentation
+    #
+    class UpdateSnapshotPolicyResponse < Struct.new(
+      :snapshot_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the snapshot to update.
     #   @return [String]
@@ -10848,12 +13218,17 @@ module Aws::FSx
     #   `fsvolsnap-0123456789abcdef0`.
     #   @return [String]
     #
+    # @!attribute [rw] ontap_configuration
+    #   The configuration of the ONTAP snapshot that you are updating.
+    #   @return [Types::UpdateOntapSnapshotConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateSnapshotRequest AWS API Documentation
     #
     class UpdateSnapshotRequest < Struct.new(
       :client_request_token,
       :name,
-      :snapshot_id)
+      :snapshot_id,
+      :ontap_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10867,6 +13242,66 @@ module Aws::FSx
     #
     class UpdateSnapshotResponse < Struct.new(
       :snapshot)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_virtual_machine_peer_id
+    #   The ID of the SVM peer that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] applications
+    #   Specifies the applications that the SVM peer relationship
+    #   authorizes. The applications that you specify replace the existing
+    #   applications.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] peer_svm_alias
+    #   Specifies the name that the local cluster uses to identify the peer
+    #   SVM.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Specifies the state to set for the SVM peer relationship:
+    #
+    #   * `PEERED` – Accepts a pending peering request, or resumes a
+    #     suspended SVM peer relationship.
+    #
+    #   * `SUSPENDED` – Suspends the SVM peer relationship.
+    #
+    #   * `REJECTED` – Rejects a pending peering request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateStorageVirtualMachinePeerRequest AWS API Documentation
+    #
+    class UpdateStorageVirtualMachinePeerRequest < Struct.new(
+      :client_request_token,
+      :storage_virtual_machine_peer_id,
+      :applications,
+      :peer_svm_alias,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] storage_virtual_machine_peer
+    #   A description of the SVM peer that was just updated.
+    #   @return [Types::StorageVirtualMachinePeer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateStorageVirtualMachinePeerResponse AWS API Documentation
+    #
+    class UpdateStorageVirtualMachinePeerResponse < Struct.new(
+      :storage_virtual_machine_peer)
       SENSITIVE = []
       include Aws::Structure
     end

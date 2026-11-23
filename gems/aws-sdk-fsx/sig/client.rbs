@@ -198,6 +198,28 @@ module Aws
                          ) -> _CreateBackupResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBackupResponseSuccess
 
+      interface _CreateClusterPeerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterPeerResponse]
+        def cluster_peer: () -> Types::ClusterPeer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#create_cluster_peer-instance_method
+      def create_cluster_peer: (
+                                 ?client_request_token: ::String,
+                                 file_system_id: ::String,
+                                 peer_addresses: Array[::String],
+                                 passphrase_secret_arn: ::String,
+                                 ?peer_cluster_name: ::String,
+                                 allowed_svm_mode: ("ALL" | "NONE" | "SPECIFIED"),
+                                 ?allowed_svm_ids: Array[::String],
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   }
+                                 ]
+                               ) -> _CreateClusterPeerResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterPeerResponseSuccess
+
       interface _CreateDataRepositoryAssociationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataRepositoryAssociationResponse]
         def association: () -> Types::DataRepositoryAssociation
@@ -366,6 +388,61 @@ module Aws
                                           ) -> _CreateFileSystemFromBackupResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFileSystemFromBackupResponseSuccess
 
+      interface _CreateSnapmirrorPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSnapmirrorPolicyResponse]
+        def snapmirror_policy: () -> Types::SnapmirrorPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#create_snapmirror_policy-instance_method
+      def create_snapmirror_policy: (
+                                      ?client_request_token: ::String,
+                                      ?file_system_id: ::String,
+                                      ?storage_virtual_machine_id: ::String,
+                                      name: ::String,
+                                      ?snapshot_copy_mode: ("COPY_ALL_SOURCE_SNAPSHOTS" | "COPY_LATEST_SOURCE_SNAPSHOT" | "NO_CREATE_SNAPSHOT_ON_SOURCE"),
+                                      ?retention_rules: Array[
+                                        {
+                                          label: ::String,
+                                          count: ::Integer,
+                                          creation_schedule: ::String?
+                                        }
+                                      ],
+                                      ?transfer_schedule: ::String,
+                                      ?network_compression_enabled: bool,
+                                      ?throttle_in_kbps: ::Integer,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        }
+                                      ]
+                                    ) -> _CreateSnapmirrorPolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapmirrorPolicyResponseSuccess
+
+      interface _CreateSnapmirrorRelationshipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSnapmirrorRelationshipResponse]
+        def snapmirror_relationship: () -> Types::SnapmirrorRelationship
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#create_snapmirror_relationship-instance_method
+      def create_snapmirror_relationship: (
+                                            ?client_request_token: ::String,
+                                            source: {
+                                              path: ::String
+                                            },
+                                            destination: {
+                                              volume_id: ::String
+                                            },
+                                            ?policy_id: ::String,
+                                            ?transfer_schedule: ::String,
+                                            ?throttle_in_kbps: ::Integer,
+                                            ?tags: Array[
+                                              {
+                                                key: ::String,
+                                                value: ::String
+                                              }
+                                            ]
+                                          ) -> _CreateSnapmirrorRelationshipResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapmirrorRelationshipResponseSuccess
+
       interface _CreateSnapshotResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateSnapshotResponse]
         def snapshot: () -> Types::Snapshot
@@ -380,9 +457,46 @@ module Aws
                                  key: ::String,
                                  value: ::String
                                }
-                             ]
+                             ],
+                             ?ontap_configuration: {
+                               snapmirror_label: ::String?,
+                               expiry_time: ::Time?,
+                               snaplock_expiry_time: ::Time?
+                             }
                            ) -> _CreateSnapshotResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotResponseSuccess
+
+      interface _CreateSnapshotPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSnapshotPolicyResponse]
+        def snapshot_policy: () -> Types::SnapshotPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#create_snapshot_policy-instance_method
+      def create_snapshot_policy: (
+                                    ?client_request_token: ::String,
+                                    ?file_system_id: ::String,
+                                    ?storage_virtual_machine_id: ::String,
+                                    name: ::String,
+                                    ?enabled: bool,
+                                    schedules: Array[
+                                      {
+                                        name: ::String,
+                                        count: ::Integer,
+                                        prefix: ::String?,
+                                        snapmirror_label: ::String?,
+                                        retention_period: {
+                                          type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE"),
+                                          value: ::Integer?
+                                        }?
+                                      }
+                                    ],
+                                    ?tags: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String
+                                      }
+                                    ]
+                                  ) -> _CreateSnapshotPolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotPolicyResponseSuccess
 
       interface _CreateStorageVirtualMachineResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateStorageVirtualMachineResponse]
@@ -407,6 +521,27 @@ module Aws
                                             ?root_volume_security_style: ("UNIX" | "NTFS" | "MIXED")
                                           ) -> _CreateStorageVirtualMachineResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStorageVirtualMachineResponseSuccess
+
+      interface _CreateStorageVirtualMachinePeerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStorageVirtualMachinePeerResponse]
+        def storage_virtual_machine_peer: () -> Types::StorageVirtualMachinePeer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#create_storage_virtual_machine_peer-instance_method
+      def create_storage_virtual_machine_peer: (
+                                                 ?client_request_token: ::String,
+                                                 storage_virtual_machine_id: ::String,
+                                                 peer_svm_name: ::String,
+                                                 ?peer_cluster_name: ::String,
+                                                 applications: Array[("SNAPMIRROR" | "FILE_COPY" | "LUN_COPY" | "FLEXCACHE")],
+                                                 ?peer_svm_alias: ::String,
+                                                 ?tags: Array[
+                                                   {
+                                                     key: ::String,
+                                                     value: ::String
+                                                   }
+                                                 ]
+                                               ) -> _CreateStorageVirtualMachinePeerResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStorageVirtualMachinePeerResponseSuccess
 
       interface _CreateVolumeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateVolumeResponse]
@@ -488,6 +623,18 @@ module Aws
                          ) -> _DeleteBackupResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBackupResponseSuccess
 
+      interface _DeleteClusterPeerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterPeerResponse]
+        def cluster_peer_id: () -> ::String
+        def lifecycle: () -> ("CREATING" | "CREATED" | "DELETING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#delete_cluster_peer-instance_method
+      def delete_cluster_peer: (
+                                 ?client_request_token: ::String,
+                                 cluster_peer_id: ::String
+                               ) -> _DeleteClusterPeerResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterPeerResponseSuccess
+
       interface _DeleteDataRepositoryAssociationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataRepositoryAssociationResponse]
         def association_id: () -> ::String
@@ -557,10 +704,34 @@ module Aws
                               ) -> _DeleteFileSystemResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFileSystemResponseSuccess
 
+      interface _DeleteSnapmirrorPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSnapmirrorPolicyResponse]
+        def snapmirror_policy_id: () -> ::String
+        def lifecycle: () -> ("CREATING" | "CREATED" | "DELETING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#delete_snapmirror_policy-instance_method
+      def delete_snapmirror_policy: (
+                                      ?client_request_token: ::String,
+                                      snapmirror_policy_id: ::String
+                                    ) -> _DeleteSnapmirrorPolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSnapmirrorPolicyResponseSuccess
+
+      interface _DeleteSnapmirrorRelationshipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSnapmirrorRelationshipResponse]
+        def snapmirror_relationship_id: () -> ::String
+        def lifecycle: () -> ("CREATING" | "CREATED" | "DELETING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#delete_snapmirror_relationship-instance_method
+      def delete_snapmirror_relationship: (
+                                            ?client_request_token: ::String,
+                                            snapmirror_relationship_id: ::String
+                                          ) -> _DeleteSnapmirrorRelationshipResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSnapmirrorRelationshipResponseSuccess
+
       interface _DeleteSnapshotResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSnapshotResponse]
         def snapshot_id: () -> ::String
-        def lifecycle: () -> ("PENDING" | "CREATING" | "DELETING" | "AVAILABLE")
+        def lifecycle: () -> ("PENDING" | "CREATING" | "DELETING" | "AVAILABLE" | "FAILED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#delete_snapshot-instance_method
       def delete_snapshot: (
@@ -568,6 +739,18 @@ module Aws
                              snapshot_id: ::String
                            ) -> _DeleteSnapshotResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSnapshotResponseSuccess
+
+      interface _DeleteSnapshotPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSnapshotPolicyResponse]
+        def snapshot_policy_id: () -> ::String
+        def lifecycle: () -> ("CREATING" | "CREATED" | "DELETING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#delete_snapshot_policy-instance_method
+      def delete_snapshot_policy: (
+                                    ?client_request_token: ::String,
+                                    snapshot_policy_id: ::String
+                                  ) -> _DeleteSnapshotPolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSnapshotPolicyResponseSuccess
 
       interface _DeleteStorageVirtualMachineResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStorageVirtualMachineResponse]
@@ -580,6 +763,18 @@ module Aws
                                             storage_virtual_machine_id: ::String
                                           ) -> _DeleteStorageVirtualMachineResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStorageVirtualMachineResponseSuccess
+
+      interface _DeleteStorageVirtualMachinePeerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStorageVirtualMachinePeerResponse]
+        def storage_virtual_machine_peer_id: () -> ::String
+        def lifecycle: () -> ("CREATING" | "CREATED" | "DELETING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#delete_storage_virtual_machine_peer-instance_method
+      def delete_storage_virtual_machine_peer: (
+                                                 ?client_request_token: ::String,
+                                                 storage_virtual_machine_peer_id: ::String
+                                               ) -> _DeleteStorageVirtualMachinePeerResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStorageVirtualMachinePeerResponseSuccess
 
       interface _DeleteVolumeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVolumeResponse]
@@ -625,6 +820,25 @@ module Aws
                               ?next_token: ::String
                             ) -> _DescribeBackupsResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBackupsResponseSuccess
+
+      interface _DescribeClusterPeersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterPeersResponse]
+        def cluster_peers: () -> ::Array[Types::ClusterPeer]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#describe_cluster_peers-instance_method
+      def describe_cluster_peers: (
+                                    ?cluster_peer_ids: Array[::String],
+                                    ?filters: Array[
+                                      {
+                                        name: ("file-system-id")?,
+                                        values: Array[::String]?
+                                      }
+                                    ],
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _DescribeClusterPeersResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterPeersResponseSuccess
 
       interface _DescribeDataRepositoryAssociationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDataRepositoryAssociationsResponse]
@@ -732,6 +946,63 @@ module Aws
                                              ) -> _DescribeSharedVpcConfigurationResponseSuccess
                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSharedVpcConfigurationResponseSuccess
 
+      interface _DescribeSnapmirrorPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSnapmirrorPoliciesResponse]
+        def snapmirror_policies: () -> ::Array[Types::SnapmirrorPolicy]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#describe_snapmirror_policies-instance_method
+      def describe_snapmirror_policies: (
+                                          ?snapmirror_policy_ids: Array[::String],
+                                          ?filters: Array[
+                                            {
+                                              name: ("file-system-id" | "storage-virtual-machine-id")?,
+                                              values: Array[::String]?
+                                            }
+                                          ],
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _DescribeSnapmirrorPoliciesResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSnapmirrorPoliciesResponseSuccess
+
+      interface _DescribeSnapmirrorRelationshipsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSnapmirrorRelationshipsResponse]
+        def snapmirror_relationships: () -> ::Array[Types::SnapmirrorRelationship]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#describe_snapmirror_relationships-instance_method
+      def describe_snapmirror_relationships: (
+                                               ?snapmirror_relationship_ids: Array[::String],
+                                               ?filters: Array[
+                                                 {
+                                                   name: ("file-system-id" | "destination-volume-id")?,
+                                                   values: Array[::String]?
+                                                 }
+                                               ],
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _DescribeSnapmirrorRelationshipsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSnapmirrorRelationshipsResponseSuccess
+
+      interface _DescribeSnapshotPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSnapshotPoliciesResponse]
+        def snapshot_policies: () -> ::Array[Types::SnapshotPolicy]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#describe_snapshot_policies-instance_method
+      def describe_snapshot_policies: (
+                                        ?snapshot_policy_ids: Array[::String],
+                                        ?filters: Array[
+                                          {
+                                            name: ("file-system-id" | "storage-virtual-machine-id")?,
+                                            values: Array[::String]?
+                                          }
+                                        ],
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _DescribeSnapshotPoliciesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSnapshotPoliciesResponseSuccess
+
       interface _DescribeSnapshotsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSnapshotsResponse]
         def snapshots: () -> ::Array[Types::Snapshot]
@@ -751,6 +1022,25 @@ module Aws
                                 ?include_shared: bool
                               ) -> _DescribeSnapshotsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSnapshotsResponseSuccess
+
+      interface _DescribeStorageVirtualMachinePeersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStorageVirtualMachinePeersResponse]
+        def storage_virtual_machine_peers: () -> ::Array[Types::StorageVirtualMachinePeer]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#describe_storage_virtual_machine_peers-instance_method
+      def describe_storage_virtual_machine_peers: (
+                                                    ?storage_virtual_machine_peer_ids: Array[::String],
+                                                    ?filters: Array[
+                                                      {
+                                                        name: ("file-system-id" | "storage-virtual-machine-id")?,
+                                                        values: Array[::String]?
+                                                      }
+                                                    ],
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String
+                                                  ) -> _DescribeStorageVirtualMachinePeersResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStorageVirtualMachinePeersResponseSuccess
 
       interface _DescribeStorageVirtualMachinesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStorageVirtualMachinesResponse]
@@ -889,6 +1179,19 @@ module Aws
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
 
+      interface _UpdateClusterPeerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterPeerResponse]
+        def cluster_peer: () -> Types::ClusterPeer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#update_cluster_peer-instance_method
+      def update_cluster_peer: (
+                                 ?client_request_token: ::String,
+                                 cluster_peer_id: ::String,
+                                 ?peer_cluster_name: ::String,
+                                 ?peer_addresses: Array[::String]
+                               ) -> _UpdateClusterPeerResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterPeerResponseSuccess
+
       interface _UpdateDataRepositoryAssociationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataRepositoryAssociationResponse]
         def association: () -> Types::DataRepositoryAssociation
@@ -1022,6 +1325,42 @@ module Aws
                                            ) -> _UpdateSharedVpcConfigurationResponseSuccess
                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSharedVpcConfigurationResponseSuccess
 
+      interface _UpdateSnapmirrorPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSnapmirrorPolicyResponse]
+        def snapmirror_policy: () -> Types::SnapmirrorPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#update_snapmirror_policy-instance_method
+      def update_snapmirror_policy: (
+                                      ?client_request_token: ::String,
+                                      snapmirror_policy_id: ::String,
+                                      ?retention_rules: Array[
+                                        {
+                                          label: ::String,
+                                          count: ::Integer,
+                                          creation_schedule: ::String?
+                                        }
+                                      ],
+                                      ?transfer_schedule: ::String,
+                                      ?network_compression_enabled: bool,
+                                      ?throttle_in_kbps: ::Integer
+                                    ) -> _UpdateSnapmirrorPolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSnapmirrorPolicyResponseSuccess
+
+      interface _UpdateSnapmirrorRelationshipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSnapmirrorRelationshipResponse]
+        def snapmirror_relationship: () -> Types::SnapmirrorRelationship
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#update_snapmirror_relationship-instance_method
+      def update_snapmirror_relationship: (
+                                            ?client_request_token: ::String,
+                                            snapmirror_relationship_id: ::String,
+                                            ?policy_id: ::String,
+                                            ?transfer_schedule: ::String,
+                                            ?throttle_in_kbps: ::Integer,
+                                            ?state: ("SNAPMIRRORED" | "PAUSED" | "BROKEN_OFF")
+                                          ) -> _UpdateSnapmirrorRelationshipResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSnapmirrorRelationshipResponseSuccess
+
       interface _UpdateSnapshotResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSnapshotResponse]
         def snapshot: () -> Types::Snapshot
@@ -1029,10 +1368,27 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#update_snapshot-instance_method
       def update_snapshot: (
                              ?client_request_token: ::String,
-                             name: ::String,
-                             snapshot_id: ::String
+                             ?name: ::String,
+                             snapshot_id: ::String,
+                             ?ontap_configuration: {
+                               snapmirror_label: ::String?,
+                               expiry_time: ::Time?,
+                               snaplock_expiry_time: ::Time?
+                             }
                            ) -> _UpdateSnapshotResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSnapshotResponseSuccess
+
+      interface _UpdateSnapshotPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSnapshotPolicyResponse]
+        def snapshot_policy: () -> Types::SnapshotPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#update_snapshot_policy-instance_method
+      def update_snapshot_policy: (
+                                    ?client_request_token: ::String,
+                                    snapshot_policy_id: ::String,
+                                    ?enabled: bool
+                                  ) -> _UpdateSnapshotPolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSnapshotPolicyResponseSuccess
 
       interface _UpdateStorageVirtualMachineResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStorageVirtualMachineResponse]
@@ -1049,6 +1405,20 @@ module Aws
                                             ?svm_admin_password: ::String
                                           ) -> _UpdateStorageVirtualMachineResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStorageVirtualMachineResponseSuccess
+
+      interface _UpdateStorageVirtualMachinePeerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStorageVirtualMachinePeerResponse]
+        def storage_virtual_machine_peer: () -> Types::StorageVirtualMachinePeer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#update_storage_virtual_machine_peer-instance_method
+      def update_storage_virtual_machine_peer: (
+                                                 ?client_request_token: ::String,
+                                                 storage_virtual_machine_peer_id: ::String,
+                                                 ?applications: Array[("SNAPMIRROR" | "FILE_COPY" | "LUN_COPY" | "FLEXCACHE")],
+                                                 ?peer_svm_alias: ::String,
+                                                 ?state: ("PEERED" | "REJECTED" | "SUSPENDED")
+                                               ) -> _UpdateStorageVirtualMachinePeerResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStorageVirtualMachinePeerResponseSuccess
 
       interface _UpdateVolumeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVolumeResponse]
@@ -1079,7 +1449,10 @@ module Aws
                                retention_period: Params::snaplock_retention_period?,
                                volume_append_mode_enabled: bool?
                              }?,
-                             size_in_bytes: ::Integer?
+                             size_in_bytes: ::Integer?,
+                             clone_configuration: {
+                               split_action: ("START")?
+                             }?
                            },
                            ?name: ::String,
                            ?open_zfs_configuration: {

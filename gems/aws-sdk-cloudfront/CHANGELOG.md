@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.172.0 (2026-11-23)
+------------------
+
+* Feature - Launch CloudFront in AWS European Sovereign Cloud.
+
 1.171.0 (2026-11-20)
 ------------------
 

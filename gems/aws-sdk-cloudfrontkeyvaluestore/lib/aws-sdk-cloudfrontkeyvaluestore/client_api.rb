@@ -155,9 +155,10 @@ module Aws::CloudFrontKeyValueStore
 
       api.metadata = {
         "apiVersion" => "2022-07-26",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "cloudfront-keyvaluestore",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon CloudFront KeyValueStore",
         "serviceId" => "CloudFront KeyValueStore",
         "signatureVersion" => "v4",

@@ -34,6 +34,7 @@ module Aws::FSx
   # * {BackupNotFound}
   # * {BackupRestoring}
   # * {BadRequest}
+  # * {ClusterPeerNotFound}
   # * {DataRepositoryAssociationNotFound}
   # * {DataRepositoryTaskEnded}
   # * {DataRepositoryTaskExecuting}
@@ -61,9 +62,13 @@ module Aws::FSx
   # * {ResourceNotFound}
   # * {S3AccessPointAttachmentNotFound}
   # * {ServiceLimitExceeded}
+  # * {SnapmirrorPolicyNotFound}
+  # * {SnapmirrorRelationshipNotFound}
   # * {SnapshotNotFound}
+  # * {SnapshotPolicyNotFound}
   # * {SourceBackupUnavailable}
   # * {StorageVirtualMachineNotFound}
+  # * {StorageVirtualMachinePeerNotFound}
   # * {TooManyAccessPoints}
   # * {UnsupportedOperation}
   # * {VolumeNotFound}
@@ -194,6 +199,21 @@ module Aws::FSx
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::FSx::Types::BadRequest] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ClusterPeerNotFound < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FSx::Types::ClusterPeerNotFound] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -659,11 +679,56 @@ module Aws::FSx
       end
     end
 
+    class SnapmirrorPolicyNotFound < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FSx::Types::SnapmirrorPolicyNotFound] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class SnapmirrorRelationshipNotFound < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FSx::Types::SnapmirrorRelationshipNotFound] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class SnapshotNotFound < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::FSx::Types::SnapshotNotFound] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class SnapshotPolicyNotFound < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FSx::Types::SnapshotPolicyNotFound] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -699,6 +764,21 @@ module Aws::FSx
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::FSx::Types::StorageVirtualMachineNotFound] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class StorageVirtualMachinePeerNotFound < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FSx::Types::StorageVirtualMachinePeerNotFound] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

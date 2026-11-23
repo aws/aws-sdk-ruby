@@ -1659,7 +1659,7 @@ module Aws::CloudWatchOmni
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_integration({
-    #     integration_type: "AWS_CONFIG_SLREC", # required, accepts AWS_CONFIG_SLREC, SLACK, EXTERNAL_AGENT, AWS_INTEGRATION
+    #     integration_type: "AWS_CONFIG_SLREC", # required, accepts AWS_CONFIG_SLREC, AWS_CONFIG_AZURE_SLREC, SLACK, EXTERNAL_AGENT, AWS_INTEGRATION
     #     name: "CreateIntegrationInputNameString", # required
     #     credential: {
     #       oauth_code_credential: {
@@ -1688,7 +1688,7 @@ module Aws::CloudWatchOmni
     #
     #   resp.integration.integration_id #=> String
     #   resp.integration.integration_arn #=> String
-    #   resp.integration.integration_type #=> String, one of "AWS_CONFIG_SLREC", "SLACK", "EXTERNAL_AGENT", "AWS_INTEGRATION"
+    #   resp.integration.integration_type #=> String, one of "AWS_CONFIG_SLREC", "AWS_CONFIG_AZURE_SLREC", "SLACK", "EXTERNAL_AGENT", "AWS_INTEGRATION"
     #   resp.integration.name #=> String
     #   resp.integration.status #=> String, one of "ACTIVE", "DELETED", "PENDING", "PENDING_OAUTH", "ERROR", "FAILED"
     #   resp.integration.auth_type #=> String, one of "NONE", "OAUTH2", "API_KEY"
@@ -3451,7 +3451,7 @@ module Aws::CloudWatchOmni
     #
     #   resp.integration.integration_id #=> String
     #   resp.integration.integration_arn #=> String
-    #   resp.integration.integration_type #=> String, one of "AWS_CONFIG_SLREC", "SLACK", "EXTERNAL_AGENT", "AWS_INTEGRATION"
+    #   resp.integration.integration_type #=> String, one of "AWS_CONFIG_SLREC", "AWS_CONFIG_AZURE_SLREC", "SLACK", "EXTERNAL_AGENT", "AWS_INTEGRATION"
     #   resp.integration.name #=> String
     #   resp.integration.status #=> String, one of "ACTIVE", "DELETED", "PENDING", "PENDING_OAUTH", "ERROR", "FAILED"
     #   resp.integration.auth_type #=> String, one of "NONE", "OAUTH2", "API_KEY"
@@ -4556,7 +4556,7 @@ module Aws::CloudWatchOmni
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_integrations({
-    #     integration_type: "AWS_CONFIG_SLREC", # accepts AWS_CONFIG_SLREC, SLACK, EXTERNAL_AGENT, AWS_INTEGRATION
+    #     integration_type: "AWS_CONFIG_SLREC", # accepts AWS_CONFIG_SLREC, AWS_CONFIG_AZURE_SLREC, SLACK, EXTERNAL_AGENT, AWS_INTEGRATION
     #     status: "ACTIVE", # accepts ACTIVE, DELETED, PENDING, PENDING_OAUTH, ERROR, FAILED
     #     name: "String",
     #     next_token: "String",
@@ -4568,7 +4568,7 @@ module Aws::CloudWatchOmni
     #   resp.items #=> Array
     #   resp.items[0].integration_id #=> String
     #   resp.items[0].integration_arn #=> String
-    #   resp.items[0].integration_type #=> String, one of "AWS_CONFIG_SLREC", "SLACK", "EXTERNAL_AGENT", "AWS_INTEGRATION"
+    #   resp.items[0].integration_type #=> String, one of "AWS_CONFIG_SLREC", "AWS_CONFIG_AZURE_SLREC", "SLACK", "EXTERNAL_AGENT", "AWS_INTEGRATION"
     #   resp.items[0].name #=> String
     #   resp.items[0].status #=> String, one of "ACTIVE", "DELETED", "PENDING", "PENDING_OAUTH", "ERROR", "FAILED"
     #   resp.items[0].auth_type #=> String, one of "NONE", "OAUTH2", "API_KEY"
@@ -5925,7 +5925,7 @@ module Aws::CloudWatchOmni
     #
     #   resp.integration.integration_id #=> String
     #   resp.integration.integration_arn #=> String
-    #   resp.integration.integration_type #=> String, one of "AWS_CONFIG_SLREC", "SLACK", "EXTERNAL_AGENT", "AWS_INTEGRATION"
+    #   resp.integration.integration_type #=> String, one of "AWS_CONFIG_SLREC", "AWS_CONFIG_AZURE_SLREC", "SLACK", "EXTERNAL_AGENT", "AWS_INTEGRATION"
     #   resp.integration.name #=> String
     #   resp.integration.status #=> String, one of "ACTIVE", "DELETED", "PENDING", "PENDING_OAUTH", "ERROR", "FAILED"
     #   resp.integration.auth_type #=> String, one of "NONE", "OAUTH2", "API_KEY"
@@ -6223,7 +6223,7 @@ module Aws::CloudWatchOmni
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchomni'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

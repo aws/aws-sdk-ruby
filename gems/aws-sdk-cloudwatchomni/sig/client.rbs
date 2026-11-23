@@ -229,7 +229,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#create_integration-instance_method
       def create_integration: (
-                                integration_type: ("AWS_CONFIG_SLREC" | "SLACK" | "EXTERNAL_AGENT" | "AWS_INTEGRATION"),
+                                integration_type: ("AWS_CONFIG_SLREC" | "AWS_CONFIG_AZURE_SLREC" | "SLACK" | "EXTERNAL_AGENT" | "AWS_INTEGRATION"),
                                 name: ::String,
                                 ?credential: Params::integration_credential,
                                 ?integration_attributes: Hash[::String, ::String],
@@ -718,7 +718,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#list_integrations-instance_method
       def list_integrations: (
-                               ?integration_type: ("AWS_CONFIG_SLREC" | "SLACK" | "EXTERNAL_AGENT" | "AWS_INTEGRATION"),
+                               ?integration_type: ("AWS_CONFIG_SLREC" | "AWS_CONFIG_AZURE_SLREC" | "SLACK" | "EXTERNAL_AGENT" | "AWS_INTEGRATION"),
                                ?status: ("ACTIVE" | "DELETED" | "PENDING" | "PENDING_OAUTH" | "ERROR" | "FAILED"),
                                ?name: ::String,
                                ?next_token: ::String,

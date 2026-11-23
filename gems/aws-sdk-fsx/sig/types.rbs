@@ -29,7 +29,7 @@ module Aws::FSx
     end
 
     class AdministrativeAction
-      attr_accessor administrative_action_type: ("FILE_SYSTEM_UPDATE" | "STORAGE_OPTIMIZATION" | "FILE_SYSTEM_ALIAS_ASSOCIATION" | "FILE_SYSTEM_ALIAS_DISASSOCIATION" | "VOLUME_UPDATE" | "SNAPSHOT_UPDATE" | "RELEASE_NFS_V3_LOCKS" | "VOLUME_RESTORE" | "THROUGHPUT_OPTIMIZATION" | "IOPS_OPTIMIZATION" | "STORAGE_TYPE_OPTIMIZATION" | "MISCONFIGURED_STATE_RECOVERY" | "VOLUME_UPDATE_WITH_SNAPSHOT" | "VOLUME_INITIALIZE_WITH_SNAPSHOT" | "DOWNLOAD_DATA_FROM_BACKUP")
+      attr_accessor administrative_action_type: ("FILE_SYSTEM_UPDATE" | "STORAGE_OPTIMIZATION" | "FILE_SYSTEM_ALIAS_ASSOCIATION" | "FILE_SYSTEM_ALIAS_DISASSOCIATION" | "VOLUME_UPDATE" | "SNAPSHOT_UPDATE" | "RELEASE_NFS_V3_LOCKS" | "VOLUME_RESTORE" | "THROUGHPUT_OPTIMIZATION" | "IOPS_OPTIMIZATION" | "STORAGE_TYPE_OPTIMIZATION" | "MISCONFIGURED_STATE_RECOVERY" | "VOLUME_UPDATE_WITH_SNAPSHOT" | "VOLUME_INITIALIZE_WITH_SNAPSHOT" | "DOWNLOAD_DATA_FROM_BACKUP" | "VOLUME_CLONE_SPLIT")
       attr_accessor progress_percent: ::Integer
       attr_accessor request_time: ::Time
       attr_accessor status: ("FAILED" | "IN_PROGRESS" | "PENDING" | "COMPLETED" | "UPDATED_OPTIMIZING" | "OPTIMIZING" | "PAUSED" | "CANCELLED")
@@ -152,6 +152,47 @@ module Aws::FSx
       SENSITIVE: []
     end
 
+    class CloneConfiguration
+      attr_accessor parent_volume_id: ::String
+      attr_accessor snapshot_id: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterPeer
+      attr_accessor resource_arn: ::String
+      attr_accessor cluster_peer_id: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor lifecycle: ("CREATING" | "CREATED" | "DELETING" | "FAILED")
+      attr_accessor lifecycle_transition_reason: Types::LifecycleTransitionReason
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor peer_addresses: ::Array[::String]
+      attr_accessor peer_cluster_name: ::String
+      attr_accessor passphrase_secret_arn: ::String
+      attr_accessor allowed_svm_mode: ("ALL" | "NONE" | "SPECIFIED")
+      attr_accessor allowed_svm_ids: ::Array[::String]
+      attr_accessor status: ::String
+      attr_accessor uuid: ::String
+      attr_accessor authentication_status: Types::ClusterPeerAuthenticationStatus
+      SENSITIVE: []
+    end
+
+    class ClusterPeerAuthenticationStatus
+      attr_accessor state: ::String
+      attr_accessor in_use: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterPeerFilter
+      attr_accessor name: ("file-system-id")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ClusterPeerNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class CompletionReport
       attr_accessor enabled: bool
       attr_accessor path: ::String
@@ -240,6 +281,29 @@ module Aws::FSx
 
     class CreateBackupResponse
       attr_accessor backup: Types::Backup
+      SENSITIVE: []
+    end
+
+    class CreateCloneConfiguration
+      attr_accessor parent_volume_id: ::String
+      attr_accessor snapshot_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateClusterPeerRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor peer_addresses: ::Array[::String]
+      attr_accessor passphrase_secret_arn: ::String
+      attr_accessor peer_cluster_name: ::String
+      attr_accessor allowed_svm_mode: ("ALL" | "NONE" | "SPECIFIED")
+      attr_accessor allowed_svm_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateClusterPeerResponse
+      attr_accessor cluster_peer: Types::ClusterPeer
       SENSITIVE: []
     end
 
@@ -430,6 +494,13 @@ module Aws::FSx
       SENSITIVE: []
     end
 
+    class CreateOntapSnapshotConfiguration
+      attr_accessor snapmirror_label: ::String
+      attr_accessor expiry_time: ::Time
+      attr_accessor snaplock_expiry_time: ::Time
+      SENSITIVE: []
+    end
+
     class CreateOntapVolumeConfiguration
       attr_accessor junction_path: ::String
       attr_accessor security_style: ("UNIX" | "NTFS" | "MIXED")
@@ -444,6 +515,7 @@ module Aws::FSx
       attr_accessor volume_style: ("FLEXVOL" | "FLEXGROUP")
       attr_accessor aggregate_configuration: Types::CreateAggregateConfiguration
       attr_accessor size_in_bytes: ::Integer
+      attr_accessor clone_configuration: Types::CreateCloneConfiguration
       SENSITIVE: []
     end
 
@@ -477,16 +549,94 @@ module Aws::FSx
       SENSITIVE: []
     end
 
+    class CreateSnapmirrorDestination
+      attr_accessor volume_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSnapmirrorPolicyRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor storage_virtual_machine_id: ::String
+      attr_accessor name: ::String
+      attr_accessor snapshot_copy_mode: ("COPY_ALL_SOURCE_SNAPSHOTS" | "COPY_LATEST_SOURCE_SNAPSHOT" | "NO_CREATE_SNAPSHOT_ON_SOURCE")
+      attr_accessor retention_rules: ::Array[Types::SnapmirrorPolicyRetentionRule]
+      attr_accessor transfer_schedule: ::String
+      attr_accessor network_compression_enabled: bool
+      attr_accessor throttle_in_kbps: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSnapmirrorPolicyResponse
+      attr_accessor snapmirror_policy: Types::SnapmirrorPolicy
+      SENSITIVE: []
+    end
+
+    class CreateSnapmirrorRelationshipRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor source: Types::CreateSnapmirrorSource
+      attr_accessor destination: Types::CreateSnapmirrorDestination
+      attr_accessor policy_id: ::String
+      attr_accessor transfer_schedule: ::String
+      attr_accessor throttle_in_kbps: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSnapmirrorRelationshipResponse
+      attr_accessor snapmirror_relationship: Types::SnapmirrorRelationship
+      SENSITIVE: []
+    end
+
+    class CreateSnapmirrorSource
+      attr_accessor path: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotPolicyRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor storage_virtual_machine_id: ::String
+      attr_accessor name: ::String
+      attr_accessor enabled: bool
+      attr_accessor schedules: ::Array[Types::SnapshotPolicySchedule]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotPolicyResponse
+      attr_accessor snapshot_policy: Types::SnapshotPolicy
+      SENSITIVE: []
+    end
+
     class CreateSnapshotRequest
       attr_accessor client_request_token: ::String
       attr_accessor name: ::String
       attr_accessor volume_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor ontap_configuration: Types::CreateOntapSnapshotConfiguration
       SENSITIVE: []
     end
 
     class CreateSnapshotResponse
       attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class CreateStorageVirtualMachinePeerRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor storage_virtual_machine_id: ::String
+      attr_accessor peer_svm_name: ::String
+      attr_accessor peer_cluster_name: ::String
+      attr_accessor applications: ::Array[("SNAPMIRROR" | "FILE_COPY" | "LUN_COPY" | "FLEXCACHE")]
+      attr_accessor peer_svm_alias: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateStorageVirtualMachinePeerResponse
+      attr_accessor storage_virtual_machine_peer: Types::StorageVirtualMachinePeer
       SENSITIVE: []
     end
 
@@ -648,6 +798,18 @@ module Aws::FSx
       SENSITIVE: []
     end
 
+    class DeleteClusterPeerRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor cluster_peer_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterPeerResponse
+      attr_accessor cluster_peer_id: ::String
+      attr_accessor lifecycle: ("CREATING" | "CREATED" | "DELETING" | "FAILED")
+      SENSITIVE: []
+    end
+
     class DeleteDataRepositoryAssociationRequest
       attr_accessor association_id: ::String
       attr_accessor client_request_token: ::String
@@ -729,6 +891,42 @@ module Aws::FSx
       SENSITIVE: []
     end
 
+    class DeleteSnapmirrorPolicyRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor snapmirror_policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSnapmirrorPolicyResponse
+      attr_accessor snapmirror_policy_id: ::String
+      attr_accessor lifecycle: ("CREATING" | "CREATED" | "DELETING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteSnapmirrorRelationshipRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor snapmirror_relationship_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSnapmirrorRelationshipResponse
+      attr_accessor snapmirror_relationship_id: ::String
+      attr_accessor lifecycle: ("CREATING" | "CREATED" | "DELETING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteSnapshotPolicyRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor snapshot_policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSnapshotPolicyResponse
+      attr_accessor snapshot_policy_id: ::String
+      attr_accessor lifecycle: ("CREATING" | "CREATED" | "DELETING" | "FAILED")
+      SENSITIVE: []
+    end
+
     class DeleteSnapshotRequest
       attr_accessor client_request_token: ::String
       attr_accessor snapshot_id: ::String
@@ -737,7 +935,19 @@ module Aws::FSx
 
     class DeleteSnapshotResponse
       attr_accessor snapshot_id: ::String
-      attr_accessor lifecycle: ("PENDING" | "CREATING" | "DELETING" | "AVAILABLE")
+      attr_accessor lifecycle: ("PENDING" | "CREATING" | "DELETING" | "AVAILABLE" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteStorageVirtualMachinePeerRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor storage_virtual_machine_peer_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStorageVirtualMachinePeerResponse
+      attr_accessor storage_virtual_machine_peer_id: ::String
+      attr_accessor lifecycle: ("CREATING" | "CREATED" | "DELETING" | "FAILED")
       SENSITIVE: []
     end
 
@@ -796,6 +1006,20 @@ module Aws::FSx
 
     class DescribeBackupsResponse
       attr_accessor backups: ::Array[Types::Backup]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClusterPeersRequest
+      attr_accessor cluster_peer_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::ClusterPeerFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClusterPeersResponse
+      attr_accessor cluster_peers: ::Array[Types::ClusterPeer]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -890,6 +1114,48 @@ module Aws::FSx
       SENSITIVE: []
     end
 
+    class DescribeSnapmirrorPoliciesRequest
+      attr_accessor snapmirror_policy_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::SnapmirrorPolicyFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSnapmirrorPoliciesResponse
+      attr_accessor snapmirror_policies: ::Array[Types::SnapmirrorPolicy]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSnapmirrorRelationshipsRequest
+      attr_accessor snapmirror_relationship_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::SnapmirrorRelationshipFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSnapmirrorRelationshipsResponse
+      attr_accessor snapmirror_relationships: ::Array[Types::SnapmirrorRelationship]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSnapshotPoliciesRequest
+      attr_accessor snapshot_policy_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::SnapshotPolicyFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSnapshotPoliciesResponse
+      attr_accessor snapshot_policies: ::Array[Types::SnapshotPolicy]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class DescribeSnapshotsRequest
       attr_accessor snapshot_ids: ::Array[::String]
       attr_accessor filters: ::Array[Types::SnapshotFilter]
@@ -901,6 +1167,20 @@ module Aws::FSx
 
     class DescribeSnapshotsResponse
       attr_accessor snapshots: ::Array[Types::Snapshot]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStorageVirtualMachinePeersRequest
+      attr_accessor storage_virtual_machine_peer_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::StorageVirtualMachinePeerFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStorageVirtualMachinePeersResponse
+      attr_accessor storage_virtual_machine_peers: ::Array[Types::StorageVirtualMachinePeer]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1184,6 +1464,7 @@ module Aws::FSx
 
     class LifecycleTransitionReason
       attr_accessor message: ::String
+      attr_accessor ontap_error: Types::OntapError
       SENSITIVE: []
     end
 
@@ -1272,6 +1553,12 @@ module Aws::FSx
       SENSITIVE: []
     end
 
+    class OntapError
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
     class OntapFileSystemConfiguration
       attr_accessor automatic_backup_retention_days: ::Integer
       attr_accessor daily_automatic_backup_start_time: ::String
@@ -1297,6 +1584,15 @@ module Aws::FSx
       SENSITIVE: []
     end
 
+    class OntapSnapshotConfiguration
+      attr_accessor size_in_megabytes: ::Integer
+      attr_accessor snapmirror_label: ::String
+      attr_accessor expiry_time: ::Time
+      attr_accessor snaplock_expiry_time: ::Time
+      attr_accessor uuid: ::String
+      SENSITIVE: []
+    end
+
     class OntapUnixFileSystemUser
       attr_accessor name: ::String
       SENSITIVE: []
@@ -1319,6 +1615,7 @@ module Aws::FSx
       attr_accessor volume_style: ("FLEXVOL" | "FLEXGROUP")
       attr_accessor aggregate_configuration: Types::AggregateConfiguration
       attr_accessor size_in_bytes: ::Integer
+      attr_accessor clone_configuration: Types::CloneConfiguration
       SENSITIVE: []
     end
 
@@ -1579,16 +1876,120 @@ module Aws::FSx
       SENSITIVE: []
     end
 
+    class SnapmirrorDestination
+      attr_accessor path: ::String
+      attr_accessor volume_id: ::String
+      SENSITIVE: []
+    end
+
+    class SnapmirrorExportedSnapshot
+      attr_accessor snapshot_id: ::String
+      attr_accessor snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class SnapmirrorPolicy
+      attr_accessor resource_arn: ::String
+      attr_accessor snapmirror_policy_id: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor storage_virtual_machine_id: ::String
+      attr_accessor name: ::String
+      attr_accessor snapshot_copy_mode: ("COPY_ALL_SOURCE_SNAPSHOTS" | "COPY_LATEST_SOURCE_SNAPSHOT" | "NO_CREATE_SNAPSHOT_ON_SOURCE")
+      attr_accessor retention_rules: ::Array[Types::SnapmirrorPolicyRetentionRule]
+      attr_accessor transfer_schedule: ::String
+      attr_accessor network_compression_enabled: bool
+      attr_accessor throttle_in_kbps: ::Integer
+      attr_accessor scope: ("FILESYSTEM" | "SVM")
+      attr_accessor lifecycle: ("CREATING" | "CREATED" | "DELETING" | "FAILED")
+      attr_accessor uuid: ::String
+      attr_accessor lifecycle_transition_reason: Types::LifecycleTransitionReason
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class SnapmirrorPolicyFilter
+      attr_accessor name: ("file-system-id" | "storage-virtual-machine-id")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SnapmirrorPolicyNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SnapmirrorPolicyRetentionRule
+      attr_accessor label: ::String
+      attr_accessor count: ::Integer
+      attr_accessor creation_schedule: ::String
+      SENSITIVE: []
+    end
+
+    class SnapmirrorRelationship
+      attr_accessor resource_arn: ::String
+      attr_accessor snapmirror_relationship_id: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor lifecycle: ("CREATING" | "CREATED" | "DELETING" | "FAILED")
+      attr_accessor lifecycle_transition_reason: Types::LifecycleTransitionReason
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor source: Types::SnapmirrorSource
+      attr_accessor destination: Types::SnapmirrorDestination
+      attr_accessor snapmirror_policy: Types::SnapmirrorRelationshipPolicy
+      attr_accessor transfer_schedule: ::String
+      attr_accessor throttle_in_kbps: ::Integer
+      attr_accessor state: ("UNINITIALIZED" | "TRANSFERRING" | "SNAPMIRRORED" | "PAUSED" | "BROKEN_OFF")
+      attr_accessor healthy: bool
+      attr_accessor unhealthy_reason: ::String
+      attr_accessor lag_time_in_minutes: ::Integer
+      attr_accessor exported_snapshot: Types::SnapmirrorExportedSnapshot
+      attr_accessor transfer_state: Types::SnapmirrorTransferState
+      attr_accessor uuid: ::String
+      SENSITIVE: []
+    end
+
+    class SnapmirrorRelationshipFilter
+      attr_accessor name: ("file-system-id" | "destination-volume-id")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SnapmirrorRelationshipNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SnapmirrorRelationshipPolicy
+      attr_accessor policy_id: ::String
+      attr_accessor policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class SnapmirrorSource
+      attr_accessor path: ::String
+      SENSITIVE: []
+    end
+
+    class SnapmirrorTransferState
+      attr_accessor state: ::String
+      attr_accessor type: ::String
+      attr_accessor bytes_transferred: ::Integer
+      attr_accessor duration: ::String
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
     class Snapshot
       attr_accessor resource_arn: ::String
       attr_accessor snapshot_id: ::String
       attr_accessor name: ::String
       attr_accessor volume_id: ::String
       attr_accessor creation_time: ::Time
-      attr_accessor lifecycle: ("PENDING" | "CREATING" | "DELETING" | "AVAILABLE")
+      attr_accessor lifecycle: ("PENDING" | "CREATING" | "DELETING" | "AVAILABLE" | "FAILED")
+      attr_accessor snapshot_type: ("ONTAP" | "OPENZFS")
       attr_accessor lifecycle_transition_reason: Types::LifecycleTransitionReason
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor administrative_actions: ::Array[Types::AdministrativeAction]
+      attr_accessor ontap_configuration: Types::OntapSnapshotConfiguration
       SENSITIVE: []
     end
 
@@ -1600,6 +2001,48 @@ module Aws::FSx
 
     class SnapshotNotFound
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SnapshotPolicy
+      attr_accessor resource_arn: ::String
+      attr_accessor snapshot_policy_id: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor storage_virtual_machine_id: ::String
+      attr_accessor name: ::String
+      attr_accessor enabled: bool
+      attr_accessor schedules: ::Array[Types::SnapshotPolicySchedule]
+      attr_accessor scope: ("FILESYSTEM" | "SVM")
+      attr_accessor lifecycle: ("CREATING" | "CREATED" | "DELETING" | "FAILED")
+      attr_accessor uuid: ::String
+      attr_accessor lifecycle_transition_reason: Types::LifecycleTransitionReason
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class SnapshotPolicyFilter
+      attr_accessor name: ("file-system-id" | "storage-virtual-machine-id")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SnapshotPolicyNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SnapshotPolicyRetentionPeriod
+      attr_accessor type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE")
+      attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class SnapshotPolicySchedule
+      attr_accessor name: ::String
+      attr_accessor count: ::Integer
+      attr_accessor prefix: ::String
+      attr_accessor snapmirror_label: ::String
+      attr_accessor retention_period: Types::SnapshotPolicyRetentionPeriod
       SENSITIVE: []
     end
 
@@ -1644,6 +2087,34 @@ module Aws::FSx
     end
 
     class StorageVirtualMachineNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StorageVirtualMachinePeer
+      attr_accessor resource_arn: ::String
+      attr_accessor storage_virtual_machine_peer_id: ::String
+      attr_accessor storage_virtual_machine_id: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor lifecycle: ("CREATING" | "CREATED" | "DELETING" | "FAILED")
+      attr_accessor lifecycle_transition_reason: Types::LifecycleTransitionReason
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor peer_svm_name: ::String
+      attr_accessor peer_svm_alias: ::String
+      attr_accessor peer_cluster_name: ::String
+      attr_accessor applications: ::Array[("SNAPMIRROR" | "FILE_COPY" | "LUN_COPY" | "FLEXCACHE")]
+      attr_accessor state: ("PEERED" | "REJECTED" | "SUSPENDED" | "INITIATED" | "PENDING" | "INITIALIZING")
+      attr_accessor uuid: ::String
+      SENSITIVE: []
+    end
+
+    class StorageVirtualMachinePeerFilter
+      attr_accessor name: ("file-system-id" | "storage-virtual-machine-id")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StorageVirtualMachinePeerNotFound
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -1708,6 +2179,24 @@ module Aws::FSx
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateCloneConfiguration
+      attr_accessor split_action: ("START")
+      SENSITIVE: []
+    end
+
+    class UpdateClusterPeerRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor cluster_peer_id: ::String
+      attr_accessor peer_cluster_name: ::String
+      attr_accessor peer_addresses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateClusterPeerResponse
+      attr_accessor cluster_peer: Types::ClusterPeer
+      SENSITIVE: []
     end
 
     class UpdateDataRepositoryAssociationRequest
@@ -1822,6 +2311,13 @@ module Aws::FSx
       SENSITIVE: []
     end
 
+    class UpdateOntapSnapshotConfiguration
+      attr_accessor snapmirror_label: ::String
+      attr_accessor expiry_time: ::Time
+      attr_accessor snaplock_expiry_time: ::Time
+      SENSITIVE: []
+    end
+
     class UpdateOntapVolumeConfiguration
       attr_accessor junction_path: ::String
       attr_accessor security_style: ("UNIX" | "NTFS" | "MIXED")
@@ -1832,6 +2328,7 @@ module Aws::FSx
       attr_accessor copy_tags_to_backups: bool
       attr_accessor snaplock_configuration: Types::UpdateSnaplockConfiguration
       attr_accessor size_in_bytes: ::Integer
+      attr_accessor clone_configuration: Types::UpdateCloneConfiguration
       SENSITIVE: []
     end
 
@@ -1866,15 +2363,72 @@ module Aws::FSx
       SENSITIVE: []
     end
 
+    class UpdateSnapmirrorPolicyRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor snapmirror_policy_id: ::String
+      attr_accessor retention_rules: ::Array[Types::SnapmirrorPolicyRetentionRule]
+      attr_accessor transfer_schedule: ::String
+      attr_accessor network_compression_enabled: bool
+      attr_accessor throttle_in_kbps: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateSnapmirrorPolicyResponse
+      attr_accessor snapmirror_policy: Types::SnapmirrorPolicy
+      SENSITIVE: []
+    end
+
+    class UpdateSnapmirrorRelationshipRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor snapmirror_relationship_id: ::String
+      attr_accessor policy_id: ::String
+      attr_accessor transfer_schedule: ::String
+      attr_accessor throttle_in_kbps: ::Integer
+      attr_accessor state: ("SNAPMIRRORED" | "PAUSED" | "BROKEN_OFF")
+      SENSITIVE: []
+    end
+
+    class UpdateSnapmirrorRelationshipResponse
+      attr_accessor snapmirror_relationship: Types::SnapmirrorRelationship
+      SENSITIVE: []
+    end
+
+    class UpdateSnapshotPolicyRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor snapshot_policy_id: ::String
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateSnapshotPolicyResponse
+      attr_accessor snapshot_policy: Types::SnapshotPolicy
+      SENSITIVE: []
+    end
+
     class UpdateSnapshotRequest
       attr_accessor client_request_token: ::String
       attr_accessor name: ::String
       attr_accessor snapshot_id: ::String
+      attr_accessor ontap_configuration: Types::UpdateOntapSnapshotConfiguration
       SENSITIVE: []
     end
 
     class UpdateSnapshotResponse
       attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class UpdateStorageVirtualMachinePeerRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor storage_virtual_machine_peer_id: ::String
+      attr_accessor applications: ::Array[("SNAPMIRROR" | "FILE_COPY" | "LUN_COPY" | "FLEXCACHE")]
+      attr_accessor peer_svm_alias: ::String
+      attr_accessor state: ("PEERED" | "REJECTED" | "SUSPENDED")
+      SENSITIVE: []
+    end
+
+    class UpdateStorageVirtualMachinePeerResponse
+      attr_accessor storage_virtual_machine_peer: Types::StorageVirtualMachinePeer
       SENSITIVE: []
     end
 

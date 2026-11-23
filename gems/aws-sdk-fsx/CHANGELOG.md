@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.154.0 (2026-11-23)
+------------------
+
+* Feature - Adds support for new FSx for NetApp ONTAP resources
+
 1.153.0 (2026-11-20)
 ------------------
 
