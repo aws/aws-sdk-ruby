@@ -234,7 +234,7 @@ module Aws
     let(:dir) { Dir.mktmpdir('cdchain') }
     let(:config_path) { File.join(dir, 'config') }
     let(:credentials_path) { File.join(dir, 'credentials') }
-    let(:config_file) { "[profile dev]\ndaemon_credential = dev\n" }
+    let(:config_file) { "[profile dev]\ncredential_daemon = dev\n" }
     let(:credentials_file) { '' }
     let(:profile) { nil }
     let(:config) do
@@ -311,6 +311,15 @@ module Aws
       expect(CredentialProviderChain.new(client.config).resolve.credentials.access_key_id).to eq('ASIADAEMON')
     end
 
+    context 'with the old daemon_credential key' do
+      let(:config_file) { "[profile dev]\ndaemon_credential = dev\n" }
+
+      it 'is not a credential daemon profile' do
+        expect(resolve).to be_nil
+        expect(daemon.requests).to be_empty
+      end
+    end
+
     it 'is not used when the shared config is disabled' do
       Aws.shared_config.fresh(config_enabled: false, config_path: config_path, credentials_path: credentials_path)
       expect(resolve).to be_nil
@@ -330,7 +339,7 @@ module Aws
       let(:config_file) do
         <<~CONFIG
           [profile dev]
-          daemon_credential = dev
+          credential_daemon = dev
           sso_session = my-sso
           sso_account_id = 123456789012
           sso_role_name = Admin

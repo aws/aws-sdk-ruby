@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Feature - Add `Aws::CredentialDaemonCredentials`, which sources credentials from a local credential daemon over a Unix domain socket for profiles that set `daemon_credential`.
+* Feature - Add `Aws::CredentialDaemonCredentials`, which sources credentials from a local credential daemon over a Unix domain socket for profiles that set `credential_daemon`.
 
 * Feature - Back off on retries of the Kinesis `ReceiveQueueRecords` and `ReceiveDeadLetterQueueRecords` long polling operations even when the retry quota is depleted.
 

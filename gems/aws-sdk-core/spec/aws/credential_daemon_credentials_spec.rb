@@ -195,6 +195,38 @@ module Aws
         expect(p.credentials.access_key_id).to eq('ASIASECOND')
         expect([first.requests.size, second.requests.size]).to eq([1, 1])
       end
+
+      context 'with the socket_path option' do
+        let!(:env_daemon) { reply_with(daemon_session_reply(material: { 'access_key_id' => 'ASIAENV' })) }
+
+        it 'dials the option ahead of AWS_CREDENTIAL_DAEMON_SOCKET and the HOME location' do
+          File.symlink(start_credential_daemon { daemon_session_reply }.path, link)
+          d = start_credential_daemon { daemon_session_reply(material: { 'access_key_id' => 'ASIAOPTION' }) }
+          expect(provider(socket_path: d.path).credentials.access_key_id).to eq('ASIAOPTION')
+          expect(env_daemon.requests).to be_empty
+        end
+
+        it 'raises NOT_RUNNING without trying another location when nothing listens there' do
+          missing = File.join(home, 'missing.sock')
+          expect_daemon_error('NOT_RUNNING', /at #{Regexp.escape(missing)} /) { provider(socket_path: missing) }
+          expect(env_daemon.requests).to be_empty
+        end
+
+        it 'skips an empty path' do
+          expect(provider(socket_path: '').credentials.access_key_id).to eq('ASIAENV')
+        end
+
+        it 'skips a relative path' do
+          start_credential_daemon(path: File.join(home, 'rel.sock')) { daemon_session_reply }
+          Dir.chdir(home) do
+            expect(provider(socket_path: 'rel.sock').credentials.access_key_id).to eq('ASIAENV')
+          end
+        end
+
+        it 'raises ArgumentError for a value that is not a String' do
+          expect { provider(socket_path: :'/x.sock') }.to raise_error(ArgumentError)
+        end
+      end
     end
 
     describe 'platform' do
@@ -281,7 +313,7 @@ module Aws
       # Runs each case through a client's default credential chain.
       cases = JSON.load_file(
         File.expand_path('../fixtures/credentials/credential-daemon-provider-test-cases.json', __dir__)
-      )
+      ).select { |c| c['appliesTo'].nil? || c['appliesTo'].include?('ruby') }
 
       # Cases that need the Credential Refresh SEP and fail with today's
       # RefreshingCredentials.
@@ -458,7 +490,7 @@ module Aws
           case test_case['id']
           when 'sso-neither-key', 'sso-neither-key-role-arn'
             # Ruby resolves an SSO token whenever it builds a client, so these
-            # profiles fail the same way with daemon_credential removed.
+            # profiles fail the same way with credential_daemon removed.
             expect(error).to be_a(Errors::InvalidSSOToken)
             expect(dialed).to be_empty
           when 'env-web-identity-and-daemon-profile'

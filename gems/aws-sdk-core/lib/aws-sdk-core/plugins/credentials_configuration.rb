@@ -73,7 +73,7 @@ module Aws
 
           * `~/.aws/credentials`
 
-          * `~/.aws/config` - A profile that sets `daemon_credential` gets its credentials from
+          * `~/.aws/config` - A profile that sets `credential_daemon` gets its credentials from
             the credential daemon, ahead of any other credentials for that profile.
 
           * EC2/ECS IMDS instance profile - When used by default, the timeouts are very aggressive.
