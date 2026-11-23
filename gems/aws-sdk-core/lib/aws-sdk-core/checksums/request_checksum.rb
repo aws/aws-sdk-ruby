@@ -83,8 +83,12 @@ module Aws
         end
 
         def apply_trailer_headers(body_size, header_name)
+          # TODO(Ruby-5258): Complete the S3-specific aws-chunked framing,
+          # including PutObject unsigned-payload behavior, in the S3 follow-up.
           headers['Content-Encoding'] =
             [headers['Content-Encoding'], 'aws-chunked'].compact.join(', ')
+          # TODO(Ruby-5273): Select signed or unsigned streaming and add running
+          # chunk and trailer signatures for signed aws-chunked requests.
           headers['X-Amz-Content-Sha256'] = 'STREAMING-UNSIGNED-PAYLOAD-TRAILER'
           headers['X-Amz-Trailer'] = header_name
           headers['X-Amz-Decoded-Content-Length'] = body_size

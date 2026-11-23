@@ -237,6 +237,37 @@ module Aws
               )
             end
           end
+
+          it 'does not recompute a header checksum on retry' do
+            add_streaming_request_behavior
+            source = StringIO.new('original')
+            configured = client_class.new(
+              **client_options,
+              endpoint: 'http://example.com',
+              max_attempts: 2
+            )
+            configured.handlers.add(RetryErrors::Handler, step: :retry)
+            original_checksum = nil
+            configured.stub_responses(
+              :operation,
+              proc do |context|
+                original_checksum =
+                  context.http_request.headers['x-amz-checksum-crc32']
+                source.string = 'different'
+                Smithy::Client::NetworkingError.new(Timeout::Error.new)
+              end,
+              {}
+            )
+            allow(Kernel).to receive(:sleep)
+
+            response = configured.operation(streaming_blob: source)
+
+            expect(response.context.retries).to eq(1)
+            expect(original_checksum)
+              .to eq(checksum_for('CRC32', StringIO.new('original')))
+            expect(response.context.http_request.headers['x-amz-checksum-crc32'])
+              .to eq(original_checksum)
+          end
         end
 
         context 'response checksum validation' do
@@ -289,8 +320,9 @@ module Aws
                     /#{message}/
                   )
               else
-                expect { client.operation(string: 'payload') }
-                  .not_to raise_error
+                response = client.operation(string: 'payload')
+                expect(response.context[:http_checksum][:validated])
+                  .to eq(test_case.dig('expect', 'validated'))
               end
             end
           end
@@ -322,7 +354,9 @@ module Aws
               body: '{}'
             )
 
-            expect { client.operation(string: 'payload') }.not_to raise_error
+            response = client.operation(string: 'payload')
+
+            expect(response.context[:http_checksum][:validated]).to be_nil
           end
 
           it 'clears attempt-specific response checksum state when headers repeat' do
@@ -332,6 +366,7 @@ module Aws
               context,
               Extension.http_checksum(context.operation)
             ).register
+            context[:http_checksum][:validated] = 'CRC32'
             context.http_response.reset
             context.http_response.signal_headers(
               500,
@@ -346,6 +381,7 @@ module Aws
             )
 
             expect { validator.raise_if_failed }.not_to raise_error
+            expect(context[:http_checksum][:validated]).to be_nil
           end
 
           it 'does not validate a checksum on a non-success response' do
@@ -398,8 +434,9 @@ module Aws
               body: '{}'
             )
 
-            expect { configured.operation(string: 'payload') }
-              .not_to raise_error
+            response = configured.operation(string: 'payload')
+
+            expect(response.context[:http_checksum][:validated]).to be_nil
           end
 
           it 'validates a response explicitly enabled in when_required mode' do

@@ -7,7 +7,8 @@
       "x-amz-checksum-crc32": "o6a/Qw=="
     },
     "expect": {
-      "kind": "success"
+      "kind": "success",
+      "validated": "CRC32"
     }
   },
   {
@@ -18,7 +19,8 @@
       "x-amz-checksum-sha1": "vyGp6PvFo4RvsFtPoIWeCReyIC8="
     },
     "expect": {
-      "kind": "success"
+      "kind": "success",
+      "validated": "SHA1"
     }
   },
   {
@@ -29,7 +31,8 @@
       "x-amz-checksum-sha256": "RBNvo1WzZ4oRRq0W9+hknpT7T8If536DEMBg9hyq/4o="
     },
     "expect": {
-      "kind": "success"
+      "kind": "success",
+      "validated": "SHA256"
     }
   },
   {
@@ -40,7 +43,8 @@
       "x-amz-checksum-sha512": "J8dGcK23UHX60FjVzq97IMTneGyDuuijL2Jvl4KvNMmjPCBG72D9Knh403jin+yFGAa72aZ4ePOp8c2kgwdj/Q=="
     },
     "expect": {
-      "kind": "success"
+      "kind": "success",
+      "validated": "SHA512"
     }
   },
   {
@@ -65,7 +69,8 @@
       "x-amz-checksum-sha256": "RBNvo1WzZ4oRRq0W9+hknpT7T8If536DEMBg9hyq/4o="
     },
     "expect": {
-      "kind": "success"
+      "kind": "success",
+      "validated": "SHA256"
     }
   },
   {
@@ -77,7 +82,8 @@
       "x-amz-checksum-crc32": "o6a/Qw=="
     },
     "expect": {
-      "kind": "success"
+      "kind": "success",
+      "validated": "CRC32"
     }
   },
   {

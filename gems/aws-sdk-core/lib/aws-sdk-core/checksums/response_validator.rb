@@ -53,6 +53,7 @@ module Aws
         def add_headers_listener(validation_list)
           @context.http_response.on_headers do |_status, headers|
             @state.clear
+            (@context[:http_checksum] ||= {}).delete(:validated)
             prepare_validation(headers, validation_list)
           end
         end
@@ -68,7 +69,11 @@ module Aws
             next unless @state[:digest]
 
             computed = @state[:digest].base64digest
-            record_failure(computed) unless computed == @state[:expected]
+            if computed == @state[:expected]
+              @context[:http_checksum][:validated] = @state[:algorithm]
+            else
+              record_failure(computed)
+            end
           end
         end
 
@@ -90,6 +95,7 @@ module Aws
             break if skip_response_validation?(expected)
             next unless valid_base64_checksum?(expected)
 
+            @state[:algorithm] = algorithm
             @state[:header_name] = header_name
             @state[:digest] = Checksums.digest_for(algorithm)
             @state[:expected] = expected
